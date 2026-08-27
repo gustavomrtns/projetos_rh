@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionário de Desligamento — Gestão de Talentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;min-height:100vh;padding:0 0 80px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.nav-band{height:5px;background:var(--gradFull)}
+.nav-tabs{background:var(--white);box-shadow:var(--shadow);display:flex;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gray100)}
+.nav-tab{flex:1;padding:18px 12px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.nav-tab:hover{color:var(--gray600);background:var(--gray50)}
+.nav-tab.active{color:var(--gray800);background:var(--offwhite)}
+.tab-dot{width:8px;height:8px;border-radius:50%;opacity:0;flex-shrink:0;transition:opacity .2s}
+.nav-tab.active .tab-dot{opacity:1}
+.t1{background:var(--grad1)}.t2{background:var(--grad3)}
+.nav-logo{height:32px;object-fit:contain;display:block;margin-right:16px}
+.pdf-logo{height:44px;object-fit:contain;display:block}
+
+/* PAGE */
+.page{display:none;padding:32px 20px 40px;animation:fadeUp .4s ease both}
+.page.active{display:block}
+.container{max-width:920px;margin:0 auto}
+.container.wide{max-width:100%;padding:0 8px}
+
+/* HEADER */
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden}
+.header-band{height:7px;background:var(--gradFull)}
+.header-inner{padding:26px 30px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.header-title h1{font-family:'DM Serif Display',serif;font-size:24px;color:var(--gray800);margin-bottom:4px}
+.header-title p{font-size:13px;color:var(--gray400);font-weight:300}
+.hbadge{display:inline-block;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.06em;margin-top:8px}
+
+/* SECTION */
+.section{margin-bottom:20px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 4px}
+.section-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sn1{background:var(--grad1)}.sn2{background:var(--grad2)}.sn3{background:var(--grad3)}.sn4{background:var(--grad1)}.sn5{background:var(--grad2)}.sn6{background:var(--grad3)}
+.section-title{font-size:12px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.1em}
+.section-sub{font-size:12px;color:var(--gray400);margin:-6px 4px 12px;font-weight:300}
+
+/* CARD */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;transition:box-shadow .2s}
+.card:focus-within{box-shadow:var(--shadow-lg)}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field textarea{min-height:70px;line-height:1.5}
+.field-hint{font-size:11px;color:var(--gray400);margin-top:-2px}
+
+/* CHOICE CARDS (sim/nao, multipla escolha) */
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.choice-grid.c3{grid-template-columns:repeat(3,1fr)}
+.choice-grid.c4{grid-template-columns:repeat(4,1fr)}
+.choice-card{border:2px solid var(--gray100);border-radius:10px;padding:13px 12px;cursor:pointer;transition:all .2s;text-align:center;background:var(--white);user-select:none;position:relative;font-size:12.5px;font-weight:700;color:var(--gray800)}
+.choice-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.choice-card.selected{border-color:#0099e5;background:#f0f9ff;transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.choice-card.simnao{padding:16px 12px;font-size:13.5px}
+
+/* RATING TABLE (avaliacoes) */
+.rating-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--gray100)}
+.rating-item:last-child{border-bottom:none;padding-bottom:0}
+.rating-item:first-child{padding-top:0}
+.rating-label{font-size:13px;font-weight:600;color:var(--gray800)}
+.rating-sub{font-size:11.5px;color:var(--gray400);margin-top:2px;font-weight:400}
+.rating-btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.rt-btn{width:84px;padding:6px 8px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:var(--gray600);cursor:pointer;transition:all .2s;white-space:nowrap;text-align:center}
+.rt-btn:hover{border-color:var(--gray400);color:var(--gray800)}
+.rt-btn.r-otimo{background:linear-gradient(135deg,#00c48c,#00e5a0);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,196,140,.3)}
+.rt-btn.r-bom{background:linear-gradient(135deg,#0099e5,#00e5a0);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,153,229,.3)}
+.rt-btn.r-regular{background:linear-gradient(135deg,#f7a800,#ff9500);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(247,168,0,.3)}
+.rt-btn.r-ruim{background:linear-gradient(135deg,#ff4e6a,#e0003c);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(224,0,60,.3)}
+.rating-legend{display:flex;gap:6px;justify-content:flex-end;margin-bottom:10px;font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.06em}
+.rating-legend span{width:84px;text-align:center}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{padding:11px 24px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-print{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.35)}
+.btn-print:hover{opacity:.9;transform:translateY(-1px)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* DASHBOARD */
+.dash-filters{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:end}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;overflow:hidden;position:relative}
+.kpi-band{position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-val{font-family:'DM Serif Display',serif;font-size:36px;line-height:1;margin:8px 0 4px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400)}
+.kpi-sub{font-size:11px;color:var(--gray600);margin-top:4px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.chart-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.chart-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ctdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:118px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:20px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .8s ease;position:relative;min-width:2px}
+.bar-pct{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:#fff}
+.bar-val{font-size:12px;font-weight:700;color:var(--gray600);width:34px;text-align:right}
+.pie-wrap{display:flex;gap:24px;align-items:center}
+.pie-leg{display:flex;flex-direction:column;gap:10px;flex:1}
+.pie-li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray800)}
+.pie-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.pie-v{margin-left:auto;font-weight:700;color:var(--gray800)}
+
+/* DASH TABLE */
+.dash-table-wrap{overflow-x:auto;overflow-y:auto;max-height:520px;border-radius:0 0 var(--radius) var(--radius)}
+.dash-table-wrap::-webkit-scrollbar{width:7px;height:7px}
+.dash-table-wrap::-webkit-scrollbar-track{background:var(--gray50);border-radius:10px}
+.dash-table-wrap::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:10px}
+.dash-table-wrap::-webkit-scrollbar-thumb:hover{background:var(--gray400)}
+.dtable{width:100%;border-collapse:collapse;table-layout:auto}
+.dtable th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap;position:sticky;top:0;background:var(--white);z-index:2}
+.dtable td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle;white-space:nowrap}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:#f0f9ff}
+.dlink{color:var(--gray800);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1.5px solid transparent;transition:border-color .15s,color .15s}
+.dlink:hover{color:#0099e5;border-bottom-color:#0099e5}
+.spill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:48px 24px;color:var(--gray400)}
+.empty-state .es-icon{font-size:34px;margin-bottom:10px;opacity:.5}
+.empty-state h3{font-family:'DM Serif Display',serif;font-size:18px;color:var(--gray600);margin-bottom:6px}
+.empty-state p{font-size:13px}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:640px;width:100%;max-height:90vh;overflow-y:auto}
+.modal.wide{max-width:820px}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:28px 30px 30px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:20px}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;margin-top:-4px;line-height:1}
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.det-field{background:var(--gray50);border-radius:8px;padding:10px 14px}
+.det-field.wide{grid-column:span 2}
+.det-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);margin-bottom:3px}
+.det-val{font-size:13px;font-weight:600;color:var(--gray800);line-height:1.5}
+
+/* PDF OVERLAY */
+.pdf-preview{display:none}
+#print-overlay{display:none;position:fixed;inset:0;background:#fff;z-index:9000;overflow-y:auto;padding:32px 20px}
+#print-overlay.visible{display:block}
+.print-close{position:fixed;top:16px;right:20px;z-index:9100;background:var(--gray800);color:#fff;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;border-radius:10px;cursor:pointer}
+.print-close:hover{opacity:.85}
+@media print{
+  body>*:not(#print-overlay){display:none!important}
+  #print-overlay{display:block!important;position:static!important;padding:0!important;overflow:visible!important}
+  .print-close{display:none!important}
+  .pdf-doc{max-width:100%;box-shadow:none!important;border-radius:0!important}
+}
+.pdf-doc{max-width:860px;margin:0 auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden;font-family:'Sora',sans-serif}
+.ptband{height:8px;background:var(--gradFull)}
+.phdr{padding:26px 36px 20px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--gray100)}
+.phdr-title{font-family:'DM Serif Display',serif;font-size:21px;color:var(--gray800);margin-bottom:3px}
+.phdr-sub{font-size:12px;color:var(--gray400)}
+.phdr-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;background:var(--grad2);margin-top:7px}
+.pbody{padding:26px 36px}
+.psect{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--gray100)}
+.psect:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.pstitle{display:flex;align-items:center;gap:10px;margin-bottom:13px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray600)}
+.psnum{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pfield{background:var(--gray50);border-radius:7px;padding:9px 13px}
+.pfield.wide{grid-column:span 2}
+.pflbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);margin-bottom:2px}
+.pfval{font-size:13px;font-weight:600;color:var(--gray800);line-height:1.5}
+.pratrow{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;background:var(--gray50);border-radius:7px;margin-bottom:5px}
+.pratlbl{font-size:12.5px;font-weight:600;color:var(--gray800)}
+.pbadge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff}
+.psiggrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:6px}
+.psigline{border-bottom:1.5px solid var(--gray800);margin:32px 0 3px}
+.psiglinelbl{font-size:10px;color:var(--gray400);text-align:center}
+.pfooter{display:flex;justify-content:space-between;padding:12px 36px;border-top:1px solid var(--gray100);font-size:11px;color:var(--gray400)}
+
+@media(max-width:700px){
+  .form-grid,.det-grid,.pgrid,.psiggrid{grid-template-columns:1fr}
+  .span2,.det-field.wide,.pfield.wide{grid-column:span 1}
+  .choice-grid.c3,.choice-grid.c4{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .chart-grid{grid-template-columns:1fr}
+  .dash-filters{grid-template-columns:1fr 1fr}
+  .nav-tab span{display:none}
+  .rating-item{grid-template-columns:1fr}
+  .rating-btns{justify-content:flex-start}
+  .rating-legend{justify-content:flex-start;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- PRINT OVERLAY -->
+<div id="print-overlay">
+  <button class="print-close" onclick="fecharPrint()">Fechar visualização</button>
+  <button class="print-close" style="right:200px;background:var(--grad3)" onclick="window.print()">Imprimir / Salvar PDF</button>
+  <div id="print-content" style="max-width:900px;margin:0 auto;padding-bottom:40px"></div>
+</div>
+
+<div class="nav-band"></div>
+<div class="nav-tabs">
+  <div style="display:flex;align-items:center;padding:0 16px;border-right:1px solid var(--gray100);flex-shrink:0"><img class="nav-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2256%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EA%3C/text%3E%3C/svg%3E" alt="Logo da empresa"></div>
+  <div class="nav-tab active" id="tab-form" onclick="showPage('form')"><div class="tab-dot t1"></div><span>Questionário de Desligamento</span></div>
+  <div class="nav-tab" id="tab-dashboard" onclick="showPage('dashboard')"><div class="tab-dot t2"></div><span>Dashboard — Gestão de Talentos</span></div>
+</div>
+
+<!-- PAGE 1: FORMULARIO -->
+<div class="page active" id="page-form"><div class="container">
+
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Questionário de Desligamento</h1>
+        <p>Sua opinião nos ajuda a melhorar — respostas tratadas com confidencialidade pela Gestão de Talentos</p>
+        <span class="hbadge" style="background:var(--grad3)">FM-GT-04 A</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="form-area">
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn1">01</div><span class="section-title">Identificação</span></div>
+      <div class="card"><div class="form-grid">
+        <div class="field span2"><label>Nome</label><input type="text" id="f-nome" placeholder="Nome completo"></div>
+        <div class="field"><label>Matrícula</label><input type="text" id="f-matricula" placeholder="Número de matrícula"></div>
+        <div class="field"><label>Setor</label><input type="text" id="f-setor" placeholder="Setor de atuação"></div>
+        <div class="field"><label>Data de Desligamento</label><input type="date" id="f-data-desligamento"></div>
+        <div class="field"><label>Tempo de Empresa</label>
+          <select id="f-tempo-empresa">
+            <option value="">Selecione...</option>
+            <option>Menos de 3 meses</option>
+            <option>3 a 6 meses</option>
+            <option>6 meses a 1 ano</option>
+            <option>1 a 2 anos</option>
+            <option>2 a 5 anos</option>
+            <option>Mais de 5 anos</option>
+          </select>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Motivo do Desligamento</span></div>
+      <div class="card">
+        <div class="field" style="margin-bottom:16px">
+          <label>Como ocorreu o desligamento?</label>
+          <div class="choice-grid" style="margin-top:6px">
+            <div class="choice-card simnao" id="mot-empresa" onclick="selMotivo('empresa')">Fui desligado por iniciativa da Empresa</div>
+            <div class="choice-card simnao" id="mot-pediu" onclick="selMotivo('pediu')">Pedi para ser desligado(a)</div>
+          </div>
+        </div>
+
+        <div id="bloco-empresa" style="display:none">
+          <div class="field" style="margin-bottom:16px">
+            <label>Sabe o motivo do seu desligamento?</label>
+            <div class="choice-grid" style="margin-top:6px;max-width:320px">
+              <div class="choice-card simnao" id="soubemotivo-sim" onclick="selSimNao('soubemotivo','sim')">Sim</div>
+              <div class="choice-card simnao" id="soubemotivo-nao" onclick="selSimNao('soubemotivo','nao')">Não</div>
+            </div>
+          </div>
+          <div id="bloco-motivo-empresa-detalhe" style="display:none">
+            <div class="field" style="margin-bottom:10px">
+              <label>Marque o(s) motivo(s):</label>
+              <div class="choice-grid c3" style="margin-top:6px" id="motivo-empresa-opcoes">
+                <div class="choice-card" data-val="Performance" onclick="toggleMulti('motivo-empresa-opcoes',this)">Performance</div>
+                <div class="choice-card" data-val="Comportamento" onclick="toggleMulti('motivo-empresa-opcoes',this)">Comportamento</div>
+                <div class="choice-card" data-val="Assiduidade" onclick="toggleMulti('motivo-empresa-opcoes',this)">Assiduidade</div>
+                <div class="choice-card" data-val="Relacionamento c/ Equipe" onclick="toggleMulti('motivo-empresa-opcoes',this)">Relacionamento c/ Equipe</div>
+                <div class="choice-card" data-val="Relacionamento c/ Superior" onclick="toggleMulti('motivo-empresa-opcoes',this)">Relacionamento c/ Superior</div>
+                <div class="choice-card" data-val="Outro" onclick="toggleMulti('motivo-empresa-opcoes',this)">Outro</div>
+              </div>
+            </div>
+            <div class="field"><label>Se "Outro", especifique</label><input type="text" id="f-motivo-empresa-outro" placeholder="Descreva o motivo"></div>
+          </div>
+        </div>
+
+        <div id="bloco-pediu" style="display:none">
+          <div class="field" style="margin-bottom:16px"><label>Por que pediu para ser desligado(a)?</label><textarea id="f-pediu-porque" placeholder="Descreva o motivo"></textarea></div>
+          <div class="field" style="margin-bottom:10px">
+            <label>Qual o maior motivo? (compartilhe conosco)</label>
+            <div class="choice-grid c3" style="margin-top:6px" id="motivo-pediu-opcoes">
+              <div class="choice-card" data-val="Proposta Melhor" onclick="toggleMulti('motivo-pediu-opcoes',this)">Proposta Melhor</div>
+              <div class="choice-card" data-val="Salário Melhor" onclick="toggleMulti('motivo-pediu-opcoes',this)">Salário Melhor</div>
+              <div class="choice-card" data-val="Mudança" onclick="toggleMulti('motivo-pediu-opcoes',this)">Mudança</div>
+              <div class="choice-card" data-val="Ambiente" onclick="toggleMulti('motivo-pediu-opcoes',this)">Ambiente</div>
+              <div class="choice-card" data-val="Chefia" onclick="toggleMulti('motivo-pediu-opcoes',this)">Chefia</div>
+              <div class="choice-card" data-val="Equipe" onclick="toggleMulti('motivo-pediu-opcoes',this)">Equipe</div>
+              <div class="choice-card" data-val="Problemas Pessoais" onclick="toggleMulti('motivo-pediu-opcoes',this)">Problemas Pessoais</div>
+              <div class="choice-card" data-val="Falta de Ferramentas" onclick="toggleMulti('motivo-pediu-opcoes',this)">Falta de Ferramentas</div>
+            </div>
+          </div>
+          <div class="field"><label>O que poderíamos ter feito para que você continuasse conosco?</label><textarea id="f-pediu-continuasse" placeholder="Sua opinião"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn3">03</div><span class="section-title">Avalie seu Superior Imediato</span></div>
+      <div class="card">
+        <div class="field" style="margin-bottom:16px"><label>Nome do Superior Imediato</label><input type="text" id="f-nome-superior" placeholder="Nome completo"></div>
+        <div class="rating-legend"><span style="color:#00c48c">Ótimo</span><span style="color:#0099e5">Bom</span><span style="color:#f7a800">Regular</span><span style="color:#e0003c">Ruim</span></div>
+        <div class="rating-item">
+          <div><div class="rating-label">Imparcialidade</div><div class="rating-sub">Tratava todos de forma igual.</div></div>
+          <div class="rating-btns" id="av-superior-1">
+            <button class="rt-btn" onclick="setRating('av-superior-1',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-1',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-1',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-1',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Comunicação</div><div class="rating-sub">Esclarecia dúvidas.</div></div>
+          <div class="rating-btns" id="av-superior-2">
+            <button class="rt-btn" onclick="setRating('av-superior-2',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-2',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-2',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-2',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Postura</div><div class="rating-sub">Liderava pelo bom exemplo.</div></div>
+          <div class="rating-btns" id="av-superior-3">
+            <button class="rt-btn" onclick="setRating('av-superior-3',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-3',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-3',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-3',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Relacionamento com a Equipe</div><div class="rating-sub">Responsabilidade.</div></div>
+          <div class="rating-btns" id="av-superior-4">
+            <button class="rt-btn" onclick="setRating('av-superior-4',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-4',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-4',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-4',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Coleguismo</div><div class="rating-sub">Incentivo ao sentido de equipe.</div></div>
+          <div class="rating-btns" id="av-superior-5">
+            <button class="rt-btn" onclick="setRating('av-superior-5',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-5',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-5',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-5',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Reconhecimento</div><div class="rating-sub">Reconhecimento do bom trabalho executado.</div></div>
+          <div class="rating-btns" id="av-superior-6">
+            <button class="rt-btn" onclick="setRating('av-superior-6',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-superior-6',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-superior-6',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-superior-6',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn4">04</div><span class="section-title">Avalie seu Local / Ambiente de Trabalho</span></div>
+      <div class="card">
+        <div class="rating-legend"><span style="color:#00c48c">Ótimo</span><span style="color:#0099e5">Bom</span><span style="color:#f7a800">Regular</span><span style="color:#e0003c">Ruim</span></div>
+        <div class="rating-item">
+          <div><div class="rating-label">Elementos 5S</div><div class="rating-sub">Limpeza, organização, utilização, saúde, auto-disciplina.</div></div>
+          <div class="rating-btns" id="av-ambiente-1">
+            <button class="rt-btn" onclick="setRating('av-ambiente-1',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-1',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-1',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-1',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Ferramentas de Trabalho</div></div>
+          <div class="rating-btns" id="av-ambiente-2">
+            <button class="rt-btn" onclick="setRating('av-ambiente-2',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-2',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-2',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-2',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Relacionamento com a Equipe</div></div>
+          <div class="rating-btns" id="av-ambiente-3">
+            <button class="rt-btn" onclick="setRating('av-ambiente-3',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-3',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-3',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-3',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+        <div class="rating-item">
+          <div><div class="rating-label">Relacionamento com o Superior Imediato</div></div>
+          <div class="rating-btns" id="av-ambiente-4">
+            <button class="rt-btn" onclick="setRating('av-ambiente-4',this,'otimo')" data-val="Ótimo">Ótimo</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-4',this,'bom')" data-val="Bom">Bom</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-4',this,'regular')" data-val="Regular">Regular</button>
+            <button class="rt-btn" onclick="setRating('av-ambiente-4',this,'ruim')" data-val="Ruim">Ruim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn5">05</div><span class="section-title">Percepções Gerais</span></div>
+      <div class="card">
+        <div class="field" style="margin-bottom:8px">
+          <label>Você recebeu informações sobre seu desempenho?</label>
+          <div class="choice-grid" style="margin-top:6px;max-width:320px">
+            <div class="choice-card simnao" id="perf-sim" onclick="selSimNao('perf','sim')">Sim</div>
+            <div class="choice-card simnao" id="perf-nao" onclick="selSimNao('perf','nao')">Não</div>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:20px"><label>Registre sua opinião a respeito</label><textarea id="f-perf-obs" placeholder="Sua opinião"></textarea></div>
+
+        <div class="field" style="margin-bottom:8px">
+          <label>Você indicaria esta empresa para um amigo ou parente?</label>
+          <div class="choice-grid" style="margin-top:6px;max-width:320px">
+            <div class="choice-card simnao" id="indicaria-sim" onclick="selSimNao('indicaria','sim')">Sim</div>
+            <div class="choice-card simnao" id="indicaria-nao" onclick="selSimNao('indicaria','nao')">Não</div>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:20px"><label>Por quê?</label><textarea id="f-indicaria-porque" placeholder="Sua opinião"></textarea></div>
+
+        <div class="field" style="margin-bottom:8px">
+          <label>Você conseguiu se desenvolver no período em que esteve aqui?</label>
+          <div class="choice-grid" style="margin-top:6px;max-width:320px">
+            <div class="choice-card simnao" id="desenv-sim" onclick="selSimNao('desenv','sim')">Sim</div>
+            <div class="choice-card simnao" id="desenv-nao" onclick="selSimNao('desenv','nao')">Não</div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:8px">
+          <label>Se um dia você pudesse voltar, aceitaria?</label>
+          <div class="choice-grid" style="margin-top:6px;max-width:320px">
+            <div class="choice-card simnao" id="voltaria-sim" onclick="selSimNao('voltaria','sim')">Sim</div>
+            <div class="choice-card simnao" id="voltaria-nao" onclick="selSimNao('voltaria','nao')">Não</div>
+          </div>
+        </div>
+        <div class="field"><label>Por quê?</label><textarea id="f-voltaria-porque" placeholder="Sua opinião"></textarea></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn6">06</div><span class="section-title">Como você chegou até a Empresa?</span></div>
+      <div class="card">
+        <div class="choice-grid c3" id="chegada-opcoes">
+          <div class="choice-card" data-val="Anúncio" onclick="selChegada(this,'anuncio')">Anúncio</div>
+          <div class="choice-card" data-val="Indicação" onclick="selChegada(this,'indicacao')">Indicação</div>
+          <div class="choice-card" data-val="A Empresa procurou" onclick="selChegada(this,'procurou')">A Empresa lhe procurou</div>
+        </div>
+        <div class="field" style="margin-top:14px" id="chegada-quem-wrap"><label>Quem?</label><input type="text" id="f-chegada-quem" placeholder="Nome de quem indicou / procurou"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn1">07</div><span class="section-title">Sugestões de Melhoria</span></div>
+      <div class="card">
+        <div class="field"><label>Compartilhe suas sugestões</label><textarea id="f-sugestoes" style="min-height:110px" placeholder="Sua sugestão é muito importante para nós"></textarea></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvarQuestionario()">Enviar Questionário</button>
+      <button class="btn btn-print" onclick="exportarParaAssinatura()">Exportar Documento para Assinatura</button>
+      <button class="btn btn-secondary" onclick="limparForm()">Limpar Formulário</button>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- PAGE 2: DASHBOARD -->
+<div class="page" id="page-dashboard"><div class="container wide">
+
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Dashboard de Desligamentos</h1>
+        <p>Análise consolidada das respostas ao Questionário de Desligamento — Gestão de Talentos</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-filters">
+    <div class="field"><label>De (Data Desligamento)</label><input type="date" id="d-de" onchange="renderDash()"></div>
+    <div class="field"><label>Até (Data Desligamento)</label><input type="date" id="d-ate" onchange="renderDash()"></div>
+    <div class="field"><label>Setor</label><select id="d-setor" onchange="renderDash()"><option value="">Todos</option></select></div>
+    <button class="btn btn-secondary" onclick="exportarCSV()">Exportar CSV</button>
+  </div>
+
+  <div id="dash-content"></div>
+
+</div></div>
+
+<!-- MODAL: DETALHE RESPOSTA -->
+<div class="modal-bg" id="modal-det"><div class="modal wide"><div class="modal-band"></div>
+  <div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-det')">x</button>
+    <div class="modal-title" id="det-title">Detalhes da Resposta</div>
+    <div class="modal-sub" id="det-sub"></div>
+    <div id="det-body"></div>
+    <div class="actions" style="margin-top:8px">
+      <button class="btn btn-print" id="det-pdf-btn">Gerar PDF</button>
+      <button class="btn btn-secondary" style="background:var(--white);color:#ff4e6a;border:1.5px solid #ff4e6a" id="det-excluir-btn">Excluir Resposta</button>
+      <button class="btn btn-secondary" onclick="fecharModal('modal-det')">Fechar</button>
+    </div>
+  </div>
+</div></div>
+
+<script>
+
+/* ===================== ESTADO ===================== */
+let respostas = [];
+let motivoSel = '';       // 'empresa' | 'pediu'
+let simNaoState = {};     // {soubemotivo:'sim'|'nao', perf:.., indicaria:.., desenv:.., voltaria:..}
+let ratingState = {};     // {id:{val,cls}}
+let chegadaSel = '';      // 'anuncio'|'indicacao'|'procurou'
+
+/* ===================== NAVEGAÇÃO ===================== */
+function showPage(p){
+  document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('tab-'+p).classList.add('active');
+  if(p==='dashboard') renderDash();
+}
+function fecharModal(id){document.getElementById(id).classList.remove('open')}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+/* ===================== SELEÇÕES DO FORMULÁRIO ===================== */
+function selMotivo(val){
+  motivoSel = val;
+  document.getElementById('mot-empresa').classList.toggle('selected', val==='empresa');
+  document.getElementById('mot-pediu').classList.toggle('selected', val==='pediu');
+  document.getElementById('bloco-empresa').style.display = val==='empresa' ? 'block' : 'none';
+  document.getElementById('bloco-pediu').style.display = val==='pediu' ? 'block' : 'none';
+}
+
+function selSimNao(grupo, val){
+  simNaoState[grupo] = val;
+  document.getElementById(grupo+'-sim').classList.toggle('selected', val==='sim');
+  document.getElementById(grupo+'-nao').classList.toggle('selected', val==='nao');
+  if(grupo==='soubemotivo'){
+    const bloco = document.getElementById('bloco-motivo-empresa-detalhe');
+    if(bloco) bloco.style.display = val==='sim' ? 'block' : 'none';
+    if(val!=='sim'){
+      document.querySelectorAll('#motivo-empresa-opcoes .choice-card').forEach(c=>c.classList.remove('selected'));
+      document.getElementById('f-motivo-empresa-outro').value='';
+    }
+  }
+}
+
+function toggleMulti(containerId, el){
+  el.classList.toggle('selected');
+}
+function getMultiVals(containerId){
+  return [...document.querySelectorAll('#'+containerId+' .choice-card.selected')].map(e=>e.getAttribute('data-val'));
+}
+
+function selChegada(el, val){
+  chegadaSel = val;
+  document.querySelectorAll('#chegada-opcoes .choice-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('chegada-quem-wrap').style.display = (val==='indicacao'||val==='procurou') ? 'flex' : 'none';
+}
+
+const RATING_LABELS = {otimo:'Ótimo',bom:'Bom',regular:'Regular',ruim:'Ruim'};
+const RATING_SCORE = {otimo:4,bom:3,regular:2,ruim:1};
+function setRating(gid, btn, cls){
+  const g = document.getElementById(gid); if(!g) return;
+  g.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('r-otimo','r-bom','r-regular','r-ruim'));
+  btn.classList.add('r-'+cls);
+  ratingState[gid] = {val: btn.getAttribute('data-val'), cls};
+}
+function getRatingVal(id){ return ratingState[id] ? ratingState[id].val : ''; }
+
+/* ===================== VALIDAÇÃO E SALVAR ===================== */
+function buildRecordFromForm(){
+  return {
+    id: Date.now(),
+    nome: document.getElementById('f-nome').value.trim(),
+    matricula: document.getElementById('f-matricula').value.trim(),
+    setor: document.getElementById('f-setor').value.trim(),
+    data_desligamento: document.getElementById('f-data-desligamento').value,
+    tempo_empresa: document.getElementById('f-tempo-empresa').value,
+
+    motivo_tipo: motivoSel,
+    soube_motivo: simNaoState['soubemotivo']||'',
+    motivos_empresa: motivoSel==='empresa' ? getMultiVals('motivo-empresa-opcoes') : [],
+    motivo_empresa_outro: document.getElementById('f-motivo-empresa-outro').value.trim(),
+    pediu_porque: document.getElementById('f-pediu-porque').value.trim(),
+    motivos_pediu: motivoSel==='pediu' ? getMultiVals('motivo-pediu-opcoes') : [],
+    pediu_continuasse: document.getElementById('f-pediu-continuasse').value.trim(),
+
+    nome_superior: document.getElementById('f-nome-superior').value.trim(),
+    av_superior: {
+      imparcialidade: getRatingVal('av-superior-1'),
+      comunicacao: getRatingVal('av-superior-2'),
+      postura: getRatingVal('av-superior-3'),
+      relacionamento_equipe: getRatingVal('av-superior-4'),
+      coleguismo: getRatingVal('av-superior-5'),
+      reconhecimento: getRatingVal('av-superior-6')
+    },
+    av_ambiente: {
+      elementos_5s: getRatingVal('av-ambiente-1'),
+      ferramentas: getRatingVal('av-ambiente-2'),
+      relacionamento_equipe: getRatingVal('av-ambiente-3'),
+      relacionamento_superior: getRatingVal('av-ambiente-4')
+    },
+
+    recebeu_feedback: simNaoState['perf']||'',
+    feedback_obs: document.getElementById('f-perf-obs').value.trim(),
+    indicaria: simNaoState['indicaria']||'',
+    indicaria_porque: document.getElementById('f-indicaria-porque').value.trim(),
+    desenvolveu: simNaoState['desenv']||'',
+    voltaria: simNaoState['voltaria']||'',
+    voltaria_porque: document.getElementById('f-voltaria-porque').value.trim(),
+
+    chegada: chegadaSel,
+    chegada_quem: document.getElementById('f-chegada-quem').value.trim(),
+    sugestoes: document.getElementById('f-sugestoes').value.trim(),
+
+    enviado_em: new Date().toISOString()
+  };
+}
+
+function salvarQuestionario(){
+  const nome = document.getElementById('f-nome').value.trim();
+  if(!nome){ showToast('Informe o nome do colaborador'); return; }
+  if(!motivoSel){ showToast('Selecione como ocorreu o desligamento'); return; }
+
+  const rec = buildRecordFromForm();
+  respostas.push(rec);
+  salvarBase();
+  showToast('Questionário enviado com sucesso — obrigado pela sua contribuição');
+  limparForm();
+}
+
+function exportarParaAssinatura(){
+  const nome = document.getElementById('f-nome').value.trim();
+  if(!nome){ showToast('Informe o nome do colaborador antes de exportar'); return; }
+  if(!motivoSel){ showToast('Selecione como ocorreu o desligamento antes de exportar'); return; }
+  const rec = buildRecordFromForm();
+  gerarPDFHtml(rec);
+  showToast('Documento gerado — revise e imprima para colher a assinatura');
+}
+
+function limparForm(){
+  ['f-nome','f-matricula','f-setor','f-data-desligamento','f-tempo-empresa','f-motivo-empresa-outro',
+   'f-pediu-porque','f-pediu-continuasse','f-nome-superior','f-perf-obs','f-indicaria-porque',
+   'f-chegada-quem','f-sugestoes','f-voltaria-porque'].forEach(id=>{const e=document.getElementById(id); if(e) e.value='';});
+  motivoSel=''; simNaoState={}; ratingState={}; chegadaSel='';
+  document.querySelectorAll('.choice-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('r-otimo','r-bom','r-regular','r-ruim'));
+  document.getElementById('bloco-empresa').style.display='none';
+  document.getElementById('bloco-pediu').style.display='none';
+  document.getElementById('bloco-motivo-empresa-detalhe').style.display='none';
+  document.getElementById('chegada-quem-wrap').style.display='flex';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ===================== PERSISTÊNCIA ===================== */
+function salvarBase(){
+  try{ localStorage.setItem('desl_respostas', JSON.stringify(respostas)); }
+  catch(e){ console.warn('localStorage indisponível', e); }
+}
+function carregarBase(){
+  try{
+    const r = localStorage.getItem('desl_respostas');
+    if(r) respostas = JSON.parse(r);
+  }catch(e){ console.warn('Erro ao carregar base', e); }
+}
+
+/* ===================== HELPERS ===================== */
+function fmtDate(str){ if(!str) return '—'; const [y,m,d]=str.split('-'); return `${d}/${m}/${y}`; }
+function dataHoje(){ const n=new Date(); return `${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()}`; }
+function simNaoLabel(v){ return v==='sim'?'Sim':(v==='nao'?'Não':'—'); }
+function ratingColor(v){
+  const m={'Ótimo':'#00c48c','Bom':'#0099e5','Regular':'#f7a800','Ruim':'#e0003c'};
+  return m[v]||'#9098b0';
+}
+function ratingBadge(v){ return v ? `<span class="pbadge" style="background:${ratingColor(v)}">${v}</span>` : '<span class="pbadge" style="background:#9098b0">—</span>'; }
+
+/* ===================== DASHBOARD ===================== */
+function getFiltered(){
+  const de=document.getElementById('d-de').value, ate=document.getElementById('d-ate').value, setor=document.getElementById('d-setor').value;
+  return respostas.filter(r=>{
+    if(de && (!r.data_desligamento || r.data_desligamento < de)) return false;
+    if(ate && (!r.data_desligamento || r.data_desligamento > ate)) return false;
+    if(setor && r.setor !== setor) return false;
+    return true;
+  });
+}
+
+function atualizarSetoresDash(){
+  const setores=[...new Set(respostas.map(r=>r.setor||'').filter(s=>s))].sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
+  const sel=document.getElementById('d-setor'); if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Todos</option>'+setores.map(s=>`<option value="${s}">${s}</option>`).join('');
+  if(cur) sel.value=cur;
+}
+
+function mediaGrupo(data, campos){
+  let soma=0, n=0;
+  data.forEach(r=>{
+    campos.forEach(c=>{
+      const v=r.av_superior && r.av_superior[c] !== undefined ? r.av_superior[c] : (r.av_ambiente ? r.av_ambiente[c] : undefined);
+    });
+  });
+}
+
+function calcMediaCriterio(data, grupo, campo){
+  const vals = data.map(r=> r[grupo] ? r[grupo][campo] : null).filter(v=>v && RATING_SCORE[normalizeKey(v)]);
+  if(vals.length===0) return null;
+  const soma = vals.reduce((a,v)=>a+scoreFromLabel(v),0);
+  return soma/vals.length;
+}
+function scoreFromLabel(label){
+  const m={'Ótimo':4,'Bom':3,'Regular':2,'Ruim':1};
+  return m[label]||0;
+}
+function normalizeKey(label){
+  const m={'Ótimo':'otimo','Bom':'bom','Regular':'regular','Ruim':'ruim'};
+  return m[label]||'';
+}
+
+function renderDash(){
+  atualizarSetoresDash();
+  const data = getFiltered();
+  const wrap = document.getElementById('dash-content');
+
+  if(respostas.length===0){
+    wrap.innerHTML = `<div class="card empty-state">
+      <div class="es-icon">—</div>
+      <h3>Nenhuma resposta registrada</h3>
+      <p>Assim que colaboradores responderem o questionário, os dados aparecerão aqui.</p>
+    </div>`;
+    return;
+  }
+  if(data.length===0){
+    wrap.innerHTML = `<div class="card empty-state">
+      <div class="es-icon">—</div>
+      <h3>Nenhum resultado para os filtros aplicados</h3>
+      <p>Ajuste o período ou o setor selecionado.</p>
+    </div>`;
+    return;
+  }
+
+  const total = data.length;
+  const iniciativaEmpresa = data.filter(r=>r.motivo_tipo==='empresa').length;
+  const pediuDesligamento = data.filter(r=>r.motivo_tipo==='pediu').length;
+  const indicariaSim = data.filter(r=>r.indicaria==='sim').length;
+  const taxaIndicaria = total ? Math.round((indicariaSim/total)*100) : 0;
+  const voltariaSim = data.filter(r=>r.voltaria==='sim').length;
+  const taxaVoltaria = total ? Math.round((voltariaSim/total)*100) : 0;
+  const desenvolveuSim = data.filter(r=>r.desenvolveu==='sim').length;
+  const taxaDesenvolveu = total ? Math.round((desenvolveuSim/total)*100) : 0;
+
+  let html = '';
+
+  /* KPIs */
+  html += `<div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad1)"></div><div class="kpi-label">Total de Respostas</div><div class="kpi-val">${total}</div><div class="kpi-sub">${iniciativaEmpresa} por iniciativa da empresa · ${pediuDesligamento} pediram desligamento</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad2)"></div><div class="kpi-label">Indicariam a Empresa</div><div class="kpi-val">${taxaIndicaria}%</div><div class="kpi-sub">${indicariaSim} de ${total} respostas</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad3)"></div><div class="kpi-label">Voltariam a Trabalhar</div><div class="kpi-val">${taxaVoltaria}%</div><div class="kpi-sub">${voltariaSim} de ${total} respostas</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad1)"></div><div class="kpi-label">Sentiram Desenvolvimento</div><div class="kpi-val">${taxaDesenvolveu}%</div><div class="kpi-sub">${desenvolveuSim} de ${total} respostas</div></div>
+  </div>`;
+
+  /* Gráficos: motivo desligamento (pizza) + avaliação superior (barras) */
+  const motivoCounts = {};
+  data.forEach(r=>{
+    const label = r.motivo_tipo==='empresa' ? 'Iniciativa da Empresa' : (r.motivo_tipo==='pediu' ? 'Pedido do Colaborador' : 'Não informado');
+    motivoCounts[label] = (motivoCounts[label]||0)+1;
+  });
+  const motivoColors = {'Iniciativa da Empresa':'#e0003c','Pedido do Colaborador':'#0099e5','Não informado':'#9098b0'};
+  let pieHtml = '<div class="pie-wrap"><div class="pie-leg">';
+  Object.entries(motivoCounts).forEach(([k,v])=>{
+    pieHtml += `<div class="pie-li"><div class="pie-dot" style="background:${motivoColors[k]||'#9098b0'}"></div>${k}<span class="pie-v">${v}</span></div>`;
+  });
+  pieHtml += '</div></div>';
+
+  const critSuperior = [
+    ['imparcialidade','Imparcialidade'],['comunicacao','Comunicação'],['postura','Postura'],
+    ['relacionamento_equipe','Relac. Equipe'],['coleguismo','Coleguismo'],['reconhecimento','Reconhecimento']
+  ];
+  let barSuperior = '';
+  critSuperior.forEach(([campo,label])=>{
+    const media = calcMediaCriterio(data,'av_superior',campo);
+    const pct = media ? Math.round((media/4)*100) : 0;
+    const color = pct>=75?'#00c48c':pct>=50?'#0099e5':pct>=25?'#f7a800':'#e0003c';
+    barSuperior += `<div class="bar-row"><div class="bar-lbl">${label}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"><span class="bar-pct">${media?media.toFixed(1):'—'}</span></div></div><div class="bar-val">${media?media.toFixed(1):'—'}</div></div>`;
+  });
+
+  const critAmbiente = [
+    ['elementos_5s','Elementos 5S'],['ferramentas','Ferramentas'],
+    ['relacionamento_equipe','Relac. Equipe'],['relacionamento_superior','Relac. Superior']
+  ];
+  let barAmbiente = '';
+  critAmbiente.forEach(([campo,label])=>{
+    const media = calcMediaCriterio(data,'av_ambiente',campo);
+    const pct = media ? Math.round((media/4)*100) : 0;
+    const color = pct>=75?'#00c48c':pct>=50?'#0099e5':pct>=25?'#f7a800':'#e0003c';
+    barAmbiente += `<div class="bar-row"><div class="bar-lbl">${label}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"><span class="bar-pct">${media?media.toFixed(1):'—'}</span></div></div><div class="bar-val">${media?media.toFixed(1):'—'}</div></div>`;
+  });
+
+  html += `<div class="chart-grid">
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad3)"></div>Motivo do Desligamento</div>${pieHtml}</div>
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad2)"></div>Avaliação Média — Superior Imediato (escala 1-4)</div>${barSuperior}</div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad1)"></div>Avaliação Média — Ambiente de Trabalho (escala 1-4)</div>${barAmbiente}</div>
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad3)"></div>Como chegaram até a Empresa</div>${chegadaChartHtml(data)}</div>
+  </div>`;
+
+  /* Tabela de respostas */
+  html += `<div class="section">
+    <div class="section-header"><div class="section-num sn2">+</div><span class="section-title">Todas as Respostas (${total})</span></div>
+    <div class="card" style="padding:0;overflow:hidden"><div class="dash-table-wrap"><table class="dtable">
+      <thead><tr><th>Colaborador</th><th>Setor</th><th>Data Desligamento</th><th>Motivo</th><th>Indicaria</th><th>Voltaria</th><th>Enviado em</th></tr></thead>
+      <tbody>
+      ${data.slice().sort((a,b)=>(b.data_desligamento||'').localeCompare(a.data_desligamento||'')).map(r=>{
+        const idx = respostas.indexOf(r);
+        return `<tr><td><a class="dlink" onclick="abrirDetalhe(${idx})">${r.nome||'—'}</a></td>
+        <td>${r.setor||'—'}</td>
+        <td>${fmtDate(r.data_desligamento)}</td>
+        <td>${r.motivo_tipo==='empresa'?'Empresa':(r.motivo_tipo==='pediu'?'Colaborador':'—')}</td>
+        <td>${simNaoPill(r.indicaria)}</td>
+        <td>${simNaoPill(r.voltaria)}</td>
+        <td>${r.enviado_em ? new Date(r.enviado_em).toLocaleDateString('pt-BR') : '—'}</td></tr>`;
+      }).join('')}
+      </tbody>
+    </table></div></div>
+  </div>`;
+
+  wrap.innerHTML = html;
+}
+
+function chegadaChartHtml(data){
+  const labels = {anuncio:'Anúncio', indicacao:'Indicação', procurou:'A Empresa procurou', '':'Não informado'};
+  const colors = {anuncio:'#f7a800', indicacao:'#0099e5', procurou:'#7b2ff7', '':'#9098b0'};
+  const counts = {};
+  data.forEach(r=>{ const k=r.chegada||''; counts[k]=(counts[k]||0)+1; });
+  let html = '<div class="pie-wrap"><div class="pie-leg">';
+  Object.entries(counts).forEach(([k,v])=>{
+    html += `<div class="pie-li"><div class="pie-dot" style="background:${colors[k]||'#9098b0'}"></div>${labels[k]||'Não informado'}<span class="pie-v">${v}</span></div>`;
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function simNaoPill(v){
+  if(v==='sim') return '<span class="spill" style="background:linear-gradient(135deg,#00c48c,#00e5a0)">Sim</span>';
+  if(v==='nao') return '<span class="spill" style="background:linear-gradient(135deg,#ff4e6a,#e0003c)">Não</span>';
+  return '<span class="spill" style="background:linear-gradient(135deg,#9098b0,#5a6278)">—</span>';
+}
+
+/* ===================== DETALHE / MODAL ===================== */
+let detIdx = -1;
+function abrirDetalhe(i){
+  detIdx = i;
+  const r = respostas[i]; if(!r) return;
+  document.getElementById('det-title').textContent = r.nome || 'Colaborador';
+  document.getElementById('det-sub').textContent = `${r.setor||'—'} · Desligamento em ${fmtDate(r.data_desligamento)}`;
+
+  const critSup = [['imparcialidade','Imparcialidade'],['comunicacao','Comunicação'],['postura','Postura'],['relacionamento_equipe','Relac. Equipe'],['coleguismo','Coleguismo'],['reconhecimento','Reconhecimento']];
+  const critAmb = [['elementos_5s','Elementos 5S'],['ferramentas','Ferramentas'],['relacionamento_equipe','Relac. Equipe'],['relacionamento_superior','Relac. Superior']];
+
+  let motivoTxt = '';
+  if(r.motivo_tipo==='empresa'){
+    motivoTxt = `Desligado por iniciativa da Empresa. Sabia o motivo: ${simNaoLabel(r.soube_motivo)}.`;
+    if(r.motivos_empresa && r.motivos_empresa.length) motivoTxt += ` Motivo(s): ${r.motivos_empresa.join(', ')}${r.motivo_empresa_outro?' — '+r.motivo_empresa_outro:''}.`;
+  } else if(r.motivo_tipo==='pediu'){
+    motivoTxt = `Pediu para ser desligado(a). ${r.pediu_porque||''}`;
+    if(r.motivos_pediu && r.motivos_pediu.length) motivoTxt += ` Motivo(s): ${r.motivos_pediu.join(', ')}.`;
+  }
+
+  document.getElementById('det-body').innerHTML = `
+    <div class="det-grid">
+      <div class="det-field"><div class="det-lbl">Matrícula</div><div class="det-val">${r.matricula||'—'}</div></div>
+      <div class="det-field"><div class="det-lbl">Tempo de Empresa</div><div class="det-val">${r.tempo_empresa||'—'}</div></div>
+      <div class="det-field wide"><div class="det-lbl">Motivo do Desligamento</div><div class="det-val">${motivoTxt||'—'}</div></div>
+      ${r.motivo_tipo==='pediu' && r.pediu_continuasse ? `<div class="det-field wide"><div class="det-lbl">O que poderíamos ter feito?</div><div class="det-val">${r.pediu_continuasse}</div></div>` : ''}
+      <div class="det-field wide"><div class="det-lbl">Superior Imediato</div><div class="det-val">${r.nome_superior||'—'}</div></div>
+      ${critSup.map(([c,l])=>`<div class="det-field"><div class="det-lbl">${l}</div><div class="det-val">${ratingBadge(r.av_superior?r.av_superior[c]:'')}</div></div>`).join('')}
+      ${critAmb.map(([c,l])=>`<div class="det-field"><div class="det-lbl">${l} (Ambiente)</div><div class="det-val">${ratingBadge(r.av_ambiente?r.av_ambiente[c]:'')}</div></div>`).join('')}
+      <div class="det-field"><div class="det-lbl">Recebeu Feedback</div><div class="det-val">${simNaoPill(r.recebeu_feedback)}</div></div>
+      <div class="det-field"><div class="det-lbl">Indicaria a Empresa</div><div class="det-val">${simNaoPill(r.indicaria)}</div></div>
+      <div class="det-field"><div class="det-lbl">Desenvolveu-se aqui</div><div class="det-val">${simNaoPill(r.desenvolveu)}</div></div>
+      <div class="det-field"><div class="det-lbl">Voltaria a Trabalhar</div><div class="det-val">${simNaoPill(r.voltaria)}</div></div>
+      ${r.feedback_obs?`<div class="det-field wide"><div class="det-lbl">Opinião sobre Feedback</div><div class="det-val">${r.feedback_obs}</div></div>`:''}
+      ${r.indicaria_porque?`<div class="det-field wide"><div class="det-lbl">Por que (in)diciaria</div><div class="det-val">${r.indicaria_porque}</div></div>`:''}
+      ${r.voltaria_porque?`<div class="det-field wide"><div class="det-lbl">Por que (não) voltaria</div><div class="det-val">${r.voltaria_porque}</div></div>`:''}
+      <div class="det-field wide"><div class="det-lbl">Como chegou até a Empresa</div><div class="det-val">${chegadaLabel(r)}</div></div>
+      ${r.sugestoes?`<div class="det-field wide"><div class="det-lbl">Sugestões de Melhoria</div><div class="det-val">${r.sugestoes}</div></div>`:''}
+    </div>`;
+
+  document.getElementById('det-pdf-btn').onclick = ()=>gerarPDF(i);
+  document.getElementById('det-excluir-btn').onclick = ()=>excluirResposta(i);
+  document.getElementById('modal-det').classList.add('open');
+}
+
+function chegadaLabel(r){
+  const labels = {anuncio:'Anúncio', indicacao:'Indicação', procurou:'A Empresa lhe procurou'};
+  let txt = labels[r.chegada] || 'Não informado';
+  if(r.chegada_quem) txt += ` — ${r.chegada_quem}`;
+  return txt;
+}
+
+function excluirResposta(i){
+  const r = respostas[i]; if(!r) return;
+  if(!confirm('Deseja excluir a resposta de '+r.nome+'? Esta ação não pode ser desfeita.')) return;
+  respostas.splice(i,1);
+  salvarBase();
+  fecharModal('modal-det');
+  renderDash();
+  showToast('Resposta excluída com sucesso');
+}
+
+/* ===================== GERAÇÃO DE PDF ===================== */
+function gerarPDF(i){
+  const r = respostas[i]; if(!r) return;
+  gerarPDFHtml(r);
+}
+
+function gerarPDFHtml(r){
+  if(!r) return;
+  const critSup = [['imparcialidade','Imparcialidade'],['comunicacao','Comunicação'],['postura','Postura'],['relacionamento_equipe','Relac. com a Equipe'],['coleguismo','Coleguismo'],['reconhecimento','Reconhecimento']];
+  const critAmb = [['elementos_5s','Elementos 5S'],['ferramentas','Ferramentas de Trabalho'],['relacionamento_equipe','Relac. com a Equipe'],['relacionamento_superior','Relac. com o Superior']];
+
+  let motivoTxt = '';
+  if(r.motivo_tipo==='empresa'){
+    motivoTxt = `Desligado(a) por iniciativa da Empresa. Sabia o motivo: ${simNaoLabel(r.soube_motivo)}.`;
+    if(r.motivos_empresa && r.motivos_empresa.length) motivoTxt += ` Motivo(s) indicado(s): ${r.motivos_empresa.join(', ')}${r.motivo_empresa_outro?' — '+r.motivo_empresa_outro:''}.`;
+  } else if(r.motivo_tipo==='pediu'){
+    motivoTxt = `Pediu para ser desligado(a). ${r.pediu_porque||''}`;
+    if(r.motivos_pediu && r.motivos_pediu.length) motivoTxt += ` Motivo(s): ${r.motivos_pediu.join(', ')}.`;
+  }
+
+  const html = `<div class="pdf-doc"><div class="ptband"></div>
+    <div class="phdr">
+      <div>
+        <div class="phdr-title">Questionário de Desligamento</div>
+        <div class="phdr-sub">Gestão de Talentos — Relatório de Desligamento</div>
+        <span class="phdr-badge">FM-GT-04 A</span>
+      </div>
+      <img class="pdf-logo" src="${document.querySelector('.nav-logo').src}" alt="Logo">
+    </div>
+    <div class="pbody">
+
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad1)">01</div>Identificação</div>
+        <div class="pgrid">
+          <div class="pfield wide"><span class="pflbl">Nome</span><span class="pfval">${r.nome||'—'}</span></div>
+          <div class="pfield"><span class="pflbl">Matrícula</span><span class="pfval">${r.matricula||'—'}</span></div>
+          <div class="pfield"><span class="pflbl">Setor</span><span class="pfval">${r.setor||'—'}</span></div>
+          <div class="pfield"><span class="pflbl">Data de Desligamento</span><span class="pfval">${fmtDate(r.data_desligamento)}</span></div>
+          <div class="pfield"><span class="pflbl">Tempo de Empresa</span><span class="pfval">${r.tempo_empresa||'—'}</span></div>
+        </div>
+      </div>
+
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad2)">02</div>Motivo do Desligamento</div>
+        <div class="pgrid"><div class="pfield wide"><span class="pflbl">Motivo</span><span class="pfval">${motivoTxt||'—'}</span></div>
+        ${r.pediu_continuasse?`<div class="pfield wide"><span class="pflbl">O que poderíamos ter feito para que continuasse conosco?</span><span class="pfval">${r.pediu_continuasse}</span></div>`:''}
+        </div>
+      </div>
+
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">03</div>Avaliação — Superior Imediato (${r.nome_superior||'—'})</div>
+        ${critSup.map(([c,l])=>`<div class="pratrow"><div class="pratlbl">${l}</div>${ratingBadge(r.av_superior?r.av_superior[c]:'')}</div>`).join('')}
+      </div>
+
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad1)">04</div>Avaliação — Ambiente de Trabalho</div>
+        ${critAmb.map(([c,l])=>`<div class="pratrow"><div class="pratlbl">${l}</div>${ratingBadge(r.av_ambiente?r.av_ambiente[c]:'')}</div>`).join('')}
+      </div>
+
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad2)">05</div>Percepções Gerais</div>
+        <div class="pgrid">
+          <div class="pfield"><span class="pflbl">Recebeu Feedback de Desempenho</span><span class="pfval">${simNaoLabel(r.recebeu_feedback)}</span></div>
+          <div class="pfield"><span class="pflbl">Indicaria a Empresa</span><span class="pfval">${simNaoLabel(r.indicaria)}</span></div>
+          <div class="pfield"><span class="pflbl">Desenvolveu-se na Empresa</span><span class="pfval">${simNaoLabel(r.desenvolveu)}</span></div>
+          <div class="pfield"><span class="pflbl">Voltaria a Trabalhar</span><span class="pfval">${simNaoLabel(r.voltaria)}</span></div>
+          ${r.feedback_obs?`<div class="pfield wide"><span class="pflbl">Opinião sobre o Feedback</span><span class="pfval">${r.feedback_obs}</span></div>`:''}
+          ${r.indicaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (indicação)</span><span class="pfval">${r.indicaria_porque}</span></div>`:''}
+          ${r.voltaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (retorno)</span><span class="pfval">${r.voltaria_porque}</span></div>`:''}
+          <div class="pfield wide"><span class="pflbl">Como chegou até a Empresa</span><span class="pfval">${chegadaLabel(r)}</span></div>
+        </div>
+      </div>
+
+      ${r.sugestoes?`<div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">06</div>Sugestões de Melhoria</div>
+        <div class="pfield wide"><span class="pfval">${r.sugestoes}</span></div>
+      </div>`:''}
+
+      <div class="psect">
+        <div class="psiggrid">
+          <div><div class="psigline"></div><div class="psiglinelbl">Assinatura do Colaborador</div></div>
+          <div><div class="psigline"></div><div class="psiglinelbl">Data: ${fmtDate(r.data_desligamento)}</div></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="pfooter"><span>Documento gerado em ${dataHoje()}</span><span>FM-GT-04 A — Gestão de Talentos</span></div>
+  </div>`;
+
+  abrirPrint(html);
+}
+
+function abrirPrint(html){
+  document.getElementById('print-content').innerHTML = html;
+  document.getElementById('print-overlay').classList.add('visible');
+  document.getElementById('print-overlay').scrollTop = 0;
+}
+function fecharPrint(){
+  document.getElementById('print-overlay').classList.remove('visible');
+  document.getElementById('print-content').innerHTML = '';
+}
+document.getElementById('print-overlay').addEventListener('click', function(e){ if(e.target===this) fecharPrint(); });
+
+/* ===================== CSV EXPORT ===================== */
+function exportarCSV(){
+  const data = getFiltered();
+  const hdr = ['Nome','Matrícula','Setor','Data Desligamento','Tempo de Empresa','Tipo Motivo','Motivos','Superior Imediato',
+    'Imparcialidade','Comunicação','Postura','Relac.Equipe(Sup)','Coleguismo','Reconhecimento',
+    'Elementos5S','Ferramentas','Relac.Equipe(Amb)','Relac.Superior(Amb)',
+    'Recebeu Feedback','Indicaria','Desenvolveu','Voltaria','Como Chegou','Sugestões'];
+  const rows = data.map(r=>[
+    r.nome, r.matricula, r.setor, fmtDate(r.data_desligamento), r.tempo_empresa,
+    r.motivo_tipo==='empresa'?'Iniciativa da Empresa':(r.motivo_tipo==='pediu'?'Pedido do Colaborador':''),
+    (r.motivo_tipo==='empresa'?(r.motivos_empresa||[]).join(' / '):(r.motivos_pediu||[]).join(' / ')),
+    r.nome_superior,
+    r.av_superior?.imparcialidade, r.av_superior?.comunicacao, r.av_superior?.postura, r.av_superior?.relacionamento_equipe, r.av_superior?.coleguismo, r.av_superior?.reconhecimento,
+    r.av_ambiente?.elementos_5s, r.av_ambiente?.ferramentas, r.av_ambiente?.relacionamento_equipe, r.av_ambiente?.relacionamento_superior,
+    simNaoLabel(r.recebeu_feedback), simNaoLabel(r.indicaria), simNaoLabel(r.desenvolveu), simNaoLabel(r.voltaria),
+    chegadaLabel(r), r.sugestoes
+  ].map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`));
+  const csv = [hdr, ...rows].map(row=>row.join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Desligamentos_Export_${new Date().toISOString().substring(0,10)}.csv`;
+  a.click();
+  showToast('CSV exportado com sucesso');
+}
+
+/* ===================== INIT ===================== */
+document.getElementById('chegada-quem-wrap').style.display='none';
+carregarBase();
+
+</script>
+</body>
+</html>

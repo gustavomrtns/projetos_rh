@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Período de Experiência</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1a:#f7a800;--g1b:#ff4e00;
+  --g2a:#0099e5;--g2b:#00e5a0;
+  --g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a) 0%,var(--g1b) 100%);
+  --grad2:linear-gradient(160deg,var(--g2a) 0%,var(--g2b) 100%);
+  --grad3:linear-gradient(160deg,var(--g3a) 0%,var(--g3b) 100%);
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#ffffff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;min-height:100vh;padding:32px 20px 120px;}
+.container{max-width:860px;margin:0 auto;}
+
+/* ── HEADER ── */
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden;animation:fadeUp .5s ease both;}
+.header-band{height:7px;background:var(--gradFull);}
+.header-inner{padding:28px 32px 26px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;}
+.header-title h1{font-family:'DM Serif Display',serif;font-size:24px;color:var(--gray800);margin-bottom:4px;line-height:1.2;}
+.header-title p{font-size:13px;color:var(--gray400);font-weight:300;}
+.period-badge{background:var(--grad2);color:#fff;font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;letter-spacing:.06em;white-space:nowrap;margin-top:8px;display:inline-block;box-shadow:0 2px 8px rgba(0,153,229,.3);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STEPS ── */
+.steps-bar{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 28px;margin-bottom:20px;display:flex;align-items:center;gap:0;overflow-x:auto;}
+.step-item{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gray400);border:2px solid var(--gray200);transition:all .3s;background:var(--white);}
+.step-label{font-size:11px;font-weight:600;color:var(--gray400);white-space:nowrap;transition:color .3s;}
+.step-connector{width:32px;height:2px;background:var(--gray100);margin:0 6px;flex-shrink:0;border-radius:2px;}
+.step-item.active .step-num{background:var(--grad2);border-color:transparent;color:#fff;}
+.step-item.active .step-label{color:var(--g2a);}
+.step-item.done .step-num{background:linear-gradient(135deg,#00e5a0,#0099e5);border-color:transparent;color:#fff;}
+.step-item.done .step-label{color:#0099e5;}
+.progress-line{height:3px;background:var(--grad2);border-radius:2px;transition:width .5s;margin-bottom:20px;}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:20px;animation:fadeUp .4s ease both;}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 4px;}
+.section-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.section-num.c1{background:var(--grad1)}.section-num.c2{background:var(--grad2)}.section-num.c3{background:var(--grad3)}.section-num.c4{background:var(--grad1)}.section-num.c5{background:var(--grad2)}.section-num.c6{background:var(--grad3)}
+.section-title{font-size:12px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.1em;}
+
+/* ── CARD ── */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;transition:box-shadow .2s;}
+.card:focus-within{box-shadow:var(--shadow-lg);}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.span2{grid-column:span 2;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em;}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff;}
+.field textarea{resize:vertical;min-height:90px;line-height:1.6;}
+
+/* ── STARS (desempenho) ── */
+.rating-block{background:var(--white);border:1.5px solid var(--gray100);border-radius:var(--radius);overflow:hidden;margin-bottom:6px;transition:border-color .2s;}
+.rating-block.scored{border-color:var(--gray200);}
+.rating-top{display:grid;grid-template-columns:1fr auto;gap:12px;padding:16px 18px 10px;align-items:start;}
+.rating-name{font-size:13px;font-weight:600;color:var(--gray800);line-height:1.4;}
+.rating-name small{display:block;font-size:11.5px;color:var(--gray400);font-weight:400;margin-top:3px;}
+.score-display{font-family:'DM Serif Display',serif;font-size:32px;line-height:1;text-align:right;min-width:32px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.score-display.empty{-webkit-text-fill-color:var(--gray200);background:none;}
+.star-options{display:flex;gap:0;padding:0 18px 14px;}
+.star-btn{flex:1;background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray400);font-family:'Sora',sans-serif;font-size:11px;font-weight:500;padding:8px 4px;cursor:pointer;transition:all .15s;text-align:center;line-height:1.3;border-right:none;position:relative;}
+.star-btn:first-child{border-radius:8px 0 0 8px}
+.star-btn:last-child{border-radius:0 8px 8px 0;border-right:1.5px solid var(--gray100)}
+.star-btn:hover{background:var(--gray100);color:var(--gray800);z-index:1;}
+.star-btn.active{z-index:2;color:#fff;border-color:transparent;font-weight:700;}
+.star-btn:nth-child(1).active{background:linear-gradient(135deg,#ff4e00,#f7a800)}
+.star-btn:nth-child(2).active{background:linear-gradient(135deg,#e0009e,#ff4e00)}
+.star-btn:nth-child(3).active{background:linear-gradient(135deg,#7b2ff7,#e0009e)}
+.star-btn:nth-child(4).active{background:linear-gradient(135deg,#0099e5,#7b2ff7)}
+.star-btn:nth-child(5).active{background:linear-gradient(135deg,#00e5a0,#0099e5)}
+.star-num{font-size:16px;font-weight:700;display:block;}
+.star-label{font-size:9px;display:block;margin-top:2px;opacity:.85;}
+
+/* ── SLIDERS (competências) ── */
+.competence-item{margin-bottom:24px;}
+.competence-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.competence-name{font-size:13px;font-weight:600;color:var(--gray800);}
+.competence-desc{font-size:11.5px;color:var(--gray400);margin-bottom:8px;}
+.competence-score{font-family:'DM Serif Display',serif;font-size:26px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-width:30px;text-align:right;}
+input[type="range"]{width:100%;height:4px;background:var(--gray200);border-radius:2px;outline:none;appearance:none;cursor:pointer;accent-color:#0099e5;}
+input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#0099e5,#00e5a0);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2);cursor:pointer;}
+.range-labels{display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--gray400);}
+
+/* ── COMPETENCES CHECKBOX ── */
+.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:8px;}
+.check-label{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--white);border:1.5px solid var(--gray100);border-radius:8px;cursor:pointer;font-size:13px;color:var(--gray800);transition:all .2s;user-select:none;}
+.check-label:hover{border-color:#0099e5;background:var(--gray50);}
+.check-label input[type="checkbox"]{width:15px;height:15px;accent-color:#0099e5;flex-shrink:0;}
+.check-label:has(input:checked){border-color:#0099e5;background:rgba(0,153,229,.05);color:#0099e5;font-weight:600;}
+
+/* ── RESULT (desempenho) ── */
+.result-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-top:6px;border-top:4px solid transparent;border-image:var(--gradFull) 1;}
+.result-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;}
+.result-label{font-size:11px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.1em;}
+.result-value{font-family:'DM Serif Display',serif;font-size:44px;line-height:1;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.result-value.empty{-webkit-text-fill-color:var(--gray200);background:none;}
+.result-pct{font-size:14px;color:var(--gray400);margin-left:8px;}
+.bar-track{background:var(--gray100);border-radius:100px;height:10px;overflow:hidden;margin-bottom:10px;}
+.bar-fill{height:100%;border-radius:100px;background:var(--gradFull);transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;}
+
+/* ── RECOMENDAÇÃO AUTOMÁTICA ── */
+.auto-rec{border-radius:var(--radius);padding:20px 22px;border:1.5px solid var(--gray100);background:var(--white);transition:all .4s;box-shadow:var(--shadow);}
+.auto-rec.active-aprovado{border-color:#00c07a;background:#f5fff9;}
+.auto-rec.active-ressalvas{border-color:#f7a800;background:#fffdf0;}
+.auto-rec.active-reprovado{border-color:#ff4e00;background:#fff8f6;}
+.auto-rec .rec-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;letter-spacing:.06em;color:#fff;}
+.auto-rec.active-aprovado .rec-badge{background:linear-gradient(135deg,#00e5a0,#00c07a);}
+.auto-rec.active-ressalvas .rec-badge{background:linear-gradient(135deg,#f7a800,#ff4e00);}
+.auto-rec.active-reprovado .rec-badge{background:linear-gradient(135deg,#ff4e00,#e0009e);}
+.auto-rec .rec-title{font-size:15px;font-weight:700;margin-bottom:8px;}
+.auto-rec.active-aprovado .rec-title{color:#00c07a;}
+.auto-rec.active-ressalvas .rec-title{color:#d4900a;}
+.auto-rec.active-reprovado .rec-title{color:#ff4e00;}
+.auto-rec .rec-desc{font-size:13px;color:var(--gray600);line-height:1.6;}
+.rec-pending{display:flex;align-items:center;gap:12px;color:var(--gray400);font-size:13px;font-style:italic;}
+
+/* ── PDI (plano de desenvolvimento) ── */
+.pdi-section{display:none;margin-top:16px;padding-top:16px;border-top:1.5px dashed var(--gray200);}
+.pdi-section.visible{display:block;}
+.pdi-label{font-size:11px;font-weight:700;color:#d4900a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+
+/* ── ASSINATURAS ── */
+.signatures-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.sig-block{padding:22px 20px;background:var(--white);border:1.5px solid var(--gray100);border-radius:var(--radius);box-shadow:var(--shadow);}
+.sig-block-title{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--gray100);}
+.sig-row{margin-bottom:14px;}
+.sig-row label{font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:4px;}
+.sig-row input[type="date"],.sig-row input[type="text"]{width:100%;background:var(--gray50);border:1.5px solid var(--gray100);border-radius:8px;padding:9px 12px;font-family:'Sora',sans-serif;font-size:13px;color:var(--gray800);outline:none;transition:border-color .2s;}
+.sig-row input:focus{border-color:#0099e5;background:#fff;}
+.sig-dotted-line{border-bottom:2px dashed var(--gray200);margin-bottom:20px;padding-bottom:8px;min-height:44px;}
+.sig-dotted-label{font-size:10px;color:var(--gray400);font-weight:500;}
+
+/* ── SUBMIT BAR ── */
+.submit-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--gray100);padding:14px 20px;display:flex;justify-content:center;gap:12px;z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,.08);}
+.btn{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;padding:11px 28px;border-radius:8px;cursor:pointer;border:none;letter-spacing:.04em;transition:all .15s;}
+.btn-primary{background:var(--gradFull);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.3);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,153,229,.4);}
+.btn-export{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3);}
+.btn-export:hover{transform:translateY(-1px);}
+.btn-secondary{background:transparent;border:1.5px solid var(--gray200);color:var(--gray600);}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800);}
+
+/* ══ PRINT / PDF ═════════════════════════════════════════ */
+@media print {
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  body>*:not(#pdf-parecer){display:none !important;}
+  body{background:#fff !important;padding:0 !important;margin:0 !important;font-family:'Sora',sans-serif;}
+  #pdf-parecer{display:block !important;padding:28px 36px;max-width:100%;font-family:'Sora',sans-serif;color:#2a2f42;}
+  .pdf-band{height:6px;background:linear-gradient(135deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0) !important;margin-bottom:0;}
+  .pdf-header{display:flex !important;justify-content:space-between;align-items:center;padding:16px 0 14px;border-bottom:1px solid #e8eaf0;margin-bottom:20px;}
+  .pdf-logo{height:52px;width:auto;object-fit:contain;}
+  .pdf-header-info{}
+  .pdf-header-title{font-family:'DM Serif Display',serif;font-size:17px;font-weight:700;color:#2a2f42;margin-bottom:2px;}
+  .pdf-header-sub{font-size:10px;color:#9098b0;}
+  .pdf-header-right{text-align:right;}
+  .pdf-header-badge{display:inline-block;background:linear-gradient(160deg,#0099e5,#00e5a0) !important;color:#fff !important;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.06em;margin-bottom:4px;}
+  .pdf-header-date{font-size:9px;color:#9098b0;}
+
+  /* Seções */
+  .pdf-section{margin-bottom:14px;page-break-inside:avoid;}
+  .pdf-section-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#9098b0;border-bottom:2px solid #f4f5f8;padding-bottom:4px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .pdf-snum{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff !important;flex-shrink:0;}
+  .pdf-snum-1{background:linear-gradient(160deg,#f7a800,#ff4e00) !important;}
+  .pdf-snum-2{background:linear-gradient(160deg,#0099e5,#00e5a0) !important;}
+  .pdf-snum-3{background:linear-gradient(160deg,#7b2ff7,#e0009e) !important;}
+  .pdf-snum-4{background:linear-gradient(160deg,#f7a800,#ff4e00) !important;}
+  .pdf-snum-5{background:linear-gradient(160deg,#0099e5,#00e5a0) !important;}
+  .pdf-snum-6{background:linear-gradient(160deg,#7b2ff7,#e0009e) !important;}
+
+  /* Identificação */
+  .pdf-id-grid{display:grid !important;grid-template-columns:1fr 1fr;gap:6px 20px;}
+  .pdf-id-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9098b0;display:block;margin-bottom:2px;}
+  .pdf-id-value{font-size:12px;font-weight:600;color:#2a2f42;border-bottom:1px solid #e8eaf0;padding-bottom:4px;margin-bottom:4px;}
+
+  /* Tabela de desempenho */
+  .pdf-table{width:100%;border-collapse:collapse;}
+  .pdf-table th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#9098b0;text-align:left;padding:5px 8px;background:#f8f9fc !important;border:1px solid #e8eaf0;}
+  .pdf-table td{font-size:11px;color:#2a2f42;padding:6px 8px;border:1px solid #e8eaf0;vertical-align:middle;}
+  .pdf-table tr:nth-child(even) td{background:#f8f9fc !important;}
+  .pdf-nota-badge{display:inline-block;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-size:11px;font-weight:700;color:#fff !important;}
+  .pdf-n1{background:linear-gradient(135deg,#ff4e00,#f7a800) !important;}
+  .pdf-n2{background:linear-gradient(135deg,#e0009e,#ff4e00) !important;}
+  .pdf-n3{background:linear-gradient(135deg,#7b2ff7,#e0009e) !important;}
+  .pdf-n4{background:linear-gradient(135deg,#0099e5,#7b2ff7) !important;}
+  .pdf-n5{background:linear-gradient(135deg,#00e5a0,#0099e5) !important;}
+  .pdf-n-empty{background:#e8eaf0 !important;color:#9098b0 !important;}
+
+  /* Score geral */
+  .pdf-score-box{display:flex !important;align-items:center;gap:18px;padding:12px 16px;background:#f8f9fc !important;border:1.5px solid #e8eaf0;border-radius:8px;}
+  .pdf-score-big{font-size:38px;font-weight:700;line-height:1;background:linear-gradient(135deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0) !important;-webkit-background-clip:text !important;-webkit-text-fill-color:transparent !important;background-clip:text !important;}
+  .pdf-score-info{flex:1;}
+  .pdf-score-pct{font-size:12px;color:#5a6278;margin-bottom:5px;}
+  .pdf-bar-track{height:7px;background:#e8eaf0 !important;border-radius:100px;overflow:hidden;margin-bottom:6px;}
+  .pdf-bar-fill{height:100%;border-radius:100px;background:linear-gradient(135deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0) !important;}
+  .pdf-class-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#fff !important;}
+
+  /* Parecer */
+  .pdf-parecer-box{padding:14px 16px;border-radius:8px;border:1.5px solid #e8eaf0;background:#fff !important;}
+  .pdf-parecer-box.aprovado{border-color:#00c07a !important;background:#f5fff9 !important;}
+  .pdf-parecer-box.ressalvas{border-color:#f7a800 !important;background:#fffdf0 !important;}
+  .pdf-parecer-box.reprovado{border-color:#ff4e00 !important;background:#fff8f6 !important;}
+  .pdf-parecer-badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#fff !important;display:inline-block;padding:2px 8px;border-radius:10px;margin-bottom:6px;}
+  .pdf-parecer-box.aprovado .pdf-parecer-badge{background:linear-gradient(135deg,#00e5a0,#00c07a) !important;}
+  .pdf-parecer-box.ressalvas .pdf-parecer-badge{background:linear-gradient(135deg,#f7a800,#ff4e00) !important;}
+  .pdf-parecer-box.reprovado .pdf-parecer-badge{background:linear-gradient(135deg,#ff4e00,#e0009e) !important;}
+  .pdf-parecer-title{font-size:14px;font-weight:700;margin-bottom:5px;}
+  .pdf-parecer-box.aprovado .pdf-parecer-title{color:#00c07a;}
+  .pdf-parecer-box.ressalvas .pdf-parecer-title{color:#d4900a;}
+  .pdf-parecer-box.reprovado .pdf-parecer-title{color:#ff4e00;}
+  .pdf-parecer-desc{font-size:11px;color:#5a6278;line-height:1.55;}
+  .pdf-pdi-block{margin-top:10px;padding-top:10px;border-top:1px dashed #e8eaf0;}
+  .pdf-pdi-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d4900a;margin-bottom:4px;}
+  .pdf-pdi-text{font-size:11px;color:#2a2f42;line-height:1.55;font-style:italic;}
+
+  /* Competências */
+  .pdf-comp-grid{display:grid !important;grid-template-columns:1fr 1fr;gap:8px;}
+  .pdf-comp-item{padding:8px 10px;background:#f8f9fc !important;border-radius:6px;border:1px solid #e8eaf0;}
+  .pdf-comp-name{font-size:10px;font-weight:700;color:#5a6278;margin-bottom:4px;}
+  .pdf-comp-bar-track{height:5px;background:#e8eaf0 !important;border-radius:100px;overflow:hidden;margin-bottom:3px;}
+  .pdf-comp-bar{height:100%;border-radius:100px;background:linear-gradient(135deg,#0099e5,#00e5a0) !important;}
+  .pdf-comp-score{font-size:11px;font-weight:700;color:#2a2f42;}
+
+  /* Assinaturas */
+  .pdf-sig-grid{display:grid !important;grid-template-columns:1fr 1fr;gap:16px;}
+  .pdf-sig-block{border:1.5px solid #d0d4e0;border-radius:8px;padding:14px;}
+  .pdf-sig-block-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#5a6278;padding-bottom:8px;border-bottom:1.5px solid #e8eaf0;margin-bottom:10px;}
+  .pdf-sig-field{margin-bottom:7px;}
+  .pdf-sig-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9098b0;display:block;margin-bottom:2px;}
+  .pdf-sig-value{font-size:12px;font-weight:600;color:#2a2f42;border-bottom:1px solid #e8eaf0;padding-bottom:3px;}
+  .pdf-sig-line{border-bottom:2px dashed #d0d4e0;min-height:36px;margin-bottom:18px;}
+  .pdf-sig-line-label{font-size:8.5px;color:#9098b0;margin-top:-15px;margin-bottom:18px;}
+  .pdf-footer{margin-top:20px;padding-top:10px;border-top:1px solid #e8eaf0;display:flex !important;justify-content:space-between;font-size:9px;color:#9098b0;}
+}
+
+@media(max-width:640px){
+  .form-grid,.signatures-grid{grid-template-columns:1fr;}
+  .span2{grid-column:span 1;}
+  .header-inner{flex-direction:column;gap:10px;}
+  .steps-bar{padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+<div id="pdf-parecer" style="display:none;"></div>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-band"></div>
+  <div class="header-inner">
+    <div class="header-title">
+      <h1>Avaliação de Período de Experiência</h1>
+      <p>Desempenho · Competências · Parecer Final</p>
+      <span class="period-badge">Gestão de Talentos</span>
+    </div>
+    <div style="flex-shrink:0;display:flex;align-items:center;margin-top:-10px;">
+      <img id="logo-img" alt="Logo" style="height:100px;width:auto;object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+<!-- STEPS -->
+<div class="steps-bar" id="stepsBar">
+  <div class="step-item active" data-step="0"><div class="step-num">1</div><div class="step-label">Identificação</div></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="1"><div class="step-num">2</div><div class="step-label">Desempenho</div></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="2"><div class="step-num">3</div><div class="step-label">Competências</div></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="3"><div class="step-num">4</div><div class="step-label">Parecer</div></div>
+  <div class="step-connector"></div>
+  <div class="step-item" data-step="4"><div class="step-num">5</div><div class="step-label">Assinaturas</div></div>
+</div>
+
+<!-- SEC 01: IDENTIFICAÇÃO -->
+<div id="sec-1" class="sec-page">
+  <div class="section">
+    <div class="section-header"><div class="section-num c1">01</div><span class="section-title">Identificação do Colaborador</span></div>
+    <div class="card">
+      <div class="form-grid">
+        <div class="field">
+          <label>Nome Completo *</label>
+          <input type="text" id="nome" placeholder="Nome completo do colaborador">
+        </div>
+        <div class="field">
+          <label>Cargo / Função *</label>
+          <input type="text" id="cargo" placeholder="Cargo ocupado">
+        </div>
+        <div class="field">
+          <label>Praça *</label>
+          <select id="sel-praca" onchange="filtrarSetores()">
+            <option value="">— Selecione —</option>
+            <option>REGIÃO SUL</option><option>REGIÃO LESTE</option><option>REGIÃO CENTRAL</option>
+            <option>REGIÃO CAPITAL</option><option>REGIÃO NORTE</option><option>REGIÃO OESTE</option><option>REGIÃO NOROESTE</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Setor / Departamento *</label>
+          <select id="sel-setor">
+            <option value="">— Selecione a praça primeiro —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Gestor Responsável *</label>
+          <input type="text" id="gestor" placeholder="Nome do avaliador">
+        </div>
+        <div class="field">
+          <label>Cargo do Gestor</label>
+          <input type="text" id="cargo-gestor" placeholder="Cargo do avaliador">
+        </div>
+        <div class="field">
+          <label>Data de Admissão</label>
+          <input type="date" id="dt-admissao">
+        </div>
+        <div class="field">
+          <label>Data da Avaliação</label>
+          <input type="date" id="dt-avaliacao">
+        </div>
+        <div class="field span2">
+          <label>Tipo de Contrato</label>
+          <select id="tipo-contrato">
+            <option>45 dias + 45 dias (90 dias total)</option>
+            <option>90 dias (período único)</option>
+            <option>30 dias + 60 dias (90 dias total)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit-bar">
+    <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
+    <button class="btn btn-primary" onclick="irPara(1)">Próximo →</button>
+  </div>
+</div>
+
+<!-- SEC 02: DESEMPENHO -->
+<div id="sec-2" class="sec-page" style="display:none;">
+  <div class="section">
+    <div class="section-header"><div class="section-num c2">02</div><span class="section-title">Avaliação de Desempenho</span></div>
+
+    <div class="rating-block" id="rb-0">
+      <div class="rating-top">
+        <div class="rating-name">Qualidade do Trabalho<small>Precisão, atenção a detalhes e padrão das entregas</small></div>
+        <div class="score-display empty" id="disp-0">—</div>
+      </div>
+      <div class="star-options">
+        <button class="star-btn" onclick="setStar(0,1)"><span class="star-num">1</span><span class="star-label">Insatisfatório</span></button>
+        <button class="star-btn" onclick="setStar(0,2)"><span class="star-num">2</span><span class="star-label">Abaixo do esp.</span></button>
+        <button class="star-btn" onclick="setStar(0,3)"><span class="star-num">3</span><span class="star-label">Satisfatório</span></button>
+        <button class="star-btn" onclick="setStar(0,4)"><span class="star-num">4</span><span class="star-label">Muito Bom</span></button>
+        <button class="star-btn" onclick="setStar(0,5)"><span class="star-num">5</span><span class="star-label">Excelente</span></button>
+      </div>
+    </div>
+
+    <div class="rating-block" id="rb-1">
+      <div class="rating-top">
+        <div class="rating-name">Produtividade<small>Volume de entregas, cumprimento de prazos e metas</small></div>
+        <div class="score-display empty" id="disp-1">—</div>
+      </div>
+      <div class="star-options">
+        <button class="star-btn" onclick="setStar(1,1)"><span class="star-num">1</span><span class="star-label">Insatisfatório</span></button>
+        <button class="star-btn" onclick="setStar(1,2)"><span class="star-num">2</span><span class="star-label">Abaixo do esp.</span></button>
+        <button class="star-btn" onclick="setStar(1,3)"><span class="star-num">3</span><span class="star-label">Satisfatório</span></button>
+        <button class="star-btn" onclick="setStar(1,4)"><span class="star-num">4</span><span class="star-label">Muito Bom</span></button>
+        <button class="star-btn" onclick="setStar(1,5)"><span class="star-num">5</span><span class="star-label">Excelente</span></button>
+      </div>
+    </div>
+
+    <div class="rating-block" id="rb-2">
+      <div class="rating-top">
+        <div class="rating-name">Assiduidade e Pontualidade<small>Frequência, pontualidade e respeito aos horários</small></div>
+        <div class="score-display empty" id="disp-2">—</div>
+      </div>
+      <div class="star-options">
+        <button class="star-btn" onclick="setStar(2,1)"><span class="star-num">1</span><span class="star-label">Insatisfatório</span></button>
+        <button class="star-btn" onclick="setStar(2,2)"><span class="star-num">2</span><span class="star-label">Abaixo do esp.</span></button>
+        <button class="star-btn" onclick="setStar(2,3)"><span class="star-num">3</span><span class="star-label">Satisfatório</span></button>
+        <button class="star-btn" onclick="setStar(2,4)"><span class="star-num">4</span><span class="star-label">Muito Bom</span></button>
+        <button class="star-btn" onclick="setStar(2,5)"><span class="star-num">5</span><span class="star-label">Excelente</span></button>
+      </div>
+    </div>
+
+    <div class="rating-block" id="rb-3">
+      <div class="rating-top">
+        <div class="rating-name">Relacionamento Interpessoal<small>Colaboração, comunicação e respeito à equipe</small></div>
+        <div class="score-display empty" id="disp-3">—</div>
+      </div>
+      <div class="star-options">
+        <button class="star-btn" onclick="setStar(3,1)"><span class="star-num">1</span><span class="star-label">Insatisfatório</span></button>
+        <button class="star-btn" onclick="setStar(3,2)"><span class="star-num">2</span><span class="star-label">Abaixo do esp.</span></button>
+        <button class="star-btn" onclick="setStar(3,3)"><span class="star-num">3</span><span class="star-label">Satisfatório</span></button>
+        <button class="star-btn" onclick="setStar(3,4)"><span class="star-num">4</span><span class="star-label">Muito Bom</span></button>
+        <button class="star-btn" onclick="setStar(3,5)"><span class="star-num">5</span><span class="star-label">Excelente</span></button>
+      </div>
+    </div>
+
+    <div class="rating-block" id="rb-4">
+      <div class="rating-top">
+        <div class="rating-name">Proatividade e Iniciativa<small>Antecipa problemas, sugere melhorias, age sem ser solicitado</small></div>
+        <div class="score-display empty" id="disp-4">—</div>
+      </div>
+      <div class="star-options">
+        <button class="star-btn" onclick="setStar(4,1)"><span class="star-num">1</span><span class="star-label">Insatisfatório</span></button>
+        <button class="star-btn" onclick="setStar(4,2)"><span class="star-num">2</span><span class="star-label">Abaixo do esp.</span></button>
+        <button class="star-btn" onclick="setStar(4,3)"><span class="star-num">3</span><span class="star-label">Satisfatório</span></button>
+        <button class="star-btn" onclick="setStar(4,4)"><span class="star-num">4</span><span class="star-label">Muito Bom</span></button>
+        <button class="star-btn" onclick="setStar(4,5)"><span class="star-num">5</span><span class="star-label">Excelente</span></button>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-row">
+        <span class="result-label">Pontuação de Desempenho</span>
+        <div style="display:flex;align-items:baseline;gap:4px;">
+          <span class="result-value empty" id="result-desemp">—</span>
+          <span class="result-pct" id="result-desemp-pct"></span>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="bar-desemp"></div></div>
+    </div>
+  </div>
+  <div class="submit-bar">
+    <button class="btn btn-secondary" onclick="irPara(0)">← Voltar</button>
+    <button class="btn btn-primary" onclick="irPara(2)">Próximo →</button>
+  </div>
+</div>
+
+<!-- SEC 03: COMPETÊNCIAS -->
+<div id="sec-3" class="sec-page" style="display:none;">
+  <div class="section">
+    <div class="section-header"><div class="section-num c3">03</div><span class="section-title">Competências Comportamentais</span></div>
+    <div class="card">
+
+      <div class="competence-item">
+        <div class="competence-header">
+          <div><div class="competence-name">Adaptabilidade</div><div class="competence-desc">Flexibilidade diante de mudanças e novos desafios</div></div>
+          <div class="competence-score" id="v-adapt">3</div>
+        </div>
+        <input type="range" min="0" max="5" value="3" oninput="updateRange(this,'adapt')">
+        <div class="range-labels"><span>0 — Nenhuma</span><span>3 — Regular</span><span>5 — Excepcional</span></div>
+      </div>
+
+      <div class="competence-item">
+        <div class="competence-header">
+          <div><div class="competence-name">Aprendizagem Rápida</div><div class="competence-desc">Absorção de processos, sistemas e cultura da empresa</div></div>
+          <div class="competence-score" id="v-apren">3</div>
+        </div>
+        <input type="range" min="0" max="5" value="3" oninput="updateRange(this,'apren')">
+        <div class="range-labels"><span>0 — Nenhuma</span><span>3 — Regular</span><span>5 — Excepcional</span></div>
+      </div>
+
+      <div class="competence-item">
+        <div class="competence-header">
+          <div><div class="competence-name">Comunicação</div><div class="competence-desc">Clareza, objetividade e escuta ativa</div></div>
+          <div class="competence-score" id="v-comu">3</div>
+        </div>
+        <input type="range" min="0" max="5" value="3" oninput="updateRange(this,'comu')">
+        <div class="range-labels"><span>0 — Nenhuma</span><span>3 — Regular</span><span>5 — Excepcional</span></div>
+      </div>
+
+      <div class="competence-item">
+        <div class="competence-header">
+          <div><div class="competence-name">Comprometimento</div><div class="competence-desc">Dedicação, responsabilidade e entrega de resultados</div></div>
+          <div class="competence-score" id="v-comp">3</div>
+        </div>
+        <input type="range" min="0" max="5" value="3" oninput="updateRange(this,'comp')">
+        <div class="range-labels"><span>0 — Nenhuma</span><span>3 — Regular</span><span>5 — Excepcional</span></div>
+      </div>
+
+      <div style="border-top:1px solid var(--gray100);padding-top:20px;margin-top:8px;">
+        <div class="field"><label>Pontos Fortes Observados</label></div>
+        <div class="checkbox-grid">
+          <label class="check-label"><input type="checkbox" value="Criatividade"> Criatividade</label>
+          <label class="check-label"><input type="checkbox" value="Liderança natural"> Liderança natural</label>
+          <label class="check-label"><input type="checkbox" value="Organização"> Organização</label>
+          <label class="check-label"><input type="checkbox" value="Resolução de problemas"> Resolução de problemas</label>
+          <label class="check-label"><input type="checkbox" value="Trabalho em equipe"> Trabalho em equipe</label>
+          <label class="check-label"><input type="checkbox" value="Foco no cliente"> Foco no cliente</label>
+          <label class="check-label"><input type="checkbox" value="Ética e integridade"> Ética e integridade</label>
+          <label class="check-label"><input type="checkbox" value="Pensamento estratégico"> Pensamento estratégico</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit-bar">
+    <button class="btn btn-secondary" onclick="irPara(1)">← Voltar</button>
+    <button class="btn btn-primary" onclick="irPara(3)">Próximo →</button>
+  </div>
+</div>
+
+<!-- SEC 04: PARECER -->
+<div id="sec-4" class="sec-page" style="display:none;">
+  <div class="section">
+    <div class="section-header"><div class="section-num c4">04</div><span class="section-title">Parecer Final — Recomendação Automática</span></div>
+
+    <div class="auto-rec" id="auto-rec-box">
+      <div class="rec-pending"><span style="font-size:22px;opacity:.25">◎</span> Preencha os campos anteriores para gerar a recomendação automática.</div>
+    </div>
+
+    <!-- PDI — só aparece quando "aprovado com ressalvas" -->
+    <div class="pdi-section" id="pdi-section">
+      <div class="pdi-label">📋 Plano de Desenvolvimento Individual (PDI)</div>
+      <div class="field" style="margin-top:6px;">
+        <label>Habilidades e comportamentos a desenvolver</label>
+        <textarea id="pdi-texto" placeholder="Descreva quais competências precisam ser trabalhadas, as ações previstas e o prazo para acompanhamento…"></textarea>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:20px;">
+      <div class="section-header"><div class="section-num c4">↳</div><span class="section-title">Comentários do Gestor</span></div>
+      <div class="card">
+        <div class="field">
+          <label>Observações gerais sobre o período de experiência</label>
+          <textarea id="comentarios" placeholder="Descreva o desempenho geral, situações marcantes e percepções sobre o colaborador durante o período…" style="min-height:110px;"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit-bar">
+    <button class="btn btn-secondary" onclick="irPara(2)">← Voltar</button>
+    <button class="btn btn-primary" onclick="irPara(4)">Próximo →</button>
+  </div>
+</div>
+
+<!-- SEC 05: ASSINATURAS -->
+<div id="sec-5" class="sec-page" style="display:none;">
+  <div class="section">
+    <div class="section-header"><div class="section-num c5">05</div><span class="section-title">Assinaturas</span></div>
+    <div class="signatures-grid">
+      <div class="sig-block">
+        <div class="sig-block-title">Responsável pela Avaliação — Gestão de Talentos</div>
+        <div class="sig-row"><label>Data da Avaliação</label><input type="date" id="sig-data-aval"></div>
+        <div class="sig-row"><label>Nome do Responsável</label><input type="text" id="sig-avaliador" placeholder="Nome completo"></div>
+        <div style="margin-top:16px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Assinatura</div>
+          <div class="sig-dotted-line"></div>
+          <div class="sig-dotted-label">Assine acima</div>
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;margin-top:14px;margin-bottom:8px;">Carimbo</div>
+          <div class="sig-dotted-line"></div>
+        </div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-block-title">Ciência do Colaborador</div>
+        <div class="sig-row"><label>Data de Ciência</label><input type="date" id="sig-data-col"></div>
+        <div class="sig-row"><label>Nome do Colaborador</label><input type="text" id="sig-colaborador" placeholder="Preenchido pelo colaborador"></div>
+        <div style="margin-top:16px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Assinatura do Colaborador</div>
+          <div class="sig-dotted-line"></div>
+          <div class="sig-dotted-label">Assine acima</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit-bar">
+    <button class="btn btn-secondary" onclick="irPara(3)">← Voltar</button>
+    <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
+    <button class="btn btn-export" onclick="exportarPDF()">⬇ Exportar Parecer PDF</button>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ── LOGO (placeholder genérico) ──
+document.getElementById('logo-img').src = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22140%22%20height%3D%22140%22%3E%3Crect%20width%3D%22140%22%20height%3D%22140%22%20rx%3D%2224%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2264%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EA%3C/text%3E%3C/svg%3E';
+
+// ── SETORES POR PRAÇA ──
+const pracaSetores = {
+  "REGIÃO SUL":["COMERCIAL","DIRETORIA EXECUTIVA","ENGENHARIA","JORNALISMO","MARKETING","PROGRAMAÇÃO"],
+  "REGIÃO LESTE":["JORNALISMO","MARKETING","PROGRAMAÇÃO"],
+  "REGIÃO CENTRAL":["TECNOLOGIA","COMERCIAL","ENGENHARIA","FINANCEIRO","PRODUÇÃO","JORNALISMO","JURÍDICO","MARKETING","OPERAÇÕES","PROGRAMAÇÃO","RECURSOS HUMANOS","INFRAESTRUTURA"],
+  "REGIÃO CAPITAL":["DIRETORIA EXECUTIVA","ENGENHARIA","JORNALISMO"],
+  "REGIÃO NORTE":["JORNALISMO"],
+  "REGIÃO OESTE":["COMERCIAL","ENGENHARIA","JORNALISMO","PROGRAMAÇÃO"],
+  "REGIÃO NOROESTE":["ENGENHARIA","JORNALISMO","PROGRAMAÇÃO"],
+};
+
+function filtrarSetores(){
+  const praca = document.getElementById('sel-praca').value;
+  const s = document.getElementById('sel-setor');
+  s.innerHTML = '<option value="">— Selecione —</option>';
+  if(praca && pracaSetores[praca]){
+    pracaSetores[praca].forEach(v => {
+      const o = document.createElement('option'); o.value = v; o.textContent = v; s.appendChild(o);
+    });
+  }
+  calcRecomendacao();
+}
+
+// ── ESTADO ──
+const stars = [0,0,0,0,0]; // 5 critérios de desempenho (1-5)
+const ranges = {adapt:3, apren:3, comu:3, comp:3}; // competências (0-5)
+
+// ── ESTRELAS ──
+function setStar(idx, val){
+  stars[idx] = val;
+  // atualiza botões
+  const btns = document.querySelectorAll(`#rb-${idx} .star-btn`);
+  btns.forEach((b,i) => {
+    b.classList.toggle('active', i < val);
+  });
+  // atualiza display
+  const d = document.getElementById(`disp-${idx}`);
+  d.textContent = val;
+  d.classList.remove('empty');
+  // atualiza resultado de desempenho
+  calcDesempenho();
+  calcRecomendacao();
+}
+
+function calcDesempenho(){
+  const filled = stars.filter(v => v > 0);
+  if(filled.length === 0){
+    document.getElementById('result-desemp').textContent = '—';
+    document.getElementById('result-desemp').classList.add('empty');
+    document.getElementById('result-desemp-pct').textContent = '';
+    document.getElementById('bar-desemp').style.width = '0%';
+    return;
+  }
+  const avg = stars.reduce((a,b) => a+b, 0) / stars.length;
+  const pct = Math.round((avg / 5) * 100);
+  document.getElementById('result-desemp').textContent = avg.toFixed(1);
+  document.getElementById('result-desemp').classList.remove('empty');
+  document.getElementById('result-desemp-pct').textContent = `(${pct}%)`;
+  document.getElementById('bar-desemp').style.width = pct + '%';
+}
+
+// ── SLIDERS ──
+function updateRange(el, key){
+  ranges[key] = parseInt(el.value);
+  document.getElementById('v-' + key).textContent = el.value;
+  calcRecomendacao();
+}
+
+// ── RECOMENDAÇÃO AUTOMÁTICA ──
+function calcRecomendacao(){
+  const allStars = stars.every(v => v > 0);
+  const avgStar = stars.reduce((a,b) => a+b, 0) / stars.length; // 0-5
+  const avgRange = (ranges.adapt + ranges.apren + ranges.comu + ranges.comp) / 4; // 0-5
+  const totalScore = ((avgStar + avgRange) / 2); // 0-5
+  const pct = Math.round((totalScore / 5) * 100);
+
+  const box = document.getElementById('auto-rec-box');
+  const pdi = document.getElementById('pdi-section');
+
+  if(!allStars){
+    box.className = 'auto-rec';
+    box.innerHTML = '<div class="rec-pending"><span style="font-size:22px;opacity:.25">◎</span> Preencha todos os critérios de desempenho para gerar a recomendação.</div>';
+    pdi.classList.remove('visible');
+    return;
+  }
+
+  let cls, badge, title, desc;
+  if(pct >= 70){
+    cls = 'aprovado';
+    badge = '✅ APROVADO';
+    title = 'Colaborador Aprovado — Efetivação Recomendada';
+    desc = `Pontuação geral de <strong>${pct}%</strong>. O colaborador demonstrou desempenho consistente e competências alinhadas às expectativas da função durante o período de experiência. Recomenda-se a efetivação.`;
+  } else if(pct >= 50){
+    cls = 'ressalvas';
+    badge = '⚠️ APROVADO COM RESSALVAS';
+    title = 'Aprovado — com Necessidade de Desenvolvimento';
+    desc = `Pontuação geral de <strong>${pct}%</strong>. O colaborador atingiu o nível mínimo para efetivação, porém apresenta pontos de melhoria que deverão ser acompanhados. Preencha o Plano de Desenvolvimento Individual (PDI) abaixo.`;
+  } else {
+    cls = 'reprovado';
+    badge = '❌ NÃO APROVADO';
+    title = 'Colaborador Não Aprovado no Período de Experiência';
+    desc = `Pontuação geral de <strong>${pct}%</strong>. O desempenho e/ou as competências comportamentais ficaram abaixo do mínimo exigido. Recomenda-se o encerramento do contrato de experiência conforme CLT Art. 445.`;
+  }
+
+  box.className = `auto-rec active-${cls}`;
+  box.innerHTML = `
+    <div class="rec-badge">${badge}</div>
+    <div class="rec-title">${title}</div>
+    <div class="rec-desc">${desc}</div>`;
+
+  // PDI apenas para ressalvas
+  if(cls === 'ressalvas'){
+    pdi.classList.add('visible');
+  } else {
+    pdi.classList.remove('visible');
+  }
+}
+
+// ── NAVEGAÇÃO ──
+let currentStep = 0;
+function irPara(n){
+  document.querySelectorAll('.sec-page').forEach(s => s.style.display = 'none');
+  document.getElementById('sec-' + (n+1)).style.display = 'block';
+  currentStep = n;
+  // update steps
+  document.querySelectorAll('.step-item').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if(i < n) s.classList.add('done');
+    else if(i === n) s.classList.add('active');
+  });
+  if(n === 3) calcRecomendacao();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function limpar(){
+  if(!confirm('Deseja limpar todos os dados?')) return;
+  location.reload();
+}
+
+// ── EXPORTAR PDF ──
+function exportarPDF(){
+  const nome      = document.getElementById('nome').value || '—';
+  const cargo     = document.getElementById('cargo').value || '—';
+  const praca     = document.getElementById('sel-praca').value || '—';
+  const setor     = document.getElementById('sel-setor').value || '—';
+  const gestor    = document.getElementById('gestor').value || '—';
+  const cargoG    = document.getElementById('cargo-gestor').value || '';
+  const dtAdm     = document.getElementById('dt-admissao').value;
+  const dtAval    = document.getElementById('dt-avaliacao').value;
+  const contrato  = document.getElementById('tipo-contrato').value;
+  const coment    = document.getElementById('comentarios').value || '—';
+  const pdiText   = document.getElementById('pdi-texto').value || '';
+  const sigAval   = document.getElementById('sig-avaliador').value || '';
+  const sigData   = document.getElementById('sig-data-aval').value;
+  const sigDataC  = document.getElementById('sig-data-col').value;
+  const pontos    = [...document.querySelectorAll('.check-label input:checked')].map(c => c.value);
+
+  const fmt = d => d ? new Date(d+'T12:00').toLocaleDateString('pt-BR') : '—';
+  const dataHoje = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+
+  // Calcular score
+  const allStars = stars.every(v => v > 0);
+  const avgStar = stars.reduce((a,b) => a+b, 0) / stars.length;
+  const avgRange = (ranges.adapt + ranges.apren + ranges.comu + ranges.comp) / 4;
+  const totalScore = ((avgStar + avgRange) / 2);
+  const pct = Math.round((totalScore / 5) * 100);
+
+  let recCls, recBadge, recTitle, recDesc;
+  if(!allStars){
+    recCls=''; recBadge=''; recTitle='Avaliação Incompleta'; recDesc='Preencha todos os critérios de desempenho.';
+  } else if(pct >= 70){
+    recCls='aprovado'; recBadge='✅ APROVADO'; recTitle='Colaborador Aprovado — Efetivação Recomendada';
+    recDesc=`Pontuação geral de ${pct}%. O colaborador demonstrou desempenho consistente e competências alinhadas às expectativas. Recomenda-se a efetivação.`;
+  } else if(pct >= 50){
+    recCls='ressalvas'; recBadge='⚠️ APROVADO COM RESSALVAS'; recTitle='Aprovado — com Necessidade de Desenvolvimento';
+    recDesc=`Pontuação geral de ${pct}%. O colaborador atingiu o nível mínimo, porém apresenta pontos que deverão ser acompanhados conforme PDI.`;
+  } else {
+    recCls='reprovado'; recBadge='❌ NÃO APROVADO'; recTitle='Colaborador Não Aprovado no Período de Experiência';
+    recDesc=`Pontuação geral de ${pct}%. Desempenho e/ou competências abaixo do mínimo exigido. Recomenda-se encerramento do contrato.`;
+  }
+
+  const starLabels = ['','Insatisfatório','Abaixo do esperado','Satisfatório','Muito Bom','Excelente'];
+  const starGrads = [
+    '','linear-gradient(135deg,#ff4e00,#f7a800)','linear-gradient(135deg,#e0009e,#ff4e00)',
+    'linear-gradient(135deg,#7b2ff7,#e0009e)','linear-gradient(135deg,#0099e5,#7b2ff7)',
+    'linear-gradient(135deg,#00e5a0,#0099e5)'
+  ];
+  const desempNames = ['Qualidade do Trabalho','Produtividade','Assiduidade e Pontualidade','Relacionamento Interpessoal','Proatividade e Iniciativa'];
+  const compItems = [
+    {name:'Adaptabilidade',val:ranges.adapt},
+    {name:'Aprendizagem Rápida',val:ranges.apren},
+    {name:'Comunicação',val:ranges.comu},
+    {name:'Comprometimento',val:ranges.comp},
+  ];
+
+  const desempRows = desempNames.map((n,i) => {
+    const v = stars[i];
+    const badge = v ? `<span class="pdf-nota-badge" style="background:${starGrads[v]}">${v}</span>` : `<span class="pdf-nota-badge pdf-n-empty">—</span>`;
+    return `<tr><td>${n}</td><td style="text-align:center">${badge}</td><td style="text-align:center">${v ? starLabels[v] : '<span style="color:#9098b0;font-style:italic">—</span>'}</td></tr>`;
+  }).join('');
+
+  const compGrid = compItems.map(c => {
+    const pctC = Math.round((c.val/5)*100);
+    return `<div class="pdf-comp-item">
+      <div class="pdf-comp-name">${c.name}</div>
+      <div class="pdf-comp-bar-track"><div class="pdf-comp-bar" style="width:${pctC}%"></div></div>
+      <div class="pdf-comp-score">${c.val}/5</div>
+    </div>`;
+  }).join('');
+
+  const pdiBlock = (recCls === 'ressalvas' && pdiText) ? `
+    <div class="pdf-pdi-block">
+      <div class="pdf-pdi-label">📋 Plano de Desenvolvimento Individual (PDI)</div>
+      <div class="pdf-pdi-text">${pdiText}</div>
+    </div>` : '';
+
+  const logoSrc = document.getElementById('logo-img').src;
+  const logoHTML = logoSrc ? `<img src="${logoSrc}" class="pdf-logo" alt="Logo">` : '';
+
+  const html = `
+    <div class="pdf-band"></div>
+    <div class="pdf-header">
+      <div class="pdf-header-info">
+        <div class="pdf-header-title">Avaliação de Período de Experiência</div>
+        <div class="pdf-header-sub">Parecer Final · Gestão de Talentos</div>
+      </div>
+      <div class="pdf-header-right">
+        ${logoHTML}
+        <div><span class="pdf-header-badge">Gestão de Talentos</span></div>
+        <div class="pdf-header-date">Emitido em ${dataHoje}</div>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-1">01</span>Identificação do Colaborador</div>
+      <div class="pdf-id-grid">
+        <div><span class="pdf-id-label">Nome</span><div class="pdf-id-value">${nome}</div></div>
+        <div><span class="pdf-id-label">Cargo</span><div class="pdf-id-value">${cargo}</div></div>
+        <div><span class="pdf-id-label">Praça</span><div class="pdf-id-value">${praca}</div></div>
+        <div><span class="pdf-id-label">Setor</span><div class="pdf-id-value">${setor}</div></div>
+        <div><span class="pdf-id-label">Gestor Responsável</span><div class="pdf-id-value">${gestor}${cargoG ? ' · '+cargoG : ''}</div></div>
+        <div><span class="pdf-id-label">Contrato</span><div class="pdf-id-value">${contrato}</div></div>
+        <div><span class="pdf-id-label">Admissão</span><div class="pdf-id-value">${fmt(dtAdm)}</div></div>
+        <div><span class="pdf-id-label">Data da Avaliação</span><div class="pdf-id-value">${fmt(dtAval)}</div></div>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-2">02</span>Avaliação de Desempenho</div>
+      <table class="pdf-table">
+        <thead><tr><th style="width:55%">Critério</th><th style="width:12%;text-align:center">Nota</th><th style="text-align:center">Classificação</th></tr></thead>
+        <tbody>${desempRows}</tbody>
+      </table>
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-3">03</span>Competências Comportamentais (escala 0–5)</div>
+      <div class="pdf-comp-grid">${compGrid}</div>
+      ${pontos.length ? `<div style="margin-top:10px;font-size:11px;color:#5a6278"><strong style="color:#2a2f42">Pontos fortes:</strong> ${pontos.join(', ')}</div>` : ''}
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-4">04</span>Pontuação Geral</div>
+      <div class="pdf-score-box">
+        <div class="pdf-score-big">${allStars ? pct + '%' : '—'}</div>
+        <div class="pdf-score-info">
+          <div class="pdf-score-pct">${allStars ? `Pontuação consolidada: desempenho + competências` : 'Avaliação incompleta'}</div>
+          <div class="pdf-bar-track"><div class="pdf-bar-fill" style="width:${allStars?pct:0}%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-5">05</span>Parecer Final e Recomendação</div>
+      <div class="pdf-parecer-box ${recCls}">
+        <div class="pdf-parecer-badge">${recBadge}</div>
+        <div class="pdf-parecer-title">${recTitle}</div>
+        <div class="pdf-parecer-desc">${recDesc}</div>
+        ${pdiBlock}
+      </div>
+    </div>
+
+    ${coment !== '—' ? `<div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-6">↳</span>Comentários do Gestor</div>
+      <div style="font-size:12px;color:#5a6278;line-height:1.6;padding:12px 14px;background:#f8f9fc;border-radius:8px;border:1px solid #e8eaf0;">${coment}</div>
+    </div>` : ''}
+
+    <div class="pdf-section">
+      <div class="pdf-section-title"><span class="pdf-snum pdf-snum-6">06</span>Assinaturas</div>
+      <div class="pdf-sig-grid">
+        <div class="pdf-sig-block">
+          <div class="pdf-sig-block-title">Responsável pela Avaliação — Gestão de Talentos</div>
+          <div class="pdf-sig-field"><span class="pdf-sig-label">Nome</span><div class="pdf-sig-value">${sigAval||'&nbsp;'}</div></div>
+          <div class="pdf-sig-field"><span class="pdf-sig-label">Data</span><div class="pdf-sig-value">${fmt(sigData)}</div></div>
+          <div style="margin-top:12px"><div class="pdf-sig-label" style="margin-bottom:5px">Assinatura</div><div class="pdf-sig-line"></div><div class="pdf-sig-line-label">Assine acima</div><div class="pdf-sig-label" style="margin-bottom:5px">Carimbo</div><div class="pdf-sig-line"></div></div>
+        </div>
+        <div class="pdf-sig-block">
+          <div class="pdf-sig-block-title">Ciência do Colaborador</div>
+          <div class="pdf-sig-field"><span class="pdf-sig-label">Nome</span><div class="pdf-sig-value">${nome}</div></div>
+          <div class="pdf-sig-field"><span class="pdf-sig-label">Data de Ciência</span><div class="pdf-sig-value">${fmt(sigDataC)}</div></div>
+          <div style="margin-top:12px"><div class="pdf-sig-label" style="margin-bottom:5px">Assinatura do Colaborador</div><div class="pdf-sig-line"></div><div class="pdf-sig-line-label">Assine acima</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdf-footer">
+      <span>Avaliação de Período de Experiência · Gestão de Talentos</span>
+      <span>Gerado em ${dataHoje}</span>
+    </div>`;
+
+  document.getElementById('pdf-parecer').innerHTML = html;
+  const safe = nome.replace(/[^a-zA-Z0-9\s]/g,'').trim().replace(/\s+/g,'_').substring(0,30);
+  document.title = `Parecer_Experiencia_${safe}`;
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { document.title = 'Avaliação de Período de Experiência'; }, 1000);
+  }, 120);
+}
+</script>
+</body>
+</html>
