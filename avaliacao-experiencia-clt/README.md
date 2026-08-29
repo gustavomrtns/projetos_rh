@@ -1,8 +1,8 @@
 # Avaliação de Período de Experiência — CLT
 
-Solução digital para estruturar o acompanhamento do período de experiência, combinando avaliação de desempenho, competências comportamentais, parecer gerencial e consolidação de indicadores em um fluxo único.
+> Solução digital para estruturar o acompanhamento do período de experiência, combinando avaliação de desempenho, competências comportamentais, parecer gerencial e consolidação de informações em um fluxo único.
 
-[▶ Explorar aplicação](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/) · [🌐 Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/) · [← Todos os projetos](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
 ---
 
@@ -19,9 +19,11 @@ Solução digital para estruturar o acompanhamento do período de experiência, 
 
 ## Evidência visual
 
-A visão abaixo consolida as principais etapas da solução: identificação, avaliação de desempenho, competências comportamentais, parecer final e visão gerencial dos resultados.
-
 ![Visão geral da Avaliação de Período de Experiência](./avaliacao-experiencia-clt-case-overview.png)
+
+*A visão consolida identificação, avaliação de desempenho, competências comportamentais, parecer final e perspectiva gerencial dos resultados.*
+
+> **Escopo da evidência:** o fluxo de avaliação representa a aplicação funcional. A camada de dashboard apresentada na montagem é uma **visão gerencial conceitual**, criada para demonstrar possibilidades de consolidação dos registros em indicadores. Os dados exibidos são demonstrativos.
 
 ## O desafio
 
@@ -42,48 +44,36 @@ Atuei na estruturação da solução desde a lógica do processo até sua materi
 
 ## A solução
 
-A aplicação organiza a avaliação em uma jornada sequencial, reduzindo dispersão de informações e dando maior clareza ao processo.
+A aplicação organiza a avaliação em uma jornada sequencial, reduzindo dispersão de informações e dando maior clareza ao processo de acompanhamento do período de experiência.
 
-### 1. Identificação
+O desenho conecta registro operacional, avaliação estruturada e formalização do parecer final em uma mesma experiência.
 
-Centraliza dados do colaborador, função, área, gestor responsável, datas e informações do período de experiência.
+## Como funciona
 
-### 2. Avaliação de desempenho
+**1. Identificação** → centraliza dados do colaborador, função, área, gestor responsável, datas e informações do período de experiência.
 
-Estrutura critérios objetivos em escala de avaliação, permitindo registrar percepções sobre dimensões relevantes do desempenho e acompanhar a pontuação consolidada.
+**2. Avaliação de desempenho** → estrutura critérios objetivos em escala de avaliação e consolida a leitura do desempenho.
 
-### 3. Competências comportamentais
+**3. Competências comportamentais** → complementa a dimensão técnica com aspectos comportamentais e pontos fortes observados.
 
-Complementa a análise técnica com aspectos comportamentais e pontos fortes observados, ampliando a qualidade do parecer sobre adaptação e atuação profissional.
+**4. Parecer final** → organiza a recomendação final e mantém espaço para observações e contextualização da decisão.
 
-### 4. Parecer final
+**5. Visão gerencial conceitual** → demonstra como os registros individuais podem ser consolidados para análises por período, área, status e desempenho.
 
-Consolida os resultados da avaliação e organiza a recomendação final, mantendo espaço para observações gerenciais e contextualização da decisão.
+## Valor potencial
 
-### 5. Visão gerencial
+A solução foi concebida para contribuir com:
 
-A camada de indicadores permite transformar registros individuais em uma perspectiva consolidada para acompanhamento do processo, apoiando análises por período, área, status e desempenho.
-
-## Estrutura de informação
-
-A solução foi concebida para conectar três níveis de análise:
-
-**Registro operacional → Avaliação estruturada → Informação gerencial**
-
-Esse desenho permite que o mesmo processo utilizado para registrar a experiência individual também produza dados organizados para acompanhamento de RH.
-
-## Impacto potencial
-
-- Padronização dos critérios e do fluxo de avaliação.
-- Maior qualidade e rastreabilidade dos registros.
-- Apoio a feedbacks mais estruturados entre liderança e colaborador.
-- Consolidação de informações para análise de RH.
-- Redução da dependência de controles dispersos e avaliações não padronizadas.
-- Maior consistência no suporte à tomada de decisão ao final do período de experiência.
+- padronização dos critérios e do fluxo de avaliação;
+- maior qualidade e rastreabilidade dos registros;
+- apoio a feedbacks mais estruturados entre liderança e colaborador;
+- consolidação de informações para análise de RH;
+- redução da dependência de controles dispersos e avaliações não padronizadas;
+- maior consistência no suporte à tomada de decisão ao final do período de experiência.
 
 ## Competências demonstradas
 
-**Gestão de Desempenho** · **Gestão de Pessoas** · **People Analytics** · **Desenho de Processos** · **Experiência do Usuário** · **Feedback** · **Indicadores de RH** · **Automação** · **Desenvolvimento de Soluções Digitais**
+`Gestão de Desempenho` · `Gestão de Pessoas` · `People Analytics` · `Desenho de Processos` · `Feedback` · `UX de Processos` · `Indicadores de RH` · `Digitalização de Processos`
 
 ## Tecnologias e abordagens
 
@@ -91,4 +81,4 @@ Esse desenho permite que o mesmo processo utilizado para registrar a experiênci
 
 ---
 
-[▶ Explorar aplicação](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/) · [🌐 Voltar ao Portfólio](https://gustavomrtns.github.io/projetos_rh/)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
