@@ -1,66 +1,94 @@
-# Portfólio Profissional — Manoel Gustavo
+# Manoel Gustavo — Projetos de Recursos Humanos, Processos e People Analytics
 
-Portfólio de projetos de Recursos Humanos, Gestão de Pessoas, Projetos, Dados, Processos e Inovação. As aplicações demonstram a transformação de necessidades de RH em fluxos, workspaces, ferramentas de gestão e soluções digitais.
+> **Estrategista de Recursos Humanos | Agilista | Analista Técnico Comportamental DISC**  
+> Gestão de Pessoas · Psicologia Organizacional · Projetos & Processos · People Analytics · Inovação · ESG
 
-## Projetos
+Este repositório reúne projetos autorais desenvolvidos para demonstrar como transformo necessidades de **Recursos Humanos** em processos estruturados, experiências digitais, indicadores e ferramentas de gestão.
 
-### 01. GT360º — Workspace de Gestão de Talentos ⭐
-Projeto de destaque do portfólio. Workspace do setor de RH para gestão integrada de atividades e processos, reunindo dois módulos principais: **Fluxo de Onboarding**, para acompanhar a integração do colaborador à empresa, e **Painel de Treinamentos**, para gerenciar o ciclo de Educação Corporativa.
+Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problema de Gestão de Pessoas e busca organizar o fluxo, melhorar a experiência do usuário, ampliar a rastreabilidade das informações e apoiar decisões orientadas por dados.
 
-**Pasta:** `gt360/`
+[**▶ Visualizar Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**LinkedIn**](https://www.linkedin.com/in/manoel-gustavo/)
 
-### 02. Quadro de Gestão — Kanban RH e Projetos
-Painel para gestão de demandas, projetos e atividades de RH, com organização por status, prioridades, responsáveis, setores, sprints e checklists.
+---
 
-**Pasta:** `quadro-gestao-kanban/`
+## Para recrutadores
 
-### 03. Questionário de Desligamento
-Formulário estruturado para coleta de informações sobre desligamento, motivos, avaliação da liderança, ambiente, feedback, recomendação e intenção de retorno.
+Este portfólio evidencia competências em quatro dimensões principais:
 
-**Pasta:** `questionario-desligamento/`
+- **Estratégia de RH:** T&D, onboarding/offboarding, desempenho, comunicação interna e experiência do colaborador.
+- **Projetos & Processos:** mapeamento de fluxos, Kanban, melhoria contínua, estruturação de rotinas e gestão de demandas.
+- **Dados & Tecnologia:** People Analytics, indicadores, dashboards, automação, HTML/CSS/JavaScript, Power BI, Python, SQL e IA aplicada a RH.
+- **Comportamento & Organizações:** análise comportamental DISC, Psicologia Organizacional, cultura, engajamento, DEI e ESG.
 
-### 04. eu + horizonte — Intranet
-Protótipo de intranet voltado à comunicação interna e experiência do colaborador.
+### Como analisar os projetos
 
-**Pasta:** `eu-horizonte-intranet/`
+A leitura dos cases segue a lógica:
 
-### 05. Checklist 5S
-Aplicação digital para auditoria 5S, com critérios de avaliação, indicadores de conformidade e organização dos resultados.
+**Contexto → Problema → Minha atuação → Solução → Tecnologia → Impacto → Competências demonstradas**
 
-**Pasta:** `checklist-5s/`
+---
 
-### 06. Avaliação de Período de Experiência — CLT
-Ferramenta estruturada para avaliação de colaboradores durante o período de experiência, apoiando acompanhamento e tomada de decisão.
+## Projetos em destaque
 
-**Pasta:** `avaliacao-experiencia-clt/`
+| # | Projeto | Problema / oportunidade | Solução desenvolvida | Competências demonstradas |
+|---|---|---|---|---|
+| **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Workspace integrado com módulos de Onboarding e Painel de Treinamentos | Gestão de Pessoas, T&D, processos, indicadores, UX e automação |
+| **02** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Kanban, priorização e gestão de projetos |
+| **03** | **[Questionário de Desligamento](./questionario-desligamento/)** | Feedbacks de saída pouco estruturados e difíceis de comparar | Instrumento digital para coleta e organização de dados de offboarding | Employee Experience, dados e melhoria de processos |
+| **04** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Protótipo de intranet para comunicação, informação e jornada do colaborador | Comunicação interna, EX, UX e Employer Branding |
+| **05** | **[Checklist 5S](./checklist-5s/)** | Auditorias e controles de conformidade pouco padronizados | Aplicação digital com critérios de avaliação e indicadores | 5S, melhoria contínua, processos e indicadores |
+| **06** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, gestão de pessoas e dados |
+| **07** | **[Avaliação de Prestadores — PJ](./avaliacao-prestador-pj/)** | Necessidade de critérios objetivos para acompanhamento de prestadores | Avaliação digital por critérios contratuais e impacto | Governança, fornecedores, avaliação e processos |
 
-### 07. Avaliação de Prestadores de Serviço — PJ
-Formulário para avaliação de prestadores por critérios contratuais, incluindo qualidade do serviço, custo-benefício e classificação de impacto.
+---
 
-**Pasta:** `avaliacao-prestador-pj/`
+## Projeto flagship — GT360º
 
-## Como o portfólio está estruturado
+O **GT360º** é o principal projeto deste portfólio. Foi concebido como um workspace de Gestão de Talentos para integrar processos que normalmente permanecem dispersos em planilhas, formulários e controles manuais.
 
-A narrativa dos projetos segue uma lógica de transformação de RH:
+### Módulo 1 — Fluxo de Onboarding
 
-**Contexto → Problema → Atuação → Solução → Tecnologia → Impacto → Competências demonstradas**
+Estrutura o acompanhamento da integração do colaborador, organizando etapas, responsabilidades, informações e indicadores relacionados à experiência de entrada.
 
-O objetivo é apresentar não apenas as aplicações, mas a capacidade de estruturar processos, organizar fluxos, digitalizar rotinas e apoiar decisões de Gestão de Pessoas.
+### Módulo 2 — Painel de Treinamentos
 
-## Tecnologias e abordagens
+Organiza o ciclo de Educação Corporativa, permitindo acompanhar treinamentos, certificações, materiais, indicadores, impacto e lógica de mensuração de ROI.
 
-- HTML, CSS e JavaScript
-- Power BI e análise de dados
-- Python e SQL
-- Metodologias ágeis, Kanban e sprints
-- Mapeamento e melhoria de processos
-- Workspaces e aplicações para RH
-- Inteligência Artificial aplicada a produtividade e processos
+**[Abrir GT360º](https://gustavomrtns.github.io/projetos_rh/gt360/)**
 
-## Publicação
+---
 
-O portfólio está publicado no GitHub Pages e pode ser acessado diretamente pelo navegador.
+## Stack e abordagens
 
-**Portfólio:** https://gustavomrtns.github.io/projetos_rh/
+**Gestão de Pessoas**  
+T&D · Onboarding · Offboarding · Performance · Employee Experience · Comunicação Interna · Employer Branding
 
-**LinkedIn:** https://www.linkedin.com/in/manoel-gustavo/
+**Projetos & Processos**  
+Scrum · Kanban · Sprints · Mapeamento de Processos · Melhoria Contínua · OKRs · Gestão de Demandas
+
+**Dados & Tecnologia**  
+People Analytics · Power BI · Python · SQL · HTML · CSS · JavaScript · IA aplicada a RH
+
+**Comportamento & Organizações**  
+Análise Comportamental DISC · Psicologia Organizacional · Cultura · Engajamento · DEI · ESG
+
+---
+
+## Navegação rápida
+
+- [Portfólio Profissional — GitHub Pages](https://gustavomrtns.github.io/projetos_rh/)
+- [GT360º](https://gustavomrtns.github.io/projetos_rh/gt360/)
+- [Quadro de Gestão](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/)
+- [Questionário de Desligamento](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/)
+- [eu + horizonte — Intranet](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
+- [Checklist 5S](https://gustavomrtns.github.io/projetos_rh/checklist-5s/)
+- [Avaliação de Experiência — CLT](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/)
+- [Avaliação de Prestadores — PJ](https://gustavomrtns.github.io/projetos_rh/avaliacao-prestador-pj/)
+
+---
+
+## Sobre mim
+
+Sou profissional de Recursos Humanos com atuação multidisciplinar em Gestão de Pessoas, projetos, processos, dados e tecnologia. Busco fazer interseccionalidade em **Gestão de Pessoas nas Organizações e Ciberpsicologia**, abordando pilares de **Gestão de Processos, Psicologia Organizacional, Inovação e ESG**.
+
+**Contato profissional:** [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)
