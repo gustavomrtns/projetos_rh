@@ -2,7 +2,7 @@
 
 > Solução digital para estruturar auditorias 5S, padronizar critérios de avaliação e transformar registros operacionais em informações úteis para acompanhamento da qualidade e melhoria contínua.
 
-[▶ Explorar aplicação](https://gustavomrtns.github.io/projetos_rh/checklist-5s/) · [🌐 Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/) · [← Todos os projetos](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/checklist-5s/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
 ---
 
@@ -23,67 +23,47 @@
 
 *A solução conecta a execução estruturada da auditoria à leitura gerencial dos resultados, permitindo acompanhar conformidade, setores, turnos, evolução das análises e pontos que demandam atenção.*
 
+> **Escopo da evidência:** a aplicação de auditoria representa a camada funcional do projeto. A visualização de dashboard apresentada na montagem é uma **camada gerencial conceitual**, criada para demonstrar como os registros podem evoluir para análises consolidadas. Os dados exibidos são demonstrativos.
+
 ## O desafio
 
 Auditorias 5S dependem de critérios consistentes e de uma forma confiável de registrar as avaliações. Quando esse processo ocorre em controles dispersos ou pouco padronizados, torna-se mais difícil comparar análises, identificar desvios recorrentes e transformar os registros em informação para gestão.
 
 O projeto foi estruturado a partir desse cenário: **como tornar a auditoria 5S mais padronizada, rastreável e orientada por indicadores?**
 
-## Meu papel no projeto
+## Minha atuação
 
 Atuei na concepção da solução desde a lógica do processo até a experiência digital, conectando critérios de qualidade, registro das avaliações e leitura dos resultados.
 
-Principais frentes de atuação:
-
-- estruturação dos critérios de auditoria para os cinco sensos;
-- organização da lógica de avaliação entre **Conforme, Não Conforme e N/A**;
-- definição da lógica de pontuação e conformidade geral;
-- organização dos dados de identificação da auditoria, como setor, responsável, data e turno;
-- desenho da experiência e do fluxo de preenchimento;
-- desenvolvimento da aplicação digital;
-- estruturação da visão de indicadores para acompanhamento das análises.
+- Estruturação dos critérios de auditoria para os cinco sensos.
+- Organização da lógica de avaliação entre **Conforme, Não Conforme e N/A**.
+- Definição da lógica de pontuação e conformidade geral.
+- Organização dos dados de identificação da auditoria, como setor, responsável, data e turno.
+- Desenho da experiência e do fluxo de preenchimento.
+- Desenvolvimento da aplicação digital.
+- Estruturação conceitual da visão de indicadores para acompanhamento das análises.
 
 ## A solução
 
-O Checklist 5S organiza a auditoria em uma jornada digital pelos cinco sensos da metodologia:
+O Checklist 5S organiza a auditoria em uma jornada digital pelos cinco sensos da metodologia, conectando critérios objetivos, registro do contexto da análise e cálculo da conformidade.
 
-**1º Seiri — Utilização**  
-**2º Seiton — Organização**  
-**3º Seiso — Limpeza**  
-**4º Seiketsu — Padronização**  
-**5º Shitsuke — Disciplina**
+A arquitetura também prevê uma camada gerencial para transformar os registros operacionais em informações consolidadas de acompanhamento.
 
-Cada etapa apresenta critérios objetivos de avaliação e alimenta a conformidade do respectivo senso e o resultado geral da auditoria. A aplicação também permite registrar informações do contexto da análise e consolidar os resultados para acompanhamento.
+## Como funciona
 
-## Da auditoria ao indicador
+**1. Identificação da auditoria** → registro de setor, responsável, data, turno e contexto da análise.
 
-A arquitetura do projeto foi pensada em duas camadas complementares:
+**2. Avaliação dos cinco sensos** → aplicação dos critérios de Seiri, Seiton, Seiso, Seiketsu e Shitsuke.
 
-**Camada operacional — Auditoria**  
-Responsável pelo preenchimento dos critérios, identificação da área avaliada e cálculo da conformidade ao longo dos cinco sensos.
+**3. Classificação dos critérios** → registro entre Conforme, Não Conforme e N/A.
 
-**Camada gerencial — Dashboard**  
-Concebida para consolidar as auditorias e permitir leituras por período, setor, turno, responsável e situação, além de indicadores como conformidade geral, média por setor, não conformidades, evolução das análises e planos de ação.
+**4. Consolidação da conformidade** → cálculo dos resultados por senso e da avaliação geral.
 
-Essa estrutura demonstra como um checklist operacional pode evoluir para uma ferramenta de acompanhamento e apoio à gestão da qualidade.
+**5. Histórico e acompanhamento** → organização dos registros para leitura posterior.
 
-## Indicadores e possibilidades de análise
+**6. Camada gerencial conceitual** → proposta de dashboard para análises por período, setor, turno, responsável, conformidade, não conformidades e planos de ação.
 
-A camada analítica foi concebida para permitir leituras como:
-
-- quantidade de auditorias realizadas;
-- conformidade geral e por senso;
-- média de conformidade por setor;
-- comparação entre setores e turnos;
-- evolução da conformidade ao longo do tempo;
-- quantidade de não conformidades;
-- desempenho das áreas avaliadas;
-- histórico das auditorias;
-- acompanhamento de planos de ação.
-
-> Os dados apresentados na visualização do dashboard são demonstrativos e servem para representar a arquitetura analítica proposta para a solução.
-
-## Valor para a gestão
+## Valor potencial
 
 A solução foi concebida para contribuir com:
 
@@ -96,8 +76,12 @@ A solução foi concebida para contribuir com:
 
 ## Competências demonstradas
 
-`Gestão de Processos` · `5S` · `Qualidade` · `Indicadores` · `Melhoria Contínua` · `UX de Processos` · `Automação` · `HTML` · `CSS` · `JavaScript`
+`Gestão de Processos` · `5S` · `Qualidade` · `Indicadores` · `Melhoria Contínua` · `UX de Processos` · `Automação` · `Gestão orientada por dados`
+
+## Tecnologias e abordagens
+
+`HTML` · `CSS` · `JavaScript` · `5S` · `Gestão de Processos` · `Indicadores` · `Melhoria Contínua` · `UX`
 
 ---
 
-[▶ Abrir Checklist 5S](https://gustavomrtns.github.io/projetos_rh/checklist-5s/) · [🌐 Ver Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/)
+[▶ **Abrir Checklist 5S**](https://gustavomrtns.github.io/projetos_rh/checklist-5s/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
