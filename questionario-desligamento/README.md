@@ -16,6 +16,12 @@
 | **Abordagens** | Offboarding · Employee Experience · Pesquisa Organizacional · Dados de RH · Melhoria de Processos |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
+## Evidência visual
+
+![Visão integrada do Questionário de Desligamento — jornada de resposta e análise](./questionario-desligamento-case-overview.png.png)
+
+A solução conecta a **jornada de escuta no desligamento** à **organização e leitura dos dados**, permitindo visualizar o processo como um fluxo único: coleta estruturada das percepções, consolidação das respostas e geração de informações para apoiar análises de Gestão de Pessoas.
+
 ## O desafio
 
 Entrevistas e pesquisas de desligamento geram informações relevantes sobre liderança, clima, experiência do colaborador, motivos de saída e intenção de retorno. Quando esses registros ficam dispersos ou sem padronização, a organização perde capacidade de comparar respostas, identificar recorrências e transformar percepções individuais em aprendizado para a Gestão de Pessoas.
