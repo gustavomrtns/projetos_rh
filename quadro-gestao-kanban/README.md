@@ -16,6 +16,14 @@
 | **Abordagens** | Kanban · Scrum · Sprints · Gestão de Demandas · Melhoria Contínua |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
+## Evidência visual
+
+![Visão consolidada do Kanban RH e Projetos](./kanban-rh-projetos-case-overview.png)
+
+*Visão integrada da solução: Quadro de Demandas, Backlog estruturado e Dashboard de Indicadores compondo um fluxo único de acompanhamento operacional e gerencial.*
+
+A montagem evidencia três camadas complementares da solução: **gestão visual do trabalho**, **governança das demandas** e **leitura dos indicadores para apoio à decisão**.
+
 ## O desafio
 
 Demandas de RH e projetos podem perder visibilidade quando ficam distribuídos entre mensagens, planilhas, anotações e acompanhamentos informais. Esse cenário dificulta a leitura do trabalho em andamento, a priorização das entregas e a identificação de responsáveis, prazos e possíveis gargalos.
