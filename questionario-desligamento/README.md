@@ -2,7 +2,7 @@
 
 > Solução digital para estruturar a coleta de percepções no desligamento e transformar feedbacks de saída em informação organizada para análise de **Employee Experience, liderança, clima e causas de turnover**.
 
-[▶ **Abrir aplicação**](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
 ---
 
@@ -20,7 +20,7 @@
 
 ![Visão integrada do Questionário de Desligamento — jornada de resposta e análise](./questionario-desligamento-case-overview.png)
 
-A solução conecta a **jornada de escuta no desligamento** à **organização e leitura dos dados**, permitindo visualizar o processo como um fluxo único: coleta estruturada das percepções, consolidação das respostas e geração de informações para apoiar análises de Gestão de Pessoas.
+*A solução conecta a jornada de escuta no desligamento à organização e leitura dos dados, permitindo visualizar o processo como um fluxo único: coleta estruturada das percepções, consolidação das respostas e geração de informações para apoiar análises de Gestão de Pessoas.*
 
 ## O desafio
 
@@ -39,44 +39,29 @@ A solução foi estruturada para conectar **offboarding, experiência do colabor
 - Estruturação da lógica para transformar percepções qualitativas em registros comparáveis.
 - Desenvolvimento do protótipo digital.
 
-## Estrutura da solução
+## A solução
 
-```text
-                EXPERIÊNCIA DE DESLIGAMENTO
-                           │
-                    COLETA ESTRUTURADA
-                           │
-       ┌───────────────────┼───────────────────┐
-       │                   │                   │
- MOTIVOS DE SAÍDA      LIDERANÇA / CLIMA     EXPERIÊNCIA
-       │                   │                   │
-       └───────────────────┼───────────────────┘
-                           │
-                ORGANIZAÇÃO DAS RESPOSTAS
-                           │
-                           ▼
-                  DADOS PARA ANÁLISE DE RH
-```
+O Questionário de Desligamento estrutura a jornada de offboarding e registra percepções relacionadas à experiência do colaborador em um formato organizado, consistente e preparado para análise posterior.
 
-A proposta é criar uma base de informação mais consistente para leitura de tendências e apoio a ações de melhoria em Gestão de Pessoas.
+A proposta é preservar a dimensão qualitativa da escuta ao mesmo tempo em que cria uma base de dados mais comparável para Gestão de Pessoas.
 
-## Solução desenvolvida
+## Como funciona
 
-O Questionário de Desligamento estrutura a jornada de offboarding e registra percepções relacionadas à experiência do colaborador.
+**1. Identificação e contexto** → registro das informações necessárias para contextualizar o desligamento.
 
-A solução contempla a lógica de:
+**2. Motivos de saída** → coleta estruturada das razões relacionadas à decisão de desligamento.
 
-- registro dos motivos do desligamento;
-- avaliação da experiência com liderança e ambiente de trabalho;
-- percepção sobre clima e relacionamento;
-- avaliação da experiência geral na organização;
-- recomendação da empresa;
-- intenção de retorno;
-- organização das respostas para análise posterior.
+**3. Liderança, clima e relacionamento** → avaliação das percepções sobre ambiente e experiência de trabalho.
 
-## Valor gerado pela solução
+**4. Experiência geral** → registro da percepção global sobre a jornada na organização.
 
-O valor do projeto está em transformar feedbacks de saída em uma fonte mais estruturada de conhecimento organizacional.
+**5. Recomendação e intenção de retorno** → captura de sinais complementares sobre vínculo e experiência.
+
+**6. Organização dos dados** → consolidação das respostas para leitura de padrões, recorrências e oportunidades de melhoria.
+
+## Valor potencial
+
+O projeto foi concebido para contribuir com:
 
 - **Padronização:** mesma lógica de coleta para diferentes desligamentos.
 - **Comparabilidade:** respostas organizadas em dimensões que facilitam identificação de padrões.
@@ -87,25 +72,14 @@ O valor do projeto está em transformar feedbacks de saída em uma fonte mais es
 
 > **Nota sobre resultados:** o case demonstra a arquitetura da solução e seus benefícios funcionais. Não são atribuídos indicadores de redução de turnover ou ganhos quantitativos sem mensuração comprovada.
 
-## Competências profissionais demonstradas
+## Competências demonstradas
 
-| Eixo | Evidências no projeto |
-|---|---|
-| **Employee Experience** | Estruturação da escuta da experiência no momento de saída |
-| **Offboarding** | Organização e padronização da jornada de desligamento |
-| **Pesquisa Organizacional** | Construção de perguntas, dimensões e critérios de análise |
-| **Dados de RH** | Transformação de feedbacks em registros estruturados e comparáveis |
-| **Gestão de Processos** | Estruturação do fluxo de coleta e organização das informações |
-| **Tecnologia aplicada a RH** | Desenvolvimento de ferramenta digital orientada a uma necessidade de Gestão de Pessoas |
+`Employee Experience` · `Offboarding` · `Pesquisa Organizacional` · `Dados de RH` · `Gestão de Processos` · `Escuta Organizacional` · `Melhoria Contínua` · `Tecnologia aplicada a RH`
 
-## Stack e abordagens
+## Tecnologias e abordagens
 
 `HTML` · `CSS` · `JavaScript` · `Offboarding` · `Employee Experience` · `Pesquisa Organizacional` · `Dados de RH` · `Melhoria Contínua`
 
 ---
 
-### Explorar a solução
-
-[▶ **Abrir Questionário de Desligamento**](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/)
-
-[**Conhecer o Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**Ver todos os projetos no GitHub**](../README.md)
+[▶ **Abrir Questionário de Desligamento**](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
