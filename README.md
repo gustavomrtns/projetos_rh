@@ -11,18 +11,18 @@ Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problem
 
 ---
 
-## Para recrutadores
+## Competências em evidência
 
-Este portfólio evidencia competências em quatro dimensões principais:
+Os projetos articulam quatro dimensões principais da minha atuação profissional:
 
 - **Estratégia de RH:** T&D, onboarding/offboarding, desempenho, comunicação interna e experiência do colaborador.
 - **Projetos & Processos:** mapeamento de fluxos, Kanban, melhoria contínua, estruturação de rotinas e gestão de demandas.
 - **Dados & Tecnologia:** People Analytics, indicadores, dashboards, automação, HTML/CSS/JavaScript, Power BI, Python, SQL e IA aplicada a RH.
 - **Comportamento & Organizações:** análise comportamental DISC, Psicologia Organizacional, cultura, engajamento, DEI e ESG.
 
-### Como analisar os projetos
+### Estrutura dos cases
 
-A leitura dos cases segue a lógica:
+Cada projeto é apresentado a partir da lógica:
 
 **Contexto → Problema → Minha atuação → Solução → Tecnologia → Impacto → Competências demonstradas**
 
