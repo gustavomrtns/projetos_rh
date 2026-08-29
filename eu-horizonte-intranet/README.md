@@ -2,7 +2,7 @@
 
 > Protótipo de ambiente digital de comunicação interna concebido para aproximar pessoas, conteúdos e cultura em uma experiência única, acessível e orientada à jornada do colaborador.
 
-[▶ Explorar aplicação](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/) · [← Todos os projetos](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
 ---
 
@@ -17,15 +17,11 @@
 | **Abordagens** | Comunicação Interna · Employee Experience · UX · Gestão de Conteúdo |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
----
-
 ## Evidência visual
 
 ![Visão geral do eu + horizonte — mural, agenda, acervo e publicação](./eu-horizonte-case-overview.png)
 
-A composição apresenta quatro pontos centrais da experiência: **mural e ativações**, **agenda e transmissões**, **acervo de conteúdos e documentos** e **fluxo de criação/publicação**. Em conjunto, as telas demonstram como a solução conecta comunicação, conteúdo, engajamento e autonomia em uma única experiência digital.
-
----
+*A composição apresenta quatro pontos centrais da experiência: mural e ativações, agenda e transmissões, acervo de conteúdos e documentos e fluxo de criação/publicação.*
 
 ## O desafio
 
@@ -33,7 +29,7 @@ Quando informações institucionais, comunicados e conteúdos relevantes ficam d
 
 O projeto parte desse problema para explorar uma questão central: **como transformar a comunicação interna em uma experiência digital mais integrada, intuitiva e próxima das pessoas?**
 
-## Meu papel no projeto
+## Minha atuação
 
 Minha atuação envolveu a estruturação do conceito e da experiência do produto, conectando necessidades de Gestão de Pessoas com princípios de organização da informação e design de interação.
 
@@ -48,31 +44,23 @@ Minha atuação envolveu a estruturação do conceito e da experiência do produ
 
 O **eu + horizonte** foi concebido como um ambiente digital de comunicação interna que concentra informações, conteúdos e interações relacionadas à experiência do colaborador.
 
-A aplicação adota uma linguagem inspirada em produtos digitais contemporâneos, com navegação orientada a telas, hierarquia visual clara, componentes interativos e uma experiência responsiva. O objetivo não é apenas disponibilizar informação, mas tornar o acesso a ela mais simples, organizado e conectado à cultura interna.
+A aplicação adota uma linguagem inspirada em produtos digitais contemporâneos, com navegação orientada a telas, hierarquia visual clara, componentes interativos e experiência responsiva.
 
-## Experiência e arquitetura
+## Como funciona
 
-A solução trabalha quatro dimensões complementares:
+**1. Mural e ativações** → concentra comunicados, destaques e conteúdos de comunicação interna.
 
-**Comunicação** — organização de conteúdos e informações internas em um ambiente central.
+**2. Agenda e transmissões** → organiza eventos, compromissos e conteúdos ao vivo em um mesmo ponto de contato.
 
-**Experiência** — navegação desenhada para reduzir atrito e facilitar o acesso aos pontos de contato da jornada.
+**3. Acervo** → centraliza conteúdos, documentos e materiais relevantes para a jornada interna.
 
-**Cultura** — espaço digital capaz de apoiar a circulação de mensagens, referências e conteúdos institucionais.
+**4. Publicação** → estrutura o fluxo de criação e compartilhamento de conteúdos dentro da experiência.
 
-**Engajamento** — recursos de interface e interação que aproximam a experiência de uma aplicação de uso cotidiano, em vez de um repositório estático de informações.
+**5. Navegação mobile-first** → utiliza uma arquitetura inspirada em aplicativos, com transições, feedback visual, componentes interativos e comportamento responsivo.
 
-## Decisões de produto e UX
+## Valor potencial
 
-O protótipo foi estruturado com abordagem **mobile-first**, utilizando uma interface de aplicativo e componentes próprios de interação. A solução incorpora transições entre telas, hierarquia de conteúdos, feedback visual, navegação por componentes e elementos de microinteração.
-
-A implementação também considera comportamento responsivo e diferentes dimensões de viewport, permitindo que a experiência se adapte ao dispositivo utilizado.
-
-## Valor para Gestão de Pessoas
-
-A proposta contribui para transformar a intranet em um ponto de contato da experiência do colaborador, conectando Comunicação Interna, Employee Experience e Employer Branding.
-
-Em termos de gestão, a solução foi concebida para favorecer:
+A solução foi concebida para contribuir com:
 
 - centralização da comunicação e dos conteúdos internos;
 - acesso mais simples a informações relevantes;
@@ -83,10 +71,12 @@ Em termos de gestão, a solução foi concebida para favorecer:
 
 ## Competências demonstradas
 
-`Comunicação Interna` · `Employee Experience` · `Employer Branding` · `UX` · `Arquitetura de Informação` · `Gestão de Conteúdo` · `Design de Interação` · `HTML` · `CSS` · `JavaScript`
+`Comunicação Interna` · `Employee Experience` · `Employer Branding` · `UX` · `Arquitetura de Informação` · `Gestão de Conteúdo` · `Design de Interação`
+
+## Tecnologias e abordagens
+
+`HTML` · `CSS` · `JavaScript` · `Mobile-first` · `Employee Experience` · `Comunicação Interna` · `UX` · `Arquitetura de Informação`
 
 ---
 
-### Navegação
-
-[▶ Abrir eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 Ver Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/) · [← Voltar aos projetos](../README.md)
+[▶ **Abrir eu + horizonte**](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
