@@ -17,6 +17,16 @@
 | **Abordagens** | Comunicação Interna · Employee Experience · UX · Gestão de Conteúdo |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
+---
+
+## Evidência visual
+
+![Visão geral do eu + horizonte — mural, agenda, acervo e publicação](./eu-horizonte-case-overview.png)
+
+A composição apresenta quatro pontos centrais da experiência: **mural e ativações**, **agenda e transmissões**, **acervo de conteúdos e documentos** e **fluxo de criação/publicação**. Em conjunto, as telas demonstram como a solução conecta comunicação, conteúdo, engajamento e autonomia em uma única experiência digital.
+
+---
+
 ## O desafio
 
 Quando informações institucionais, comunicados e conteúdos relevantes ficam distribuídos em diferentes canais, o colaborador precisa despender mais esforço para encontrar o que necessita. Esse cenário também pode reduzir a consistência da comunicação e enfraquecer a experiência digital ao longo da jornada interna.
@@ -74,14 +84,6 @@ Em termos de gestão, a solução foi concebida para favorecer:
 ## Competências demonstradas
 
 `Comunicação Interna` · `Employee Experience` · `Employer Branding` · `UX` · `Arquitetura de Informação` · `Gestão de Conteúdo` · `Design de Interação` · `HTML` · `CSS` · `JavaScript`
-
----
-
-## Evidência visual
-
-![Visão geral do eu + horizonte — mural, agenda, acervo e publicação](./eu-horizonte-case-overview.png)
-
-A composição apresenta quatro pontos centrais da experiência: **mural e ativações**, **agenda e transmissões**, **acervo de conteúdos e documentos** e **fluxo de criação/publicação**. Em conjunto, as telas demonstram como a solução conecta comunicação, conteúdo, engajamento e autonomia em uma única experiência digital.
 
 ---
 
