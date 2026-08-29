@@ -17,6 +17,14 @@
 | **Abordagens** | Gestão de Projetos · People Analytics · T&D · Onboarding · Automação · UX |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
+## Evidência visual
+
+![Visão geral do case GT360º](./gt360-case-overview.png.png)
+
+*Visão do GT360º como workspace de Gestão de Talentos. A interface evidencia a integração entre processos de Onboarding, Treinamento & Desenvolvimento e acompanhamento gerencial em um mesmo ambiente digital.*
+
+> **O que observar:** a solução foi desenhada a partir do fluxo de RH. Navegação, módulos, controles e indicadores estão organizados para transformar rotinas operacionais em uma experiência de gestão estruturada.
+
 ## O desafio
 
 Rotinas de Onboarding e Treinamento & Desenvolvimento podem operar em controles separados, planilhas e fluxos manuais. Esse cenário fragmenta informações e dificulta a visualização de etapas, responsabilidades, capacitações, certificações e indicadores em uma perspectiva integrada.
