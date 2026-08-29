@@ -1,46 +1,123 @@
 # GT360º — Workspace de Gestão de Talentos
 
-**Projeto flagship do portfólio.**
+> **Projeto flagship do portfólio de Manoel Gustavo.** Uma solução digital de RH concebida para integrar processos, dados e indicadores de **Onboarding** e **Treinamento & Desenvolvimento** em um único ambiente de gestão.
 
-[▶ Abrir aplicação](https://gustavomrtns.github.io/projetos_rh/gt360/) · [← Voltar ao portfólio](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/gt360/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
-## Contexto
+---
 
-Rotinas de Onboarding e Treinamento & Desenvolvimento costumam operar em controles separados, planilhas e fluxos manuais, reduzindo a visibilidade sobre etapas, responsabilidades e indicadores.
+## Visão executiva
 
-## Problema
+| Dimensão | GT360º |
+|---|---|
+| **Área** | Recursos Humanos / Gestão de Pessoas |
+| **Frentes integradas** | Onboarding + Treinamento & Desenvolvimento |
+| **Objetivo** | Centralizar fluxos, informações e indicadores para ampliar rastreabilidade, padronização e visão gerencial |
+| **Minha atuação** | Mapeamento de processos, levantamento de requisitos, arquitetura da solução, UX de processos, lógica de indicadores e desenvolvimento do protótipo digital |
+| **Abordagens** | Gestão de Projetos · People Analytics · T&D · Onboarding · Automação · UX |
+| **Tecnologias** | HTML · CSS · JavaScript |
 
-A fragmentação das informações dificulta o acompanhamento da jornada do colaborador, a gestão do ciclo de capacitação e a consolidação de dados para tomada de decisão.
+## O desafio
 
-## Minha atuação
+Rotinas de Onboarding e Treinamento & Desenvolvimento podem operar em controles separados, planilhas e fluxos manuais. Esse cenário fragmenta informações e dificulta a visualização de etapas, responsabilidades, capacitações, certificações e indicadores em uma perspectiva integrada.
 
-- Mapeamento dos fluxos de RH e identificação de pontos de melhoria.
-- Estruturação de requisitos e lógica de navegação do workspace.
-- Organização de módulos, etapas, indicadores e experiência de uso.
-- Desenvolvimento do protótipo digital e integração das informações.
+O GT360º foi estruturado a partir desse problema: **como transformar processos de RH distribuídos em uma experiência de gestão mais centralizada, rastreável e orientada por dados?**
 
-## Solução
+## Meu papel no projeto
 
-O GT360º integra dois módulos principais:
+Minha atuação no GT360º envolve a conexão entre **Gestão de Pessoas, processos, dados e tecnologia**. O projeto não parte da tecnologia como fim; a tecnologia é utilizada como meio para estruturar uma necessidade de RH.
 
-### Fluxo de Onboarding
-Acompanhamento estruturado da integração do colaborador, com organização de etapas, responsabilidades, informações e indicadores.
+- Mapeamento dos fluxos de Onboarding e Educação Corporativa.
+- Identificação de etapas, responsabilidades, informações e pontos de melhoria.
+- Levantamento e organização de requisitos funcionais.
+- Estruturação da arquitetura de navegação e dos módulos do workspace.
+- Definição da lógica de acompanhamento e indicadores.
+- Desenvolvimento do protótipo digital e da experiência de uso.
+- Integração conceitual entre dados operacionais e visão gerencial.
 
-### Painel de Treinamentos
-Gestão do ciclo de Educação Corporativa, incluindo treinamentos, certificações, materiais, indicadores, impacto e lógica de ROI.
+## Arquitetura da solução
 
-## Tecnologias e abordagens
+```text
+                    GT360º
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+     ONBOARDING                   T&D
+          │                         │
+  Etapas e responsáveis      Treinamentos e turmas
+  Jornada de integração      Certificações e materiais
+  Acompanhamento             Aproveitamento e impacto
+          │                         │
+          └────────────┬────────────┘
+                       │
+              DADOS E INDICADORES
+                       │
+                       ▼
+              VISÃO GERENCIAL DE RH
+```
 
-HTML · CSS · JavaScript · UX de processos · Indicadores · Gestão de Projetos · T&D · Onboarding
+A proposta é conectar a execução dos processos à capacidade de acompanhamento, criando uma base mais organizada para análise e tomada de decisão.
 
-## Impacto esperado
+## Módulo 1 — Fluxo de Onboarding
 
-- Centralização das informações.
-- Maior rastreabilidade de processos.
-- Padronização de rotinas.
-- Visibilidade gerencial sobre onboarding e capacitação.
-- Base para decisões orientadas por dados.
+Estrutura o acompanhamento da integração do colaborador desde o registro até a conclusão das etapas previstas no processo.
 
-## Competências demonstradas
+**O módulo foi pensado para:**
 
-Gestão de Pessoas · T&D · Mapeamento de Processos · People Analytics · UX · Automação · Gestão de Projetos
+- organizar etapas e responsabilidades;
+- centralizar informações da jornada de integração;
+- acompanhar o andamento do processo;
+- reduzir dependência de controles dispersos;
+- criar uma base para indicadores de onboarding.
+
+## Módulo 2 — Painel de Treinamentos
+
+Estrutura o ciclo de Educação Corporativa e permite organizar informações relacionadas às ações de capacitação.
+
+**O módulo contempla a lógica de:**
+
+- cadastro de treinamentos planejados e em andamento;
+- acompanhamento de turmas e conclusão;
+- controle de certificados;
+- repositório de materiais;
+- acompanhamento de aproveitamento e impacto;
+- indicadores de T&D;
+- estrutura para análise de ROI de treinamento.
+
+## Valor gerado pela solução
+
+O projeto foi concebido para gerar valor principalmente por meio da **estruturação e integração dos processos**. Entre os benefícios funcionais demonstráveis no protótipo estão:
+
+- **Centralização:** informações de Onboarding e T&D organizadas em um mesmo ambiente.
+- **Rastreabilidade:** maior clareza sobre etapas, status e responsabilidades.
+- **Padronização:** transformação de rotinas dispersas em fluxos estruturados.
+- **Visibilidade:** consolidação de informações para acompanhamento gerencial.
+- **Mensuração:** organização da base necessária para indicadores de RH e análises de impacto.
+- **Escalabilidade:** estrutura concebida para evoluir com novos módulos, integrações e automações.
+
+> **Nota sobre resultados:** este case apresenta a solução, sua arquitetura e seus benefícios funcionais. Não são atribuídos percentuais de ganho, economia ou ROI sem mensuração comprovada.
+
+## Competências profissionais demonstradas
+
+| Eixo | Evidências no projeto |
+|---|---|
+| **Gestão de Pessoas** | Onboarding, T&D e experiência do colaborador |
+| **Projetos & Processos** | Mapeamento de fluxos, requisitos, estruturação e melhoria de processos |
+| **People Analytics** | Organização de dados, indicadores e visão gerencial |
+| **Tecnologia aplicada a RH** | Desenvolvimento de solução digital orientada a uma necessidade de Gestão de Pessoas |
+| **UX de processos** | Organização da navegação e experiência de uso a partir do fluxo operacional |
+| **Inovação** | Integração de processos tradicionalmente separados em um workspace único |
+
+## Stack e abordagens
+
+`HTML` · `CSS` · `JavaScript` · `Gestão de Projetos` · `Mapeamento de Processos` · `People Analytics` · `T&D` · `Onboarding` · `UX` · `Automação`
+
+---
+
+### Quer explorar o projeto?
+
+[▶ **Abrir GT360º**](https://gustavomrtns.github.io/projetos_rh/gt360/)
+
+O GT360º faz parte de um portfólio de soluções aplicadas a Recursos Humanos, Gestão de Pessoas, processos e dados.
+
+[**Conhecer o Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**Ver todos os projetos no GitHub**](../README.md)
