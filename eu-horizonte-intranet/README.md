@@ -79,7 +79,9 @@ Em termos de gestão, a solução foi concebida para favorecer:
 
 ## Evidência visual
 
-*A composição visual do case será adicionada nesta seção após a seleção das telas mais representativas da aplicação.*
+![Visão geral do eu + horizonte — mural, agenda, acervo e publicação](./eu-horizonte-case-overview.png)
+
+A composição apresenta quatro pontos centrais da experiência: **mural e ativações**, **agenda e transmissões**, **acervo de conteúdos e documentos** e **fluxo de criação/publicação**. Em conjunto, as telas demonstram como a solução conecta comunicação, conteúdo, engajamento e autonomia em uma única experiência digital.
 
 ---
 
