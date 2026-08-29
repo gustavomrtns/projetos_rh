@@ -2,7 +2,7 @@
 
 > Solução digital para organização visual de demandas, prioridades, responsáveis e entregas, aplicando princípios de **Kanban, Scrum e gestão de processos** ao contexto de Recursos Humanos e projetos.
 
-[▶ **Abrir aplicação**](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
+[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
 
 ---
 
@@ -22,11 +22,9 @@
 
 *Visão integrada da solução: Quadro de Demandas, Backlog estruturado e Dashboard de Indicadores compondo um fluxo único de acompanhamento operacional e gerencial.*
 
-A montagem evidencia três camadas complementares da solução: **gestão visual do trabalho**, **governança das demandas** e **leitura dos indicadores para apoio à decisão**.
-
 ## O desafio
 
-Demandas de RH e projetos podem perder visibilidade quando ficam distribuídos entre mensagens, planilhas, anotações e acompanhamentos informais. Esse cenário dificulta a leitura do trabalho em andamento, a priorização das entregas e a identificação de responsáveis, prazos e possíveis gargalos.
+Demandas de RH e projetos podem perder visibilidade quando ficam distribuídas entre mensagens, planilhas, anotações e acompanhamentos informais. Esse cenário dificulta a leitura do trabalho em andamento, a priorização das entregas e a identificação de responsáveis, prazos e possíveis gargalos.
 
 O projeto parte de uma questão central: **como tornar o fluxo de trabalho mais visível, organizado e acompanhável sem aumentar a complexidade operacional?**
 
@@ -41,44 +39,29 @@ A solução foi estruturada a partir da lógica de **gestão visual do trabalho*
 - Estruturação da interface para leitura rápida do status das atividades.
 - Desenvolvimento do protótipo digital.
 
-## Estrutura da solução
+## A solução
 
-```text
-                   DEMANDAS E PROJETOS
-                           │
-                  ORGANIZAÇÃO DO FLUXO
-                           │
-        ┌──────────────────┼──────────────────┐
-        │                  │                  │
-    PRIORIDADES        RESPONSÁVEIS         STATUS
-        │                  │                  │
-        └──────────────────┼──────────────────┘
-                           │
-                 KANBAN / SPRINTS / CHECKLISTS
-                           │
-                           ▼
-                 VISIBILIDADE DAS ENTREGAS
-```
+O Quadro de Gestão funciona como um painel digital para organização de atividades e projetos, permitindo visualizar o fluxo de trabalho e acompanhar o andamento das entregas em um único ambiente.
 
-A proposta é transformar demandas dispersas em um fluxo visual, estruturado e compartilhável, facilitando acompanhamento e tomada de decisão sobre prioridades.
+A proposta é transformar demandas dispersas em um sistema visual de acompanhamento, facilitando priorização, responsabilização e leitura de gargalos.
 
-## Solução desenvolvida
+## Como funciona
 
-O Quadro de Gestão funciona como um painel digital para organização de atividades e projetos, permitindo visualizar o fluxo de trabalho e acompanhar o andamento das entregas.
+**1. Entrada e organização das demandas** → registro das atividades e projetos que precisam ser acompanhados.
 
-A estrutura contempla:
+**2. Priorização** → classificação das demandas conforme urgência e relevância.
 
-- organização das demandas por status;
-- classificação de prioridades;
-- definição de responsáveis;
-- segmentação por setor ou frente de atuação;
-- gestão de backlog;
-- organização por sprints;
-- uso de checklists para acompanhamento de execução.
+**3. Responsáveis e setores** → definição de quem conduz cada entrega e da frente relacionada.
 
-## Valor gerado pela solução
+**4. Kanban e status** → visualização do trabalho planejado, em andamento e concluído.
 
-O valor do projeto está na transformação de uma rotina potencialmente dispersa em um sistema visual de acompanhamento.
+**5. Backlog, sprints e checklists** → estruturação do planejamento e detalhamento das entregas.
+
+**6. Indicadores** → leitura consolidada do fluxo para acompanhamento operacional e gerencial.
+
+## Valor potencial
+
+O projeto foi concebido para contribuir com:
 
 - **Visibilidade:** leitura mais clara sobre o que está planejado, em andamento e concluído.
 - **Priorização:** apoio à organização das demandas de acordo com urgência e relevância.
@@ -89,25 +72,14 @@ O valor do projeto está na transformação de uma rotina potencialmente dispers
 
 > **Nota sobre resultados:** o case demonstra a arquitetura da solução e seus benefícios funcionais. Não são atribuídos ganhos quantitativos sem mensuração comprovada.
 
-## Competências profissionais demonstradas
+## Competências demonstradas
 
-| Eixo | Evidências no projeto |
-|---|---|
-| **Gestão de Projetos** | Organização de demandas, prioridades, responsáveis e entregas |
-| **Agilidade** | Aplicação de Kanban, Scrum, backlog e sprints |
-| **Gestão de Processos** | Estruturação do fluxo e padronização do acompanhamento |
-| **Priorização** | Organização das demandas de acordo com status e relevância |
-| **UX de gestão** | Interface concebida para facilitar leitura e acompanhamento do trabalho |
-| **Tecnologia aplicada** | Desenvolvimento de solução digital orientada à organização do processo |
+`Gestão de Projetos` · `Kanban` · `Scrum` · `Gestão de Processos` · `Priorização` · `Gestão de Demandas` · `UX de Gestão` · `Melhoria Contínua`
 
-## Stack e abordagens
+## Tecnologias e abordagens
 
 `HTML` · `CSS` · `JavaScript` · `Kanban` · `Scrum` · `Sprints` · `Backlog` · `Checklists` · `Gestão de Demandas` · `Melhoria Contínua`
 
 ---
 
-### Explorar a solução
-
-[▶ **Abrir Quadro de Gestão**](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/)
-
-[**Conhecer o Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**Ver todos os projetos no GitHub**](../README.md)
+[▶ **Abrir Quadro de Gestão**](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
