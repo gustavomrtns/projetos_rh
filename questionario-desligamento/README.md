@@ -18,7 +18,7 @@
 
 ## Evidência visual
 
-![Visão integrada do Questionário de Desligamento — jornada de resposta e análise](./questionario-desligamento-case-overview.png.png)
+![Visão integrada do Questionário de Desligamento — jornada de resposta e análise](./questionario-desligamento-case-overview.png)
 
 A solução conecta a **jornada de escuta no desligamento** à **organização e leitura dos dados**, permitindo visualizar o processo como um fluxo único: coleta estruturada das percepções, consolidação das respostas e geração de informações para apoiar análises de Gestão de Pessoas.
 
