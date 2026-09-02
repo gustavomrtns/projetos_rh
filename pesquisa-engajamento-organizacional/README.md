@@ -4,7 +4,7 @@ Solução digital para estruturar, aplicar e tabular pesquisas internas de engaj
 
 [▶ Abrir aplicação](https://gustavomrtns.github.io/projetos_rh/pesquisa-engajamento-organizacional/) · [🌐 Portfólio Profissional](https://gustavomrtns.github.io/projetos_rh/) · [← Todos os projetos](../README.md)
 
-> **Status:** protótipo funcional front-end para demonstração em portfólio. A persistência é local no navegador (`localStorage`), sem autenticação real, backend ou banco de dados externo.
+> **Status:** MVP funcional front-end para demonstração em portfólio. Nesta etapa primária, a persistência ocorre localmente no navegador (`localStorage`). A arquitetura foi pensada para evolução posterior com backend, autenticação e persistência em banco de dados.
 
 ## Visão executiva
 
@@ -14,6 +14,14 @@ Solução digital para estruturar, aplicar e tabular pesquisas internas de engaj
 **Minha atuação:** modelagem dos blocos e perguntas, desenho do fluxo do colaborador, estruturação do painel administrativo, regras de tabulação, filtros demográficos, experiência da interface e desenvolvimento da solução digital.  
 **Abordagens:** People Analytics · Pesquisa Organizacional · Employee Experience · Process Design · Analytics · UX/UI  
 **Tecnologia:** HTML · CSS · JavaScript · localStorage
+
+## Evidência visual
+
+<p align="center">
+  <img src="./pesquisa%20de%20engajamento-overview.png" alt="Pesquisa de Engajamento Organizacional — visão do portal, construtor da pesquisa e dashboard de análise" width="100%">
+</p>
+
+A evidência visual apresenta as três etapas centrais da solução: **portal da pesquisa → construtor de competências e perguntas → dashboard de análise**. O dashboard exibido na composição é uma visualização demonstrativa de como a camada analítica pode operar quando houver base de respostas suficiente; os números ilustrados não representam resultados reais de uma organização.
 
 ## O desafio
 
@@ -67,6 +75,18 @@ A pesquisa padrão foi organizada em sete blocos:
 
 Essa arquitetura permite combinar dados quantitativos, contexto demográfico e espaço qualitativo para sugestões.
 
+## Evolução da arquitetura
+
+O uso de `localStorage` representa a **camada primária de persistência do MVP**, adequada para validar fluxo, usabilidade, regras de negócio e estrutura analítica diretamente no navegador.
+
+A solução pode ser escalonada para uma arquitetura completa com **backend, autenticação, API e banco de dados**, permitindo centralização das respostas, persistência multiusuário, controle de acessos, histórico de ciclos de pesquisa, governança de dados, integrações e análises em maior escala.
+
+Uma evolução possível do fluxo técnico é:
+
+**Interface web → API/backend → banco de dados → camada analítica/dashboard**
+
+Essa separação permite preservar a experiência já construída no front-end enquanto a persistência local é substituída gradualmente por uma infraestrutura centralizada e preparada para uso organizacional.
+
 ## Valor potencial
 
 - Redução do esforço manual de organização e tabulação de pesquisas internas.
@@ -75,6 +95,7 @@ Essa arquitetura permite combinar dados quantitativos, contexto demográfico e e
 - Possibilidade de analisar percepções por diferentes recortes demográficos.
 - Base estruturada para apoiar diagnósticos de engajamento e priorização de ações de Gestão de Pessoas.
 - Demonstração prática da aplicação de People Analytics em processos de pesquisa organizacional.
+- Arquitetura preparada conceitualmente para evolução de um MVP local para uma aplicação integrada a backend e banco de dados.
 
 ## Competências demonstradas
 
@@ -86,4 +107,4 @@ HTML · CSS · JavaScript · localStorage · UX/UI · Survey Design · Scoring �
 
 ## Observação técnica
 
-Esta versão foi preparada especificamente para portfólio público. O acesso administrativo funciona em **modo demonstração** e não representa um mecanismo real de autenticação. Os dados são persistidos apenas no navegador do usuário e não são enviados para servidor externo.
+Esta versão foi preparada especificamente para portfólio público. O acesso administrativo funciona em **modo demonstração** e não representa um mecanismo real de autenticação. A persistência via `localStorage` corresponde ao estágio atual do MVP e não a uma limitação definitiva da solução; para um ambiente organizacional, a evolução prevista contempla autenticação, backend e banco de dados centralizado.
