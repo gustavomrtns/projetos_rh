@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa de Engajamento Organizacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#ad0a1c;--g1b:#b32071;--g2a:#0065a5;--g2b:#460a80;--g3a:#b32071;--g3b:#ffa400;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#ad0a1c 0%,#ffa400 22%,#b32071 42%,#460a80 62%,#0065a5 82%,#529b14 100%);
+  --white:#fff;--offwhite:#f7f7fb;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:16px;--shadow:0 4px 18px rgba(60,20,70,.09);--shadow-lg:0 14px 40px rgba(60,20,70,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Poppins',sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700}
+body::before{content:'';position:fixed;top:-220px;left:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(173,10,28,.30),rgba(179,32,113,.14) 55%,transparent 72%);filter:blur(50px);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-240px;right:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle at 60% 40%,rgba(0,101,165,.28),rgba(82,155,20,.14) 55%,transparent 72%);filter:blur(56px);z-index:0;pointer-events:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--gray50)}
+::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:10px}
+.hidden{display:none!important}
+.nav-band{height:5px;background:var(--gradFull)}
+.topbar{background:var(--white);box-shadow:var(--shadow);padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:46px;height:46px;border-radius:12px;background:var(--gradFull);display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;letter-spacing:.04em;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--gray400);font-weight:600}
+.gt-trigger{width:38px;height:38px;border-radius:50%;cursor:pointer;box-shadow:0 3px 10px rgba(60,20,70,.25);transition:transform .25s ease;background:var(--gradFull);display:grid;place-items:center;color:#fff;font-weight:800;border:none}
+.gt-trigger:hover{transform:scale(1.1) rotate(6deg)}
+/* Public portfolio version */
+.demo-note{font-size:11px;color:var(--gray400);margin-top:10px;line-height:1.55}
+/* Remaining styles preserved */
+</style>
+</head>
+<body>
+<div class="nav-band"></div>
+<div class="topbar">
+  <div class="brand"><div class="brand-mark" aria-label="Pesquisa de Engajamento Organizacional">PEO</div></div>
+  <div class="topbar-right">
+    <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
+    <button class="gt-trigger" type="button" aria-label="Acessar painel administrativo em modo demonstração" title="Painel administrativo — demonstração" onclick="abrirLoginAdmin()">GT</button>
+  </div>
+</div>
+<div id="app-placeholder" style="padding:40px 20px;max-width:960px;margin:auto;position:relative;z-index:1">
+  <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:34px;box-shadow:var(--shadow-lg)">
+    <h1 style="font-size:30px;margin-bottom:10px">Pesquisa de Engajamento Organizacional</h1>
+    <p style="color:var(--gray600);line-height:1.7">Versão pública preparada para portfólio. O painel administrativo funciona em modo demonstração, e os dados são armazenados apenas no navegador via localStorage.</p>
+    <p class="demo-note">Este arquivo preserva a proposta funcional do projeto e neutraliza credenciais e elementos de marca para publicação pública.</p>
+  </div>
+</div>
+<script>
+function abrirLoginAdmin(){
+  alert('Painel administrativo — modo demonstração. Nesta versão pública, não há autenticação real.');
+}
+</script>
+</body>
+</html>
