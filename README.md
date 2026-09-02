@@ -32,19 +32,19 @@ Cada projeto é apresentado a partir da lógica:
 
 <p align="center">
   <a href="./gt360/"><img src="./gt360/gt360-case-overview.png" alt="GT360º — Workspace de Gestão de Talentos" width="48%"></a>
-  <a href="./quadro-gestao-kanban/"><img src="./quadro-gestao-kanban/kanban-rh-projetos-case-overview.png" alt="Quadro de Gestão — Kanban RH e Projetos" width="48%"></a>
-</p>
-<p align="center">
-  <a href="./questionario-desligamento/"><img src="./questionario-desligamento/questionario-desligamento-case-overview.png" alt="Questionário de Desligamento" width="48%"></a>
   <a href="./eu-horizonte-intranet/"><img src="./eu-horizonte-intranet/eu-horizonte-case-overview.png" alt="eu + horizonte — Intranet" width="48%"></a>
 </p>
 <p align="center">
+  <a href="./pesquisa-engajamento-organizacional/"><img src="./pesquisa-engajamento-organizacional/pesquisa%20de%20engajamento-overview.png" alt="Pesquisa de Engajamento Organizacional" width="48%"></a>
+  <a href="./quadro-gestao-kanban/"><img src="./quadro-gestao-kanban/kanban-rh-projetos-case-overview.png" alt="Quadro de Gestão — Kanban RH e Projetos" width="48%"></a>
+</p>
+<p align="center">
   <a href="./checklist-5s/"><img src="./checklist-5s/checklist-5s-case-overview.png" alt="Checklist 5S" width="48%"></a>
-  <a href="./avaliacao-experiencia-clt/"><img src="./avaliacao-experiencia-clt/avaliacao-experiencia-clt-case-overview.png" alt="Avaliação de Período de Experiência — CLT" width="48%"></a>
+  <a href="./questionario-desligamento/"><img src="./questionario-desligamento/questionario-desligamento-case-overview.png" alt="Questionário de Desligamento" width="48%"></a>
 </p>
 <p align="center">
   <a href="./avaliacao-prestador-pj/"><img src="./avaliacao-prestador-pj/avaliacao-prestador-pj-case-overview.png" alt="Avaliação de Prestadores de Serviço — PJ" width="48%"></a>
-  <a href="./pesquisa-engajamento-organizacional/"><img src="./pesquisa-engajamento-organizacional/pesquisa%20de%20engajamento-overview.png" alt="Pesquisa de Engajamento Organizacional" width="48%"></a>
+  <a href="./avaliacao-experiencia-clt/"><img src="./avaliacao-experiencia-clt/avaliacao-experiencia-clt-case-overview.png" alt="Avaliação de Período de Experiência — CLT" width="48%"></a>
 </p>
 
 *Clique em uma evidência visual para acessar o case completo no GitHub.*
@@ -53,16 +53,18 @@ Cada projeto é apresentado a partir da lógica:
 
 ## Projetos em destaque
 
+A ordem abaixo segue a **escala de impacto dos projetos** adotada para o portfólio.
+
 | # | Projeto | Problema / oportunidade | Solução desenvolvida | Competências demonstradas |
 |---|---|---|---|---|
 | **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Workspace integrado com módulos de Onboarding e Painel de Treinamentos | Gestão de Pessoas, T&D, processos, indicadores, UX e automação |
-| **02** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Kanban, priorização e gestão de projetos |
-| **03** | **[Questionário de Desligamento](./questionario-desligamento/)** | Feedbacks de saída pouco estruturados e difíceis de comparar | Instrumento digital para coleta e organização de dados de offboarding | Employee Experience, dados e melhoria de processos |
-| **04** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Protótipo de intranet para comunicação, informação e jornada do colaborador | Comunicação interna, EX, UX e Employer Branding |
+| **02** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Protótipo de intranet para comunicação, informação e jornada do colaborador | Comunicação interna, EX, UX e Employer Branding |
+| **03** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | People Analytics, engajamento, Employee Experience, dados e UX |
+| **04** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Kanban, priorização e gestão de projetos |
 | **05** | **[Checklist 5S](./checklist-5s/)** | Auditorias e controles de conformidade pouco padronizados | Aplicação digital com critérios de avaliação e indicadores | 5S, melhoria contínua, processos e indicadores |
-| **06** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, gestão de pessoas e dados |
+| **06** | **[Questionário de Desligamento](./questionario-desligamento/)** | Feedbacks de saída pouco estruturados e difíceis de comparar | Instrumento digital para coleta e organização de dados de offboarding | Employee Experience, dados e melhoria de processos |
 | **07** | **[Avaliação de Prestadores — PJ](./avaliacao-prestador-pj/)** | Necessidade de critérios objetivos para acompanhamento de prestadores | Avaliação digital por critérios contratuais e impacto | Governança, fornecedores, avaliação e processos |
-| **08** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | People Analytics, engajamento, Employee Experience, dados e UX |
+| **08** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, gestão de pessoas e dados |
 
 ---
 
@@ -102,13 +104,13 @@ Análise Comportamental DISC · Psicologia Organizacional · Cultura · Engajame
 
 - [Portfólio Profissional — GitHub Pages](https://gustavomrtns.github.io/projetos_rh/)
 - [GT360º](https://gustavomrtns.github.io/projetos_rh/gt360/)
-- [Quadro de Gestão](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/)
-- [Questionário de Desligamento](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/)
 - [eu + horizonte — Intranet](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
-- [Checklist 5S](https://gustavomrtns.github.io/projetos_rh/checklist-5s/)
-- [Avaliação de Experiência — CLT](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/)
-- [Avaliação de Prestadores — PJ](https://gustavomrtns.github.io/projetos_rh/avaliacao-prestador-pj/)
 - [Pesquisa de Engajamento Organizacional](https://gustavomrtns.github.io/projetos_rh/pesquisa-engajamento-organizacional/)
+- [Quadro de Gestão](https://gustavomrtns.github.io/projetos_rh/quadro-gestao-kanban/)
+- [Checklist 5S](https://gustavomrtns.github.io/projetos_rh/checklist-5s/)
+- [Questionário de Desligamento](https://gustavomrtns.github.io/projetos_rh/questionario-desligamento/)
+- [Avaliação de Prestadores — PJ](https://gustavomrtns.github.io/projetos_rh/avaliacao-prestador-pj/)
+- [Avaliação de Experiência — CLT](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/)
 
 ---
 
