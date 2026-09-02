@@ -44,6 +44,7 @@ Cada projeto é apresentado a partir da lógica:
 </p>
 <p align="center">
   <a href="./avaliacao-prestador-pj/"><img src="./avaliacao-prestador-pj/avaliacao-prestador-pj-case-overview.png" alt="Avaliação de Prestadores de Serviço — PJ" width="48%"></a>
+  <a href="./pesquisa-engajamento-organizacional/"><img src="./pesquisa-engajamento-organizacional/pesquisa%20de%20engajamento-overview.png" alt="Pesquisa de Engajamento Organizacional" width="48%"></a>
 </p>
 
 *Clique em uma evidência visual para acessar o case completo no GitHub.*
@@ -61,6 +62,7 @@ Cada projeto é apresentado a partir da lógica:
 | **05** | **[Checklist 5S](./checklist-5s/)** | Auditorias e controles de conformidade pouco padronizados | Aplicação digital com critérios de avaliação e indicadores | 5S, melhoria contínua, processos e indicadores |
 | **06** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, gestão de pessoas e dados |
 | **07** | **[Avaliação de Prestadores — PJ](./avaliacao-prestador-pj/)** | Necessidade de critérios objetivos para acompanhamento de prestadores | Avaliação digital por critérios contratuais e impacto | Governança, fornecedores, avaliação e processos |
+| **08** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | People Analytics, engajamento, Employee Experience, dados e UX |
 
 ---
 
@@ -106,6 +108,7 @@ Análise Comportamental DISC · Psicologia Organizacional · Cultura · Engajame
 - [Checklist 5S](https://gustavomrtns.github.io/projetos_rh/checklist-5s/)
 - [Avaliação de Experiência — CLT](https://gustavomrtns.github.io/projetos_rh/avaliacao-experiencia-clt/)
 - [Avaliação de Prestadores — PJ](https://gustavomrtns.github.io/projetos_rh/avaliacao-prestador-pj/)
+- [Pesquisa de Engajamento Organizacional](https://gustavomrtns.github.io/projetos_rh/pesquisa-engajamento-organizacional/)
 
 ---
 
