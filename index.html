@@ -184,10 +184,11 @@
     .job p{font-size:13px;color:var(--muted);line-height:1.75;margin:0}
 
     .education{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .edu{padding:20px;transition:transform .25s ease}
+    .edu{padding:22px;min-height:132px;display:flex;flex-direction:column;transition:transform .25s ease}
     .edu:hover,.edu.is-active{transform:translateY(-4px)}
-    .edu b{font-size:14px}
-    .edu span{display:block;font-size:12px;color:var(--red);margin-top:5px;line-height:1.5}
+    .edu b{font-size:14px;line-height:1.35}
+    .edu span{display:block;font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+    .edu small{display:block;font-size:11px;color:var(--red);font-weight:800;line-height:1.4;margin-top:auto;padding-top:10px}
 
     .cert-intro{max-width:760px;color:var(--muted);font-size:14px;line-height:1.75;margin:-14px 0 26px}
     .certs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -306,7 +307,7 @@
       .job{grid-template-columns:1fr;gap:12px;padding:24px}
       .timeline{gap:16px}
       .education{grid-template-columns:1fr;gap:12px}
-      .edu{padding:20px;min-height:82px}
+      .edu{padding:20px;min-height:120px}
       .certs{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
       .cert{padding:18px;min-height:126px}
       .cert-intro{margin-top:-6px;margin-bottom:24px}
@@ -459,7 +460,12 @@
     <section class="section" id="formacao">
       <div class="wrap">
         <div class="section-head reveal-target"><div><div class="kicker">FORMAÇÃO</div><h2>Formação multidisciplinar</h2></div></div>
-        <div class="education"><div class="glass edu reveal-target reveal-delay-1"><b>Gestão de Recursos Humanos</b><span>Faculdade Martha Falcão · Concluído</span></div><div class="glass edu reveal-target reveal-delay-2"><b>Psicologia</b><span>Faculdade Santa Teresa · Em andamento</span></div><div class="glass edu reveal-target reveal-delay-2"><b>MBA em Gestão de Projetos</b><span>USP/ESALQ · Em andamento</span></div><div class="glass edu reveal-target reveal-delay-3"><b>Eletrônica</b><span>IFAM · Concluído</span></div></div>
+        <div class="education">
+          <div class="glass edu reveal-target reveal-delay-1"><b>Ensino Médio Técnico - Eletrônica</b><span>IFAM</span><small>2020 — 2023</small></div>
+          <div class="glass edu reveal-target reveal-delay-2"><b>Gestão de Recursos Humanos</b><span>Faculdade Martha Falcão</span><small>2023 — 2025</small></div>
+          <div class="glass edu reveal-target reveal-delay-2"><b>Bacharelado em Psicologia</b><span>Faculdade Santa Teresa</span><small>2025 — Em andamento</small></div>
+          <div class="glass edu reveal-target reveal-delay-3"><b>MBA em Gestão de Projetos</b><span>USP/ESALQ</span><small>2026 — Em andamento</small></div>
+        </div>
       </div>
     </section>
 
