@@ -16,7 +16,7 @@ Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problem
 Os projetos articulam quatro dimensões principais da minha atuação profissional:
 
 - **Estratégia de RH:** T&D, onboarding/offboarding, desempenho, comunicação interna e experiência do colaborador.
-- **Projetos & Processos:** mapeamento de fluxos, Kanban, melhoria contínua, estruturação de rotinas e gestão de demandas.
+- **Projetos & Processos:** identificação de necessidades, definição de escopo, priorização de entregas, alinhamento com stakeholders, mapeamento de fluxos, Kanban e melhoria contínua.
 - **Dados & Tecnologia:** People Analytics, indicadores, dashboards, automação, HTML/CSS/JavaScript, Power BI, Python, SQL e IA aplicada a RH.
 - **Comportamento & Organizações:** análise comportamental DISC, Psicologia Organizacional, cultura, engajamento, DEI e ESG.
 
@@ -57,7 +57,7 @@ A ordem abaixo segue a **escala de impacto dos projetos** adotada para o portfó
 
 | # | Projeto | Problema / oportunidade | Solução desenvolvida | Competências demonstradas |
 |---|---|---|---|---|
-| **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Workspace integrado com módulos de Onboarding e Painel de Treinamentos | Gestão de Pessoas, T&D, processos, indicadores, UX e automação |
+| **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Concepção de workspace digital a partir do mapeamento de dores, definição de fluxos, requisitos funcionais, indicadores e experiência do usuário | Gestão de Pessoas, T&D, processos, indicadores, UX e automação |
 | **02** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Protótipo de intranet para comunicação, informação e jornada do colaborador | Comunicação interna, EX, UX e Employer Branding |
 | **03** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | People Analytics, engajamento, Employee Experience, dados e UX |
 | **04** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Kanban, priorização e gestão de projetos |
@@ -70,7 +70,9 @@ A ordem abaixo segue a **escala de impacto dos projetos** adotada para o portfó
 
 ## Projeto flagship — GT360º
 
-O **GT360º** é o principal projeto deste portfólio. Foi concebido como um workspace de Gestão de Talentos para integrar processos que normalmente permanecem dispersos em planilhas, formulários e controles manuais.
+O **GT360º** é o principal projeto deste portfólio. Foi concebido como um workspace digital de Gestão de Talentos, partindo do **mapeamento de dores dos processos de onboarding e T&D** até a definição de **fluxos, requisitos funcionais, indicadores e experiência do usuário**.
+
+Minha atuação no projeto envolveu identificação de necessidades, definição de escopo, organização e priorização de entregas, alinhamento com stakeholders, estruturação dos fluxos e lógica de indicadores, mantendo a tecnologia como meio para resolver problemas reais de Gestão de Pessoas.
 
 ### Módulo 1 — Fluxo de Onboarding
 
@@ -90,7 +92,7 @@ Organiza o ciclo de Educação Corporativa, permitindo acompanhar treinamentos, 
 T&D · Onboarding · Offboarding · Performance · Employee Experience · Comunicação Interna · Employer Branding
 
 **Projetos & Processos**  
-Scrum · Kanban · Sprints · Mapeamento de Processos · Melhoria Contínua · OKRs · Gestão de Demandas
+Identificação de Necessidades · Definição de Escopo · Priorização de Entregas · Stakeholders · Scrum · Kanban · Sprints · Mapeamento de Processos · Melhoria Contínua · OKRs · Gestão de Demandas
 
 **Dados & Tecnologia**  
 People Analytics · Power BI · Python · SQL · HTML · CSS · JavaScript · IA aplicada a RH
