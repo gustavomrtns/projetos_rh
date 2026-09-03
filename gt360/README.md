@@ -13,7 +13,7 @@
 | **Área** | Recursos Humanos / Gestão de Pessoas |
 | **Frentes integradas** | Onboarding + Treinamento & Desenvolvimento |
 | **Objetivo** | Centralizar fluxos, informações e indicadores para ampliar rastreabilidade, padronização e visão gerencial |
-| **Minha atuação** | Mapeamento de processos, levantamento de requisitos, arquitetura da solução, UX de processos, lógica de indicadores e desenvolvimento do protótipo digital |
+| **Minha atuação** | Identificação de necessidades, mapeamento de dores, definição de escopo, priorização de entregas, alinhamento com stakeholders, levantamento de requisitos, UX de processos e lógica de indicadores |
 | **Abordagens** | Gestão de Projetos · People Analytics · T&D · Onboarding · Automação · UX |
 | **Tecnologias** | HTML · CSS · JavaScript |
 
@@ -33,9 +33,12 @@ O GT360º foi estruturado a partir desse problema: **como transformar processos 
 
 Minha atuação no GT360º conecta **Gestão de Pessoas, processos, dados e tecnologia**. O projeto não parte da tecnologia como fim; ela é utilizada como meio para estruturar uma necessidade de RH.
 
-- Mapeamento dos fluxos de Onboarding e Educação Corporativa.
-- Identificação de etapas, responsabilidades, informações e pontos de melhoria.
+- Identificação de necessidades e mapeamento das dores dos fluxos de Onboarding e Educação Corporativa.
+- Definição de escopo e organização das entregas da solução.
+- Mapeamento dos fluxos, etapas, responsabilidades e pontos de melhoria.
 - Levantamento e organização de requisitos funcionais.
+- Priorização das funcionalidades e entregas de acordo com a lógica dos processos.
+- Alinhamento das necessidades da solução com stakeholders e usuários envolvidos nos fluxos.
 - Estruturação da arquitetura de navegação e dos módulos do workspace.
 - Definição da lógica de acompanhamento e indicadores.
 - Desenvolvimento do protótipo digital e da experiência de uso.
@@ -43,9 +46,9 @@ Minha atuação no GT360º conecta **Gestão de Pessoas, processos, dados e tecn
 
 ## A solução
 
-O **GT360º** organiza duas frentes de Gestão de Talentos em um único workspace digital, conectando execução dos processos e acompanhamento gerencial.
+O **GT360º** foi concebido como um workspace digital de Gestão de Talentos, partindo do **mapeamento de dores dos processos de onboarding e T&D** até a definição de **fluxos, requisitos funcionais, indicadores e experiência do usuário**.
 
-A proposta é reduzir a dispersão de informações e transformar rotinas operacionais em fluxos mais estruturados, rastreáveis e preparados para análise.
+A solução organiza duas frentes de Gestão de Talentos em um único ambiente, conectando execução dos processos e acompanhamento gerencial. A proposta é reduzir a dispersão de informações e transformar rotinas operacionais em fluxos mais estruturados, rastreáveis e preparados para análise.
 
 ## Como funciona
 
@@ -95,7 +98,7 @@ O projeto foi concebido para contribuir com:
 
 ## Competências demonstradas
 
-`Gestão de Pessoas` · `Onboarding` · `T&D` · `Gestão de Projetos` · `Mapeamento de Processos` · `People Analytics` · `UX de Processos` · `Indicadores` · `Automação` · `Inovação`
+`Gestão de Pessoas` · `Identificação de Necessidades` · `Definição de Escopo` · `Priorização` · `Stakeholders` · `Requisitos Funcionais` · `Onboarding` · `T&D` · `Gestão de Projetos` · `Mapeamento de Processos` · `People Analytics` · `UX de Processos` · `Indicadores` · `Automação` · `Inovação`
 
 ## Tecnologias e abordagens
 
