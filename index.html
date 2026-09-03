@@ -192,11 +192,12 @@
 
     .cert-intro{max-width:760px;color:var(--muted);font-size:14px;line-height:1.75;margin:-14px 0 26px}
     .certs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .cert{padding:20px;min-height:126px;position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+    .cert{padding:20px;min-height:158px;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
     .cert:hover,.cert.is-active{transform:translateY(-4px);box-shadow:0 18px 38px rgba(0,0,0,.08)}
     .cert:before{content:"";position:absolute;width:54px;height:54px;border-radius:50%;background:rgba(143,255,0,.28);right:-14px;top:-14px}
-    .cert small{font-size:11px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.05em}
-    .cert b{font-family:Manrope,sans-serif;font-size:14px;line-height:1.35;display:block;margin-top:12px;max-width:90%}
+    .cert small{font-size:11px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.05em;max-width:82%}
+    .cert b{font-family:Manrope,sans-serif;font-size:14px;line-height:1.35;display:block;margin-top:12px;max-width:92%}
+    .cert span{display:block;font-size:11px;color:var(--muted);line-height:1.45;margin-top:auto;padding-top:12px;max-width:95%}
 
     .cta{background:linear-gradient(135deg,#b81414,var(--red) 68%,#d31b1b);color:#fff;border-radius:28px;padding:44px 42px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:32px;box-shadow:0 24px 60px rgba(199,23,23,.18)}
     .cta .blob{width:150px;height:130px;right:-34px;top:-46px;background:var(--lime)}
@@ -309,7 +310,7 @@
       .education{grid-template-columns:1fr;gap:12px}
       .edu{padding:20px;min-height:120px}
       .certs{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-      .cert{padding:18px;min-height:126px}
+      .cert{padding:18px;min-height:160px}
       .cert-intro{margin-top:-6px;margin-bottom:24px}
       .cta{padding:32px 24px 28px;gap:24px}
       .cta h2{font-size:clamp(28px,8vw,34px)}
@@ -472,16 +473,18 @@
     <section class="section" id="certificacoes">
       <div class="wrap">
         <div class="section-head reveal-target"><div><div class="kicker">DESENVOLVIMENTO CONTÍNUO</div><h2>Certificações & desenvolvimento contínuo</h2></div></div>
-        <p class="cert-intro reveal-target">Formação complementar concentrada em comportamento, dados, tecnologia e práticas aplicadas à Gestão de Pessoas.</p>
+        <p class="cert-intro reveal-target">Formação complementar concentrada em comportamento, dados, tecnologia, gestão, compliance e práticas aplicadas à Gestão de Pessoas.</p>
         <div class="certs">
-          <div class="glass cert reveal-target reveal-delay-1"><small>Comportamento</small><b>DISC · Análise Técnica Comportamental</b></div>
-          <div class="glass cert reveal-target reveal-delay-2"><small>Dados</small><b>People Analytics</b></div>
-          <div class="glass cert reveal-target reveal-delay-2"><small>Tecnologia</small><b>IA aplicada a RH</b></div>
-          <div class="glass cert reveal-target reveal-delay-3"><small>Educação Corporativa</small><b>Indicadores de T&D</b></div>
-          <div class="glass cert reveal-target reveal-delay-1"><small>Sustentabilidade</small><b>ESG</b></div>
-          <div class="glass cert reveal-target reveal-delay-2"><small>Talent Acquisition</small><b>Tech Recruiter</b></div>
-          <div class="glass cert reveal-target reveal-delay-2"><small>Projetos</small><b>Metodologias Ágeis & Ativas</b></div>
-          <div class="glass cert reveal-target reveal-delay-3"><small>Analytics</small><b>Análise de Dados</b></div>
+          <div class="glass cert reveal-target reveal-delay-1"><small>Comportamento</small><b>Análise Técnica Comportamental DISC</b><span>Certificado pela Freedom Start</span></div>
+          <div class="glass cert reveal-target reveal-delay-2"><small>Compliance & Saúde Mental</small><b>NR-1 e Saúde Mental no Trabalho: Gestão de Riscos e Compliance</b><span>Certificado pela UniGlobo &amp; Sólides</span></div>
+          <div class="glass cert reveal-target reveal-delay-2"><small>Dados</small><b>People Analytics</b><span>Certificado pela DIO</span></div>
+          <div class="glass cert reveal-target reveal-delay-3"><small>Departamento Pessoal</small><b>Formação em Departamento Pessoal</b><span>Certificado pela INOVAR RH &amp; Sólides</span></div>
+          <div class="glass cert reveal-target reveal-delay-1"><small>Tecnologia</small><b>IA aplicada a RH</b><span>Certificado pela Qulture Rooks</span></div>
+          <div class="glass cert reveal-target reveal-delay-2"><small>Educação Corporativa</small><b>Indicadores de T&D</b><span>Certificado pela Sólides</span></div>
+          <div class="glass cert reveal-target reveal-delay-2"><small>Sustentabilidade</small><b>Formação em ESG</b><span>Certificado pelo DD&amp;L Advogados Associados</span></div>
+          <div class="glass cert reveal-target reveal-delay-3"><small>Talent Acquisition</small><b>Tech Recruiter</b><span>Certificado pela Sólides</span></div>
+          <div class="glass cert reveal-target reveal-delay-1"><small>Projetos</small><b>Metodologias Ágeis e Ativas</b><span>Certificado pela FGV &amp; UniGlobo</span></div>
+          <div class="glass cert reveal-target reveal-delay-2"><small>Analytics</small><b>Análise de Dados</b><span>Certificado pela Descomplica</span></div>
         </div>
       </div>
     </section>
