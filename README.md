@@ -1,11 +1,13 @@
-# Manoel Gustavo — Projetos de Recursos Humanos, Processos e People Analytics
+# Manoel Gustavo — Projetos, Produtos Digitais, Processos e People Analytics
 
-> **Estrategista de Recursos Humanos | Agilista | Analista Técnico Comportamental DISC**  
-> Gestão de Pessoas · Psicologia Organizacional · Projetos & Processos · People Analytics · Inovação · ESG
+> **Recursos Humanos | Projetos | Produtos Digitais | Agilidade**  
+> Gestão de Pessoas · Product & Agile · Projetos & Processos · People Analytics · Comportamento Organizacional
 
-Este repositório reúne projetos autorais desenvolvidos para demonstrar como transformo necessidades de **Recursos Humanos** em processos estruturados, experiências digitais, indicadores e ferramentas de gestão.
+Este repositório reúne projetos autorais desenvolvidos para demonstrar como transformo necessidades de **negócio e Gestão de Pessoas** em processos estruturados, soluções digitais, requisitos, indicadores e experiências de uso.
 
-Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problema de Gestão de Pessoas e busca organizar o fluxo, melhorar a experiência do usuário, ampliar a rastreabilidade das informações e apoiar decisões orientadas por dados.
+Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problema, considera usuários e stakeholders, organiza necessidades e fluxos, estrutura requisitos e busca gerar valor potencial por meio de dados, melhoria contínua e tecnologia.
+
+A leitura dos cases também evidencia competências transferíveis para **Product Owner, Product Analyst, Agile Analyst, Scrum e Agilidade**, sem descaracterizar minha experiência profissional de origem em Recursos Humanos.
 
 [**▶ Visualizar Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**LinkedIn**](https://www.linkedin.com/in/manoel-gustavo/)
 
@@ -15,16 +17,16 @@ Meu foco não é apenas desenvolver interfaces: cada projeto parte de um problem
 
 Os projetos articulam quatro dimensões principais da minha atuação profissional:
 
-- **Estratégia de RH:** T&D, onboarding/offboarding, desempenho, comunicação interna e experiência do colaborador.
-- **Projetos & Processos:** identificação de necessidades, definição de escopo, priorização de entregas, alinhamento com stakeholders, mapeamento de fluxos, Kanban e melhoria contínua.
-- **Dados & Tecnologia:** People Analytics, indicadores, dashboards, automação, HTML/CSS/JavaScript, Power BI, Python, SQL e IA aplicada a RH.
-- **Comportamento & Organizações:** análise comportamental DISC, Psicologia Organizacional, cultura, engajamento, DEI e ESG.
+- **Pessoas & Negócio:** Gestão de Pessoas, T&D, onboarding/offboarding, desempenho, comunicação interna, experiência do colaborador e entendimento de necessidades organizacionais.
+- **Produto & Projetos:** identificação de problemas, definição de escopo, levantamento e organização de requisitos, priorização de entregas, experiência do usuário, indicadores e alinhamento com stakeholders.
+- **Agilidade & Processos:** Scrum, Kanban, sprints, gestão visual, mapeamento de fluxos, melhoria contínua, organização de demandas e acompanhamento de entregas.
+- **Dados & Tecnologia:** People Analytics, dashboards, automação, HTML/CSS/JavaScript, Power BI, Python, SQL e IA aplicada a RH.
 
 ### Estrutura dos cases
 
 Cada projeto é apresentado a partir da lógica:
 
-**Visão executiva → Evidência visual → O desafio → Minha atuação → A solução → Como funciona → Valor potencial → Competências demonstradas → Tecnologias e abordagens**
+**Visão executiva → Evidência visual → O desafio → Usuários/Stakeholders → Minha atuação → Requisitos e fluxo → A solução → Como funciona → Valor potencial → Competências demonstradas → Tecnologias e abordagens**
 
 ---
 
@@ -57,22 +59,22 @@ A ordem abaixo segue a **escala de impacto dos projetos** adotada para o portfó
 
 | # | Projeto | Problema / oportunidade | Solução desenvolvida | Competências demonstradas |
 |---|---|---|---|---|
-| **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Concepção de workspace digital a partir do mapeamento de dores, definição de fluxos, requisitos funcionais, indicadores e experiência do usuário | Gestão de Pessoas, T&D, processos, indicadores, UX e automação |
-| **02** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Protótipo de intranet para comunicação, informação e jornada do colaborador | Comunicação interna, EX, UX e Employer Branding |
-| **03** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | People Analytics, engajamento, Employee Experience, dados e UX |
-| **04** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Kanban, priorização e gestão de projetos |
-| **05** | **[Checklist 5S](./checklist-5s/)** | Auditorias e controles de conformidade pouco padronizados | Aplicação digital com critérios de avaliação e indicadores | 5S, melhoria contínua, processos e indicadores |
+| **01** | **[GT360º — Workspace de Gestão de Talentos](./gt360/)** ⭐ | Processos de onboarding e T&D distribuídos em controles distintos | Concepção de workspace digital a partir do mapeamento de dores, definição de fluxos, requisitos funcionais, priorização, indicadores e experiência do usuário | Product Thinking, requisitos, priorização, Gestão de Pessoas, dados, UX e automação |
+| **02** | **[eu + horizonte — Intranet](./eu-horizonte-intranet/)** | Necessidade de centralizar comunicação e experiência interna | Produto digital para comunicação, informação e jornada do colaborador | Produto Digital, Comunicação Interna, EX, UX e Employer Branding |
+| **03** | **[Pesquisa de Engajamento Organizacional](./pesquisa-engajamento-organizacional/)** | Aplicação, tabulação e análise de pesquisas internas em fluxos dispersos | Plataforma para construção da pesquisa, aplicação, recortes demográficos e dashboard analítico | Product Thinking, People Analytics, engajamento, dados e UX |
+| **04** | **[Quadro de Gestão — Kanban RH e Projetos](./quadro-gestao-kanban/)** | Baixa visibilidade sobre demandas, prioridades e responsáveis | Painel Kanban para gestão de demandas, projetos, sprints e checklists | Agilidade, Scrum/Kanban, priorização, gestão visual e fluxo |
+| **05** | **[Checklist 5S](./checklist-5s/)** | Auditorias e controles de conformidade pouco padronizados | Aplicação digital com critérios de avaliação e indicadores | Melhoria contínua, processos, indicadores e gestão visual |
 | **06** | **[Questionário de Desligamento](./questionario-desligamento/)** | Feedbacks de saída pouco estruturados e difíceis de comparar | Instrumento digital para coleta e organização de dados de offboarding | Employee Experience, dados e melhoria de processos |
-| **07** | **[Avaliação de Prestadores — PJ](./avaliacao-prestador-pj/)** | Necessidade de critérios objetivos para acompanhamento de prestadores | Avaliação digital por critérios contratuais e impacto | Governança, fornecedores, avaliação e processos |
-| **08** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, gestão de pessoas e dados |
+| **07** | **[Avaliação de Prestadores — PJ](./avaliacao-prestador-pj/)** | Necessidade de critérios objetivos para acompanhamento de prestadores | Avaliação digital por critérios contratuais e impacto | Governança, stakeholders, avaliação e processos |
+| **08** | **[Avaliação de Experiência — CLT](./avaliacao-experiencia-clt/)** | Acompanhamento do período de experiência sem padronização | Ferramenta estruturada para avaliação e suporte à decisão | Performance, feedback, Gestão de Pessoas e dados |
 
 ---
 
 ## Projeto flagship — GT360º
 
-O **GT360º** é o principal projeto deste portfólio. Foi concebido como um workspace digital de Gestão de Talentos, partindo do **mapeamento de dores dos processos de onboarding e T&D** até a definição de **fluxos, requisitos funcionais, indicadores e experiência do usuário**.
+O **GT360º** é o principal projeto deste portfólio. Foi concebido como um workspace digital de Gestão de Talentos, partindo do **mapeamento de dores dos processos de onboarding e T&D** até a definição de **fluxos, requisitos funcionais, priorização de entregas, indicadores e experiência do usuário**.
 
-Minha atuação no projeto envolveu identificação de necessidades, definição de escopo, organização e priorização de entregas, alinhamento com stakeholders, estruturação dos fluxos e lógica de indicadores, mantendo a tecnologia como meio para resolver problemas reais de Gestão de Pessoas.
+Minha atuação no projeto envolveu identificação de necessidades, entendimento do problema, definição de escopo, organização e priorização de entregas, alinhamento com stakeholders, estruturação dos fluxos, requisitos e lógica de indicadores, mantendo a tecnologia como meio para resolver problemas reais de negócio e Gestão de Pessoas.
 
 ### Módulo 1 — Fluxo de Onboarding
 
@@ -88,17 +90,19 @@ Organiza o ciclo de Educação Corporativa, permitindo acompanhar treinamentos, 
 
 ## Stack e abordagens
 
+**Produto & Projetos**  
+Identificação de Problemas · Levantamento de Necessidades · Definição de Escopo · Requisitos Funcionais · Priorização de Entregas · Stakeholders · Experiência do Usuário · Indicadores
+
+**Agilidade & Processos**  
+Scrum · Kanban · Sprints · Gestão Visual · Mapeamento de Processos · Melhoria Contínua · OKRs · Gestão de Demandas · Acompanhamento de Fluxo
+
 **Gestão de Pessoas**  
 T&D · Onboarding · Offboarding · Performance · Employee Experience · Comunicação Interna · Employer Branding
-
-**Projetos & Processos**  
-Identificação de Necessidades · Definição de Escopo · Priorização de Entregas · Stakeholders · Scrum · Kanban · Sprints · Mapeamento de Processos · Melhoria Contínua · OKRs · Gestão de Demandas
 
 **Dados & Tecnologia**  
 People Analytics · Power BI · Python · SQL · HTML · CSS · JavaScript · IA aplicada a RH
 
-**Comportamento & Organizações**  
-Análise Comportamental DISC · Psicologia Organizacional · Cultura · Engajamento · DEI · ESG
+> **Nota de posicionamento:** os projetos demonstram competências aplicáveis a Produto e Agilidade. As experiências formais permanecem descritas conforme os cargos efetivamente exercidos; o portfólio não atribui experiência formal como Scrum Master ou Product Owner onde ela não ocorreu.
 
 ---
 
@@ -118,6 +122,8 @@ Análise Comportamental DISC · Psicologia Organizacional · Cultura · Engajame
 
 ## Sobre mim
 
-Sou profissional de Recursos Humanos com atuação multidisciplinar em Gestão de Pessoas, projetos, processos, dados e tecnologia. Busco fazer interseccionalidade em **Gestão de Pessoas nas Organizações e Ciberpsicologia**, abordando pilares de **Gestão de Processos, Psicologia Organizacional, Inovação e ESG**.
+Sou profissional com trajetória em **Recursos Humanos, Gestão de Projetos, Processos, Dados e Soluções Digitais**. Minha atuação conecta domínio de negócio em Gestão de Pessoas a **Product Thinking, Agilidade, melhoria contínua e tecnologia**, com foco em compreender problemas, estruturar necessidades e transformar demandas em soluções aplicáveis.
+
+Busco ampliar essa atuação em contextos de **Product Owner, Product Analyst, Agile Analyst, Scrum e Agilidade**, preservando como diferencial minha experiência com pessoas, comportamento, processos e People Analytics.
 
 **Contato profissional:** [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)
