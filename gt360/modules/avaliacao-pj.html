@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Prestadores de Serviço</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ── VARIÁVEIS ─────────────────────────────────────────── */
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html,body{height:100%}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;display:flex;flex-direction:column;overflow:hidden}
+.brand-band{height:5px;background:var(--gradFull);flex-shrink:0}
+header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 24px;flex-shrink:0;position:relative;z-index:50}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:.01em;color:var(--gray800)}
+.brand-text .tag{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);font-weight:600;margin-top:2px}
+.workspace-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.sidebar{width:240px;flex-shrink:0;background:var(--white);border-right:1px solid var(--gray100);display:flex;flex-direction:column;padding:18px 12px;gap:2px;overflow-y:auto;transition:width .2s ease}
+.sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px;gap:8px}
+.sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);padding:6px 12px 10px}
+.side-toggle{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1.5px solid var(--gray100);background:var(--gray50);color:var(--gray400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.side-toggle:hover{border-color:var(--gray400);color:var(--gray800)}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;color:var(--gray600);transition:all .18s;border:2px solid transparent;background:none;text-align:left;width:100%;font-family:'Sora',sans-serif}
+.side-item:hover{background:var(--gray50);color:var(--gray800)}
+.side-item.active{background:var(--gray800);border-color:var(--gray800);color:var(--white)}
+.side-item .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sidebar.collapsed{width:64px}
+.sidebar.collapsed .sidebar-label{display:none}
+.sidebar.collapsed .sidebar-top{justify-content:center}
+.sidebar.collapsed .side-item{justify-content:center;padding:11px 0}
+.sidebar.collapsed .side-item span:not(.dot){display:none}
+.sidebar.collapsed #side-toggle-icon{transform:rotate(180deg)}
+.content{flex:1;overflow-y:auto;padding:32px 20px 100px;min-width:0}
+@media(max-width:700px){
+  .workspace-body{flex-direction:column}
+  .sidebar{width:100%!important;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--gray100);padding:8px 10px}
+  .side-item{flex-shrink:0;white-space:nowrap}
+  .sidebar-label,.sidebar-top{display:none}
+}
+
+/* ── CONTAINER ─────────────────────────────────────────── */
+
+/* ── CONTAINER ─────────────────────────────────────────── */
+.container { max-width: 860px; margin: 0 auto; }
+
+/* ── HEADER ────────────────────────────────────────────── */
+.header {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0;
+  margin-bottom: 24px;
+  overflow: hidden;
+  animation: fadeUp .5s ease both;
+}
+.header-band {
+  height: 7px;
+  background: var(--gradFull);
+}
+.header-inner {
+  padding: 28px 32px 26px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.header-title h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--gray800);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.header-title p { font-size: 13px; color: var(--gray400); font-weight: 300; }
+.period-badge {
+  background: var(--grad2);
+  color: #fff;
+  font-size: 11px; font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  margin-top: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,153,229,0.3);
+}
+
+/* ── SECTIONS ──────────────────────────────────────────── */
+.section { margin-bottom: 20px; animation: fadeUp .4s ease both; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.section:nth-child(1){animation-delay:.05s}
+.section:nth-child(2){animation-delay:.10s}
+.section:nth-child(3){animation-delay:.15s}
+.section:nth-child(4){animation-delay:.20s}
+.section:nth-child(5){animation-delay:.25s}
+.section:nth-child(6){animation-delay:.30s}
+
+.section-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding: 0 4px;
+}
+.section-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.section-num.c1 { background: var(--grad1); }
+.section-num.c2 { background: var(--grad2); }
+.section-num.c3 { background: var(--grad3); }
+.section-num.c4 { background: var(--grad1); }
+.section-num.c5 { background: var(--grad2); }
+.section-num.c6 { background: var(--grad3); }
+
+.section-title {
+  font-size: 12px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+/* ── CARD ──────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+.card:focus-within { box-shadow: var(--shadow-lg); }
+
+/* ── FORM GRID ─────────────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.span2 { grid-column: span 2; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.field input, .field select {
+  background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px; padding: 10px 13px;
+  border-radius: 8px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%; appearance: none; -webkit-appearance: none;
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 36px; cursor: pointer;
+}
+.field select option { background: #fff; color: var(--gray800); }
+.field input:focus, .field select:focus {
+  border-color: #0099e5;
+  box-shadow: 0 0 0 3px rgba(0,153,229,0.1);
+  background: #fff;
+}
+.field input[readonly] {
+  background: var(--gray100); color: var(--gray400); cursor: not-allowed;
+}
+
+/* ── SEGMENTAÇÃO ───────────────────────────────────────── */
+.seg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.seg-card {
+  border: 2px solid var(--gray100);
+  border-radius: var(--radius); padding: 20px 16px;
+  cursor: pointer; transition: all 0.2s; position: relative;
+  user-select: none; background: var(--white);
+}
+.seg-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.seg-card.selected { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.seg-card.estrategico.selected { border-color: #ff4e00; }
+.seg-card.critico.selected     { border-color: #0099e5; }
+.seg-card.baixo.selected       { border-color: #7b2ff7; }
+
+.seg-pill {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: #fff; margin-bottom: 10px;
+}
+.seg-card.estrategico .seg-pill { background: var(--grad1); }
+.seg-card.critico     .seg-pill { background: var(--grad2); }
+.seg-card.baixo       .seg-pill { background: var(--grad3); }
+.seg-name { font-size: 14px; font-weight: 700; color: var(--gray800); margin-bottom: 6px; }
+.seg-desc { font-size: 11.5px; color: var(--gray400); line-height: 1.5; }
+.seg-check {
+  position: absolute; top: 12px; right: 14px;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #fff; opacity: 0; transition: opacity 0.2s;
+}
+.seg-card.estrategico.selected .seg-check { background: var(--grad1); opacity:1; }
+.seg-card.critico.selected     .seg-check { background: var(--grad2); opacity:1; }
+.seg-card.baixo.selected       .seg-check { background: var(--grad3); opacity:1; }
+
+/* ── CRITÉRIOS ─────────────────────────────────────────── */
+.criteria-list { display: flex; flex-direction: column; gap: 3px; }
+.criteria-item {
+  background: var(--white);
+  border: 1.5px solid var(--gray100);
+  border-radius: var(--radius);
+  overflow: hidden; transition: all 0.2s;
+}
+.criteria-item.scored { border-color: var(--gray200); }
+
+.criteria-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; padding: 16px 18px 10px; align-items: start;
+}
+.criteria-name { font-size: 13px; font-weight: 600; color: var(--gray800); line-height: 1.4; }
+.criteria-name small {
+  display: block; font-size: 11.5px; color: var(--gray800);
+  font-weight: 400; margin-top: 3px; line-height: 1.45;
+}
+.score-display {
+  font-family: 'DM Serif Display', serif; font-size: 32px; font-weight: 400;
+  line-height: 1; text-align: right; min-width: 32px;
+  background: var(--gradFull); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.score-display.empty { -webkit-text-fill-color: var(--gray200); background: none; }
+
+/* NOTE BUTTONS */
+.note-options { display: flex; gap: 0; padding: 0 18px 14px; }
+.note-btn {
+  flex: 1; background: var(--gray50); border: 1.5px solid var(--gray100);
+  color: var(--gray400); font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 500; padding: 8px 4px;
+  cursor: pointer; transition: all 0.15s; text-align: center;
+  line-height: 1.3; border-right: none; position: relative;
+}
+.note-btn:first-child { border-radius: 8px 0 0 8px; }
+.note-btn:last-child  { border-radius: 0 8px 8px 0; border-right: 1.5px solid var(--gray100); }
+.note-btn:hover { background: var(--gray100); color: var(--gray800); z-index:1; }
+.note-btn.active {
+  z-index: 2; color: #fff; border-color: transparent; font-weight: 700;
+}
+.note-btn:nth-child(1).active { background: linear-gradient(135deg,#ff4e00,#f7a800); }
+.note-btn:nth-child(2).active { background: linear-gradient(135deg,#e0009e,#ff4e00); }
+.note-btn:nth-child(3).active { background: linear-gradient(135deg,#7b2ff7,#e0009e); }
+.note-btn:nth-child(4).active { background: linear-gradient(135deg,#0099e5,#7b2ff7); }
+.note-btn:nth-child(5).active { background: linear-gradient(135deg,#00e5a0,#0099e5); }
+.note-num   { font-size: 16px; font-weight: 700; display: block; }
+.note-label { font-size: 9px; display: block; margin-top: 2px; opacity: 0.85; }
+
+/* ── RESULTADO ─────────────────────────────────────────── */
+.result-card {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 22px 24px; margin-top: 3px;
+  border-top: 4px solid transparent;
+  border-image: var(--gradFull) 1;
+}
+.result-row {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;
+}
+.result-label {
+  font-size: 11px; font-weight: 700; color: var(--gray400);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.result-value {
+  font-family: 'DM Serif Display', serif; font-size: 44px; line-height: 1;
+  background: var(--gradFull); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.result-value.empty { -webkit-text-fill-color: var(--gray200); background: none; }
+.result-pct {
+  font-size: 14px; color: var(--gray400); margin-left: 8px;
+  font-family: 'Sora', sans-serif;
+}
+.bar-track {
+  background: var(--gray100); border-radius: 100px; height: 10px;
+  overflow: hidden; margin-bottom: 10px;
+}
+.bar-fill {
+  height: 100%; border-radius: 100px;
+  background: var(--gradFull);
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%;
+}
+.classification-tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+  color: #fff;
+}
+
+/* ── AÇÕES ─────────────────────────────────────────────── */
+.action-result {
+  border-radius: var(--radius); padding: 20px 22px;
+  border: 1.5px solid var(--gray100); background: var(--white);
+  transition: all 0.3s; box-shadow: var(--shadow);
+}
+.action-result.active-rever        { border-color: #ff4e00; background: #fff8f6; }
+.action-result.active-melhoria     { border-color: #0099e5; background: #f6fbff; }
+.action-result.active-preferencial { border-color: #00c07a; background: #f5fff9; }
+.action-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.action-result.active-rever        .action-title { color: #ff4e00; }
+.action-result.active-melhoria     .action-title { color: #0099e5; }
+.action-result.active-preferencial .action-title { color: #00c07a; }
+.action-desc { font-size: 13px; color: var(--gray600); line-height: 1.6; }
+.action-pct-badge {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+  letter-spacing: 0.06em; color: #fff;
+}
+.action-result.active-rever        .action-pct-badge { background: var(--grad1); }
+.action-result.active-melhoria     .action-pct-badge { background: var(--grad2); }
+.action-result.active-preferencial .action-pct-badge { background: linear-gradient(135deg,#00e5a0,#00c07a); }
+.action-pending {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--gray400); font-size: 13px; font-style: italic;
+}
+
+/* ── DECLARAÇÕES ───────────────────────────────────────── */
+.declaration {
+  font-size: 13px; color: var(--gray600); padding: 14px 16px;
+  background: var(--gray50); border-left: 4px solid transparent;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.55; margin-bottom: 10px; font-style: italic;
+}
+.declaration:nth-child(1) { border-left-color: #f7a800; }
+.declaration:nth-child(2) { border-left-color: #0099e5; }
+.declaration:last-child { margin-bottom: 0; }
+
+/* ── ASSINATURAS ───────────────────────────────────────── */
+.signatures-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.sig-block {
+  padding: 22px 20px; background: var(--white);
+  border: 1.5px solid var(--gray100); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.sig-block-title {
+  font-size: 11px; font-weight: 700; color: var(--gray600);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--gray100);
+}
+.sig-row { margin-bottom: 16px; }
+.sig-row label {
+  font-size: 10px; font-weight: 700; color: var(--gray400);
+  text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;
+}
+.sig-row input[type="date"],
+.sig-row input[type="text"] {
+  width: 100%; background: var(--gray50); border: 1.5px solid var(--gray100);
+  border-radius: 8px; padding: 9px 12px;
+  font-family: 'Sora', sans-serif; font-size: 13px; color: var(--gray800);
+  outline: none; transition: border-color 0.2s;
+}
+.sig-row input:focus { border-color: #0099e5; background: #fff; }
+
+/* LINHAS PONTILHADAS PARA ASSINATURA MANUAL */
+.sig-dotted-area {
+  margin-top: 4px;
+}
+.sig-dotted-line {
+  border-bottom: 2px dashed var(--gray200);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  min-height: 40px;
+  position: relative;
+}
+.sig-dotted-line:last-child { margin-bottom: 0; }
+.sig-dotted-label {
+  font-size: 10px; color: var(--gray400); font-weight: 500;
+  position: absolute; bottom: -18px; left: 0;
+}
+.sig-info-readonly {
+  font-size: 11.5px; font-weight: 600; color: var(--gray600);
+  margin-top: 6px; padding: 6px 10px;
+  background: var(--gray50); border-radius: 6px;
+}
+
+/* ── SUBMIT BAR ────────────────────────────────────────── */
+.submit-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--gray100);
+  padding: 14px 20px;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.btn {
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 11px 28px; border-radius: 8px;
+  cursor: pointer; border: none; letter-spacing: 0.04em; transition: all 0.15s;
+}
+.btn-primary {
+  background: var(--gradFull); color: #fff;
+  box-shadow: 0 4px 14px rgba(0,153,229,0.3);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,153,229,0.4); }
+.btn-export {
+  background: var(--grad3); color: #fff;
+  box-shadow: 0 4px 14px rgba(123,47,247,0.3);
+}
+.btn-export:hover { transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; border: 1.5px solid var(--gray200); color: var(--gray600);
+}
+.btn-secondary:hover { border-color: var(--gray400); color: var(--gray800); }
+
+/* ── TOAST ─────────────────────────────────────────────── */
+.toast {
+  position: fixed; top: 24px; right: 24px;
+  background: var(--white); border-left: 4px solid #00c07a;
+  font-size: 13px; font-weight: 600; color: var(--gray800);
+  padding: 14px 20px; border-radius: 10px; display: none; z-index: 200;
+  box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(20px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+/* Assinatura/carimbo física: escondida na tela, só aparece no PDF impresso (@media print abaixo). */
+.print-only { display: none; }
+
+/* ══════════════════════════════════════════════════════════
+   PRINT / PDF STYLES
+══════════════════════════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .submit-bar, .toast, .no-print { display: none !important; }
+
+  .container { max-width: 100%; padding: 0 16px; }
+
+  .header, .card, .criteria-item, .result-card,
+  .action-result, .sig-block { box-shadow: none !important; }
+
+  .section { margin-bottom: 14px; page-break-inside: avoid; }
+
+  .header-band { height: 6px; }
+
+  /* Hide score buttons and selects in print, show values */
+  .note-options { display: none !important; }
+  .field select  { background-image: none; }
+
+  /* Signature blocks get more space */
+  .sig-block { border: 1.5px solid #ccc; }
+
+  .sig-dotted-line {
+    border-bottom: 2px dashed #aaa !important;
+    min-height: 50px;
+    margin-bottom: 28px;
+  }
+
+  .print-only { display: block !important; }
+
+  /* Print header */
+  .print-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(135deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0) 1;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .note-options-print { display: flex !important; gap: 4px; padding: 0 18px 12px; }
+  .note-btn-print {
+    padding: 4px 8px; font-size: 10px; border: 1px solid #ccc;
+    border-radius: 4px; font-weight: 500;
+  }
+  .note-btn-print.active-print {
+    background: #2a2f42 !important; color: #fff !important; border-color: #2a2f42;
+  }
+
+  /* Keep gradients in print for seg pills */
+  .seg-pill { -webkit-print-color-adjust: exact; }
+}
+
+/* Print header — hidden on screen */
+.print-header { display: none; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-grid, .signatures-grid, .seg-grid { grid-template-columns: 1fr; }
+  .span2 { grid-column: span 1; }
+  .header-inner { flex-direction: column; gap: 10px; }
+  .note-label { display: none; }
+}
+
+/* ── DASHBOARD ── */
+.btn-hist{background:var(--white);border:1.5px solid var(--gray200);color:var(--gray600);padding:9px 16px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.btn-hist:hover{border-color:var(--gray400);color:var(--gray800);}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:900;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:640px;width:100%;max-height:82vh;overflow-y:auto;}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0;}
+.modal-inner{padding:26px 28px;}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:18px;}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;line-height:1;}
+.modal.modal-wide{max-width:760px;max-height:82vh;overflow-y:auto;}
+.dash-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;}
+.dash-card{background:var(--gray50);border-radius:10px;padding:14px;text-align:center;}
+.dash-card .num{font-family:'DM Serif Display',serif;font-size:26px;color:var(--gray800);line-height:1.1;}
+.dash-card .lbl{font-size:10.5px;color:var(--gray400);text-transform:uppercase;letter-spacing:.04em;margin-top:4px;font-weight:700;}
+.dash-card.excelente .num{color:#00c48c;}
+.dash-card.bom .num{color:#0099e5;}
+.dash-card.regular .num{color:#f7a800;}
+.dash-card.critico .num{color:#ff4e6a;}
+.dash-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin:18px 0 10px;}
+.dash-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12.5px;}
+.dash-bar-label{width:140px;flex-shrink:0;color:var(--gray600);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dash-bar-track{flex:1;height:8px;background:var(--gray100);border-radius:6px;overflow:hidden;}
+.dash-bar-fill{height:100%;border-radius:6px;}
+.dash-bar-count{width:30px;text-align:right;color:var(--gray400);font-weight:700;font-size:11px;}
+.dash-empty{text-align:center;color:var(--gray400);padding:24px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<div class="modal-bg" id="modal-historico">
+  <div class="modal"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharHistorico()">×</button>
+      <div class="modal-title">Histórico de Avaliações</div>
+      <div class="modal-sub">Avaliações de prestadores salvas neste navegador — clique para reabrir e revisar</div>
+      <input type="text" id="busca-historico" placeholder="Buscar por empresa, praça ou setor..." oninput="renderHistoricoPJ()" style="width:100%;padding:10px 13px;border:1.5px solid var(--gray100);border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;margin-bottom:14px;outline:none;">
+      <div id="lista-historico"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-dashboard">
+  <div class="modal modal-wide"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharDashboard()">×</button>
+      <div class="modal-title">Dashboard de Avaliações</div>
+      <div class="modal-sub">Panorama das avaliações de prestadores de serviço salvas neste navegador</div>
+      <div id="dashboard-conteudo"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✓ Avaliação salva com sucesso</div>
+
+<div id="tela-recebimento" class="container" style="display:none;">
+  <div class="header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1 id="receb-titulo">Avaliação de Prestação de Serviço</h1>
+        <p id="receb-sub">Revise os dados abaixo</p>
+      </div>
+    </div>
+  </div>
+  <div id="receb-conteudo"></div>
+</div>
+
+<div class="brand-band"></div>
+<header>
+  <div class="logo-wrap">
+    <div class="brand-text">
+      <div class="name">Avaliação de PJ</div>
+      <div class="tag">Gestão de Talentos</div>
+    </div>
+  </div>
+</header>
+
+<div class="workspace-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Navegação</div>
+      <button class="side-toggle" id="side-toggle-btn" onclick="toggleSidebar()" title="Recolher menu">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="side-toggle-icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+    </div>
+    <nav id="sidebar-nav">
+      <button class="side-item active" onclick="" title="Avaliação"><span class="dot" style="background:var(--grad2)"></span><span>Avaliação</span></button>
+      <div class="sidebar-sep" style="height:1px;background:var(--gray100);margin:10px 4px"></div>
+      <button class="side-item" onclick="abrirHistorico()" title="Histórico"><span class="dot" style="background:var(--grad3)"></span><span>Histórico</span></button>
+      <button class="side-item" onclick="abrirDashboard()" title="Dashboard"><span class="dot" style="background:var(--grad1)"></span><span>Dashboard</span></button>
+    </nav>
+  </aside>
+
+  <main class="content" id="content">
+
+<div class="container" id="container-principal">
+
+  <!-- HEADER CARD -->
+  <div class="header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Avaliação de Prestadores de Serviço</h1>
+        <p>Qualidade do serviço – Conformidade técnica, acabamento e resultado final</p>
+        <span class="period-badge">Período 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 01 IDENTIFICAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c1">01</div>
+      <span class="section-title">Identificação do Prestador</span>
+    </div>
+    <div class="card">
+      <div class="form-grid">
+        <div class="field">
+          <label>Praça</label>
+          <select id="sel-praca" onchange="filtrarSetores()">
+            <option value="">— Selecione —</option>
+            <option>REGIÃO SUL</option><option>REGIÃO LESTE</option><option>REGIÃO CENTRAL</option>
+            <option>REGIÃO CAPITAL</option><option>REGIÃO NORTE</option><option>REGIÃO OESTE</option><option>REGIÃO NOROESTE</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Setor</label>
+          <select id="sel-setor" onchange="filtrarPJs()">
+            <option value="">— Selecione —</option>
+          </select>
+        </div>
+        <div class="field span2">
+          <label>Razão Social</label>
+          <input type="text" id="sel-empresa" list="lista-empresas-pj" placeholder="Digite ou selecione um prestador já cadastrado" oninput="preencherDados()">
+          <datalist id="lista-empresas-pj"></datalist>
+        </div>
+        <div class="field">
+          <label>CNPJ</label>
+          <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
+        </div>
+        <div class="field">
+          <label>Representante Legal</label>
+          <input type="text" id="representante" placeholder="Nome do representante legal">
+        </div>
+        <div class="field">
+          <label>E-mail do Representante (prestador) *</label>
+          <input type="email" id="email-representante" placeholder="representante@prestador.com">
+        </div>
+        <div class="field">
+          <label>E-mail do Gestor de Contrato (retorno) *</label>
+          <input type="email" id="email-gestor-contrato" placeholder="gestor@empresa.com">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 02 SEGMENTAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c2">02</div>
+      <span class="section-title">Segmentação do Prestador / Criticidade</span>
+    </div>
+    <div class="card">
+      <div class="seg-grid">
+        <div class="seg-card estrategico" id="seg-estrategico" onclick="selecionarSeg('estrategico')">
+          <div class="seg-pill">Estratégico</div>
+          <div class="seg-name">Estratégico</div>
+          <div class="seg-desc">Alto impacto direto no negócio. Sua interrupção compromete operações críticas, receita ou imagem. Exige monitoramento contínuo e gestão próxima.</div>
+          <div class="seg-check">✓</div>
+        </div>
+        <div class="seg-card critico" id="seg-critico" onclick="selecionarSeg('critico')">
+          <div class="seg-pill">Crítico</div>
+          <div class="seg-name">Crítico</div>
+          <div class="seg-desc">Relevante para a continuidade das operações. Falhas causam impacto moderado a alto. Requer acompanhamento periódico e plano de contingência.</div>
+          <div class="seg-check">✓</div>
+        </div>
+        <div class="seg-card baixo" id="seg-baixo" onclick="selecionarSeg('baixo')">
+          <div class="seg-pill">Baixo Impacto</div>
+          <div class="seg-name">Baixo Impacto</div>
+          <div class="seg-desc">Impacto limitado nas operações. Falhas podem ser absorvidas sem prejuízo relevante. Avaliação simplificada e menor frequência de monitoramento.</div>
+          <div class="seg-check">✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 03 AVALIAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c3">03</div>
+      <span class="section-title">Avaliação por Critérios — Resultados Contratuais</span>
+    </div>
+    <div class="criteria-list">
+
+      <div class="criteria-item" id="ci-0">
+        <div class="criteria-top">
+          <div class="criteria-name">Qualidade do Serviço
+            <small>Conformidade técnica, organização, acabamento e resultado final. Avalie se o serviço entregue atende aos requisitos técnicos contratados, prezando pela qualidade e conformidade com os padrões estabelecidos.</small>
+          </div>
+          <div class="score-display empty" id="disp-0">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(0,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(0,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(0,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(0,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(0,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-1">
+        <div class="criteria-top">
+          <div class="criteria-name">Custo-Benefício
+            <small>Relação entre preço, qualidade e entrega do serviço. Avalie se o valor cobrado é compatível com a qualidade e eficiência dos serviços prestados.</small>
+          </div>
+          <div class="score-display empty" id="disp-1">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(1,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(1,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(1,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(1,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(1,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-2">
+        <div class="criteria-top">
+          <div class="criteria-name">Comunicação e Responsividade
+            <small>Clareza e completude de relatório e tempo de respostas à solicitações internas. Avalie a qualidade da comunicação, pontualidade nos retornos e clareza dos relatórios entregues.</small>
+          </div>
+          <div class="score-display empty" id="disp-2">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(2,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(2,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(2,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(2,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(2,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-3">
+        <div class="criteria-top">
+          <div class="criteria-name">Segurança, Conformidade Legal e Gestão de Risco
+            <small>Cumprimento de normas internas (seg. trabalho / código de conduta) e documentação exigida (CNDs Municipal, Estadual, Federal). Avalie a regularidade documental e aderência às normas de compliance.</small>
+          </div>
+          <div class="score-display empty" id="disp-3">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(3,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(3,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(3,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(3,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(3,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-4">
+        <div class="criteria-top">
+          <div class="criteria-name">Proatividade / Iniciativa
+            <small>Registro de melhorias, ações corretivas eficazes e solução de imprevistos. Avalie se o prestador antecipa problemas, propõe melhorias e age de forma resolutiva diante de situações não previstas.</small>
+          </div>
+          <div class="score-display empty" id="disp-4">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(4,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(4,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(4,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(4,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(4,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-5">
+        <div class="criteria-top">
+          <div class="criteria-name">Atendimento dos Entregáveis Contratados
+            <small>Cumprimento dos prazos acordados e acurácia dos serviços prestados. Avalie se os entregáveis foram concluídos dentro dos prazos e com o nível de exatidão e qualidade exigidos no contrato.</small>
+          </div>
+          <div class="score-display empty" id="disp-5">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(5,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(5,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(5,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(5,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(5,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESULTADO FINAL -->
+    <div class="result-card">
+      <div class="result-row">
+        <span class="result-label">Resultado Final</span>
+        <div style="display:flex;align-items:baseline;gap:4px;">
+          <span class="result-value empty" id="result-val">—</span>
+          <span class="result-pct" id="result-pct"></span>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
+      <div id="result-class" style="margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- SEC 04 AÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c4">04</div>
+      <span class="section-title">Ações e Recomendações</span>
+    </div>
+    <div id="action-box" class="action-result">
+      <div class="action-pending">
+        <span style="font-size:22px;opacity:0.25">◎</span>
+        Preencha todos os critérios para obter a recomendação automática.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 05 DECLARAÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c5">05</div>
+      <span class="section-title">Declarações</span>
+    </div>
+    <div class="card">
+      <div class="declaration">
+        <strong>4.1</strong> — A presente avaliação refere-se exclusivamente à prestação de serviços contratada, não configurando controle de natureza trabalhista.
+      </div>
+      <div class="declaration">
+        <strong>4.2</strong> — A eventual aplicação de ações corretivas não aplica poder disciplinar típico de vínculo de emprego.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 06 ASSINATURAS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c6">06</div>
+      <span class="section-title">Assinaturas</span>
+    </div>
+    <div class="signatures-grid">
+
+      <!-- Responsável pela avaliação -->
+      <div class="sig-block">
+        <div class="sig-block-title">Responsável pela Avaliação</div>
+        <div class="sig-row">
+          <label>Data</label>
+          <input type="date" id="data-avaliacao">
+        </div>
+        <div class="sig-row">
+          <label>Nome do Responsável</label>
+          <input type="text" id="nome-avaliador" placeholder="Nome completo">
+        </div>
+        <p class="no-print" style="font-size:11px;color:var(--gray400);margin-top:10px">A assinatura e o carimbo ficam disponíveis no PDF exportado, para registro físico se necessário.</p>
+        <div class="print-only" style="margin-top:18px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Assinatura</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-top:20px;margin-bottom:6px;">Carimbo</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ciência do prestador -->
+      <div class="sig-block">
+        <div class="sig-block-title">Ciência do Prestador de Serviço</div>
+        <div class="sig-row">
+          <label>Data</label>
+          <input type="date" id="data-ciencia">
+        </div>
+        <div class="sig-row">
+          <label>Responsável Legal</label>
+          <div class="sig-info-readonly" id="sig-empresa">—</div>
+        </div>
+        <div class="sig-row">
+          <label>CNPJ</label>
+          <div class="sig-info-readonly" id="sig-cnpj" style="color:var(--gray400);font-size:11px;">—</div>
+        </div>
+        <div class="print-only" style="margin-top:12px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Assinatura do Responsável Legal</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- SUBMIT BAR -->
+<div class="submit-bar no-print">
+  <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
+  <button class="btn btn-secondary" onclick="salvar()">Salvar</button>
+  <button class="btn btn-secondary" onclick="exportarPDF()">⬇ Exportar PDF</button>
+  <button class="btn btn-export" onclick="enviarParaCienciaPrestador()">Enviar para Ciência do Prestador</button>
+</div>
+
+  </main>
+</div>
+
+<script>
+/* ═══════════ INÍCIO core.js (biblioteca compartilhada GT360) ═══════════ */
+/* ══════════════ GT360 CORE — biblioteca compartilhada ══════════════
+   Fonte única destas funções. Qualquer correção/alteração deve ser
+   feita AQUI e reaplicada aos módulos — nunca editar as cópias
+   coladas em cada módulo individualmente. */
+
+/* Escapa texto para uso seguro dentro de innerHTML. */
+function esc(str){
+  return (str==null?'':String(str)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Transferência de estado via link (sem backend) ──
+   O estado de um registro (avaliação, etc.) viaja dentro da própria
+   URL — quem recebe o link abre o módulo já carregado na etapa certa.
+   Quando houver backend, este é o ponto de troca: substituir
+   codificarEstado/decodificarEstado e o mailto por chamadas reais de
+   API — o restante do fluxo (etapas, telas) não precisa mudar. */
+function codificarEstado(obj){
+  const json = JSON.stringify(obj);
+  const utf8 = unescape(encodeURIComponent(json));
+  const b64 = btoa(utf8);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodificarEstado(str){
+  let b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length % 4) b64 += '=';
+  const utf8 = atob(b64);
+  return JSON.parse(decodeURIComponent(escape(utf8)));
+}
+function gerarLinkTransferencia(registro){
+  // Dentro do workspace GT360, este módulo roda num iframe carregado via
+  // srcdoc — location.href aponta para "about:srcdoc", que não é um
+  // endereço utilizável fora daquela sessão. Quando embutido, o link
+  // precisa apontar para a página de nível mais alto (o próprio
+  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
+  // o shell é responsável por ler esse link e abrir o módulo certo.
+  let base;
+  try{
+    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
+  }catch(e){
+    base = location.href.split('#')[0];
+  }
+  return base + '#av=' + codificarEstado(registro);
+}
+function gerarMailtoLink(destinatario, assunto, corpo){
+  return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+}
+function verificarLinkRecebido(){
+  // Quando o shell do GT360 identifica um link de convite/retorno, ele
+  // injeta o registro já decodificado nesta variável antes de carregar o
+  // módulo (mais confiável do que tentar setar o hash de um documento
+  // srcdoc depois que ele já carregou). Fora do shell (uso direto do
+  // arquivo do módulo, ou abertura standalone), cai no hash normal.
+  if(window.__conviteRecebidoDireto) return window.__conviteRecebidoDireto;
+  const hash = location.hash;
+  if(hash.indexOf('#av=') === 0){
+    try{ return decodificarEstado(hash.slice(4)); }catch(e){ console.warn('Link de transferência inválido ou corrompido', e); return null; }
+  }
+  return null;
+}
+/* ═══════════ FIM core.js ═══════════ */
+
+// ── DATA ATUAL ──────────────────────────────────────────
+(function(){
+  const d = new Date();
+  const s = d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  // date removed
+})();
+
+// ── BASE DE DADOS ──────────────────────────────────────
+let pjs = []; // reconstruído em runtime a partir do histórico salvo (pj_avaliacoes)
+
+const pracaSetores = {
+  "REGIÃO SUL":     ["COMERCIAL","MANUTENÇÃO","ATENDIMENTO","MARKETING","LOGÍSTICA"],
+  "REGIÃO LESTE":    ["ATENDIMENTO","MARKETING","LOGÍSTICA"],
+  "REGIÃO CENTRAL": ["TECNOLOGIA","COMERCIAL","MANUTENÇÃO","FINANCEIRO","PRODUÇÃO","ATENDIMENTO","JURÍDICO","MARKETING","OPERAÇÕES","LOGÍSTICA","RECURSOS HUMANOS","INFRAESTRUTURA"],
+  "REGIÃO CAPITAL": ["DIRETORIA EXECUTIVA","ATENDIMENTO"],
+  "REGIÃO NORTE":     ["ATENDIMENTO"],
+  "REGIÃO OESTE": ["COMERCIAL","MANUTENÇÃO","ATENDIMENTO","LOGÍSTICA"],
+  "REGIÃO NOROESTE":  ["MANUTENÇÃO","ATENDIMENTO","LOGÍSTICA"],
+};
+
+const weights   = [2.0, 1.5, 1.5, 2.0, 1.0, 2.0];
+const totalW    = weights.reduce((a,b)=>a+b,0); // 10
+const maxScore  = totalW * 5; // 50
+const notas     = [null,null,null,null,null,null];
+
+// ── FILTROS ──
+function filtrarSetores(){
+  const praca=document.getElementById('sel-praca').value;
+  const s=document.getElementById('sel-setor');
+  s.innerHTML='<option value="">— Selecione —</option>';
+  if(praca&&pracaSetores[praca]) pracaSetores[praca].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;s.appendChild(o);});
+  filtrarPJs();
+}
+function filtrarPJs(){
+  const praca=document.getElementById('sel-praca').value;
+  const setor=document.getElementById('sel-setor').value;
+  const dl=document.getElementById('lista-empresas-pj');
+  dl.innerHTML='';
+  pjs.filter(p=>(!praca||p.praca===praca)&&(!setor||p.setor===setor))
+     .sort((a,b)=>a.empresa.localeCompare(b.empresa))
+     .forEach(p=>{const o=document.createElement('option');o.value=p.empresa;dl.appendChild(o);});
+  clearPJ();
+}
+function preencherDados(){
+  const nome=document.getElementById('sel-empresa').value;
+  const f=pjs.find(p=>p.empresa===nome);
+  if(f){
+    document.getElementById('cnpj').value=f.cnpj;
+    document.getElementById('representante').value=f.representante;
+    document.getElementById('sig-empresa').textContent=f.representante;
+    document.getElementById('sig-cnpj').textContent=f.cnpj;
+    if(!document.getElementById('sel-praca').value){
+      document.getElementById('sel-praca').value=f.praca;
+      filtrarSetores();
+      document.getElementById('sel-setor').value=f.setor;
+      filtrarPJs();
+      document.getElementById('sel-empresa').value=nome;
+      document.getElementById('cnpj').value=f.cnpj;
+      document.getElementById('representante').value=f.representante;
+      document.getElementById('sig-empresa').textContent=f.representante;
+      document.getElementById('sig-cnpj').textContent=f.cnpj;
+    }
+  }
+}
+function clearPJ(){
+  document.getElementById('cnpj').value='';
+  document.getElementById('representante').value='';
+  document.getElementById('sig-empresa').textContent='—';
+  document.getElementById('sig-cnpj').textContent='—';
+}
+
+// ── SEGMENTAÇÃO ──
+function selecionarSeg(t){
+  ['estrategico','critico','baixo'].forEach(x=>{
+    const el=document.getElementById('seg-'+x);
+    el.className='seg-card '+x;
+  });
+  document.getElementById('seg-'+t).classList.add('selected');
+}
+
+// ── NOTAS ──
+function setNota(idx,val){
+  notas[idx]=val;
+  const d=document.getElementById('disp-'+idx);
+  d.textContent=val; d.classList.remove('empty');
+  document.querySelectorAll('.criteria-item')[idx]
+    .querySelectorAll('.note-btn')
+    .forEach((b,i)=>b.classList.toggle('active',i+1===val));
+  document.querySelectorAll('.criteria-item')[idx].classList.add('scored');
+  calcular();
+}
+
+// ── CÁLCULO ──
+function calcular(){
+  const filled=notas.filter(n=>n!==null).length;
+  if(filled===0){resetResult();return;}
+
+  let ws=0,wt=0;
+  notas.forEach((n,i)=>{if(n!==null){ws+=n*weights[i];wt+=weights[i];}});
+  const avg=ws/wt;
+  const allFilled=filled===6;
+  const pct=allFilled?(ws/maxScore)*100:null;
+
+  const rv=document.getElementById('result-val');
+  const rp=document.getElementById('result-pct');
+  const bar=document.getElementById('bar-fill');
+  const rc=document.getElementById('result-class');
+  const ab=document.getElementById('action-box');
+
+  rv.textContent=avg.toFixed(2);
+  rv.classList.remove('empty');
+
+  if(allFilled){
+    rp.textContent='('+pct.toFixed(0)+'%)';
+    bar.style.width=pct+'%';
+
+    let tag,bg;
+    if(pct>=90){tag='Excelente';bg='linear-gradient(135deg,#00e5a0,#0099e5)';}
+    else if(pct>=61){tag='Bom';bg='linear-gradient(135deg,#0099e5,#7b2ff7)';}
+    else if(pct>=40){tag='Regular';bg='linear-gradient(135deg,#f7a800,#ff4e00)';}
+    else{tag='Crítico';bg='linear-gradient(135deg,#ff4e00,#e0009e)';}
+
+    rc.innerHTML=`<span class="classification-tag" style="background:${bg}">${tag}</span>`;
+
+    if(pct<60){
+      ab.className='action-result active-rever';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Abaixo de 60%</div><div class="action-title">Rever Contrato</div><div class="action-desc">O desempenho é insatisfatório, com falhas que comprometem a qualidade, segurança, prazos ou conformidade. Esse nível indica alto risco operacional e baixo alinhamento com os padrões exigidos pela empresa.</div>`;
+    } else if(pct<=89){
+      ab.className='action-result active-melhoria';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Entre 61% e 89%</div><div class="action-title">◈ Solicitar Plano de Melhoria</div><div class="action-desc">O desempenho é adequado, porém apresenta pontos de atenção que precisam ser aprimorados. Esse intervalo indica que o prestador atende às necessidades, mas possui oportunidades claras de evolução.</div>`;
+    } else {
+      ab.className='action-result active-preferencial';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Acima de 90%</div><div class="action-title">★ Manter no Cadastro Preferencial</div><div class="action-desc">O prestador demonstra desempenho superior e consistente, atendendo plenamente aos requisitos técnicos, operacionais e de qualidade.</div>`;
+    }
+  } else {
+    rp.textContent=`(${filled}/6 critérios)`;
+    bar.style.width=((filled/6)*(avg/5)*100)+'%';
+    rc.innerHTML='';
+    ab.className='action-result';
+    ab.innerHTML=`<div class="action-pending"><span style="font-size:22px;opacity:0.25">◎</span> Preencha os ${6-filled} critério(s) restante(s) para obter a recomendação.</div>`;
+  }
+}
+
+function resetResult(){
+  const rv=document.getElementById('result-val');
+  rv.textContent='—'; rv.classList.add('empty');
+  document.getElementById('result-pct').textContent='';
+  document.getElementById('bar-fill').style.width='0%';
+  document.getElementById('result-class').innerHTML='';
+  const ab=document.getElementById('action-box');
+  ab.className='action-result';
+  ab.innerHTML=`<div class="action-pending"><span style="font-size:22px;opacity:0.25">◎</span> Preencha todos os critérios de avaliação para obter a recomendação automática.</div>`;
+}
+
+function limpar(){
+  if(!confirm('Deseja limpar todo o formulário?')) return;
+  document.getElementById('sel-praca').value='';
+  document.getElementById('sel-setor').innerHTML='<option value="">— Selecione —</option>';
+  document.getElementById('sel-empresa').innerHTML='<option value="">— Selecione a empresa —</option>';
+  clearPJ();
+  document.getElementById('nome-avaliador').value='';
+  document.getElementById('data-avaliacao').value='';
+  document.getElementById('data-ciencia').value='';
+  for(let i=0;i<6;i++){
+    notas[i]=null;
+    const d=document.getElementById('disp-'+i);
+    d.textContent='—'; d.classList.add('empty');
+    document.querySelectorAll('.criteria-item')[i].querySelectorAll('.note-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.criteria-item')[i].classList.remove('scored');
+  }
+  ['estrategico','critico','baixo'].forEach(t=>{document.getElementById('seg-'+t).className='seg-card '+t;});
+  resetResult();
+}
+
+function salvar(){
+  if(!document.getElementById('sel-empresa').value){alert('Informe a empresa prestadora.');return;}
+  document.getElementById('sig-empresa').textContent = document.getElementById('representante').value || '—';
+  document.getElementById('sig-cnpj').textContent = document.getElementById('cnpj').value || '—';
+  registrarNoHistoricoPJ();
+  houveAlteracaoNaoSalva = false;
+  const t=document.getElementById('toast');
+  t.style.display='block';
+  setTimeout(()=>{t.style.display='none';},2800);
+}
+
+// ── EXPORTAR PDF ──────────────────────────────────────
+function exportarPDF(){
+  const empresa = document.getElementById('sel-empresa').value || 'Avaliação';
+  // Preparar nome do arquivo
+  const safe = empresa.replace(/[^a-zA-Z0-9\s]/g,'').trim().replace(/\s+/g,'_').substring(0,40);
+  const d = new Date();
+  const dataStr = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  document.title = `Avaliacao_PJ_${safe}_${dataStr}`;
+
+  // Adicionar classe de impressão temporária para ocultar botões
+  document.body.classList.add('printing');
+
+  // Esconder submit bar
+  document.querySelector('.submit-bar').style.display='none';
+  document.querySelector('.toast').style.display='none';
+
+  window.print();
+
+  // Restaurar
+  setTimeout(()=>{
+    document.querySelector('.submit-bar').style.display='flex';
+    document.body.classList.remove('printing');
+    document.title = 'Avaliação de Prestadores de Serviço';
+  }, 1000);
+}
+
+/* ── HISTÓRICO / REPOSITÓRIO (localStorage) ── */
+const PJ_STORAGE_KEY = 'pj_avaliacoes';
+function carregarHistoricoPJ(){ try{ return JSON.parse(localStorage.getItem(PJ_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function salvarHistoricoPJ(lista){ try{ localStorage.setItem(PJ_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico', e); } }
+
+function registrarNoHistoricoPJ(){
+  const registro = {
+    id: Date.now(),
+    salvoEm: new Date().toISOString(),
+    empresa: document.getElementById('sel-empresa').value,
+    cnpj: document.getElementById('cnpj').value,
+    representante: document.getElementById('representante').value,
+    praca: document.getElementById('sel-praca').value,
+    setor: document.getElementById('sel-setor').value,
+    segmentacao: (document.querySelector('.seg-card.selected')||{}).id ? document.querySelector('.seg-card.selected').id.replace('seg-','') : '',
+    notas: [...notas],
+    nomeAvaliador: document.getElementById('nome-avaliador').value,
+    dataAvaliacao: document.getElementById('data-avaliacao').value,
+    dataCiencia: document.getElementById('data-ciencia').value,
+    resultadoPct: document.getElementById('result-pct').textContent,
+    resultadoTag: document.getElementById('result-class').innerHTML
+  };
+  const lista = carregarHistoricoPJ();
+  // evita duplicar registro idêntico da mesma empresa no mesmo dia — sempre adiciona um novo, mantém histórico completo
+  lista.unshift(registro);
+  salvarHistoricoPJ(lista);
+  reconstruirPjsDoHistorico();
+}
+
+// Reconstrói a lista de prestadores conhecidos (pjs) a partir do histórico salvo,
+// para alimentar o autocomplete de "Razão Social" sem depender de dados fictícios.
+function reconstruirPjsDoHistorico(){
+  const lista = carregarHistoricoPJ();
+  const vistos = new Set();
+  pjs = [];
+  lista.forEach(r=>{
+    const chave = r.empresa+'|'+r.praca+'|'+r.setor;
+    if(r.empresa && !vistos.has(chave)){
+      vistos.add(chave);
+      pjs.push({empresa:r.empresa, representante:r.representante, cnpj:r.cnpj, praca:r.praca, setor:r.setor});
+    }
+  });
+}
+
+function abrirHistorico(){ document.getElementById('busca-historico').value=''; renderHistoricoPJ(); document.getElementById('modal-historico').classList.add('open'); }
+function fecharHistorico(){ document.getElementById('modal-historico').classList.remove('open'); }
+
+function renderHistoricoPJ(){
+  const termo = (document.getElementById('busca-historico').value||'').toLowerCase().trim();
+  let lista = carregarHistoricoPJ();
+  const el = document.getElementById('lista-historico');
+  if(!lista.length){ el.innerHTML = '<div class="hist-empty">Nenhuma avaliação salva ainda neste navegador.</div>'; return; }
+  const listaCompleta = lista;
+  if(termo) lista = lista.filter(r => (r.empresa||'').toLowerCase().includes(termo) || (r.praca||'').toLowerCase().includes(termo) || (r.setor||'').toLowerCase().includes(termo));
+  if(!lista.length){ el.innerHTML = '<div class="hist-empty">Nenhuma avaliação encontrada para essa busca.</div>'; return; }
+  el.innerHTML = lista.map((r) => {
+    const i = listaCompleta.indexOf(r);
+    const aguardando = r.etapa === 'aguardando_prestador';
+    const badge = aguardando ? '<span class="pdf-nota-badge" style="background:var(--gray200);color:var(--gray600)">⏳ Aguardando Prestador</span>' : (r.resultadoTag||'');
+    return `
+    <div class="hist-row" onclick="reabrirRegistroPJ(${i})">
+      <div><div class="hist-name">${r.empresa||'—'}</div><div class="hist-meta">${r.praca||'—'} · ${r.setor||'—'} · ${r.dataAvaliacao||''}</div></div>
+      <span>${badge}</span>
+      <button class="hist-del" onclick="event.stopPropagation();excluirRegistroPJ(${i})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function excluirRegistroPJ(i){
+  const lista = carregarHistoricoPJ();
+  lista.splice(i,1);
+  salvarHistoricoPJ(lista);
+  reconstruirPjsDoHistorico();
+  renderHistoricoPJ();
+}
+
+function reabrirRegistroPJ(i){
+  const r = carregarHistoricoPJ()[i];
+  if(!r) return;
+  document.getElementById('sel-praca').value = r.praca||'';
+  filtrarSetores();
+  document.getElementById('sel-setor').value = r.setor||'';
+  filtrarPJs();
+  document.getElementById('sel-empresa').value = r.empresa||'';
+  document.getElementById('cnpj').value = r.cnpj||'';
+  document.getElementById('representante').value = r.representante||'';
+  document.getElementById('sig-empresa').textContent = r.representante||'—';
+  document.getElementById('sig-cnpj').textContent = r.cnpj||'—';
+  document.getElementById('nome-avaliador').value = r.nomeAvaliador||'';
+  document.getElementById('data-avaliacao').value = r.dataAvaliacao||'';
+  document.getElementById('data-ciencia').value = r.dataCiencia||'';
+  if(r.segmentacao) selecionarSeg(r.segmentacao);
+  (r.notas||[]).forEach((v,idx)=>{ if(v!==null && v!==undefined) setNota(idx,v); });
+  fecharHistorico();
+  showToastPJ('Registro carregado — revise e gere o PDF novamente se necessário');
+}
+
+function showToastPJ(msg){
+  const t=document.getElementById('toast');
+  const original = t.textContent;
+  t.textContent = msg;
+  t.style.display='block';
+  setTimeout(()=>{ t.style.display='none'; t.textContent = original; },2800);
+}
+
+
+/* ── DASHBOARD ── */
+function abrirDashboard(){ renderDashboardPJ(); document.getElementById('modal-dashboard').classList.add('open'); }
+function fecharDashboard(){ document.getElementById('modal-dashboard').classList.remove('open'); }
+
+function categoriaDe(pct){
+  if(pct===null) return null;
+  if(pct>=90) return 'excelente';
+  if(pct>=61) return 'bom';
+  if(pct>=40) return 'regular';
+  return 'critico';
+}
+
+function renderDashboardPJ(){
+  const lista = carregarHistoricoPJ();
+  const el = document.getElementById('dashboard-conteudo');
+  if(!lista.length){ el.innerHTML = '<div class="dash-empty">Nenhuma avaliação salva ainda — o dashboard aparece assim que a primeira avaliação for salva.</div>'; return; }
+
+  const total = lista.length;
+  const pcts = lista.map(r => {
+    const m = (r.resultadoPct||'').match(/(\d+)/);
+    return m ? parseInt(m[1],10) : null;
+  }).filter(p => p !== null);
+  const media = pcts.length ? Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length) : null;
+
+  const categorias = {excelente:0,bom:0,regular:0,critico:0};
+  lista.forEach(r => {
+    const m = (r.resultadoPct||'').match(/(\d+)/);
+    const pct = m ? parseInt(m[1],10) : null;
+    const cat = categoriaDe(pct);
+    if(cat) categorias[cat]++;
+  });
+
+  const porEmpresa = {};
+  lista.forEach(r => { const e = r.empresa||'Não informado'; porEmpresa[e] = (porEmpresa[e]||0)+1; });
+  const empresasOrdenadas = Object.entries(porEmpresa).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxEmpresa = empresasOrdenadas.length ? empresasOrdenadas[0][1] : 1;
+
+  const recentes = lista.slice(0,5);
+
+  el.innerHTML = `
+    <div class="dash-cards">
+      <div class="dash-card"><div class="num">${total}</div><div class="lbl">Total de Avaliações</div></div>
+      <div class="dash-card"><div class="num">${media!==null?media+'%':'—'}</div><div class="lbl">Média Geral</div></div>
+      <div class="dash-card excelente"><div class="num">${categorias.excelente}</div><div class="lbl">Excelente</div></div>
+      <div class="dash-card bom"><div class="num">${categorias.bom}</div><div class="lbl">Bom</div></div>
+      <div class="dash-card regular"><div class="num">${categorias.regular}</div><div class="lbl">Regular</div></div>
+      <div class="dash-card critico"><div class="num">${categorias.critico}</div><div class="lbl">Crítico</div></div>
+    </div>
+    <div class="dash-section-title">Prestadores Mais Avaliados</div>
+    ${empresasOrdenadas.map(([empresa,qtd])=>`
+      <div class="dash-bar-row">
+        <div class="dash-bar-label">${esc(empresa)}</div>
+        <div class="dash-bar-track"><div class="dash-bar-fill" style="width:${(qtd/maxEmpresa*100)}%;background:var(--grad2)"></div></div>
+        <div class="dash-bar-count">${qtd}</div>
+      </div>`).join('')}
+    <div class="dash-section-title">Avaliações Recentes</div>
+    ${recentes.map(r=>`
+      <div class="hist-row" onclick="fecharDashboard();reabrirRegistroPJ(${lista.indexOf(r)})">
+        <div><div class="hist-name">${esc(r.empresa||'—')}</div><div class="hist-meta">${esc(r.praca||'—')} · ${esc(r.dataAvaliacao||'')}</div></div>
+        <span>${r.resultadoTag||''}</span>
+      </div>`).join('')}
+  `;
+}
+
+
+/* ══════════════ FLUXO DIGITAL (Gestor de Contrato → Prestador → RH) ══════════════
+   Sem backend: o estado da avaliação viaja dentro do próprio link (URL),
+   e cada pessoa usa seu próprio cliente de e-mail (mailto:) para encaminhar
+   a etapa seguinte. Quando houver backend, substituir codificarEstado/
+   decodificarEstado e o mailto por chamadas reais de API. */
+
+
+function coletarDadosAvaliacaoPJ(){
+  const empresa = document.getElementById('sel-empresa').value || '—';
+  const cnpj = document.getElementById('cnpj').value || '';
+  const representante = document.getElementById('representante').value || '';
+  const emailRepresentante = document.getElementById('email-representante').value || '';
+  const emailGestorContrato = document.getElementById('email-gestor-contrato').value || '';
+  const praca = document.getElementById('sel-praca').value || '—';
+  const setor = document.getElementById('sel-setor').value || '—';
+  const segSel = document.querySelector('.seg-card.selected');
+  const segmentacao = segSel ? segSel.id.replace('seg-','') : '';
+  const nomeAvaliador = document.getElementById('nome-avaliador').value || '';
+  const dataAvaliacao = document.getElementById('data-avaliacao').value || '';
+
+  const filled = notas.filter(n=>n!==null).length;
+  const allFilled = filled === 6;
+  let ws=0, wt=0;
+  notas.forEach((n,i)=>{ if(n!==null){ ws+=n*weights[i]; wt+=weights[i]; } });
+  const pct = allFilled ? (ws/maxScore)*100 : null;
+
+  let tag = '';
+  if(allFilled){
+    if(pct>=90) tag='Excelente';
+    else if(pct>=61) tag='Bom';
+    else if(pct>=40) tag='Regular';
+    else tag='Crítico';
+  }
+
+  return { empresa, cnpj, representante, emailRepresentante, emailGestorContrato, praca, setor,
+    segmentacao, nomeAvaliador, dataAvaliacao, notas: [...notas], allFilled, pct, tag };
+}
+
+function enviarParaCienciaPrestador(){
+  const d = coletarDadosAvaliacaoPJ();
+  if(d.empresa === '—'){ alert('Informe a empresa prestadora.'); return; }
+  if(!d.allFilled){ alert('Preencha todos os critérios de avaliação antes de enviar.'); return; }
+  if(!d.emailRepresentante){ alert('Informe o e-mail do representante do prestador.'); return; }
+  if(!d.emailGestorContrato){ alert('Informe o e-mail do gestor de contrato — é para onde a confirmação de ciência vai retornar.'); return; }
+
+  const registro = { versao:1, tipo:'pj', etapa:'aguardando_prestador', criadoEm:new Date().toISOString(), dados: d };
+
+  const lista = carregarHistoricoPJ();
+  lista.unshift({
+    id: Date.now(), salvoEm: new Date().toISOString(),
+    empresa: d.empresa, cnpj: d.cnpj, representante: d.representante,
+    praca: d.praca, setor: d.setor, segmentacao: d.segmentacao,
+    notas: d.notas, nomeAvaliador: d.nomeAvaliador, dataAvaliacao: d.dataAvaliacao,
+    resultadoPct: d.pct!==null ? '('+d.pct.toFixed(0)+'%)' : '',
+    resultadoTag: '',
+    etapa: 'aguardando_prestador'
+  });
+  salvarHistoricoPJ(lista);
+  reconstruirPjsDoHistorico();
+
+  const link = gerarLinkTransferencia(registro);
+  const assunto = 'Avaliação de Prestação de Serviço — ' + d.empresa;
+  const corpo = 'Olá!\n\nA avaliação de prestação de serviço referente a ' + d.empresa + ' foi preenchida pelo(a) gestor(a) de contrato '
+    + (d.nomeAvaliador||'—') + ' e está disponível para ciência.\n\n'
+    + 'Acesse o link abaixo para revisar e confirmar:\n' + link + '\n\n'
+    + 'Atenciosamente,\nGestão de Talentos';
+  houveAlteracaoNaoSalva = false;
+  window.location.href = gerarMailtoLink(d.emailRepresentante, assunto, corpo);
+}
+
+/* ── TELA DE RECEBIMENTO ── */
+function iniciarFluxoRecebimentoPJ(){
+  const registro = verificarLinkRecebido();
+  if(!registro || registro.tipo !== 'pj') return false;
+  document.querySelector('.brand-band').style.display = 'none';
+  document.querySelector('header').style.display = 'none';
+  document.querySelector('.workspace-body').style.display = 'none';
+  document.querySelector('.submit-bar').style.display = 'none';
+  document.getElementById('tela-recebimento').style.display = 'block';
+  if(registro.etapa === 'aguardando_prestador') renderTelaCienciaPJ(registro);
+  else if(registro.etapa === 'concluida') renderTelaImportarPJ(registro);
+  else document.getElementById('receb-conteudo').innerHTML = '<div class="card"><p>Link de avaliação em formato não reconhecido.</p></div>';
+  return true;
+}
+
+function renderTelaCienciaPJ(registro){
+  const d = registro.dados;
+  const pctTxt = d.pct!==null ? Math.round(d.pct)+'%' : '—';
+  document.getElementById('receb-titulo').textContent = 'Ciência da Avaliação de Prestação de Serviço';
+  document.getElementById('receb-sub').textContent = 'Revise a avaliação abaixo e confirme a ciência';
+  document.getElementById('receb-conteudo').innerHTML = `
+    <div class="card" style="margin-bottom:16px">
+      <div class="form-grid">
+        <div class="field"><label>Empresa</label><div style="font-weight:700">${esc(d.empresa)}</div></div>
+        <div class="field"><label>CNPJ</label><div>${esc(d.cnpj||'—')}</div></div>
+        <div class="field"><label>Praça / Setor</label><div>${esc(d.praca)} · ${esc(d.setor)}</div></div>
+        <div class="field"><label>Avaliador</label><div>${esc(d.nomeAvaliador||'—')}</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--gray800)">${pctTxt}</div>
+      <div style="font-size:13px;color:var(--gray600);margin-top:4px">Classificação: <b>${esc(d.tag||'—')}</b></div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin-bottom:10px">Confirmação de Ciência</div>
+      <div class="field"><label>Nome do Representante Legal</label><input type="text" id="receb-nome-prest" value="${esc(d.representante)}"></div>
+      <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray600);margin:14px 0;cursor:pointer">
+        <input type="checkbox" id="receb-check-ciencia" style="margin-top:3px">
+        <span>Declaro, na qualidade de representante legal, ciência do conteúdo desta avaliação de prestação de serviço.</span>
+      </label>
+      <button class="btn btn-export" onclick="confirmarCienciaPrestador(${esc(JSON.stringify(registro)).replace(/"/g,'&quot;')})">Confirmar Ciência</button>
+    </div>`;
+}
+
+function confirmarCienciaPrestador(registro){
+  const nomeRepr = document.getElementById('receb-nome-prest').value.trim();
+  const checked = document.getElementById('receb-check-ciencia').checked;
+  if(!nomeRepr){ alert('Informe o nome do representante legal.'); return; }
+  if(!checked){ alert('É necessário confirmar a ciência para prosseguir.'); return; }
+
+  registro.etapa = 'concluida';
+  registro.dados.sigRepresentanteNome = nomeRepr;
+  registro.dados.sigRepresentanteData = new Date().toISOString();
+
+  const link = gerarLinkTransferencia(registro);
+  const assunto = 'Ciência confirmada — ' + registro.dados.empresa;
+  const corpo = 'O representante legal ' + nomeRepr + ' (' + registro.dados.empresa + ') confirmou ciência da avaliação de prestação de serviço em '
+    + new Date().toLocaleDateString('pt-BR') + '.\n\n'
+    + 'Acesse o link abaixo para registrar esta avaliação no painel de acompanhamento:\n' + link;
+
+  document.getElementById('receb-conteudo').innerHTML = `<div class="card"><h3 style="font-family:'DM Serif Display',serif;margin-bottom:8px">Ciência registrada ✓</h3><p style="color:var(--gray600);font-size:13.5px">Um e-mail de confirmação será preparado para o gestor de contrato. Obrigado!</p></div>`;
+  window.location.href = gerarMailtoLink(registro.dados.emailGestorContrato, assunto, corpo);
+}
+
+function renderTelaImportarPJ(registro){
+  const d = registro.dados;
+  const pctTxt = d.pct!==null ? Math.round(d.pct)+'%' : '—';
+  document.getElementById('receb-titulo').textContent = 'Avaliação Concluída';
+  document.getElementById('receb-sub').textContent = 'O prestador confirmou ciência — importe para o seu painel';
+  document.getElementById('receb-conteudo').innerHTML = `
+    <div class="card">
+      <div class="form-grid">
+        <div class="field"><label>Empresa</label><div style="font-weight:700">${esc(d.empresa)}</div></div>
+        <div class="field"><label>Resultado</label><div>${pctTxt} — ${esc(d.tag||'—')}</div></div>
+        <div class="field"><label>Ciência confirmada por</label><div>${esc(d.sigRepresentanteNome||'—')}</div></div>
+        <div class="field"><label>Data da ciência</label><div>${d.sigRepresentanteData ? new Date(d.sigRepresentanteData).toLocaleDateString('pt-BR') : '—'}</div></div>
+      </div>
+      <button class="btn btn-export" style="margin-top:14px" onclick="importarAvaliacaoConcluidaPJ(${esc(JSON.stringify(registro)).replace(/"/g,'&quot;')})">Adicionar ao Meu Painel</button>
+    </div>`;
+}
+
+function importarAvaliacaoConcluidaPJ(registro){
+  const d = registro.dados;
+  const tagHtml = d.tag ? `<span class="classification-tag">${esc(d.tag)}</span>` : '';
+  const lista = carregarHistoricoPJ();
+  lista.unshift({
+    id: Date.now(), salvoEm: new Date().toISOString(),
+    empresa: d.empresa, cnpj: d.cnpj, representante: d.representante,
+    praca: d.praca, setor: d.setor, segmentacao: d.segmentacao,
+    notas: d.notas, nomeAvaliador: d.nomeAvaliador, dataAvaliacao: d.dataAvaliacao,
+    resultadoPct: d.pct!==null ? '('+d.pct.toFixed(0)+'%)' : '',
+    resultadoTag: tagHtml,
+    etapa: 'concluida',
+    sigRepresentanteNome: d.sigRepresentanteNome, sigRepresentanteData: d.sigRepresentanteData
+  });
+  salvarHistoricoPJ(lista);
+  reconstruirPjsDoHistorico();
+  document.getElementById('receb-conteudo').innerHTML = '<div class="card"><h3 style="font-family:\'DM Serif Display\',serif">Avaliação adicionada ao seu painel ✓</h3><p style="color:var(--gray600);font-size:13.5px;margin-top:8px">Você já pode fechar esta janela ou consultá-la pelo Dashboard / Histórico.</p></div>';
+}
+
+reconstruirPjsDoHistorico();
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const colapsado = sb.classList.toggle('collapsed');
+  document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
+  try{ localStorage.setItem('pj_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+}
+function restaurarEstadoSidebar(){
+  let colapsado = false;
+  try{ colapsado = localStorage.getItem('pj_sidebar_colapsada') === '1'; }catch(e){}
+  if(colapsado){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('side-toggle-btn').title = 'Expandir menu';
+  }
+}
+restaurarEstadoSidebar();
+iniciarFluxoRecebimentoPJ();
+window.addEventListener('hashchange', iniciarFluxoRecebimentoPJ);
+
+/* ── AVISO DE SAÍDA COM DADOS NÃO SALVOS ── */
+let houveAlteracaoNaoSalva = false;
+document.getElementById('container-principal').addEventListener('input', () => { houveAlteracaoNaoSalva = true; });
+document.getElementById('container-principal').addEventListener('change', () => { houveAlteracaoNaoSalva = true; });
+window.addEventListener('beforeunload', (e) => {
+  if(!houveAlteracaoNaoSalva) return;
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+</script>
+</body>
+</html>

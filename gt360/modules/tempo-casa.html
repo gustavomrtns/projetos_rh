@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tempo de Casa — Gestão de Talentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;display:flex;flex-direction:column;overflow:hidden}
+.workspace-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.sidebar{width:240px;flex-shrink:0;background:var(--white);border-right:1px solid var(--gray100);display:flex;flex-direction:column;padding:18px 12px;gap:2px;overflow-y:auto;transition:width .2s ease}
+.sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px;gap:8px}
+.sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);padding:6px 12px 10px}
+.side-toggle{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1.5px solid var(--gray100);background:var(--gray50);color:var(--gray400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.side-toggle:hover{border-color:var(--gray400);color:var(--gray800)}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;color:var(--gray600);transition:all .18s;border:2px solid transparent;background:none;text-align:left;width:100%;font-family:'Sora',sans-serif}
+.side-item:hover{background:var(--gray50);color:var(--gray800)}
+.side-item.active{background:var(--gray800);border-color:var(--gray800);color:var(--white)}
+.side-item .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.side-item .dot.d1{background:var(--grad1)}
+.side-item .dot.d2{background:var(--grad2)}
+.side-item .dot.d3{background:var(--grad3)}
+.side-item .dot.d4{background:linear-gradient(160deg,#00c48c,#0099e5)}
+.side-item .nav-badge{margin-left:auto;display:none;align-items:center;justify-content:center}
+.sidebar.collapsed{width:64px}
+.sidebar.collapsed .sidebar-label{display:none}
+.sidebar.collapsed .sidebar-top{justify-content:center}
+.sidebar.collapsed .side-item{justify-content:center;padding:11px 0}
+.sidebar.collapsed .side-item span:not(.dot){display:none}
+.sidebar.collapsed #side-toggle-icon{transform:rotate(180deg)}
+.content{flex:1;position:relative;overflow:hidden;min-width:0}
+.view{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .12s;overflow-y:auto}
+.view.active{opacity:1;pointer-events:auto}
+@media(max-width:700px){
+  .workspace-body{flex-direction:column}
+  .sidebar{width:100%!important;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--gray100);padding:8px 10px}
+  .side-item{flex-shrink:0;white-space:nowrap}
+  .sidebar-label,.sidebar-top{display:none}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+button,input,select,textarea{font-family:'Sora',sans-serif}
+
+/* NAV */
+.nav-band{height:5px;background:var(--gradFull)}
+.topbar{background:var(--white);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;padding:12px 24px;flex-shrink:0;z-index:50;gap:16px}
+.topbar-brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.topbar-logo{width:36px;height:36px;border-radius:10px;background:var(--gradFull);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'DM Serif Display',serif;font-size:14px;flex-shrink:0}
+.topbar-brand h2{font-family:'DM Serif Display',serif;font-size:16px;color:var(--gray800);line-height:1.2}
+.topbar-brand span{font-size:10px;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.topbar-search{position:relative;flex:1;max-width:380px}
+.topbar-search input{width:100%;background:var(--gray50);border:1.5px solid var(--gray100);border-radius:20px;padding:8px 16px;font-size:12.5px;color:var(--gray800);outline:none;transition:.2s}
+.topbar-search input:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.topbar-right{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.notif-link{position:relative;cursor:pointer;font-size:12px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.05em;transition:.2s;padding-right:14px;white-space:nowrap}
+.notif-link:hover{color:var(--gray800)}
+.badge-dot{position:absolute;top:-6px;right:-8px;background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;font-size:9px;font-weight:700;border-radius:10px;padding:1px 5px;min-width:15px;text-align:center;display:none;align-items:center;justify-content:center}
+.badge-dot.show{display:flex}
+.topbar-user{display:flex;align-items:center;gap:9px}
+.topbar-user span{font-size:12.5px;font-weight:700;color:var(--gray800)}
+.mini-avt{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+
+.nav-tabs{background:var(--white);box-shadow:var(--shadow);display:flex;position:sticky;top:60px;z-index:100;border-bottom:2px solid var(--gray100);overflow-x:auto}
+.nav-tab{flex:1;padding:16px 10px;text-align:center;cursor:pointer;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.nav-tab:hover{color:var(--gray600);background:var(--gray50)}
+.nav-tab.active{color:var(--gray800);background:var(--offwhite)}
+.tab-dot{width:8px;height:8px;border-radius:50%;opacity:0;flex-shrink:0;transition:opacity .2s}
+.nav-tab.active .tab-dot{opacity:1}
+.t1{background:var(--grad1)}.t2{background:var(--grad2)}.t3{background:var(--grad3)}
+.nav-badge{background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;font-size:9.5px;font-weight:700;border-radius:10px;padding:1px 6px;display:none;align-items:center;justify-content:center}
+.nav-badge.show{display:flex}
+
+/* PAGE */
+.page{display:none;padding:28px 20px 40px;animation:fadeUp .4s ease both}
+.page.active{display:block}
+.container{max-width:1180px;margin:0 auto}
+
+/* HEADER */
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.header-band{height:6px;background:var(--gradFull)}
+.header-inner{padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.header-title h1{font-family:'DM Serif Display',serif;font-size:23px;color:var(--gray800);margin-bottom:4px}
+.header-title p{font-size:12.5px;color:var(--gray400);font-weight:300}
+
+/* SECTION */
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 4px;justify-content:space-between}
+.section-title{font-size:11.5px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:8px}
+.section-count{background:var(--gray100);color:var(--gray600);font-size:10px;font-weight:700;border-radius:10px;padding:1px 8px}
+
+/* CARD / BUTTONS / FORM (compartilhado) */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+@keyframes gradLoop{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn{padding:10px 22px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-rainbow{background-image:linear-gradient(270deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0,#f7a800);background-size:400% 400%;animation:gradLoop 6s ease infinite;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-rainbow:hover{opacity:.92;transform:translateY(-1px)}
+.btn-sm{padding:7px 14px;font-size:11.5px;border-radius:8px}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
+.st-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--gray50);font-size:11px;font-weight:600;color:var(--gray600);cursor:pointer;transition:all .2s;white-space:nowrap}
+.st-btn:hover{border-color:var(--gray400);color:var(--gray800)}
+.st-btn.on{background:linear-gradient(135deg,#0099e5,#7b2ff7);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,153,229,.3)}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:620px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:26px 28px 28px;position:relative}
+.modal-title{font-family:'DM Serif Display',serif;font-size:19px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:18px}
+.modal-close{position:absolute;top:22px;right:24px;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--gray800)}
+
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.field label{font-size:10.5px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.07em}
+.field-help{font-size:10.5px;color:var(--gray400);margin-top:2px;line-height:1.4}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;resize:vertical;font-family:'Sora',sans-serif}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.mini-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.mini-stat{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;text-align:center}
+.mini-stat b{display:block;font-family:'DM Serif Display',serif;font-size:26px;color:var(--gray800)}
+.mini-stat span{font-size:9.5px;color:var(--gray400);text-transform:uppercase;font-weight:700;letter-spacing:.05em}
+
+/* ===== PAINEL: comemorações de hoje ===== */
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:26px}
+.hero-marco{border-radius:16px;padding:22px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero-marco::before{content:'';position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.14);top:-50px;right:-40px}
+.hero-marco::after{content:'';position:absolute;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.10);bottom:-30px;left:-20px}
+.hero-emoji{font-size:30px;margin-bottom:8px}
+.hero-marco h3{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:2px;position:relative}
+.hero-marco p{font-size:12px;opacity:.92;margin-bottom:14px;position:relative}
+.hero-marco .btn{position:relative}
+
+/* ===== LISTAS DE MARCOS (semana/mês) ===== */
+.marco-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--gray50)}
+.marco-row:last-child{border-bottom:none}
+.marco-tier-chip{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;flex-shrink:0}
+.marco-row h5{font-size:13px;font-weight:700;color:var(--gray800)}
+.marco-row p{font-size:11px;color:var(--gray400);margin-top:1px}
+.marco-when{margin-left:auto;text-align:right;flex-shrink:0}
+.marco-when b{display:block;font-size:12px;color:var(--gray800);font-weight:700}
+.marco-when span{font-size:10px;color:var(--gray400);text-transform:uppercase;letter-spacing:.04em}
+.marco-row .btn-sm{margin-left:10px;flex-shrink:0}
+
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.bar-row:last-child{margin-bottom:0}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:80px;flex-shrink:0}
+.bar-track{flex:1;height:18px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .6s ease;min-width:3%}
+.bar-val{font-size:12px;font-weight:700;color:var(--gray600);width:22px;text-align:right;flex-shrink:0}
+
+/* ===== COLABORADORES ===== */
+.people-filters{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
+.people-filters input,.people-filters select{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none}
+.people-filters select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.people-filters input:focus,.people-filters select:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.person-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;text-align:center;transition:.2s;display:flex;flex-direction:column}
+.person-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.person-avt{width:56px;height:56px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;font-weight:700}
+.person-card h4{font-size:13.5px;font-weight:700;color:var(--gray800)}
+.person-card p{font-size:11px;color:var(--gray400);margin-top:2px}
+.person-tenure{margin:12px 0;padding:10px;background:var(--gray50);border-radius:10px}
+.person-tenure b{display:block;font-family:'DM Serif Display',serif;font-size:16px;color:var(--gray800)}
+.person-tenure span{font-size:9.5px;color:var(--gray400);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.person-next{font-size:10.5px;color:var(--gray600);margin-bottom:12px;min-height:14px}
+.person-next b{color:#0099e5}
+
+/* ===== MODELOS DE CARTÃO ===== */
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tier-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.2s;background:var(--white)}
+.tier-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.tier-cover{height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;position:relative;overflow:hidden}
+.tier-cover .em{font-size:28px}
+.tier-body{padding:14px 16px;text-align:center}
+.tier-body h4{font-size:13.5px;font-weight:700;color:var(--gray800);margin-bottom:2px}
+.tier-body p{font-size:10.5px;color:var(--gray400)}
+.tier-off{opacity:.4;filter:grayscale(.6)}
+
+/* ===== CARTÃO COMEMORATIVO (compartilhável) ===== */
+.celebration-wrap{display:flex;justify-content:center;margin-bottom:18px}
+.celebration-card{width:100%;max-width:420px;aspect-ratio:4/5;border-radius:20px;position:relative;overflow:hidden;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 26px;box-shadow:var(--shadow-lg)}
+.celebration-card .dot{position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+.cc-brand{position:absolute;top:20px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.92}
+.cc-emoji{font-size:44px;margin-bottom:6px}
+.cc-number{font-family:'DM Serif Display',serif;font-size:52px;line-height:1}
+.cc-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px;opacity:.95}
+.cc-name{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:4px}
+.cc-role{font-size:12px;opacity:.9}
+.cc-footer{position:absolute;bottom:18px;left:0;right:0;font-size:9.5px;opacity:.75;letter-spacing:.05em}
+.send-row{display:flex;gap:10px;flex-wrap:wrap}
+.send-row .btn{flex:1;min-width:130px}
+.select-colab{margin-bottom:16px}
+
+/* ===== ENVIOS (histórico) ===== */
+.chips-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--white);font-size:11px;font-weight:700;color:var(--gray600);cursor:pointer;transition:.2s}
+.chip.active{background:var(--grad2);border-color:transparent;color:#fff}
+.log-list{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.log-item{display:flex;gap:13px;padding:15px 20px;border-bottom:1px solid var(--gray50);align-items:center}
+.log-item:last-child{border-bottom:none}
+.log-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;flex-shrink:0}
+.log-item h5{font-size:12.5px;font-weight:700;color:var(--gray800)}
+.log-item p{font-size:11px;color:var(--gray400);margin-top:1px}
+.log-status{margin-left:auto;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.log-status.enviado{background:#e6faf2;color:#00875f}
+.log-status.falhou{background:#ffe9ec;color:#c8003c}
+.log-status.simulado{background:var(--gray100);color:var(--gray600)}
+.empty-state{padding:50px 20px;text-align:center;color:var(--gray400)}
+.empty-state h4{font-family:'DM Serif Display',serif;font-size:16px;color:var(--gray600);margin-bottom:6px}
+.empty-state p{font-size:12px}
+
+/* ===== INTEGRAÇÃO / ADMIN ===== */
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.admin-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.admin-card h3{font-family:'DM Serif Display',serif;font-size:16px;color:var(--gray800);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.admin-card>p.sub{font-size:11.5px;color:var(--gray400);margin-bottom:16px}
+.integ-status{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--gray400);margin-top:2px}
+.integ-dot{width:8px;height:8px;border-radius:50%;background:var(--gray200)}
+.integ-dot.ok{background:#00c48c}
+.integ-dot.err{background:#e0003c}
+.rules-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.rule-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray50)}
+.rule-row:last-child{border-bottom:none}
+.rule-row .marco-tier-chip{width:32px;height:32px;font-size:13px;border-radius:9px}
+.rule-row h5{font-size:12.5px;font-weight:700;color:var(--gray800)}
+.rule-row p{font-size:10.5px;color:var(--gray400)}
+
+@media(max-width:980px){
+  .people-grid,.tier-grid{grid-template-columns:repeat(2,1fr)}
+  .people-filters{grid-template-columns:1fr}
+  .admin-grid{grid-template-columns:1fr}
+  .mini-stat-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .people-grid,.tier-grid{grid-template-columns:1fr}
+  .nav-tab{font-size:9.5px;padding:13px 10px;gap:4px}
+  .topbar-brand span{display:none}
+  .topbar-search{display:none}
+  .field-row{grid-template-columns:1fr}
+  .header-inner{padding:20px}
+  .mini-stat-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+.person-card{position:relative}
+.person-card-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px;opacity:0;transition:opacity .15s;}
+.person-card:hover .person-card-actions{opacity:1}
+.person-card-icon-btn{width:26px;height:26px;border-radius:8px;border:1px solid var(--gray100);background:var(--white);color:var(--gray400);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.person-card-icon-btn:hover{border-color:var(--gray400);color:var(--gray800)}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.import-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1.5px solid var(--gray100);border-radius:10px;margin-bottom:8px;}
+.import-row input[type=checkbox]{width:16px;height:16px;flex-shrink:0}
+.import-row .imp-name{font-weight:700;font-size:13px;color:var(--gray800)}
+.import-row .imp-meta{font-size:11px;color:var(--gray400)}
+.import-empty{text-align:center;color:var(--gray400);padding:24px;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="nav-band"></div>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">TC</div>
+    <div><h2>Tempo de Casa</h2><span>Marcos &amp; Reconhecimento</span></div>
+  </div>
+  <div class="topbar-search">
+    <input type="text" id="busca-global" placeholder="Buscar colaborador por nome, cargo ou unidade..." oninput="onBuscaGlobal()">
+  </div>
+  <div class="topbar-right">
+    <div class="notif-link" onclick="switchTab('painel')">Comemorações hoje<span class="badge-dot" id="badge-hoje">0</span></div>
+    <div class="topbar-user"><div class="mini-avt" style="background:var(--grad3)">U1</div><span>Usuário 1</span></div>
+  </div>
+</div>
+
+<div class="workspace-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Navegação</div>
+      <button class="side-toggle" id="side-toggle-btn" onclick="toggleSidebar()" title="Recolher menu">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="side-toggle-icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+    </div>
+    <nav id="sidebar-nav">
+      <button class="side-item active" id="side-painel" onclick="switchTab('painel')" title="Painel"><span class="dot d1"></span><span>Painel</span></button>
+      <button class="side-item" id="side-colaboradores" onclick="switchTab('colaboradores')" title="Colaboradores"><span class="dot d2"></span><span>Colaboradores</span></button>
+      <button class="side-item" id="side-modelos" onclick="switchTab('modelos')" title="Modelos de Cartão"><span class="dot d3"></span><span>Modelos de Cartão</span></button>
+      <button class="side-item" id="side-envios" onclick="switchTab('envios')" title="Envios"><span class="dot d4"></span><span>Envios</span><span class="nav-badge" id="badge-envios">0</span></button>
+      <button class="side-item" id="side-integracao" onclick="switchTab('integracao')" title="Integração"><span class="dot d2"></span><span>Integração</span></button>
+    </nav>
+  </aside>
+
+  <main class="content" id="content">
+
+<!-- PAGE: PAINEL -->
+<div class="view active" id="page-painel"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Painel de Marcos</h1><p>Acompanhe o tempo de casa dos colaboradores e celebre cada marco na hora certa</p></div>
+    </div>
+  </div>
+
+  <div class="mini-stat-grid" id="painel-stats"></div>
+
+  <div class="section-header"><div class="section-title">Comemorações de hoje</div></div>
+  <div class="hero-grid" id="painel-hoje"></div>
+
+  <div class="section-header"><div class="section-title">Próximos marcos <span class="section-count" id="count-proximos">0</span></div></div>
+  <div class="card" style="padding:6px 6px;margin-bottom:26px" id="painel-proximos"></div>
+
+  <div class="section-header"><div class="section-title">Distribuição por marco atingido</div></div>
+  <div class="card" id="painel-distribuicao"></div>
+
+</div></div>
+
+<!-- PAGE: COLABORADORES -->
+<div class="view" id="page-colaboradores"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Colaboradores</h1><p>Tempo de casa e próximo marco de cada pessoa do grupo</p></div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <button class="btn btn-secondary" onclick="abrirImportOnboarding()">⇩ Importar do Onboarding</button>
+        <button class="btn btn-primary" onclick="abrirModalColab()">+ Adicionar Colaborador</button>
+      </div>
+    </div>
+  </div>
+  <div class="people-filters">
+    <input type="text" id="filtro-nome" placeholder="Buscar por nome ou cargo..." oninput="renderColaboradores()">
+    <select id="filtro-unidade" onchange="renderColaboradores()"><option value="">Todas as unidades</option></select>
+    <select id="filtro-marco" onchange="renderColaboradores()">
+      <option value="">Qualquer marco</option>
+      <option value="hoje">Comemora hoje</option>
+      <option value="semana">Marco em 7 dias</option>
+      <option value="mes">Marco em 30 dias</option>
+    </select>
+  </div>
+  <div class="people-grid" id="people-grid"></div>
+</div></div>
+
+<!-- PAGE: MODELOS -->
+<div class="view" id="page-modelos"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Modelos de Cartão</h1><p>Cada marco de tempo de casa tem um cartão comemorativo próprio — clique para ver um exemplo e enviar</p></div>
+    </div>
+  </div>
+  <div class="tier-grid" id="tier-grid"></div>
+</div></div>
+
+<!-- PAGE: ENVIOS -->
+<div class="view" id="page-envios"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Histórico de Envios</h1><p>Registro de todos os cartões comemorativos compartilhados por e-mail ou telefone</p></div>
+    </div>
+  </div>
+  <div class="chips-row" id="envios-chips"></div>
+  <div id="envios-lista"></div>
+</div></div>
+
+<!-- PAGE: INTEGRAÇÃO -->
+<div class="view" id="page-integracao"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Integração</h1><p>Configure os endpoints que recebem os cartões para disparo por e-mail e telefone</p></div>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+    <div class="admin-card">
+      <h3>E-mail</h3>
+      <p class="sub">Conecte um webhook (Zapier, Make, SendGrid, ou seu próprio backend) que recebe o payload do cartão e dispara o e-mail.</p>
+      <div class="field"><label>Nome do remetente</label><input type="text" id="cfg-email-remetente" placeholder="Empresa — Pessoas &amp; Cultura"></div>
+      <div class="field"><label>Endpoint / Webhook da API de e-mail</label><input type="url" id="cfg-email-webhook" placeholder="https://sua-automacao.com/webhook/email"></div>
+      <div class="field"><label>Assunto padrão</label><input type="text" id="cfg-email-assunto" placeholder="Parabéns pelo seu marco na empresa!"></div>
+      <button class="btn btn-secondary btn-block" onclick="testarIntegracao('email')">Testar integração</button>
+      <div class="integ-status" id="status-email"><span class="integ-dot" id="dot-email"></span><span id="txt-email">Não testado ainda</span></div>
+    </div>
+    <div class="admin-card">
+      <h3>Telefone / WhatsApp</h3>
+      <p class="sub">Conecte a API de WhatsApp Business ou de SMS (Twilio, Z-API, etc.) que vai receber o payload e enviar a mensagem.</p>
+      <div class="field"><label>Canal</label>
+        <select id="cfg-tel-canal"><option value="WhatsApp">WhatsApp Business API</option><option value="SMS">SMS</option></select>
+      </div>
+      <div class="field"><label>Endpoint / Webhook da API de telefone</label><input type="url" id="cfg-tel-webhook" placeholder="https://sua-automacao.com/webhook/telefone"></div>
+      <div class="field"><label>Modelo de mensagem</label><textarea id="cfg-tel-modelo" rows="3" placeholder="Parabéns, {{nome}}! Hoje você completa {{marco}} de casa ">Parabéns, {{nome}}! Hoje você completa {{marco}} de casa </textarea></div>
+      <button class="btn btn-secondary btn-block" onclick="testarIntegracao('telefone')">Testar integração</button>
+      <div class="integ-status" id="status-telefone"><span class="integ-dot" id="dot-telefone"></span><span id="txt-telefone">Não testado ainda</span></div>
+    </div>
+  </div>
+
+  <div class="rules-card">
+    <h3 style="font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:4px">Marcos monitorados</h3>
+    <p class="sub" style="font-size:11.5px;color:var(--gray400);margin-bottom:14px">Desative um marco para que ele pare de gerar comemorações e cartões automaticamente</p>
+    <div id="regras-lista"></div>
+  </div>
+</div></div>
+
+  </main>
+</div>
+
+<!-- MODAL: CARTÃO -->
+<div class="modal-bg" id="modal-cartao">
+  <div class="modal">
+    <div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharModal()">&times;</button>
+      <div class="modal-title">Cartão comemorativo</div>
+      <div class="modal-sub" id="modal-sub-texto">Pré-visualize e compartilhe o marco de tempo de casa</div>
+
+      <select class="field select-colab" id="modal-colab-select" onchange="onTrocarColabModal()"></select>
+
+      <div class="celebration-wrap"><div id="celebration-canvas"></div></div>
+
+      <div class="field"><label>Enviar para</label>
+        <div class="field-row">
+          <input type="email" id="envio-email-destino" placeholder="e-mail do colaborador">
+          <input type="tel" id="envio-tel-destino" placeholder="telefone do colaborador">
+        </div>
+      </div>
+
+      <div class="send-row">
+        <button class="btn btn-primary" onclick="enviarCartao('email')">Enviar por e-mail</button>
+        <button class="btn btn-primary" onclick="enviarCartao('telefone')">Enviar por telefone</button>
+        <button class="btn btn-secondary" onclick="baixarCartao()">Baixar imagem</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-colab-form">
+  <div class="modal">
+    <div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharModalColab()">&times;</button>
+      <div class="modal-title" id="modal-colab-form-title">Adicionar Colaborador</div>
+      <div class="modal-sub">Preencha os dados para acompanhar o tempo de casa desta pessoa</div>
+      <input type="hidden" id="colab-form-id">
+      <div class="field"><label>Nome completo</label><input type="text" id="colab-form-nome" placeholder="Nome completo"></div>
+      <div class="form-grid-2">
+        <div class="field"><label>Cargo</label><input type="text" id="colab-form-cargo" placeholder="Cargo"></div>
+        <div class="field"><label>Setor</label><input type="text" id="colab-form-setor" placeholder="Setor"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="field"><label>Unidade</label><input type="text" id="colab-form-unidade" list="lista-unidades-colab" placeholder="Unidade"><datalist id="lista-unidades-colab"></datalist></div>
+        <div class="field"><label>Data de admissão</label><input type="date" id="colab-form-admissao"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="field"><label>E-mail</label><input type="email" id="colab-form-email" placeholder="nome@empresa.com"></div>
+        <div class="field"><label>Telefone</label><input type="text" id="colab-form-telefone" placeholder="+55 00 00000-0000"></div>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="salvarColab()">Salvar Colaborador</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-import-onboarding">
+  <div class="modal">
+    <div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharImportOnboarding()">&times;</button>
+      <div class="modal-title">Importar do Onboarding</div>
+      <div class="modal-sub">Colaboradores cadastrados no Fluxo de Onboarding que ainda não estão aqui</div>
+      <div id="import-onboarding-lista"></div>
+      <button class="btn btn-primary btn-block" style="margin-top:14px" onclick="confirmarImportOnboarding()">Importar Selecionados</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+/* ═══════════ INÍCIO core.js (biblioteca compartilhada GT360) ═══════════ */
+/* ══════════════ GT360 CORE — biblioteca compartilhada ══════════════
+   Fonte única destas funções. Qualquer correção/alteração deve ser
+   feita AQUI e reaplicada aos módulos — nunca editar as cópias
+   coladas em cada módulo individualmente. */
+
+/* Escapa texto para uso seguro dentro de innerHTML. */
+function esc(str){
+  return (str==null?'':String(str)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Transferência de estado via link (sem backend) ──
+   O estado de um registro (avaliação, etc.) viaja dentro da própria
+   URL — quem recebe o link abre o módulo já carregado na etapa certa.
+   Quando houver backend, este é o ponto de troca: substituir
+   codificarEstado/decodificarEstado e o mailto por chamadas reais de
+   API — o restante do fluxo (etapas, telas) não precisa mudar. */
+function codificarEstado(obj){
+  const json = JSON.stringify(obj);
+  const utf8 = unescape(encodeURIComponent(json));
+  const b64 = btoa(utf8);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodificarEstado(str){
+  let b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length % 4) b64 += '=';
+  const utf8 = atob(b64);
+  return JSON.parse(decodeURIComponent(escape(utf8)));
+}
+function gerarLinkTransferencia(registro){
+  // Dentro do workspace GT360, este módulo roda num iframe carregado via
+  // srcdoc — location.href aponta para "about:srcdoc", que não é um
+  // endereço utilizável fora daquela sessão. Quando embutido, o link
+  // precisa apontar para a página de nível mais alto (o próprio
+  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
+  // o shell é responsável por ler esse link e abrir o módulo certo.
+  let base;
+  try{
+    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
+  }catch(e){
+    base = location.href.split('#')[0];
+  }
+  return base + '#av=' + codificarEstado(registro);
+}
+function gerarMailtoLink(destinatario, assunto, corpo){
+  return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+}
+function verificarLinkRecebido(){
+  // Quando o shell do GT360 identifica um link de convite/retorno, ele
+  // injeta o registro já decodificado nesta variável antes de carregar o
+  // módulo (mais confiável do que tentar setar o hash de um documento
+  // srcdoc depois que ele já carregou). Fora do shell (uso direto do
+  // arquivo do módulo, ou abertura standalone), cai no hash normal.
+  if(window.__conviteRecebidoDireto) return window.__conviteRecebidoDireto;
+  const hash = location.hash;
+  if(hash.indexOf('#av=') === 0){
+    try{ return decodificarEstado(hash.slice(4)); }catch(e){ console.warn('Link de transferência inválido ou corrompido', e); return null; }
+  }
+  return null;
+}
+/* ═══════════ FIM core.js ═══════════ */
+
+/* ================= CONFIG DE MARCOS ================= */
+const MARCOS=[
+  {dias:182, label:'6 meses', num:'6', suf:'MESES', emoji:'', grad:'linear-gradient(160deg,#00e5a0,#0099e5)'},
+  {dias:365, label:'1 ano',   num:'1', suf:'ANO',    emoji:'', grad:'linear-gradient(160deg,#0099e5,#7b2ff7)'},
+  {dias:730, label:'2 anos',  num:'2', suf:'ANOS',   emoji:'', grad:'linear-gradient(160deg,#7b2ff7,#e0009e)'},
+  {dias:1095,label:'3 anos',  num:'3', suf:'ANOS',   emoji:'', grad:'linear-gradient(160deg,#e0009e,#ff4e00)'},
+  {dias:1825,label:'5 anos',  num:'5', suf:'ANOS',   emoji:'', grad:'linear-gradient(160deg,#ff4e00,#f7a800)'},
+  {dias:3650,label:'10 anos', num:'10',suf:'ANOS',   emoji:'', grad:'linear-gradient(135deg,#f7a800,#7b2ff7)'},
+  {dias:5475,label:'15 anos', num:'15',suf:'ANOS',   emoji:'', grad:'linear-gradient(135deg,#0099e5,#f7a800)'},
+  {dias:7300,label:'20 anos', num:'20',suf:'ANOS',   emoji:'', grad:'var(--gradFull)'},
+];
+
+const AVA_COLORS=[
+  'linear-gradient(135deg,#0099e5,#00e5a0)','linear-gradient(135deg,#f7a800,#ff4e00)',
+  'linear-gradient(135deg,#7b2ff7,#e0009e)','linear-gradient(135deg,#00c48c,#00e5a0)',
+  'linear-gradient(135deg,#ff4e6a,#e0003c)','linear-gradient(135deg,#9098b0,#5a6278)',
+  'linear-gradient(135deg,#0099e5,#7b2ff7)','linear-gradient(135deg,#ff9500,#ff4e6a)',
+  'linear-gradient(135deg,#00e5a0,#0099e5)'
+];
+
+const STORE_KEY='tempoDeCasaDB_v1';
+let DB=null;
+let STATE={ tabAtiva:'painel', envioFiltro:{canal:'',status:''}, modalColabId:null };
+
+function iniciais(nome){ return nome.split(' ').filter(Boolean).slice(0,2).map(p=>p[0]).join('').toUpperCase(); }
+function diasDesde(iso){ return Math.floor((Date.now()-new Date(iso).getTime())/86400000); }
+function isoDiasAtras(d){ return new Date(Date.now()-d*86400000).toISOString(); }
+
+function seedDB(){
+  const colaboradores=[];
+
+  const marcosConfig={};
+  MARCOS.forEach(m=>marcosConfig[m.dias]=true);
+
+  return {
+    colaboradores,
+    marcosConfig,
+    envios:[],
+    integracoes:{
+      email:{remetente:'Empresa — Pessoas & Cultura',webhook:'',assunto:'Parabéns pelo seu marco na empresa!',ultimoTeste:null},
+      telefone:{canal:'WhatsApp',webhook:'',modelo:'Parabéns, {{nome}}! Hoje você completa {{marco}} de casa ',ultimoTeste:null}
+    }
+  };
+}
+
+function load(){
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    if(raw){ DB=JSON.parse(raw); return; }
+  }catch(e){ console.warn(e); }
+  DB=seedDB();
+  save();
+}
+function save(){ try{ localStorage.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ console.warn(e); } }
+
+
+/* ================= CÁLCULO DE TEMPO DE CASA ================= */
+function marcosAtivos(){ return MARCOS.filter(m=>DB.marcosConfig[m.dias]!==false); }
+
+function calcTempo(colab){
+  const dias=diasDesde(colab.admissao);
+  const ativos=marcosAtivos();
+  let atual=null, proximo=null;
+  for(const m of ativos){
+    if(dias>=m.dias) atual=m;
+    if(dias<m.dias && !proximo) proximo=m;
+  }
+  const diasDesdeUltimo = atual ? dias-atual.dias : null;
+  const diasParaProximo = proximo ? proximo.dias-dias : null;
+  let status='geral';
+  if(atual && diasDesdeUltimo===0) status='hoje';
+  else if(atual && diasDesdeUltimo<=7) status='recente';
+  else if(proximo && diasParaProximo<=7) status='semana';
+  else if(proximo && diasParaProximo<=30) status='mes';
+  return {dias,atual,proximo,diasDesdeUltimo,diasParaProximo,status};
+}
+
+function formatTempo(dias){
+  const anos=Math.floor(dias/365);
+  const restoDias=dias%365;
+  const meses=Math.floor(restoDias/30.44);
+  if(anos>0 && meses>0) return anos+' ano'+(anos>1?'s':'')+' e '+meses+' mês'+(meses>1?'es':'');
+  if(anos>0) return anos+' ano'+(anos>1?'s':'');
+  if(meses>0) return meses+' mês'+(meses>1?'es':'')+' e '+(restoDias%30)+' dias';
+  return dias+' dias';
+}
+
+function getColab(id){ return DB.colaboradores.find(c=>c.id===id); }
+function getMarcoByDias(dias){ return MARCOS.find(m=>m.dias===Number(dias)); }
+
+/* ================= TABS ================= */
+function switchTab(nome){
+  STATE.tabAtiva=nome;
+  document.querySelectorAll('.view').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.side-item').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+nome).classList.add('active');
+  document.getElementById('side-'+nome).classList.add('active');
+  document.getElementById('content').scrollTop = 0;
+  refreshAll();
+}
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const colapsado = sb.classList.toggle('collapsed');
+  document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
+  try{ localStorage.setItem('tc_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+}
+function restaurarEstadoSidebar(){
+  let colapsado = false;
+  try{ colapsado = localStorage.getItem('tc_sidebar_colapsada') === '1'; }catch(e){}
+  if(colapsado){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('side-toggle-btn').title = 'Expandir menu';
+  }
+}
+restaurarEstadoSidebar();
+
+function onBuscaGlobal(){
+  const v=document.getElementById('busca-global').value;
+  document.getElementById('filtro-nome').value=v;
+  if(STATE.tabAtiva!=='colaboradores') switchTab('colaboradores');
+  else renderColaboradores();
+}
+
+/* ================= RENDER: PAINEL ================= */
+function renderPainel(){
+  const calcs=DB.colaboradores.map(c=>({colab:c,calc:calcTempo(c)}));
+
+  const hoje=calcs.filter(x=>x.calc.status==='hoje');
+  const recentes=calcs.filter(x=>x.calc.status==='recente');
+  const semana=calcs.filter(x=>x.calc.status==='semana');
+  const mes=calcs.filter(x=>x.calc.status==='mes');
+
+  document.getElementById('badge-hoje').classList.toggle('show',hoje.length>0);
+  document.getElementById('badge-hoje').textContent=hoje.length;
+
+  document.getElementById('painel-stats').innerHTML=`
+    <div class="mini-stat"><b>${hoje.length}</b><span>Comemoram hoje</span></div>
+    <div class="mini-stat"><b>${semana.length}</b><span>Marco em 7 dias</span></div>
+    <div class="mini-stat"><b>${mes.length}</b><span>Marco em 30 dias</span></div>
+    <div class="mini-stat"><b>${DB.envios.length}</b><span>Cartões enviados</span></div>`;
+
+  document.getElementById('painel-hoje').innerHTML = hoje.length ? hoje.map(x=>`
+    <div class="hero-marco" style="background:${x.calc.atual.grad}">
+      <div class="hero-emoji">${x.calc.atual.emoji}</div>
+      <h3>${x.colab.nome}</h3>
+      <p>Completa hoje ${x.calc.atual.label} de ${x.colab.unidade}</p>
+      <button class="btn btn-secondary" style="background:rgba(255,255,255,.92)" onclick="abrirCartao('${x.colab.id}',${x.calc.atual.dias})">Ver cartão comemorativo</button>
+    </div>`).join('') : `<div class="card empty-state" style="grid-column:1/-1"><h4>Nenhum marco hoje</h4><p>Ninguém completa um marco de tempo de casa hoje. Confira os próximos abaixo.</p></div>`;
+
+  const proximosLista=[...recentes.map(x=>({...x,tipo:'recente'})),...semana.map(x=>({...x,tipo:'semana'})),...mes.map(x=>({...x,tipo:'mes'}))]
+    .sort((a,b)=>(a.calc.diasParaProximo??-1)-(b.calc.diasParaProximo??-1));
+
+  document.getElementById('count-proximos').textContent=proximosLista.length;
+  document.getElementById('painel-proximos').innerHTML = proximosLista.length ? proximosLista.map(x=>{
+    if(x.tipo==='recente'){
+      return `<div class="marco-row">
+        <div class="marco-tier-chip" style="background:${x.calc.atual.grad}">${x.calc.atual.emoji}</div>
+        <div><h5>${x.colab.nome}</h5><p>Completou ${x.calc.atual.label} há ${x.calc.diasDesdeUltimo} dia${x.calc.diasDesdeUltimo===1?'':'s'}</p></div>
+        <div class="marco-when"><b>Recente</b><span>${x.colab.unidade}</span></div>
+        <button class="btn btn-sm btn-secondary" onclick="abrirCartao('${x.colab.id}',${x.calc.atual.dias})">Cartão</button>
+      </div>`;
+    }
+    return `<div class="marco-row">
+      <div class="marco-tier-chip" style="background:${x.calc.proximo.grad}">${x.calc.proximo.emoji}</div>
+      <div><h5>${x.colab.nome}</h5><p>Completa ${x.calc.proximo.label} em ${x.calc.diasParaProximo} dia${x.calc.diasParaProximo===1?'':'s'}</p></div>
+      <div class="marco-when"><b>${x.calc.diasParaProximo}d</b><span>${x.colab.unidade}</span></div>
+      <button class="btn btn-sm btn-secondary" onclick="abrirCartao('${x.colab.id}',${x.calc.proximo.dias})">Cartão</button>
+    </div>`;
+  }).join('') : `<div class="empty-state"><h4>Nenhum marco nos próximos 30 dias</h4><p>A lista volta a aparecer conforme os colaboradores se aproximam de um marco monitorado.</p></div>`;
+
+  const dist=marcosAtivos().map(m=>({m,total:calcs.filter(x=>x.calc.atual&&x.calc.atual.dias===m.dias).length}));
+  const max=Math.max(1,...dist.map(d=>d.total));
+  document.getElementById('painel-distribuicao').innerHTML=dist.map(d=>`
+    <div class="bar-row"><div class="bar-lbl">${d.m.label}</div><div class="bar-track"><div class="bar-fill" style="width:${(d.total/max*100)}%;background:${d.m.grad}"></div></div><div class="bar-val">${d.total}</div></div>`).join('');
+}
+
+/* ================= RENDER: COLABORADORES ================= */
+
+/* ================= CRUD: COLABORADORES ================= */
+function abrirModalColab(id){
+  document.getElementById('colab-form-id').value = id || '';
+  const unidadesExistentes = [...new Set(DB.colaboradores.map(c=>c.unidade).filter(Boolean))];
+  document.getElementById('lista-unidades-colab').innerHTML = unidadesExistentes.map(u=>`<option value="${esc(u)}">`).join('');
+  if(id){
+    const c = getColab(id);
+    document.getElementById('modal-colab-form-title').textContent = 'Editar Colaborador';
+    document.getElementById('colab-form-nome').value = c.nome||'';
+    document.getElementById('colab-form-cargo').value = c.cargo||'';
+    document.getElementById('colab-form-setor').value = c.setor||'';
+    document.getElementById('colab-form-unidade').value = c.unidade||'';
+    document.getElementById('colab-form-admissao').value = (c.admissao||'').slice(0,10);
+    document.getElementById('colab-form-email').value = c.email||'';
+    document.getElementById('colab-form-telefone').value = c.telefone||'';
+  }else{
+    document.getElementById('modal-colab-form-title').textContent = 'Adicionar Colaborador';
+    ['colab-form-nome','colab-form-cargo','colab-form-setor','colab-form-unidade','colab-form-admissao','colab-form-email','colab-form-telefone'].forEach(fid=>document.getElementById(fid).value='');
+  }
+  document.getElementById('modal-colab-form').classList.add('open');
+}
+function fecharModalColab(){ document.getElementById('modal-colab-form').classList.remove('open'); }
+
+function salvarColab(){
+  const nome = document.getElementById('colab-form-nome').value.trim();
+  if(!nome){ showToast('Informe o nome do colaborador'); return; }
+  const id = document.getElementById('colab-form-id').value;
+  const admissaoInput = document.getElementById('colab-form-admissao').value;
+  const dados = {
+    nome,
+    cargo: document.getElementById('colab-form-cargo').value.trim(),
+    setor: document.getElementById('colab-form-setor').value.trim(),
+    unidade: document.getElementById('colab-form-unidade').value.trim(),
+    admissao: admissaoInput ? new Date(admissaoInput+'T12:00:00').toISOString() : new Date().toISOString(),
+    email: document.getElementById('colab-form-email').value.trim(),
+    telefone: document.getElementById('colab-form-telefone').value.trim()
+  };
+  if(id){
+    const c = getColab(id);
+    Object.assign(c, dados);
+  }else{
+    dados.id = 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    dados.avt = AVA_COLORS[DB.colaboradores.length % AVA_COLORS.length];
+    DB.colaboradores.push(dados);
+  }
+  save();
+  fecharModalColab();
+  popularFiltroUnidade();
+  renderColaboradores();
+  showToast(id ? 'Colaborador atualizado' : 'Colaborador adicionado');
+}
+
+function excluirColab(id){
+  const c = getColab(id);
+  if(!c) return;
+  if(!confirm('Remover '+c.nome+' da base de colaboradores?')) return;
+  DB.colaboradores = DB.colaboradores.filter(x=>x.id!==id);
+  save();
+  popularFiltroUnidade();
+  renderColaboradores();
+  showToast('Colaborador removido');
+}
+
+/* ================= IMPORTAR DO ONBOARDING ================= */
+function lerOnboardingColaboradores(){
+  try{ return JSON.parse(localStorage.getItem('onb_colaboradores')||'[]'); }catch(e){ return []; }
+}
+function abrirImportOnboarding(){
+  const doOnboarding = lerOnboardingColaboradores();
+  const nomesExistentes = new Set(DB.colaboradores.map(c=>c.nome.toLowerCase()));
+  const candidatos = doOnboarding.filter(c=>c.colaborador && !nomesExistentes.has(c.colaborador.toLowerCase()));
+  const el = document.getElementById('import-onboarding-lista');
+  if(!candidatos.length){
+    el.innerHTML = '<div class="import-empty">Nenhum colaborador novo encontrado no Onboarding — todos já estão cadastrados aqui, ou o Onboarding ainda não tem registros.</div>';
+  }else{
+    el.innerHTML = candidatos.map((c,i)=>`
+      <label class="import-row">
+        <input type="checkbox" checked data-idx="${i}">
+        <div><div class="imp-name">${esc(c.colaborador)}</div><div class="imp-meta">${esc(c.cargo||'—')} · ${esc(unidadeLabelSimples(c.unidade))}</div></div>
+      </label>`).join('');
+  }
+  window._importCandidatos = candidatos;
+  document.getElementById('modal-import-onboarding').classList.add('open');
+}
+function unidadeLabelSimples(v){ return v||'—'; }
+function fecharImportOnboarding(){ document.getElementById('modal-import-onboarding').classList.remove('open'); }
+function confirmarImportOnboarding(){
+  const candidatos = window._importCandidatos||[];
+  const marcados = Array.from(document.querySelectorAll('#import-onboarding-lista input[type=checkbox]:checked')).map(chk=>candidatos[+chk.dataset.idx]);
+  if(!marcados.length){ fecharImportOnboarding(); return; }
+  marcados.forEach(c=>{
+    const contato = (c.contato||'').trim();
+    const isEmail = contato.includes('@');
+    DB.colaboradores.push({
+      id: 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+      nome: c.colaborador,
+      cargo: c.cargo||'',
+      setor: c.setor||'',
+      unidade: c.unidade||'',
+      admissao: c.datainicio ? new Date(c.datainicio+'T12:00:00').toISOString() : new Date().toISOString(),
+      email: isEmail ? contato : '',
+      telefone: !isEmail ? contato : '',
+      avt: AVA_COLORS[DB.colaboradores.length % AVA_COLORS.length]
+    });
+  });
+  save();
+  fecharImportOnboarding();
+  popularFiltroUnidade();
+  renderColaboradores();
+  showToast(marcados.length+' colaborador(es) importado(s) do Onboarding');
+}
+
+function popularFiltroUnidade(){
+  const sel=document.getElementById('filtro-unidade');
+  const unidades=[...new Set(DB.colaboradores.map(c=>c.unidade))].sort();
+  sel.innerHTML='<option value="">Todas as unidades</option>'+unidades.map(u=>`<option value="${u}">${u}</option>`).join('');
+}
+
+function renderColaboradores(){
+  const termo=(document.getElementById('filtro-nome').value||'').toLowerCase();
+  const unidade=document.getElementById('filtro-unidade').value;
+  const marcoFiltro=document.getElementById('filtro-marco').value;
+
+  let lista=DB.colaboradores.map(c=>({colab:c,calc:calcTempo(c)}));
+  if(termo) lista=lista.filter(x=>x.colab.nome.toLowerCase().includes(termo)||x.colab.cargo.toLowerCase().includes(termo));
+  if(unidade) lista=lista.filter(x=>x.colab.unidade===unidade);
+  if(marcoFiltro) lista=lista.filter(x=>x.calc.status===marcoFiltro);
+
+  document.getElementById('people-grid').innerHTML = lista.length ? lista.map(x=>{
+    const c=x.colab, k=x.calc;
+    let nextTxt='Sem marco monitorado próximo';
+    if(k.status==='hoje') nextTxt=`<b>Completa ${k.atual.label} hoje </b>`;
+    else if(k.proximo) nextTxt=`Próximo marco: <b>${k.proximo.label}</b> em ${k.diasParaProximo}d`;
+    return `<div class="person-card">
+      <div class="person-card-actions">
+        <button class="person-card-icon-btn" title="Editar" onclick="abrirModalColab('${c.id}')">✎</button>
+        <button class="person-card-icon-btn" title="Excluir" onclick="excluirColab('${c.id}')">✕</button>
+      </div>
+      <div class="person-avt" style="background:${c.avt}">${iniciais(c.nome)}</div>
+      <h4>${c.nome}</h4>
+      <p>${c.cargo} · ${c.unidade}</p>
+      <div class="person-tenure"><b>${formatTempo(k.dias)}</b><span>de casa</span></div>
+      <div class="person-next">${nextTxt}</div>
+      <button class="btn btn-sm btn-secondary btn-block" onclick="abrirCartao('${c.id}',${k.atual?k.atual.dias:(k.proximo?k.proximo.dias:MARCOS[0].dias)})">Ver cartão</button>
+    </div>`;
+  }).join('') : (DB.colaboradores.length===0
+      ? `<div class="card empty-state" style="grid-column:1/-1"><h4>Nenhum colaborador cadastrado ainda</h4><p>Adicione o primeiro colaborador ou importe do Onboarding.</p><button class="btn btn-primary" style="margin-top:12px" onclick="abrirModalColab()">+ Adicionar Colaborador</button></div>`
+      : `<div class="card empty-state" style="grid-column:1/-1"><h4>Nenhum colaborador encontrado</h4><p>Ajuste os filtros de busca acima.</p></div>`);
+}
+
+/* ================= RENDER: MODELOS ================= */
+function renderModelos(){
+  document.getElementById('tier-grid').innerHTML = MARCOS.map(m=>{
+    const ativo=DB.marcosConfig[m.dias]!==false;
+    const qtd=DB.colaboradores.filter(c=>calcTempo(c).atual&&calcTempo(c).atual.dias===m.dias).length;
+    return `<div class="tier-card ${ativo?'':'tier-off'}" onclick="abrirCartaoPorMarco(${m.dias})">
+      <div class="tier-cover" style="background:${m.grad}"><span class="em">${m.emoji}</span></div>
+      <div class="tier-body"><h4>${m.label}</h4><p>${ativo?(qtd+' colaborador'+(qtd===1?'':'es')+' já atingiram'):'Marco desativado'}</p></div>
+    </div>`;
+  }).join('');
+}
+function abrirCartaoPorMarco(diasMarco){
+  const candidato=DB.colaboradores.find(c=>calcTempo(c).atual&&calcTempo(c).atual.dias===diasMarco) || DB.colaboradores[0];
+  abrirCartao(candidato.id,diasMarco);
+}
+
+/* ================= RENDER: ENVIOS ================= */
+function renderEnviosChips(){
+  const canais=['','email','telefone'];
+  const statuses=['','enviado','falhou','simulado'];
+  document.getElementById('envios-chips').innerHTML =
+    canais.map(c=>`<div class="chip ${STATE.envioFiltro.canal===c?'active':''}" onclick="setEnvioFiltro('canal','${c}')">${c===''?'Todos os canais':(c==='email'?'E-mail':'Telefone')}</div>`).join('')
+    + statuses.map(s=>`<div class="chip ${STATE.envioFiltro.status===s?'active':''}" onclick="setEnvioFiltro('status','${s}')">${s===''?'Todos os status':s.charAt(0).toUpperCase()+s.slice(1)}</div>`).join('');
+}
+function setEnvioFiltro(campo,valor){ STATE.envioFiltro[campo]=valor; renderEnvios(); }
+
+function renderEnvios(){
+  renderEnviosChips();
+  document.getElementById('badge-envios').textContent=DB.envios.length;
+  document.getElementById('badge-envios').classList.toggle('show',DB.envios.length>0);
+
+  let lista=[...DB.envios].reverse();
+  if(STATE.envioFiltro.canal) lista=lista.filter(e=>e.canal===STATE.envioFiltro.canal);
+  if(STATE.envioFiltro.status) lista=lista.filter(e=>e.status===STATE.envioFiltro.status);
+
+  if(!lista.length){
+    document.getElementById('envios-lista').innerHTML=`<div class="log-list"><div class="empty-state"><h4>Nenhum envio registrado</h4><p>Envie um cartão comemorativo a partir do Painel, de Colaboradores ou de Modelos de Cartão.</p></div></div>`;
+    return;
+  }
+  document.getElementById('envios-lista').innerHTML=`<div class="log-list">`+lista.map(e=>{
+    const m=getMarcoByDias(e.marcoDias);
+    const icon=e.canal==='email'?'':'';
+    return `<div class="log-item">
+      <div class="log-icon" style="background:${m?m.grad:'var(--grad2)'}">${icon}</div>
+      <div><h5>${esc(e.colabNome)} — ${m?m.label:''}</h5><p>Para ${esc(e.destino)} · ${new Date(e.data).toLocaleString('pt-BR')}</p></div>
+      <div class="log-status ${e.status}">${e.status}</div>
+    </div>`;
+  }).join('')+`</div>`;
+}
+
+/* ================= RENDER: INTEGRAÇÃO ================= */
+function renderIntegracao(){
+  document.getElementById('cfg-email-remetente').value=DB.integracoes.email.remetente;
+  document.getElementById('cfg-email-webhook').value=DB.integracoes.email.webhook;
+  document.getElementById('cfg-email-assunto').value=DB.integracoes.email.assunto;
+  document.getElementById('cfg-tel-canal').value=DB.integracoes.telefone.canal;
+  document.getElementById('cfg-tel-webhook').value=DB.integracoes.telefone.webhook;
+  document.getElementById('cfg-tel-modelo').value=DB.integracoes.telefone.modelo;
+
+  ['email','telefone'].forEach(tipo=>{
+    const t=DB.integracoes[tipo].ultimoTeste;
+    const dot=document.getElementById('dot-'+tipo), txt=document.getElementById('txt-'+tipo);
+    dot.className='integ-dot'+(t?(t.ok?' ok':' err'):'');
+    txt.textContent = t ? (t.ok?('Testado com sucesso em '+new Date(t.data).toLocaleString('pt-BR')) : ('Falha no teste em '+new Date(t.data).toLocaleString('pt-BR'))) : 'Não testado ainda';
+  });
+
+  document.getElementById('regras-lista').innerHTML = MARCOS.map(m=>{
+    const ativo=DB.marcosConfig[m.dias]!==false;
+    return `<div class="rule-row">
+      <div class="marco-tier-chip" style="background:${m.grad}">${m.emoji}</div>
+      <div style="flex:1"><h5>${m.label}</h5><p>${ativo?'Monitorado — gera comemorações automaticamente':'Desativado — não aparece no Painel'}</p></div>
+      <button class="st-btn ${ativo?'on':''}" onclick="toggleMarco(${m.dias})">${ativo?'Ativo':'Inativo'}</button>
+    </div>`;
+  }).join('');
+}
+function toggleMarco(dias){
+  DB.marcosConfig[dias]=!(DB.marcosConfig[dias]!==false);
+  save(); refreshAll();
+  showToast('Marco de '+getMarcoByDias(dias).label+' '+(DB.marcosConfig[dias]?'ativado':'desativado'));
+}
+
+/* salvar campos de integração ao sair do campo */
+function bindIntegracaoInputs(){
+  document.getElementById('cfg-email-remetente').addEventListener('change',e=>{DB.integracoes.email.remetente=e.target.value;save();});
+  document.getElementById('cfg-email-webhook').addEventListener('change',e=>{DB.integracoes.email.webhook=e.target.value;save();});
+  document.getElementById('cfg-email-assunto').addEventListener('change',e=>{DB.integracoes.email.assunto=e.target.value;save();});
+  document.getElementById('cfg-tel-canal').addEventListener('change',e=>{DB.integracoes.telefone.canal=e.target.value;save();});
+  document.getElementById('cfg-tel-webhook').addEventListener('change',e=>{DB.integracoes.telefone.webhook=e.target.value;save();});
+  document.getElementById('cfg-tel-modelo').addEventListener('change',e=>{DB.integracoes.telefone.modelo=e.target.value;save();});
+}
+
+async function testarIntegracao(tipo){
+  const url = tipo==='email' ? document.getElementById('cfg-email-webhook').value.trim() : document.getElementById('cfg-tel-webhook').value.trim();
+  if(!url){ showToast('Informe o endpoint antes de testar'); return; }
+  const payload={ tipo:'teste', origem:'Tempo de Casa', timestamp:new Date().toISOString() };
+  let ok=true;
+  try{
+    await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  }catch(e){ ok=false; }
+  DB.integracoes[tipo].ultimoTeste={ok,data:new Date().toISOString()};
+  save(); renderIntegracao();
+  showToast(ok ? 'Requisição de teste enviada — confirme o recebimento na sua automação' : 'Não foi possível contatar o endpoint informado');
+}
+
+/* ================= CARTÃO / MODAL ================= */
+function abrirCartao(colabId,marcoDias){
+  STATE.modalColabId=colabId;
+  STATE.modalMarcoDias=marcoDias;
+  const sel=document.getElementById('modal-colab-select');
+  sel.innerHTML=DB.colaboradores.map(c=>`<option value="${c.id}" ${c.id===colabId?'selected':''}>${c.nome}</option>`).join('');
+  renderCelebrationCard();
+  document.getElementById('modal-cartao').classList.add('open');
+}
+function onTrocarColabModal(){
+  STATE.modalColabId=document.getElementById('modal-colab-select').value;
+  renderCelebrationCard();
+}
+function fecharModal(){ document.getElementById('modal-cartao').classList.remove('open'); }
+
+function renderCelebrationCard(){
+  const c=getColab(STATE.modalColabId);
+  const m=getMarcoByDias(STATE.modalMarcoDias) || MARCOS[0];
+  document.getElementById('modal-sub-texto').textContent=m.label+' de '+c.nome;
+  document.getElementById('envio-email-destino').value=c.email;
+  document.getElementById('envio-tel-destino').value=c.telefone;
+  document.getElementById('celebration-canvas').innerHTML=`
+    <div class="celebration-card" id="cc-render" style="background:${m.grad}">
+      <div class="dot" style="width:150px;height:150px;top:-60px;right:-50px"></div>
+      <div class="dot" style="width:90px;height:90px;bottom:-30px;left:-25px"></div>
+      <div class="cc-brand">Empresa</div>
+      <div class="cc-emoji">${m.emoji}</div>
+      <div class="cc-number">${m.num}</div>
+      <div class="cc-label">${m.suf} DE CASA</div>
+      <div class="cc-name">${esc(c.nome)}</div>
+      <div class="cc-role">${esc(c.cargo)} · ${esc(c.unidade)}</div>
+      <div class="cc-footer">${new Date().toLocaleDateString('pt-BR')}</div>
+    </div>`;
+}
+
+async function enviarCartao(canal){
+  const c=getColab(STATE.modalColabId);
+  const m=getMarcoByDias(STATE.modalMarcoDias);
+  const destino = canal==='email' ? document.getElementById('envio-email-destino').value.trim() : document.getElementById('envio-tel-destino').value.trim();
+  if(!destino){ showToast('Informe um destino de envio'); return; }
+
+  const integ = DB.integracoes[canal==='email'?'email':'telefone'];
+  const webhook = integ.webhook;
+  let status='simulado';
+
+  if(webhook){
+    const payload = canal==='email'
+      ? { canal:'email', destino, remetente:integ.remetente, assunto:integ.assunto, colaborador:c.nome, marco:m.label, cargo:c.cargo, unidade:c.unidade }
+      : { canal:'telefone', destino, provedor:integ.canal, mensagem:integ.modelo.replace('{{nome}}',c.nome).replace('{{marco}}',m.label), colaborador:c.nome, marco:m.label };
+    try{
+      await fetch(webhook,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      status='enviado';
+    }catch(e){ status='falhou'; }
+  }
+
+  DB.envios.push({ id:'e'+Date.now(), colabId:c.id, colabNome:c.nome, marcoDias:m.dias, canal, destino, data:new Date().toISOString(), status });
+  save();
+  refreshAll();
+
+  if(status==='simulado') showToast('Envio simulado — configure o webhook em Integração para disparar de verdade');
+  else if(status==='enviado') showToast('Cartão enviado para '+destino);
+  else showToast('Falha ao contatar o endpoint configurado');
+}
+
+function baixarCartao(){
+  const node=document.getElementById('cc-render');
+  if(!node || typeof html2canvas==='undefined'){ showToast('Não foi possível gerar a imagem agora'); return; }
+  html2canvas(node,{backgroundColor:null,scale:2}).then(canvas=>{
+    const link=document.createElement('a');
+    link.download='cartao-tempo-de-casa.png';
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+  }).catch(()=>showToast('Não foi possível gerar a imagem agora'));
+}
+
+/* ================= TOAST ================= */
+let toastTimer=null;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ================= REFRESH ================= */
+function refreshAll(){
+  renderPainel();
+  if(STATE.tabAtiva==='colaboradores') renderColaboradores();
+  if(STATE.tabAtiva==='modelos') renderModelos();
+  if(STATE.tabAtiva==='envios') renderEnvios();
+  if(STATE.tabAtiva==='integracao') renderIntegracao();
+}
+
+/* ================= INIT ================= */
+load();
+popularFiltroUnidade();
+bindIntegracaoInputs();
+refreshAll();
+</script>
+</body>
+</html>

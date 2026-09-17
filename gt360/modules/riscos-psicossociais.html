@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão de Riscos Psicossociais | PROART</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;display:flex;flex-direction:column;overflow:hidden}
+
+.brand-band{height:5px;background:var(--gradFull);flex-shrink:0}
+header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 24px;flex-shrink:0;position:relative;z-index:50}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:.01em;color:var(--gray800)}
+.brand-text .tag{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);font-weight:600;margin-top:2px}
+.header-role{display:flex;align-items:center;gap:12px}
+.role-chip{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray600);background:var(--gray50);border:1.5px solid var(--gray100);padding:6px 14px;border-radius:20px}
+.btn-sair-top{background:none;border:1.5px solid var(--gray200);color:var(--gray600);font-family:'Sora',sans-serif;font-size:11.5px;font-weight:700;padding:7px 16px;border-radius:8px;cursor:pointer;transition:all .2s}
+.btn-sair-top:hover{border-color:var(--alto2);color:var(--alto2)}
+
+.workspace-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.sidebar{width:240px;flex-shrink:0;background:var(--white);border-right:1px solid var(--gray100);display:flex;flex-direction:column;padding:18px 12px;gap:2px;overflow-y:auto;transition:width .2s ease}
+.sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px;gap:8px}
+.side-toggle{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1.5px solid var(--gray100);background:var(--gray50);color:var(--gray400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.side-toggle:hover{border-color:var(--gray400);color:var(--gray800)}
+.sidebar.collapsed{width:64px}
+.sidebar.collapsed .sidebar-label{display:none}
+.sidebar.collapsed .sidebar-top{justify-content:center}
+.sidebar.collapsed .side-item{justify-content:center;padding:11px 0}
+.sidebar.collapsed .side-item span:not(.dot){display:none}
+.sidebar.collapsed #side-toggle-icon{transform:rotate(180deg)}
+.sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);padding:6px 12px 10px}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;color:var(--gray600);transition:all .18s;border:2px solid transparent;background:none;text-align:left;width:100%;font-family:'Sora',sans-serif}
+.side-item:hover{background:var(--gray50);color:var(--gray800)}
+.side-item.active{background:var(--gray800);border-color:var(--gray800);color:var(--white)}
+.side-item .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.side-item .dot.d1{background:var(--grad1)}.side-item .dot.d2{background:var(--grad2)}.side-item .dot.d3{background:var(--grad3)}
+.sidebar-sep{height:1px;background:var(--gray100);margin:10px 8px}
+
+.content{flex:1;position:relative;overflow:hidden;min-width:0}
+.view{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .12s;overflow-y:auto}
+.view.active{opacity:1;pointer-events:auto}
+.view-inner{max-width:1180px;margin:0 auto;padding:28px 26px 60px}
+.view-inner.narrow{max-width:820px}
+
+/* ACCESS SCREEN */
+.access-screen{position:fixed;inset:0;background:var(--offwhite);z-index:2000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+.access-band{position:fixed;top:0;left:0;right:0;height:5px;background:var(--gradFull);z-index:2001}
+.access-inner{max-width:760px;width:100%;text-align:center}
+.access-logo{height:52px;object-fit:contain;margin-bottom:22px}
+.access-inner h1{font-family:'DM Serif Display',serif;font-size:32px;color:var(--gray800);margin-bottom:34px}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.access-card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);padding:0;cursor:pointer;transition:all .2s;text-align:left;border:2px solid transparent;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.access-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--gray200)}
+.access-card-band{height:5px}
+.access-card-inner{padding:30px 26px 26px}
+.access-dot{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700;margin-bottom:18px}
+.access-card h3{font-size:17px;font-weight:700;color:var(--gray800);margin-bottom:18px}
+.btn-acessar{align-self:flex-start;padding:10px 22px;border-radius:10px;border:none;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;transition:opacity .2s,transform .2s;pointer-events:none}
+.access-card:hover .btn-acessar{opacity:.9;transform:translateY(-1px)}
+.access-notice{margin-top:28px;font-size:11.5px;color:var(--gray400);background:var(--white);border:1.5px solid var(--gray100);border-radius:10px;padding:12px 16px;text-align:left}
+.access-admin-form{display:none;margin-top:18px;background:var(--white);border-radius:12px;box-shadow:var(--shadow);padding:20px;text-align:left}
+.access-admin-form.open{display:block}
+
+/* HEADER TITLE / HERO */
+.hero{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.hero-band{height:7px;background:var(--gradFull)}
+.hero-inner{padding:26px 30px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:24px;color:var(--gray800);margin-bottom:6px}
+.hero .sub{font-size:13px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.hero p{font-size:13.5px;color:var(--gray600);line-height:1.6;max-width:760px}
+
+/* CARD / SECTION / FORM (reused component library) */
+.section{margin-bottom:20px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 2px;flex-wrap:wrap}
+.section-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sn1{background:var(--grad1)}.sn2{background:var(--grad2)}.sn3{background:var(--grad3)}.sn4{background:var(--grad1)}
+.section-title{font-size:12px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.1em}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field input[readonly]{background:var(--gray100);color:var(--gray600);cursor:default}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--alto2);background:#fff5f6}
+.field .errmsg{font-size:10.5px;color:var(--alto2);font-weight:600;display:none}
+.field.invalid .errmsg{display:block}
+
+.btn{padding:11px 24px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-print{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.35)}
+.btn-danger{background:linear-gradient(135deg,var(--alto1),var(--alto2));color:#fff}
+.btn-sm{padding:7px 14px;font-size:11.5px;border-radius:8px}
+.actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+
+/* WIZARD STEPS */
+.wizard-steps{display:flex;gap:6px;margin-bottom:22px}
+.wz-step{flex:1;text-align:center;padding:10px 6px;border-radius:8px;background:var(--white);box-shadow:var(--shadow);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray400);border:2px solid transparent}
+.wz-step.active{color:#fff;background:var(--grad2);border-color:transparent}
+.wz-step.done{color:var(--baixo1);border-color:var(--baixo1)}
+
+/* KPI / CHART / BADGES / TABLE (reused) */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.kpi-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;overflow:hidden;position:relative}
+.kpi-band{position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-val{font-family:'DM Serif Display',serif;font-size:30px;line-height:1;margin:8px 0 4px}
+.kpi-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400)}
+.kpi-sub{font-size:11px;color:var(--gray600);margin-top:4px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.chart-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.chart-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:16px}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:170px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:20px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .8s ease;position:relative;min-width:2px}
+.bar-pct{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:#fff}
+.bar-val{font-size:12px;font-weight:700;color:var(--gray600);width:34px;text-align:right}
+.chart-empty{font-size:12.5px;color:var(--gray400);padding:8px 0}
+
+.rbadge,.pbadge,.spill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap}
+.rbadge.alto{background:linear-gradient(135deg,var(--alto1),var(--alto2))}
+.rbadge.medio{background:linear-gradient(135deg,var(--medio1),var(--medio2))}
+.rbadge.baixo{background:linear-gradient(135deg,var(--baixo1),var(--baixo2))}
+.pbadge.alta{background:linear-gradient(135deg,var(--alto1),var(--alto2))}
+.pbadge.media{background:linear-gradient(135deg,var(--medio1),var(--medio2))}
+.pbadge.baixa{background:linear-gradient(135deg,var(--gray400),var(--gray600))}
+.spill.st-pendente{background:linear-gradient(135deg,var(--gray400),var(--gray600))}
+.spill.st-em_andamento{background:linear-gradient(135deg,#0099e5,#7b2ff7)}
+.spill.st-concluida{background:linear-gradient(135deg,var(--baixo1),var(--baixo2))}
+.spill.st-atrasada{background:linear-gradient(135deg,var(--alto1),var(--alto2))}
+.spill.st-respondido{background:linear-gradient(135deg,var(--baixo1),var(--baixo2))}
+.spill.st-pendente_envio{background:linear-gradient(135deg,var(--alto1),var(--alto2))}
+
+.filters-bar{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;align-items:end}
+.filters-bar .field label{font-size:9.5px}
+.table-wrap{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.table-scroll{overflow-x:auto}
+.dtable{width:100%;border-collapse:collapse;min-width:900px}
+.dtable th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);font-weight:700;padding:12px 14px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap;background:var(--white)}
+.dtable td{padding:11px 14px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:#f8fafd}
+.dtable tr.overdue td{background:#fff5f6}
+.dtable .wrap-cell{max-width:220px;white-space:normal;line-height:1.35}
+.tbtn{padding:6px 13px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s;white-space:nowrap}
+.tbtn:hover{border-color:#0099e5;color:#0099e5;background:#f0f9ff}
+.empty-row td{text-align:center;padding:34px;color:var(--gray400);font-size:13px}
+
+/* DIM CARD (leitura) */
+.dim-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px}
+.dim-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:8px}
+.dim-card-name{font-size:14.5px;font-weight:700;color:var(--gray800)}
+.dim-card-nota{font-size:12px;color:var(--gray400)}
+
+.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kv{background:var(--gray50);border-radius:8px;padding:10px 14px}
+.kv-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);margin-bottom:3px}
+.kv-val{font-size:13px;font-weight:600;color:var(--gray800);word-break:break-word;white-space:pre-wrap}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:1500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:760px;width:100%;max-height:88vh;overflow-y:auto}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:26px 28px 28px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:19px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:18px}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;margin-top:-4px;line-height:1}
+
+/* SUCCESS */
+.success-box{text-align:center;padding:50px 20px}
+.success-icon{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--baixo1),var(--baixo2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:34px;margin:0 auto 20px}
+.success-box h2{font-family:'DM Serif Display',serif;font-size:22px;color:var(--gray800);margin-bottom:8px}
+.success-box p{font-size:13.5px;color:var(--gray600);margin-bottom:26px}
+
+/* PRINT / PDF */
+#print-overlay{display:none;position:fixed;inset:0;background:#fff;z-index:9000;overflow-y:auto;padding:32px 20px}
+#print-overlay.visible{display:block}
+.print-close{position:fixed;top:16px;right:20px;z-index:9100;background:var(--gray800);color:#fff;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;border-radius:10px;cursor:pointer}
+@media print{
+  @page{ size:A4; margin:11mm; }
+  html,body{ height:auto!important; overflow:visible!important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body>*:not(#print-overlay){display:none!important}
+  #print-overlay{display:block!important;position:static!important;padding:0!important;overflow:visible!important}
+  .print-close{display:none!important}
+  .pdf-doc{max-width:100%!important;margin:0!important;box-shadow:none!important;border-radius:0!important}
+  .ptband{height:5px!important}
+  .phdr{padding:0 0 8px!important}
+  .phdr-title{font-size:15px!important}
+  .phdr-sub{font-size:10px!important}
+  .phdr-logo{height:65px!important}
+  .pbody{padding:8px 0 0!important}
+  .psect{margin-bottom:9px!important;padding-bottom:9px!important;break-inside:avoid;page-break-inside:avoid}
+  .pstitle{font-size:9.5px!important;margin-bottom:6px!important}
+  .pdim-block{padding:8px 10px!important;margin-bottom:7px!important;break-inside:avoid;page-break-inside:avoid}
+  .pdim-head{margin-bottom:5px!important}
+  .pdim-head b{font-size:11px!important}
+  .kv{padding:6px 9px!important}
+  .kv-lbl{font-size:8.5px!important;margin-bottom:1px!important}
+  .kv-val{font-size:10.5px!important;line-height:1.3!important}
+  .kv-grid{gap:6px!important}
+  .rbadge,.pbadge,.spill{font-size:8.5px!important;padding:2px 8px!important}
+  .dtable{min-width:0!important}
+  .dtable th{font-size:8px!important;padding:5px 8px!important}
+  .dtable td{font-size:9.5px!important;padding:5px 8px!important}
+  .dtable tr{break-inside:avoid;page-break-inside:avoid}
+}
+.pdf-doc{max-width:820px;margin:0 auto 40px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden}
+.ptband{height:8px;background:var(--gradFull)}
+.phdr{padding:24px 32px 18px;border-bottom:2px solid var(--gray100);display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.phdr-logo{height:85px;object-fit:contain;flex-shrink:0}
+.phdr-title{font-family:'DM Serif Display',serif;font-size:19px;color:var(--gray800);margin-bottom:3px}
+.phdr-sub{font-size:12px;color:var(--gray400)}
+.pbody{padding:22px 32px 30px}
+.psect{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--gray100)}
+.psect:last-child{border-bottom:none}
+.pstitle{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:10px}
+.pdim-block{border:1.5px solid var(--gray100);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.pdim-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.pdim-head b{font-size:13px;color:var(--gray800)}
+
+/* SUBTABS (usadas para agrupar seções dentro de uma mesma página do Painel Gerencial) */
+.subtabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.subtab-btn{padding:9px 18px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--white);font-family:'Sora',sans-serif;font-size:11.5px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s}
+.subtab-btn.active{border-color:transparent;color:#fff;background:var(--grad2)}
+.subtab-btn:hover{border-color:var(--gray400)}
+.refresh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.refresh-info{font-size:11px;color:var(--gray400)}
+
+@media(max-width:900px){
+  .form-grid,.kv-grid{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .chart-grid{grid-template-columns:1fr}
+  .filters-bar{grid-template-columns:1fr 1fr}
+  .access-grid{grid-template-columns:1fr}
+  .sidebar{width:210px}
+}
+@media(max-width:700px){
+  .workspace-body{flex-direction:column}
+  .sidebar{width:100%;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--gray100);padding:8px 10px}
+  .side-item{flex-shrink:0;white-space:nowrap}
+  .sidebar-label,.sidebar-sep,.sidebar-top{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+<div id="print-overlay">
+  <button class="print-close" onclick="document.getElementById('print-overlay').classList.remove('visible')">Fechar</button>
+  <div id="print-content"></div>
+</div>
+
+<!-- ===================== TELA DE ACESSO ===================== -->
+<div class="access-screen" id="access-screen">
+  <div class="access-band"></div>
+  <div class="access-inner">
+    <img class="access-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
+    <h1>Gestão de Riscos Psicossociais</h1>
+    <div class="access-grid">
+      <div class="access-card" onclick="entrarComo('gestor')">
+        <div class="access-card-band" style="background:var(--grad2)"></div>
+        <div class="access-card-inner">
+          <div class="access-dot" style="background:var(--grad2)">G</div>
+          <h3>Sou Gestor</h3>
+          <button class="btn-acessar" style="background:var(--grad2)">Acessar</button>
+        </div>
+      </div>
+      <div class="access-card" onclick="toggleAdminForm()">
+        <div class="access-card-band" style="background:var(--grad3)"></div>
+        <div class="access-card-inner">
+          <div class="access-dot" style="background:var(--grad3)">PG</div>
+          <h3>Painel Gerencial</h3>
+          <button class="btn-acessar" style="background:var(--grad3)">Acessar</button>
+        </div>
+      </div>
+    </div>
+    <div class="access-admin-form" id="access-admin-form">
+      <div class="form-grid">
+        <div class="field span2"><label>Senha de acesso ao Painel Gerencial</label><input type="password" id="admin-pass" placeholder="Senha"></div>
+      </div>
+      <div class="actions" style="margin-top:14px">
+        <button class="btn btn-primary" onclick="entrarComoAdmin()">Entrar</button>
+      </div>
+      <div class="access-notice" style="margin-top:14px">Ambiente de demonstração — senha padrão: <b>admin123</b></div>
+    </div>
+  </div>
+</div>
+<!-- ===================== APP SHELL ===================== -->
+<div class="brand-band"></div>
+<header>
+  <div class="logo-wrap">
+    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
+    <div class="brand-text">
+      <div class="name">Gestão de Riscos Psicossociais</div>
+      <div class="tag">PROART</div>
+    </div>
+  </div>
+  <div class="header-role">
+    <span class="role-chip" id="role-chip">—</span>
+    <button class="btn-sair-top" id="btn-sair-top" onclick="sair()">Sair</button>
+  </div>
+</header>
+
+<div class="workspace-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Navegação</div>
+      <button class="side-toggle" id="side-toggle-btn" onclick="toggleSidebar()" title="Recolher menu">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="side-toggle-icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+    </div>
+    <nav id="sidebar-nav"></nav>
+  </aside>
+
+  <main class="content" id="content">
+
+    <!-- ============ GESTOR: INÍCIO ============ -->
+    <div class="view" id="view-inicio"><div class="view-inner narrow">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Plano de Ação — Riscos Psicossociais</h1>
+        <div class="sub">Preenchimento do Plano de Ação — PROART</div>
+        <p>Este formulário foi elaborado com base nos resultados da avaliação de riscos psicossociais (PROART). As dimensões apresentadas abaixo correspondem aos resultados identificados para o seu setor.</p>
+      </div></div>
+      <button class="btn btn-primary" style="width:100%;padding:16px;font-size:14px" onclick="irPara('novo-plano'); iniciarNovoPlano()">Novo Plano de Ação</button>
+    </div></div>
+
+    <!-- ============ GESTOR: NOVO PLANO (WIZARD) ============ -->
+    <div class="view" id="view-novo-plano"><div class="view-inner narrow">
+      <div class="wizard-steps">
+        <div class="wz-step" id="wzs-1">1. Identificação</div>
+        <div class="wz-step" id="wzs-2">2. Resultados PROART</div>
+        <div class="wz-step" id="wzs-3">3. Plano de Ação</div>
+        <div class="wz-step" id="wzs-4">4. Revisão</div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="wz-step-1">
+        <div class="section-header"><div class="section-num sn1">01</div><span class="section-title">Identificação</span></div>
+        <div class="card"><div class="form-grid">
+          <div class="field" id="f-praca-wrap"><label>Praça</label><select id="f-praca" onchange="onPracaChange()"><option value="">Selecione</option></select><span class="errmsg">Selecione a praça.</span></div>
+          <div class="field" id="f-setor-wrap"><label>Setor</label><select id="f-setor"><option value="">Selecione a praça primeiro</option></select><span class="errmsg">Selecione o setor.</span></div>
+          <div class="field" id="f-gestor-wrap"><label>Nome do gestor responsável</label><input type="text" id="f-gestor" placeholder="Nome completo"><span class="errmsg">Informe o nome.</span></div>
+          <div class="field" id="f-cargo-wrap"><label>Cargo / Função</label><input type="text" id="f-cargo" placeholder="Ex.: Coordenador de Atendimento"><span class="errmsg">Informe o cargo.</span></div>
+          <div class="field" id="f-email-wrap"><label>E-mail corporativo</label><input type="email" id="f-email" placeholder="nome@suaempresa.com.br"><span class="errmsg">Informe um e-mail válido.</span></div>
+          <div class="field"><label>Data do preenchimento</label><input type="date" id="f-data" readonly></div>
+        </div></div>
+        <div class="actions"><button class="btn btn-primary" onclick="avancarStep1()">Continuar</button></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="wz-step-2" style="display:none">
+        <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Resultados do PROART</span></div>
+        <div id="dims-readonly"></div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="avancarStep2()">Continuar para o Plano de Ação</button>
+          <button class="btn btn-secondary" onclick="voltarStep(1)">Voltar</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="wz-step-3" style="display:none">
+        <div class="section-header"><div class="section-num sn3">03</div><span class="section-title">Plano de Ação</span></div>
+        <div id="acoes-blocks"></div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="avancarStep3()">Revisar Plano de Ação</button>
+          <button class="btn btn-secondary" onclick="voltarStep(2)">Voltar</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div id="wz-step-4" style="display:none">
+        <div class="section-header"><div class="section-num sn4">04</div><span class="section-title">Revisão do Plano de Ação</span></div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="kv-grid">
+            <div class="kv"><div class="kv-lbl">Praça</div><div class="kv-val" id="rev-praca"></div></div>
+            <div class="kv"><div class="kv-lbl">Setor</div><div class="kv-val" id="rev-setor"></div></div>
+            <div class="kv"><div class="kv-lbl">Gestor</div><div class="kv-val" id="rev-gestor"></div></div>
+            <div class="kv"><div class="kv-lbl">Data</div><div class="kv-val" id="rev-data"></div></div>
+          </div>
+        </div>
+        <div id="rev-acoes"></div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="finalizarPlano()">Finalizar Plano de Ação</button>
+          <button class="btn btn-secondary" onclick="voltarStep(3)">Voltar e editar</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="wz-success" style="display:none">
+        <div class="card success-box">
+          <div class="success-icon">✓</div>
+          <h2>Plano de Ação enviado com sucesso!</h2>
+          <p>Seu Plano de Ação foi registrado e o documento PDF foi gerado.<br>ID do registro: <b id="success-id"></b></p>
+          <div class="actions" style="justify-content:center">
+            <button class="btn btn-print" onclick="imprimirResposta(window._ultimaRespostaId)">Baixar / Imprimir PDF</button>
+            <button class="btn btn-secondary" onclick="iniciarNovoPlano()">Novo Plano de Ação</button>
+            <button class="btn btn-secondary" onclick="irPara('inicio')">Voltar ao início</button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- ============ GESTOR: MEUS PLANOS ============ -->
+    <div class="view" id="view-meus-planos"><div class="view-inner">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Meus Planos</h1>
+        <p>Informe o e-mail utilizado no preenchimento para localizar seus planos enviados.</p>
+      </div></div>
+      <div class="filters-bar" style="grid-template-columns:2fr 1fr">
+        <div class="field"><label>E-mail corporativo</label><input type="email" id="mp-email" placeholder="nome@suaempresa.com.br"></div>
+        <div class="field"><button class="btn btn-primary" style="width:100%" onclick="buscarMeusPlanos()">Buscar</button></div>
+      </div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table class="dtable">
+          <thead><tr><th>ID</th><th>Praça</th><th>Setor</th><th>Data de envio</th><th>Ações registradas</th><th></th></tr></thead>
+          <tbody id="mp-tbody"><tr class="empty-row"><td colspan="6">Informe seu e-mail e clique em Buscar.</td></tr></tbody>
+        </table>
+      </div></div>
+    </div></div>
+    <!-- ============ ADMIN: PLANOS DE AÇÃO (+ Controle de Respostas + Pendências) ============ -->
+    <div class="view" id="view-admin-planos"><div class="view-inner">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Planos de Ação</h1>
+        <p>Ações registradas pelos gestores, controle de quem já respondeu e pendências — as três informações se cruzam, por isso ficam reunidas aqui.</p>
+      </div></div>
+      <div class="refresh-bar">
+        <div class="subtabs" data-group="planos" style="margin-bottom:0">
+          <button class="subtab-btn active" onclick="showSubTab('planos','acoes',this)">Ações Registradas</button>
+          <button class="subtab-btn" onclick="showSubTab('planos','respostas',this)">Controle de Respostas</button>
+          <button class="subtab-btn" onclick="showSubTab('planos','pendencias',this)">Pendências</button>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="atualizarDadosAdmin()">↻ Atualizar dados</button>
+      </div>
+
+      <div class="subtab-panel" data-group="planos" data-tab="acoes">
+        <div class="filters-bar">
+          <div class="field"><label>Praça</label><select id="pf-praca" onchange="renderPlanosAdmin()"><option value="">Todas</option></select></div>
+          <div class="field"><label>Setor</label><select id="pf-setor" onchange="renderPlanosAdmin()"><option value="">Todos</option></select></div>
+          <div class="field"><label>Status</label><select id="pf-status" onchange="renderPlanosAdmin()"><option value="">Todos</option><option value="pendente">Pendente</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluída</option><option value="atrasada">Atrasada</option></select></div>
+          <div class="field"><label>Gestor</label><input type="text" id="pf-gestor" placeholder="Buscar gestor" oninput="renderPlanosAdmin()"></div>
+          <div class="field"><label>Período (envio)</label><input type="date" id="pf-periodo" onchange="renderPlanosAdmin()"></div>
+          <div class="field"><button class="btn btn-secondary" style="width:100%" onclick="limparFiltrosPlanos()">Limpar</button></div>
+        </div>
+        <div class="table-wrap"><div class="table-scroll">
+          <table class="dtable">
+            <thead><tr><th>ID</th><th>Praça</th><th>Setor</th><th>Gestor</th><th>Dimensão</th><th>Nota</th><th>Classificação</th><th>Prioridade</th><th>Responsável</th><th>Prazo</th><th>Status</th><th>Envio</th><th></th></tr></thead>
+            <tbody id="admin-planos-tbody"></tbody>
+          </table>
+        </div></div>
+      </div>
+
+      <div class="subtab-panel" data-group="planos" data-tab="respostas" style="display:none">
+        <p style="font-size:12.5px;color:var(--gray400);margin-bottom:16px">Comparação entre a Base de Setores esperada e os Planos de Ação já enviados.</p>
+        <div class="table-wrap"><div class="table-scroll">
+          <table class="dtable">
+            <thead><tr><th>Praça</th><th>Setor</th><th>Gestor</th><th>Status</th><th>Data de envio</th></tr></thead>
+            <tbody id="controle-tbody"></tbody>
+          </table>
+        </div></div>
+      </div>
+
+      <div class="subtab-panel" data-group="planos" data-tab="pendencias" style="display:none">
+        <p style="font-size:12.5px;color:var(--gray400);margin-bottom:16px">Combinações Praça + Setor da Base de Setores que ainda não enviaram o Plano de Ação.</p>
+        <div class="table-wrap"><div class="table-scroll">
+          <table class="dtable">
+            <thead><tr><th>Praça</th><th>Setor</th></tr></thead>
+            <tbody id="pendencias-tbody"></tbody>
+          </table>
+        </div></div>
+      </div>
+    </div></div>
+
+    <!-- ============ ADMIN: ANÁLISE DE DADOS (Dashboard + Análise por Praça/Setor/Dimensão) ============ -->
+    <div class="view" id="view-admin-analise"><div class="view-inner">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Análise de Dados</h1>
+        <p>Indicadores gerais e recortes por Praça, Setor e Dimensão do PROART.</p>
+      </div></div>
+      <div class="refresh-bar">
+        <div class="subtabs" data-group="analise" style="margin-bottom:0">
+          <button class="subtab-btn active" onclick="showSubTab('analise','dashboard',this)">Dashboard</button>
+          <button class="subtab-btn" onclick="showSubTab('analise','praca',this)">Análise por Praça</button>
+          <button class="subtab-btn" onclick="showSubTab('analise','setor',this)">Análise por Setor</button>
+          <button class="subtab-btn" onclick="showSubTab('analise','dim',this)">Análise por Dimensão</button>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="atualizarDadosAdmin()">↻ Atualizar dados</button>
+      </div>
+
+      <div class="subtab-panel" data-group="analise" data-tab="dashboard">
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-band" style="background:var(--grad2)"></div><div class="kpi-label">Total de planos</div><div class="kpi-val" id="dk-total">0</div><div class="kpi-sub">respostas finalizadas</div></div>
+          <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(135deg,var(--baixo1),var(--baixo2))"></div><div class="kpi-label">% de adesão</div><div class="kpi-val" id="dk-adesao" style="color:#00c48c">0%</div><div class="kpi-sub" id="dk-adesao-sub">0 de 0 setores esperados</div></div>
+          <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(135deg,var(--alto1),var(--alto2))"></div><div class="kpi-label">Planos pendentes</div><div class="kpi-val" id="dk-pendentes" style="color:var(--alto2)">0</div><div class="kpi-sub">setores sem envio</div></div>
+          <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(135deg,var(--medio1),var(--medio2))"></div><div class="kpi-label">Praças respondidas</div><div class="kpi-val" id="dk-pracas" style="color:#ff9500">0</div><div class="kpi-sub" id="dk-setores-sub">0 setores respondidos</div></div>
+        </div>
+        <div class="filters-bar" id="dash-filters">
+          <div class="field"><label>Praça</label><select id="df-praca" onchange="renderDashboardAdmin()"><option value="">Todas</option></select></div>
+          <div class="field"><label>Dimensão</label><select id="df-dim" onchange="renderDashboardAdmin()"><option value="">Todas</option></select></div>
+          <div class="field"><label>Classificação</label><select id="df-classif" onchange="renderDashboardAdmin()"><option value="">Todas</option><option value="alto">Alto</option><option value="medio">Médio</option><option value="baixo">Baixo</option></select></div>
+          <div class="field"><label>Prioridade</label><select id="df-prio" onchange="renderDashboardAdmin()"><option value="">Todas</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select></div>
+          <div class="field"><label>Status</label><select id="df-status" onchange="renderDashboardAdmin()"><option value="">Todos</option><option value="pendente">Pendente</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluída</option><option value="atrasada">Atrasada</option></select></div>
+          <div class="field"><button class="btn btn-secondary" style="width:100%" onclick="limparFiltrosAdmin()">Limpar</button></div>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card"><div class="chart-title">Planos por Praça</div><div id="chart-praca"></div></div>
+          <div class="chart-card"><div class="chart-title">Dimensões com maior quantidade de ações</div><div id="chart-dim"></div></div>
+          <div class="chart-card"><div class="chart-title">Classificação dos riscos</div><div id="chart-classif"></div></div>
+          <div class="chart-card"><div class="chart-title">Prioridade das ações</div><div id="chart-prio"></div></div>
+          <div class="chart-card" style="grid-column:span 2"><div class="chart-title">Status das ações</div><div id="chart-status"></div></div>
+        </div>
+      </div>
+
+      <div class="subtab-panel" data-group="analise" data-tab="praca" style="display:none">
+        <div class="chart-card" style="margin-bottom:20px"><div class="chart-title">Ações por Praça</div><div id="analise-praca-chart"></div></div>
+        <div class="table-wrap"><div class="table-scroll"><table class="dtable"><thead><tr><th>Praça</th><th>Ações registradas</th><th>Risco Alto</th><th>Risco Médio</th><th>Risco Baixo</th></tr></thead><tbody id="analise-praca-tbody"></tbody></table></div></div>
+      </div>
+
+      <div class="subtab-panel" data-group="analise" data-tab="setor" style="display:none">
+        <div class="chart-card" style="margin-bottom:20px"><div class="chart-title">Ações por Setor</div><div id="analise-setor-chart"></div></div>
+        <div class="table-wrap"><div class="table-scroll"><table class="dtable"><thead><tr><th>Setor / GHE</th><th>Ações registradas</th><th>Risco Alto</th><th>Risco Médio</th><th>Risco Baixo</th></tr></thead><tbody id="analise-setor-tbody"></tbody></table></div></div>
+      </div>
+
+      <div class="subtab-panel" data-group="analise" data-tab="dim" style="display:none">
+        <div class="chart-card" style="margin-bottom:20px"><div class="chart-title">Ações por Dimensão</div><div id="analise-dim-chart"></div></div>
+        <div class="table-wrap"><div class="table-scroll"><table class="dtable"><thead><tr><th>Dimensão</th><th>Ações registradas</th><th>Risco Alto</th><th>Risco Médio</th><th>Risco Baixo</th></tr></thead><tbody id="analise-dim-tbody"></tbody></table></div></div>
+      </div>
+    </div></div>
+
+    <!-- ============ ADMIN: BANCO DE DADOS (+ Exportações) ============ -->
+    <div class="view" id="view-admin-bd"><div class="view-inner">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Banco de Dados</h1>
+        <p>Visualização bruta das tabelas normalizadas RESPOSTAS e AÇÕES, com exportação dos dados filtrados.</p>
+      </div></div>
+      <div class="refresh-bar">
+        <div class="subtabs" data-group="bd" style="margin-bottom:0">
+          <button class="subtab-btn active" onclick="showSubTab('bd','tabelas',this)">Tabelas</button>
+          <button class="subtab-btn" onclick="showSubTab('bd','exportacoes',this)">Exportações</button>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="atualizarDadosAdmin()">↻ Atualizar dados</button>
+      </div>
+
+      <div class="subtab-panel" data-group="bd" data-tab="tabelas">
+        <div class="section-header"><div class="section-num sn1">R</div><span class="section-title">Tabela RESPOSTAS</span></div>
+        <div class="table-wrap" style="margin-bottom:22px"><div class="table-scroll">
+          <table class="dtable"><thead><tr><th>ID_Resposta</th><th>Data</th><th>Hora</th><th>Praça</th><th>Setor</th><th>Gestor</th><th>Cargo</th><th>Email</th><th>Status</th></tr></thead><tbody id="bd-respostas-tbody"></tbody></table>
+        </div></div>
+        <div class="section-header"><div class="section-num sn2">A</div><span class="section-title">Tabela AÇÕES</span></div>
+        <div class="table-wrap"><div class="table-scroll">
+          <table class="dtable"><thead><tr><th>ID_Acao</th><th>ID_Resposta</th><th>Dimensão</th><th>Prioridade</th><th>Área de apoio</th><th>Responsável</th><th>Prazo início</th><th>Prazo conclusão</th><th>Status</th></tr></thead><tbody id="bd-acoes-tbody"></tbody></table>
+        </div></div>
+      </div>
+
+      <div class="subtab-panel" data-group="bd" data-tab="exportacoes" style="display:none">
+        <div class="card" style="max-width:820px">
+          <div class="form-grid">
+            <div class="field"><label>Praça</label><select id="ex-praca"><option value="">Todas</option></select></div>
+            <div class="field"><label>Dimensão</label><select id="ex-dim"><option value="">Todas</option></select></div>
+            <div class="field"><label>Status</label><select id="ex-status"><option value="">Todos</option><option value="pendente">Pendente</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluída</option><option value="atrasada">Atrasada</option></select></div>
+            <div class="field"><label>Prioridade</label><select id="ex-prio"><option value="">Todas</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="exportarDados('xlsx')">Exportar Excel (.xlsx)</button>
+            <button class="btn btn-secondary" onclick="exportarDados('csv')">Exportar CSV</button>
+            <button class="btn btn-print" onclick="exportarDados('pdf')">Exportar PDF (relatório)</button>
+          </div>
+          <p style="font-size:11.5px;color:var(--gray400);margin-top:14px">O arquivo conterá somente os registros (ações) que atendem aos filtros selecionados acima.</p>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- ============ ADMIN: CONFIGURAÇÕES ============ -->
+    <div class="view" id="view-admin-config"><div class="view-inner narrow">
+      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
+        <h1>Configurações</h1>
+        <p>Ajustes do Painel Gerencial no ambiente de demonstração.</p>
+      </div></div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="kv-lbl" style="margin-bottom:8px">Base de dados</div>
+        <p style="font-size:12.5px;color:var(--gray600);margin-bottom:14px">Todos os planos de ação enviados ficam salvos no armazenamento deste navegador (visível em qualquer aba deste mesmo navegador, mas não em outros computadores ou navegadores). Use o botão abaixo apenas se quiser reiniciar completamente os dados de demonstração.</p>
+        <button class="btn btn-danger" onclick="abrirModalReset()">Apagar todos os planos registrados</button>
+      </div>
+      <div class="card">
+        <div class="kv-lbl" style="margin-bottom:8px">Sobre este ambiente</div>
+        <p style="font-size:12.5px;color:var(--gray600);line-height:1.6">Este é um protótipo funcional que roda inteiramente no navegador. Não há backend, autenticação real, banco de dados relacional ou integração com Excel/SQL em produção — os dados ficam salvos apenas no armazenamento local deste navegador, o que significa que um plano enviado em um computador não aparece automaticamente em outro. Para uso corporativo real (login de gestores e do Painel Gerencial, permissões verificadas no servidor, base de dados única acessível de qualquer lugar), é necessário desenvolver um backend dedicado.</p>
+      </div>
+    </div></div>
+
+  </main>
+</div>
+
+<!-- MODAL: DETALHE DO PLANO -->
+<div class="modal-bg" id="modal-detalhe">
+  <div class="modal"><div class="modal-band"></div><div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-detalhe')">&times;</button>
+    <div class="modal-title">Detalhe do Plano de Ação</div>
+    <div class="modal-sub" id="det-sub"></div>
+    <div id="det-body"></div>
+    <div class="actions"><button class="btn btn-print" onclick="imprimirRespostaDoModal()">Baixar PDF</button><button class="btn btn-secondary" onclick="fecharModal('modal-detalhe')">Fechar</button></div>
+  </div></div>
+</div>
+
+<!-- MODAL: ALTERAR STATUS -->
+<div class="modal-bg" id="modal-status">
+  <div class="modal"><div class="modal-band"></div><div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-status')">&times;</button>
+    <div class="modal-title">Atualizar status da ação</div>
+    <div class="form-grid">
+      <div class="field span2"><label>Status</label><select id="st-novo-status">
+        <option value="pendente">Pendente</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluída</option><option value="atrasada">Atrasada</option>
+      </select></div>
+    </div>
+    <div class="actions"><button class="btn btn-primary" onclick="salvarStatusAcao()">Salvar</button><button class="btn btn-secondary" onclick="fecharModal('modal-status')">Cancelar</button></div>
+  </div></div>
+</div>
+
+<!-- MODAL: RESET -->
+<div class="modal-bg" id="modal-reset">
+  <div class="modal"><div class="modal-band"></div><div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-reset')">&times;</button>
+    <div class="modal-title">Apagar todos os planos registrados</div>
+    <div class="modal-sub">Esta ação é irreversível e afeta todos os usuários do sistema.</div>
+    <div class="actions"><button class="btn btn-danger" onclick="confirmarReset()">Apagar tudo</button><button class="btn btn-secondary" onclick="fecharModal('modal-reset')">Cancelar</button></div>
+  </div></div>
+</div>
+<script>
+/* ═══════════ INÍCIO core.js (biblioteca compartilhada GT360) ═══════════ */
+/* ══════════════ GT360 CORE — biblioteca compartilhada ══════════════
+   Fonte única destas funções. Qualquer correção/alteração deve ser
+   feita AQUI e reaplicada aos módulos — nunca editar as cópias
+   coladas em cada módulo individualmente. */
+
+/* Escapa texto para uso seguro dentro de innerHTML. */
+function esc(str){
+  return (str==null?'':String(str)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Transferência de estado via link (sem backend) ──
+   O estado de um registro (avaliação, etc.) viaja dentro da própria
+   URL — quem recebe o link abre o módulo já carregado na etapa certa.
+   Quando houver backend, este é o ponto de troca: substituir
+   codificarEstado/decodificarEstado e o mailto por chamadas reais de
+   API — o restante do fluxo (etapas, telas) não precisa mudar. */
+function codificarEstado(obj){
+  const json = JSON.stringify(obj);
+  const utf8 = unescape(encodeURIComponent(json));
+  const b64 = btoa(utf8);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodificarEstado(str){
+  let b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length % 4) b64 += '=';
+  const utf8 = atob(b64);
+  return JSON.parse(decodeURIComponent(escape(utf8)));
+}
+function gerarLinkTransferencia(registro){
+  // Dentro do workspace GT360, este módulo roda num iframe carregado via
+  // srcdoc — location.href aponta para "about:srcdoc", que não é um
+  // endereço utilizável fora daquela sessão. Quando embutido, o link
+  // precisa apontar para a página de nível mais alto (o próprio
+  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
+  // o shell é responsável por ler esse link e abrir o módulo certo.
+  let base;
+  try{
+    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
+  }catch(e){
+    base = location.href.split('#')[0];
+  }
+  return base + '#av=' + codificarEstado(registro);
+}
+function gerarMailtoLink(destinatario, assunto, corpo){
+  return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+}
+function verificarLinkRecebido(){
+  // Quando o shell do GT360 identifica um link de convite/retorno, ele
+  // injeta o registro já decodificado nesta variável antes de carregar o
+  // módulo (mais confiável do que tentar setar o hash de um documento
+  // srcdoc depois que ele já carregou). Fora do shell (uso direto do
+  // arquivo do módulo, ou abertura standalone), cai no hash normal.
+  if(window.__conviteRecebidoDireto) return window.__conviteRecebidoDireto;
+  const hash = location.hash;
+  if(hash.indexOf('#av=') === 0){
+    try{ return decodificarEstado(hash.slice(4)); }catch(e){ console.warn('Link de transferência inválido ou corrompido', e); return null; }
+  }
+  return null;
+}
+/* ═══════════ FIM core.js ═══════════ */
+
+/* ===================== DADOS BASE ===================== */
+const BASE_SETOR = [{"praca":"Praça 1","setor":"Setor 4"},{"praca":"Praça 2","setor":"Setor 3"},{"praca":"Praça 3","setor":"Setor 3"},{"praca":"Praça 4","setor":"Setor 3"},{"praca":"Praça 5","setor":"Setor 1"},{"praca":"Praça 5","setor":"Setor 5"},{"praca":"Praça 5","setor":"Setor 3"},{"praca":"Praça 6","setor":"Setor 5"},{"praca":"Praça 6","setor":"Setor 3"},{"praca":"Praça 7","setor":"Setor 1"},{"praca":"Praça 8","setor":"Setor 3"},{"praca":"Praça 9","setor":"Setor 1"},{"praca":"Praça 9","setor":"Setor 3"},{"praca":"Praça 10","setor":"Setor 2"},{"praca":"Praça 10","setor":"Setor 3"},{"praca":"Praça 11","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 2"},{"praca":"Praça 12","setor":"Setor 2"},{"praca":"Praça 12","setor":"Setor 1"},{"praca":"Praça 12","setor":"Setor 1"},{"praca":"Praça 12","setor":"Setor 5"},{"praca":"Praça 12","setor":"Setor 2"},{"praca":"Praça 12","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 3"},{"praca":"Praça 12","setor":"Setor 5"},{"praca":"Praça 12","setor":"Setor 5"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 4"},{"praca":"Praça 12","setor":"Setor 5"},{"praca":"Praça 13","setor":"Setor 1"},{"praca":"Praça 13","setor":"Setor 2"},{"praca":"Praça 13","setor":"Setor 5"},{"praca":"Praça 13","setor":"Setor 3"},{"praca":"Praça 13","setor":"Setor 4"},{"praca":"Praça 13","setor":"Setor 5"},{"praca":"Praça 14","setor":"Setor 3"},{"praca":"Praça 14","setor":"Setor 4"},{"praca":"Praça 14","setor":"Setor 5"},{"praca":"Praça 15","setor":"Setor 5"},{"praca":"Praça 15","setor":"Setor 5"}];
+const BASE_PROART = [{"praca":"Praça 1","setor":"Setor 4","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.5,"classificacao":"medio"},{"praca":"Praça 1","setor":"Setor 4","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.41,"classificacao":"medio"},{"praca":"Praça 2","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.42,"classificacao":"medio"},{"praca":"Praça 2","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.78,"classificacao":"medio"},{"praca":"Praça 3","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.54,"classificacao":"medio"},{"praca":"Praça 3","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.76,"classificacao":"medio"},{"praca":"Praça 4","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.5,"classificacao":"medio"},{"praca":"Praça 4","setor":"Setor 3","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.05,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 1","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.26,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 1","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.5,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 1","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.45,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.7,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.73,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.6,"classificacao":"medio"},{"praca":"Praça 5","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.32,"classificacao":"medio"},{"praca":"Praça 7","setor":"Setor 1","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.55,"classificacao":"medio"},{"praca":"Praça 7","setor":"Setor 1","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.37,"classificacao":"medio"},{"praca":"Praça 8","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.58,"classificacao":"medio"},{"praca":"Praça 9","setor":"Setor 1","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.66,"classificacao":"medio"},{"praca":"Praça 9","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.66,"classificacao":"medio"},{"praca":"Praça 10","setor":"Setor 2","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.84,"classificacao":"medio"},{"praca":"Praça 10","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.41,"classificacao":"medio"},{"praca":"Praça 10","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.67,"classificacao":"medio"},{"praca":"Praça 10","setor":"Setor 3","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.98,"classificacao":"medio"},{"praca":"Praça 11","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.63,"classificacao":"medio"},{"praca":"Praça 11","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.46,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.6,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.36,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.65,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.3,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 2","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.6,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 2","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.94,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 1","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.05,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 1","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.6,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 1","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.31,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.36,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 2","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.55,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.43,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.59,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.3,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.14,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.41,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":2.88,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.69,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.18,"classificacao":"alto"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"sofr","dimNome":"Indicadores de Sofrimento Mental","nota":2.55,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.91,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.85,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.39,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.47,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.27,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.39,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.77,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.87,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.43,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.49,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.64,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.32,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.53,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.35,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.63,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 4","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.3,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.3,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.95,"classificacao":"medio"},{"praca":"Praça 12","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.36,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 1","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.63,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 1","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.43,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 2","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.61,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.95,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 3","dimKey":"org","dimNome":"Organização do Trabalho","nota":3.64,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 4","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.86,"classificacao":"medio"},{"praca":"Praça 13","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.6,"classificacao":"medio"},{"praca":"Praça 14","setor":"Setor 3","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.31,"classificacao":"medio"},{"praca":"Praça 14","setor":"Setor 4","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.5,"classificacao":"medio"},{"praca":"Praça 14","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":2.36,"classificacao":"alto"},{"praca":"Praça 14","setor":"Setor 5","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":2.74,"classificacao":"medio"},{"praca":"Praça 15","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.5,"classificacao":"medio"},{"praca":"Praça 15","setor":"Setor 5","dimKey":"sofr","dimNome":"Indicadores de Sofrimento Mental","nota":2.32,"classificacao":"medio"},{"praca":"Praça 15","setor":"Setor 5","dimKey":"danos","dimNome":"Danos Relacionados ao Trabalho","nota":3.0,"classificacao":"medio"},{"praca":"Praça 15","setor":"Setor 5","dimKey":"indiv","dimNome":"Estilos de Gestão (Individualista)","nota":2.68,"classificacao":"medio"},{"praca":"Praça 15","setor":"Setor 5","dimKey":"colet","dimNome":"Estilos de Gestão (Coletivista)","nota":3.49,"classificacao":"medio"}];
+const DIMENSOES = [{"key":"org","nome":"Organização do Trabalho","b1":2.29,"b2":3.69,"dir":"desc"},{"key":"indiv","nome":"Estilos de Gestão (Individualista)","b1":2.49,"b2":3.5,"dir":"asc"},{"key":"colet","nome":"Estilos de Gestão (Coletivista)","b1":2.49,"b2":3.5,"dir":"desc"},{"key":"sofr","nome":"Indicadores de Sofrimento Mental","b1":2.29,"b2":3.69,"dir":"asc"},{"key":"danos","nome":"Danos Relacionados ao Trabalho","b1":2.29,"b2":3.69,"dir":"asc"}];
+const DIM_BY_KEY = {}; DIMENSOES.forEach(d=>DIM_BY_KEY[d.key]=d);
+const CLASSIF_LABEL = {alto:'Risco Alto', medio:'Risco Médio', baixo:'Risco Baixo'};
+const DIM_CONCEITOS = {
+  org: 'Avalia como o trabalho é estruturado, considerando aspectos como divisão de tarefas, ritmo, autonomia, cobrança e condições para realização das atividades.',
+  indiv: 'Refere-se a uma forma de gestão mais centralizadora e baseada no controle, na cobrança individual e na valorização do desempenho pessoal.',
+  colet: 'Avalia uma gestão baseada na cooperação, participação, confiança, integração da equipe e valorização do trabalho coletivo.',
+  sofr: 'Identifica sinais relacionados ao desgaste emocional e psicológico decorrente da relação com o trabalho, como estresse, desânimo, insegurança, irritabilidade e sensação de sobrecarga.',
+  danos: 'Avalia possíveis consequências negativas do trabalho para o indivíduo, considerando impactos físicos, psicológicos e sociais que podem estar associados às condições e relações de trabalho.'
+};
+const STATUS_LABEL = {pendente:'Pendente', em_andamento:'Em andamento', concluida:'Concluída', atrasada:'Atrasada'};
+const AREA_OPCOES = ['RH','SESMT','TI','Gestão','Comunicação','Diretoria','Outro'];
+const ADMIN_PASS = 'admin123';
+const STORAGE_KEY = 'psicossocial_sistema_v1';
+const LOGO_DATA_URI = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E';
+
+let currentRole = null;
+let RESPOSTAS = [];
+let ACOES = [];
+let wzData = {};
+let wzDims = [];
+let pendingAcaoId = null;
+
+/* ===================== UTIL ===================== */
+function fmtNota(n){ if(n===null||n===undefined||isNaN(n)) return '—'; return Number(n).toFixed(2).replace('.',','); }
+function fmtDataISO(d){ if(!d) return '—'; const p=d.split('-'); if(p.length!==3) return d; return p[2]+'/'+p[1]+'/'+p[0]; }
+function hojeISO(){ return new Date().toISOString().slice(0,10); }
+function hojeDisplay(){ return fmtDataISO(hojeISO()); }
+function horaAgora(){ const n=new Date(); return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'); }
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastTimer); window._toastTimer=setTimeout(()=>t.classList.remove('show'), 3000); }
+function fecharModal(id){ document.getElementById(id).classList.remove('open'); }
+function abrirModal(id){ document.getElementById(id).classList.add('open'); }
+function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+/* ===================== ACESSO / SESSÃO ===================== */
+function toggleAdminForm(){ document.getElementById('access-admin-form').classList.add('open'); }
+async function entrarComoAdmin(){
+  const p = document.getElementById('admin-pass').value;
+  if(p !== ADMIN_PASS){ showToast('Senha incorreta.'); return; }
+  currentRole = 'admin';
+  document.getElementById('access-screen').style.display='none';
+  document.getElementById('role-chip').textContent = 'Painel Gerencial';
+  buildSidebar('admin');
+  await carregarDados();
+  irPara('admin-planos');
+}
+async function entrarComo(role){
+  currentRole = role;
+  document.getElementById('access-screen').style.display='none';
+  document.getElementById('role-chip').textContent = role==='gestor' ? 'Gestor' : 'Painel Gerencial';
+  buildSidebar(role);
+  await carregarDados();
+  irPara(role==='gestor' ? 'inicio' : 'admin-planos');
+}
+function sair(){
+  currentRole = null;
+  document.getElementById('access-screen').style.display='flex';
+  document.getElementById('admin-pass').value='';
+  document.getElementById('access-admin-form').classList.remove('open');
+}
+
+const SIDEBAR_GESTOR = [
+  {id:'inicio', label:'Início', dot:'d1'},
+  {id:'novo-plano', label:'Novo Plano de Ação', dot:'d2'},
+  {id:'meus-planos', label:'Meus Planos', dot:'d3'},
+];
+const SIDEBAR_ADMIN = [
+  {id:'admin-planos', label:'Planos de Ação', dot:'d1'},
+  {id:'admin-analise', label:'Análise de Dados', dot:'d2'},
+  {id:'admin-bd', label:'Banco de Dados', dot:'d3'},
+  {id:'admin-config', label:'Configurações', dot:'d1'},
+];
+function buildSidebar(role){
+  const items = role==='gestor'?SIDEBAR_GESTOR:SIDEBAR_ADMIN;
+  document.getElementById('sidebar-nav').innerHTML = items.map(it=>
+    '<button class="side-item" id="side-'+it.id+'" onclick="irPara(\''+it.id+'\')" title="'+it.label+'"><span class="dot '+it.dot+'"></span><span>'+it.label+'</span></button>'
+  ).join('');
+}
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const colapsado = sb.classList.toggle('collapsed');
+  document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
+  try{ localStorage.setItem('riscos_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+}
+function restaurarEstadoSidebar(){
+  let colapsado = false;
+  try{ colapsado = localStorage.getItem('riscos_sidebar_colapsada') === '1'; }catch(e){}
+  if(colapsado){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('side-toggle-btn').title = 'Expandir menu';
+  }
+}
+function renderTudoAdmin(){
+  renderPlanosAdmin();
+  renderControleRespostas();
+  renderPendencias();
+  renderDashboardAdmin();
+  renderAnalise('praca');
+  renderAnalise('setor');
+  renderAnalise('dim');
+  renderBancoDados();
+  popularSelectsExport();
+}
+async function atualizarDadosAdmin(){
+  await carregarDados();
+  renderTudoAdmin();
+  showToast(RESPOSTAS.length+' plano(s) carregado(s).');
+}
+function showSubTab(group, tab, btn){
+  document.querySelectorAll('.subtab-panel[data-group="'+group+'"]').forEach(p=>{ p.style.display = p.getAttribute('data-tab')===tab ? 'block' : 'none'; });
+  document.querySelectorAll('.subtabs[data-group="'+group+'"] .subtab-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+async function irPara(viewId){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.side-item').forEach(v=>v.classList.remove('active'));
+  const view = document.getElementById('view-'+viewId);
+  if(view) view.classList.add('active');
+  const side = document.getElementById('side-'+viewId);
+  if(side) side.classList.add('active');
+  document.getElementById('content').scrollTop = 0;
+
+  // Os planos ficam salvos no navegador (localStorage) e valem para todas as
+  // abas/sessões deste mesmo navegador. Por isso, buscamos a versão mais
+  // recente antes de exibir qualquer tela que dependa deles — útil, por
+  // exemplo, se o Gestor e o Painel Gerencial estiverem em abas diferentes
+  // do mesmo navegador.
+  const precisaDadosFrescos = viewId.indexOf('admin-')===0 || viewId==='meus-planos';
+  if(precisaDadosFrescos) await carregarDados();
+
+  if(viewId==='admin-planos'){ renderPlanosAdmin(); renderControleRespostas(); renderPendencias(); }
+  if(viewId==='admin-analise'){ renderDashboardAdmin(); renderAnalise('praca'); renderAnalise('setor'); renderAnalise('dim'); }
+  if(viewId==='admin-bd'){ renderBancoDados(); popularSelectsExport(); }
+  if(viewId==='meus-planos'){ const tb=document.getElementById('mp-tbody'); if(tb && !document.getElementById('mp-email').value) tb.innerHTML='<tr class="empty-row"><td colspan="6">Informe seu e-mail e clique em Buscar.</td></tr>'; }
+}
+
+/* ===================== PERSISTÊNCIA ===================== */
+// Armazenamento local do navegador (localStorage). Os dados ficam disponíveis
+// para todas as abas/sessões deste mesmo navegador, mas não são compartilhados
+// entre navegadores, computadores ou pessoas diferentes — para isso, seria
+// necessário um backend real com banco de dados.
+async function storageGetSafe(key){
+  try{ const v = localStorage.getItem(key); return v ? {key, value:v} : null; }
+  catch(e){ console.error('localStorage.getItem falhou', e); return null; }
+}
+async function storageSetSafe(key, value){
+  try{ localStorage.setItem(key, value); return {key, value}; }
+  catch(e){ console.error('localStorage.setItem falhou', e); return null; }
+}
+async function carregarDados(){
+  const r = await storageGetSafe(STORAGE_KEY);
+  if(r && r.value){
+    try{
+      const d = JSON.parse(r.value);
+      RESPOSTAS = d.respostas||[];
+      ACOES = d.acoes||[];
+    }catch(e){ console.error('Dados salvos em formato inválido', e); }
+  }
+  // Se não houver nada salvo ainda, mantemos as listas como estão (não zeramos
+  // dados já carregados na memória só porque uma leitura pontual não encontrou nada).
+}
+async function salvarDados(){
+  const r = await storageSetSafe(STORAGE_KEY, JSON.stringify({respostas:RESPOSTAS, acoes:ACOES}));
+  if(!r) showToast('Não foi possível salvar os dados neste navegador — tente novamente.');
+}
+
+/* ===================== BASE SETOR / PROART ===================== */
+function pracasUnicas(){ return Array.from(new Set(BASE_SETOR.map(r=>r.praca))).sort((a,b)=>a.localeCompare(b,'pt-BR')); }
+function setoresDe(praca){ return BASE_SETOR.filter(r=>r.praca===praca).map(r=>r.setor).sort((a,b)=>a.localeCompare(b,'pt-BR')); }
+function dimensoesDe(praca,setor){ return BASE_PROART.filter(r=>r.praca===praca && r.setor===setor); }
+
+/* ===================== WIZARD: NOVO PLANO ===================== */
+function iniciarNovoPlano(){
+  wzData = {}; wzDims = [];
+  document.getElementById('f-praca').innerHTML = '<option value="">Selecione</option>'+pracasUnicas().map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
+  document.getElementById('f-setor').innerHTML = '<option value="">Selecione a praça primeiro</option>';
+  ['f-praca','f-setor','f-gestor','f-cargo','f-email'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-data').value = hojeISO();
+  ['f-praca-wrap','f-setor-wrap','f-gestor-wrap','f-cargo-wrap','f-email-wrap'].forEach(id=>document.getElementById(id).classList.remove('invalid'));
+  document.getElementById('wz-success').style.display='none';
+  goStep(1);
+}
+function onPracaChange(){
+  const praca = document.getElementById('f-praca').value;
+  const sel = document.getElementById('f-setor');
+  sel.innerHTML = praca ? '<option value="">Selecione</option>'+setoresDe(praca).map(s=>'<option value="'+esc(s)+'">'+esc(s)+'</option>').join('') : '<option value="">Selecione a praça primeiro</option>';
+}
+function markInvalid(wrapId, invalid){ document.getElementById(wrapId).classList.toggle('invalid', invalid); }
+function goStep(n){
+  for(let i=1;i<=4;i++) document.getElementById('wz-step-'+i).style.display = (i===n?'block':'none');
+  document.getElementById('wz-success').style.display='none';
+  for(let i=1;i<=4;i++){
+    const el = document.getElementById('wzs-'+i);
+    el.classList.remove('active','done');
+    if(i<n) el.classList.add('done'); else if(i===n) el.classList.add('active');
+  }
+  document.getElementById('content').scrollTop = 0;
+}
+function voltarStep(n){ goStep(n); }
+
+function avancarStep1(){
+  const praca = document.getElementById('f-praca').value;
+  const setor = document.getElementById('f-setor').value;
+  const gestor = document.getElementById('f-gestor').value.trim();
+  const cargo = document.getElementById('f-cargo').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  let ok = true;
+  markInvalid('f-praca-wrap', !praca); if(!praca) ok=false;
+  markInvalid('f-setor-wrap', !setor); if(!setor) ok=false;
+  markInvalid('f-gestor-wrap', !gestor); if(!gestor) ok=false;
+  markInvalid('f-cargo-wrap', !cargo); if(!cargo) ok=false;
+  markInvalid('f-email-wrap', !validEmail(email)); if(!validEmail(email)) ok=false;
+  if(!ok){ showToast('Existem campos obrigatórios não preenchidos. Revise o formulário antes de continuar.'); return; }
+  wzData = {praca, setor, gestor, cargo, email, data: document.getElementById('f-data').value};
+  wzDims = dimensoesDe(praca, setor);
+  if(wzDims.length===0){ showToast('Não há dimensões do PROART registradas para este setor.'); return; }
+  document.getElementById('acoes-blocks').innerHTML = ''; // evita reaproveitar campos de uma combinação Praça/Setor anterior
+  renderDimsReadonly();
+  goStep(2);
+}
+function renderDimsReadonly(){
+  document.getElementById('dims-readonly').innerHTML = wzDims.map(d=>
+    '<div class="dim-card"><div class="dim-card-top"><span class="dim-card-name">'+esc(d.dimNome)+'</span><span class="rbadge '+d.classificacao+'">'+CLASSIF_LABEL[d.classificacao]+'</span></div><div class="dim-card-nota">Nota: '+fmtNota(d.nota)+' — valores obtidos na avaliação PROART, somente para visualização.</div></div>'
+  ).join('');
+}
+async function avancarStep2(){
+  // Se o usuário já tinha preenchido os campos do Plano de Ação e voltou/avançou
+  // de novo sem passar pela Identificação, capturamos o que já foi digitado
+  // antes de recriar os blocos — evita perder o que já estava preenchido.
+  const jaRenderizado = document.getElementById('acoes-blocks').children.length > 0;
+  if(jaRenderizado) wzData.acoes = lerAcoesDOM();
+  renderAcoesBlocks();
+  goStep(3);
+}
+
+function renderAcoesBlocks(){
+  document.getElementById('acoes-blocks').innerHTML = wzDims.map(d=>{
+    const k=d.dimKey;
+    const prev = wzData.acoes && wzData.acoes[k] || {};
+    return '<div class="card" style="margin-bottom:16px" id="acblk-'+k+'">'+
+      '<div class="dim-card-top"><span class="dim-card-name">'+esc(d.dimNome)+'</span><span class="rbadge '+d.classificacao+'">'+CLASSIF_LABEL[d.classificacao]+' — Nota '+fmtNota(d.nota)+'</span></div>'+
+      '<p style="font-size:12px;color:var(--gray400);line-height:1.5;margin-top:4px">'+esc(DIM_CONCEITOS[k]||'')+'</p>'+
+      '<div class="form-grid" style="margin-top:12px">'+
+        '<div class="field span2" id="wrap-objetivo-'+k+'"><label>Objetivo da ação</label><textarea rows="2" id="ac-objetivo-'+k+'" placeholder="O que pretende melhorar?">'+esc(prev.objetivo)+'</textarea><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field span2" id="wrap-acao-'+k+'"><label>Ação proposta</label><textarea rows="2" id="ac-acao-'+k+'" placeholder="Descreva a ação de forma objetiva e executável.">'+esc(prev.acaoProposta)+'</textarea><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field span2" id="wrap-como-'+k+'"><label>Como a ação será realizada?</label><textarea rows="2" id="ac-como-'+k+'" placeholder="Ex.: Reunião mensal do gestor com a equipe para redistribuição de demandas.">'+esc(prev.comoRealizada)+'</textarea><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field" id="wrap-prioridade-'+k+'"><label>Prioridade</label><select id="ac-prioridade-'+k+'"><option value="">Selecione</option><option'+(prev.prioridade==='Alta'?' selected':'')+'>Alta</option><option'+(prev.prioridade==='Média'?' selected':'')+'>Média</option><option'+(prev.prioridade==='Baixa'?' selected':'')+'>Baixa</option></select><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field"><label>Área de apoio</label><select id="ac-area-'+k+'">'+AREA_OPCOES.map(a=>'<option'+(prev.areaApoioBase===a?' selected':'')+'>'+a+'</option>').join('')+'</select></div>'+
+        '<div class="field" id="wrap-responsavel-'+k+'"><label>Responsável</label><input type="text" id="ac-responsavel-'+k+'" placeholder="Quem irá executar a ação" value="'+esc(prev.responsavel)+'"><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field"><label>Área de apoio (especifique, se Outro)</label><input type="text" id="ac-areaoutro-'+k+'" placeholder="Opcional" value="'+esc(prev.areaApoioOutro)+'"></div>'+
+        '<div class="field" id="wrap-inicio-'+k+'"><label>Prazo de início</label><input type="date" id="ac-inicio-'+k+'" value="'+esc(prev.prazoInicio)+'"><span class="errmsg">Campo obrigatório.</span></div>'+
+        '<div class="field" id="wrap-fim-'+k+'"><label>Prazo de conclusão</label><input type="date" id="ac-fim-'+k+'" value="'+esc(prev.prazoConclusao)+'"><span class="errmsg">Campo obrigatório.</span></div>'+
+      '</div></div>';
+  }).join('');
+}
+
+function lerAcoesDOM(){
+  // Lê os valores atuais dos campos do Plano de Ação no DOM, sem validar nem
+  // marcar erros — usada tanto para preservar o rascunho ao navegar entre
+  // passos quanto como base da validação em coletarAcoesDoDOM().
+  const acoes = {};
+  wzDims.forEach(d=>{
+    const k=d.dimKey;
+    const campo = document.getElementById('ac-objetivo-'+k);
+    if(!campo) return; // bloco ainda não renderizado para esta dimensão
+    const val = id=>document.getElementById(id).value.trim();
+    const areaBase = val('ac-area-'+k), areaOutro = val('ac-areaoutro-'+k);
+    acoes[k] = {dimKey:k, dimNome:d.dimNome, nota:d.nota, classificacao:d.classificacao,
+      objetivo:val('ac-objetivo-'+k), acaoProposta:val('ac-acao-'+k), comoRealizada:val('ac-como-'+k),
+      prioridade:val('ac-prioridade-'+k), areaApoioBase:areaBase, areaApoioOutro:areaOutro,
+      areaApoio:(areaBase==='Outro'&&areaOutro)?areaOutro:areaBase,
+      responsavel:val('ac-responsavel-'+k), prazoInicio:val('ac-inicio-'+k), prazoConclusao:val('ac-fim-'+k)};
+  });
+  return acoes;
+}
+function coletarAcoesDoDOM(){
+  const acoes = lerAcoesDOM(); let ok = true;
+  wzDims.forEach(d=>{
+    const k=d.dimKey;
+    const a = acoes[k] || {};
+    const reqs = {'objetivo':a.objetivo,'acao':a.acaoProposta,'como':a.comoRealizada,'prioridade':a.prioridade,'responsavel':a.responsavel,'inicio':a.prazoInicio,'fim':a.prazoConclusao};
+    Object.keys(reqs).forEach(campo=>{
+      const invalid = !reqs[campo];
+      const wrap = document.getElementById('wrap-'+campo+'-'+k);
+      if(wrap) wrap.classList.toggle('invalid', invalid);
+      if(invalid) ok=false;
+    });
+  });
+  return {acoes, ok};
+}
+function avancarStep3(){
+  const {acoes, ok} = coletarAcoesDoDOM();
+  wzData.acoes = acoes;
+  if(!ok){ showToast('Existem campos obrigatórios não preenchidos. Revise o formulário antes de finalizar.'); return; }
+  renderRevisao();
+  goStep(4);
+}
+function renderRevisao(){
+  document.getElementById('rev-praca').textContent = wzData.praca;
+  document.getElementById('rev-setor').textContent = wzData.setor;
+  document.getElementById('rev-gestor').textContent = wzData.gestor+' ('+wzData.cargo+')';
+  document.getElementById('rev-data').textContent = fmtDataISO(wzData.data);
+  document.getElementById('rev-acoes').innerHTML = wzDims.map(d=>{
+    const a = wzData.acoes[d.dimKey];
+    return '<div class="dim-card">'+
+      '<div class="dim-card-top"><span class="dim-card-name">'+esc(d.dimNome)+'</span><span class="rbadge '+d.classificacao+'">'+CLASSIF_LABEL[d.classificacao]+' — Nota '+fmtNota(d.nota)+'</span></div>'+
+      '<div class="kv-grid" style="margin-top:10px">'+
+        '<div class="kv span2" style="grid-column:span 2"><div class="kv-lbl">Objetivo da ação</div><div class="kv-val">'+esc(a.objetivo)+'</div></div>'+
+        '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Ação proposta</div><div class="kv-val">'+esc(a.acaoProposta)+'</div></div>'+
+        '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Como será realizada</div><div class="kv-val">'+esc(a.comoRealizada)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Prioridade</div><div class="kv-val">'+esc(a.prioridade)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Área de apoio</div><div class="kv-val">'+esc(a.areaApoio||'—')+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Responsável</div><div class="kv-val">'+esc(a.responsavel)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Prazos</div><div class="kv-val">'+fmtDataISO(a.prazoInicio)+' até '+fmtDataISO(a.prazoConclusao)+'</div></div>'+
+      '</div></div>';
+  }).join('');
+}
+
+async function finalizarPlano(){
+  // Antes de gravar, buscamos a versão mais recente já salva neste navegador —
+  // outra aba pode ter enviado um plano enquanto este formulário estava
+  // aberto, e não queremos que o salvamento de um apague o do outro.
+  await carregarDados();
+  const seq = RESPOSTAS.length+1;
+  const id = 'RESP-'+String(seq).padStart(5,'0')+'-'+Date.now().toString(36).slice(-4).toUpperCase();
+  const resposta = {
+    id, dataEnvioISO: hojeISO(), dataEnvio: hojeDisplay(), horaEnvio: horaAgora(),
+    praca: wzData.praca, setor: wzData.setor, gestor: wzData.gestor, cargo: wzData.cargo, email: wzData.email,
+    dataPreenchimento: wzData.data, status:'Respondido'
+  };
+  RESPOSTAS.push(resposta);
+  wzDims.forEach(d=>{
+    const a = wzData.acoes[d.dimKey];
+    ACOES.push({
+      idAcao: id+'-'+d.dimKey, idResposta:id, dimKey:d.dimKey, dimNome:d.dimNome, nota:d.nota, classificacao:d.classificacao,
+      objetivo:a.objetivo, acaoProposta:a.acaoProposta, comoRealizada:a.comoRealizada, prioridade:a.prioridade,
+      areaApoio:a.areaApoio, responsavel:a.responsavel, prazoInicio:a.prazoInicio, prazoConclusao:a.prazoConclusao, status:'pendente'
+    });
+  });
+  await salvarDados();
+  window._ultimaRespostaId = id;
+  document.getElementById('success-id').textContent = id;
+  for(let i=1;i<=4;i++) document.getElementById('wz-step-'+i).style.display='none';
+  document.getElementById('wz-success').style.display='block';
+  showToast('Plano de Ação enviado com sucesso.');
+}
+
+/* ===================== MEUS PLANOS ===================== */
+async function buscarMeusPlanos(){
+  await carregarDados();
+  const email = document.getElementById('mp-email').value.trim().toLowerCase();
+  const tbody = document.getElementById('mp-tbody');
+  if(!email){ tbody.innerHTML='<tr class="empty-row"><td colspan="6">Informe seu e-mail e clique em Buscar.</td></tr>'; return; }
+  const minhas = RESPOSTAS.filter(r=>(r.email||'').toLowerCase()===email);
+  if(minhas.length===0){ tbody.innerHTML='<tr class="empty-row"><td colspan="6">Nenhum plano encontrado para este e-mail.</td></tr>'; return; }
+  tbody.innerHTML = minhas.map(r=>{
+    const qtd = ACOES.filter(a=>a.idResposta===r.id).length;
+    return '<tr><td>'+r.id+'</td><td>'+esc(r.praca)+'</td><td>'+esc(r.setor)+'</td><td>'+r.dataEnvio+'</td><td>'+qtd+'</td><td><button class="tbtn" onclick="imprimirResposta(\''+r.id+'\')">Baixar PDF</button></td></tr>';
+  }).join('');
+}
+
+/* ===================== ADMIN: HELPERS ===================== */
+function acoesComContexto(){
+  const map = {}; RESPOSTAS.forEach(r=>map[r.id]=r);
+  return ACOES.map(a=>{
+    const r = map[a.idResposta]||{};
+    return Object.assign({}, a, {praca:r.praca, setor:r.setor, gestor:r.gestor, dataEnvio:r.dataEnvio, dataEnvioISO:r.dataEnvioISO});
+  });
+}
+function statusExibido(a){
+  if(a.status==='concluida') return 'concluida';
+  if(a.prazoConclusao && a.prazoConclusao < hojeISO()) return 'atrasada';
+  return a.status;
+}
+function setoresRespondidosSet(){
+  return new Set(RESPOSTAS.map(r=>(r.praca+'|'+r.setor).toUpperCase()));
+}
+function popularSelectComOpcoes(id, opcoes, manterTodas, labelTodas){
+  const sel = document.getElementById(id); if(!sel) return; const cur = sel.value;
+  const rotulo = labelTodas || 'Todas';
+  sel.innerHTML = (manterTodas!==false?'<option value="">'+rotulo+'</option>':'')+opcoes.map(o=>'<option value="'+esc(o)+'">'+esc(o)+'</option>').join('');
+  sel.value = cur;
+}
+function popularSelectsAdminComuns(){
+  popularSelectComOpcoes('df-praca', pracasUnicas());
+  popularSelectComOpcoes('df-dim', DIMENSOES.map(d=>d.nome));
+  popularSelectComOpcoes('pf-praca', pracasUnicas());
+  popularSelectComOpcoes('pf-setor', Array.from(new Set(BASE_SETOR.map(r=>r.setor))).sort((a,b)=>a.localeCompare(b,'pt-BR')), true, 'Todos');
+}
+function limparFiltrosAdmin(){ ['df-praca','df-dim','df-classif','df-prio','df-status'].forEach(id=>document.getElementById(id).value=''); renderDashboardAdmin(); }
+function limparFiltrosPlanos(){ ['pf-praca','pf-setor','pf-status','pf-gestor','pf-periodo'].forEach(id=>document.getElementById(id).value=''); renderPlanosAdmin(); }
+
+function barChart(container, data, colorFn){
+  if(data.length===0 || data.every(d=>d.val===0)){ container.innerHTML='<div class="chart-empty">Nenhum dado registrado ainda.</div>'; return; }
+  const max = Math.max(...data.map(d=>d.val), 1);
+  container.innerHTML = data.map(d=>{
+    const pct = Math.round(d.val/max*100);
+    return '<div class="bar-row"><div class="bar-lbl">'+esc(d.label)+'</div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+colorFn(d.key)+'">'+(pct>18?'<span class="bar-pct">'+d.val+'</span>':'')+'</div></div>'+
+      '<div class="bar-val">'+d.val+'</div></div>';
+  }).join('');
+}
+function corClassif(k){ return k==='alto'?'linear-gradient(135deg,#ff4e6a,#e0003c)':k==='medio'?'linear-gradient(135deg,#f7a800,#ff9500)':'linear-gradient(135deg,#00c48c,#00e5a0)'; }
+function corPrio(k){ return k==='Alta'?'linear-gradient(135deg,#ff4e6a,#e0003c)':k==='Média'?'linear-gradient(135deg,#f7a800,#ff9500)':'linear-gradient(135deg,#9098b0,#5a6278)'; }
+function corStatus(k){ return {pendente:'linear-gradient(135deg,#9098b0,#5a6278)',em_andamento:'linear-gradient(135deg,#0099e5,#7b2ff7)',concluida:'linear-gradient(135deg,#00c48c,#00e5a0)',atrasada:'linear-gradient(135deg,#ff4e6a,#e0003c)'}[k]; }
+function corGrad(i){ return ['var(--grad1)','var(--grad2)','var(--grad3)','linear-gradient(135deg,#ff4e6a,#e0003c)','linear-gradient(135deg,#00c48c,#00e5a0)'][i%5]; }
+
+/* ===================== ADMIN: DASHBOARD ===================== */
+function renderDashboardAdmin(){
+  popularSelectsAdminComuns();
+  let lista = acoesComContexto();
+  const fPraca=document.getElementById('df-praca').value, fDim=document.getElementById('df-dim').value,
+        fClassif=document.getElementById('df-classif').value, fPrio=document.getElementById('df-prio').value, fStatus=document.getElementById('df-status').value;
+  lista = lista.filter(a=>{
+    if(fPraca && a.praca!==fPraca) return false;
+    if(fDim && a.dimNome!==fDim) return false;
+    if(fClassif && a.classificacao!==fClassif) return false;
+    if(fPrio && a.prioridade!==fPrio) return false;
+    if(fStatus && statusExibido(a)!==fStatus) return false;
+    return true;
+  });
+
+  const setoresResp = setoresRespondidosSet();
+  document.getElementById('dk-total').textContent = RESPOSTAS.length;
+  const pct = BASE_SETOR.length ? Math.round(setoresResp.size/BASE_SETOR.length*100) : 0;
+  document.getElementById('dk-adesao').textContent = pct+'%';
+  document.getElementById('dk-adesao-sub').textContent = setoresResp.size+' de '+BASE_SETOR.length+' setores esperados';
+  document.getElementById('dk-pendentes').textContent = (BASE_SETOR.length-setoresResp.size);
+  const pracasResp = new Set(RESPOSTAS.map(r=>r.praca));
+  document.getElementById('dk-pracas').textContent = pracasResp.size;
+  document.getElementById('dk-setores-sub').textContent = setoresResp.size+' setores respondidos';
+
+  const porPraca = {}; lista.forEach(a=>porPraca[a.praca]=(porPraca[a.praca]||0)+1);
+  barChart(document.getElementById('chart-praca'), Object.keys(porPraca).sort((x,y)=>porPraca[y]-porPraca[x]).slice(0,10).map((p,i)=>({key:i,label:p,val:porPraca[p]})), (k)=>corGrad(k));
+
+  const porDim = {}; DIMENSOES.forEach(d=>porDim[d.nome]=0); lista.forEach(a=>porDim[a.dimNome]=(porDim[a.dimNome]||0)+1);
+  barChart(document.getElementById('chart-dim'), Object.keys(porDim).map((d,i)=>({key:i,label:d,val:porDim[d]})), (k)=>corGrad(k));
+
+  const porClassif = {alto:0,medio:0,baixo:0}; lista.forEach(a=>{ if(porClassif[a.classificacao]!==undefined) porClassif[a.classificacao]++; });
+  barChart(document.getElementById('chart-classif'), [{key:'alto',label:'Risco Alto',val:porClassif.alto},{key:'medio',label:'Risco Médio',val:porClassif.medio},{key:'baixo',label:'Risco Baixo',val:porClassif.baixo}], corClassif);
+
+  const porPrio = {'Alta':0,'Média':0,'Baixa':0}; lista.forEach(a=>{ if(porPrio[a.prioridade]!==undefined) porPrio[a.prioridade]++; });
+  barChart(document.getElementById('chart-prio'), Object.keys(porPrio).map(p=>({key:p,label:p,val:porPrio[p]})), corPrio);
+
+  const porStatus = {pendente:0,em_andamento:0,concluida:0,atrasada:0}; lista.forEach(a=>{ const s=statusExibido(a); if(porStatus[s]!==undefined) porStatus[s]++; });
+  barChart(document.getElementById('chart-status'), Object.keys(porStatus).map(s=>({key:s,label:STATUS_LABEL[s],val:porStatus[s]})), corStatus);
+}
+
+/* ===================== ADMIN: PLANOS DE AÇÃO ===================== */
+function renderPlanosAdmin(){
+  popularSelectsAdminComuns();
+  let lista = acoesComContexto();
+  const fPraca=document.getElementById('pf-praca').value, fSetor=document.getElementById('pf-setor').value,
+        fStatus=document.getElementById('pf-status').value, fGestor=document.getElementById('pf-gestor').value.trim().toLowerCase(),
+        fPeriodo=document.getElementById('pf-periodo').value;
+  lista = lista.filter(a=>{
+    if(fPraca && a.praca!==fPraca) return false;
+    if(fSetor && a.setor!==fSetor) return false;
+    if(fStatus && statusExibido(a)!==fStatus) return false;
+    if(fGestor && !(a.gestor||'').toLowerCase().includes(fGestor)) return false;
+    if(fPeriodo && a.dataEnvioISO!==fPeriodo) return false;
+    return true;
+  });
+  lista.sort((a,b)=>(b.dataEnvioISO||'').localeCompare(a.dataEnvioISO||''));
+  const tbody = document.getElementById('admin-planos-tbody');
+  if(lista.length===0){ tbody.innerHTML='<tr class="empty-row"><td colspan="13">Nenhum plano de ação registrado com os filtros atuais.</td></tr>'; return; }
+  tbody.innerHTML = lista.map(a=>{
+    const st = statusExibido(a);
+    return '<tr class="'+(st==='atrasada'?'overdue':'')+'">'+
+      '<td>'+a.idAcao+'</td><td>'+esc(a.praca)+'</td><td class="wrap-cell">'+esc(a.setor)+'</td><td>'+esc(a.gestor)+'</td>'+
+      '<td>'+esc(a.dimNome)+'</td><td>'+fmtNota(a.nota)+'</td><td><span class="rbadge '+a.classificacao+'">'+CLASSIF_LABEL[a.classificacao].replace('Risco ','')+'</span></td>'+
+      '<td><span class="pbadge '+(a.prioridade==='Alta'?'alta':a.prioridade==='Média'?'media':'baixa')+'">'+a.prioridade+'</span></td>'+
+      '<td>'+esc(a.responsavel)+'</td><td>'+fmtDataISO(a.prazoConclusao)+'</td>'+
+      '<td><span class="spill st-'+st+'">'+STATUS_LABEL[st]+'</span></td><td>'+a.dataEnvio+'</td>'+
+      '<td style="display:flex;gap:6px"><button class="tbtn" onclick="verDetalhePlano(\''+a.idResposta+'\')">Visualizar</button><button class="tbtn" onclick="abrirModalStatus(\''+a.idAcao+'\')">Status</button></td>'+
+    '</tr>';
+  }).join('');
+}
+function abrirModalStatus(idAcao){ pendingAcaoId = idAcao; const a = ACOES.find(x=>x.idAcao===idAcao); document.getElementById('st-novo-status').value = a?a.status:'pendente'; abrirModal('modal-status'); }
+async function salvarStatusAcao(){
+  // Recarrega antes de gravar, pelo mesmo motivo do envio de plano: evita que
+  // esta atualização de status apague alterações feitas por outra pessoa
+  // entre o carregamento da tela e este clique em Salvar.
+  await carregarDados();
+  const a = ACOES.find(x=>x.idAcao===pendingAcaoId);
+  if(!a){ showToast('Esta ação não foi encontrada — os dados podem ter sido atualizados. Recarregando...'); fecharModal('modal-status'); renderTudoAdmin(); return; }
+  a.status = document.getElementById('st-novo-status').value;
+  await salvarDados();
+  fecharModal('modal-status');
+  renderTudoAdmin();
+  showToast('Status atualizado.');
+}
+
+let pendingDetalheId=null;
+function verDetalhePlano(idResposta){
+  pendingDetalheId = idResposta;
+  const r = RESPOSTAS.find(x=>x.id===idResposta); if(!r) return;
+  const acoes = ACOES.filter(a=>a.idResposta===idResposta);
+  document.getElementById('det-sub').textContent = r.praca+' — '+r.setor+' · Gestor: '+r.gestor+' · Envio: '+r.dataEnvio;
+  document.getElementById('det-body').innerHTML = acoes.map(a=>
+    '<div class="dim-card"><div class="dim-card-top"><span class="dim-card-name">'+esc(a.dimNome)+'</span><span class="rbadge '+a.classificacao+'">'+CLASSIF_LABEL[a.classificacao]+' — Nota '+fmtNota(a.nota)+'</span></div>'+
+    '<div class="kv-grid" style="margin-top:10px">'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Objetivo</div><div class="kv-val">'+esc(a.objetivo)+'</div></div>'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Ação proposta</div><div class="kv-val">'+esc(a.acaoProposta)+'</div></div>'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Como será realizada</div><div class="kv-val">'+esc(a.comoRealizada)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Prioridade</div><div class="kv-val">'+esc(a.prioridade)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Área de apoio</div><div class="kv-val">'+esc(a.areaApoio||'—')+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Responsável</div><div class="kv-val">'+esc(a.responsavel)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Prazos</div><div class="kv-val">'+fmtDataISO(a.prazoInicio)+' até '+fmtDataISO(a.prazoConclusao)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Status</div><div class="kv-val"><span class="spill st-'+statusExibido(a)+'">'+STATUS_LABEL[statusExibido(a)]+'</span></div></div>'+
+    '</div></div>'
+  ).join('');
+  abrirModal('modal-detalhe');
+}
+function imprimirRespostaDoModal(){ if(pendingDetalheId) imprimirResposta(pendingDetalheId); }
+
+/* ===================== ADMIN: CONTROLE DE RESPOSTAS / PENDÊNCIAS ===================== */
+function renderControleRespostas(){
+  const map = {}; RESPOSTAS.forEach(r=>map[(r.praca+'|'+r.setor).toUpperCase()]=r);
+  const tbody = document.getElementById('controle-tbody');
+  tbody.innerHTML = BASE_SETOR.map(bs=>{
+    const r = map[(bs.praca+'|'+bs.setor).toUpperCase()];
+    return '<tr><td>'+esc(bs.praca)+'</td><td class="wrap-cell">'+esc(bs.setor)+'</td><td>'+(r?esc(r.gestor):'—')+'</td>'+
+      '<td><span class="spill '+(r?'st-respondido':'st-pendente_envio')+'">'+(r?'Respondido':'Pendente')+'</span></td><td>'+(r?r.dataEnvio:'—')+'</td></tr>';
+  }).join('');
+}
+function renderPendencias(){
+  const set = setoresRespondidosSet();
+  const pend = BASE_SETOR.filter(bs=>!set.has((bs.praca+'|'+bs.setor).toUpperCase()));
+  const tbody = document.getElementById('pendencias-tbody');
+  tbody.innerHTML = pend.length===0 ? '<tr class="empty-row"><td colspan="2">Nenhuma pendência — todos os setores esperados já enviaram o Plano de Ação.</td></tr>'
+    : pend.map(p=>'<tr><td>'+esc(p.praca)+'</td><td class="wrap-cell">'+esc(p.setor)+'</td></tr>').join('');
+}
+
+/* ===================== ADMIN: ANÁLISES ===================== */
+function renderAnalise(tipo){
+  const lista = acoesComContexto();
+  const chaveFn = tipo==='praca'?a=>a.praca:tipo==='setor'?a=>a.setor:a=>a.dimNome;
+  const grupos = {};
+  lista.forEach(a=>{ const k=chaveFn(a); if(!grupos[k]) grupos[k]={total:0,alto:0,medio:0,baixo:0}; grupos[k].total++; if(grupos[k][a.classificacao]!==undefined) grupos[k][a.classificacao]++; });
+  const keys = Object.keys(grupos).sort((x,y)=>grupos[y].total-grupos[x].total);
+  const chartEl = document.getElementById('analise-'+tipo+'-chart');
+  barChart(chartEl, keys.slice(0,12).map((k,i)=>({key:i,label:k,val:grupos[k].total})), corGrad);
+  const tbody = document.getElementById('analise-'+tipo+'-tbody');
+  tbody.innerHTML = keys.length===0 ? '<tr class="empty-row"><td colspan="5">Nenhum dado registrado ainda.</td></tr>'
+    : keys.map(k=>'<tr><td class="wrap-cell">'+esc(k)+'</td><td>'+grupos[k].total+'</td><td>'+grupos[k].alto+'</td><td>'+grupos[k].medio+'</td><td>'+grupos[k].baixo+'</td></tr>').join('');
+}
+
+/* ===================== ADMIN: BANCO DE DADOS ===================== */
+function renderBancoDados(){
+  document.getElementById('bd-respostas-tbody').innerHTML = RESPOSTAS.length===0 ? '<tr class="empty-row"><td colspan="9">Nenhuma resposta registrada.</td></tr>' :
+    RESPOSTAS.map(r=>'<tr><td>'+r.id+'</td><td>'+r.dataEnvio+'</td><td>'+r.horaEnvio+'</td><td>'+esc(r.praca)+'</td><td class="wrap-cell">'+esc(r.setor)+'</td><td>'+esc(r.gestor)+'</td><td>'+esc(r.cargo)+'</td><td>'+esc(r.email)+'</td><td>'+r.status+'</td></tr>').join('');
+  document.getElementById('bd-acoes-tbody').innerHTML = ACOES.length===0 ? '<tr class="empty-row"><td colspan="9">Nenhuma ação registrada.</td></tr>' :
+    ACOES.map(a=>'<tr><td>'+a.idAcao+'</td><td>'+a.idResposta+'</td><td>'+esc(a.dimNome)+'</td><td>'+a.prioridade+'</td><td>'+esc(a.areaApoio||'—')+'</td><td>'+esc(a.responsavel)+'</td><td>'+fmtDataISO(a.prazoInicio)+'</td><td>'+fmtDataISO(a.prazoConclusao)+'</td><td>'+STATUS_LABEL[statusExibido(a)]+'</td></tr>').join('');
+}
+
+/* ===================== ADMIN: EXPORTAÇÕES ===================== */
+function popularSelectsExport(){
+  popularSelectComOpcoes('ex-praca', pracasUnicas());
+  popularSelectComOpcoes('ex-dim', DIMENSOES.map(d=>d.nome));
+}
+function linhasExportacao(){
+  const fPraca=document.getElementById('ex-praca').value, fDim=document.getElementById('ex-dim').value,
+        fStatus=document.getElementById('ex-status').value, fPrio=document.getElementById('ex-prio').value;
+  return acoesComContexto().filter(a=>{
+    if(fPraca && a.praca!==fPraca) return false;
+    if(fDim && a.dimNome!==fDim) return false;
+    if(fStatus && statusExibido(a)!==fStatus) return false;
+    if(fPrio && a.prioridade!==fPrio) return false;
+    return true;
+  });
+}
+const EXPORT_HEADERS = ['ID_Resposta','Data_Envio','Hora_Envio','Praça','Setor','Gestor','Email','Dimensão','Nota','Classificação_Risco','Objetivo_Ação','Ação_Proposta','Como_Será_Realizada','Prioridade','Área_Apoio','Responsável','Prazo_Início','Prazo_Conclusão','Status'];
+function linhaParaArray(a){
+  return [a.idResposta,a.dataEnvio,'',a.praca,a.setor,a.gestor,'',a.dimNome,fmtNota(a.nota),CLASSIF_LABEL[a.classificacao],a.objetivo,a.acaoProposta,a.comoRealizada,a.prioridade,a.areaApoio||'',a.responsavel,fmtDataISO(a.prazoInicio),fmtDataISO(a.prazoConclusao),STATUS_LABEL[statusExibido(a)]];
+}
+function exportarDados(tipo){
+  const linhas = linhasExportacao();
+  if(linhas.length===0){ showToast('Não há registros para os filtros selecionados.'); return; }
+  if(tipo==='xlsx'){
+    if(typeof XLSX === 'undefined'){ showToast('Não foi possível carregar o módulo de Excel (verifique a conexão com a internet) — tente CSV.'); return; }
+    try{
+      const aoa = [EXPORT_HEADERS, ...linhas.map(linhaParaArray)];
+      const ws = XLSX.utils.aoa_to_sheet(aoa);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Planos de Ação');
+      XLSX.writeFile(wb, 'planos_de_acao_riscos_psicossociais.xlsx');
+      showToast('Excel exportado.');
+    }catch(e){ console.error(e); showToast('Erro ao gerar o Excel — tente exportar em CSV.'); }
+  } else if(tipo==='csv'){
+    const esc = v=>'"'+String(v===undefined||v===null?'':v).replace(/"/g,'""')+'"';
+    let out = EXPORT_HEADERS.map(esc).join(';')+'\r\n';
+    linhas.forEach(a=>{ out += linhaParaArray(a).map(esc).join(';')+'\r\n'; });
+    const blob = new Blob(['\ufeff'+out], {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob); const el=document.createElement('a'); el.href=url; el.download='planos_de_acao_riscos_psicossociais.csv';
+    document.body.appendChild(el); el.click(); document.body.removeChild(el); URL.revokeObjectURL(url);
+    showToast('CSV exportado.');
+  } else if(tipo==='pdf'){
+    const rowsHtml = linhas.map(a=>'<tr><td>'+a.idResposta+'</td><td>'+esc(a.praca)+'</td><td>'+esc(a.setor)+'</td><td>'+esc(a.dimNome)+'</td><td>'+CLASSIF_LABEL[a.classificacao]+'</td><td>'+a.prioridade+'</td><td>'+STATUS_LABEL[statusExibido(a)]+'</td></tr>').join('');
+    const html = '<div class="pdf-doc"><div class="ptband"></div><div class="phdr"><div><div class="phdr-title">Relatório de Planos de Ação — Riscos Psicossociais</div><div class="phdr-sub">Exportado em '+hojeDisplay()+' · '+linhas.length+' registro(s)</div></div><img class="phdr-logo" src="'+LOGO_DATA_URI+'" alt="Logo da empresa"></div>'+
+      '<div class="pbody"><table class="dtable" style="min-width:0"><thead><tr><th>ID</th><th>Praça</th><th>Setor</th><th>Dimensão</th><th>Classificação</th><th>Prioridade</th><th>Status</th></tr></thead><tbody>'+rowsHtml+'</tbody></table></div></div>';
+    document.getElementById('print-content').innerHTML = html;
+    document.getElementById('print-overlay').classList.add('visible');
+    setTimeout(()=>window.print(), 200);
+  }
+}
+
+/* ===================== RESET ===================== */
+function abrirModalReset(){ abrirModal('modal-reset'); }
+async function confirmarReset(){
+  RESPOSTAS = []; ACOES = [];
+  await salvarDados();
+  fecharModal('modal-reset');
+  irPara('admin-planos');
+  showToast('Todos os planos foram apagados.');
+}
+
+/* ===================== PDF DE UMA RESPOSTA (modelo "Plano de ação - Novo") ===================== */
+function imprimirResposta(idResposta){
+  const r = RESPOSTAS.find(x=>x.id===idResposta);
+  if(!r){ showToast('Resposta não encontrada.'); return; }
+  const acoes = ACOES.filter(a=>a.idResposta===idResposta);
+  const notasRows = acoes.map(a=>'<tr><td>'+esc(a.dimNome)+'</td><td>'+CLASSIF_LABEL[a.classificacao]+'</td><td>'+fmtNota(a.nota)+'</td></tr>').join('');
+  const planoBlocks = acoes.map(a=>
+    '<div class="pdim-block"><div class="pdim-head"><b>'+esc(a.dimNome)+'</b><span class="rbadge '+a.classificacao+'">'+CLASSIF_LABEL[a.classificacao]+' — Nota '+fmtNota(a.nota)+'</span></div>'+
+    '<div class="kv-grid">'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Objetivo da ação</div><div class="kv-val">'+esc(a.objetivo)+'</div></div>'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Ação proposta</div><div class="kv-val">'+esc(a.acaoProposta)+'</div></div>'+
+      '<div class="kv" style="grid-column:span 2"><div class="kv-lbl">Como será realizada</div><div class="kv-val">'+esc(a.comoRealizada)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Prioridade</div><div class="kv-val">'+esc(a.prioridade)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Área de apoio</div><div class="kv-val">'+esc(a.areaApoio||'—')+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Responsável</div><div class="kv-val">'+esc(a.responsavel)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Prazo de início</div><div class="kv-val">'+fmtDataISO(a.prazoInicio)+'</div></div>'+
+      '<div class="kv"><div class="kv-lbl">Prazo de conclusão</div><div class="kv-val">'+fmtDataISO(a.prazoConclusao)+'</div></div>'+
+    '</div></div>'
+  ).join('');
+  const html = '<div class="pdf-doc"><div class="ptband"></div>'+
+    '<div class="phdr"><div><div class="phdr-title">PLANO DE AÇÃO — RISCOS PSICOSSOCIAIS</div><div class="phdr-sub">ID: '+r.id+' · Enviado em '+r.dataEnvio+' às '+r.horaEnvio+'</div></div><img class="phdr-logo" src="'+LOGO_DATA_URI+'" alt="Logo da empresa"></div>'+
+    '<div class="pbody">'+
+      '<div class="psect"><div class="pstitle">1. Identificação</div><div class="kv-grid">'+
+        '<div class="kv"><div class="kv-lbl">Unidade/Praça</div><div class="kv-val">'+esc(r.praca)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Setor</div><div class="kv-val">'+esc(r.setor)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Gestor responsável</div><div class="kv-val">'+esc(r.gestor)+' — '+esc(r.cargo)+'</div></div>'+
+        '<div class="kv"><div class="kv-lbl">Data</div><div class="kv-val">'+fmtDataISO(r.dataPreenchimento)+'</div></div>'+
+      '</div></div>'+
+      '<div class="psect"><div class="pstitle">2. Notas do PROART</div><table class="dtable" style="min-width:0"><thead><tr><th>Dimensão</th><th>Classificação do risco</th><th>Nota</th></tr></thead><tbody>'+notasRows+'</tbody></table></div>'+
+      '<div class="psect"><div class="pstitle">3. Plano de Ação</div>'+planoBlocks+'</div>'+
+    '</div></div>';
+  document.getElementById('print-content').innerHTML = html;
+  document.getElementById('print-overlay').classList.add('visible');
+  setTimeout(()=>window.print(), 200);
+}
+
+function entrarComoAdminEmbutido(){
+  currentRole = 'admin';
+  document.getElementById('access-screen').style.display='none';
+  document.getElementById('role-chip').textContent = 'Painel Gerencial';
+  buildSidebar('admin');
+  irPara('admin-planos');
+}
+
+/* ===================== INIT ===================== */
+(async function init(){
+  await carregarDados();
+  restaurarEstadoSidebar();
+  /* Quando este módulo é aberto de dentro do workspace GT360 (embutido em iframe),
+     pula direto para o Painel Gerencial — a escolha "Sou Gestor / Painel Gerencial"
+     (e a senha do painel) só fazem sentido quando o link é aberto isoladamente,
+     fora do workspace interno. */
+  if(window.self !== window.top){
+    entrarComoAdminEmbutido();
+    // Dentro do workspace GT360 não existe para onde "sair" — a escolha
+    // "Sou Gestor / Painel Gerencial" não faz sentido neste contexto.
+    const btnSair = document.getElementById('btn-sair-top');
+    if(btnSair) btnSair.style.display = 'none';
+  }
+})();
+</script>
+</body>
+</html>

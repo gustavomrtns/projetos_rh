@@ -22,9 +22,9 @@ Este portfólio reúne dois produtos digitais que conectam Gestão de Pessoas, p
 | Desenvolvimento de Talentos | Painel de Treinamentos |
 | Qualidade e Processos | Checklist 5S |
 
-[![Visão dos nove módulos do GT360°](./gt360/gt360-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/gt360/)
+[![Ilustração da navegação pelos nove módulos do GT360°](./gt360/gt360-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/gt360/)
 
-O GT360° funciona no navegador com dados salvos localmente no dispositivo. Não há conta, banco de dados compartilhado ou sincronização entre usuários nesta versão.
+O GT360° reúne os módulos por navegação. Cada aplicação mantém seus registros localmente no navegador; não há conta, banco de dados compartilhado ou sincronização entre usuários nesta versão. A imagem acima ilustra a organização dos módulos.
 
 ### eu + horizonte
 

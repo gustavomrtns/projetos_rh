@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist 5S | Auditoria de Qualidade</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — Sistema de Auditoria
+═══════════════════════════════════════════ */
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+  --s1-grad:linear-gradient(160deg,#f7a800,#ff4e00);
+  --s2-grad:linear-gradient(160deg,#ff4e00,#e0009e);
+  --s3-grad:linear-gradient(160deg,#0099e5,#00e5a0);
+  --s4-grad:linear-gradient(160deg,#00c48c,#0099e5);
+  --s5-grad:linear-gradient(160deg,#7b2ff7,#e0009e);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html,body{height:100%}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--offwhite);
+  color: var(--gray800);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#view-painel{flex:1;overflow-y:auto;min-height:0;padding-bottom:72px}
+#view-checklist{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+#view-painel.hidden-view,#view-checklist.hidden-view{display:none!important}
+.check-workspace-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.check-sidebar{width:240px;flex-shrink:0;background:var(--white);border-right:1px solid var(--gray100);display:flex;flex-direction:column;padding:18px 12px;gap:2px;overflow-y:auto;transition:width .2s ease}
+.check-sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px;gap:8px}
+.check-sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);padding:6px 12px 10px}
+.check-side-toggle{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1.5px solid var(--gray100);background:var(--gray50);color:var(--gray400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.check-side-toggle:hover{border-color:var(--gray400);color:var(--gray800)}
+.check-side-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;color:var(--gray600);transition:all .18s;border:2px solid transparent;background:none;text-align:left;width:100%;font-family:'Sora',sans-serif}
+.check-side-item:hover{background:var(--gray50);color:var(--gray800)}
+.check-side-item.active{background:var(--gray800);border-color:var(--gray800);color:var(--white)}
+.check-side-item .dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.check-sidebar.collapsed{width:64px}
+.check-sidebar.collapsed .check-sidebar-label{display:none}
+.check-sidebar.collapsed .check-sidebar-top{justify-content:center}
+.check-sidebar.collapsed .check-side-item{justify-content:center;padding:11px 0}
+.check-sidebar.collapsed .check-side-item span:not(.dot){display:none}
+.check-sidebar.collapsed #check-side-toggle-icon{transform:rotate(180deg)}
+.check-content{flex:1;overflow-y:auto;min-width:0;padding-bottom:72px}
+@media(max-width:700px){
+  .check-workspace-body{flex-direction:column}
+  .check-sidebar{width:100%!important;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--gray100);padding:8px 10px}
+  .check-side-item{flex-shrink:0;white-space:nowrap}
+  .check-sidebar-label,.check-sidebar-top{display:none}
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   NAV BAND
+═══════════════════════════════════════════ */
+.nav-band { height: 5px; background: var(--gradFull); }
+
+.nav-tabs {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--gray100);
+  overflow-x: auto;
+}
+.nav-tab {
+  flex: 1; min-width: 120px;
+  padding: 14px 10px; text-align: center;
+  cursor: pointer;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--gray400);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  white-space: nowrap; user-select: none;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.nav-tab:hover  { color: var(--gray600); background: var(--gray50); }
+.nav-tab.active { color: var(--gray800); background: var(--offwhite); }
+.nav-tab[data-s="1"].active { border-bottom-color: var(--s1-cor); color: var(--s1-cor); }
+.nav-tab[data-s="2"].active { border-bottom-color: var(--s2-cor); color: var(--s2-cor); }
+.nav-tab[data-s="3"].active { border-bottom-color: var(--s3-cor); color: var(--s3-cor); }
+.nav-tab[data-s="4"].active { border-bottom-color: var(--s4-cor); color: var(--s4-cor); }
+.nav-tab[data-s="5"].active { border-bottom-color: var(--s5-cor); color: var(--s5-cor); }
+
+.tab-dot { width: 8px; height: 8px; border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity .2s; }
+.nav-tab.active .tab-dot { opacity: 1; }
+.dot-s1 { background: var(--s1-grad); }
+.dot-s2 { background: var(--s2-grad); }
+.dot-s3 { background: var(--s3-grad); }
+.dot-s4 { background: var(--s4-grad); }
+.dot-s5 { background: var(--s5-grad); }
+
+/* ═══════════════════════════════════════════
+   PAGE
+═══════════════════════════════════════════ */
+.page { display: none; padding: 28px 20px 48px; animation: fadeUp .35s ease both; }
+.page.active { display: block; }
+.container { max-width: 980px; margin: 0 auto; }
+
+/* ═══════════════════════════════════════════
+   HEADER CARD
+═══════════════════════════════════════════ */
+.header-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.header-band { height: 7px; background: var(--gradFull); }
+.header-inner {
+  padding: 22px 28px;
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.header-title h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--gray800); margin-bottom: 3px;
+}
+.header-title p { font-size: 13px; color: var(--gray400); font-weight: 300; }
+.header-badge {
+  padding: 6px 16px; border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: white; background: var(--grad3);
+  white-space: nowrap; align-self: center;
+}
+
+/* ═══════════════════════════════════════════
+   META FORM CARD
+═══════════════════════════════════════════ */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: box-shadow .2s;
+}
+.card:focus-within { box-shadow: var(--shadow-lg); }
+
+.form-grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: .08em;
+}
+.field input,
+.field select,
+.field textarea {
+  background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px;
+  padding: 10px 13px; border-radius: 8px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+  appearance: none; -webkit-appearance: none;
+  resize: vertical;
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer; resize: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--g3a);
+  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  background: #fff;
+}
+
+/* ═══════════════════════════════════════════
+   SCORE PANEL
+═══════════════════════════════════════════ */
+.score-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.score-inner {
+  padding: 22px 28px;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.score-total-wrap { text-align: center; }
+.score-total {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; font-weight: 400; line-height: 1;
+  background: var(--gradFull);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.score-label { font-size: 10px; color: var(--gray400); text-transform: uppercase; letter-spacing: .1em; margin-top: 4px; }
+.score-divider { width: 1.5px; height: 56px; background: linear-gradient(to bottom, transparent, var(--gray200), transparent); }
+.score-bars { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 9px; }
+.score-bar-row { display: grid; grid-template-columns: 80px 1fr 42px; align-items: center; gap: 12px; }
+.score-bar-label { font-size: 10px; color: var(--gray400); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+.score-bar-track { height: 7px; background: var(--gray100); border-radius: 99px; overflow: hidden; }
+.score-bar-fill  { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.score-bar-pct   { font-size: 11px; text-align: right; font-weight: 700; color: var(--gray600); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 0 28px 18px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray400); }
+.legend-dot  { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ═══════════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════════ */
+.section-hd {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.section-hd-band { height: 5px; }
+.section-hd-inner { padding: 20px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between; }
+.section-hd-left { display: flex; align-items: center; gap: 14px; }
+.s-badge {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; color: #fff;
+  white-space: nowrap;
+}
+.section-hd-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gray800); }
+.section-hd-desc  { font-size: 12px; color: var(--gray400); font-weight: 300; line-height: 1.6; max-width: 560px; margin-top: 2px; }
+.section-hd-score {
+  font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   CHECKLIST
+═══════════════════════════════════════════ */
+.checklist {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1.5px solid var(--gray100);
+}
+.check-item {
+  background: var(--white);
+  padding: 16px 20px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: center;
+  transition: background .15s;
+  border-bottom: 1px solid var(--gray100);
+  border-left: 4px solid transparent;
+}
+.check-item:last-child { border-bottom: none; }
+.check-item:hover { background: var(--gray50); }
+.check-item.ok  { border-left-color: var(--ok);  background: #f0fdf8; }
+.check-item.nok { border-left-color: var(--nok); background: #fff2f2; }
+.check-item.na  { border-left-color: var(--na);  background: var(--gray50); opacity: .6; }
+.item-text     { font-size: 13px; line-height: 1.55; color: var(--gray800); font-weight: 500; }
+.item-criteria { font-size: 11px; color: var(--gray400); margin-top: 4px; line-height: 1.45; }
+.item-controls { display: flex; gap: 6px; }
+
+.btn-check {
+  width: 38px; height: 38px; border-radius: 8px;
+  border: 1.5px solid var(--gray200);
+  background: var(--white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800;
+  transition: all .15s; color: var(--gray400);
+}
+.btn-check:hover { transform: scale(1.1); }
+.btn-check.ok-btn:hover, .btn-check.ok-btn.active {
+  background: var(--grad-green); border-color: var(--ok);
+  color: #fff; box-shadow: 0 2px 10px rgba(0,196,140,.35);
+}
+.btn-check.nok-btn:hover, .btn-check.nok-btn.active {
+  background: var(--grad-red); border-color: var(--nok);
+  color: #fff; box-shadow: 0 2px 10px rgba(224,0,60,.3);
+}
+.btn-check.na-btn:hover, .btn-check.na-btn.active {
+  background: var(--gray200); border-color: var(--na); color: var(--gray600);
+}
+
+/* ═══════════════════════════════════════════
+   NOTES BLOCK
+═══════════════════════════════════════════ */
+.notes-block {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.notes-block label {
+  display: block;
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+textarea {
+  width: 100%; background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif; font-size: 13px;
+  padding: 12px 14px; border-radius: 8px;
+  resize: vertical; min-height: 80px;
+  outline: none; line-height: 1.6;
+  transition: border-color .2s, box-shadow .2s;
+}
+textarea:focus {
+  border-color: var(--g3a);
+  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  background: #fff;
+}
+
+/* ═══════════════════════════════════════════
+   BOTTOM BAR
+═══════════════════════════════════════════ */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--white);
+  border-top: 1.5px solid var(--gray100);
+  padding: 10px 24px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+  z-index: 150;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+}
+.bottom-info { font-size: 12px; color: var(--gray400); white-space: nowrap; }
+.bottom-info strong { color: var(--gray800); }
+.bottom-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700;
+  color: white; background: var(--grad3);
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 4px 14px rgba(123,47,247,.3);
+}
+.btn-primary:hover  { opacity: .9; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
+  color: var(--gray600); background: var(--white);
+  border: 1.5px solid var(--gray200); cursor: pointer;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--g3a); color: var(--g3a); background: #f5f0ff; }
+
+.btn-export {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700;
+  color: white; background: var(--grad1);
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 4px 14px rgba(255,78,0,.3);
+}
+.btn-export:hover  { opacity: .9; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 80px; left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--gray800); color: white;
+  padding: 10px 20px; border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  opacity: 0; pointer-events: none;
+  transition: all .3s; z-index: 9999;
+  white-space: nowrap;
+}
+.toast.show  { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: #c0392b; }
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500; opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg); padding: 28px;
+  width: 90%; max-width: 440px;
+  transform: scale(.95); transition: transform .25s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal h2 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 8px; }
+.modal p  { font-size: 13px; color: var(--gray600); margin-bottom: 20px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .form-grid-4 { grid-template-columns: 1fr 1fr; }
+  .form-grid   { grid-template-columns: 1fr; }
+  .score-divider { display: none; }
+  .score-inner   { gap: 20px; }
+}
+@media (max-width: 420px) {
+  .header-inner { flex-direction: column; }
+  .nav-tab { min-width: 90px; font-size: 9px; }
+}
+
+.painel-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin:24px 0 10px;}
+.dash-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;}
+.dash-card{background:var(--white);border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:16px;text-align:center;}
+.dash-card .num{font-family:'DM Serif Display',serif;font-size:26px;color:var(--gray800);line-height:1.1;}
+.dash-card .lbl{font-size:10.5px;color:var(--gray400);text-transform:uppercase;letter-spacing:.04em;margin-top:4px;font-weight:700;}
+.agendada-row,.realizada-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 14px;border:1.5px solid var(--gray100);border-radius:10px;margin-bottom:8px;background:var(--white);}
+.agendada-name,.realizada-name{font-weight:700;font-size:13px;color:var(--gray800);}
+.agendada-meta,.realizada-meta{font-size:11px;color:var(--gray400);margin-top:2px;}
+.painel-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;color:#fff;}
+.painel-badge.pendente{background:var(--gray400);}
+.painel-empty{text-align:center;color:var(--gray400);padding:20px;font-size:13px;background:var(--white);border-radius:10px;}
+</style>
+</head>
+<body>
+
+<div id="view-painel">
+<div class="container">
+  <div class="header-card" style="margin-top:28px">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Painel Gerencial — Checklist 5S</h1>
+        <p>Acompanhamento macro das auditorias de organização e qualidade do ambiente de trabalho</p>
+      </div>
+      <button class="btn-secondary" onclick="abrirModalNovaAuditoria()">+ Nova Auditoria</button>
+    </div>
+  </div>
+
+  <div class="dash-cards" id="painel-cards"></div>
+
+<div class="painel-section-title">Auditorias Agendadas</div>
+  <div id="painel-agendadas"></div>
+
+<div class="painel-section-title">Auditorias Realizadas</div>
+  <div id="painel-realizadas"></div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modalNovaAuditoria">
+  <div class="modal modal-wide">
+    <h2>Nova Auditoria</h2>
+    <p>Cadastre a auditoria — o auditor interno recebe um link ou QR Code para abrir o checklist e começar.</p>
+    <div class="field" style="text-align:left;margin-top:16px"><label>Área a ser auditada</label><input type="text" id="na-area" placeholder="Ex: Produção"></div>
+    <div class="field" style="text-align:left"><label>Auditor Responsável</label><input type="text" id="na-responsavel" placeholder="Nome do auditor"></div>
+    <div class="field" style="text-align:left"><label>Data prevista</label><input type="date" id="na-data"></div>
+    <div class="field" style="text-align:left"><label>Turno</label>
+      <select id="na-turno"><option value="Manhã">Manhã</option><option value="Tarde">Tarde</option><option value="Noite">Noite</option></select>
+    </div>
+    <div class="field" style="text-align:left"><label>E-mail do auditor (opcional, para envio direto)</label><input type="email" id="na-email"></div>
+    <div class="field" style="text-align:left"><label>Seu e-mail (para receber o resultado)</label><input type="email" id="na-email-gestor" placeholder="gestor@empresa.com"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modalNovaAuditoria')">Cancelar</button>
+      <button class="btn-primary" onclick="gerarAuditoriaAgendada()">Gerar Link e QR Code</button>
+    </div>
+    <div id="na-resultado" style="display:none;margin-top:16px">
+      <div id="na-qr" style="display:flex;justify-content:center;margin-bottom:12px"></div>
+      <input type="text" id="na-link" readonly style="width:100%;padding:10px;border:1.5px solid var(--gray100);border-radius:8px;font-size:12px" onclick="this.select()">
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="copiarLinkAuditoria()">Copiar Link</button>
+        <button class="btn-secondary" onclick="enviarAuditoriaPorEmail()">Enviar por E-mail</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="view-checklist" class="hidden-view">
+<!-- ═══ NAV BAND ═══ -->
+<div class="nav-band"></div>
+
+<div class="check-workspace-body">
+  <aside class="check-sidebar" id="check-sidebar">
+    <div class="check-sidebar-top">
+      <div class="check-sidebar-label">Navegação</div>
+      <button class="check-side-toggle" id="check-side-toggle-btn" onclick="toggleCheckSidebar()" title="Recolher menu">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="check-side-toggle-icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+    </div>
+    <nav id="check-sidebar-nav">
+      <button class="check-side-item active" data-s="1" onclick="switchTab(1)" title="1º Seiri"><span class="dot dot-s1"></span><span>1° Seiri</span></button>
+      <button class="check-side-item" data-s="2" onclick="switchTab(2)" title="2º Seiton"><span class="dot dot-s2"></span><span>2° Seiton</span></button>
+      <button class="check-side-item" data-s="3" onclick="switchTab(3)" title="3º Seiso"><span class="dot dot-s3"></span><span>3° Seiso</span></button>
+      <button class="check-side-item" data-s="4" onclick="switchTab(4)" title="4º Seiketsu"><span class="dot dot-s4"></span><span>4° Seiketsu</span></button>
+      <button class="check-side-item" data-s="5" onclick="switchTab(5)" title="5º Shitsuke"><span class="dot dot-s5"></span><span>5° Shitsuke</span></button>
+    </nav>
+  </aside>
+
+  <main class="check-content" id="check-content">
+
+<!-- ═══ PAGES ═══ -->
+
+<!-- Página 1 — Seiri -->
+<div class="page active" id="page_s1">
+<div class="container">
+
+  <!-- Header -->
+  <div class="header-card" style="margin-top:28px">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Checklist 5S</h1>
+        <p>Auditoria de qualidade e organização do ambiente de trabalho</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="btn-secondary" onclick="abrirHistoricoAuditorias()">Auditorias Anteriores</button>
+        <span class="header-badge">Auditoria de Qualidade</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="card">
+    <div class="form-grid-4">
+      <div class="field">
+        <label>Área / Setor</label>
+        <input type="text" id="area" placeholder="Ex: Produção">
+      </div>
+      <div class="field">
+        <label>Responsável</label>
+        <input type="text" id="responsavel" placeholder="Nome do auditor">
+      </div>
+      <div class="field">
+        <label>Data</label>
+        <input type="date" id="data">
+      </div>
+      <div class="field">
+        <label>Turno</label>
+        <select id="turno">
+          <option value="">Selecione</option>
+          <option>Manhã</option>
+          <option>Tarde</option>
+          <option>Noite</option>
+          <option>Geral</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-card">
+    <div class="score-inner">
+      <div class="score-total-wrap">
+        <div class="score-total" id="totalScore">—</div>
+        <div class="score-label">Conformidade Geral</div>
+      </div>
+      <div class="score-divider"></div>
+      <div class="score-bars" id="scoreBars"></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--grad-green)"></span>Conforme</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--grad-red)"></span>Não Conforme</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--gray200)"></span>N/A</div>
+    </div>
+  </div>
+
+  <!-- Section header S1 -->
+  <div class="section-hd">
+    <div class="section-hd-band" style="background:var(--s1-grad)"></div>
+    <div class="section-hd-inner">
+      <div class="section-hd-left">
+        <span class="s-badge" style="background:var(--s1-grad)">1° S</span>
+        <div>
+          <div class="section-hd-title">Seiri — Utilização</div>
+          <div class="section-hd-desc">Separar o necessário do desnecessário. Manter no local de trabalho apenas o que é realmente utilizado.</div>
+        </div>
+      </div>
+      <div class="section-hd-score" style="background:var(--s1-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="score_display_s1">0%</div>
+    </div>
+  </div>
+
+  <!-- Checklist S1 -->
+  <div class="checklist" id="checklist_s1"></div>
+
+  <!-- Notes S1 -->
+  <div class="notes-block">
+    <label>Observações / Evidências — Seiri</label>
+    <textarea id="nota_s1" placeholder="Registre observações, evidências encontradas..." onchange="saveNota(1)"></textarea>
+  </div>
+
+</div>
+</div>
+
+<!-- Páginas 2–5 (estrutura idêntica, gerada via JS) -->
+<div class="page" id="page_s2"><div class="container" id="cont_s2"></div></div>
+<div class="page" id="page_s3"><div class="container" id="cont_s3"></div></div>
+<div class="page" id="page_s4"><div class="container" id="cont_s4"></div></div>
+<div class="page" id="page_s5"><div class="container" id="cont_s5"></div></div>
+
+<!-- ═══ BOTTOM BAR ═══ -->
+<div class="bottom-bar">
+  <div class="bottom-info">
+    <strong id="bb-area">Checklist 5S</strong>
+    <span id="bb-status"> — Preencha os dados da auditoria</span>
+  </div>
+  <div class="bottom-actions">
+    <button class="btn-secondary" onclick="confirmReset()">Reiniciar</button>
+    <button class="btn-secondary" onclick="salvarRelatorio()">Salvar</button>
+    <button class="btn-export"    onclick="exportarPDF()">↓ Exportar PDF</button>
+  </div>
+</div>
+
+  </main>
+</div>
+
+<!-- Modal Reiniciar -->
+</div>
+
+<div class="modal-overlay" id="modalReset">
+  <div class="modal">
+    <h2>Reiniciar auditoria?</h2>
+    <p>Todos os dados preenchidos serão apagados. Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modalReset')">Cancelar</button>
+      <button class="btn-primary" onclick="doReset()">Confirmar</button>
+    </div>
+  </div>
+
+<div class="modal-overlay" id="modalHistoricoAuditorias">
+  <div class="modal modal-wide">
+    <h2>Auditorias Anteriores</h2>
+    <p>Auditorias 5S arquivadas neste navegador — clique para reabrir, revisar ou reimprimir.</p>
+    <div id="lista-auditorias"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modalHistoricoAuditorias')">Fechar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════ GT360 CORE — biblioteca compartilhada ══════════════
+   Fonte única destas funções. Qualquer correção/alteração deve ser
+   feita AQUI e reaplicada aos módulos — nunca editar as cópias
+   coladas em cada módulo individualmente. */
+
+/* Escapa texto para uso seguro dentro de innerHTML. */
+function esc(str){
+  return (str==null?'':String(str)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Transferência de estado via link (sem backend) ──
+   O estado de um registro (avaliação, etc.) viaja dentro da própria
+   URL — quem recebe o link abre o módulo já carregado na etapa certa.
+   Quando houver backend, este é o ponto de troca: substituir
+   codificarEstado/decodificarEstado e o mailto por chamadas reais de
+   API — o restante do fluxo (etapas, telas) não precisa mudar. */
+function codificarEstado(obj){
+  const json = JSON.stringify(obj);
+  const utf8 = unescape(encodeURIComponent(json));
+  const b64 = btoa(utf8);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodificarEstado(str){
+  let b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length % 4) b64 += '=';
+  const utf8 = atob(b64);
+  return JSON.parse(decodeURIComponent(escape(utf8)));
+}
+function gerarLinkTransferencia(registro){
+  // Dentro do workspace GT360, este módulo roda num iframe carregado via
+  // srcdoc — location.href aponta para "about:srcdoc", que não é um
+  // endereço utilizável fora daquela sessão. Quando embutido, o link
+  // precisa apontar para a página de nível mais alto (o próprio
+  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
+  // o shell é responsável por ler esse link e abrir o módulo certo.
+  let base;
+  try{
+    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
+  }catch(e){
+    base = location.href.split('#')[0];
+  }
+  return base + '#av=' + codificarEstado(registro);
+}
+function gerarMailtoLink(destinatario, assunto, corpo){
+  return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+}
+function verificarLinkRecebido(){
+  // Quando o shell do GT360 identifica um link de convite/retorno, ele
+  // injeta o registro já decodificado nesta variável antes de carregar o
+  // módulo (mais confiável do que tentar setar o hash de um documento
+  // srcdoc depois que ele já carregou). Fora do shell (uso direto do
+  // arquivo do módulo, ou abertura standalone), cai no hash normal.
+  if(window.__conviteRecebidoDireto) return window.__conviteRecebidoDireto;
+  const hash = location.hash;
+  if(hash.indexOf('#av=') === 0){
+    try{ return decodificarEstado(hash.slice(4)); }catch(e){ console.warn('Link de transferência inválido ou corrompido', e); return null; }
+  }
+  return null;
+}
+
+/* ═══════════ INÍCIO qrcode.min.js (kazuhikoarase/qrcode-generator, MIT) ═══════════ */
+var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(o*r,n*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});
+/* ═══════════ FIM qrcode.min.js ═══════════ */
+
+/* Helper de conveniência do GT360 */
+function gerarQRCodeSVG(texto, cellSize){
+  const qr = qrcode(0, 'M');
+  qr.addData(texto);
+  qr.make();
+  return qr.createSvgTag(cellSize||4, 4);
+}
+
+/* ════════ DADOS ════════ */
+const SS = [
+  {
+    id:1, nome:"Seiri", subtitulo:"Utilização",
+    grad:"var(--s1-grad)", cor:"#f7a800",
+    desc:"Separar o necessário do desnecessário. Manter no local de trabalho apenas o que é realmente utilizado.",
+    itens:[
+      {texto:"Materiais e ferramentas desnecessários removidos da área",criterio:"Nenhum item sem uso nos últimos 30 dias presente na área de trabalho"},
+      {texto:"Equipamentos obsoletos ou com defeito identificados e retirados",criterio:"Etiquetas vermelhas aplicadas em itens questionáveis; itens descartados ou realocados"},
+      {texto:"Documentos e papéis desnecessários eliminados",criterio:"Apenas documentos ativos e relevantes presentes; demais arquivados ou destruídos"},
+      {texto:"Estoques excessivos identificados e tratados",criterio:"Quantidade de materiais não excede o necessário para o período de trabalho em curso"},
+      {texto:"Espaço livre de itens pessoais não relacionados ao trabalho",criterio:"Área limpa de objetos pessoais, decorações excessivas ou itens de uso doméstico"},
+      {texto:"Recipientes e embalagens vazias removidos",criterio:"Nenhuma caixa, embalagem ou recipiente vazio acumulado na área"},
+    ]
+  },
+  {
+    id:2, nome:"Seiton", subtitulo:"Organização",
+    grad:"var(--s2-grad)", cor:"#ff4e00",
+    desc:"Um lugar para cada coisa e cada coisa em seu lugar. Organizar os itens necessários de forma que sejam fáceis de encontrar, usar e repor.",
+    itens:[
+      {texto:"Ferramentas e equipamentos possuem local definido e identificado",criterio:"Todo item tem posição fixa marcada (shadow board, fita, etiqueta)"},
+      {texto:"Identificação visual clara em armários, gavetas e prateleiras",criterio:"Etiquetas legíveis, padronizadas e visíveis a 1 metro de distância"},
+      {texto:"Itens de maior frequência de uso estão mais acessíveis",criterio:"Ferramentas frequentes a < 30cm de alcance; esporádicas podem estar mais longe"},
+      {texto:"Corredores e saídas de emergência desobstruídos e demarcados",criterio:"Faixas de segurança visíveis; zero obstruções nas vias de circulação e emergência"},
+      {texto:"Cabos, mangueiras e fios organizados e identificados",criterio:"Nenhum cabo solto no piso; identificação por cor ou etiqueta quando aplicável"},
+      {texto:"Produtos e materiais armazenados respeitando limites máximos e mínimos",criterio:"Linhas de máximo e mínimo visíveis nos estoques; produtos dentro dos limites"},
+    ]
+  },
+  {
+    id:3, nome:"Seiso", subtitulo:"Limpeza",
+    grad:"var(--s3-grad)", cor:"#0099e5",
+    desc:"Limpar e inspecionar. Manter o ambiente limpo e usar a limpeza como forma de inspeção para identificar anomalias.",
+    itens:[
+      {texto:"Pisos limpos, sem manchas, resíduos ou líquidos",criterio:"Nenhum resíduo visível; manchas antigas sinalizadas para tratamento"},
+      {texto:"Máquinas e equipamentos limpos por fora e por dentro (quando aplicável)",criterio:"Sem acúmulo de poeira, óleo ou resíduo nos equipamentos"},
+      {texto:"Bancadas e superfícies de trabalho limpas ao início e fim do turno",criterio:"Registro de limpeza realizado; superfícies sem resíduos ao final do turno"},
+      {texto:"Lixeiras disponíveis, identificadas e esvaziadas regularmente",criterio:"Lixeiras em quantidade suficiente; não ultrapassam 80% da capacidade"},
+      {texto:"Fontes de sujidade identificadas e tratadas (vazamentos, desgaste)",criterio:"Relatório de anomalia emitido para toda fonte de sujidade recorrente"},
+      {texto:"Utensílios de limpeza disponíveis, organizados e em bom estado",criterio:"Vassouras, panos, produtos de limpeza presentes, limpos e armazenados corretamente"},
+    ]
+  },
+  {
+    id:4, nome:"Seiketsu", subtitulo:"Padronização",
+    grad:"var(--s4-grad)", cor:"#00c48c",
+    desc:"Padronizar as boas práticas. Criar padrões visuais e procedimentos para manter os três primeiros S de forma consistente.",
+    itens:[
+      {texto:"Procedimentos de limpeza e organização documentados e disponíveis",criterio:"POP (Procedimento Operacional Padrão) de 5S afixado ou acessível na área"},
+      {texto:"Responsabilidades de manutenção do 5S definidas por pessoa/turno",criterio:"Quadro de responsabilidades visível com nome e turno de cada responsável"},
+      {texto:"Padrões visuais (fotos, mapas, gabaritos) afixados na área",criterio:"Fotos do 'antes e depois' ou estado padrão afixadas em pontos-chave"},
+      {texto:"Frequência de auditorias estabelecida e cumprida",criterio:"Cronograma de auditorias definido; registros das últimas 4 semanas disponíveis"},
+      {texto:"Sinalização de segurança padronizada e em bom estado",criterio:"Placas de EPI, saída de emergência e risco visíveis, sem danos e atualizadas"},
+      {texto:"Uniforme e EPIs utilizados conforme padrão da empresa",criterio:"100% dos colaboradores com EPI correto e uniforme adequado durante inspeção"},
+    ]
+  },
+  {
+    id:5, nome:"Shitsuke", subtitulo:"Disciplina",
+    grad:"var(--s5-grad)", cor:"#7b2ff7",
+    desc:"Manter a autodisciplina. Garantir que os hábitos 5S sejam praticados de forma natural, contínua e com melhoria constante.",
+    itens:[
+      {texto:"Equipe treinada e consciente sobre a metodologia 5S",criterio:"Registro de treinamento disponível; colaboradores conhecem os 5 sensos"},
+      {texto:"Checklists anteriores preenchidos e arquivados",criterio:"Últimas 4 auditorias arquivadas e acessíveis para consulta"},
+      {texto:"Planos de ação para não conformidades anteriores cumpridos",criterio:"≥ 80% dos planos de ação das últimas auditorias concluídos no prazo"},
+      {texto:"Colaboradores relatam desvios espontaneamente (cultura proativa)",criterio:"Registros de comunicação de desvios por colaboradores presentes"},
+      {texto:"Melhorias sugeridas pela equipe nos últimos 30 dias",criterio:"Pelo menos 1 sugestão de melhoria registrada e avaliada no período"},
+      {texto:"Resultados do 5S comunicados à equipe (quadro de gestão à vista)",criterio:"Placar ou gráfico de desempenho 5S atualizado e visível na área"},
+    ]
+  }
+];
+
+let state = { checks:{}, notas:{} };
+let currentTab = 1;
+
+/* ════════ STATE ════════ */
+function loadState() {
+  try {
+    const s = localStorage.getItem('5s_gt_state'); if(s) state = JSON.parse(s);
+    const m = JSON.parse(localStorage.getItem('5s_gt_meta') || '{}');
+    if(m.area)  document.getElementById('area').value = m.area;
+    if(m.resp)  document.getElementById('responsavel').value = m.resp;
+    if(m.data)  document.getElementById('data').value = m.data;
+    if(m.turno) document.getElementById('turno').value = m.turno;
+  } catch(e){}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('5s_gt_state', JSON.stringify(state));
+    localStorage.setItem('5s_gt_meta', JSON.stringify({
+      area:  document.getElementById('area').value,
+      resp:  document.getElementById('responsavel').value,
+      data:  document.getElementById('data').value,
+      turno: document.getElementById('turno').value
+    }));
+  } catch(e){}
+}
+
+/* ════════ SCORE ════════ */
+function calcScore(sId) {
+  const items = SS[sId-1].itens; let ok=0, total=0;
+  items.forEach((_,i) => {
+    const v = state.checks[`s${sId}_i${i}`]; if(v==='na') return; total++; if(v==='ok') ok++;
+  });
+  return total===0 ? 0 : Math.round((ok/total)*100);
+}
+function calcTotal() {
+  return Math.round(SS.reduce((sum,s) => sum+calcScore(s.id), 0) / SS.length);
+}
+
+function updateScores() {
+  const tot = calcTotal();
+  document.getElementById('totalScore').textContent = tot + '%';
+  document.getElementById('scoreBars').innerHTML = SS.map(s => {
+    const pct = calcScore(s.id);
+    return `<div class="score-bar-row">
+      <span class="score-bar-label">${s.nome}</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:${pct}%;background:${s.grad}"></div></div>
+      <span class="score-bar-pct" style="color:${s.cor}">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  // update each section header score badge
+  SS.forEach(s => {
+    const el = document.getElementById(`score_display_s${s.id}`);
+    if(el) el.textContent = calcScore(s.id) + '%';
+  });
+
+  // update bottom bar
+  const area = document.getElementById('area').value || 'Checklist 5S';
+  document.getElementById('bb-area').textContent = area;
+  document.getElementById('bb-status').textContent = ` — ${tot}% de conformidade geral`;
+}
+
+/* ════════ CHECK ════════ */
+function setCheck(sId, iIdx, val) {
+  const key = `s${sId}_i${iIdx}`;
+  if(state.checks[key] === val) { delete state.checks[key]; val = null; }
+  else state.checks[key] = val;
+  const row = document.getElementById(`row_s${sId}_i${iIdx}`);
+  row.className = 'check-item' + (val?' '+val:'');
+  ['ok','nok','na'].forEach(v =>
+    document.getElementById(`btn_s${sId}_i${iIdx}_${v}`).classList.toggle('active', v===val)
+  );
+  updateScores(); saveState();
+}
+
+/* ════════ RENDER CHECKLIST ════════ */
+function renderChecklist(s) {
+  return s.itens.map((item, iIdx) => {
+    const val = state.checks[`s${s.id}_i${iIdx}`] || null;
+    return `<div class="check-item${val?' '+val:''}" id="row_s${s.id}_i${iIdx}">
+      <div>
+        <div class="item-text">${esc(item.texto)}</div>
+        <div class="item-criteria">✦ Critério: ${esc(item.criterio)}</div>
+      </div>
+      <div class="item-controls">
+        <button class="btn-check ok-btn${val==='ok'?' active':''}" id="btn_s${s.id}_i${iIdx}_ok"  title="Conforme"       onclick="setCheck(${s.id},${iIdx},'ok')">✓</button>
+        <button class="btn-check nok-btn${val==='nok'?' active':''}" id="btn_s${s.id}_i${iIdx}_nok" title="Não Conforme" onclick="setCheck(${s.id},${iIdx},'nok')">✗</button>
+        <button class="btn-check na-btn${val==='na'?' active':''}" id="btn_s${s.id}_i${iIdx}_na"   title="N/A"            onclick="setCheck(${s.id},${iIdx},'na')">—</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ════════ BUILD PAGES 2–5 ════════ */
+function buildPages() {
+  SS.slice(1).forEach(s => {
+    const cont = document.getElementById(`cont_s${s.id}`);
+    if(!cont) return;
+    cont.innerHTML = `
+      <div class="section-hd" style="margin-top:28px">
+        <div class="section-hd-band" style="background:${s.grad}"></div>
+        <div class="section-hd-inner">
+          <div class="section-hd-left">
+            <span class="s-badge" style="background:${s.grad}">${s.id}° S</span>
+            <div>
+              <div class="section-hd-title">${s.nome} — ${s.subtitulo}</div>
+              <div class="section-hd-desc">${esc(s.desc)}</div>
+            </div>
+          </div>
+          <div class="section-hd-score" style="background:${s.grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="score_display_s${s.id}">0%</div>
+        </div>
+      </div>
+      <div class="checklist" id="checklist_s${s.id}"></div>
+      <div class="notes-block">
+        <label>Observações / Evidências — ${s.nome}</label>
+        <textarea id="nota_s${s.id}" placeholder="Registre observações, evidências encontradas..." onchange="saveNota(${s.id})">${state.notas['s'+s.id]||''}</textarea>
+      </div>`;
+    document.getElementById(`checklist_s${s.id}`).innerHTML = renderChecklist(s);
+  });
+}
+
+/* ════════ POPULATE S1 CHECKLIST ════════ */
+function buildS1() {
+  document.getElementById('checklist_s1').innerHTML = renderChecklist(SS[0]);
+  const nota = document.getElementById('nota_s1');
+  if(nota) nota.value = state.notas['s1'] || '';
+}
+
+/* ════════ TABS ════════ */
+function switchTab(sId) {
+  currentTab = sId;
+  document.querySelectorAll('.check-side-item[data-s]').forEach(t => t.classList.toggle('active', +t.dataset.s === sId));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page_s${sId}`).classList.add('active');
+  updateScores();
+  const contentEl = document.getElementById('check-content');
+  if(contentEl) contentEl.scrollTop = 0;
+}
+function toggleCheckSidebar(){
+  const sb = document.getElementById('check-sidebar');
+  const colapsado = sb.classList.toggle('collapsed');
+  document.getElementById('check-side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
+  try{ localStorage.setItem('5s_check_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+}
+function restaurarEstadoCheckSidebar(){
+  let colapsado = false;
+  try{ colapsado = localStorage.getItem('5s_check_sidebar_colapsada') === '1'; }catch(e){}
+  if(colapsado){
+    document.getElementById('check-sidebar').classList.add('collapsed');
+    document.getElementById('check-side-toggle-btn').title = 'Expandir menu';
+  }
+}
+restaurarEstadoCheckSidebar();
+
+/* ════════ NOTES ════════ */
+function saveNota(sId) { state.notas['s'+sId] = document.getElementById('nota_s'+sId).value; saveState(); }
+
+/* ════════ ACTIONS ════════ */
+function confirmReset() { document.getElementById('modalReset').classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function doReset() {
+  state = {checks:{}, notas:{}};
+  saveState(); buildS1(); buildPages(); updateScores();
+  closeModal('modalReset');
+  showToast('Auditoria reiniciada com sucesso');
+}
+
+function salvarRelatorio() {
+  saveState();
+  showToast(`Relatório salvo — Conformidade: ${calcTotal()}%`);
+}
+
+function exportarPDF() {
+  const area  = document.getElementById('area').value || 'N/A';
+  const resp  = document.getElementById('responsavel').value || 'N/A';
+  const data  = document.getElementById('data').value || new Date().toLocaleDateString('pt-BR');
+  const turno = document.getElementById('turno').value || 'N/A';
+
+  arquivarAuditoria({area, resp, data, turno});
+
+  const grads = [
+    '#f7a800,#ff4e00','#ff4e00,#e0009e','#0099e5,#00e5a0','#00c48c,#00e5a0','#7b2ff7,#e0009e'
+  ];
+
+  let html = `<html><head><meta charset="UTF-8"><title>Relatório 5S</title>
+  <style>
+    body{font-family:Arial,sans-serif;font-size:11px;color:#222;margin:24px}
+    h1{font-size:20px;margin-bottom:6px;font-weight:900}
+    .meta{display:flex;gap:28px;margin-bottom:20px;font-size:10px;color:#555;padding:12px;background:#f4f5f8;border-radius:6px;flex-wrap:wrap}
+    table{width:100%;border-collapse:collapse;margin-bottom:18px}
+    th{padding:8px 12px;text-align:left;font-size:10px;color:#fff}
+    td{padding:7px 12px;border-bottom:1px solid #eee;vertical-align:top}
+    .ok{color:#00c48c;font-weight:bold}.nok{color:#e0003c;font-weight:bold}.na{color:#9098b0}
+    .criteria{font-size:9px;color:#9098b0;margin-top:2px}
+    .notes{background:#f8f9fc;padding:10px 12px;font-size:10px;margin-bottom:18px;border-radius:6px;border-left:4px solid #7b2ff7}
+    .score-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:10px;color:#fff;background:linear-gradient(135deg,#7b2ff7,#e0009e)}
+  </style></head><body>
+  <h1>Relatório de Auditoria 5S</h1>
+  <div class="meta">
+    <span><b>Área:</b> ${area}</span>
+    <span><b>Responsável:</b> ${resp}</span>
+    <span><b>Data:</b> ${data}</span>
+    <span><b>Turno:</b> ${turno}</span>
+    <span><b>Conformidade Geral:</b> <span class="score-badge">${calcTotal()}%</span></span>
+  </div>`;
+
+  SS.forEach((s, si) => {
+    html += `<table><thead><tr><th colspan="2" style="background:linear-gradient(135deg,${grads[si]})">${s.id}° S — ${s.nome} (${s.subtitulo}) — ${calcScore(s.id)}%</th></tr>
+    <tr style="background:#f4f5f8"><th>Ponto de Verificação</th><th style="width:110px">Status</th></tr></thead><tbody>`;
+    s.itens.forEach((item, i) => {
+      const v = state.checks[`s${s.id}_i${i}`];
+      const label = v==='ok' ? '<span class="ok">✓ Conforme</span>'
+                  : v==='nok'? '<span class="nok">✗ N. Conforme</span>'
+                  : v==='na' ? '<span class="na">— N/A</span>'
+                  : '<span style="color:#d0d4e0">Não avaliado</span>';
+      html += `<tr><td>${item.texto}<div class="criteria">Critério: ${item.criterio}</div></td><td>${label}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    if(state.notas['s'+s.id]) html += `<div class="notes"><b>Observações ${s.nome}:</b> ${state.notas['s'+s.id]}</div>`;
+  });
+
+  html += '</body></html>';
+  const win = window.open('','_blank');
+  if(!win) { showToast('Permita popups para exportar', true); return; }
+  win.document.write(html); win.document.close(); win.print();
+}
+
+/* ════════ TOAST ════════ */
+let _toastTimer = null;
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError?' error':'');
+  t.classList.add('show');
+  if(_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+/* ════════ UTILS ════════ */
+
+
+/* ════════ HISTÓRICO / REPOSITÓRIO DE AUDITORIAS ════════ */
+const AUD_STORAGE_KEY = '5s_gt_auditorias';
+function carregarAuditorias(){ try{ return JSON.parse(localStorage.getItem(AUD_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function salvarAuditorias(lista){ try{ localStorage.setItem(AUD_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico de auditorias', e); } }
+
+function arquivarAuditoria(meta){
+  const registro = {
+    id: Date.now(),
+    salvoEm: new Date().toISOString(),
+    area: meta.area, resp: meta.resp, data: meta.data, turno: meta.turno,
+    conformidade: calcTotal(),
+    state: JSON.parse(JSON.stringify(state))
+  };
+
+  if(conviteAuditoriaAtivo){
+    // Auditoria feita a partir de um convite (auditor em outro dispositivo) —
+    // o resultado não fica só salvo localmente: volta para o gestor por e-mail.
+    const registroRetorno = { versao:1, tipo:'5s-resultado', criadoEm:new Date().toISOString(), dados: registro };
+    const link = gerarLinkTransferencia(registroRetorno);
+    const assunto = 'Auditoria 5S concluída — '+registro.area;
+    const corpo = 'A auditoria da área "'+registro.area+'" foi concluída, com conformidade de '+registro.conformidade+'%.\n\n'
+      + 'Acesse o link abaixo para adicionar o resultado ao painel gerencial:\n'+link;
+    window.location.href = gerarMailtoLink(conviteAuditoriaAtivo.emailGestor, assunto, corpo);
+    return;
+  }
+
+  const lista = carregarAuditorias();
+  lista.unshift(registro);
+  salvarAuditorias(lista);
+}
+
+function abrirHistoricoAuditorias(){ renderHistoricoAuditorias(); document.getElementById('modalHistoricoAuditorias').classList.add('open'); }
+
+function corConformidade(pct){
+  if(pct>=90) return 'linear-gradient(135deg,#00c48c,#00e5a0)';
+  if(pct>=70) return 'linear-gradient(135deg,#0099e5,#00e5a0)';
+  if(pct>=50) return 'linear-gradient(135deg,#f7a800,#ff4e00)';
+  return 'linear-gradient(135deg,#e0003c,#ff4e6a)';
+}
+
+function renderHistoricoAuditorias(){
+  const lista = carregarAuditorias();
+  const el = document.getElementById('lista-auditorias');
+  if(!lista.length){ el.innerHTML = '<div class="hist-empty">Nenhuma auditoria arquivada ainda neste navegador.</div>'; return; }
+  el.innerHTML = lista.map((r,i) => `
+    <div class="hist-row" onclick="reabrirAuditoria(${i})">
+      <div><div class="hist-name">${esc(r.area||'Área não informada')}</div><div class="hist-meta">${esc(r.resp||'—')} · ${esc(r.turno||'—')} · ${esc(r.data||'')}</div></div>
+      <span class="hist-score" style="background:${corConformidade(r.conformidade)}">${r.conformidade}%</span>
+      <button class="hist-del" onclick="event.stopPropagation();excluirAuditoria(${i})">✕</button>
+    </div>`).join('');
+}
+
+function excluirAuditoria(i){
+  const lista = carregarAuditorias();
+  lista.splice(i,1);
+  salvarAuditorias(lista);
+  renderHistoricoAuditorias();
+}
+
+function reabrirAuditoria(i){
+  const r = carregarAuditorias()[i];
+  if(!r) return;
+  state = r.state || {checks:{}, notas:{}};
+  document.getElementById('area').value = r.area||'';
+  document.getElementById('responsavel').value = r.resp||'';
+  document.getElementById('data').value = r.data||'';
+  document.getElementById('turno').value = r.turno||'';
+  saveState();
+  buildS1(); buildPages(); updateScores();
+  closeModal('modalHistoricoAuditorias');
+  showToast('Auditoria carregada — revise ou exporte novamente se necessário');
+}
+
+
+/* ══════════════ PAINEL GERENCIAL + AUDITORIA VIA LINK/QR CODE ══════════════
+   O checklist deixou de ser a tela padrão: quem abre o módulo (dentro do
+   GT360 ou direto) cai no Painel Gerencial. Uma nova auditoria é cadastrada
+   ali (área, responsável, data, turno) e o sistema gera um link/QR Code
+   para o auditor interno abrir o checklist já pré-preenchido. Ao concluir,
+   o resultado volta para o gestor por e-mail, para ser importado ao painel. */
+
+let agendamentos = [];
+function salvarAgendamentos(){ try{ localStorage.setItem('5s_gt_agendamentos', JSON.stringify(agendamentos)); }catch(e){} }
+function carregarAgendamentos(){ try{ agendamentos = JSON.parse(localStorage.getItem('5s_gt_agendamentos')||'[]'); }catch(e){ agendamentos = []; } }
+
+function abrirModalNovaAuditoria(){
+  ['na-area','na-responsavel','na-data','na-email','na-email-gestor'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('na-turno').value='Manhã';
+  document.getElementById('na-resultado').style.display='none';
+  document.getElementById('modalNovaAuditoria').classList.add('open');
+}
+
+let ultimoLinkAuditoria = '';
+function gerarAuditoriaAgendada(){
+  const area = document.getElementById('na-area').value.trim();
+  const responsavel = document.getElementById('na-responsavel').value.trim();
+  const data = document.getElementById('na-data').value;
+  const turno = document.getElementById('na-turno').value;
+  const email = document.getElementById('na-email').value.trim();
+  const emailGestor = document.getElementById('na-email-gestor').value.trim();
+  if(!area){ showToast('Informe a área a ser auditada'); return; }
+  if(!emailGestor){ showToast('Informe seu e-mail para receber o resultado'); return; }
+
+  const registro = { versao:1, tipo:'5s-convite', criadoEm:new Date().toISOString(),
+    area, responsavel, data, turno, emailGestor };
+  const link = gerarLinkTransferencia(registro);
+  ultimoLinkAuditoria = link;
+
+  agendamentos.unshift({ id:Date.now(), area, responsavel, data, turno, email, status:'pendente', criadoEm:new Date().toISOString() });
+  salvarAgendamentos();
+  renderPainel();
+
+  document.getElementById('na-link').value = link;
+  document.getElementById('na-qr').innerHTML = gerarQRCodeSVG(link, 4);
+  document.getElementById('na-resultado').style.display='block';
+}
+
+function copiarLinkAuditoria(){
+  const input = document.getElementById('na-link');
+  input.select();
+  try{ document.execCommand('copy'); showToast('Link copiado'); }catch(e){ showToast('Selecione e copie o link manualmente'); }
+}
+function enviarAuditoriaPorEmail(){
+  const email = document.getElementById('na-email').value.trim();
+  if(!email){ showToast('Informe o e-mail do auditor para enviar automaticamente — ou copie o link.'); return; }
+  const area = document.getElementById('na-area').value.trim();
+  const assunto = 'Auditoria 5S agendada — '+area;
+  const corpo = 'Olá!\n\nVocê foi designado(a) para realizar a auditoria 5S da área "'+area+'".\n\n'
+    + 'Acesse o link abaixo para abrir o checklist e começar a auditoria:\n'+ultimoLinkAuditoria;
+  window.location.href = gerarMailtoLink(email, assunto, corpo);
+}
+
+function renderPainel(){
+  const auditorias = carregarAuditorias();
+  const totalRealizadas = auditorias.length;
+  const mediaConformidade = totalRealizadas ? Math.round(auditorias.reduce((s,a)=>s+a.conformidade,0)/totalRealizadas) : 0;
+  const pendentes = agendamentos.filter(a=>a.status==='pendente').length;
+
+  document.getElementById('painel-cards').innerHTML = `
+    <div class="dash-card"><div class="num">${totalRealizadas}</div><div class="lbl">Auditorias Realizadas</div></div>
+    <div class="dash-card"><div class="num">${mediaConformidade}%</div><div class="lbl">Conformidade Média</div></div>
+    <div class="dash-card"><div class="num">${pendentes}</div><div class="lbl">Agendadas Pendentes</div></div>
+  `;
+
+  const elAgendadas = document.getElementById('painel-agendadas');
+  if(!agendamentos.length){
+    elAgendadas.innerHTML = '<div class="painel-empty">Nenhuma auditoria agendada ainda.</div>';
+  }else{
+    elAgendadas.innerHTML = agendamentos.map(a=>`
+      <div class="agendada-row">
+        <div><div class="agendada-name">${esc(a.area)}</div><div class="agendada-meta">${esc(a.responsavel||'sem responsável definido')} · ${a.data?new Date(a.data+'T12:00').toLocaleDateString('pt-BR'):'sem data'} · ${esc(a.turno)}</div></div>
+        <span class="painel-badge ${a.status}">${a.status==='concluida'?'Concluída':'Pendente'}</span>
+        <button class="hist-del" onclick="excluirAgendamento(${a.id})">✕</button>
+      </div>`).join('');
+  }
+
+  const elRealizadas = document.getElementById('painel-realizadas');
+  if(!auditorias.length){
+    elRealizadas.innerHTML = '<div class="painel-empty">Nenhuma auditoria realizada ainda.</div>';
+  }else{
+    elRealizadas.innerHTML = auditorias.slice(0,10).map((r,i)=>`
+      <div class="realizada-row" onclick="reabrirAuditoria(${i})" style="cursor:pointer">
+        <div><div class="realizada-name">${esc(r.area||'Área não informada')}</div><div class="realizada-meta">${esc(r.resp||'—')} · ${esc(r.turno||'—')} · ${esc(r.data||'')}</div></div>
+        <span class="painel-badge" style="background:${corConformidade(r.conformidade)}">${r.conformidade}%</span>
+        <span></span>
+      </div>`).join('');
+  }
+}
+function excluirAgendamento(id){
+  agendamentos = agendamentos.filter(a=>a.id!==id);
+  salvarAgendamentos();
+  renderPainel();
+}
+
+/* ── Alternância entre Painel e Checklist ── */
+function mostrarPainel(){
+  document.getElementById('view-painel').classList.remove('hidden-view');
+  document.getElementById('view-checklist').classList.add('hidden-view');
+  renderPainel();
+}
+function mostrarChecklist(){
+  document.getElementById('view-painel').classList.add('hidden-view');
+  document.getElementById('view-checklist').classList.remove('hidden-view');
+}
+
+/* ── Auditor abre o link do convite ── */
+let conviteAuditoriaAtivo = null;
+function aplicarConviteAuditoria(registro){
+  conviteAuditoriaAtivo = registro;
+  mostrarChecklist();
+  document.getElementById('area').value = registro.area||'';
+  document.getElementById('responsavel').value = registro.responsavel||'';
+  document.getElementById('data').value = registro.data || new Date().toISOString().split('T')[0];
+  document.getElementById('turno').value = registro.turno||'Manhã';
+}
+
+/* ── Gestor abre o link de retorno com o resultado ── */
+function renderRetornoAuditoria(registro){
+  document.getElementById('view-painel').style.display='none';
+  document.getElementById('view-checklist').style.display='none';
+  const r = registro.dados;
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="container">
+      <div class="header-card" style="margin-top:28px"><div class="header-band"></div>
+        <div class="header-inner"><div class="header-title">
+          <h1>Auditoria Concluída</h1>
+          <p>${esc(r.area||'')} — conformidade de ${r.conformidade}%</p>
+        </div></div>
+      </div>
+      <div class="card" style="background:#fff;border-radius:12px;padding:20px;margin-top:16px">
+        <button class="btn-primary" onclick='importarResultadoAuditoria(${esc(JSON.stringify(registro)).replace(/"/g,"&quot;")})'>Adicionar ao Painel Gerencial</button>
+      </div>
+    </div>`);
+}
+function importarResultadoAuditoria(registro){
+  const r = registro.dados;
+  const lista = carregarAuditorias();
+  lista.unshift(r);
+  salvarAuditorias(lista);
+  const ag = agendamentos.find(a => a.area === r.area && a.data === r.data);
+  if(ag){ ag.status = 'concluida'; salvarAgendamentos(); }
+  document.querySelector('.container').innerHTML = '<div class="card" style="background:#fff;border-radius:12px;padding:20px;margin:20px"><h3>Auditoria adicionada ao painel gerencial.</h3></div>';
+}
+
+function verificarConviteOuRetornoAuditoria(){
+  const registro = verificarLinkRecebido();
+  if(!registro) return false;
+  if(registro.tipo === '5s-convite'){ aplicarConviteAuditoria(registro); return true; }
+  if(registro.tipo === '5s-resultado'){ renderRetornoAuditoria(registro); return true; }
+  return false;
+}
+
+/* ════════ INIT ════════ */
+document.getElementById('data').value = new Date().toISOString().split('T')[0];
+loadState();
+buildS1();
+buildPages();
+updateScores();
+
+// save meta on any input change
+['area','responsavel','data','turno'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('change', () => { saveState(); updateScores(); });
+});
+
+/* O checklist deixou de ser a tela padrão. Por padrão o módulo abre no
+   Painel Gerencial; o checklist só aparece quando o link recebido é um
+   convite de auditoria (o auditor abrindo pelo link/QR Code que o gestor
+   gerou), e a tela de importação aparece quando o link é um resultado
+   de auditoria já concluída voltando para o gestor. */
+carregarAgendamentos();
+if(!verificarConviteOuRetornoAuditoria()){
+  mostrarPainel();
+}
+window.addEventListener('hashchange', () => {
+  if(!verificarConviteOuRetornoAuditoria()){ mostrarPainel(); }
+});
+</script>
+</body>
+</html>

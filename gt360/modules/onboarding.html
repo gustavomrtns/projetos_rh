@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluxo de Onboarding — Gestão de Talentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;display:flex;flex-direction:column;overflow:hidden}
+.brand-band{height:5px;background:var(--gradFull);flex-shrink:0}
+header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 24px;flex-shrink:0;position:relative;z-index:50}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .name{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:.01em;color:var(--gray800)}
+.brand-text .tag{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);font-weight:600;margin-top:2px}
+.workspace-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.sidebar{width:240px;flex-shrink:0;background:var(--white);border-right:1px solid var(--gray100);display:flex;flex-direction:column;padding:18px 12px;gap:2px;overflow-y:auto;transition:width .2s ease}
+.sidebar-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px;gap:8px}
+.sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);padding:6px 12px 10px}
+.side-toggle{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1.5px solid var(--gray100);background:var(--gray50);color:var(--gray400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.side-toggle:hover{border-color:var(--gray400);color:var(--gray800)}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;color:var(--gray600);transition:all .18s;border:2px solid transparent;background:none;text-align:left;width:100%;font-family:'Sora',sans-serif}
+.side-item:hover{background:var(--gray50);color:var(--gray800)}
+.side-item.active{background:var(--gray800);border-color:var(--gray800);color:var(--white)}
+.side-item .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.side-item .dot.d1{background:var(--grad1)}
+.side-item .dot.d2{background:var(--grad2)}
+.side-item .dot.d3{background:var(--grad3)}
+.sidebar.collapsed{width:64px}
+.sidebar.collapsed .sidebar-label{display:none}
+.sidebar.collapsed .sidebar-top{justify-content:center}
+.sidebar.collapsed .side-item{justify-content:center;padding:11px 0}
+.sidebar.collapsed .side-item span:not(.dot){display:none}
+.sidebar.collapsed #side-toggle-icon{transform:rotate(180deg)}
+.content{flex:1;position:relative;overflow:hidden;min-width:0}
+.view{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .12s;overflow-y:auto}
+.view.active{opacity:1;pointer-events:auto}
+@media(max-width:700px){
+  .workspace-body{flex-direction:column}
+  .sidebar{width:100%!important;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--gray100);padding:8px 10px}
+  .side-item{flex-shrink:0;white-space:nowrap}
+  .sidebar-label,.sidebar-top{display:none}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.nav-band{height:5px;background:var(--gradFull)}
+.nav-tabs{background:var(--white);box-shadow:var(--shadow);display:flex;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gray100)}
+.nav-tab{flex:1;padding:18px 12px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.nav-tab:hover{color:var(--gray600);background:var(--gray50)}
+.nav-tab.active{color:var(--gray800);background:var(--offwhite)}
+.tab-dot{width:8px;height:8px;border-radius:50%;opacity:0;flex-shrink:0;transition:opacity .2s}
+.nav-tab.active .tab-dot{opacity:1}
+.t1{background:var(--grad1)}.t2{background:var(--grad2)}.t3{background:var(--grad3)}
+
+/* PAGE */
+.page{display:none;padding:32px 20px 40px;animation:fadeUp .4s ease both}
+.page.active{display:block}
+.container{max-width:920px;margin:0 auto}
+.container.wide{max-width:100%;padding:0 8px}
+/* Dashboard tables */
+.dash-table-wrap{overflow-x:hidden;overflow-y:auto;max-height:520px;border-radius:0 0 var(--radius) var(--radius)}
+.dash-table-wrap::-webkit-scrollbar{width:7px;height:7px}
+.dash-table-wrap::-webkit-scrollbar-track{background:var(--gray50);border-radius:10px}
+.dash-table-wrap::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:10px}
+.dash-table-wrap::-webkit-scrollbar-thumb:hover{background:var(--gray400)}
+.dtable{width:100%;border-collapse:collapse;table-layout:auto}
+.dtable th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap;position:sticky;top:0;background:var(--white);z-index:2}
+.dtable td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle;white-space:nowrap}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:#f0f9ff}
+.collab-link{color:var(--gray800);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1.5px solid transparent;transition:border-color .15s,color .15s}
+.collab-link:hover{color:#0099e5;border-bottom-color:#0099e5}
+
+/* HEADER */
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden}
+.header-band{height:7px;background:var(--gradFull)}
+.header-inner{padding:26px 30px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.header-title h1{font-family:'DM Serif Display',serif;font-size:24px;color:var(--gray800);margin-bottom:4px}
+.header-title p{font-size:13px;color:var(--gray400);font-weight:300}
+.hbadge{display:inline-block;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.06em;margin-top:8px;cursor:pointer;transition:opacity .2s}
+.hbadge:hover{opacity:.85}
+
+/* SECTION */
+.section{margin-bottom:20px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 4px}
+.section-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sn1{background:var(--grad1)}.sn2{background:var(--grad2)}.sn3{background:var(--grad3)}.sn4{background:var(--grad1)}
+.section-title{font-size:12px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.1em}
+
+/* CARD */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;transition:box-shadow .2s}
+.card:focus-within{box-shadow:var(--shadow-lg)}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field input[readonly]{background:var(--gray100);color:var(--gray600);cursor:default}
+
+/* UNIDADE */
+.unidade-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.unid-card{border:2px solid var(--gray100);border-radius:10px;padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;background:var(--white);user-select:none;position:relative}
+.unid-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.unid-card.selected{border-color:#0099e5;background:#f0f9ff;transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.unid-name{font-size:12px;font-weight:700;color:var(--gray800)}
+.unid-check{position:absolute;top:6px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;opacity:0;transition:opacity .2s;font-weight:700}
+.unid-card.selected .unid-check{opacity:1}
+
+/* STATUS */
+.status-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--gray100)}
+.status-item:last-child{border-bottom:none;padding-bottom:0}
+.status-item:first-child{padding-top:0}
+.status-label{font-size:13px;font-weight:600;color:var(--gray800)}
+.status-sub{font-size:11.5px;color:var(--gray400);margin-top:2px}
+.status-btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.st-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:var(--gray600);cursor:pointer;transition:all .2s;white-space:nowrap}
+.st-btn:hover{border-color:var(--gray400);color:var(--gray800)}
+.st-btn.s-ok{background:linear-gradient(135deg,#00c48c,#00e5a0);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,196,140,.3)}
+.st-btn.s-pend{background:linear-gradient(135deg,#f7a800,#ff9500);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(247,168,0,.3)}
+.st-btn.s-no{background:linear-gradient(135deg,#ff4e6a,#e0003c);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(224,0,60,.3)}
+.st-btn.s-andamento{background:linear-gradient(135deg,#0099e5,#7b2ff7);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,153,229,.3)}
+.st-btn.s-parcial{background:linear-gradient(135deg,#e0009e,#7b2ff7);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(123,47,247,.3)}
+.st-btn.s-naoobrg{background:linear-gradient(135deg,#9098b0,#5a6278);border-color:transparent;color:#fff}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+@keyframes gradLoop{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn-novocadastro{background-image:linear-gradient(270deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0,#f7a800);background-size:400% 400%;animation:gradLoop 6s ease infinite;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-novocadastro:hover{opacity:.92;transform:translateY(-1px)}
+.btn{padding:11px 24px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-print{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.35)}
+.btn-print:hover{opacity:.9;transform:translateY(-1px)}
+
+/* COLLAB LIST */
+.collab-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.collab-row{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;cursor:pointer;transition:all .2s;border:2px solid transparent}
+.collab-row:hover{box-shadow:var(--shadow-lg);border-color:var(--gray200)}
+.collab-avatar{width:40px;height:40px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0}
+.collab-info h4{font-size:14px;font-weight:700;color:var(--gray800);margin-bottom:2px}
+.collab-info p{font-size:12px;color:var(--gray400)}
+.spill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.sp-andamento{background:var(--grad2)}
+.sp-concluido{background:linear-gradient(135deg,#00c48c,#00e5a0)}
+.sp-atraso{background:linear-gradient(135deg,#ff4e6a,#e0003c)}
+.sp-novo{background:linear-gradient(135deg,#9098b0,#5a6278)}
+
+/* DASHBOARD */
+.dash-filters{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr auto;gap:14px;align-items:end}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;overflow:hidden;position:relative}
+.kpi-band{position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-val{font-family:'DM Serif Display',serif;font-size:36px;line-height:1;margin:8px 0 4px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400)}
+.kpi-sub{font-size:11px;color:var(--gray600);margin-top:4px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+.chart-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.chart-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ctdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:148px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:20px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .8s ease;position:relative;min-width:2px}
+.bar-pct{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:#fff}
+.bar-val{font-size:12px;font-weight:700;color:var(--gray600);width:36px;text-align:right}
+.pie-wrap{display:flex;gap:24px;align-items:center}
+.pie-leg{display:flex;flex-direction:column;gap:10px;flex:1}
+.pie-li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray800)}
+.pie-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.pie-v{margin-left:auto;font-weight:700;color:var(--gray800)}
+
+/* DASH TABLE */
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap}
+.dtable td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--gray50);vertical-align:middle}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:var(--gray50)}
+.tedit{padding:5px 14px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s}
+.tedit:hover{border-color:#0099e5;color:#0099e5;background:#f0f9ff}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:640px;width:100%;max-height:90vh;overflow-y:auto}
+.modal.wide{max-width:820px}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:28px 30px 30px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:20px}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;margin-top:-4px;line-height:1}
+
+/* MODAL CHECKLIST */
+.mclist{display:flex;flex-direction:column;gap:8px;max-height:360px;overflow-y:auto;margin-bottom:20px;padding-right:4px}
+.mcitem{display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid var(--gray100);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none}
+.mcitem:hover{background:var(--gray50);border-color:var(--gray200)}
+.mcitem.checked{border-color:#0099e5;background:#f0f9ff}
+.mcbox{width:20px;height:20px;border-radius:5px;border:2px solid var(--gray200);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all .2s}
+.mcitem.checked .mcbox{background:var(--grad2);border-color:transparent;color:#fff}
+.mcname{font-size:13px;font-weight:700;color:var(--gray800)}
+.mcmeta{font-size:11px;color:var(--gray400);margin-top:1px}
+
+/* DETAIL */
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.det-field{background:var(--gray50);border-radius:8px;padding:10px 14px}
+.det-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);margin-bottom:3px}
+.det-val{font-size:13px;font-weight:600;color:var(--gray800)}
+.det-strow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray50);border-radius:8px;margin-bottom:6px}
+.det-stlbl{font-size:13px;font-weight:600;color:var(--gray800)}
+
+/* PDF OVERLAY */
+.pdf-preview{display:none}
+#print-overlay{display:none;position:fixed;inset:0;background:#fff;z-index:9000;overflow-y:auto;padding:32px 20px}
+#print-overlay.visible{display:block}
+.print-close{position:fixed;top:16px;right:20px;z-index:9100;background:var(--gray800);color:#fff;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;border-radius:10px;cursor:pointer}
+.print-close:hover{opacity:.85}
+@media print{
+  body>*:not(#print-overlay){display:none!important}
+  #print-overlay{display:block!important;position:static!important;padding:0!important;overflow:visible!important}
+  .print-close{display:none!important}
+  .pdf-doc{max-width:100%;box-shadow:none!important;border-radius:0!important}
+  .pdf-sep{height:0;page-break-after:always}
+}
+.pdf-doc{max-width:860px;margin:0 auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden;font-family:'Sora',sans-serif}
+.pdf-sep{height:32px}
+.ptband{height:8px;background:var(--gradFull)}
+.phdr{padding:26px 36px 20px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--gray100)}
+.phdr-title{font-family:'DM Serif Display',serif;font-size:21px;color:var(--gray800);margin-bottom:3px}
+.phdr-sub{font-size:12px;color:var(--gray400)}
+.phdr-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;background:var(--grad2);margin-top:7px}
+.pbody{padding:26px 36px}
+.psect{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--gray100)}
+.psect:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.pstitle{display:flex;align-items:center;gap:10px;margin-bottom:13px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray600)}
+.psnum{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pfield{background:var(--gray50);border-radius:7px;padding:9px 13px}
+.pflbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);margin-bottom:2px}
+.pfval{font-size:13px;font-weight:600;color:var(--gray800)}
+.pstrow{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;background:var(--gray50);border-radius:7px;margin-bottom:5px}
+.pstlbl{font-size:13px;font-weight:600;color:var(--gray800)}
+.pbadge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff}
+.psiggrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.psigblock{border:1.5px solid var(--gray100);border-radius:10px;padding:16px}
+.psigbtitle{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:12px}
+.psiglbl{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gray400);letter-spacing:.06em;margin-bottom:3px;display:block}
+.psigval{font-size:13px;font-weight:600;color:var(--gray800);min-height:20px;border-bottom:1px solid var(--gray200);padding-bottom:2px;margin-bottom:10px}
+.psigline{border-bottom:1.5px solid var(--gray800);margin:16px 0 3px}
+.psiglinelbl{font-size:10px;color:var(--gray400);text-align:center}
+.pfooter{display:flex;justify-content:space-between;padding:12px 36px;border-top:1px solid var(--gray100);font-size:11px;color:var(--gray400)}
+
+@media(max-width:700px){
+  .form-grid,.det-grid,.pgrid,.psiggrid{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+  .unidade-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .chart-grid{grid-template-columns:1fr}
+  .dash-filters{grid-template-columns:1fr 1fr}
+  .nav-tab span{display:none}
+}
+
+/* LOGO */
+.nav-logo{height:32px;object-fit:contain;display:block;margin-right:16px}
+.pdf-logo{height:44px;object-fit:contain;display:block}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- PRINT OVERLAY -->
+<div id="print-overlay">
+  <button class="print-close" onclick="fecharPrint()">Fechar visualização</button>
+  <div id="print-content" style="max-width:900px;margin:0 auto;padding-bottom:40px"></div>
+</div>
+
+<div class="brand-band"></div>
+<header>
+  <div class="logo-wrap">
+    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
+    <div class="brand-text">
+      <div class="name">Fluxo de Onboarding</div>
+      <div class="tag">Gestão de Talentos</div>
+    </div>
+  </div>
+</header>
+
+<div class="workspace-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Navegação</div>
+      <button class="side-toggle" id="side-toggle-btn" onclick="toggleSidebar()" title="Recolher menu">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="side-toggle-icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+    </div>
+    <nav id="sidebar-nav">
+      <button class="side-item active" id="side-onboarding" onclick="showPage('onboarding')" title="Processo de Onboarding"><span class="dot d1"></span><span>Processo de Onboarding</span></button>
+      <button class="side-item" id="side-termos" onclick="showPage('termos')" title="Controle de Termos"><span class="dot d2"></span><span>Controle de Termos</span></button>
+      <button class="side-item" id="side-dashboard" onclick="showPage('dashboard')" title="Dashboard"><span class="dot d3"></span><span>Dashboard</span></button>
+    </nav>
+  </aside>
+
+  <main class="content" id="content">
+
+<!-- PAGE 1: ONBOARDING -->
+<div class="view active" id="page-onboarding"><div class="container">
+
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Processo de Onboarding</h1>
+        <p>Registro e acompanhamento de integração de colaboradores — Gestão de Talentos</p>
+        <span class="hbadge" style="background:var(--grad1)" onclick="abrirModalCond()">Responsável pela condução: <strong id="cond-nome">Selecionar</strong></span>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--gray400);font-weight:700;text-transform:uppercase;letter-spacing:.07em">Registros</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:36px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="count-badge">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:28px">
+    <button class="btn btn-novocadastro" style="width:100%;padding:16px 24px;font-size:15px;letter-spacing:.02em" onclick="novoColaborador()">Novo Cadastro</button>
+  </div>
+
+  <div id="form-area">
+    <div class="section">
+      <div class="section-header"><div class="section-num sn1">01</div><span class="section-title">Identificação do Colaborador</span></div>
+      <div class="card"><div class="form-grid">
+        <div class="field span2"><label>Colaborador</label><input type="text" id="f-colaborador" placeholder="Nome completo"></div>
+        <div class="field"><label>Matrícula</label><input type="text" id="f-matricula" placeholder="Número de matrícula"></div>
+        <div class="field"><label>Setor</label><input type="text" id="f-setor" placeholder="Setor de atuação"></div>
+        <div class="field"><label>Cargo</label><input type="text" id="f-cargo" placeholder="Cargo / função"></div>
+        <div class="field"><label>Contato</label><input type="text" id="f-contato" placeholder="E-mail ou telefone"></div>
+        <div class="field"><label>Data de Início</label><input type="date" id="f-datainicio"></div>
+        <div class="field span2">
+          <label>Realizará Integração?</label>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <button class="st-btn" onclick="toggleInteg(this,'sim')" id="integ-sim">Sim — realizará integração</button>
+            <button class="st-btn" onclick="toggleInteg(this,'nao')" id="integ-nao">Não — apenas registro</button>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Unidade</span></div>
+      <div class="card"><div class="unidade-grid">
+        <div class="unid-card" id="unid-unidade1" onclick="abrirModalUnidadeRA()"><div class="unid-name">UNIDADE 1</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 2')"><div class="unid-name">UNIDADE 2</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 3')"><div class="unid-name">UNIDADE 3</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 4')"><div class="unid-name">UNIDADE 4</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 5')"><div class="unid-name">UNIDADE 5</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 6')"><div class="unid-name">UNIDADE 6</div></div>
+        <div class="unid-card" onclick="selUnit(this,'UNIDADE 7')"><div class="unid-name">UNIDADE 7</div></div>
+      </div><input type="hidden" id="f-unidade"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num sn3">03</div><span class="section-title">Status do Processo</span></div>
+      <div class="card">
+        <div class="status-item">
+          <div><div class="status-label">Envio de Documentos Norteadores</div><div class="status-sub">Envio dos documentos de referencia ao colaborador</div></div>
+          <div class="status-btns" id="st-envio">
+            <button class="st-btn" onclick="setSt('st-envio',this,'ok')" data-val="Enviado">Enviado</button>
+            <button class="st-btn" onclick="setSt('st-envio',this,'andamento')" data-val="Em andamento">Em andamento</button>
+            <button class="st-btn" onclick="setSt('st-envio',this,'no')" data-val="Não enviado">Não enviado</button>
+          </div>
+        </div>
+        <div class="status-item">
+          <div><div class="status-label">Cadastro UniGlobo</div><div class="status-sub">Plataforma interna — pode ser não obrigatório conforme cargo</div></div>
+          <div class="status-btns" id="st-uniglobo">
+            <button class="st-btn" onclick="setSt('st-uniglobo',this,'ok')" data-val="Cadastrado">Cadastrado</button>
+            <button class="st-btn" onclick="setSt('st-uniglobo',this,'no')" data-val="Não cadastrado">Não cadastrado</button>
+            <button class="st-btn" onclick="setSt('st-uniglobo',this,'naoobrg')" data-val="Não obrigatório">Não obrigatório</button>
+          </div>
+        </div>
+        <div class="status-item">
+          <div><div class="status-label">Cursos Obrigatórios de Onboarding</div><div class="status-sub">Módulos obrigatórios a serem concluídos pelo colaborador</div></div>
+          <div class="status-btns" id="st-cursos">
+            <button class="st-btn" onclick="setSt('st-cursos',this,'ok')" data-val="Realizados completamente">Realizados completamente</button>
+            <button class="st-btn" onclick="setSt('st-cursos',this,'andamento')" data-val="Em andamento">Em andamento</button>
+            <button class="st-btn" onclick="setSt('st-cursos',this,'no')" data-val="Não realizado">Não realizado</button>
+            <button class="st-btn" onclick="setSt('st-cursos',this,'naoobrg')" data-val="Não obrigatório">Não obrigatório</button>
+          </div>
+        </div>
+        <div class="status-item" style="grid-template-columns:1fr;border-bottom:none">
+          <div><div class="status-label">Parecer — Gestão de Talentos</div><div class="status-sub">Data de conclusão e observações do processo</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+            <div class="field"><label>Data de Conclusão</label><input type="date" id="f-parecer-data"></div>
+            <div class="field"><label>Observações</label><input type="text" id="f-parecer-obs" placeholder="Ex.: Processo concluído com êxito"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvarColaborador()">Salvar Registro</button>
+    </div>
+  </div>
+
+  <div id="pdf-onboarding" class="pdf-preview" style="margin-top:28px"></div>
+</div></div>
+
+<!-- PAGE 2: TERMOS -->
+<div class="view" id="page-termos"><div class="container">
+
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Controle de Termos</h1>
+        <p>Registro de assinatura de termos — vinculado ao pré-cadastro do colaborador</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-num sn1">01</div><span class="section-title">Selecionar Colaborador</span></div>
+    <div class="card">
+      <div class="form-grid">
+        <div class="field"><label>Buscar Colaborador</label>
+          <input type="text" id="t-search-collab" list="t-collab-datalist" placeholder="Digite o nome para selecionar..." oninput="onTermoSearchInput()" autocomplete="off">
+          <datalist id="t-collab-datalist"></datalist>
+        </div>
+        <div class="field"><label>Colaborador Pré-Cadastrado</label>
+          <select id="t-select-collab" onchange="preencherTermos()"><option value="">— Selecione o colaborador —</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Dados do Colaborador</span></div>
+    <div class="card"><div class="form-grid">
+      <div class="field span2"><label>Colaborador</label><input type="text" id="t-colaborador" readonly></div>
+      <div class="field"><label>Matrícula</label><input type="text" id="t-matricula" readonly></div>
+      <div class="field"><label>Setor</label><input type="text" id="t-setor" readonly></div>
+      <div class="field"><label>Cargo</label><input type="text" id="t-cargo" readonly></div>
+      <div class="field"><label>Data de Assinatura dos Termos</label><input type="date" id="t-data-assinatura"></div>
+    </div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-num sn3">03</div><span class="section-title">Status do Termo</span></div>
+    <div class="card">
+      <div class="status-item" style="border-bottom:none">
+        <div><div class="status-label">Termo de Ciência e Compromisso</div><div class="status-sub">Assinatura e aceite do termo de ciência e compromisso pelo colaborador</div></div>
+        <div class="status-btns" id="tt-ciencia">
+          <button class="st-btn" onclick="setSt('tt-ciencia',this,'ok')" data-val="Assinado">Assinado</button>
+          <button class="st-btn" onclick="setSt('tt-ciencia',this,'pend')" data-val="Pendente validação">Pendente validação</button>
+          <button class="st-btn" onclick="setSt('tt-ciencia',this,'andamento')" data-val="Em andamento">Em andamento</button>
+          <button class="st-btn" onclick="setSt('tt-ciencia',this,'no')" data-val="Não assinado">Não assinado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="salvarTermos()">Salvar Termos</button>
+    <button class="btn btn-print" onclick="abrirModalTermosExport()">Gerar Documento</button>
+  </div>
+
+  <div id="pdf-termos" class="pdf-preview" style="margin-top:28px"></div>
+</div></div>
+
+<!-- PAGE 3: DASHBOARD -->
+<div class="view" id="page-dashboard"><div class="container wide">
+
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Dashboard de Onboarding</h1>
+        <p>Acompanhamento, análise e gestão de todos os processos de integração</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-filters">
+    <div class="field"><label>De (Data Início)</label><input type="date" id="d-de" onchange="renderDash()"></div>
+    <div class="field"><label>Até (Data Fim)</label><input type="date" id="d-ate" onchange="renderDash()"></div>
+    <div class="field"><label>Unidade</label>
+      <select id="d-unidade" onchange="renderDash()">
+        <option value="">Todas</option>
+      </select>
+    </div>
+    <div class="field"><label>Setor</label><select id="d-setor" onchange="renderDash()"><option value="">Todos</option></select></div>
+    <div class="field"><label>Distribuição por Status</label>
+      <select id="d-status" onchange="renderDash()">
+        <option value="">Todos</option>
+        <option value="Concluído">Concluído</option>
+        <option value="Em andamento">Em andamento</option>
+        <option value="Em atraso">Em atraso</option>
+        <option value="Não iniciado">Não iniciado</option>
+      </select>
+    </div>
+    <div class="field"><label>Status de Cursos</label>
+      <select id="d-cursos" onchange="renderDash()">
+        <option value="">Todos</option>
+        <option value="Realizados completamente">Realizados completamente</option>
+        <option value="Em andamento">Em andamento</option>
+        <option value="Não realizado">Não realizado</option>
+        <option value="naoiniciado">Não iniciado</option>
+        <option value="Não obrigatório">Não obrigatório</option>
+      </select>
+    </div>
+    <button class="btn btn-secondary" onclick="exportarCSV()">Exportar CSV</button>
+  </div>
+
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="chart-grid">
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad2)"></div>Taxa de Conclusão por Unidade</div><div id="chart-unidade"></div></div>
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad3)"></div>Distribuição por Status</div><div id="chart-status"></div></div>
+    <div class="chart-card"><div class="chart-title"><div class="ctdot" style="background:var(--grad1)"></div>Distribuição por Status de Cursos</div><div id="chart-cursos"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><div class="section-num sn3">!</div><span class="section-title">Em Atraso / Sem Movimentação — prazo de 6 dias</span></div>
+    <div class="card" style="padding:0;overflow:hidden"><div id="dash-alertas"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" style="justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="section-num sn2">+</div><span class="section-title">Todos os Colaboradores Cadastrados</span>
+      </div>
+      <button class="btn btn-secondary" style="padding:7px 16px;font-size:12px" onclick="toggleDashAll()" id="btn-dash-all">Mostrar Listagem Completa</button>
+    </div>
+    <div id="dash-all-wrap" style="display:none">
+      <div class="card" style="padding:0;overflow:hidden"><div id="dash-all"></div></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- MODAL: RESPONSAVEL -->
+<div class="modal-bg" id="modal-cond"><div class="modal"><div class="modal-band"></div>
+  <div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-cond')">x</button>
+    <div class="modal-title">Responsável pela Condução</div>
+    <div class="modal-sub">Selecione o responsável pelo processo de onboarding</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="unid-card" id="cond-usuario1" onclick="setCond('Usuário 1')" style="text-align:left;display:flex;align-items:center;gap:14px;padding:16px 20px">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0">U1</div>
+        <div><div style="font-weight:700;color:var(--gray800)">Usuário 1</div><div style="font-size:12px;color:var(--gray400)">Gestão de Talentos</div></div>
+        <div class="unid-check" id="chk-usuario1" style="position:static;margin-left:auto">v</div>
+      </div>
+      <div class="unid-card" id="cond-usuario2" onclick="setCond('Usuário 2')" style="text-align:left;display:flex;align-items:center;gap:14px;padding:16px 20px">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--grad3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0">U2</div>
+        <div><div style="font-weight:700;color:var(--gray800)">Usuário 2</div><div style="font-size:12px;color:var(--gray400)">Gestão de Talentos</div></div>
+        <div class="unid-check" id="chk-usuario2" style="position:static;margin-left:auto">v</div>
+      </div>
+    </div>
+    <div class="actions" style="margin-top:20px"><button class="btn btn-primary" onclick="fecharModal('modal-cond')">Confirmar</button></div>
+  </div>
+</div></div>
+
+<!-- MODAL: UNIDADE 1 -->
+<div class="modal-bg" id="modal-unidade-ra"><div class="modal"><div class="modal-band"></div>
+  <div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-unidade-ra')">x</button>
+    <div class="modal-title">Unidade 1</div>
+    <div class="modal-sub">Selecione a localidade</div>
+    <div class="unidade-grid" id="modal-unidade-ra-grid">
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 1')"><div class="unid-name">FILIAL 1</div></div>
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 2')"><div class="unid-name">FILIAL 2</div></div>
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 3')"><div class="unid-name">FILIAL 3</div></div>
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 4')"><div class="unid-name">FILIAL 4</div></div>
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 5')"><div class="unid-name">FILIAL 5</div></div>
+      <div class="unid-card" onclick="selUnitRA(this,'FILIAL 6')"><div class="unid-name">FILIAL 6</div></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- MODAL: SELECAO TERMOS EXPORT -->
+<div class="modal-bg" id="modal-tex"><div class="modal"><div class="modal-band"></div>
+  <div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-tex')">x</button>
+    <div class="modal-title">Gerar Documento de Termos</div>
+    <div class="modal-sub">Selecione um ou mais colaboradores para incluir no documento</div>
+    <div style="margin-bottom:12px">
+      <input type="text" id="modal-tex-search" placeholder="Buscar colaborador..." oninput="renderModalTexList(this.value)" style="width:100%;background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:9px 13px;border-radius:8px;outline:none;margin-bottom:8px">
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" style="padding:7px 14px;font-size:11px" onclick="selectAllTex(true)">Selecionar todos</button>
+        <button class="btn btn-secondary" style="padding:7px 14px;font-size:11px" onclick="selectAllTex(false)">Limpar seleção</button>
+      </div>
+    </div>
+    <div class="mclist" id="modal-tex-list"></div>
+    <div class="actions" style="margin-top:0">
+      <button class="btn btn-print" onclick="gerarDocTermos()">Gerar Documento</button>
+      <button class="btn btn-secondary" onclick="fecharModal('modal-tex')">Cancelar</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- MODAL: DETALHE -->
+<div class="modal-bg" id="modal-det"><div class="modal wide"><div class="modal-band"></div>
+  <div class="modal-inner">
+    <button class="modal-close" onclick="fecharModal('modal-det')">x</button>
+    <div class="modal-title" id="det-title">Detalhes do Colaborador</div>
+    <div class="modal-sub" id="det-sub"></div>
+    <div id="det-body"></div>
+    <div id="det-actions" style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <button class="btn btn-primary" id="det-edit-btn">Editar Cadastro</button>
+      <button class="btn" id="det-declinou-btn" style="background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)" onclick="marcarDetModal('Declinou')">Declinou</button>
+      <button class="btn" id="det-demitido-btn" style="background:linear-gradient(135deg,#7b2ff7,#e0009e);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)" onclick="marcarDetModal('Demitido')">Demitido</button>
+      <button class="btn" id="det-remover-marc-btn" style="background:var(--gray100);color:var(--gray600);display:none" onclick="marcarDetModal('')">Remover Marcação</button>
+      <button class="btn" id="det-excluir-btn" style="background:var(--white);color:#ff4e6a;border:1.5px solid #ff4e6a" onclick="excluirDetModal()">Excluir Cadastro</button>
+      <button class="btn btn-secondary" onclick="fecharModal('modal-det')">Fechar</button>
+    </div>
+  </div>
+</div></div>
+
+  </main>
+</div>
+
+<script>
+/* ═══════════ INÍCIO core.js (biblioteca compartilhada GT360) ═══════════ */
+/* ══════════════ GT360 CORE — biblioteca compartilhada ══════════════
+   Fonte única destas funções. Qualquer correção/alteração deve ser
+   feita AQUI e reaplicada aos módulos — nunca editar as cópias
+   coladas em cada módulo individualmente. */
+
+/* Escapa texto para uso seguro dentro de innerHTML. */
+function esc(str){
+  return (str==null?'':String(str)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Transferência de estado via link (sem backend) ──
+   O estado de um registro (avaliação, etc.) viaja dentro da própria
+   URL — quem recebe o link abre o módulo já carregado na etapa certa.
+   Quando houver backend, este é o ponto de troca: substituir
+   codificarEstado/decodificarEstado e o mailto por chamadas reais de
+   API — o restante do fluxo (etapas, telas) não precisa mudar. */
+function codificarEstado(obj){
+  const json = JSON.stringify(obj);
+  const utf8 = unescape(encodeURIComponent(json));
+  const b64 = btoa(utf8);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodificarEstado(str){
+  let b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length % 4) b64 += '=';
+  const utf8 = atob(b64);
+  return JSON.parse(decodeURIComponent(escape(utf8)));
+}
+function gerarLinkTransferencia(registro){
+  // Dentro do workspace GT360, este módulo roda num iframe carregado via
+  // srcdoc — location.href aponta para "about:srcdoc", que não é um
+  // endereço utilizável fora daquela sessão. Quando embutido, o link
+  // precisa apontar para a página de nível mais alto (o próprio
+  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
+  // o shell é responsável por ler esse link e abrir o módulo certo.
+  let base;
+  try{
+    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
+  }catch(e){
+    base = location.href.split('#')[0];
+  }
+  return base + '#av=' + codificarEstado(registro);
+}
+function gerarMailtoLink(destinatario, assunto, corpo){
+  return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+}
+function verificarLinkRecebido(){
+  // Quando o shell do GT360 identifica um link de convite/retorno, ele
+  // injeta o registro já decodificado nesta variável antes de carregar o
+  // módulo (mais confiável do que tentar setar o hash de um documento
+  // srcdoc depois que ele já carregou). Fora do shell (uso direto do
+  // arquivo do módulo, ou abertura standalone), cai no hash normal.
+  if(window.__conviteRecebidoDireto) return window.__conviteRecebidoDireto;
+  const hash = location.hash;
+  if(hash.indexOf('#av=') === 0){
+    try{ return decodificarEstado(hash.slice(4)); }catch(e){ console.warn('Link de transferência inválido ou corrompido', e); return null; }
+  }
+  return null;
+}
+/* ═══════════ FIM core.js ═══════════ */
+
+let colaboradores=[], editIndex=-1, condutor='', unidadeSel='', integSel='', stMap={}, termosMap={}, texSel=new Set(), sortDiasAsc=false;
+
+/* Base de segmentação de Unidades — genérica, editável conforme a estrutura de cada empresa */
+const UNIDADES_LIST=[
+  {v:'UNIDADE 1 - FILIAL 1',l:'Unidade 1 — Filial 1',grupo:'Unidade 1'},
+  {v:'UNIDADE 1 - FILIAL 2',l:'Unidade 1 — Filial 2',grupo:'Unidade 1'},
+  {v:'UNIDADE 1 - FILIAL 3',l:'Unidade 1 — Filial 3',grupo:'Unidade 1'},
+  {v:'UNIDADE 1 - FILIAL 4',l:'Unidade 1 — Filial 4',grupo:'Unidade 1'},
+  {v:'UNIDADE 1 - FILIAL 5',l:'Unidade 1 — Filial 5',grupo:'Unidade 1'},
+  {v:'UNIDADE 1 - FILIAL 6',l:'Unidade 1 — Filial 6',grupo:'Unidade 1'},
+  {v:'UNIDADE 2',l:'Unidade 2',grupo:'Demais Unidades'},
+  {v:'UNIDADE 3',l:'Unidade 3',grupo:'Demais Unidades'},
+  {v:'UNIDADE 4',l:'Unidade 4',grupo:'Demais Unidades'},
+  {v:'UNIDADE 5',l:'Unidade 5',grupo:'Demais Unidades'},
+  {v:'UNIDADE 6',l:'Unidade 6',grupo:'Demais Unidades'},
+  {v:'UNIDADE 7',l:'Unidade 7',grupo:'Demais Unidades'}
+];
+const UNID_BARCOLORS=['linear-gradient(90deg,#f7a800,#ff4e00)','linear-gradient(90deg,#0099e5,#00e5a0)','linear-gradient(90deg,#7b2ff7,#e0009e)','linear-gradient(90deg,#00c48c,#0099e5)','linear-gradient(90deg,#e0009e,#ff4e00)','linear-gradient(90deg,#ff9500,#f7a800)','linear-gradient(90deg,#7b2ff7,#0099e5)','linear-gradient(90deg,#00c48c,#00e5a0)'];
+
+function unidadeOptionsHTML(selected){
+  const grupos={};
+  UNIDADES_LIST.forEach(u=>{(grupos[u.grupo]=grupos[u.grupo]||[]).push(u);});
+  return Object.keys(grupos).map(g=>`<optgroup label="${g}">${grupos[g].map(u=>`<option value="${u.v}" ${u.v===selected?'selected':''}>${u.l}</option>`).join('')}</optgroup>`).join('');
+}
+function unidadeLabel(v){const f=UNIDADES_LIST.find(u=>u.v===v);return f?f.l:(v||'—');}
+
+function showPage(p){
+  document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.side-item').forEach(e=>e.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('side-'+p).classList.add('active');
+  document.getElementById('content').scrollTop = 0; /* evita abrir a seção já rolada para o meio, herdado da seção anterior */
+  if(p==='dashboard') renderDash();
+  if(p==='termos') populateTermoSelect();
+}
+function toggleSidebar(){
+  const sb = document.getElementById('sidebar');
+  const colapsado = sb.classList.toggle('collapsed');
+  document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
+  try{ localStorage.setItem('onb_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+}
+function restaurarEstadoSidebar(){
+  let colapsado = false;
+  try{ colapsado = localStorage.getItem('onb_sidebar_colapsada') === '1'; }catch(e){}
+  if(colapsado){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('side-toggle-btn').title = 'Expandir menu';
+  }
+}
+restaurarEstadoSidebar();
+function fecharModal(id){document.getElementById(id).classList.remove('open')}
+function abrirModalCond(){document.getElementById('modal-cond').classList.add('open')}
+
+function setCond(nome){
+  condutor=nome;
+  document.getElementById('cond-nome').textContent=nome;
+  document.getElementById('chk-usuario1').style.opacity=nome==='Usuário 1'?'1':'0';
+  document.getElementById('chk-usuario2').style.opacity=nome==='Usuário 2'?'1':'0';
+  document.getElementById('cond-usuario1').classList.toggle('selected',nome==='Usuário 1');
+  document.getElementById('cond-usuario2').classList.toggle('selected',nome==='Usuário 2');
+}
+
+function selUnit(el,nome){
+  document.querySelectorAll('#form-area .unid-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected'); unidadeSel=nome;
+  document.getElementById('f-unidade').value=nome;
+  resetUnidRALabel();
+}
+
+function resetUnidRALabel(){
+  const raCard=document.getElementById('unid-unidade1');
+  if(raCard) raCard.querySelector('.unid-name').innerHTML='UNIDADE 1';
+}
+
+function abrirModalUnidadeRA(){
+  const grid=document.getElementById('modal-unidade-ra-grid');
+  grid.querySelectorAll('.unid-card').forEach(el=>{
+    const loc=el.querySelector('.unid-name').textContent;
+    el.classList.toggle('selected', unidadeSel==='UNIDADE 1 - '+loc);
+  });
+  document.getElementById('modal-unidade-ra').classList.add('open');
+}
+
+function selUnitRA(el,loc){
+  document.getElementById('modal-unidade-ra-grid').querySelectorAll('.unid-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  unidadeSel='UNIDADE 1 - '+loc;
+  document.getElementById('f-unidade').value=unidadeSel;
+  document.querySelectorAll('#form-area .unidade-grid .unid-card').forEach(c=>c.classList.remove('selected'));
+  const raCard=document.getElementById('unid-unidade1');
+  raCard.classList.add('selected');
+  raCard.querySelector('.unid-name').innerHTML='UNIDADE 1<br><span style="font-size:10px;font-weight:600;color:var(--gray400);text-transform:none;letter-spacing:normal">'+loc+'</span>';
+  fecharModal('modal-unidade-ra');
+}
+
+function aplicarSelecaoUnidade(nome){
+  document.querySelectorAll('#form-area .unidade-grid .unid-card').forEach(c=>c.classList.remove('selected'));
+  resetUnidRALabel();
+  if(!nome) return;
+  if(nome.indexOf('UNIDADE 1 - ')===0){
+    const loc=nome.replace('UNIDADE 1 - ','');
+    const raCard=document.getElementById('unid-unidade1');
+    raCard.classList.add('selected');
+    raCard.querySelector('.unid-name').innerHTML='UNIDADE 1<br><span style="font-size:10px;font-weight:600;color:var(--gray400);text-transform:none;letter-spacing:normal">'+loc+'</span>';
+  } else {
+    document.querySelectorAll('#form-area .unidade-grid .unid-card').forEach(el=>{
+      if(el.id==='unid-unidade1') return;
+      if(el.querySelector('.unid-name').textContent.trim()===nome) el.classList.add('selected');
+    });
+  }
+}
+
+function toggleInteg(el,val){
+  document.getElementById('integ-sim').classList.remove('s-ok');
+  document.getElementById('integ-nao').classList.remove('s-pend');
+  el.classList.add(val==='sim'?'s-ok':'s-pend'); integSel=val;
+}
+
+function setSt(gid,btn,cls){
+  const g=document.getElementById(gid); if(!g) return;
+  g.querySelectorAll('.st-btn').forEach(b=>b.classList.remove('s-ok','s-pend','s-no','s-andamento','s-parcial','s-naoobrg'));
+  btn.classList.add('s-'+cls); stMap[gid]={val:btn.getAttribute('data-val'),cls};
+}
+function getStVal(id){return stMap[id]?stMap[id].val:'—'}
+function clearSt(id){
+  const g=document.getElementById(id); if(!g) return;
+  g.querySelectorAll('.st-btn').forEach(b=>b.classList.remove('s-ok','s-pend','s-no','s-andamento','s-parcial','s-naoobrg'));
+  delete stMap[id];
+}
+function restoreSt(id,val){
+  if(!val||val==='—') return;
+  const g=document.getElementById(id); if(!g) return;
+  const cm={'Enviado':'ok','Assinado':'ok','Cadastrado':'ok','Realizados completamente':'ok','Em andamento':'andamento',
+    'Não enviado':'no','Não assinado':'no','Não cadastrado':'no','Não realizado':'no',
+    'Pendente validação':'pend','Realizados parcialmente':'parcial','Não obrigatório':'naoobrg'};
+  const btn=[...g.querySelectorAll('.st-btn')].find(b=>b.getAttribute('data-val')===val);
+  if(btn) setSt(id,btn,cm[val]||'ok');
+}
+
+function salvarColaborador(){
+  const nome=document.getElementById('f-colaborador').value.trim();
+  if(!nome){showToast('Informe o nome do colaborador');return;}
+  if(!unidadeSel){showToast('Selecione a unidade');return;}
+  const rec={
+    id:editIndex>=0?colaboradores[editIndex].id:Date.now(),
+    colaborador:nome, matricula:document.getElementById('f-matricula').value.trim(),
+    setor:document.getElementById('f-setor').value.trim(),
+    cargo:document.getElementById('f-cargo').value.trim(), contato:document.getElementById('f-contato').value.trim(),
+    datainicio:document.getElementById('f-datainicio').value, unidade:unidadeSel,
+    integracao:integSel, condutor,
+    st_envio:getStVal('st-envio'), st_assinatura:getStVal('st-assinatura'),
+    st_uniglobo:getStVal('st-uniglobo'), st_cursos:getStVal('st-cursos'),
+    parecer_data:document.getElementById('f-parecer-data').value,
+    parecer_obs:document.getElementById('f-parecer-obs').value.trim(),
+    salvo_em:new Date().toISOString()
+  };
+  if(editIndex>=0) colaboradores[editIndex]=rec; else colaboradores.push(rec);
+  editIndex=-1; renderCollabList(); showToast('Colaborador salvo com sucesso');
+}
+
+function statusEhConcluido(val){
+  return val==='Enviado'||val==='Assinado'||val==='Cadastrado'||val==='Realizados completamente';
+}
+function calcSt(c){
+  /* Status geral do processo: considera concluído quando ha parecer manual da Gestao de Talentos
+     OU quando Envio de Documentos e Assinatura do Termo de Ciencia estao ambos finalizados.
+     Cursos passa a ser uma analise independente (ver chart-cursos / d-cursos) e nao entra mais
+     na composicao do Status geral. */
+  const stAssin=termoAssinatura(c);
+  if(c.parecer_data||(statusEhConcluido(c.st_envio)&&statusEhConcluido(stAssin))) return{label:'Concluído',cls:'sp-concluido'};
+  const hoje=new Date(), ini=c.datainicio?new Date(c.datainicio+'T00:00:00'):null;
+  const dias=ini?Math.floor((hoje-ini)/864e5):null;
+  if(dias!==null&&dias>6) return{label:'Em atraso',cls:'sp-atraso'};
+  const mov=[c.st_envio,stAssin,c.st_uniglobo].some(v=>v&&v!=='—');
+  return mov?{label:'Em andamento',cls:'sp-andamento'}:{label:'Não iniciado',cls:'sp-novo'};
+}
+
+function renderCollabList(){
+  const badge=document.getElementById('count-badge'); if(badge) badge.textContent=colaboradores.length;
+  const pill=document.getElementById('lista-count-pill');
+  if(pill) pill.textContent=colaboradores.length+' cadastro'+(colaboradores.length!==1?'s':'');
+  const sec=document.getElementById('sec-lista');
+  if(!sec) return; // listagem não existe mais nesta página — o resumo completo fica só no Dashboard
+  if(colaboradores.length===0){sec.style.display='none';return;}
+  sec.style.display='block';
+  const listEl=document.getElementById('collab-list');
+  if(!listEl) return;
+  // Criar lista ordenada alfabeticamente mantendo índice original
+  const sorted=colaboradores.map((c,i)=>({c,i})).sort((a,b)=>(a.c.colaborador||'').localeCompare(b.c.colaborador||'','pt-BR',{sensitivity:'base'}));
+  listEl.innerHTML=sorted.map(({c,i})=>{
+    const st=calcSt(c), av=(c.colaborador||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    return`<div class="collab-row" onclick="editarColaborador(${i})">
+      <div class="collab-avatar">${av}</div>
+      <div class="collab-info"><h4>${c.colaborador}</h4><p>${unidadeLabel(c.unidade)} · ${c.setor||'—'} · ${c.cargo||'—'}${c.datainicio?' · Início: '+fmtDate(c.datainicio):''}</p></div>
+      <span class="spill ${st.cls}">${st.label}</span>
+    </div>`;
+  }).join('');
+}
+
+function editarColaborador(i){
+  editIndex=i; const c=colaboradores[i];
+  document.getElementById('f-colaborador').value=c.colaborador||'';
+  document.getElementById('f-matricula').value=c.matricula||'';
+  document.getElementById('f-setor').value=c.setor||'';
+  document.getElementById('f-cargo').value=c.cargo||'';
+  document.getElementById('f-contato').value=c.contato||'';
+  document.getElementById('f-datainicio').value=c.datainicio||'';
+  document.getElementById('f-parecer-data').value=c.parecer_data||'';
+  document.getElementById('f-parecer-obs').value=c.parecer_obs||'';
+  unidadeSel=c.unidade||'';
+  aplicarSelecaoUnidade(unidadeSel);
+  ['st-envio','st-assinatura','st-uniglobo','st-cursos'].forEach(id=>clearSt(id));
+  restoreSt('st-envio',c.st_envio); restoreSt('st-assinatura',c.st_assinatura);
+  restoreSt('st-uniglobo',c.st_uniglobo); restoreSt('st-cursos',c.st_cursos);
+  integSel=c.integracao||'';
+  document.getElementById('integ-sim').classList.toggle('s-ok',integSel==='sim');
+  document.getElementById('integ-nao').classList.toggle('s-pend',integSel==='nao');
+  if(c.condutor) setCond(c.condutor);
+  document.getElementById('form-area').scrollIntoView({behavior:'smooth'});
+  showToast('Editando: '+c.colaborador);
+}
+function novoColaborador(){editIndex=-1;limparForm();document.getElementById('form-area').scrollIntoView({behavior:'smooth'});}
+function popularGerarSelect(){
+  const sel=document.getElementById('f-gerar-select'); if(!sel) return;
+  const q=(document.getElementById('f-gerar-search')||{value:''}).value.toLowerCase().trim();
+  const sorted=colaboradores.map((c,i)=>({c,i})).sort((a,b)=>(a.c.colaborador||'').localeCompare(b.c.colaborador||'','pt-BR',{sensitivity:'base'}));
+  const filtered=q?sorted.filter(({c})=>(c.colaborador||'').toLowerCase().includes(q)):sorted;
+  sel.innerHTML='<option value="">— Formulário atual (não salvo) —</option>'+filtered.map(({c,i})=>`<option value="${i}">${c.colaborador} — ${unidadeLabel(c.unidade)}</option>`).join('');
+}
+function limparForm(){
+  ['f-colaborador','f-matricula','f-setor','f-cargo','f-contato','f-datainicio','f-parecer-data','f-parecer-obs'].forEach(id=>document.getElementById(id).value='');
+  document.querySelectorAll('#form-area .unid-card').forEach(c=>c.classList.remove('selected'));
+  resetUnidRALabel();
+  unidadeSel=''; ['st-envio','st-assinatura','st-uniglobo','st-cursos'].forEach(id=>clearSt(id));
+  document.getElementById('integ-sim').classList.remove('s-ok');
+  document.getElementById('integ-nao').classList.remove('s-pend'); integSel='';
+}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+function marcarColaborador(gi,val){
+  if(!colaboradores[gi]) return;
+  colaboradores[gi].marcacao=val;
+  salvarBase();
+  renderDash();
+  showToast(val?'Colaborador marcado como: '+val:'Marcação removida');
+}
+
+function toggleDashAll(forceOpen){
+  const wrap=document.getElementById('dash-all-wrap');
+  const btn=document.getElementById('btn-dash-all');
+  if(!wrap||!btn) return;
+  const opening=forceOpen===true||(forceOpen===undefined&&wrap.style.display==='none');
+  wrap.style.display=opening?'block':'none';
+  btn.textContent=opening?'Ocultar Listagem':'Mostrar Listagem Completa';
+}
+function getSetoresOptions(selected){
+  const setores=[...new Set(colaboradores.map(c=>c.setor||'').filter(s=>s))].sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
+  return setores.map(s=>`<option value="${s}" ${s===selected?'selected':''}>${s}</option>`).join('');
+}
+
+function toggleSortDias(){
+  sortDiasAsc=!sortDiasAsc;
+  const th=document.getElementById('th-dias-aberto');
+  if(th) th.textContent='Dias em Aberto '+(sortDiasAsc?'↑':'↓');
+  renderDash();
+}
+
+function atualizarSetoresDash(){
+  const setores=[...new Set(colaboradores.map(c=>c.setor||'').filter(s=>s))].sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
+  const sel=document.getElementById('d-setor'); if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Todos</option>'+setores.map(s=>`<option value="${s}">${s}</option>`).join('');
+  if(cur) sel.value=cur;
+}
+
+function fmtDate(str){if(!str)return'—';const[y,m,d]=str.split('-');return`${d}/${m}/${y}`;}
+function dataHoje(){const n=new Date();return`${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()}`;}
+
+function badgeBg(val){
+  const m={'Enviado':'linear-gradient(135deg,#00c48c,#00e5a0)','Assinado':'linear-gradient(135deg,#00c48c,#00e5a0)',
+    'Cadastrado':'linear-gradient(135deg,#00c48c,#00e5a0)','Realizados completamente':'linear-gradient(135deg,#00c48c,#00e5a0)',
+    'Em andamento':'linear-gradient(135deg,#0099e5,#7b2ff7)','Pendente validação':'linear-gradient(135deg,#f7a800,#e0009e)',
+    'Realizados parcialmente':'linear-gradient(135deg,#e0009e,#7b2ff7)',
+    'Não enviado':'linear-gradient(135deg,#ff4e6a,#e0003c)','Não assinado':'linear-gradient(135deg,#ff4e6a,#e0003c)',
+    'Não cadastrado':'linear-gradient(135deg,#ff4e6a,#e0003c)','Não realizado':'linear-gradient(135deg,#ff4e6a,#e0003c)',
+    'Não obrigatório':'linear-gradient(135deg,#9098b0,#5a6278)'};
+  return m[val]||'linear-gradient(135deg,#9098b0,#5a6278)';
+}
+function pdfBadge(val){return`<span class="pbadge" style="background:${badgeBg(val)}">${val||'—'}</span>`;}
+function inlinePill(val){return`<span class="spill" style="background:${badgeBg(val)};font-size:11px;padding:3px 10px">${val||'—'}</span>`;}
+function termoAssinatura(c){const sv=termosMap[c.id];return sv&&sv['tt-ciencia']?sv['tt-ciencia'].val:'—';}
+
+/* DOC ONBOARDING */
+function gerarDocOnboarding(){
+  const gerarSelEl=document.getElementById('f-gerar-select');
+  const gerarIdx=gerarSelEl&&gerarSelEl.value!==''?parseInt(gerarSelEl.value):-1;
+  const useIdx=gerarIdx>=0?gerarIdx:(editIndex>=0?editIndex:-1);
+  let c=useIdx>=0?colaboradores[useIdx]:{
+    colaborador:document.getElementById('f-colaborador').value.trim()||'—',
+    matricula:document.getElementById('f-matricula').value.trim()||'—',
+    setor:document.getElementById('f-setor').value.trim()||'—',
+    cargo:document.getElementById('f-cargo').value.trim()||'—',
+    contato:document.getElementById('f-contato').value.trim()||'—',
+    datainicio:document.getElementById('f-datainicio').value,
+    unidade:unidadeSel||'—', integracao:integSel, condutor,
+    st_envio:getStVal('st-envio'), st_assinatura:getStVal('st-assinatura'),
+    st_uniglobo:getStVal('st-uniglobo'), st_cursos:getStVal('st-cursos'),
+    parecer_data:document.getElementById('f-parecer-data').value,
+    parecer_obs:document.getElementById('f-parecer-obs').value.trim()
+  };
+  if(!c.colaborador||c.colaborador==='—'){showToast('Preencha os dados antes de gerar');return;}
+  const g=['linear-gradient(160deg,#f7a800,#ff4e00)','linear-gradient(160deg,#0099e5,#00e5a0)','linear-gradient(160deg,#7b2ff7,#e0009e)'];
+  const html=`<div class="pdf-doc"><div class="ptband"></div>
+    <div class="phdr">
+      <div><div class="phdr-title">Processo de Onboarding</div><div class="phdr-sub">Registro de Integração — Gestão de Talentos</div>
+        ${c.condutor?`<span class="phdr-badge">Conduzido por: ${c.condutor}</span>`:''}
+        ${c.integracao==='nao'?`<span class="phdr-badge" style="background:linear-gradient(135deg,#9098b0,#5a6278);margin-left:6px">Sem integração — apenas registro</span>`:''}
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+        <img class="pdf-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
+        <div style="text-align:right"><div style="font-size:11px;color:var(--gray400);font-weight:700;text-transform:uppercase">Emitido em</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--gray800)">${dataHoje()}</div></div>
+      </div>
+    </div>
+    <div class="pbody">
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:${g[0]}">01</div>Identificação</div>
+        <div class="pgrid">
+          <div class="pfield"><span class="pflbl">Colaborador</span><div class="pfval">${c.colaborador}</div></div>
+          <div class="pfield"><span class="pflbl">Matrícula</span><div class="pfval">${c.matricula||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Unidade</span><div class="pfval">${unidadeLabel(c.unidade)}</div></div>
+          <div class="pfield"><span class="pflbl">Setor</span><div class="pfval">${c.setor||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Cargo</span><div class="pfval">${c.cargo||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Data de Início</span><div class="pfval">${fmtDate(c.datainicio)}</div></div>
+          <div class="pfield"><span class="pflbl">Contato</span><div class="pfval">${c.contato||'—'}</div></div>
+        </div>
+      </div>
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:${g[1]}">02</div>Status do Processo</div>
+        <div class="pstrow"><span class="pstlbl">Envio de Documentos Norteadores</span>${pdfBadge(c.st_envio)}</div>
+        <div class="pstrow"><span class="pstlbl">Cadastro UniGlobo</span>${pdfBadge(c.st_uniglobo)}</div>
+        <div class="pstrow"><span class="pstlbl">Cursos Obrigatórios de Onboarding</span>${pdfBadge(c.st_cursos)}</div>
+        ${c.parecer_data?`<div class="pstrow" style="margin-top:4px"><span class="pstlbl">Parecer — Gestão de Talentos</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' — '+c.parecer_obs:''}</span></div>`:''}
+      </div>
+      <div class="psect">
+        <div class="pstitle"><div class="psnum" style="background:${g[2]}">03</div>Assinaturas</div>
+        <div class="psiggrid">
+          <div class="psigblock"><div class="psigbtitle">Elaborado por</div>
+            <span class="psiglbl">Nome</span><div class="psigval">${c.condutor||''}&nbsp;</div>
+            <span class="psiglbl">Data de elaboração</span><div class="psigval">${dataHoje()}</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+          <div class="psigblock"><div class="psigbtitle">Recebido por</div>
+            <span class="psiglbl">Colaborador</span><div class="psigval">${c.colaborador}&nbsp;</div>
+            <span class="psiglbl">Data de recebimento</span><div class="psigval">&nbsp;</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pfooter"><span>Gestão de Talentos — Processo de Onboarding</span><span>Emitido em ${dataHoje()}</span></div>
+  </div>`;
+  abrirPrint(html);
+}
+
+/* TERMOS */
+function populateTermoSelect(searchVal){
+  const sel=document.getElementById('t-select-collab'), cur=sel.value;
+  const q=(searchVal!==undefined?searchVal:(document.getElementById('t-search-collab')||{value:''}).value).toLowerCase().trim();
+  const sorted=colaboradores.map((c,i)=>({c,i})).sort((a,b)=>(a.c.colaborador||'').localeCompare(b.c.colaborador||'','pt-BR',{sensitivity:'base'}));
+  const filtered=q?sorted.filter(({c})=>(c.colaborador||'').toLowerCase().includes(q)):sorted;
+  sel.innerHTML='<option value="">— Selecione o colaborador —</option>'+
+    filtered.map(({c,i})=>`<option value="${i}">${c.colaborador} — ${unidadeLabel(c.unidade)}</option>`).join('');
+  if(cur) sel.value=cur;
+  /* atualizar datalist */
+  const dl=document.getElementById('t-collab-datalist');
+  if(dl) dl.innerHTML=sorted.map(({c})=>`<option value="${c.colaborador}"></option>`).join('');
+}
+function onTermoSearchInput(){
+  const searchEl=document.getElementById('t-search-collab');
+  const val=searchEl?searchEl.value:'';
+  /* checar se valor bate exatamente com algum colaborador (seleção via datalist) */
+  const match=colaboradores.find(c=>(c.colaborador||'').toLowerCase()===val.toLowerCase().trim());
+  if(match){
+    populateTermoSelect('');
+    const sel=document.getElementById('t-select-collab');
+    const idx=colaboradores.indexOf(match);
+    if(sel){sel.value=idx;preencherTermos();}
+  } else {
+    populateTermoSelect(val);
+  }
+}
+function preencherTermos(){
+  const i=document.getElementById('t-select-collab').value;
+  if(i===''){['t-colaborador','t-matricula','t-setor','t-cargo'].forEach(id=>document.getElementById(id).value='');return;}
+  const c=colaboradores[parseInt(i)];
+  document.getElementById('t-colaborador').value=c.colaborador||'';
+  document.getElementById('t-matricula').value=c.matricula||'';
+  document.getElementById('t-setor').value=c.setor||'';
+  document.getElementById('t-cargo').value=c.cargo||'';
+  const sv=termosMap[c.id];
+  clearSt('tt-ciencia');
+  if(sv){
+    if(sv['tt-ciencia']){const g=document.getElementById('tt-ciencia');const b=[...g.querySelectorAll('.st-btn')].find(b=>b.getAttribute('data-val')===sv['tt-ciencia'].val);if(b)setSt('tt-ciencia',b,sv['tt-ciencia'].cls);}
+    document.getElementById('t-data-assinatura').value=sv.data||'';
+  } else {
+    document.getElementById('t-data-assinatura').value='';
+  }
+}
+function salvarTermos(){
+  const i=document.getElementById('t-select-collab').value;
+  if(i===''){showToast('Selecione um colaborador');return;}
+  const c=colaboradores[parseInt(i)];
+  termosMap[c.id]={data:document.getElementById('t-data-assinatura').value,'tt-ciencia':stMap['tt-ciencia']};
+  showToast('Termos salvos com sucesso');
+}
+function abrirModalTermosExport(){
+  if(colaboradores.length===0){showToast('Nenhum colaborador cadastrado');return;}
+  texSel.clear();
+  renderModalTexList('');
+  document.getElementById('modal-tex').classList.add('open');
+}
+function renderModalTexList(search){
+  const q=(search||'').toLowerCase().trim();
+  const sorted=colaboradores.map((c,i)=>({c,i})).sort((a,b)=>(a.c.colaborador||'').localeCompare(b.c.colaborador||'','pt-BR',{sensitivity:'base'}));
+  const filtered=q?sorted.filter(({c})=>(c.colaborador||'').toLowerCase().includes(q)):sorted;
+  document.getElementById('modal-tex-list').innerHTML=filtered.map(({c,i})=>`
+    <div class="mcitem ${texSel.has(i)?'checked':''}" id="tex-${i}" onclick="toggleTex(${i})">
+      <div class="mcbox" id="tex-chk-${i}">${texSel.has(i)?'v':''}</div>
+      <div><div class="mcname">${c.colaborador}</div><div class="mcmeta">${unidadeLabel(c.unidade)} · ${c.setor||'—'} · ${c.cargo||'—'}</div></div>
+    </div>`).join('');
+}
+function toggleTex(i){
+  if(texSel.has(i))texSel.delete(i);else texSel.add(i);
+  const el=document.getElementById('tex-'+i);
+  if(el){el.classList.toggle('checked',texSel.has(i));const chk=document.getElementById('tex-chk-'+i);if(chk)chk.textContent=texSel.has(i)?'v':'';}
+}
+function selectAllTex(v){
+  colaboradores.forEach((_,i)=>{v?texSel.add(i):texSel.delete(i);});
+  const searchEl=document.getElementById('modal-tex-search');
+  renderModalTexList(searchEl?searchEl.value:'');
+}
+function gerarDocTermos(){
+  if(texSel.size===0){showToast('Selecione ao menos um colaborador');return;}
+  fecharModal('modal-tex');
+  const sels=[...texSel].sort((a,b)=>(colaboradores[a]?.colaborador||'').localeCompare(colaboradores[b]?.colaborador||'','pt-BR',{sensitivity:'base'}));
+  const isSingle=sels.length===1;
+
+  /* Cabeçalho único do documento */
+  const cabecalho=`<div class="pdf-doc"><div class="ptband"></div>
+    <div class="phdr">
+      <div>
+        <div class="phdr-title">Controle de Termos</div>
+        <div class="phdr-sub">Relação de Assinatura de Termos — Gestão de Talentos</div>
+        ${condutor?`<span class="phdr-badge">Elaborado por: ${condutor}</span>`:''}
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+        <img class="pdf-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--gray400);font-weight:700;text-transform:uppercase">Emitido em</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--gray800)">${dataHoje()}</div>
+        </div>
+      </div>
+    </div>
+    <div class="pbody">`;
+
+  if(isSingle){
+    /* ── Documento individual: campos em destaque ── */
+    const co=colaboradores[sels[0]], sv=termosMap[co.id]||{};
+    const stC=sv['tt-ciencia']?sv['tt-ciencia'].val:'—';
+    const corpo=`
+      <div class="psect">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+          <div class="pfield"><span class="pflbl">Colaborador</span><div class="pfval">${co.colaborador}</div></div>
+          <div class="pfield"><span class="pflbl">Matrícula</span><div class="pfval">${co.matricula||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Setor</span><div class="pfval">${co.setor||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Cargo</span><div class="pfval">${co.cargo||'—'}</div></div>
+          <div class="pfield"><span class="pflbl">Unidade</span><div class="pfval">${unidadeLabel(co.unidade)}</div></div>
+          <div class="pfield"><span class="pflbl">Data de Assinatura do Termo</span><div class="pfval">${fmtDate(sv.data)}</div></div>
+        </div>
+      </div>
+      <div class="psect">
+        <div class="pstrow"><span class="pstlbl">Termo de Ciência e Compromisso</span>${pdfBadge(stC)}</div>
+      </div>
+      <div class="psect">
+        <div class="psiggrid">
+          <div class="psigblock"><div class="psigbtitle">Elaborado por</div>
+            <span class="psiglbl">Nome</span><div class="psigval">${condutor||''}&nbsp;</div>
+            <span class="psiglbl">Data de entrega para arquivo</span><div class="psigval">${dataHoje()}</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+          <div class="psigblock"><div class="psigbtitle">Recebido por</div>
+            <span class="psiglbl">Nome do receptor</span><div class="psigval">&nbsp;</div>
+            <span class="psiglbl">Data de recebimento para arquivo</span><div class="psigval">&nbsp;</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+        </div>
+      </div>`;
+    const doc=cabecalho+corpo+`</div>
+      <div class="pfooter"><span>Gestão de Talentos — Controle de Termos</span><span>Emitido em ${dataHoje()}</span></div>
+    </div>`;
+    abrirPrint(doc);
+  } else {
+    /* ── Relação de múltiplos colaboradores: tabela compacta ── */
+    const linhas=sels.map(i=>{
+      const co=colaboradores[i], sv=termosMap[co.id]||{};
+      const stC=sv['tt-ciencia']?sv['tt-ciencia'].val:'—';
+      return`<tr>
+        <td style="font-weight:600">${co.colaborador}</td>
+        <td>${co.matricula||'—'}</td>
+        <td>${co.setor||'—'}</td>
+        <td>${co.cargo||'—'}</td>
+        <td>${unidadeLabel(co.unidade)}</td>
+        <td>${fmtDate(sv.data)}</td>
+        <td>${pdfBadge(stC)}</td>
+      </tr>`;
+    }).join('');
+    const tabela=`
+      <div class="psect">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="border-bottom:2px solid var(--gray100)">
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Colaborador</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Matrícula</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Setor</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Cargo</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Unidade</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Dt. Assinatura</th>
+              <th style="text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700">Status</th>
+            </tr>
+          </thead>
+          <tbody>${linhas}</tbody>
+        </table>
+      </div>
+      <div class="psect" style="margin-top:28px">
+        <div class="psiggrid">
+          <div class="psigblock"><div class="psigbtitle">Elaborado por</div>
+            <span class="psiglbl">Nome</span><div class="psigval">${condutor||''}&nbsp;</div>
+            <span class="psiglbl">Data de entrega para arquivo</span><div class="psigval">${dataHoje()}</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+          <div class="psigblock"><div class="psigbtitle">Recebido por</div>
+            <span class="psiglbl">Nome do receptor</span><div class="psigval">&nbsp;</div>
+            <span class="psiglbl">Data de recebimento para arquivo</span><div class="psigval">&nbsp;</div>
+            <span class="psiglbl" style="margin-top:12px;display:block">Assinatura</span>
+            <div class="psigline"></div><div class="psiglinelbl">Assine acima</div>
+          </div>
+        </div>
+      </div>`;
+    const doc=cabecalho+tabela+`</div>
+      <div class="pfooter"><span>Gestão de Talentos — Controle de Termos (${sels.length} colaboradores)</span><span>Emitido em ${dataHoje()}</span></div>
+    </div>`;
+    abrirPrint(doc);
+  }
+}
+
+/* DASHBOARD */
+function getFiltered(){
+  const de=document.getElementById('d-de').value, ate=document.getElementById('d-ate').value,
+    unid=document.getElementById('d-unidade').value, setor=document.getElementById('d-setor').value,
+    cursosEl=document.getElementById('d-cursos'), cursos=cursosEl?cursosEl.value:'',
+    statusEl=document.getElementById('d-status'), status=statusEl?statusEl.value:'';
+  return colaboradores.filter(c=>{
+    if(unid&&c.unidade!==unid)return false;
+    if(setor&&(c.setor||'')!==setor)return false;
+    if(de&&c.datainicio&&c.datainicio<de)return false;
+    if(ate&&c.datainicio&&c.datainicio>ate)return false;
+    if(cursos){
+      if(cursos==='naoiniciado'){ if(c.st_cursos&&c.st_cursos!=='—') return false; }
+      else if((c.st_cursos||'')!==cursos) return false;
+    }
+    if(status&&calcSt(c).label!==status) return false;
+    return true;
+  });
+}
+
+function renderDash(){
+  /* Preserva o foco e a posicao do cursor do campo de busca durante o re-render,
+     pois os inputs de filtro sao recriados via innerHTML a cada chamada */
+  const _activeEl=document.activeElement;
+  let _focusId=null,_focusSelStart=null,_focusSelEnd=null;
+  if(_activeEl&&_activeEl.id&&(_activeEl.id==='d-all-colab'||_activeEl.id==='d-alt-colab')){
+    _focusId=_activeEl.id;
+    _focusSelStart=_activeEl.selectionStart;
+    _focusSelEnd=_activeEl.selectionEnd;
+  }
+  /* Auto-abrir listagem quando filtros estao ativos */
+  const _de=document.getElementById('d-de')&&document.getElementById('d-de').value;
+  const _ate=document.getElementById('d-ate')&&document.getElementById('d-ate').value;
+  const _unid=document.getElementById('d-unidade')&&document.getElementById('d-unidade').value;
+  const _setor=document.getElementById('d-setor')&&document.getElementById('d-setor').value;
+  const _cursos=document.getElementById('d-cursos')&&document.getElementById('d-cursos').value;
+  const _status=document.getElementById('d-status')&&document.getElementById('d-status').value;
+  if(_de||_ate||_unid||_setor||_cursos||_status) toggleDashAll(true);
+  const data=getFiltered(), hoje=new Date();
+  const total=data.length;
+  /* Status geral (Envio + Assinatura / parecer) — apurado via calcSt para manter os cards,
+     o grafico e as linhas da tabela sempre consistentes entre si */
+  const stC={'Concluído':0,'Em andamento':0,'Em atraso':0,'Não iniciado':0};
+  data.forEach(c=>{ const l=calcSt(c).label; stC[l]=(stC[l]||0)+1; });
+  const conc=stC['Concluído'];
+  const pct=total?Math.round(conc/total*100):0;
+  const tempos=data.filter(c=>c.datainicio&&c.parecer_data).map(c=>Math.max(0,Math.floor((new Date(c.parecer_data+'T00:00:00')-new Date(c.datainicio+'T00:00:00'))/864e5)));
+  const media=tempos.length?Math.round(tempos.reduce((a,b)=>a+b,0)/tempos.length):0;
+  const atras=data.filter(c=>calcSt(c).label==='Em atraso').length;
+
+  /* Análise independente de Cursos — segmentada do Status geral do processo.
+     Colaboradores marcados como "Não obrigatório" ficam de fora desta análise
+     (não entram no total nem em nenhuma das categorias do gráfico/KPI de Cursos). */
+  const cursosData=data.filter(c=>c.st_cursos!=='Não obrigatório');
+  const cursosTotal=cursosData.length;
+  const cursosIsentos=total-cursosTotal;
+  const cursosC={'Concluído':0,'Em andamento':0,'Não realizado':0,'Não iniciado':0};
+  cursosData.forEach(c=>{
+    const v=c.st_cursos;
+    if(v==='Realizados completamente') cursosC['Concluído']++;
+    else if(v==='Em andamento') cursosC['Em andamento']++;
+    else if(v==='Não realizado') cursosC['Não realizado']++;
+    else cursosC['Não iniciado']++;
+  });
+  const cursosConc=cursosC['Concluído'];
+  const cursosPct=cursosTotal?Math.round(cursosConc/cursosTotal*100):0;
+
+  document.getElementById('kpi-grid').innerHTML=`
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#f7a800,#ff4e00)"></div><div class="kpi-label">Total de colaboradores</div><div class="kpi-val">${total}</div><div class="kpi-sub">no período filtrado</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#00c48c,#00e5a0)"></div><div class="kpi-label">Taxa de conclusão</div><div class="kpi-val">${pct}%</div><div class="kpi-sub">${conc} de ${total} concluídos</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#0099e5,#7b2ff7)"></div><div class="kpi-label">Tempo médio de conclusão</div><div class="kpi-val">${media}</div><div class="kpi-sub">dias em média</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#ff4e6a,#e0003c)"></div><div class="kpi-label">Em atraso (mais de 10 dias)</div><div class="kpi-val">${atras}</div><div class="kpi-sub">sem conclusão no prazo</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#7b2ff7,#e0009e)"></div><div class="kpi-label">Cursos concluídos</div><div class="kpi-val">${cursosPct}%</div><div class="kpi-sub">${cursosConc} de ${cursosTotal} com cursos concluídos${cursosIsentos?' · '+cursosIsentos+' isento'+(cursosIsentos!==1?'s':''):''}</div></div>`;
+
+  let barH='';
+  UNIDADES_LIST.forEach((u,i)=>{
+    const tot=data.filter(c=>c.unidade===u.v).length, cn=data.filter(c=>c.unidade===u.v&&calcSt(c).label==='Concluído').length;
+    if(!tot)return;
+    const p=Math.round(cn/tot*100);
+    barH+=`<div class="bar-row"><div class="bar-lbl" title="${u.l}">${u.l}</div><div class="bar-track"><div class="bar-fill" style="width:${p}%;background:${UNID_BARCOLORS[i%UNID_BARCOLORS.length]}"><span class="bar-pct">${p}%</span></div></div><div class="bar-val">${cn}/${tot}</div></div>`;
+  });
+  document.getElementById('chart-unidade').innerHTML=barH||'<div style="color:var(--gray400);font-size:13px;padding:16px;text-align:center">Nenhum dado para exibir</div>';
+
+  function renderDonut(elId,counts,colors,centerPct,centerLabel){
+    const pt=Object.values(counts).reduce((a,b)=>a+b,0)||1;
+    let cum=-90, paths='';
+    Object.entries(counts).forEach(([,cnt],i)=>{
+      const deg=cnt/pt*360,sr=cum*Math.PI/180,er=(cum+deg)*Math.PI/180;
+      const x1=100+80*Math.cos(sr),y1=100+80*Math.sin(sr),x2=100+80*Math.cos(er),y2=100+80*Math.sin(er);
+      if(cnt>0)paths+=`<path d="M100,100 L${x1},${y1} A80,80 0 ${deg>180?1:0},1 ${x2},${y2} Z" fill="${colors[i%colors.length]}" opacity=".9"/>`;
+      cum+=deg;
+    });
+    document.getElementById(elId).innerHTML=`<div class="pie-wrap">
+      <svg width="200" height="200" viewBox="0 0 200 200">${paths}
+        <circle cx="100" cy="100" r="48" fill="white"/>
+        <text x="100" y="96" text-anchor="middle" fill="#2a2f42" font-family="DM Serif Display,serif" font-size="26">${centerPct}%</text>
+        <text x="100" y="112" text-anchor="middle" fill="#9098b0" font-family="Sora,sans-serif" font-size="10" font-weight="700">${centerLabel}</text>
+      </svg>
+      <div class="pie-leg">${Object.entries(counts).map(([l,v],i)=>`<div class="pie-li"><div class="pie-dot" style="background:${colors[i%colors.length]}"></div>${l}<div class="pie-v">${v}</div></div>`).join('')}</div>
+    </div>`;
+  }
+  renderDonut('chart-status',stC,['#00c48c','#0099e5','#ff4e6a','#9098b0'],pct,'CONCLUSÃO');
+  renderDonut('chart-cursos',cursosC,['#7b2ff7','#0099e5','#ff4e6a','#9098b0'],cursosPct,'CURSOS');
+
+  /* Tabela todos */
+  const allFiltColab=(document.getElementById('d-all-colab')||{value:''}).value.toLowerCase().trim();
+  const allFiltUnid=(document.getElementById('d-all-unid')||{value:''}).value;
+  const allFiltSetor=(document.getElementById('d-all-setor')||{value:''}).value;
+  const dataAll=[...data].filter(c=>{
+    if(allFiltColab&&!(c.colaborador||'').toLowerCase().includes(allFiltColab))return false;
+    if(allFiltUnid&&c.unidade!==allFiltUnid)return false;
+    if(allFiltSetor&&(c.setor||'')!==allFiltSetor)return false;
+    return true;
+  });
+  const allSort=(document.getElementById('d-all-sort')||{value:'nome'}).value||'nome';
+  dataAll.sort((a,b)=>{
+    if(allSort==='dias_desc'||allSort==='dias_asc'){
+      const dA=a.datainicio?Math.floor((hoje-new Date(a.datainicio+'T00:00:00'))/864e5):0;
+      const dB=b.datainicio?Math.floor((hoje-new Date(b.datainicio+'T00:00:00'))/864e5):0;
+      return allSort==='dias_desc'?(dB-dA):(dA-dB);
+    }
+    return (a.colaborador||'').localeCompare(b.colaborador||'','pt-BR',{sensitivity:'base'});
+  });
+
+  if(data.length===0){
+    document.getElementById('dash-all').innerHTML='<div style="text-align:center;color:var(--gray400);font-size:13px;padding:24px">Nenhum colaborador cadastrado ainda</div>';
+  } else {
+    document.getElementById('dash-all').innerHTML=`
+      <div style="padding:16px 20px 10px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;border-bottom:1px solid var(--gray100);background:var(--gray50)">
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Colaborador</label>
+          <input type="text" id="d-all-colab" placeholder="Filtrar por nome..." value="${allFiltColab}" oninput="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%"></div>
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Unidade</label>
+          <select id="d-all-unid" onchange="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%;appearance:none;cursor:pointer">
+            <option value="">Todas</option>
+            ${unidadeOptionsHTML(allFiltUnid)}
+          </select></div>
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Setor</label>
+          <select id="d-all-setor" onchange="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%;appearance:none;cursor:pointer"><option value="">Todos</option>${getSetoresOptions(allFiltSetor)}</select></div>
+        <div style="display:flex;align-items:flex-end;gap:6px">
+          <select id="d-all-sort" onchange="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:11px;padding:7px 10px;border-radius:7px;outline:none;cursor:pointer">
+            <option value="nome" ${allSort==='nome'?'selected':''}>Ordenar: Nome</option>
+            <option value="dias_desc" ${allSort==='dias_desc'?'selected':''}>Dias em aberto ↓</option>
+            <option value="dias_asc" ${allSort==='dias_asc'?'selected':''}>Dias em aberto ↑</option>
+          </select>
+          <button class="btn btn-secondary" style="padding:7px 12px;font-size:11px" onclick="document.getElementById('d-all-colab').value='';document.getElementById('d-all-unid').value='';document.getElementById('d-all-setor').value='';document.getElementById('d-all-sort').value='nome';renderDash()">Limpar</button></div>
+      </div>
+      <div class="dash-table-wrap"><table class="dtable">
+        <thead><tr><th style="min-width:160px">Colaborador</th><th style="min-width:90px">Unidade</th><th style="min-width:110px">Setor</th><th style="min-width:120px">Cargo</th><th style="min-width:96px">Dt. Início</th><th style="min-width:110px;cursor:pointer;user-select:none" onclick="(function(){var s=document.getElementById('d-all-sort');if(!s)return;s.value=s.value==='dias_desc'?'dias_asc':'dias_desc';renderDash();})()" title="Ordenar por dias em aberto">Dias em Aberto ↕</th><th style="min-width:110px">Envio Docs</th><th style="min-width:110px">Assinatura</th><th style="min-width:100px">Cursos</th><th style="min-width:110px">Status</th></tr></thead>
+        <tbody>${dataAll.length===0?`<tr><td colspan="10" style="text-align:center;color:var(--gray400);padding:20px">Nenhum resultado encontrado para os filtros aplicados</td></tr>`:dataAll.map(c=>{
+          const gi=colaboradores.indexOf(c), st=calcSt(c);
+          const marc=c.marcacao||'';
+          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':marc==='Demitido'?'linear-gradient(135deg,#7b2ff7,#e0009e)':'';
+          return`<tr style="${marc?'opacity:0.72;':''}">
+            <td><span class="collab-link" onclick="abrirDetalhe(${gi})">${c.colaborador}</span></td>
+            <td>${unidadeLabel(c.unidade)}</td><td>${c.setor||'—'}</td><td>${c.cargo||'—'}</td>
+            <td>${fmtDate(c.datainicio)}</td>
+            <td>${c.datainicio?`<span style="color:var(--gray600);font-weight:700;background:var(--gray50);padding:3px 10px;border-radius:20px">${Math.floor((hoje-new Date(c.datainicio+'T00:00:00'))/864e5)} dias</span>`:'—'}</td>
+            <td>${inlinePill(c.st_envio)}</td><td>${inlinePill(termoAssinatura(c))}</td><td>${inlinePill(c.st_cursos)}</td>
+            <td><span class="spill ${st.cls}">${st.label}</span></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+  }
+
+  /* Alertas */
+  const altFiltColab=(document.getElementById('d-alt-colab')||{value:''}).value.toLowerCase().trim();
+  const altFiltUnid=(document.getElementById('d-alt-unid')||{value:''}).value;
+  const altFiltSetor=(document.getElementById('d-alt-setor')||{value:''}).value;
+  const alertas=data.filter(c=>calcSt(c).label==='Em atraso');
+  const alertasFilt=[...alertas].filter(c=>{
+    if(altFiltColab&&!(c.colaborador||'').toLowerCase().includes(altFiltColab))return false;
+    if(altFiltUnid&&c.unidade!==altFiltUnid)return false;
+    if(altFiltSetor&&(c.setor||'')!==altFiltSetor)return false;
+    return true;
+  }).sort((a,b)=>{
+    const dA=Math.floor((hoje-new Date(a.datainicio+'T00:00:00'))/864e5);
+    const dB=Math.floor((hoje-new Date(b.datainicio+'T00:00:00'))/864e5);
+    return sortDiasAsc?(dA-dB):(dB-dA);
+  });
+
+  if(alertas.length===0){
+    document.getElementById('dash-alertas').innerHTML='<div style="text-align:center;color:var(--gray400);font-size:13px;padding:24px">Nenhum colaborador em atraso</div>';
+  } else {
+    document.getElementById('dash-alertas').innerHTML=`
+      <div style="padding:16px 20px 10px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;border-bottom:1px solid var(--gray100);background:var(--gray50)">
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Colaborador</label>
+          <input type="text" id="d-alt-colab" placeholder="Filtrar por nome..." value="${altFiltColab}" oninput="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%"></div>
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Unidade</label>
+          <select id="d-alt-unid" onchange="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%;appearance:none;cursor:pointer">
+            <option value="">Todas</option>
+            ${unidadeOptionsHTML(altFiltUnid)}
+          </select></div>
+        <div class="field"><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600)">Setor</label>
+          <select id="d-alt-setor" onchange="renderDash()" style="background:var(--white);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13px;padding:7px 10px;border-radius:7px;outline:none;width:100%;appearance:none;cursor:pointer"><option value="">Todos</option>${getSetoresOptions(altFiltSetor)}</select></div>
+        <div style="display:flex;align-items:flex-end"><button class="btn btn-secondary" style="padding:7px 12px;font-size:11px" onclick="document.getElementById('d-alt-colab').value='';document.getElementById('d-alt-unid').value='';document.getElementById('d-alt-setor').value='';renderDash()">Limpar</button></div>
+      </div>
+      <div class="dash-table-wrap"><table class="dtable">
+        <thead><tr><th style="min-width:160px">Colaborador</th><th style="min-width:90px">Unidade</th><th style="min-width:110px">Setor</th><th style="min-width:96px">Dt. Início</th><th style="min-width:110px;cursor:pointer" onclick="toggleSortDias()" id="th-dias-aberto">Dias em Aberto ↕</th><th style="min-width:110px">Envio Docs</th><th style="min-width:110px">Assinatura</th><th style="min-width:100px">Cursos</th><th style="min-width:110px">Status</th></tr></thead>
+        <tbody>${alertasFilt.length===0?`<tr><td colspan="10" style="text-align:center;color:var(--gray400);padding:20px">Nenhum resultado encontrado para os filtros aplicados</td></tr>`:alertasFilt.map(c=>{
+          const gi=colaboradores.indexOf(c), dias=Math.floor((hoje-new Date(c.datainicio+'T00:00:00'))/864e5);
+          const marc=c.marcacao||'';
+          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':marc==='Demitido'?'linear-gradient(135deg,#7b2ff7,#e0009e)':'';
+          const st=calcSt(c);
+          return`<tr style="${marc?'opacity:0.72;':''}">
+            <td><span class="collab-link" onclick="abrirDetalhe(${gi})">${c.colaborador}</span></td>
+            <td>${unidadeLabel(c.unidade)}</td><td>${c.setor||'—'}</td>
+            <td>${fmtDate(c.datainicio)}</td>
+            <td><span style="color:#ff4e6a;font-weight:700;background:#fff0f3;padding:3px 10px;border-radius:20px">${dias} dias</span></td>
+            <td>${inlinePill(c.st_envio)}</td><td>${inlinePill(termoAssinatura(c))}</td><td>${inlinePill(c.st_cursos)}</td>
+            <td><span class="spill ${st.cls}">${st.label}</span></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+  }
+
+  /* Restaura foco e posicao do cursor do campo de busca apos o re-render */
+  if(_focusId){
+    const _newEl=document.getElementById(_focusId);
+    if(_newEl){
+      _newEl.focus();
+      if(typeof _focusSelStart==='number'&&_newEl.setSelectionRange){
+        try{ _newEl.setSelectionRange(_focusSelStart,_focusSelEnd); }catch(e){}
+      }
+    }
+  }
+}
+
+/* DETALHE MODAL */
+let _detGi=-1;
+function abrirDetalhe(gi){
+  const c=colaboradores[gi]; if(!c) return;
+  _detGi=gi;
+  const st=calcSt(c), sv=termosMap[c.id]||{};
+  const stT=sv['tt-ciencia']?sv['tt-ciencia'].val:'—';
+  const marc=c.marcacao||'';
+  document.getElementById('det-title').textContent=c.colaborador;
+  document.getElementById('det-sub').textContent=`${unidadeLabel(c.unidade)} · ${c.setor||'—'} · ${c.cargo||'—'}`;
+  document.getElementById('det-body').innerHTML=`
+    <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">
+      <span class="spill ${st.cls}" style="font-size:13px;padding:5px 16px">${st.label}</span>
+      ${marc?`<span class="spill" style="font-size:13px;padding:5px 16px;background:${marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':'linear-gradient(135deg,#7b2ff7,#e0009e)'}">${marc}</span>`:''}
+      ${c.integracao==='nao'?'<span class="spill sp-novo" style="font-size:13px;padding:5px 16px">Sem integração — apenas registro</span>':''}
+    </div>
+    <div class="det-grid" style="margin-bottom:18px">
+      <div class="det-field"><div class="det-lbl">Data de Início</div><div class="det-val">${fmtDate(c.datainicio)}</div></div>
+      <div class="det-field"><div class="det-lbl">Contato</div><div class="det-val">${c.contato||'—'}</div></div>
+      <div class="det-field"><div class="det-lbl">Condutor</div><div class="det-val">${c.condutor||'—'}</div></div>
+      <div class="det-field"><div class="det-lbl">Registrado em</div><div class="det-val">${c.salvo_em?fmtDate(c.salvo_em.substring(0,10)):'—'}</div></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:10px">Movimentação do Processo</div>
+    <div class="det-strow"><span class="det-stlbl">Envio de Documentos Norteadores</span>${inlinePill(c.st_envio)}</div>
+    <div class="det-strow"><span class="det-stlbl">Cadastro UniGlobo</span>${inlinePill(c.st_uniglobo)}</div>
+    <div class="det-strow"><span class="det-stlbl">Cursos Obrigatórios de Onboarding</span>${inlinePill(c.st_cursos)}</div>
+    <div class="det-strow"><span class="det-stlbl">Termo de Ciência e Compromisso</span>${inlinePill(stT)}</div>
+    ${c.parecer_data?`<div class="det-strow" style="margin-top:4px"><span class="det-stlbl">Parecer — Gestão de Talentos</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' · '+c.parecer_obs:''}</span></div>`:''}
+    ${c.matricula?`<div style="margin-top:12px;padding:10px 14px;background:var(--gray50);border-radius:8px;font-size:12px;color:var(--gray600)">Matrícula: <strong>${c.matricula}</strong>${sv.data?' · Data de assinatura dos termos: <strong>'+fmtDate(sv.data)+'</strong>':''}</div>`:''}`;
+  document.getElementById('det-edit-btn').onclick=()=>{fecharModal('modal-det');showPage('onboarding');setTimeout(()=>editarColaborador(gi),200);};
+  /* botão remover marcação */
+  const rmBtn=document.getElementById('det-remover-marc-btn');
+  if(rmBtn) rmBtn.style.display=marc?'inline-flex':'none';
+  document.getElementById('modal-det').classList.add('open');
+}
+function marcarDetModal(val){
+  if(_detGi<0) return;
+  marcarColaborador(_detGi,val);
+  fecharModal('modal-det');
+}
+function excluirDetModal(){
+  if(_detGi<0) return;
+  fecharModal('modal-det');
+  setTimeout(()=>confirmarExclusao(_detGi),150);
+}
+
+/* CSV */
+function exportarCSV(){
+  const data=getFiltered();
+  const hdr=['Colaborador','Matrícula','Unidade','Setor','Cargo','Data Início','Integração','Condutor','Envio Docs','Assinatura Docs','UniGlobo','Cursos','Status','Data Parecer','Observações'];
+  const rows=data.map(c=>[c.colaborador,c.matricula,unidadeLabel(c.unidade),c.setor,c.cargo,fmtDate(c.datainicio),c.integracao==='nao'?'Sem integração':'Com integração',c.condutor,c.st_envio,termoAssinatura(c),c.st_uniglobo,c.st_cursos,calcSt(c).label,fmtDate(c.parecer_data),c.parecer_obs].map(v=>`"${(v||'').replace(/"/g,'""')}"`));
+  const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`Onboarding_Export_${new Date().toISOString().substring(0,10)}.csv`; a.click();
+  showToast('CSV exportado com sucesso');
+}
+
+document.getElementById('d-unidade').innerHTML='<option value="">Todas</option>'+unidadeOptionsHTML('');
+renderDash();
+
+/* SCROLL PARA FORMULÁRIO */
+function scrollParaFormulario(){
+  const formArea = document.getElementById('form-area');
+  if(formArea){
+    formArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+/* LISTA COLLAB TOGGLE */
+function toggleListaCollab(){
+  const body=document.getElementById('lista-body');
+  const chev=document.getElementById('lista-chevron');
+  const hdr=document.getElementById('lista-hdr');
+  const open=body.style.display==='none';
+  body.style.display=open?'block':'none';
+  chev.style.transform=open?'rotate(180deg)':'rotate(0deg)';
+  hdr.style.borderBottomColor=open?'var(--gray100)':'transparent';
+}
+
+/* EXCLUIR COLABORADOR */
+function confirmarExclusao(gi){
+  const c=colaboradores[gi]; if(!c) return;
+  if(!confirm('Deseja excluir o cadastro de '+c.colaborador+'? Esta ação não pode ser desfeita.')) return;
+  delete termosMap[c.id];
+  colaboradores.splice(gi,1);
+  salvarBase();
+  renderCollabList();
+  populateTermoSelect();
+  renderDash();
+  showToast('Cadastro excluído com sucesso');
+}
+
+/* PRINT OVERLAY */
+function abrirPrint(html){
+  document.getElementById('print-content').innerHTML=html;
+  document.getElementById('print-overlay').classList.add('visible');
+  document.getElementById('print-overlay').scrollTop=0;
+}
+function fecharPrint(){
+  document.getElementById('print-overlay').classList.remove('visible');
+  document.getElementById('print-content').innerHTML='';
+}
+document.getElementById('print-overlay').addEventListener('click',function(e){
+  if(e.target===this) fecharPrint();
+});
+
+/* IMPRIMIR a partir do overlay */
+function imprimirDocumento(){
+  window.print();
+}
+
+/* PERSISTENCIA localStorage */
+function salvarBase(){
+  try{
+    localStorage.setItem('onb_colaboradores', JSON.stringify(colaboradores));
+    localStorage.setItem('onb_termosMap', JSON.stringify(termosMap));
+    localStorage.setItem('onb_condutor', condutor);
+  }catch(e){console.warn('localStorage indisponível',e);}
+}
+function carregarBase(){
+  try{
+    const c=localStorage.getItem('onb_colaboradores');
+    const t=localStorage.getItem('onb_termosMap');
+    const cd=localStorage.getItem('onb_condutor');
+    if(c) colaboradores=JSON.parse(c);
+    if(t) termosMap=JSON.parse(t);
+    if(cd&&cd!==''){condutor=cd;document.getElementById('cond-nome').textContent=cd;}
+    renderCollabList();
+    popularGerarSelect();
+    atualizarSetoresDash();
+    renderDash();
+  }catch(e){console.warn('Erro ao carregar base',e);}
+}
+
+/* Patch salvarColaborador e salvarTermos para persistir */
+const _origSalvarColab=salvarColaborador;
+// override via wrapper
+window.salvarColaborador=function(){
+  const nome=document.getElementById('f-colaborador').value.trim();
+  if(!nome){showToast('Informe o nome do colaborador');return;}
+  if(!unidadeSel){showToast('Selecione a unidade');return;}
+  const rec={
+    id:editIndex>=0?colaboradores[editIndex].id:Date.now(),
+    colaborador:nome,matricula:document.getElementById('f-matricula').value.trim(),
+    setor:document.getElementById('f-setor').value.trim(),
+    cargo:document.getElementById('f-cargo').value.trim(),contato:document.getElementById('f-contato').value.trim(),
+    datainicio:document.getElementById('f-datainicio').value,unidade:unidadeSel,
+    integracao:integSel,condutor,
+    st_envio:getStVal('st-envio'),st_assinatura:getStVal('st-assinatura'),
+    st_uniglobo:getStVal('st-uniglobo'),st_cursos:getStVal('st-cursos'),
+    parecer_data:document.getElementById('f-parecer-data').value,
+    parecer_obs:document.getElementById('f-parecer-obs').value.trim(),
+    marcacao:editIndex>=0?(colaboradores[editIndex].marcacao||''):'',
+    salvo_em:new Date().toISOString()
+  };
+  if(editIndex>=0)colaboradores[editIndex]=rec;else colaboradores.push(rec);
+  editIndex=-1;salvarBase();renderCollabList();populateTermoSelect();popularGerarSelect();atualizarSetoresDash();renderDash();
+  limparForm();
+  showToast('Colaborador salvo com sucesso');
+};
+window.salvarTermos=function(){
+  const i=document.getElementById('t-select-collab').value;
+  if(i===''){showToast('Selecione um colaborador');return;}
+  const c=colaboradores[parseInt(i)];
+  termosMap[c.id]={data:document.getElementById('t-data-assinatura').value,'tt-ciencia':stMap['tt-ciencia']};
+  salvarBase();renderDash();
+  showToast('Termos salvos com sucesso');
+};
+
+/* Adicionar botão imprimir no overlay */
+document.getElementById('print-overlay').querySelector('.print-close').insertAdjacentHTML('afterend',
+  '<button class="print-close" style="right:200px;background:var(--grad3)" onclick="window.print()">Imprimir / Salvar PDF</button>'
+);
+
+carregarBase();
+</script>
+</body>
+</html>
