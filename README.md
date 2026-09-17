@@ -6,6 +6,12 @@ Este portfólio reúne dois produtos digitais que conectam Gestão de Pessoas, p
 
 [**▶ Visualizar Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**LinkedIn**](https://www.linkedin.com/in/manoel-gustavo/)
 
+## Sobre mim
+
+Sou profissional com trajetória em Recursos Humanos e atuação em projetos, processos, produtos digitais e dados. Trabalho com identificação de necessidades, organização de requisitos, priorização, experiência de uso e melhoria de processos, sem dissociar a solução do contexto das pessoas e do negócio.
+
+**Contato:** [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)
+
 ## Projetos
 
 | Projeto | Proposta | Aplicação | Case |
@@ -29,9 +35,3 @@ O GT360° reúne os módulos por navegação. Cada aplicação mantém seus regi
 ### eu + horizonte
 
 [![Visão da intranet eu + horizonte](./eu-horizonte-intranet/eu-horizonte-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
-
-## Sobre mim
-
-Sou profissional com trajetória em Recursos Humanos e atuação em projetos, processos, produtos digitais e dados. Trabalho com identificação de necessidades, organização de requisitos, priorização, experiência de uso e melhoria de processos, sem dissociar a solução do contexto das pessoas e do negócio.
-
-**Contato:** [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)
