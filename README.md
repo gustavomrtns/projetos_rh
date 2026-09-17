@@ -1,4 +1,4 @@
-# Manoel Gustavo — Projetos, Produtos Digitais, Processos e People Analytics
+# Manoel Gustavo — Recursos Humanos, Projetos, Produtos Digitais e People Analytics
 
 > **Recursos Humanos | Projetos | Produtos Digitais | Agilidade**  
 > Gestão de Pessoas · Product & Agile · Projetos & Processos · People Analytics · Comportamento Organizacional
