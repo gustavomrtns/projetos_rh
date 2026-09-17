@@ -1,109 +1,37 @@
-# GT360º — Workspace de Gestão de Talentos
+# GT360° — Workspace de Gestão de Talentos
 
-> **Projeto flagship do portfólio de Manoel Gustavo.** Solução digital de RH concebida para integrar processos, dados e indicadores de **Onboarding** e **Treinamento & Desenvolvimento** em um único ambiente de gestão.
+> Um workspace com nove aplicações de RH integradas por navegação, da jornada do colaborador à análise de indicadores.
 
-[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/gt360/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
-
----
+[▶ **Explorar workspace**](https://gustavomrtns.github.io/projetos_rh/gt360/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Dois projetos do portfólio**](../README.md)
 
 ## Visão executiva
 
-| Dimensão | GT360º |
+| Dimensão | GT360° |
 |---|---|
 | **Área** | Recursos Humanos / Gestão de Pessoas |
-| **Frentes integradas** | Onboarding + Treinamento & Desenvolvimento |
-| **Objetivo** | Centralizar fluxos, informações e indicadores para ampliar rastreabilidade, padronização e visão gerencial |
-| **Minha atuação** | Identificação de necessidades, mapeamento de dores, definição de escopo, priorização de entregas, alinhamento com stakeholders, levantamento de requisitos, UX de processos e lógica de indicadores |
-| **Abordagens** | Gestão de Projetos · People Analytics · T&D · Onboarding · Automação · UX |
-| **Tecnologias** | HTML · CSS · JavaScript |
+| **Objetivo** | Organizar aplicações e fluxos de Gestão de Pessoas em um único espaço de trabalho |
+| **Minha atuação** | Levantamento de necessidades, mapeamento de processos, definição de escopo e requisitos, priorização, navegação, experiência de uso e indicadores |
+| **Tecnologias** | HTML · CSS · JavaScript · armazenamento local no navegador |
 
-## Evidência visual
+![Visão dos módulos do GT360°](./gt360-case-overview.png)
 
-![Visão geral do case GT360º](./gt360-case-overview.png)
+## O problema e a solução
 
-*Visão do GT360º como workspace de Gestão de Talentos. A interface evidencia a integração entre processos de Onboarding, Treinamento & Desenvolvimento e acompanhamento gerencial em um mesmo ambiente digital.*
+Onboarding, avaliações, pesquisas, treinamentos e auditorias podem ficar espalhados por controles distintos. O GT360° organiza essas frentes em quatro grupos de navegação. Cada aplicação mantém seu próprio fluxo e os usuários acessam tudo a partir da página inicial do workspace.
 
-## O desafio
+| Frente | Módulos |
+|---|---|
+| **Jornada do Colaborador** | Fluxo de Onboarding; Avaliação de Experiência; Avaliação de PJ; Gestão de Tempo de Casa; Questionário de Desligamento |
+| **Clima e Saúde Organizacional** | Pesquisa de Engajamento; Gestão de Riscos Psicossociais |
+| **Desenvolvimento de Talentos** | Painel de Treinamentos |
+| **Qualidade e Processos** | Checklist 5S |
 
-Rotinas de Onboarding e Treinamento & Desenvolvimento podem operar em controles separados, planilhas e fluxos manuais. Esse cenário fragmenta informações e dificulta a visualização de etapas, responsabilidades, capacitações, certificações e indicadores em uma perspectiva integrada.
+A **Pesquisa de Engajamento Organizacional** é uma pesquisa de engajamento; ela não é apresentada como pesquisa de clima organizacional.
 
-O GT360º foi estruturado a partir desse problema: **como transformar processos de RH distribuídos em uma experiência de gestão mais centralizada, rastreável e orientada por dados?**
+## Como usar esta versão
 
-## Minha atuação
+Abra o workspace, selecione um módulo no menu lateral ou na página inicial e utilize as funções disponíveis. Os dados inseridos ficam no `localStorage` do navegador e dispositivo usados. Esta versão não oferece login, banco de dados compartilhado, sincronização entre pessoas ou proteção adequada para registrar dados pessoais reais em um site público.
 
-Minha atuação no GT360º conecta **Gestão de Pessoas, processos, dados e tecnologia**. O projeto não parte da tecnologia como fim; ela é utilizada como meio para estruturar uma necessidade de RH.
+O projeto demonstra a estrutura e os fluxos das aplicações. Indicadores e benefícios descritos representam capacidades da solução, não resultados de impacto já medidos.
 
-- Identificação de necessidades e mapeamento das dores dos fluxos de Onboarding e Educação Corporativa.
-- Definição de escopo e organização das entregas da solução.
-- Mapeamento dos fluxos, etapas, responsabilidades e pontos de melhoria.
-- Levantamento e organização de requisitos funcionais.
-- Priorização das funcionalidades e entregas de acordo com a lógica dos processos.
-- Alinhamento das necessidades da solução com stakeholders e usuários envolvidos nos fluxos.
-- Estruturação da arquitetura de navegação e dos módulos do workspace.
-- Definição da lógica de acompanhamento e indicadores.
-- Desenvolvimento do protótipo digital e da experiência de uso.
-- Integração conceitual entre dados operacionais e visão gerencial.
-
-## A solução
-
-O **GT360º** foi concebido como um workspace digital de Gestão de Talentos, partindo do **mapeamento de dores dos processos de onboarding e T&D** até a definição de **fluxos, requisitos funcionais, indicadores e experiência do usuário**.
-
-A solução organiza duas frentes de Gestão de Talentos em um único ambiente, conectando execução dos processos e acompanhamento gerencial. A proposta é reduzir a dispersão de informações e transformar rotinas operacionais em fluxos mais estruturados, rastreáveis e preparados para análise.
-
-## Como funciona
-
-### 1. Fluxo de Onboarding
-
-Estrutura o acompanhamento da integração do colaborador desde o registro até a conclusão das etapas previstas no processo, organizando responsabilidades, informações, andamento e base para indicadores.
-
-### 2. Painel de Treinamentos
-
-Estrutura o ciclo de Educação Corporativa, contemplando cadastro de treinamentos, turmas, conclusão, certificados, materiais, aproveitamento, impacto e lógica para análise de ROI.
-
-### 3. Dados e indicadores
-
-Os dois módulos convergem para uma lógica de acompanhamento que conecta informações operacionais a uma visão gerencial de RH.
-
-```text
-                    GT360º
-                       │
-          ┌────────────┴────────────┐
-          │                         │
-     ONBOARDING                   T&D
-          │                         │
-  Etapas e responsáveis      Treinamentos e turmas
-  Jornada de integração      Certificações e materiais
-  Acompanhamento             Aproveitamento e impacto
-          │                         │
-          └────────────┬────────────┘
-                       │
-              DADOS E INDICADORES
-                       │
-                       ▼
-              VISÃO GERENCIAL DE RH
-```
-
-## Valor potencial
-
-O projeto foi concebido para contribuir com:
-
-- **Centralização:** informações de Onboarding e T&D organizadas em um mesmo ambiente.
-- **Rastreabilidade:** maior clareza sobre etapas, status e responsabilidades.
-- **Padronização:** transformação de rotinas dispersas em fluxos estruturados.
-- **Visibilidade:** consolidação de informações para acompanhamento gerencial.
-- **Mensuração:** organização da base necessária para indicadores de RH e análises de impacto.
-- **Escalabilidade:** estrutura concebida para evoluir com novos módulos, integrações e automações.
-
-> **Nota sobre resultados:** este case apresenta a solução, sua arquitetura e seus benefícios funcionais. Não são atribuídos percentuais de ganho, economia ou ROI sem mensuração comprovada.
-
-## Competências demonstradas
-
-`Gestão de Pessoas` · `Identificação de Necessidades` · `Definição de Escopo` · `Priorização` · `Stakeholders` · `Requisitos Funcionais` · `Onboarding` · `T&D` · `Gestão de Projetos` · `Mapeamento de Processos` · `People Analytics` · `UX de Processos` · `Indicadores` · `Automação` · `Inovação`
-
-## Tecnologias e abordagens
-
-`HTML` · `CSS` · `JavaScript` · `Gestão de Projetos` · `Mapeamento de Processos` · `People Analytics` · `T&D` · `Onboarding` · `UX` · `Automação`
-
----
-
-[▶ **Abrir GT360º**](https://gustavomrtns.github.io/projetos_rh/gt360/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
+[▶ **Abrir GT360°**](https://gustavomrtns.github.io/projetos_rh/gt360/) · [🌐 **Voltar ao portfólio**](https://gustavomrtns.github.io/projetos_rh/)
