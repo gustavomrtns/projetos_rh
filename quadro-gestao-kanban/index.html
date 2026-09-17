@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadro de Demandas — Gestão de Talentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --grad4:linear-gradient(160deg,#00c48c,#00b37e);
+  --grad6:linear-gradient(160deg,#e0009e,#ff4e6a);
+  --grad7:linear-gradient(160deg,#00b8d9,#0099e5);
+  --gradGray:linear-gradient(160deg,#9098b0,#5a6278);
+  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --white:#fff;--offwhite:#f8f9fc;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Sora',sans-serif;min-height:100vh;padding:0 0 80px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.nav-band{height:5px;background:var(--gradFull)}
+.nav-tabs{background:var(--white);box-shadow:var(--shadow);display:flex;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gray100)}
+.nav-tab{flex:1;padding:18px 12px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.nav-tab:hover{color:var(--gray600);background:var(--gray50)}
+.nav-tab.active{color:var(--gray800);background:var(--offwhite)}
+.tab-dot{width:8px;height:8px;border-radius:50%;opacity:0;flex-shrink:0;transition:opacity .2s}
+.nav-tab.active .tab-dot{opacity:1}
+.t1{background:var(--grad1)}.t2{background:var(--grad2)}.t3{background:var(--grad3)}
+
+/* PAGE */
+.page{display:none;padding:28px 20px 40px;animation:fadeUp .4s ease both}
+.page.active{display:block}
+.container{max-width:1180px;margin:0 auto}
+
+/* HEADER */
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.header-band{height:7px;background:var(--gradFull)}
+.header-inner{padding:24px 30px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.header-title h1{font-family:'DM Serif Display',serif;font-size:23px;color:var(--gray800);margin-bottom:4px}
+.header-title p{font-size:13px;color:var(--gray400);font-weight:300}
+.hbadge{display:inline-block;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.06em;background:var(--grad2)}
+
+/* CARD / FORM (base) */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.checkfield{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--gray600);margin-top:4px}
+.checkfield input{width:16px;height:16px}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+@keyframes gradLoop{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn-novocadastro{background-image:linear-gradient(270deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0,#f7a800);background-size:400% 400%;animation:gradLoop 6s ease infinite;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-novocadastro:hover{opacity:.92;transform:translateY(-1px)}
+.btn{padding:11px 22px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em;white-space:nowrap}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-danger{background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff}
+.btn-danger:hover{opacity:.9}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--gray200);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray600);font-size:16px;transition:all .2s;flex-shrink:0}
+.icon-btn:hover{border-color:var(--gray400);color:var(--gray800);background:var(--gray50)}
+.tedit{padding:5px 14px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s}
+.tedit:hover{border-color:#0099e5;color:#0099e5;background:#f0f9ff}
+
+/* KANBAN TOOLBAR */
+.kanban-toolbar{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.toolbar-left{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.toolbar-left .field{min-width:150px}
+.toolbar-right{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+
+/* SPRINT BANNER */
+.sprint-banner{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-left:5px solid #7b2ff7}
+.sprint-banner h3{font-family:'DM Serif Display',serif;font-size:17px;color:var(--gray800)}
+.sprint-banner p{font-size:12px;color:var(--gray400);margin-top:2px}
+.sprint-progress{display:flex;align-items:center;gap:10px;min-width:260px}
+.bar-track{flex:1;height:20px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .8s ease;position:relative;min-width:2px;display:flex;align-items:center}
+.bar-pct{margin-left:auto;margin-right:8px;font-size:10px;font-weight:700;color:#fff}
+
+/* KANBAN BOARD */
+.kanban-board{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;align-items:flex-start}
+.kcol{background:var(--gray50);border-radius:var(--radius);width:272px;flex:0 0 272px;display:flex;flex-direction:column;max-height:calc(100vh - 320px);min-height:220px;overflow:hidden}
+.kcol-band{height:4px}
+.kcol-head{padding:13px 15px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--gray100)}
+.kcol-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray600)}
+.kcol-count{background:var(--white);color:var(--gray600);font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;box-shadow:var(--shadow)}
+.kcol-body{padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;min-height:80px;transition:background .15s}
+.kcol-body.drag-over{background:#f0f9ff;box-shadow:inset 0 0 0 2px #0099e5}
+.kcol-empty{font-size:11.5px;color:var(--gray400);text-align:center;padding:18px 8px;border:1.5px dashed var(--gray200);border-radius:10px}
+
+/* KCARD */
+.kcard{background:var(--white);border-radius:10px;box-shadow:var(--shadow);padding:14px 15px;cursor:grab;border:2px solid transparent;transition:all .2s}
+.kcard:hover{box-shadow:var(--shadow-lg);border-color:var(--gray200)}
+.kcard.dragging{opacity:.4}
+.kcard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px}
+.ktype{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.kprio{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.kcard-title{font-size:13px;font-weight:700;color:var(--gray800);line-height:1.35;margin-bottom:8px}
+.kcard-meta{font-size:11px;color:var(--gray400);margin-bottom:9px}
+.kcard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.ktag{font-size:9.5px;font-weight:700;color:var(--gray600);background:var(--gray100);padding:2px 8px;border-radius:20px}
+.kcard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:9px;border-top:1px solid var(--gray50)}
+.kavatar{width:24px;height:24px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.kdue{font-size:10.5px;font-weight:700;color:var(--gray400)}
+.kdue.overdue{color:#e0003c}
+.kchecklist{font-size:10.5px;font-weight:700;color:var(--gray400)}
+
+/* DASHBOARD */
+.dash-filters{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:14px;align-items:end}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;overflow:hidden;position:relative}
+.kpi-band{position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-val{font-family:'DM Serif Display',serif;font-size:34px;line-height:1;margin:8px 0 4px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400)}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.chart-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.chart-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:18px}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:140px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-val{font-size:12px;font-weight:700;color:var(--gray600);width:30px;text-align:right}
+.pie-wrap{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.donut{width:130px;height:130px;border-radius:50%;flex-shrink:0;position:relative}
+.donut::after{content:'';position:absolute;inset:22px;background:var(--white);border-radius:50%}
+.pie-leg{display:flex;flex-direction:column;gap:10px;flex:1;min-width:160px}
+.pie-li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray800)}
+.pie-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.pie-v{margin-left:auto;font-weight:700;color:var(--gray800)}
+
+/* DASH TABLE */
+.dash-table-wrap{overflow-x:auto;overflow-y:auto;max-height:560px;border-radius:0 0 var(--radius) var(--radius)}
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);font-weight:700;padding:10px 13px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap;position:sticky;top:0;background:var(--white)}
+.dtable td{padding:10px 13px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle;white-space:nowrap}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:#f7f9fc}
+.collab-link{color:var(--gray800);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1.5px solid transparent;transition:border-color .15s,color .15s}
+.collab-link:hover{color:#0099e5;border-bottom-color:#0099e5}
+.spill{padding:4px 12px;border-radius:20px;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap}
+
+/* COLLAB / SPRINT LIST */
+.collab-list{display:flex;flex-direction:column;gap:10px}
+.collab-row{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border:2px solid transparent}
+.collab-avatar{width:38px;height:38px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.collab-info h4{font-size:13.5px;font-weight:700;color:var(--gray800);margin-bottom:2px}
+.collab-info p{font-size:11.5px;color:var(--gray400)}
+
+/* CHIPS (config) */
+.chip-list{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px;min-height:20px}
+.chip{background:var(--gray100);color:var(--gray800);font-size:12px;font-weight:600;padding:6px 8px 6px 14px;border-radius:20px;display:flex;align-items:center;gap:8px}
+.chip button{background:none;border:none;color:var(--gray400);cursor:pointer;font-size:13px;line-height:1;padding:2px}
+.chip button:hover{color:#e0003c}
+.add-row{display:flex;gap:8px;margin-bottom:6px}
+.add-row .field{flex:1}
+.config-sub{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+
+/* MCLIST (checklist) */
+.mclist{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;margin-bottom:12px;padding-right:2px}
+.mcitem{display:flex;align-items:center;gap:12px;padding:10px 14px;border:2px solid var(--gray100);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none}
+.mcitem:hover{background:var(--gray50);border-color:var(--gray200)}
+.mcitem.checked{border-color:#0099e5;background:#f0f9ff}
+.mcbox{width:19px;height:19px;border-radius:5px;border:2px solid var(--gray200);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all .2s}
+.mcitem.checked .mcbox{background:var(--grad2);border-color:transparent;color:#fff}
+.mcname{font-size:12.5px;font-weight:700;color:var(--gray800)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:640px;width:100%;max-height:90vh;overflow-y:auto}
+.modal.wide{max-width:820px}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:26px 30px 28px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:18px}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;margin-top:-4px;line-height:1}
+.modal-section-title{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 10px}
+
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .chart-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+  .dash-filters{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .kpi-grid{grid-template-columns:1fr}
+  .dash-filters{grid-template-columns:1fr}
+  .header-inner{flex-direction:column}
+  .collab-row{grid-template-columns:auto 1fr;grid-template-areas:"a b" "c c"}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-band"></div>
+<div class="nav-tabs">
+  <div class="nav-tab active" data-page="quadro" onclick="showPage('quadro')"><span class="tab-dot t1"></span>Quadro</div>
+  <div class="nav-tab" data-page="backlog" onclick="showPage('backlog')"><span class="tab-dot t2"></span>Backlog</div>
+  <div class="nav-tab" data-page="dashboard" onclick="showPage('dashboard')"><span class="tab-dot t3"></span>Dashboard</div>
+</div>
+
+<!-- PAGE 1: QUADRO (KANBAN) -->
+<div class="page active" id="page-quadro"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Quadro de Demandas</h1>
+        <p>Gestão de Talentos — Educação Corporativa &amp; Projetos</p>
+      </div>
+      <span class="hbadge">GESTÃO DE TALENTOS</span>
+    </div>
+  </div>
+
+  <div class="sprint-banner" id="sprint-banner"></div>
+
+  <div class="kanban-toolbar">
+    <div class="toolbar-left">
+      <div class="field"><label>Sprint</label><select id="kf-sprint" onchange="renderBoard()"></select></div>
+      <div class="field"><label>Responsável</label><select id="kf-resp" onchange="renderBoard()"></select></div>
+      <div class="field"><label>Tipo</label><select id="kf-tipo" onchange="renderBoard()"></select></div>
+      <div class="field"><label>Prioridade</label>
+        <select id="kf-prio" onchange="renderBoard()">
+          <option value="todas">Todas</option>
+          <option value="alta">Alta</option>
+          <option value="media">Média</option>
+          <option value="baixa">Baixa</option>
+        </select>
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <button class="icon-btn" title="Configurar equipe e setores" onclick="abrirConfig()">⚙</button>
+      <button class="btn btn-secondary" onclick="abrirModalSprint()">+ Sprint</button>
+      <button class="btn btn-novocadastro" onclick="abrirModalDemanda()">+ Nova Demanda</button>
+    </div>
+  </div>
+
+  <div class="kanban-board" id="kanban-board"></div>
+</div></div>
+
+<!-- PAGE 2: BACKLOG -->
+<div class="page" id="page-backlog"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Backlog de Demandas</h1>
+        <p>Lista completa de demandas e atividades do setor</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-filters">
+    <div class="field"><label>Buscar</label><input type="text" id="bf-search" placeholder="Título, descrição ou responsável..." oninput="renderBacklogTable()"></div>
+    <div class="field"><label>Setor Solicitante</label><select id="bf-setor" onchange="renderBacklogTable()"></select></div>
+    <div class="field"><label>Tipo</label><select id="bf-tipo" onchange="renderBacklogTable()"></select></div>
+    <div class="field"><label>Status</label>
+      <select id="bf-status" onchange="renderBacklogTable()">
+        <option value="todos">Todos</option>
+        <option value="backlog">Backlog</option>
+        <option value="todo">A Fazer</option>
+        <option value="doing">Em Andamento</option>
+        <option value="review">Em Revisão</option>
+        <option value="done">Concluído</option>
+      </select>
+    </div>
+    <button class="btn btn-secondary" onclick="exportarCSV()">Exportar CSV</button>
+  </div>
+
+  <div class="card" style="padding:0">
+    <div class="dash-table-wrap">
+      <table class="dtable">
+        <thead><tr>
+          <th>Título</th><th>Tipo</th><th>Setor</th><th>Responsável</th><th>Prioridade</th><th>Status</th><th>Sprint</th><th>Prazo</th><th>Ações</th>
+        </tr></thead>
+        <tbody id="backlog-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div></div>
+
+<!-- PAGE 3: DASHBOARD -->
+<div class="page" id="page-dashboard"><div class="container">
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Dashboard — Indicadores</h1>
+        <p>Visão geral das demandas e atividades do setor</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad1)"></div><div class="kpi-label">Total de Demandas</div><div class="kpi-val" id="kpi-total">0</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad3)"></div><div class="kpi-label">Em Andamento</div><div class="kpi-val" id="kpi-andamento">0</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad4)"></div><div class="kpi-label">Concluídas</div><div class="kpi-val" id="kpi-concluidas">0</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(135deg,#ff4e6a,#e0003c)"></div><div class="kpi-label">Atrasadas</div><div class="kpi-val" id="kpi-atrasadas">0</div></div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Demandas por Status</div>
+      <div id="chart-status"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Demandas por Tipo</div>
+      <div class="pie-wrap">
+        <div class="donut" id="chart-tipo-donut"></div>
+        <div class="pie-leg" id="chart-tipo-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-title">Carga por Responsável</div>
+      <div id="chart-resp"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Sprint Ativa</div>
+      <div id="chart-sprint"></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- MODAL: NOVA/EDITAR DEMANDA -->
+<div class="modal-bg" id="modal-demanda-bg" onclick="if(event.target===this)fecharModalDemanda()">
+  <div class="modal wide"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharModalDemanda()">✕</button>
+      <div class="modal-title" id="modal-demanda-title">Nova Demanda</div>
+      <div class="modal-sub">Cadastro de demanda ou atividade da Gestão de Talentos</div>
+
+      <div class="form-grid">
+        <div class="field span2"><label>Título</label><input type="text" id="dm-titulo" placeholder="Ex.: Trilha de Liderança — Módulo 3"></div>
+        <div class="field"><label>Tipo</label><select id="dm-tipo"></select></div>
+        <div class="field"><label>Prioridade</label>
+          <select id="dm-prioridade">
+            <option value="alta">Alta</option>
+            <option value="media">Média</option>
+            <option value="baixa">Baixa</option>
+          </select>
+        </div>
+        <div class="field"><label>Setor Solicitante</label><select id="dm-setor"></select></div>
+        <div class="field"><label>Responsável</label><select id="dm-responsavel"></select></div>
+        <div class="field"><label>Sprint</label><select id="dm-sprint"></select></div>
+        <div class="field"><label>Status</label>
+          <select id="dm-status">
+            <option value="backlog">Backlog</option>
+            <option value="todo">A Fazer</option>
+            <option value="doing">Em Andamento</option>
+            <option value="review">Em Revisão</option>
+            <option value="done">Concluído</option>
+          </select>
+        </div>
+        <div class="field"><label>Data de Início</label><input type="date" id="dm-datainicio"></div>
+        <div class="field"><label>Prazo</label><input type="date" id="dm-prazo"></div>
+        <div class="field span2"><label>Tags (separadas por vírgula)</label><input type="text" id="dm-tags" placeholder="Ex.: liderança, trilha"></div>
+        <div class="field span2"><label>Descrição</label><textarea id="dm-descricao" rows="3" placeholder="Detalhes da demanda..."></textarea></div>
+      </div>
+
+      <div class="modal-section-title">Checklist de Atividades</div>
+      <div class="mclist" id="dm-checklist-list"></div>
+      <div class="add-row">
+        <div class="field"><input type="text" id="dm-checklist-input" placeholder="Adicionar item ao checklist..." onkeydown="if(event.key==='Enter'){event.preventDefault();adicionarChecklistTemp();}"></div>
+        <button class="btn btn-secondary" onclick="adicionarChecklistTemp()">Adicionar</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="salvarDemanda()">Salvar Demanda</button>
+        <button class="btn btn-danger" id="btn-excluir-demanda" style="display:none" onclick="excluirDemandaAtual()">Excluir</button>
+        <button class="btn btn-secondary" onclick="fecharModalDemanda()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SPRINT -->
+<div class="modal-bg" id="modal-sprint-bg" onclick="if(event.target===this)fecharModalSprint()">
+  <div class="modal"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharModalSprint()">✕</button>
+      <div class="modal-title">Sprints</div>
+      <div class="modal-sub">Crie e gerencie os ciclos de trabalho do setor</div>
+
+      <div class="form-grid">
+        <div class="field span2"><label>Nome da Sprint</label><input type="text" id="sp-nome" placeholder="Ex.: Sprint 13 — Ago/2026"></div>
+        <div class="field"><label>Início</label><input type="date" id="sp-inicio"></div>
+        <div class="field"><label>Fim</label><input type="date" id="sp-fim"></div>
+        <div class="field span2"><label>Meta da Sprint</label><input type="text" id="sp-meta" placeholder="Ex.: Fechar trilhas de liderança do mês"></div>
+      </div>
+      <label class="checkfield"><input type="checkbox" id="sp-ativa"> Definir como sprint ativa</label>
+
+      <div class="actions"><button class="btn btn-primary" onclick="salvarSprint()">Criar Sprint</button></div>
+
+      <div class="modal-section-title">Sprints Cadastradas</div>
+      <div class="collab-list" id="sprint-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIGURAÇÕES -->
+<div class="modal-bg" id="modal-config-bg" onclick="if(event.target===this)fecharConfig()">
+  <div class="modal"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharConfig()">✕</button>
+      <div class="modal-title">Configurações</div>
+      <div class="modal-sub">Equipe da Gestão de Talentos e setores solicitantes</div>
+
+      <div class="config-sub">Equipe</div>
+      <div class="chip-list" id="chips-equipe"></div>
+      <div class="add-row">
+        <div class="field"><input type="text" id="novo-equipe-input" placeholder="Nome do integrante..." onkeydown="if(event.key==='Enter'){event.preventDefault();adicionarEquipe();}"></div>
+        <button class="btn btn-secondary" onclick="adicionarEquipe()">Adicionar</button>
+      </div>
+
+      <div class="config-sub" style="margin-top:20px">Setores Solicitantes</div>
+      <div class="chip-list" id="chips-setores"></div>
+      <div class="add-row">
+        <div class="field"><input type="text" id="novo-setor-input" placeholder="Nome do setor..." onkeydown="if(event.key==='Enter'){event.preventDefault();adicionarSetor();}"></div>
+        <button class="btn btn-secondary" onclick="adicionarSetor()">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== DADOS BASE ===================== */
+const tipos=[
+  {id:'treinamento',label:'Treinamento/Curso',hex:'#ff4e00'},
+  {id:'projeto',label:'Projeto',hex:'#7b2ff7'},
+  {id:'onboarding',label:'Onboarding',hex:'#00c48c'},
+  {id:'processo',label:'Processo Interno',hex:'#5a6278'},
+  {id:'recrutamento',label:'Recrutamento & Seleção',hex:'#e0009e'},
+  {id:'evento',label:'Evento/Ação',hex:'#0099e5'}
+];
+const statusCols=[
+  {id:'backlog',label:'Backlog',hex:'#9098b0'},
+  {id:'todo',label:'A Fazer',hex:'#0099e5'},
+  {id:'doing',label:'Em Andamento',hex:'#7b2ff7'},
+  {id:'review',label:'Em Revisão',hex:'#e0009e'},
+  {id:'done',label:'Concluído',hex:'#00c48c'}
+];
+const prioridades=[
+  {id:'alta',label:'Alta',hex:'#e0003c'},
+  {id:'media',label:'Média',hex:'#f7a800'},
+  {id:'baixa',label:'Baixa',hex:'#00c48c'}
+];
+
+let demandas=[], sprints=[], equipe=[], setores=[];
+let editandoId=null, checklistTemp=[];
+
+function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+
+function seedInicial(){
+  const sp1={id:uid(),nome:'Sprint 12 — Ago/2026',inicio:'2026-08-03',fim:'2026-08-14',meta:'Fechar trilhas de liderança e revisar onboarding de agosto',ativa:true};
+  sprints=[sp1];
+  equipe=['Ana Souza','Bruno Lima','Carla Nunes','Diego Ramos'];
+  setores=['Diretoria','RH Interno','Financeiro','TI','Comercial','Operações'];
+  demandas=[
+    {id:uid(),titulo:'Trilha de Liderança 2026 — Módulo 3: Feedback e Performance',descricao:'Produção do terceiro módulo da trilha de liderança.',tipo:'treinamento',setor:'Diretoria',responsavel:'Ana Souza',prioridade:'alta',status:'doing',sprintId:sp1.id,dataInicio:'2026-08-03',prazo:'2026-08-13',tags:['liderança','trilha'],checklist:[{id:uid(),texto:'Roteirizar conteúdo',feito:true},{id:uid(),texto:'Gravar vídeo-aula',feito:true},{id:uid(),texto:'Montar avaliação',feito:false}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Onboarding Turma Agosto — Revisar cronograma de integração',descricao:'',tipo:'onboarding',setor:'RH Interno',responsavel:'Bruno Lima',prioridade:'alta',status:'todo',sprintId:sp1.id,dataInicio:'2026-08-04',prazo:'2026-08-12',tags:['onboarding'],checklist:[{id:uid(),texto:'Atualizar apresentação institucional',feito:false},{id:uid(),texto:'Confirmar palestrantes',feito:false}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Levantamento de Necessidades de Treinamento (LNT) 2027',descricao:'',tipo:'projeto',setor:'Diretoria',responsavel:'Carla Nunes',prioridade:'media',status:'backlog',sprintId:null,dataInicio:'',prazo:'2026-09-30',tags:['LNT','planejamento'],checklist:[],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Curso de Compliance — Atualizar conteúdo com nova política',descricao:'',tipo:'treinamento',setor:'Financeiro',responsavel:'Diego Ramos',prioridade:'media',status:'review',sprintId:sp1.id,dataInicio:'2026-08-05',prazo:'2026-08-11',tags:['compliance'],checklist:[{id:uid(),texto:'Revisão jurídica',feito:true},{id:uid(),texto:'Ajustar slides',feito:true}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Processo Seletivo — Analista de T&D Pleno',descricao:'',tipo:'recrutamento',setor:'RH Interno',responsavel:'Ana Souza',prioridade:'alta',status:'doing',sprintId:sp1.id,dataInicio:'2026-08-03',prazo:'2026-08-15',tags:['seleção'],checklist:[{id:uid(),texto:'Triagem de currículos',feito:true},{id:uid(),texto:'Entrevistas técnicas',feito:false}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Universidade Corporativa — Diagnóstico de plataforma LMS',descricao:'',tipo:'projeto',setor:'TI',responsavel:'Bruno Lima',prioridade:'alta',status:'todo',sprintId:sp1.id,dataInicio:'2026-08-06',prazo:'2026-08-20',tags:['universidade corporativa','LMS'],checklist:[{id:uid(),texto:'Levantar requisitos com TI',feito:false}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Semana de Bem-Estar — Programação de palestras',descricao:'',tipo:'evento',setor:'RH Interno',responsavel:'Carla Nunes',prioridade:'baixa',status:'backlog',sprintId:null,dataInicio:'',prazo:'2026-09-15',tags:['evento','clima'],checklist:[],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Revisão do Fluxo de Onboarding (formulário digital)',descricao:'',tipo:'processo',setor:'RH Interno',responsavel:'Diego Ramos',prioridade:'media',status:'done',sprintId:sp1.id,dataInicio:'2026-07-28',prazo:'2026-08-05',tags:['processo interno'],checklist:[{id:uid(),texto:'Mapear etapas atuais',feito:true},{id:uid(),texto:'Validar com gestão',feito:true}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Pesquisa de Clima Organizacional — Consolidar resultados',descricao:'',tipo:'projeto',setor:'Diretoria',responsavel:'Ana Souza',prioridade:'media',status:'doing',sprintId:sp1.id,dataInicio:'2026-08-01',prazo:'2026-08-14',tags:['clima','pesquisa'],checklist:[{id:uid(),texto:'Tabular respostas',feito:true},{id:uid(),texto:'Montar relatório executivo',feito:false}],criadoEm:new Date().toISOString()},
+    {id:uid(),titulo:'Capacitação de Excel Avançado — Turma Financeiro',descricao:'',tipo:'treinamento',setor:'Financeiro',responsavel:'Bruno Lima',prioridade:'baixa',status:'backlog',sprintId:null,dataInicio:'',prazo:'2026-09-05',tags:['excel','capacitação'],checklist:[],criadoEm:new Date().toISOString()}
+  ];
+}
+
+/* ===================== PERSISTÊNCIA ===================== */
+function salvarTudo(){
+  try{
+    localStorage.setItem('gt_demandas',JSON.stringify(demandas));
+    localStorage.setItem('gt_sprints',JSON.stringify(sprints));
+    localStorage.setItem('gt_equipe',JSON.stringify(equipe));
+    localStorage.setItem('gt_setores',JSON.stringify(setores));
+  }catch(e){console.warn('localStorage indisponível',e);}
+}
+function carregarTudo(){
+  try{
+    const d=localStorage.getItem('gt_demandas');
+    if(d){
+      demandas=JSON.parse(d);
+      sprints=JSON.parse(localStorage.getItem('gt_sprints')||'[]');
+      equipe=JSON.parse(localStorage.getItem('gt_equipe')||'[]');
+      setores=JSON.parse(localStorage.getItem('gt_setores')||'[]');
+    }else{
+      seedInicial();
+      salvarTudo();
+    }
+  }catch(e){console.warn('Erro ao carregar base',e);seedInicial();}
+}
+
+/* ===================== HELPERS ===================== */
+function escapeHtml(s){return (s||'').toString().replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmtDate(iso){if(!iso)return '—';const p=iso.split('-');if(p.length!==3)return iso;return p[2]+'/'+p[1]+'/'+p[0];}
+function initials(nome){if(!nome)return '?';const p=nome.trim().split(/\s+/);return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
+function tipoInfo(id){return tipos.find(t=>t.id===id)||{label:id,hex:'#9098b0'};}
+function statusInfo(id){return statusCols.find(s=>s.id===id)||{label:id,hex:'#9098b0'};}
+function prioInfo(id){return prioridades.find(p=>p.id===id)||{label:id,hex:'#9098b0'};}
+function sprintAtivaId(){const a=sprints.find(s=>s.ativa);return a?a.id:(sprints.length?sprints[sprints.length-1].id:null);}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window._toastT);window._toastT=setTimeout(()=>t.classList.remove('show'),2600);}
+
+/* ===================== NAVEGAÇÃO ===================== */
+function showPage(name){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.page===name));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
+  if(name==='quadro')renderBoard();
+  if(name==='backlog')renderBacklogTable();
+  if(name==='dashboard')renderDashboard();
+}
+
+/* ===================== SELECTS DINÂMICOS ===================== */
+function popularSelects(){
+  const kfResp=document.getElementById('kf-resp');
+  kfResp.innerHTML='<option value="todos">Todos os Responsáveis</option>'+equipe.map(n=>`<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
+  const kfTipo=document.getElementById('kf-tipo');
+  kfTipo.innerHTML='<option value="todos">Todos os Tipos</option>'+tipos.map(t=>`<option value="${t.id}">${t.label}</option>`).join('');
+  const kfSprint=document.getElementById('kf-sprint');
+  kfSprint.innerHTML='<option value="todas">Todas as Sprints</option>'+sprints.map(s=>`<option value="${s.id}">${escapeHtml(s.nome)}</option>`).join('');
+
+  const bfSetor=document.getElementById('bf-setor');
+  bfSetor.innerHTML='<option value="todos">Todos</option>'+setores.map(s=>`<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+  const bfTipo=document.getElementById('bf-tipo');
+  bfTipo.innerHTML='<option value="todos">Todos</option>'+tipos.map(t=>`<option value="${t.id}">${t.label}</option>`).join('');
+
+  document.getElementById('dm-tipo').innerHTML=tipos.map(t=>`<option value="${t.id}">${t.label}</option>`).join('');
+  document.getElementById('dm-setor').innerHTML=setores.map(s=>`<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+  document.getElementById('dm-responsavel').innerHTML=equipe.map(n=>`<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
+  document.getElementById('dm-sprint').innerHTML='<option value="">Sem sprint (Backlog)</option>'+sprints.map(s=>`<option value="${s.id}">${escapeHtml(s.nome)}</option>`).join('');
+}
+
+/* ===================== QUADRO / DRAG & DROP ===================== */
+function renderBoard(){
+  renderSprintBanner(document.getElementById('kf-sprint').value);
+  const sprintFiltro=document.getElementById('kf-sprint').value;
+  const respFiltro=document.getElementById('kf-resp').value;
+  const tipoFiltro=document.getElementById('kf-tipo').value;
+  const prioFiltro=document.getElementById('kf-prio').value;
+
+  const board=document.getElementById('kanban-board');
+  board.innerHTML=statusCols.map(col=>{
+    let itens=demandas.filter(d=>d.status===col.id);
+    if(col.id!=='backlog') itens=itens.filter(d=>sprintFiltro==='todas'||d.sprintId===sprintFiltro);
+    if(respFiltro!=='todos') itens=itens.filter(d=>d.responsavel===respFiltro);
+    if(tipoFiltro!=='todos') itens=itens.filter(d=>d.tipo===tipoFiltro);
+    if(prioFiltro!=='todas') itens=itens.filter(d=>d.prioridade===prioFiltro);
+    itens=itens.slice().sort((a,b)=>(a.prazo||'9999-99-99').localeCompare(b.prazo||'9999-99-99'));
+    return `<div class="kcol">
+      <div class="kcol-band" style="background:${col.hex}"></div>
+      <div class="kcol-head"><span class="kcol-title">${col.label}</span><span class="kcol-count">${itens.length}</span></div>
+      <div class="kcol-body" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropCard(event,'${col.id}')">
+        ${itens.length?itens.map(d=>cardHTML(d)).join(''):'<div class="kcol-empty">Nenhuma demanda aqui</div>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function cardHTML(d){
+  const overdue=d.prazo && d.status!=='done' && new Date(d.prazo+'T23:59:59')<new Date();
+  const feitos=(d.checklist||[]).filter(c=>c.feito).length;
+  const totalCk=(d.checklist||[]).length;
+  const ti=tipoInfo(d.tipo), pi=prioInfo(d.prioridade);
+  return `<div class="kcard" draggable="true" data-id="${d.id}" ondragstart="dragStart(event)" ondragend="dragEnd(event)" onclick="abrirModalDemanda('${d.id}')">
+    <div class="kcard-top">
+      <span class="ktype" style="background:${ti.hex}">${ti.label}</span>
+      <span class="kprio" style="background:${pi.hex}" title="Prioridade ${pi.label}"></span>
+    </div>
+    <div class="kcard-title">${escapeHtml(d.titulo)}</div>
+    <div class="kcard-meta">${escapeHtml(d.setor||'—')}</div>
+    ${d.tags&&d.tags.length?`<div class="kcard-tags">${d.tags.map(t=>`<span class="ktag">${escapeHtml(t)}</span>`).join('')}</div>`:''}
+    <div class="kcard-foot">
+      <div class="kavatar" title="${escapeHtml(d.responsavel||'')}">${initials(d.responsavel)}</div>
+      ${totalCk?`<span class="kchecklist">${feitos}/${totalCk}</span>`:'<span></span>'}
+      <span class="kdue ${overdue?'overdue':''}">${d.prazo?fmtDate(d.prazo):'Sem prazo'}</span>
+    </div>
+  </div>`;
+}
+
+function renderSprintBanner(sprintFiltro){
+  const el=document.getElementById('sprint-banner');
+  if(!sprints.length){el.innerHTML='<div><h3>Nenhuma sprint cadastrada</h3><p>Crie uma sprint para organizar o fluxo de trabalho do setor.</p></div>';return;}
+  let sprint = sprintFiltro==='todas' ? (sprints.find(s=>s.ativa)||sprints[sprints.length-1]) : sprints.find(s=>s.id===sprintFiltro);
+  if(!sprint){el.innerHTML='';return;}
+  const itens=demandas.filter(d=>d.sprintId===sprint.id);
+  const total=itens.length, feitos=itens.filter(d=>d.status==='done').length;
+  const pct=total?Math.round(feitos/total*100):0;
+  el.innerHTML=`
+    <div><h3>${escapeHtml(sprint.nome)} ${sprint.ativa?'<span class="spill" style="background:var(--grad3);margin-left:8px;font-size:10px">ATIVA</span>':''}</h3>
+    <p>${fmtDate(sprint.inicio)} — ${fmtDate(sprint.fim)}${sprint.meta?' · '+escapeHtml(sprint.meta):''}</p></div>
+    <div class="sprint-progress">
+      <span style="font-size:11px;font-weight:700;color:var(--gray600);white-space:nowrap">${feitos}/${total} concluídas</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--grad4)"><span class="bar-pct">${pct}%</span></div></div>
+    </div>`;
+}
+
+function dragStart(e){e.dataTransfer.setData('text/plain',e.currentTarget.dataset.id);setTimeout(()=>e.currentTarget.classList.add('dragging'),0);}
+function dragEnd(e){e.currentTarget.classList.remove('dragging');}
+function dragOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function dropCard(e,statusId){
+  e.preventDefault();e.currentTarget.classList.remove('drag-over');
+  const id=e.dataTransfer.getData('text/plain');
+  moverDemanda(id,statusId);
+}
+function moverDemanda(id,statusId){
+  const d=demandas.find(x=>x.id===id); if(!d)return;
+  d.status=statusId;
+  if(statusId==='backlog'){ d.sprintId=null; }
+  else if(!d.sprintId){ d.sprintId=sprintAtivaId(); }
+  d.atualizadoEm=new Date().toISOString();
+  salvarTudo();renderBoard();renderBacklogTable();renderDashboard();
+  showToast('Demanda movida para '+statusInfo(statusId).label);
+}
+
+/* ===================== MODAL DEMANDA ===================== */
+function abrirModalDemanda(id){
+  popularSelects();
+  const d=id?demandas.find(x=>x.id===id):null;
+  editandoId=id||null;
+  checklistTemp=d?JSON.parse(JSON.stringify(d.checklist||[])):[];
+  document.getElementById('modal-demanda-title').textContent=d?'Editar Demanda':'Nova Demanda';
+  document.getElementById('dm-titulo').value=d?d.titulo:'';
+  document.getElementById('dm-descricao').value=d?(d.descricao||''):'';
+  document.getElementById('dm-tipo').value=d?d.tipo:tipos[0].id;
+  document.getElementById('dm-prioridade').value=d?d.prioridade:'media';
+  document.getElementById('dm-setor').value=d?d.setor:(setores[0]||'');
+  document.getElementById('dm-responsavel').value=d?d.responsavel:(equipe[0]||'');
+  document.getElementById('dm-sprint').value=d?(d.sprintId||''):'';
+  document.getElementById('dm-status').value=d?d.status:'backlog';
+  document.getElementById('dm-datainicio').value=d?(d.dataInicio||''):'';
+  document.getElementById('dm-prazo').value=d?(d.prazo||''):'';
+  document.getElementById('dm-tags').value=d?(d.tags||[]).join(', '):'';
+  document.getElementById('btn-excluir-demanda').style.display=d?'inline-flex':'none';
+  renderChecklistTemp();
+  document.getElementById('modal-demanda-bg').classList.add('open');
+}
+function fecharModalDemanda(){document.getElementById('modal-demanda-bg').classList.remove('open');}
+
+function renderChecklistTemp(){
+  const el=document.getElementById('dm-checklist-list');
+  if(!checklistTemp.length){el.innerHTML='<div class="kcol-empty">Nenhum item adicionado</div>';return;}
+  el.innerHTML=checklistTemp.map((c,i)=>`
+    <div class="mcitem ${c.feito?'checked':''}" onclick="toggleChecklistTemp(${i})">
+      <div class="mcbox">${c.feito?'✓':''}</div>
+      <div style="flex:1"><div class="mcname">${escapeHtml(c.texto)}</div></div>
+      <button type="button" onclick="event.stopPropagation();removerChecklistTemp(${i})" style="background:none;border:none;color:var(--gray400);cursor:pointer;font-size:15px">✕</button>
+    </div>`).join('');
+}
+function toggleChecklistTemp(i){checklistTemp[i].feito=!checklistTemp[i].feito;renderChecklistTemp();}
+function removerChecklistTemp(i){checklistTemp.splice(i,1);renderChecklistTemp();}
+function adicionarChecklistTemp(){
+  const inp=document.getElementById('dm-checklist-input');const v=inp.value.trim();if(!v)return;
+  checklistTemp.push({id:uid(),texto:v,feito:false});inp.value='';renderChecklistTemp();
+}
+
+function salvarDemanda(){
+  const titulo=document.getElementById('dm-titulo').value.trim();
+  if(!titulo){showToast('Informe o título da demanda');return;}
+  if(!equipe.length||!setores.length){showToast('Cadastre ao menos um responsável e um setor em Configurações');return;}
+  const sprintVal=document.getElementById('dm-sprint').value;
+  const status=document.getElementById('dm-status').value;
+  const rec={
+    id:editandoId||uid(),
+    titulo,
+    descricao:document.getElementById('dm-descricao').value.trim(),
+    tipo:document.getElementById('dm-tipo').value,
+    prioridade:document.getElementById('dm-prioridade').value,
+    setor:document.getElementById('dm-setor').value,
+    responsavel:document.getElementById('dm-responsavel').value,
+    sprintId:status==='backlog'?null:(sprintVal||null),
+    status,
+    dataInicio:document.getElementById('dm-datainicio').value,
+    prazo:document.getElementById('dm-prazo').value,
+    tags:document.getElementById('dm-tags').value.split(',').map(t=>t.trim()).filter(Boolean),
+    checklist:checklistTemp,
+    criadoEm:editandoId?(demandas.find(x=>x.id===editandoId)||{}).criadoEm||new Date().toISOString():new Date().toISOString(),
+    atualizadoEm:new Date().toISOString()
+  };
+  if(editandoId){const idx=demandas.findIndex(x=>x.id===editandoId);demandas[idx]=rec;}
+  else{demandas.push(rec);}
+  salvarTudo();fecharModalDemanda();renderTudo();
+  showToast('Demanda salva com sucesso');
+}
+function excluirDemandaAtual(){
+  if(!editandoId)return;
+  if(!confirm('Deseja excluir esta demanda? Esta ação não pode ser desfeita.'))return;
+  demandas=demandas.filter(x=>x.id!==editandoId);
+  salvarTudo();fecharModalDemanda();renderTudo();
+  showToast('Demanda excluída com sucesso');
+}
+function excluirDemandaLista(id){
+  if(!confirm('Deseja excluir esta demanda? Esta ação não pode ser desfeita.'))return;
+  demandas=demandas.filter(x=>x.id!==id);
+  salvarTudo();renderTudo();
+  showToast('Demanda excluída com sucesso');
+}
+function renderTudo(){renderBoard();renderBacklogTable();renderDashboard();}
+
+/* ===================== BACKLOG ===================== */
+function renderBacklogTable(){
+  const busca=(document.getElementById('bf-search').value||'').toLowerCase();
+  const fSetor=document.getElementById('bf-setor').value;
+  const fTipo=document.getElementById('bf-tipo').value;
+  const fStatus=document.getElementById('bf-status').value;
+  let itens=demandas.filter(d=>{
+    if(busca && !((d.titulo||'').toLowerCase().includes(busca)||(d.descricao||'').toLowerCase().includes(busca)||(d.responsavel||'').toLowerCase().includes(busca)))return false;
+    if(fSetor!=='todos' && d.setor!==fSetor)return false;
+    if(fTipo!=='todos' && d.tipo!==fTipo)return false;
+    if(fStatus!=='todos' && d.status!==fStatus)return false;
+    return true;
+  });
+  itens=itens.slice().sort((a,b)=>(a.prazo||'9999-99-99').localeCompare(b.prazo||'9999-99-99'));
+  const tbody=document.getElementById('backlog-tbody');
+  if(!itens.length){tbody.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--gray400);padding:24px;white-space:normal">Nenhuma demanda encontrada</td></tr>';return;}
+  tbody.innerHTML=itens.map(d=>{
+    const overdue=d.prazo && d.status!=='done' && new Date(d.prazo+'T23:59:59')<new Date();
+    const sprint=sprints.find(s=>s.id===d.sprintId);
+    const ti=tipoInfo(d.tipo), pi=prioInfo(d.prioridade), si=statusInfo(d.status);
+    return `<tr>
+      <td><a class="collab-link" onclick="abrirModalDemanda('${d.id}')">${escapeHtml(d.titulo)}</a></td>
+      <td><span class="ktype" style="background:${ti.hex}">${ti.label}</span></td>
+      <td>${escapeHtml(d.setor||'—')}</td>
+      <td>${escapeHtml(d.responsavel||'—')}</td>
+      <td><span style="color:${pi.hex};font-weight:700">${pi.label}</span></td>
+      <td><span class="spill" style="background:${si.hex}">${si.label}</span></td>
+      <td>${sprint?escapeHtml(sprint.nome):'—'}</td>
+      <td style="${overdue?'color:#e0003c;font-weight:700':''}">${d.prazo?fmtDate(d.prazo):'—'}</td>
+      <td><div style="display:flex;gap:6px"><button class="tedit" onclick="abrirModalDemanda('${d.id}')">Editar</button><button class="tedit" onclick="excluirDemandaLista('${d.id}')">Excluir</button></div></td>
+    </tr>`;
+  }).join('');
+}
+function exportarCSV(){
+  const hdr=['Título','Tipo','Setor','Responsável','Prioridade','Status','Sprint','Data Início','Prazo'].map(v=>`"${v}"`).join(',');
+  const rows=demandas.map(d=>{
+    const sprint=sprints.find(s=>s.id===d.sprintId);
+    return [d.titulo,tipoInfo(d.tipo).label,d.setor,d.responsavel,prioInfo(d.prioridade).label,statusInfo(d.status).label,sprint?sprint.nome:'',fmtDate(d.dataInicio),fmtDate(d.prazo)]
+      .map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',');
+  });
+  const csv=[hdr,...rows].join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`Backlog_Demandas_${new Date().toISOString().substring(0,10)}.csv`;a.click();
+  showToast('CSV exportado com sucesso');
+}
+
+/* ===================== DASHBOARD ===================== */
+function renderDashboard(){
+  const total=demandas.length;
+  const andamento=demandas.filter(d=>d.status==='doing').length;
+  const concluidas=demandas.filter(d=>d.status==='done').length;
+  const hoje=new Date();
+  const atrasadas=demandas.filter(d=>d.prazo&&d.status!=='done'&&new Date(d.prazo+'T23:59:59')<hoje).length;
+  document.getElementById('kpi-total').textContent=total;
+  document.getElementById('kpi-andamento').textContent=andamento;
+  document.getElementById('kpi-concluidas').textContent=concluidas;
+  document.getElementById('kpi-atrasadas').textContent=atrasadas;
+
+  document.getElementById('chart-status').innerHTML=statusCols.map(c=>{
+    const n=demandas.filter(d=>d.status===c.id).length;
+    const pct=total?Math.round(n/total*100):0;
+    return `<div class="bar-row"><span class="bar-lbl">${c.label}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${c.hex}">${pct>14?`<span class="bar-pct">${pct}%</span>`:''}</div></div><span class="bar-val">${n}</span></div>`;
+  }).join('');
+
+  const tipoData=tipos.map(t=>({...t,n:demandas.filter(d=>d.tipo===t.id).length}));
+  let acc=0;const stops=[];
+  tipoData.forEach(t=>{const pct=total?(t.n/total*100):0;if(pct>0){stops.push(`${t.hex} ${acc}% ${acc+pct}%`);acc+=pct;}});
+  document.getElementById('chart-tipo-donut').style.background=stops.length?`conic-gradient(${stops.join(',')})`:'var(--gray100)';
+  document.getElementById('chart-tipo-legend').innerHTML=tipoData.filter(t=>t.n>0).map(t=>`<div class="pie-li"><span class="pie-dot" style="background:${t.hex}"></span>${t.label}<span class="pie-v">${t.n}</span></div>`).join('')||'<div class="kcol-empty">Sem dados</div>';
+
+  const respData=equipe.map(n=>({nome:n,n:demandas.filter(d=>d.responsavel===n).length})).sort((a,b)=>b.n-a.n);
+  const maxResp=Math.max(1,...respData.map(r=>r.n));
+  document.getElementById('chart-resp').innerHTML=respData.length?respData.map(r=>{
+    const pct=Math.round(r.n/maxResp*100);
+    return `<div class="bar-row"><span class="bar-lbl">${escapeHtml(r.nome)}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--grad2)">${pct>20?`<span class="bar-pct">${r.n}</span>`:''}</div></div><span class="bar-val">${r.n}</span></div>`;
+  }).join(''):'<div class="kcol-empty">Nenhum integrante cadastrado</div>';
+
+  const elSprint=document.getElementById('chart-sprint');
+  const sprintAtiva=sprints.find(s=>s.ativa)||sprints[sprints.length-1];
+  if(!sprintAtiva){elSprint.innerHTML='<div class="kcol-empty">Nenhuma sprint cadastrada</div>';}
+  else{
+    const itens=demandas.filter(d=>d.sprintId===sprintAtiva.id);
+    const t=itens.length,f=itens.filter(d=>d.status==='done').length;
+    const pct=t?Math.round(f/t*100):0;
+    elSprint.innerHTML=`
+      <div style="margin-bottom:14px">
+        <div style="font-weight:700;color:var(--gray800);font-size:14px;margin-bottom:2px">${escapeHtml(sprintAtiva.nome)}</div>
+        <div style="font-size:12px;color:var(--gray400)">${fmtDate(sprintAtiva.inicio)} — ${fmtDate(sprintAtiva.fim)}</div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Progresso</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--grad4)"><span class="bar-pct">${pct}%</span></div></div><span class="bar-val">${f}/${t}</span></div>
+      ${sprintAtiva.meta?`<p style="font-size:12px;color:var(--gray600);margin-top:12px"><strong>Meta:</strong> ${escapeHtml(sprintAtiva.meta)}</p>`:''}`;
+  }
+}
+
+/* ===================== SPRINTS ===================== */
+function abrirModalSprint(){
+  document.getElementById('sp-nome').value='';
+  document.getElementById('sp-inicio').value='';
+  document.getElementById('sp-fim').value='';
+  document.getElementById('sp-meta').value='';
+  document.getElementById('sp-ativa').checked=sprints.length===0;
+  renderListaSprints();
+  document.getElementById('modal-sprint-bg').classList.add('open');
+}
+function fecharModalSprint(){document.getElementById('modal-sprint-bg').classList.remove('open');}
+function salvarSprint(){
+  const nome=document.getElementById('sp-nome').value.trim();
+  if(!nome){showToast('Informe o nome da sprint');return;}
+  const rec={id:uid(),nome,inicio:document.getElementById('sp-inicio').value,fim:document.getElementById('sp-fim').value,meta:document.getElementById('sp-meta').value.trim(),ativa:document.getElementById('sp-ativa').checked};
+  if(rec.ativa)sprints.forEach(s=>s.ativa=false);
+  sprints.push(rec);
+  salvarTudo();popularSelects();renderListaSprints();renderBoard();renderDashboard();
+  document.getElementById('sp-nome').value='';document.getElementById('sp-inicio').value='';document.getElementById('sp-fim').value='';document.getElementById('sp-meta').value='';document.getElementById('sp-ativa').checked=false;
+  showToast('Sprint criada com sucesso');
+}
+function tornarSprintAtiva(id){
+  sprints.forEach(s=>s.ativa=(s.id===id));
+  salvarTudo();popularSelects();renderListaSprints();renderBoard();renderDashboard();
+  showToast('Sprint definida como ativa');
+}
+function excluirSprint(id){
+  if(!confirm('Excluir esta sprint? As demandas vinculadas voltarão para o Backlog.'))return;
+  sprints=sprints.filter(s=>s.id!==id);
+  demandas.forEach(d=>{if(d.sprintId===id){d.sprintId=null;if(d.status!=='done')d.status='backlog';}});
+  salvarTudo();popularSelects();renderListaSprints();renderTudo();
+  showToast('Sprint excluída');
+}
+function renderListaSprints(){
+  const el=document.getElementById('sprint-list');
+  if(!sprints.length){el.innerHTML='<div class="kcol-empty">Nenhuma sprint cadastrada ainda</div>';return;}
+  el.innerHTML=sprints.slice().reverse().map(s=>`
+    <div class="collab-row">
+      <div class="collab-avatar" style="background:${s.ativa?'var(--grad3)':'var(--gray400)'}">${escapeHtml(s.nome.slice(0,2).toUpperCase())}</div>
+      <div class="collab-info"><h4>${escapeHtml(s.nome)} ${s.ativa?'<span class="spill" style="background:var(--grad3);margin-left:6px">ATIVA</span>':''}</h4>
+      <p>${fmtDate(s.inicio)} — ${fmtDate(s.fim)}${s.meta?' · '+escapeHtml(s.meta):''}</p></div>
+      <div style="display:flex;gap:6px">
+        ${s.ativa?'':`<button class="tedit" onclick="tornarSprintAtiva('${s.id}')">Ativar</button>`}
+        <button class="tedit" onclick="excluirSprint('${s.id}')">Excluir</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ===================== CONFIGURAÇÕES (EQUIPE / SETORES) ===================== */
+function abrirConfig(){renderChipsEquipe();renderChipsSetores();document.getElementById('modal-config-bg').classList.add('open');}
+function fecharConfig(){document.getElementById('modal-config-bg').classList.remove('open');}
+function renderChipsEquipe(){
+  document.getElementById('chips-equipe').innerHTML=equipe.length?equipe.map((n,i)=>`<div class="chip">${escapeHtml(n)}<button onclick="removerEquipe(${i})">✕</button></div>`).join(''):'<span style="font-size:12px;color:var(--gray400)">Nenhum integrante cadastrado</span>';
+}
+function renderChipsSetores(){
+  document.getElementById('chips-setores').innerHTML=setores.length?setores.map((n,i)=>`<div class="chip">${escapeHtml(n)}<button onclick="removerSetor(${i})">✕</button></div>`).join(''):'<span style="font-size:12px;color:var(--gray400)">Nenhum setor cadastrado</span>';
+}
+function adicionarEquipe(){
+  const inp=document.getElementById('novo-equipe-input');const v=inp.value.trim();if(!v)return;
+  if(equipe.includes(v)){showToast('Integrante já cadastrado');return;}
+  equipe.push(v);inp.value='';salvarTudo();renderChipsEquipe();popularSelects();
+}
+function removerEquipe(i){equipe.splice(i,1);salvarTudo();renderChipsEquipe();popularSelects();renderTudo();}
+function adicionarSetor(){
+  const inp=document.getElementById('novo-setor-input');const v=inp.value.trim();if(!v)return;
+  if(setores.includes(v)){showToast('Setor já cadastrado');return;}
+  setores.push(v);inp.value='';salvarTudo();renderChipsSetores();popularSelects();
+}
+function removerSetor(i){setores.splice(i,1);salvarTudo();renderChipsSetores();popularSelects();renderTudo();}
+
+/* ===================== INIT ===================== */
+carregarTudo();
+popularSelects();
+renderBoard();
+renderBacklogTable();
+renderDashboard();
+</script>
+</body>
+</html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist 5S | Auditoria de Qualidade</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Barlow+Condensed:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — Sistema de Auditoria
+═══════════════════════════════════════════ */
+:root {
+  --gt-primary:   #7b2ff7;
+  --gt-secondary: #e0009e;
+  --gt-accent1:   #f7a800;
+  --gt-accent2:   #ff4e00;
+  --gt-teal:      #0099e5;
+  --gt-green:     #00e5a0;
+
+  --grad-full:    linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
+  --grad-purple:  linear-gradient(135deg,#7b2ff7,#e0009e);
+  --grad-orange:  linear-gradient(135deg,#f7a800,#ff4e00);
+  --grad-blue:    linear-gradient(135deg,#0099e5,#00e5a0);
+  --grad-red:     linear-gradient(135deg,#e0003c,#ff4e6a);
+  --grad-green:   linear-gradient(135deg,#00c48c,#00e5a0);
+  --grad-dark:    linear-gradient(135deg,#1a0a30,#0d1a3a);
+
+  /* 5S palettes mantidas, integradas ao GT token system */
+  --s1-grad: linear-gradient(135deg,#f7a800,#ff4e00);
+  --s1-cor:  #f7a800;
+  --s2-grad: linear-gradient(135deg,#ff4e00,#e0009e);
+  --s2-cor:  #ff4e00;
+  --s3-grad: linear-gradient(135deg,#0099e5,#00e5a0);
+  --s3-cor:  #0099e5;
+  --s4-grad: linear-gradient(135deg,#00c48c,#00e5a0);
+  --s4-cor:  #00c48c;
+  --s5-grad: linear-gradient(135deg,#7b2ff7,#e0009e);
+  --s5-cor:  #7b2ff7;
+
+  --ok:  #00c48c;
+  --nok: #e0003c;
+  --na:  #9098b0;
+
+  --white:    #fff;
+  --offwhite: #f8f9fc;
+  --gray50:   #f4f5f8;
+  --gray100:  #e8eaf0;
+  --gray200:  #d0d4e0;
+  --gray400:  #9098b0;
+  --gray600:  #5a6278;
+  --gray800:  #2a2f42;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--offwhite);
+  color: var(--gray800);
+  min-height: 100vh;
+  padding-bottom: 72px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   NAV BAND
+═══════════════════════════════════════════ */
+.nav-band { height: 5px; background: var(--grad-full); }
+
+.nav-tabs {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--gray100);
+  overflow-x: auto;
+}
+.nav-tab {
+  flex: 1; min-width: 120px;
+  padding: 14px 10px; text-align: center;
+  cursor: pointer;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--gray400);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  white-space: nowrap; user-select: none;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.nav-tab:hover  { color: var(--gray600); background: var(--gray50); }
+.nav-tab.active { color: var(--gray800); background: var(--offwhite); }
+.nav-tab[data-s="1"].active { border-bottom-color: var(--s1-cor); color: var(--s1-cor); }
+.nav-tab[data-s="2"].active { border-bottom-color: var(--s2-cor); color: var(--s2-cor); }
+.nav-tab[data-s="3"].active { border-bottom-color: var(--s3-cor); color: var(--s3-cor); }
+.nav-tab[data-s="4"].active { border-bottom-color: var(--s4-cor); color: var(--s4-cor); }
+.nav-tab[data-s="5"].active { border-bottom-color: var(--s5-cor); color: var(--s5-cor); }
+
+.tab-dot { width: 8px; height: 8px; border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity .2s; }
+.nav-tab.active .tab-dot { opacity: 1; }
+.dot-s1 { background: var(--s1-grad); }
+.dot-s2 { background: var(--s2-grad); }
+.dot-s3 { background: var(--s3-grad); }
+.dot-s4 { background: var(--s4-grad); }
+.dot-s5 { background: var(--s5-grad); }
+
+/* ═══════════════════════════════════════════
+   PAGE
+═══════════════════════════════════════════ */
+.page { display: none; padding: 28px 20px 48px; animation: fadeUp .35s ease both; }
+.page.active { display: block; }
+.container { max-width: 980px; margin: 0 auto; }
+
+/* ═══════════════════════════════════════════
+   HEADER CARD
+═══════════════════════════════════════════ */
+.header-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.header-band { height: 7px; background: var(--grad-full); }
+.header-inner {
+  padding: 22px 28px;
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.header-title h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--gray800); margin-bottom: 3px;
+}
+.header-title p { font-size: 13px; color: var(--gray400); font-weight: 300; }
+.header-badge {
+  padding: 6px 16px; border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: white; background: var(--grad-purple);
+  white-space: nowrap; align-self: center;
+}
+
+/* ═══════════════════════════════════════════
+   META FORM CARD
+═══════════════════════════════════════════ */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: box-shadow .2s;
+}
+.card:focus-within { box-shadow: var(--shadow-lg); }
+
+.form-grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: .08em;
+}
+.field input,
+.field select,
+.field textarea {
+  background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px;
+  padding: 10px 13px; border-radius: 8px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+  appearance: none; -webkit-appearance: none;
+  resize: vertical;
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer; resize: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--gt-primary);
+  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  background: #fff;
+}
+
+/* ═══════════════════════════════════════════
+   SCORE PANEL
+═══════════════════════════════════════════ */
+.score-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.score-inner {
+  padding: 22px 28px;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.score-total-wrap { text-align: center; }
+.score-total {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; font-weight: 400; line-height: 1;
+  background: var(--grad-full);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.score-label { font-size: 10px; color: var(--gray400); text-transform: uppercase; letter-spacing: .1em; margin-top: 4px; }
+.score-divider { width: 1.5px; height: 56px; background: linear-gradient(to bottom, transparent, var(--gray200), transparent); }
+.score-bars { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 9px; }
+.score-bar-row { display: grid; grid-template-columns: 80px 1fr 42px; align-items: center; gap: 12px; }
+.score-bar-label { font-size: 10px; color: var(--gray400); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+.score-bar-track { height: 7px; background: var(--gray100); border-radius: 99px; overflow: hidden; }
+.score-bar-fill  { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.score-bar-pct   { font-size: 11px; text-align: right; font-weight: 700; color: var(--gray600); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 0 28px 18px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray400); }
+.legend-dot  { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ═══════════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════════ */
+.section-hd {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.section-hd-band { height: 5px; }
+.section-hd-inner { padding: 20px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between; }
+.section-hd-left { display: flex; align-items: center; gap: 14px; }
+.s-badge {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; color: #fff;
+  white-space: nowrap;
+}
+.section-hd-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gray800); }
+.section-hd-desc  { font-size: 12px; color: var(--gray400); font-weight: 300; line-height: 1.6; max-width: 560px; margin-top: 2px; }
+.section-hd-score {
+  font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   CHECKLIST
+═══════════════════════════════════════════ */
+.checklist {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1.5px solid var(--gray100);
+}
+.check-item {
+  background: var(--white);
+  padding: 16px 20px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: center;
+  transition: background .15s;
+  border-bottom: 1px solid var(--gray100);
+  border-left: 4px solid transparent;
+}
+.check-item:last-child { border-bottom: none; }
+.check-item:hover { background: var(--gray50); }
+.check-item.ok  { border-left-color: var(--ok);  background: #f0fdf8; }
+.check-item.nok { border-left-color: var(--nok); background: #fff2f2; }
+.check-item.na  { border-left-color: var(--na);  background: var(--gray50); opacity: .6; }
+.item-text     { font-size: 13px; line-height: 1.55; color: var(--gray800); font-weight: 500; }
+.item-criteria { font-size: 11px; color: var(--gray400); margin-top: 4px; line-height: 1.45; }
+.item-controls { display: flex; gap: 6px; }
+
+.btn-check {
+  width: 38px; height: 38px; border-radius: 8px;
+  border: 1.5px solid var(--gray200);
+  background: var(--white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800;
+  transition: all .15s; color: var(--gray400);
+}
+.btn-check:hover { transform: scale(1.1); }
+.btn-check.ok-btn:hover, .btn-check.ok-btn.active {
+  background: var(--grad-green); border-color: var(--ok);
+  color: #fff; box-shadow: 0 2px 10px rgba(0,196,140,.35);
+}
+.btn-check.nok-btn:hover, .btn-check.nok-btn.active {
+  background: var(--grad-red); border-color: var(--nok);
+  color: #fff; box-shadow: 0 2px 10px rgba(224,0,60,.3);
+}
+.btn-check.na-btn:hover, .btn-check.na-btn.active {
+  background: var(--gray200); border-color: var(--na); color: var(--gray600);
+}
+
+/* ═══════════════════════════════════════════
+   NOTES BLOCK
+═══════════════════════════════════════════ */
+.notes-block {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.notes-block label {
+  display: block;
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+textarea {
+  width: 100%; background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif; font-size: 13px;
+  padding: 12px 14px; border-radius: 8px;
+  resize: vertical; min-height: 80px;
+  outline: none; line-height: 1.6;
+  transition: border-color .2s, box-shadow .2s;
+}
+textarea:focus {
+  border-color: var(--gt-primary);
+  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  background: #fff;
+}
+
+/* ═══════════════════════════════════════════
+   BOTTOM BAR
+═══════════════════════════════════════════ */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--white);
+  border-top: 1.5px solid var(--gray100);
+  padding: 10px 24px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+  z-index: 150;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+}
+.bottom-info { font-size: 12px; color: var(--gray400); white-space: nowrap; }
+.bottom-info strong { color: var(--gray800); }
+.bottom-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700;
+  color: white; background: var(--grad-purple);
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 4px 14px rgba(123,47,247,.3);
+}
+.btn-primary:hover  { opacity: .9; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
+  color: var(--gray600); background: var(--white);
+  border: 1.5px solid var(--gray200); cursor: pointer;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--gt-primary); color: var(--gt-primary); background: #f5f0ff; }
+
+.btn-export {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700;
+  color: white; background: var(--grad-orange);
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 4px 14px rgba(255,78,0,.3);
+}
+.btn-export:hover  { opacity: .9; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 80px; left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--gray800); color: white;
+  padding: 10px 20px; border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  opacity: 0; pointer-events: none;
+  transition: all .3s; z-index: 9999;
+  white-space: nowrap;
+}
+.toast.show  { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: #c0392b; }
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500; opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg); padding: 28px;
+  width: 90%; max-width: 440px;
+  transform: scale(.95); transition: transform .25s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal h2 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 8px; }
+.modal p  { font-size: 13px; color: var(--gray600); margin-bottom: 20px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .form-grid-4 { grid-template-columns: 1fr 1fr; }
+  .form-grid   { grid-template-columns: 1fr; }
+  .score-divider { display: none; }
+  .score-inner   { gap: 20px; }
+}
+@media (max-width: 420px) {
+  .header-inner { flex-direction: column; }
+  .nav-tab { min-width: 90px; font-size: 9px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV BAND ═══ -->
+<div class="nav-band"></div>
+
+<!-- ═══ TABS ═══ -->
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" data-s="1" onclick="switchTab(1)">
+    <span class="tab-dot dot-s1"></span>1° Seiri
+  </button>
+  <button class="nav-tab" data-s="2" onclick="switchTab(2)">
+    <span class="tab-dot dot-s2"></span>2° Seiton
+  </button>
+  <button class="nav-tab" data-s="3" onclick="switchTab(3)">
+    <span class="tab-dot dot-s3"></span>3° Seiso
+  </button>
+  <button class="nav-tab" data-s="4" onclick="switchTab(4)">
+    <span class="tab-dot dot-s4"></span>4° Seiketsu
+  </button>
+  <button class="nav-tab" data-s="5" onclick="switchTab(5)">
+    <span class="tab-dot dot-s5"></span>5° Shitsuke
+  </button>
+</div>
+
+<!-- ═══ PAGES ═══ -->
+
+<!-- Página 1 — Seiri -->
+<div class="page active" id="page_s1">
+<div class="container">
+
+  <!-- Header -->
+  <div class="header-card" style="margin-top:28px">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Checklist 5S</h1>
+        <p>Auditoria de qualidade e organização do ambiente de trabalho</p>
+      </div>
+      <span class="header-badge">Auditoria de Qualidade</span>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="card">
+    <div class="form-grid-4">
+      <div class="field">
+        <label>Área / Setor</label>
+        <input type="text" id="area" placeholder="Ex: Produção">
+      </div>
+      <div class="field">
+        <label>Responsável</label>
+        <input type="text" id="responsavel" placeholder="Nome do auditor">
+      </div>
+      <div class="field">
+        <label>Data</label>
+        <input type="date" id="data">
+      </div>
+      <div class="field">
+        <label>Turno</label>
+        <select id="turno">
+          <option value="">Selecione</option>
+          <option>Manhã</option>
+          <option>Tarde</option>
+          <option>Noite</option>
+          <option>Geral</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-card">
+    <div class="score-inner">
+      <div class="score-total-wrap">
+        <div class="score-total" id="totalScore">—</div>
+        <div class="score-label">Conformidade Geral</div>
+      </div>
+      <div class="score-divider"></div>
+      <div class="score-bars" id="scoreBars"></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--grad-green)"></span>Conforme</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--grad-red)"></span>Não Conforme</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--gray200)"></span>N/A</div>
+    </div>
+  </div>
+
+  <!-- Section header S1 -->
+  <div class="section-hd">
+    <div class="section-hd-band" style="background:var(--s1-grad)"></div>
+    <div class="section-hd-inner">
+      <div class="section-hd-left">
+        <span class="s-badge" style="background:var(--s1-grad)">1° S</span>
+        <div>
+          <div class="section-hd-title">Seiri — Utilização</div>
+          <div class="section-hd-desc">Separar o necessário do desnecessário. Manter no local de trabalho apenas o que é realmente utilizado.</div>
+        </div>
+      </div>
+      <div class="section-hd-score" style="background:var(--s1-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="score_display_s1">0%</div>
+    </div>
+  </div>
+
+  <!-- Checklist S1 -->
+  <div class="checklist" id="checklist_s1"></div>
+
+  <!-- Notes S1 -->
+  <div class="notes-block">
+    <label>Observações / Evidências — Seiri</label>
+    <textarea id="nota_s1" placeholder="Registre observações, evidências encontradas..." onchange="saveNota(1)"></textarea>
+  </div>
+
+</div>
+</div>
+
+<!-- Páginas 2–5 (estrutura idêntica, gerada via JS) -->
+<div class="page" id="page_s2"><div class="container" id="cont_s2"></div></div>
+<div class="page" id="page_s3"><div class="container" id="cont_s3"></div></div>
+<div class="page" id="page_s4"><div class="container" id="cont_s4"></div></div>
+<div class="page" id="page_s5"><div class="container" id="cont_s5"></div></div>
+
+<!-- ═══ BOTTOM BAR ═══ -->
+<div class="bottom-bar">
+  <div class="bottom-info">
+    <strong id="bb-area">Checklist 5S</strong>
+    <span id="bb-status"> — Preencha os dados da auditoria</span>
+  </div>
+  <div class="bottom-actions">
+    <button class="btn-secondary" onclick="confirmReset()">Reiniciar</button>
+    <button class="btn-secondary" onclick="salvarRelatorio()">Salvar</button>
+    <button class="btn-export"    onclick="exportarPDF()">↓ Exportar PDF</button>
+  </div>
+</div>
+
+<!-- Modal Reiniciar -->
+<div class="modal-overlay" id="modalReset">
+  <div class="modal">
+    <h2>Reiniciar auditoria?</h2>
+    <p>Todos os dados preenchidos serão apagados. Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modalReset')">Cancelar</button>
+      <button class="btn-primary" onclick="doReset()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════ DADOS ════════ */
+const SS = [
+  {
+    id:1, nome:"Seiri", subtitulo:"Utilização",
+    grad:"var(--s1-grad)", cor:"#f7a800",
+    desc:"Separar o necessário do desnecessário. Manter no local de trabalho apenas o que é realmente utilizado.",
+    itens:[
+      {texto:"Materiais e ferramentas desnecessários removidos da área",criterio:"Nenhum item sem uso nos últimos 30 dias presente na área de trabalho"},
+      {texto:"Equipamentos obsoletos ou com defeito identificados e retirados",criterio:"Etiquetas vermelhas aplicadas em itens questionáveis; itens descartados ou realocados"},
+      {texto:"Documentos e papéis desnecessários eliminados",criterio:"Apenas documentos ativos e relevantes presentes; demais arquivados ou destruídos"},
+      {texto:"Estoques excessivos identificados e tratados",criterio:"Quantidade de materiais não excede o necessário para o período de trabalho em curso"},
+      {texto:"Espaço livre de itens pessoais não relacionados ao trabalho",criterio:"Área limpa de objetos pessoais, decorações excessivas ou itens de uso doméstico"},
+      {texto:"Recipientes e embalagens vazias removidos",criterio:"Nenhuma caixa, embalagem ou recipiente vazio acumulado na área"},
+    ]
+  },
+  {
+    id:2, nome:"Seiton", subtitulo:"Organização",
+    grad:"var(--s2-grad)", cor:"#ff4e00",
+    desc:"Um lugar para cada coisa e cada coisa em seu lugar. Organizar os itens necessários de forma que sejam fáceis de encontrar, usar e repor.",
+    itens:[
+      {texto:"Ferramentas e equipamentos possuem local definido e identificado",criterio:"Todo item tem posição fixa marcada (shadow board, fita, etiqueta)"},
+      {texto:"Identificação visual clara em armários, gavetas e prateleiras",criterio:"Etiquetas legíveis, padronizadas e visíveis a 1 metro de distância"},
+      {texto:"Itens de maior frequência de uso estão mais acessíveis",criterio:"Ferramentas frequentes a < 30cm de alcance; esporádicas podem estar mais longe"},
+      {texto:"Corredores e saídas de emergência desobstruídos e demarcados",criterio:"Faixas de segurança visíveis; zero obstruções nas vias de circulação e emergência"},
+      {texto:"Cabos, mangueiras e fios organizados e identificados",criterio:"Nenhum cabo solto no piso; identificação por cor ou etiqueta quando aplicável"},
+      {texto:"Produtos e materiais armazenados respeitando limites máximos e mínimos",criterio:"Linhas de máximo e mínimo visíveis nos estoques; produtos dentro dos limites"},
+    ]
+  },
+  {
+    id:3, nome:"Seiso", subtitulo:"Limpeza",
+    grad:"var(--s3-grad)", cor:"#0099e5",
+    desc:"Limpar e inspecionar. Manter o ambiente limpo e usar a limpeza como forma de inspeção para identificar anomalias.",
+    itens:[
+      {texto:"Pisos limpos, sem manchas, resíduos ou líquidos",criterio:"Nenhum resíduo visível; manchas antigas sinalizadas para tratamento"},
+      {texto:"Máquinas e equipamentos limpos por fora e por dentro (quando aplicável)",criterio:"Sem acúmulo de poeira, óleo ou resíduo nos equipamentos"},
+      {texto:"Bancadas e superfícies de trabalho limpas ao início e fim do turno",criterio:"Registro de limpeza realizado; superfícies sem resíduos ao final do turno"},
+      {texto:"Lixeiras disponíveis, identificadas e esvaziadas regularmente",criterio:"Lixeiras em quantidade suficiente; não ultrapassam 80% da capacidade"},
+      {texto:"Fontes de sujidade identificadas e tratadas (vazamentos, desgaste)",criterio:"Relatório de anomalia emitido para toda fonte de sujidade recorrente"},
+      {texto:"Utensílios de limpeza disponíveis, organizados e em bom estado",criterio:"Vassouras, panos, produtos de limpeza presentes, limpos e armazenados corretamente"},
+    ]
+  },
+  {
+    id:4, nome:"Seiketsu", subtitulo:"Padronização",
+    grad:"var(--s4-grad)", cor:"#00c48c",
+    desc:"Padronizar as boas práticas. Criar padrões visuais e procedimentos para manter os três primeiros S de forma consistente.",
+    itens:[
+      {texto:"Procedimentos de limpeza e organização documentados e disponíveis",criterio:"POP (Procedimento Operacional Padrão) de 5S afixado ou acessível na área"},
+      {texto:"Responsabilidades de manutenção do 5S definidas por pessoa/turno",criterio:"Quadro de responsabilidades visível com nome e turno de cada responsável"},
+      {texto:"Padrões visuais (fotos, mapas, gabaritos) afixados na área",criterio:"Fotos do 'antes e depois' ou estado padrão afixadas em pontos-chave"},
+      {texto:"Frequência de auditorias estabelecida e cumprida",criterio:"Cronograma de auditorias definido; registros das últimas 4 semanas disponíveis"},
+      {texto:"Sinalização de segurança padronizada e em bom estado",criterio:"Placas de EPI, saída de emergência e risco visíveis, sem danos e atualizadas"},
+      {texto:"Uniforme e EPIs utilizados conforme padrão da empresa",criterio:"100% dos colaboradores com EPI correto e uniforme adequado durante inspeção"},
+    ]
+  },
+  {
+    id:5, nome:"Shitsuke", subtitulo:"Disciplina",
+    grad:"var(--s5-grad)", cor:"#7b2ff7",
+    desc:"Manter a autodisciplina. Garantir que os hábitos 5S sejam praticados de forma natural, contínua e com melhoria constante.",
+    itens:[
+      {texto:"Equipe treinada e consciente sobre a metodologia 5S",criterio:"Registro de treinamento disponível; colaboradores conhecem os 5 sensos"},
+      {texto:"Checklists anteriores preenchidos e arquivados",criterio:"Últimas 4 auditorias arquivadas e acessíveis para consulta"},
+      {texto:"Planos de ação para não conformidades anteriores cumpridos",criterio:"≥ 80% dos planos de ação das últimas auditorias concluídos no prazo"},
+      {texto:"Colaboradores relatam desvios espontaneamente (cultura proativa)",criterio:"Registros de comunicação de desvios por colaboradores presentes"},
+      {texto:"Melhorias sugeridas pela equipe nos últimos 30 dias",criterio:"Pelo menos 1 sugestão de melhoria registrada e avaliada no período"},
+      {texto:"Resultados do 5S comunicados à equipe (quadro de gestão à vista)",criterio:"Placar ou gráfico de desempenho 5S atualizado e visível na área"},
+    ]
+  }
+];
+
+let state = { checks:{}, notas:{} };
+let currentTab = 1;
+
+/* ════════ STATE ════════ */
+function loadState() {
+  try {
+    const s = localStorage.getItem('5s_gt_state'); if(s) state = JSON.parse(s);
+    const m = JSON.parse(localStorage.getItem('5s_gt_meta') || '{}');
+    if(m.area)  document.getElementById('area').value = m.area;
+    if(m.resp)  document.getElementById('responsavel').value = m.resp;
+    if(m.data)  document.getElementById('data').value = m.data;
+    if(m.turno) document.getElementById('turno').value = m.turno;
+  } catch(e){}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('5s_gt_state', JSON.stringify(state));
+    localStorage.setItem('5s_gt_meta', JSON.stringify({
+      area:  document.getElementById('area').value,
+      resp:  document.getElementById('responsavel').value,
+      data:  document.getElementById('data').value,
+      turno: document.getElementById('turno').value
+    }));
+  } catch(e){}
+}
+
+/* ════════ SCORE ════════ */
+function calcScore(sId) {
+  const items = SS[sId-1].itens; let ok=0, total=0;
+  items.forEach((_,i) => {
+    const v = state.checks[`s${sId}_i${i}`]; if(v==='na') return; total++; if(v==='ok') ok++;
+  });
+  return total===0 ? 0 : Math.round((ok/total)*100);
+}
+function calcTotal() {
+  return Math.round(SS.reduce((sum,s) => sum+calcScore(s.id), 0) / SS.length);
+}
+
+function updateScores() {
+  const tot = calcTotal();
+  document.getElementById('totalScore').textContent = tot + '%';
+  document.getElementById('scoreBars').innerHTML = SS.map(s => {
+    const pct = calcScore(s.id);
+    return `<div class="score-bar-row">
+      <span class="score-bar-label">${s.nome}</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:${pct}%;background:${s.grad}"></div></div>
+      <span class="score-bar-pct" style="color:${s.cor}">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  // update each section header score badge
+  SS.forEach(s => {
+    const el = document.getElementById(`score_display_s${s.id}`);
+    if(el) el.textContent = calcScore(s.id) + '%';
+  });
+
+  // update bottom bar
+  const area = document.getElementById('area').value || 'Checklist 5S';
+  document.getElementById('bb-area').textContent = area;
+  document.getElementById('bb-status').textContent = ` — ${tot}% de conformidade geral`;
+}
+
+/* ════════ CHECK ════════ */
+function setCheck(sId, iIdx, val) {
+  const key = `s${sId}_i${iIdx}`;
+  if(state.checks[key] === val) { delete state.checks[key]; val = null; }
+  else state.checks[key] = val;
+  const row = document.getElementById(`row_s${sId}_i${iIdx}`);
+  row.className = 'check-item' + (val?' '+val:'');
+  ['ok','nok','na'].forEach(v =>
+    document.getElementById(`btn_s${sId}_i${iIdx}_${v}`).classList.toggle('active', v===val)
+  );
+  updateScores(); saveState();
+}
+
+/* ════════ RENDER CHECKLIST ════════ */
+function renderChecklist(s) {
+  return s.itens.map((item, iIdx) => {
+    const val = state.checks[`s${s.id}_i${iIdx}`] || null;
+    return `<div class="check-item${val?' '+val:''}" id="row_s${s.id}_i${iIdx}">
+      <div>
+        <div class="item-text">${esc(item.texto)}</div>
+        <div class="item-criteria">✦ Critério: ${esc(item.criterio)}</div>
+      </div>
+      <div class="item-controls">
+        <button class="btn-check ok-btn${val==='ok'?' active':''}" id="btn_s${s.id}_i${iIdx}_ok"  title="Conforme"       onclick="setCheck(${s.id},${iIdx},'ok')">✓</button>
+        <button class="btn-check nok-btn${val==='nok'?' active':''}" id="btn_s${s.id}_i${iIdx}_nok" title="Não Conforme" onclick="setCheck(${s.id},${iIdx},'nok')">✗</button>
+        <button class="btn-check na-btn${val==='na'?' active':''}" id="btn_s${s.id}_i${iIdx}_na"   title="N/A"            onclick="setCheck(${s.id},${iIdx},'na')">—</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ════════ BUILD PAGES 2–5 ════════ */
+function buildPages() {
+  SS.slice(1).forEach(s => {
+    const cont = document.getElementById(`cont_s${s.id}`);
+    if(!cont) return;
+    cont.innerHTML = `
+      <div class="section-hd" style="margin-top:28px">
+        <div class="section-hd-band" style="background:${s.grad}"></div>
+        <div class="section-hd-inner">
+          <div class="section-hd-left">
+            <span class="s-badge" style="background:${s.grad}">${s.id}° S</span>
+            <div>
+              <div class="section-hd-title">${s.nome} — ${s.subtitulo}</div>
+              <div class="section-hd-desc">${esc(s.desc)}</div>
+            </div>
+          </div>
+          <div class="section-hd-score" style="background:${s.grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="score_display_s${s.id}">0%</div>
+        </div>
+      </div>
+      <div class="checklist" id="checklist_s${s.id}"></div>
+      <div class="notes-block">
+        <label>Observações / Evidências — ${s.nome}</label>
+        <textarea id="nota_s${s.id}" placeholder="Registre observações, evidências encontradas..." onchange="saveNota(${s.id})">${state.notas['s'+s.id]||''}</textarea>
+      </div>`;
+    document.getElementById(`checklist_s${s.id}`).innerHTML = renderChecklist(s);
+  });
+}
+
+/* ════════ POPULATE S1 CHECKLIST ════════ */
+function buildS1() {
+  document.getElementById('checklist_s1').innerHTML = renderChecklist(SS[0]);
+  const nota = document.getElementById('nota_s1');
+  if(nota) nota.value = state.notas['s1'] || '';
+}
+
+/* ════════ TABS ════════ */
+function switchTab(sId) {
+  currentTab = sId;
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', +t.dataset.s === sId));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page_s${sId}`).classList.add('active');
+  updateScores();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ════════ NOTES ════════ */
+function saveNota(sId) { state.notas['s'+sId] = document.getElementById('nota_s'+sId).value; saveState(); }
+
+/* ════════ ACTIONS ════════ */
+function confirmReset() { document.getElementById('modalReset').classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function doReset() {
+  state = {checks:{}, notas:{}};
+  saveState(); buildS1(); buildPages(); updateScores();
+  closeModal('modalReset');
+  showToast('Auditoria reiniciada com sucesso');
+}
+
+function salvarRelatorio() {
+  saveState();
+  showToast(`Relatório salvo — Conformidade: ${calcTotal()}%`);
+}
+
+function exportarPDF() {
+  const area  = document.getElementById('area').value || 'N/A';
+  const resp  = document.getElementById('responsavel').value || 'N/A';
+  const data  = document.getElementById('data').value || new Date().toLocaleDateString('pt-BR');
+  const turno = document.getElementById('turno').value || 'N/A';
+
+  const grads = [
+    '#f7a800,#ff4e00','#ff4e00,#e0009e','#0099e5,#00e5a0','#00c48c,#00e5a0','#7b2ff7,#e0009e'
+  ];
+
+  let html = `<html><head><meta charset="UTF-8"><title>Relatório 5S</title>
+  <style>
+    body{font-family:Arial,sans-serif;font-size:11px;color:#222;margin:24px}
+    h1{font-size:20px;margin-bottom:6px;font-weight:900}
+    .meta{display:flex;gap:28px;margin-bottom:20px;font-size:10px;color:#555;padding:12px;background:#f4f5f8;border-radius:6px;flex-wrap:wrap}
+    table{width:100%;border-collapse:collapse;margin-bottom:18px}
+    th{padding:8px 12px;text-align:left;font-size:10px;color:#fff}
+    td{padding:7px 12px;border-bottom:1px solid #eee;vertical-align:top}
+    .ok{color:#00c48c;font-weight:bold}.nok{color:#e0003c;font-weight:bold}.na{color:#9098b0}
+    .criteria{font-size:9px;color:#9098b0;margin-top:2px}
+    .notes{background:#f8f9fc;padding:10px 12px;font-size:10px;margin-bottom:18px;border-radius:6px;border-left:4px solid #7b2ff7}
+    .score-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:10px;color:#fff;background:linear-gradient(135deg,#7b2ff7,#e0009e)}
+  </style></head><body>
+  <h1>Relatório de Auditoria 5S</h1>
+  <div class="meta">
+    <span><b>Área:</b> ${area}</span>
+    <span><b>Responsável:</b> ${resp}</span>
+    <span><b>Data:</b> ${data}</span>
+    <span><b>Turno:</b> ${turno}</span>
+    <span><b>Conformidade Geral:</b> <span class="score-badge">${calcTotal()}%</span></span>
+  </div>`;
+
+  SS.forEach((s, si) => {
+    html += `<table><thead><tr><th colspan="2" style="background:linear-gradient(135deg,${grads[si]})">${s.id}° S — ${s.nome} (${s.subtitulo}) — ${calcScore(s.id)}%</th></tr>
+    <tr style="background:#f4f5f8"><th>Ponto de Verificação</th><th style="width:110px">Status</th></tr></thead><tbody>`;
+    s.itens.forEach((item, i) => {
+      const v = state.checks[`s${s.id}_i${i}`];
+      const label = v==='ok' ? '<span class="ok">✓ Conforme</span>'
+                  : v==='nok'? '<span class="nok">✗ N. Conforme</span>'
+                  : v==='na' ? '<span class="na">— N/A</span>'
+                  : '<span style="color:#d0d4e0">Não avaliado</span>';
+      html += `<tr><td>${item.texto}<div class="criteria">Critério: ${item.criterio}</div></td><td>${label}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    if(state.notas['s'+s.id]) html += `<div class="notes"><b>Observações ${s.nome}:</b> ${state.notas['s'+s.id]}</div>`;
+  });
+
+  html += '</body></html>';
+  const win = window.open('','_blank');
+  if(!win) { showToast('Permita popups para exportar', true); return; }
+  win.document.write(html); win.document.close(); win.print();
+}
+
+/* ════════ TOAST ════════ */
+let _toastTimer = null;
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError?' error':'');
+  t.classList.add('show');
+  if(_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+/* ════════ UTILS ════════ */
+function esc(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ════════ INIT ════════ */
+document.getElementById('data').value = new Date().toISOString().split('T')[0];
+loadState();
+buildS1();
+buildPages();
+updateScores();
+
+// save meta on any input change
+['area','responsavel','data','turno'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('change', () => { saveState(); updateScores(); });
+});
+</script>
+</body>
+</html>

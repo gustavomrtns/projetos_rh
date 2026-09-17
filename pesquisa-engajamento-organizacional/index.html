@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa de Engajamento Organizacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g1a:#ad0a1c;--g1b:#b32071;--g2a:#0065a5;--g2b:#460a80;--g3a:#b32071;--g3b:#ffa400;
+  --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
+  --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
+  --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
+  --gradFull:linear-gradient(135deg,#ad0a1c 0%,#ffa400 22%,#b32071 42%,#460a80 62%,#0065a5 82%,#529b14 100%);
+  --white:#fff;--offwhite:#f7f7fb;
+  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
+  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --radius:16px;--shadow:0 4px 18px rgba(60,20,70,.09);--shadow-lg:0 14px 40px rgba(60,20,70,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--offwhite);color:var(--gray800);font-family:'Poppins',sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700}
+body::before{content:'';position:fixed;top:-220px;left:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(173,10,28,.30),rgba(179,32,113,.14) 55%,transparent 72%);filter:blur(50px);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-240px;right:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle at 60% 40%,rgba(0,101,165,.28),rgba(82,155,20,.14) 55%,transparent 72%);filter:blur(56px);z-index:0;pointer-events:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--gray50)}
+::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:10px}
+
+/* WAVE BACKGROUND (landing) — fluxo ondulado duplo em looping contínuo */
+.wave-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;filter:blur(1.5px)}
+.wave-track{position:absolute;left:0;width:200%;height:340px;display:flex;will-change:transform}
+.wave-track svg{width:50%;height:100%;flex-shrink:0;display:block}
+.wave-track.wt1{top:12%;animation:flowLeft 32s linear infinite;opacity:.85}
+.wave-track.wt2{top:42%;animation:flowRight 42s linear infinite;opacity:.6;transform:scaleY(-1)}
+@keyframes flowLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes flowRight{from{transform:translateX(-50%) scaleY(-1)}to{transform:translateX(0) scaleY(-1)}}
+
+.hidden{display:none!important}
+.nav-band{height:5px;background:var(--gradFull)}
+
+/* TOPBAR (logo) */
+.topbar{background:var(--white);box-shadow:var(--shadow);padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--gradFull);flex-shrink:0}
+.brand-txt strong{display:block;font-size:12.5px;letter-spacing:.06em;color:var(--gray800);font-weight:800;text-transform:uppercase}
+.brand-txt span{display:block;font-size:10.5px;color:var(--gray400);font-weight:600;letter-spacing:.04em}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{height:46px;width:auto;display:block}
+.topbar-right{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--gray400);font-weight:600}
+.gt-trigger{width:38px;height:38px;border-radius:50%;object-fit:cover;cursor:pointer;box-shadow:0 3px 10px rgba(60,20,70,.25);transition:transform .25s ease}
+.gt-trigger:hover{transform:scale(1.1) rotate(6deg)}
+.gate-single{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:44px 36px;max-width:460px;margin:0 auto;text-align:center}
+
+/* REF CARD (inspirado no card de treinamento) */
+.ref-card{background:var(--white);border-radius:20px;box-shadow:var(--shadow-lg);max-width:560px;margin:0 auto;overflow:hidden;text-align:left}
+.ref-card-band{height:6px;background:var(--gradFull)}
+.ref-card-body{padding:34px 36px 32px}
+.ref-card-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--g2a);margin-bottom:8px}
+.ref-card-title{font-size:23px;font-weight:700;color:var(--gray800);margin-bottom:4px;line-height:1.25}
+.ref-card-sub{font-size:12px;color:var(--gray400);font-weight:600;letter-spacing:.02em;margin-bottom:24px}
+.ref-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.ref-info-box{background:var(--gray50);border-radius:12px;padding:12px 16px}
+.ref-info-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin-bottom:5px}
+.ref-info-value{font-size:14px;font-weight:700;color:var(--gray800)}
+.ref-pill{display:inline-block;padding:4px 13px;border-radius:20px;font-size:11.5px;font-weight:800;background:linear-gradient(135deg,#00c48c,#00e5a0);color:#fff}
+.ref-desc-box{background:var(--gray50);border-radius:12px;padding:16px 18px;font-size:12.5px;color:var(--gray600);line-height:1.65;margin-bottom:24px}
+.ref-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-pill{border-radius:999px;padding:13px 28px;font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif}
+.btn-pill-primary{background:linear-gradient(135deg,#00c2b2,#0065a5);color:#fff;box-shadow:0 8px 20px rgba(0,101,165,.32)}
+.btn-pill-primary:hover{opacity:.92;transform:translateY(-1px)}
+.ref-note{font-size:11.5px;color:var(--gray400);display:flex;align-items:center;gap:6px}
+
+/* GATE */
+.gate-wrap{min-height:calc(100vh - 62px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.gate-inner{max-width:860px;width:100%;text-align:center;animation:fadeUp .5s ease both}
+.gate-inner h1{font-size:30px;color:var(--gray800);margin-bottom:8px}
+.gate-inner p.sub{font-size:14px;color:var(--gray400);margin-bottom:36px;font-weight:300}
+.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.gate-card{background:var(--white);border-radius:18px;box-shadow:var(--shadow);padding:38px 26px;cursor:pointer;transition:all .25s;border:2px solid transparent;text-align:left}
+.gate-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--gray200)}
+.gate-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;margin-bottom:18px}
+.gate-card h3{font-size:19px;color:var(--gray800);margin-bottom:6px}
+.gate-card p{font-size:12.5px;color:var(--gray400);line-height:1.5;font-weight:300}
+.gate-card .gc-btn{margin-top:18px;display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--g2a)}
+
+/* LOGIN MODAL simplificado usa .modal-bg abaixo */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(42,47,66,.55);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;box-shadow:var(--shadow-lg);max-width:640px;width:100%;max-height:90vh;overflow-y:auto;animation:fadeUp .3s ease both}
+.modal.narrow{max-width:400px}
+.modal.wide{max-width:880px}
+.modal-band{height:6px;background:var(--gradFull);border-radius:16px 16px 0 0}
+.modal-inner{padding:26px 28px 28px}
+.modal-title{font-size:19px;color:var(--gray800);margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--gray400);margin-bottom:18px}
+.modal-close{float:right;background:none;border:none;font-size:22px;color:var(--gray400);cursor:pointer;margin-top:-4px;line-height:1}
+
+/* NAV TABS (admin) */
+.nav-tabs{background:var(--white);box-shadow:var(--shadow);display:flex;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gray100);overflow-x:auto}
+.nav-tab{flex:1;padding:16px 10px;text-align:center;cursor:pointer;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.nav-tab:hover{color:var(--gray600);background:var(--gray50)}
+.nav-tab.active{color:var(--gray800);background:var(--offwhite)}
+.tab-dot{width:7px;height:7px;border-radius:50%;opacity:0;flex-shrink:0;transition:opacity .2s}
+.nav-tab.active .tab-dot{opacity:1}
+.t1{background:var(--grad1)}.t2{background:var(--grad2)}.t3{background:var(--grad3)}
+
+/* PAGE / LAYOUT */
+.page{display:none;padding:28px 20px 60px;animation:fadeUp .4s ease both}
+.page.active{display:block}
+.container{max-width:1080px;margin:0 auto}
+.container.narrow{max-width:760px}
+
+.header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.header-band{height:6px;background:var(--gradFull)}
+.header-inner{padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.header-title h1{font-size:22px;color:var(--gray800);margin-bottom:4px}
+.header-title p{font-size:12.5px;color:var(--gray400);font-weight:300}
+
+.section{margin-bottom:20px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:0 2px}
+.section-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;flex-shrink:0}
+.sn1{background:var(--grad1)}.sn2{background:var(--grad2)}.sn3{background:var(--grad3)}.sn4{background:var(--grad1)}.sn5{background:var(--grad2)}
+.section-title{font-size:11.5px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.09em}
+
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.card + .card{margin-top:14px}
+
+/* GRID / FORM */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:10.5px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.07em}
+.field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Poppins',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.hint{font-size:11px;color:var(--gray400);margin-top:2px}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{padding:11px 22px;border-radius:10px;border:none;font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
+.btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
+.btn-danger{background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)}
+.btn-danger:hover{opacity:.9}
+.btn-purple{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-purple:hover{opacity:.9}
+.btn-sm{padding:7px 14px;font-size:11px;border-radius:8px}
+.btn-block{width:100%;justify-content:center}
+
+/* TOAST */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* BADGES */
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap}
+.bd-ok{background:linear-gradient(135deg,#00c48c,#00e5a0)}
+.bd-pend{background:linear-gradient(135deg,#f7a800,#ff9500)}
+.bd-mut{background:linear-gradient(135deg,#9098b0,#5a6278)}
+.bd-info{background:var(--grad2)}
+.bd-purple{background:var(--grad3)}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;overflow:hidden;position:relative}
+.kpi-band{position:absolute;top:0;left:0;right:0;height:4px}
+.kpi-val{font-size:30px;line-height:1;margin:6px 0 4px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400)}
+.kpi-sub{font-size:11px;color:var(--gray600);margin-top:3px}
+
+.chart-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:20px}
+.chart-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.chart-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray600);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.ctdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.bar-lbl{font-size:11.5px;font-weight:600;color:var(--gray800);width:170px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:18px;background:var(--gray100);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .8s ease;position:relative;min-width:2px}
+.bar-val{font-size:11.5px;font-weight:700;color:var(--gray600);width:38px;text-align:right;flex-shrink:0}
+.empty-note{font-size:12.5px;color:var(--gray400);text-align:center;padding:30px 10px}
+
+/* TABLE */
+.dash-table-wrap{overflow-x:auto;border-radius:0 0 var(--radius) var(--radius)}
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap}
+.dtable td{padding:10px 12px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle;white-space:nowrap}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:var(--gray50)}
+.tlink{color:var(--g2a);font-weight:700;cursor:pointer;background:none;border:none;font-family:'Poppins',sans-serif;font-size:11.5px}
+.tlink:hover{text-decoration:underline}
+
+/* LIST ROWS (blocos/perguntas/pessoas) */
+.item-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid var(--gray100);border-radius:10px;margin-bottom:8px;transition:all .2s;background:#fff}
+.item-row:hover{border-color:var(--gray200)}
+.item-row.active-item{border-color:#0099e5;background:#f0f9ff}
+.item-main{flex:1;min-width:0}
+.item-title{font-size:13px;font-weight:700;color:var(--gray800)}
+.item-sub{font-size:11px;color:var(--gray400);margin-top:1px}
+.item-actions{display:flex;gap:6px;flex-shrink:0}
+.icon-btn{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--gray600)}
+.icon-btn:hover{border-color:var(--gray400);color:var(--gray800)}
+.icon-btn.danger:hover{border-color:#e0003c;color:#e0003c;background:#fff0f2}
+
+/* PILLS de tipo */
+.pill{display:inline-block;padding:3px 10px;border-radius:14px;font-size:10px;font-weight:700;letter-spacing:.03em}
+.pill-likert{background:#eef4ff;color:#0060c9}
+.pill-unica{background:#f3eaff;color:#6b1fd6}
+.pill-texto{background:#fff2e0;color:#c46a00}
+
+/* LIKERT (colaborador) */
+.likert-row{display:flex;gap:8px;flex-wrap:wrap}
+.likert-pill{flex:1;min-width:118px;padding:12px 8px;border:2px solid var(--gray100);border-radius:10px;text-align:center;font-size:11.5px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s;background:#fff;user-select:none}
+.likert-pill:hover{border-color:var(--gray200);transform:translateY(-1px)}
+.likert-pill.selected{border-color:transparent;color:#fff;background:var(--grad2);box-shadow:var(--shadow)}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;align-items:stretch}
+.opt-grid.opt-grid-stack{grid-template-columns:1fr}
+.opt-card{border:2px solid var(--gray100);border-radius:10px;padding:13px 16px;cursor:pointer;transition:all .2s;text-align:center;background:#fff;user-select:none;font-size:12.5px;font-weight:700;color:var(--gray800);line-height:1.45;display:flex;align-items:center;justify-content:center}
+.opt-grid-stack .opt-card{text-align:left;justify-content:flex-start;padding:14px 18px}
+.opt-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.opt-card.selected{border-color:#0099e5;background:#f0f9ff;transform:translateY(-2px);box-shadow:var(--shadow)}
+
+/* PROGRESS */
+.progress-wrap{height:8px;background:var(--gray100);border-radius:20px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;background:var(--gradFull);border-radius:20px;transition:width .4s ease}
+.progress-lbl{font-size:11px;color:var(--gray400);font-weight:600;margin-bottom:22px;text-align:right}
+
+/* QUESTION CARD colaborador */
+.q-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 22px;margin-bottom:16px}
+.q-num{font-size:10.5px;font-weight:700;color:var(--g2a);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.q-text{font-size:16px;font-weight:600;color:var(--gray800);margin-bottom:16px;line-height:1.4}
+.q-text.serif{font-family:'Poppins',sans-serif;font-weight:700}
+
+/* colaborador final */
+.done-wrap{text-align:center;padding:60px 20px;animation:fadeUp .5s ease both}
+.done-icon{width:88px;height:88px;border-radius:50%;background:var(--gradFull);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;margin:0 auto 22px}
+
+@media(max-width:820px){
+  .grid2,.grid3,.chart-grid,.kpi-grid{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+  .gate-grid{grid-template-columns:1fr}
+  .bar-lbl{width:110px}
+}
+/* DASHBOARD: recortes demográficos e base de cálculo */
+.dash-filters{margin-bottom:20px}
+.dash-filter-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:16px;align-items:end}
+.dash-filter-grid .btn{justify-content:center;min-height:42px}
+.dash-scope{font-size:12px;color:var(--gray600);margin-top:14px;line-height:1.6}
+.dash-method{font-size:12px;color:var(--gray600);line-height:1.75;margin-bottom:20px}
+.dash-method summary{font-weight:700;color:var(--gray800);cursor:pointer}
+.dash-method p{margin-top:9px}
+.dash-score-row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:18px;align-items:center;padding:13px 0;border-bottom:1px solid var(--gray100)}
+.dash-score-row:last-child{border-bottom:0}
+.dash-score-name{font-size:12.5px;font-weight:600;overflow-wrap:anywhere;margin-bottom:7px}
+.dash-score-row .bar-fill{min-width:0}
+.dash-score-value{text-align:right;font-size:13px;font-weight:700;color:var(--gray800)}
+.dash-score-value small{display:block;font-size:10.5px;font-weight:400;color:var(--gray600);margin-top:4px}
+.dash-chart-note{font-size:11px;color:var(--gray600);line-height:1.6;margin-top:12px}
+@media(max-width:820px){
+  .dash-filter-grid{grid-template-columns:1fr}
+  .dash-score-row{grid-template-columns:minmax(0,1fr) 110px;gap:10px}
+}
+
+/* LIQUID GLASS OVERRIDE */
+.header,.card,.kpi-card,.chart-card,.modal,.q-card,.item-row,.gate-card,.gate-single,.ref-card,.dash-table-wrap{
+  background:rgba(255,255,255,.68)!important;
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border:1px solid rgba(255,255,255,.65);
+}
+.topbar,.nav-tabs{background:rgba(255,255,255,.78);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+.topbar,.nav-tabs,.page,.gate-wrap,.modal-bg{position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="nav-band"></div>
+<div class="topbar">
+  <div class="brand">
+    <img class="brand-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPEO%3C/text%3E%3C/svg%3E" alt="Identidade visual da Pesquisa de Engajamento Organizacional">
+  </div>
+  <div class="topbar-right">
+    <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
+    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%237b2ff7%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
+  </div>
+</div>
+
+<!-- ============ GATE / PORTAL DO COLABORADOR ============ -->
+<div id="view-gate" class="gate-wrap">
+  <div class="wave-bg" id="wave-bg-slot"><div class="wave-track wt1"><svg viewBox="0 0 800 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="wtGradOne" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6fb8f5" stop-opacity="0"/>
+      <stop offset="22%" stop-color="#6fb8f5" stop-opacity=".5"/>
+      <stop offset="50%" stop-color="#9a8ce8" stop-opacity=".45"/>
+      <stop offset="78%" stop-color="#f0a6c8" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#f0a6c8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0.0,155.0 L13.3,160.2 L26.7,165.4 L40.0,170.5 L53.3,175.3 L66.7,180.0 L80.0,184.4 L93.3,188.5 L106.7,192.2 L120.0,195.5 L133.3,198.3 L146.7,200.7 L160.0,202.6 L173.3,203.9 L186.7,204.7 L200.0,205.0 L213.3,204.7 L226.7,203.9 L240.0,202.6 L253.3,200.7 L266.7,198.3 L280.0,195.5 L293.3,192.2 L306.7,188.5 L320.0,184.4 L333.3,180.0 L346.7,175.3 L360.0,170.5 L373.3,165.4 L386.7,160.2 L400.0,155.0 L413.3,149.8 L426.7,144.6 L440.0,139.5 L453.3,134.7 L466.7,130.0 L480.0,125.6 L493.3,121.5 L506.7,117.8 L520.0,114.5 L533.3,111.7 L546.7,109.3 L560.0,107.4 L573.3,106.1 L586.7,105.3 L600.0,105.0 L613.3,105.3 L626.7,106.1 L640.0,107.4 L653.3,109.3 L666.7,111.7 L680.0,114.5 L693.3,117.8 L706.7,121.5 L720.0,125.6 L733.3,130.0 L746.7,134.7 L760.0,139.5 L773.3,144.6 L786.7,149.8 L800.0,155.0 L800.0,225.0 L786.7,219.8 L773.3,214.6 L760.0,209.5 L746.7,204.7 L733.3,200.0 L720.0,195.6 L706.7,191.5 L693.3,187.8 L680.0,184.5 L666.7,181.7 L653.3,179.3 L640.0,177.4 L626.7,176.1 L613.3,175.3 L600.0,175.0 L586.7,175.3 L573.3,176.1 L560.0,177.4 L546.7,179.3 L533.3,181.7 L520.0,184.5 L506.7,187.8 L493.3,191.5 L480.0,195.6 L466.7,200.0 L453.3,204.7 L440.0,209.5 L426.7,214.6 L413.3,219.8 L400.0,225.0 L386.7,230.2 L373.3,235.4 L360.0,240.5 L346.7,245.3 L333.3,250.0 L320.0,254.4 L306.7,258.5 L293.3,262.2 L280.0,265.5 L266.7,268.3 L253.3,270.7 L240.0,272.6 L226.7,273.9 L213.3,274.7 L200.0,275.0 L186.7,274.7 L173.3,273.9 L160.0,272.6 L146.7,270.7 L133.3,268.3 L120.0,265.5 L106.7,262.2 L93.3,258.5 L80.0,254.4 L66.7,250.0 L53.3,245.3 L40.0,240.5 L26.7,235.4 L13.3,230.2 L0.0,225.0 Z" fill="url(#wtGradOne)"/>
+  <path d="M0.0,257.3 L13.3,258.7 L26.7,259.8 L40.0,260.6 L53.3,261.0 L66.7,261.0 L80.0,260.6 L93.3,259.8 L106.7,258.7 L120.0,257.3 L133.3,255.5 L146.7,253.4 L160.0,251.0 L173.3,248.4 L186.7,245.5 L200.0,242.4 L213.3,239.2 L226.7,235.8 L240.0,232.3 L253.3,228.8 L266.7,225.2 L280.0,221.7 L293.3,218.2 L306.7,214.8 L320.0,211.6 L333.3,208.5 L346.7,205.6 L360.0,202.9 L373.3,200.6 L386.7,198.5 L400.0,196.7 L413.3,195.3 L426.7,194.2 L440.0,193.4 L453.3,193.0 L466.7,193.0 L480.0,193.4 L493.3,194.2 L506.7,195.3 L520.0,196.7 L533.3,198.5 L546.7,200.6 L560.0,203.0 L573.3,205.6 L586.7,208.5 L600.0,211.6 L613.3,214.8 L626.7,218.2 L640.0,221.7 L653.3,225.2 L666.7,228.8 L680.0,232.3 L693.3,235.8 L706.7,239.2 L720.0,242.4 L733.3,245.5 L746.7,248.4 L760.0,251.1 L773.3,253.4 L786.7,255.5 L800.0,257.3 L800.0,303.3 L786.7,301.5 L773.3,299.4 L760.0,297.1 L746.7,294.4 L733.3,291.5 L720.0,288.4 L706.7,285.2 L693.3,281.8 L680.0,278.3 L666.7,274.8 L653.3,271.2 L640.0,267.7 L626.7,264.2 L613.3,260.8 L600.0,257.6 L586.7,254.5 L573.3,251.6 L560.0,249.0 L546.7,246.6 L533.3,244.5 L520.0,242.7 L506.7,241.3 L493.3,240.2 L480.0,239.4 L466.7,239.0 L453.3,239.0 L440.0,239.4 L426.7,240.2 L413.3,241.3 L400.0,242.7 L386.7,244.5 L373.3,246.6 L360.0,248.9 L346.7,251.6 L333.3,254.5 L320.0,257.6 L306.7,260.8 L293.3,264.2 L280.0,267.7 L266.7,271.2 L253.3,274.8 L240.0,278.3 L226.7,281.8 L213.3,285.2 L200.0,288.4 L186.7,291.5 L173.3,294.4 L160.0,297.0 L146.7,299.4 L133.3,301.5 L120.0,303.3 L106.7,304.7 L93.3,305.8 L80.0,306.6 L66.7,307.0 L53.3,307.0 L40.0,306.6 L26.7,305.8 L13.3,304.7 L0.0,303.3 Z" fill="url(#wtGradOne2x)" opacity=".75"/>
+  <defs>
+    <linearGradient id="wtGradOne2x" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6fb8f5" stop-opacity="0"/>
+      <stop offset="22%" stop-color="#6fb8f5" stop-opacity=".5"/>
+      <stop offset="50%" stop-color="#9a8ce8" stop-opacity=".45"/>
+      <stop offset="78%" stop-color="#f0a6c8" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#f0a6c8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg><svg viewBox="0 0 800 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="wtGradOne" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6fb8f5" stop-opacity="0"/>
+      <stop offset="22%" stop-color="#6fb8f5" stop-opacity=".5"/>
+      <stop offset="50%" stop-color="#9a8ce8" stop-opacity=".45"/>
+      <stop offset="78%" stop-color="#f0a6c8" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#f0a6c8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0.0,155.0 L13.3,160.2 L26.7,165.4 L40.0,170.5 L53.3,175.3 L66.7,180.0 L80.0,184.4 L93.3,188.5 L106.7,192.2 L120.0,195.5 L133.3,198.3 L146.7,200.7 L160.0,202.6 L173.3,203.9 L186.7,204.7 L200.0,205.0 L213.3,204.7 L226.7,203.9 L240.0,202.6 L253.3,200.7 L266.7,198.3 L280.0,195.5 L293.3,192.2 L306.7,188.5 L320.0,184.4 L333.3,180.0 L346.7,175.3 L360.0,170.5 L373.3,165.4 L386.7,160.2 L400.0,155.0 L413.3,149.8 L426.7,144.6 L440.0,139.5 L453.3,134.7 L466.7,130.0 L480.0,125.6 L493.3,121.5 L506.7,117.8 L520.0,114.5 L533.3,111.7 L546.7,109.3 L560.0,107.4 L573.3,106.1 L586.7,105.3 L600.0,105.0 L613.3,105.3 L626.7,106.1 L640.0,107.4 L653.3,109.3 L666.7,111.7 L680.0,114.5 L693.3,117.8 L706.7,121.5 L720.0,125.6 L733.3,130.0 L746.7,134.7 L760.0,139.5 L773.3,144.6 L786.7,149.8 L800.0,155.0 L800.0,225.0 L786.7,219.8 L773.3,214.6 L760.0,209.5 L746.7,204.7 L733.3,200.0 L720.0,195.6 L706.7,191.5 L693.3,187.8 L680.0,184.5 L666.7,181.7 L653.3,179.3 L640.0,177.4 L626.7,176.1 L613.3,175.3 L600.0,175.0 L586.7,175.3 L573.3,176.1 L560.0,177.4 L546.7,179.3 L533.3,181.7 L520.0,184.5 L506.7,187.8 L493.3,191.5 L480.0,195.6 L466.7,200.0 L453.3,204.7 L440.0,209.5 L426.7,214.6 L413.3,219.8 L400.0,225.0 L386.7,230.2 L373.3,235.4 L360.0,240.5 L346.7,245.3 L333.3,250.0 L320.0,254.4 L306.7,258.5 L293.3,262.2 L280.0,265.5 L266.7,268.3 L253.3,270.7 L240.0,272.6 L226.7,273.9 L213.3,274.7 L200.0,275.0 L186.7,274.7 L173.3,273.9 L160.0,272.6 L146.7,270.7 L133.3,268.3 L120.0,265.5 L106.7,262.2 L93.3,258.5 L80.0,254.4 L66.7,250.0 L53.3,245.3 L40.0,240.5 L26.7,235.4 L13.3,230.2 L0.0,225.0 Z" fill="url(#wtGradOne)"/>
+  <path d="M0.0,257.3 L13.3,258.7 L26.7,259.8 L40.0,260.6 L53.3,261.0 L66.7,261.0 L80.0,260.6 L93.3,259.8 L106.7,258.7 L120.0,257.3 L133.3,255.5 L146.7,253.4 L160.0,251.0 L173.3,248.4 L186.7,245.5 L200.0,242.4 L213.3,239.2 L226.7,235.8 L240.0,232.3 L253.3,228.8 L266.7,225.2 L280.0,221.7 L293.3,218.2 L306.7,214.8 L320.0,211.6 L333.3,208.5 L346.7,205.6 L360.0,202.9 L373.3,200.6 L386.7,198.5 L400.0,196.7 L413.3,195.3 L426.7,194.2 L440.0,193.4 L453.3,193.0 L466.7,193.0 L480.0,193.4 L493.3,194.2 L506.7,195.3 L520.0,196.7 L533.3,198.5 L546.7,200.6 L560.0,203.0 L573.3,205.6 L586.7,208.5 L600.0,211.6 L613.3,214.8 L626.7,218.2 L640.0,221.7 L653.3,225.2 L666.7,228.8 L680.0,232.3 L693.3,235.8 L706.7,239.2 L720.0,242.4 L733.3,245.5 L746.7,248.4 L760.0,251.1 L773.3,253.4 L786.7,255.5 L800.0,257.3 L800.0,303.3 L786.7,301.5 L773.3,299.4 L760.0,297.1 L746.7,294.4 L733.3,291.5 L720.0,288.4 L706.7,285.2 L693.3,281.8 L680.0,278.3 L666.7,274.8 L653.3,271.2 L640.0,267.7 L626.7,264.2 L613.3,260.8 L600.0,257.6 L586.7,254.5 L573.3,251.6 L560.0,249.0 L546.7,246.6 L533.3,244.5 L520.0,242.7 L506.7,241.3 L493.3,240.2 L480.0,239.4 L466.7,239.0 L453.3,239.0 L440.0,239.4 L426.7,240.2 L413.3,241.3 L400.0,242.7 L386.7,244.5 L373.3,246.6 L360.0,248.9 L346.7,251.6 L333.3,254.5 L320.0,257.6 L306.7,260.8 L293.3,264.2 L280.0,267.7 L266.7,271.2 L253.3,274.8 L240.0,278.3 L226.7,281.8 L213.3,285.2 L200.0,288.4 L186.7,291.5 L173.3,294.4 L160.0,297.0 L146.7,299.4 L133.3,301.5 L120.0,303.3 L106.7,304.7 L93.3,305.8 L80.0,306.6 L66.7,307.0 L53.3,307.0 L40.0,306.6 L26.7,305.8 L13.3,304.7 L0.0,303.3 Z" fill="url(#wtGradOne2x)" opacity=".75"/>
+  <defs>
+    <linearGradient id="wtGradOne2x" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6fb8f5" stop-opacity="0"/>
+      <stop offset="22%" stop-color="#6fb8f5" stop-opacity=".5"/>
+      <stop offset="50%" stop-color="#9a8ce8" stop-opacity=".45"/>
+      <stop offset="78%" stop-color="#f0a6c8" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#f0a6c8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg></div><div class="wave-track wt2"><svg viewBox="0 0 800 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="wtGradTwo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffc7ae" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ffb199" stop-opacity=".5"/>
+      <stop offset="55%" stop-color="#fb90ae" stop-opacity=".45"/>
+      <stop offset="80%" stop-color="#8ec6f3" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="#8ec6f3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0.0,228.4 L13.3,225.0 L26.7,221.3 L40.0,217.4 L53.3,213.3 L66.7,209.1 L80.0,204.7 L93.3,200.4 L106.7,196.0 L120.0,191.6 L133.3,187.4 L146.7,183.2 L160.0,179.3 L173.3,175.6 L186.7,172.2 L200.0,169.0 L213.3,166.2 L226.7,163.8 L240.0,161.8 L253.3,160.2 L266.7,159.0 L280.0,158.3 L293.3,158.0 L306.7,158.2 L320.0,158.8 L333.3,159.9 L346.7,161.5 L360.0,163.4 L373.3,165.8 L386.7,168.5 L400.0,171.6 L413.3,175.0 L426.7,178.7 L440.0,182.6 L453.3,186.7 L466.7,190.9 L480.0,195.3 L493.3,199.6 L506.7,204.0 L520.0,208.4 L533.3,212.6 L546.7,216.8 L560.0,220.7 L573.3,224.4 L586.7,227.8 L600.0,231.0 L613.3,233.8 L626.7,236.2 L640.0,238.2 L653.3,239.8 L666.7,241.0 L680.0,241.7 L693.3,242.0 L706.7,241.8 L720.0,241.2 L733.3,240.1 L746.7,238.5 L760.0,236.6 L773.3,234.2 L786.7,231.5 L800.0,228.4 L800.0,288.4 L786.7,291.5 L773.3,294.2 L760.0,296.6 L746.7,298.5 L733.3,300.1 L720.0,301.2 L706.7,301.8 L693.3,302.0 L680.0,301.7 L666.7,301.0 L653.3,299.8 L640.0,298.2 L626.7,296.2 L613.3,293.8 L600.0,291.0 L586.7,287.8 L573.3,284.4 L560.0,280.7 L546.7,276.8 L533.3,272.6 L520.0,268.4 L506.7,264.0 L493.3,259.6 L480.0,255.3 L466.7,250.9 L453.3,246.7 L440.0,242.6 L426.7,238.7 L413.3,235.0 L400.0,231.6 L386.7,228.5 L373.3,225.8 L360.0,223.4 L346.7,221.5 L333.3,219.9 L320.0,218.8 L306.7,218.2 L293.3,218.0 L280.0,218.3 L266.7,219.0 L253.3,220.2 L240.0,221.8 L226.7,223.8 L213.3,226.2 L200.0,229.0 L186.7,232.2 L173.3,235.6 L160.0,239.3 L146.7,243.2 L133.3,247.4 L120.0,251.6 L106.7,256.0 L93.3,260.4 L80.0,264.7 L66.7,269.1 L53.3,273.3 L40.0,277.4 L26.7,281.3 L13.3,285.0 L0.0,288.4 Z" fill="url(#wtGradTwo)"/>
+  <path d="M0.0,165.8 L13.3,168.1 L26.7,170.3 L40.0,172.2 L53.3,173.8 L66.7,175.2 L80.0,176.4 L93.3,177.2 L106.7,177.8 L120.0,178.0 L133.3,177.9 L146.7,177.5 L160.0,176.9 L173.3,175.9 L186.7,174.6 L200.0,173.1 L213.3,171.3 L226.7,169.3 L240.0,167.1 L253.3,164.7 L266.7,162.1 L280.0,159.4 L293.3,156.6 L306.7,153.7 L320.0,150.8 L333.3,147.9 L346.7,145.0 L360.0,142.1 L373.3,139.3 L386.7,136.7 L400.0,134.2 L413.3,131.9 L426.7,129.7 L440.0,127.8 L453.3,126.2 L466.7,124.8 L480.0,123.6 L493.3,122.8 L506.7,122.2 L520.0,122.0 L533.3,122.1 L546.7,122.5 L560.0,123.1 L573.3,124.1 L586.7,125.4 L600.0,126.9 L613.3,128.7 L626.7,130.7 L640.0,132.9 L653.3,135.3 L666.7,137.9 L680.0,140.6 L693.3,143.4 L706.7,146.3 L720.0,149.2 L733.3,152.1 L746.7,155.0 L760.0,157.9 L773.3,160.7 L786.7,163.3 L800.0,165.8 L800.0,205.8 L786.7,203.3 L773.3,200.7 L760.0,197.9 L746.7,195.0 L733.3,192.1 L720.0,189.2 L706.7,186.3 L693.3,183.4 L680.0,180.6 L666.7,177.9 L653.3,175.3 L640.0,172.9 L626.7,170.7 L613.3,168.7 L600.0,166.9 L586.7,165.4 L573.3,164.1 L560.0,163.1 L546.7,162.5 L533.3,162.1 L520.0,162.0 L506.7,162.2 L493.3,162.8 L480.0,163.6 L466.7,164.8 L453.3,166.2 L440.0,167.8 L426.7,169.7 L413.3,171.9 L400.0,174.2 L386.7,176.7 L373.3,179.3 L360.0,182.1 L346.7,185.0 L333.3,187.9 L320.0,190.8 L306.7,193.7 L293.3,196.6 L280.0,199.4 L266.7,202.1 L253.3,204.7 L240.0,207.1 L226.7,209.3 L213.3,211.3 L200.0,213.1 L186.7,214.6 L173.3,215.9 L160.0,216.9 L146.7,217.5 L133.3,217.9 L120.0,218.0 L106.7,217.8 L93.3,217.2 L80.0,216.4 L66.7,215.2 L53.3,213.8 L40.0,212.2 L26.7,210.3 L13.3,208.1 L0.0,205.8 Z" fill="url(#wtGradTwo2y)" opacity=".75"/>
+  <defs>
+    <linearGradient id="wtGradTwo2y" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ffc7ae" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ffb199" stop-opacity=".5"/>
+      <stop offset="55%" stop-color="#fb90ae" stop-opacity=".45"/>
+      <stop offset="80%" stop-color="#8ec6f3" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="#8ec6f3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg><svg viewBox="0 0 800 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="wtGradTwo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffc7ae" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ffb199" stop-opacity=".5"/>
+      <stop offset="55%" stop-color="#fb90ae" stop-opacity=".45"/>
+      <stop offset="80%" stop-color="#8ec6f3" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="#8ec6f3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0.0,228.4 L13.3,225.0 L26.7,221.3 L40.0,217.4 L53.3,213.3 L66.7,209.1 L80.0,204.7 L93.3,200.4 L106.7,196.0 L120.0,191.6 L133.3,187.4 L146.7,183.2 L160.0,179.3 L173.3,175.6 L186.7,172.2 L200.0,169.0 L213.3,166.2 L226.7,163.8 L240.0,161.8 L253.3,160.2 L266.7,159.0 L280.0,158.3 L293.3,158.0 L306.7,158.2 L320.0,158.8 L333.3,159.9 L346.7,161.5 L360.0,163.4 L373.3,165.8 L386.7,168.5 L400.0,171.6 L413.3,175.0 L426.7,178.7 L440.0,182.6 L453.3,186.7 L466.7,190.9 L480.0,195.3 L493.3,199.6 L506.7,204.0 L520.0,208.4 L533.3,212.6 L546.7,216.8 L560.0,220.7 L573.3,224.4 L586.7,227.8 L600.0,231.0 L613.3,233.8 L626.7,236.2 L640.0,238.2 L653.3,239.8 L666.7,241.0 L680.0,241.7 L693.3,242.0 L706.7,241.8 L720.0,241.2 L733.3,240.1 L746.7,238.5 L760.0,236.6 L773.3,234.2 L786.7,231.5 L800.0,228.4 L800.0,288.4 L786.7,291.5 L773.3,294.2 L760.0,296.6 L746.7,298.5 L733.3,300.1 L720.0,301.2 L706.7,301.8 L693.3,302.0 L680.0,301.7 L666.7,301.0 L653.3,299.8 L640.0,298.2 L626.7,296.2 L613.3,293.8 L600.0,291.0 L586.7,287.8 L573.3,284.4 L560.0,280.7 L546.7,276.8 L533.3,272.6 L520.0,268.4 L506.7,264.0 L493.3,259.6 L480.0,255.3 L466.7,250.9 L453.3,246.7 L440.0,242.6 L426.7,238.7 L413.3,235.0 L400.0,231.6 L386.7,228.5 L373.3,225.8 L360.0,223.4 L346.7,221.5 L333.3,219.9 L320.0,218.8 L306.7,218.2 L293.3,218.0 L280.0,218.3 L266.7,219.0 L253.3,220.2 L240.0,221.8 L226.7,223.8 L213.3,226.2 L200.0,229.0 L186.7,232.2 L173.3,235.6 L160.0,239.3 L146.7,243.2 L133.3,247.4 L120.0,251.6 L106.7,256.0 L93.3,260.4 L80.0,264.7 L66.7,269.1 L53.3,273.3 L40.0,277.4 L26.7,281.3 L13.3,285.0 L0.0,288.4 Z" fill="url(#wtGradTwo)"/>
+  <path d="M0.0,165.8 L13.3,168.1 L26.7,170.3 L40.0,172.2 L53.3,173.8 L66.7,175.2 L80.0,176.4 L93.3,177.2 L106.7,177.8 L120.0,178.0 L133.3,177.9 L146.7,177.5 L160.0,176.9 L173.3,175.9 L186.7,174.6 L200.0,173.1 L213.3,171.3 L226.7,169.3 L240.0,167.1 L253.3,164.7 L266.7,162.1 L280.0,159.4 L293.3,156.6 L306.7,153.7 L320.0,150.8 L333.3,147.9 L346.7,145.0 L360.0,142.1 L373.3,139.3 L386.7,136.7 L400.0,134.2 L413.3,131.9 L426.7,129.7 L440.0,127.8 L453.3,126.2 L466.7,124.8 L480.0,123.6 L493.3,122.8 L506.7,122.2 L520.0,122.0 L533.3,122.1 L546.7,122.5 L560.0,123.1 L573.3,124.1 L586.7,125.4 L600.0,126.9 L613.3,128.7 L626.7,130.7 L640.0,132.9 L653.3,135.3 L666.7,137.9 L680.0,140.6 L693.3,143.4 L706.7,146.3 L720.0,149.2 L733.3,152.1 L746.7,155.0 L760.0,157.9 L773.3,160.7 L786.7,163.3 L800.0,165.8 L800.0,205.8 L786.7,203.3 L773.3,200.7 L760.0,197.9 L746.7,195.0 L733.3,192.1 L720.0,189.2 L706.7,186.3 L693.3,183.4 L680.0,180.6 L666.7,177.9 L653.3,175.3 L640.0,172.9 L626.7,170.7 L613.3,168.7 L600.0,166.9 L586.7,165.4 L573.3,164.1 L560.0,163.1 L546.7,162.5 L533.3,162.1 L520.0,162.0 L506.7,162.2 L493.3,162.8 L480.0,163.6 L466.7,164.8 L453.3,166.2 L440.0,167.8 L426.7,169.7 L413.3,171.9 L400.0,174.2 L386.7,176.7 L373.3,179.3 L360.0,182.1 L346.7,185.0 L333.3,187.9 L320.0,190.8 L306.7,193.7 L293.3,196.6 L280.0,199.4 L266.7,202.1 L253.3,204.7 L240.0,207.1 L226.7,209.3 L213.3,211.3 L200.0,213.1 L186.7,214.6 L173.3,215.9 L160.0,216.9 L146.7,217.5 L133.3,217.9 L120.0,218.0 L106.7,217.8 L93.3,217.2 L80.0,216.4 L66.7,215.2 L53.3,213.8 L40.0,212.2 L26.7,210.3 L13.3,208.1 L0.0,205.8 Z" fill="url(#wtGradTwo2y)" opacity=".75"/>
+  <defs>
+    <linearGradient id="wtGradTwo2y" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ffc7ae" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ffb199" stop-opacity=".5"/>
+      <stop offset="55%" stop-color="#fb90ae" stop-opacity=".45"/>
+      <stop offset="80%" stop-color="#8ec6f3" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="#8ec6f3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg></div></div>
+  <div class="gate-inner" style="position:relative;z-index:1;max-width:560px">
+    <div class="ref-card">
+      <div class="ref-card-band"></div>
+      <div class="ref-card-body">
+        <div class="ref-card-eyebrow" id="home-eyebrow">Gestão de Talentos</div>
+        <div class="ref-card-title" id="home-titulo">Pesquisa de Engajamento Organizacional</div>
+        <div class="ref-card-sub" id="home-subtitulo">A sua opinião constrói um lugar de trabalho melhor</div>
+
+        <div class="ref-info-grid">
+          <div class="ref-info-box"><div class="ref-info-label">Status</div><div class="ref-info-value"><span class="ref-pill" id="home-status">Aberta</span></div></div>
+          <div class="ref-info-box"><div class="ref-info-label">Duração</div><div class="ref-info-value" id="home-duracao">≈ 5 minutos</div></div>
+          <div class="ref-info-box"><div class="ref-info-label">Participação</div><div class="ref-info-value" id="home-participacao">Todas as unidades</div></div>
+          <div class="ref-info-box"><div class="ref-info-label">Temas avaliados</div><div class="ref-info-value" id="home-temas">7 blocos</div></div>
+        </div>
+
+        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. As respostas são anônimas.</div>
+
+        <div class="ref-actions">
+          <button class="btn-pill btn-pill-primary" onclick="entrarColaborador()"><span id="home-btn-texto">Responder pesquisa</span> &rarr;</button>
+          <span class="ref-note" id="home-nota">100% anônima</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL LOGIN ADMIN ============ -->
+<div class="modal-bg" id="modal-login">
+  <div class="modal narrow"><div class="modal-band"></div>
+    <div class="modal-inner">
+      <button class="modal-close" onclick="fecharModal('modal-login')">&times;</button>
+      <div class="modal-title">Painel Administrativo · Demonstração</div>
+      <div class="modal-sub">Este portfólio utiliza um acesso demonstrativo, sem autenticação real ou backend.</div>
+      <div class="actions"><button class="btn btn-primary btn-block" onclick="validarLogin()">Acessar painel</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMIN APP ============ -->
+<div id="view-admin" class="hidden">
+  <div style="max-width:1080px;margin:14px auto 0;padding:0 20px">
+    <div class="card" style="padding:12px 16px;font-size:11.5px;color:var(--gray600);line-height:1.55">
+      <strong>Modo demonstração:</strong> protótipo front-end com persistência local no navegador. Não há autenticação real nem banco de dados externo; os dados inseridos ficam armazenados somente neste dispositivo.
+    </div>
+  </div>
+  <div class="nav-tabs" id="admin-tabs">
+    <div class="nav-tab active" data-tab="tab-dashboard" onclick="mudarTabAdmin('tab-dashboard',this)"><span class="tab-dot t2"></span>Dashboard</div>
+    <div class="nav-tab" data-tab="tab-pesquisa" onclick="mudarTabAdmin('tab-pesquisa',this)"><span class="tab-dot t3"></span>Competências &amp; Perguntas</div>
+    <div class="nav-tab" data-tab="tab-respostas" onclick="mudarTabAdmin('tab-respostas',this)"><span class="tab-dot t3"></span>Respostas</div>
+    <div class="nav-tab" onclick="sairAdmin()" style="flex:0 0 auto;padding-left:22px;padding-right:22px;color:#e0003c"><span>&#8592;</span>Sair</div>
+  </div>
+
+  <!-- TAB DASHBOARD -->
+  <div class="page active" id="tab-dashboard"><div class="container" id="dash-root"></div></div>
+
+  <!-- TAB PESQUISA (competencias/blocos + perguntas) -->
+  <div class="page" id="tab-pesquisa"><div class="container" id="pesquisa-root"></div></div>
+
+  <!-- TAB RESPOSTAS -->
+  <div class="page" id="tab-respostas"><div class="container" id="respostas-root"></div></div>
+</div>
+
+<!-- ============ COLABORADOR APP ============ -->
+<div id="view-colab" class="hidden">
+  <div class="page active"><div class="container narrow" id="colab-root"></div></div>
+</div>
+
+<!-- MODAL GENÉRICO (bloco/pergunta/pessoa/detalhe) -->
+<div class="modal-bg" id="modal-generico">
+  <div class="modal wide"><div class="modal-band"></div>
+    <div class="modal-inner" id="modal-generico-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====================== CONSTANTES ====================== */
+const UNIDADES=['Unidade A','Unidade B'];
+const ESTADOS_POR_UNIDADE={'Unidade A':['Região Sul','Região Leste','Região Central','Região Norte','Região Oeste','Região Noroeste']};
+const TEMPO_CASA=['Menos de 1 ano','1 a 2 anos','3 a 5 anos','6 a 10 anos','Mais de 10 anos'];
+const LIKERT_OPTS=['Discordo Totalmente','Discordo Parcialmente','Neutro','Concordo Parcialmente','Concordo Totalmente'];
+const ADMIN_SENHA=null;
+const CORES_BLOCO=['#f7a800','#0099e5','#7b2ff7','#e0009e','#00c48c','#ff4e6a','#5a6278'];
+/* Sempre que o conteúdo padrão de blocos/perguntas mudar, incremente esta versão
+   para que o navegador do usuário recarregue o banco de perguntas mais recente,
+   mesmo que já exista dado salvo localmente de uma versão anterior. */
+const SEED_VERSION=2;
+
+/* ====================== ESTADO ====================== */
+let blocos=[],perguntas=[],pessoas=[],respostas=[],lembretesLog=[],config={};
+let editandoBlocoId=null,editandoPerguntaId=null,editandoPessoaId=null;
+let blocoSelecionadoId=null;
+let dashboardFiltros={estado:'',tempoCasa:''};
+let colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+
+/* ====================== PERSISTÊNCIA ====================== */
+function salvarTudo(){
+  try{
+    localStorage.setItem('peo_blocos',JSON.stringify(blocos));
+    localStorage.setItem('peo_perguntas',JSON.stringify(perguntas));
+    localStorage.setItem('peo_pessoas',JSON.stringify(pessoas));
+    localStorage.setItem('peo_respostas',JSON.stringify(respostas));
+    localStorage.setItem('peo_lembretes',JSON.stringify(lembretesLog));
+    localStorage.setItem('peo_config',JSON.stringify(config));
+  }catch(e){console.warn('Erro ao salvar',e);}
+}
+function carregarTudo(){
+  try{
+    const b=localStorage.getItem('peo_blocos');
+    const p=localStorage.getItem('peo_perguntas');
+    const pe=localStorage.getItem('peo_pessoas');
+    const r=localStorage.getItem('peo_respostas');
+    const l=localStorage.getItem('peo_lembretes');
+    const c=localStorage.getItem('peo_config');
+    const versaoSalva=parseInt(localStorage.getItem('peo_seed_version')||'0',10);
+    if(b&&JSON.parse(b).length&&versaoSalva>=SEED_VERSION){
+      blocos=JSON.parse(b);perguntas=JSON.parse(p||'[]');
+    }else{
+      seedDefaults();
+      localStorage.setItem('peo_seed_version',String(SEED_VERSION));
+    }
+    if(pe)pessoas=JSON.parse(pe);
+    if(r)respostas=JSON.parse(r);
+    if(l)lembretesLog=JSON.parse(l);
+    if(c)config=JSON.parse(c); else config=configPadrao();
+    if(!config.home)config.home=homePadrao();
+    salvarTudo();
+    renderHomePublic();
+  }catch(e){console.warn('Erro ao carregar',e);seedDefaults();config=configPadrao();}
+}
+function configPadrao(){
+  return{
+    linkPesquisa:window.location.href.split('#')[0],
+    assuntoEmail:'Sua opinião é importante — Pesquisa de Engajamento {empresa}',
+    corpoEmail:'Olá, {nome}!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
+    msgWhats:'Olá, {nome}! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
+    home:homePadrao()
+  };
+}
+function homePadrao(){
+  return{
+    eyebrow:'Gestão de Talentos',
+    titulo:'Pesquisa de Engajamento Organizacional',
+    subtitulo:'A sua opinião constrói um lugar de trabalho melhor',
+    status:'Aberta',
+    duracao:'≈ 5 minutos',
+    participacao:'Todas as unidades',
+    temas:'7 blocos',
+    descricao:'Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. As respostas são anônimas.',
+    textoBotao:'Responder pesquisa',
+    nota:'100% anônima'
+  };
+}
+function uid(pref){return pref+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+
+/* ====================== DADOS SEMENTE (Banco de Perguntas) ====================== */
+function seedDefaults(){
+  blocos=[
+    {id:'b1',nome:'Perfil Demográfico',ordem:1,cor:CORES_BLOCO[0],descricao:'Identificação do respondente'},
+    {id:'b2',nome:'Engajamento',ordem:2,cor:CORES_BLOCO[1],descricao:'Percepção geral de engajamento com a organização'},
+    {id:'b3',nome:'Desenvolvimento',ordem:3,cor:CORES_BLOCO[2],descricao:'Oportunidades de crescimento e carreira'},
+    {id:'b4',nome:'Lideranças e Comunicação',ordem:4,cor:CORES_BLOCO[3],descricao:'Relação com lideranças e fluxo de comunicação'},
+    {id:'b5',nome:'Condições de Trabalho',ordem:5,cor:CORES_BLOCO[4],descricao:'Recursos, carga de trabalho e bem-estar'},
+    {id:'b6',nome:'Cultura',ordem:6,cor:CORES_BLOCO[5],descricao:'Percepção sobre a cultura e impacto da empresa'},
+    {id:'b7',nome:'Sugestões',ordem:7,cor:CORES_BLOCO[6],descricao:'Espaço aberto para sugestões e melhorias'},
+  ];
+  perguntas=[
+    {id:'p1',blocoId:'b1',texto:'De qual unidade da empresa você faz parte?',tipo:'unica',opcoes:UNIDADES.slice(),ordem:1,campo:'unidade'},
+    {id:'p1b',blocoId:'b1',texto:'De qual estado?',tipo:'unica',opcoes:[],ordem:2,campo:'estado',dependeDe:{perguntaId:'p1'},opcoesCondicionais:JSON.parse(JSON.stringify(ESTADOS_POR_UNIDADE))},
+    {id:'p3',blocoId:'b1',texto:'Qual seu tempo de casa?',tipo:'unica',opcoes:TEMPO_CASA.slice(),ordem:3,campo:'tempoCasa'},
+
+    {id:'p4',blocoId:'b2',texto:'Tenho intenção de permanecer na organização por longo prazo.',tipo:'likert',ordem:1},
+    {id:'p5',blocoId:'b2',texto:'Sinto que pertenço e faço parte da organização.',tipo:'likert',ordem:2},
+    {id:'p6',blocoId:'b2',texto:'Recomendaria a empresa como bom lugar para trabalhar.',tipo:'likert',ordem:3},
+    {id:'p7',blocoId:'b2',texto:'Tenho clareza de como meu trabalho contribui para os resultados.',tipo:'likert',ordem:4},
+    {id:'p8',blocoId:'b2',texto:'Meu trabalho me dá um senso de realização pessoal.',tipo:'likert',ordem:5},
+    {id:'p9',blocoId:'b2',texto:'Estou satisfeito(a) com meu papel atual na organização.',tipo:'likert',ordem:6},
+    {id:'p10',blocoId:'b2',texto:'A falta de comunicação clara dificulta meu engajamento com a organização.',tipo:'likert',ordem:7},
+    {id:'p11',blocoId:'b2',texto:'Programas de desenvolvimento e carreira seriam eficazes para aumentar meu engajamento.',tipo:'likert',ordem:8},
+
+    {id:'p12',blocoId:'b3',texto:'Tenho oportunidades claras de desenvolvimento profissional.',tipo:'likert',ordem:1},
+    {id:'p13',blocoId:'b3',texto:'Recebo feedbacks que ajudam no meu desenvolvimento.',tipo:'likert',ordem:2},
+    {id:'p14',blocoId:'b3',texto:'A empresa investe em meu desenvolvimento de carreira.',tipo:'likert',ordem:3},
+    {id:'p15',blocoId:'b3',texto:'Existem oportunidades reais de participação em decisões e projetos.',tipo:'likert',ordem:4},
+
+    {id:'p16',blocoId:'b4',texto:'Me sinto confortável para expressar opiniões à liderança.',tipo:'likert',ordem:1},
+    {id:'p17',blocoId:'b4',texto:'A comunicação entre áreas é eficiente.',tipo:'likert',ordem:2},
+    {id:'p18',blocoId:'b4',texto:'As decisões da liderança são bem explicadas.',tipo:'likert',ordem:3},
+    {id:'p19',blocoId:'b4',texto:'Recebo orientações claras sobre expectativas de desempenho.',tipo:'likert',ordem:4},
+    {id:'p20',blocoId:'b4',texto:'A liderança comunica de forma eficaz os objetivos e atualizações organizacionais.',tipo:'likert',ordem:5},
+
+    {id:'p21',blocoId:'b5',texto:'As condições físicas e recursos disponíveis são adequados para meu desempenho.',tipo:'likert',ordem:1},
+    {id:'p22',blocoId:'b5',texto:'As cargas de trabalho são distribuídas de forma justa.',tipo:'likert',ordem:2},
+    {id:'p23',blocoId:'b5',texto:'Tenho flexibilidade para organizar minhas tarefas.',tipo:'likert',ordem:3},
+    {id:'p24',blocoId:'b5',texto:'Tenho acesso às ferramentas necessárias para meu trabalho.',tipo:'likert',ordem:4},
+    {id:'p25',blocoId:'b5',texto:'A empresa promove práticas de saúde e bem-estar.',tipo:'likert',ordem:5},
+    {id:'p26',blocoId:'b5',texto:'Me sinto apoiado(a) para manter uma boa qualidade de vida.',tipo:'likert',ordem:6},
+    {id:'p27',blocoId:'b5',texto:'Meu equilíbrio entre trabalho e vida pessoal tem sido satisfatório.',tipo:'likert',ordem:7},
+
+    {id:'p28',blocoId:'b6',texto:'Sinto que meu trabalho contribui para os objetivos da empresa.',tipo:'likert',ordem:1},
+    {id:'p29',blocoId:'b6',texto:'Acredito que a empresa tem impacto positivo na sociedade.',tipo:'likert',ordem:2},
+
+    {id:'p30',blocoId:'b7',texto:'Dê sugestões práticas para melhoria do ambiente de trabalho.',tipo:'texto',ordem:1},
+    {id:'p31',blocoId:'b7',texto:'Qual mudança teria maior impacto positivo no seu engajamento?',tipo:'texto',ordem:2},
+    {id:'p32',blocoId:'b7',texto:'O que faria você recomendar a empresa a outras pessoas?',tipo:'texto',ordem:3},
+  ];
+}
+
+/* ====================== HELPERS ====================== */
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function fecharModal(id){document.getElementById(id).classList.remove('open');}
+function abrirModal(id){document.getElementById(id).classList.add('open');}
+function esc(s){return (s||'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function blocosOrdenados(){return blocos.slice().sort((a,b)=>a.ordem-b.ordem);}
+function perguntasDoBloco(bid){return perguntas.filter(p=>p.blocoId===bid).sort((a,b)=>a.ordem-b.ordem);}
+function fmtData(iso){if(!iso)return'—';const d=new Date(iso);return d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
+
+/* ====================== GATE / LOGIN ====================== */
+function abrirLoginAdmin(){entrarAdminDemo();}
+function validarLogin(){fecharModal('modal-login');entrarAdminDemo();}
+function entrarAdminDemo(){
+  document.getElementById('view-gate').classList.add('hidden');
+  document.getElementById('view-admin').classList.remove('hidden');
+  document.getElementById('topbar-status').textContent='Painel Administrativo · Demonstração';
+  renderDashboard();renderPesquisa();renderRespostas();
+}
+function sairAdmin(){
+  document.getElementById('view-admin').classList.add('hidden');
+  document.getElementById('view-gate').classList.remove('hidden');
+  document.getElementById('topbar-status').textContent='Pesquisa de Engajamento Organizacional';
+}
+function entrarColaborador(){
+  document.getElementById('view-gate').classList.add('hidden');
+  document.getElementById('view-colab').classList.remove('hidden');
+  document.getElementById('topbar-status').textContent='Portal do Colaborador';
+  colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+  renderColab();
+}
+function sairColaborador(){
+  document.getElementById('view-colab').classList.add('hidden');
+  document.getElementById('view-gate').classList.remove('hidden');
+  document.getElementById('topbar-status').textContent='Pesquisa de Engajamento Organizacional';
+}
+
+/* ====================== NAV TABS ADMIN ====================== */
+function mudarTabAdmin(tabId,el){
+  document.querySelectorAll('#admin-tabs .nav-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if(tabId==='tab-dashboard')renderDashboard();
+  if(tabId==='tab-respostas')renderRespostas();
+}
+
+/* ====================== CÁLCULOS ====================== */
+function perguntasPontuadas(){
+  // Campos demográficos e perguntas abertas não compõem a pontuação.
+  return perguntas.filter(q=>q.tipo==='likert'&&!q.campo&&blocos.some(b=>b.id===q.blocoId));
+}
+function calcTabulacao(lista=respostas,qs=perguntasPontuadas()){
+  let soma=0,count=0;
+  lista.forEach(r=>qs.forEach(q=>{
+    const original=(r.valores||{})[q.id];
+    if(typeof original!=='number'&&typeof original!=='string')return;
+    const nota=Number(original);
+    if(!Number.isInteger(nota)||nota<1||nota>5)return;
+    soma+=nota;count++;
+  }));
+  const media=count?soma/count:null;
+  // Mantém a escala percentual original: 1 = 0% e 5 = 100%.
+  return{soma,count,media,pct:count?(media-1)/4*100:null};
+}
+function calcMediaBloco(blocoId,lista=respostas){
+  const qs=perguntasPontuadas().filter(q=>q.blocoId===blocoId);
+  return qs.length?calcTabulacao(lista,qs):null;
+}
+function calcEngajamentoGeral(lista=respostas){
+  // Calcula a partir de todas as notas, sem dar peso igual a blocos de tamanhos diferentes.
+  return calcTabulacao(lista).pct;
+}
+function valorDemografico(r,campo){
+  const direto=r[campo];
+  if(direto!==undefined&&direto!==null&&String(direto).trim())return String(direto).trim();
+  const q=perguntas.find(p=>p.campo===campo);
+  const valor=q?(r.valores||{})[q.id]:null;
+  return valor===undefined||valor===null?'':String(valor).trim();
+}
+function respostasDoDashboard(){
+  return respostas.filter(r=>['estado','tempoCasa'].every(campo=>{
+    const filtro=dashboardFiltros[campo];
+    return !filtro||(filtro==='__nao_informado__'?!valorDemografico(r,campo):valorDemografico(r,campo)===filtro);
+  }));
+}
+function opcoesFiltroDashboard(campo){
+  const q=perguntas.find(p=>p.campo===campo);
+  const configuradas=q?[...(q.opcoes||[]),...Object.values(q.opcoesCondicionais||{}).flat()]:[];
+  const padrao=campo==='estado'?Object.values(ESTADOS_POR_UNIDADE).flat():TEMPO_CASA;
+  const opcoes=[...new Set([...padrao,...configuradas,...respostas.map(r=>valorDemografico(r,campo))]
+    .map(v=>String(v).trim()).filter(Boolean))];
+  if(campo==='estado')opcoes.sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  // Mantém a opção selecionada mesmo se a última resposta desse grupo for excluída.
+  const selecionada=dashboardFiltros[campo];
+  if(selecionada&&selecionada!=='__nao_informado__'&&!opcoes.includes(selecionada))opcoes.push(selecionada);
+  return `<option value="">${campo==='estado'?'Todos os estados':'Todos os tempos de casa'}</option>`+
+    opcoes.map(v=>`<option value="${esc(v)}"${selecionada===v?' selected':''}>${esc(v)}</option>`).join('')+
+    `<option value="__nao_informado__"${selecionada==='__nao_informado__'?' selected':''}>Não informado</option>`;
+}
+function alterarFiltroDashboard(campo,valor){
+  if(!['estado','tempoCasa'].includes(campo))return;
+  dashboardFiltros[campo]=valor;
+  renderDashboard();
+  document.getElementById('dash-filtro-'+campo).focus();
+}
+function limparFiltrosDashboard(){
+  dashboardFiltros={estado:'',tempoCasa:''};
+  renderDashboard();
+  document.getElementById('dash-filtro-estado').focus();
+}
+function calcDistribuicaoUnidade(lista=respostas){
+  const map=Object.create(null);
+  lista.forEach(r=>{const u=valorDemografico(r,'unidade')||'Não informado';map[u]=(map[u]||0)+1;});
+  return map;
+}
+function fmtNumeroDashboard(valor,casas=0){
+  return valor===null?'—':valor.toLocaleString('pt-BR',{minimumFractionDigits:casas,maximumFractionDigits:casas});
+}
+
+/* ====================== DASHBOARD ====================== */
+function renderDashboard(){
+  const lista=respostasDoDashboard();
+  const totalRespostas=lista.length;
+  const geral=calcTabulacao(lista);
+  const filtrosAtivos=!!(dashboardFiltros.estado||dashboardFiltros.tempoCasa);
+  const scored=perguntasPontuadas();
+  const blocosScored=blocosOrdenados().filter(b=>scored.some(q=>q.blocoId===b.id));
+  let bhtml='';
+  if(!totalRespostas){
+    bhtml=`<div class="empty-note">${respostas.length?'Nenhuma resposta encontrada para os filtros selecionados.':'Ainda não há respostas para calcular os resultados.'}</div>`;
+  }else if(!geral.count){
+    bhtml='<div class="empty-note">Não há notas válidas de 1 a 5 nas respostas deste recorte.</div>';
+  }else{
+    bhtml=blocosScored.map(b=>{
+      const m=calcMediaBloco(b.id,lista);
+      return `<div class="dash-score-row">
+        <div><div class="dash-score-name">${esc(b.nome)}</div>
+          <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${m.pct===null?0:m.pct}%;background:${esc(b.cor)}"></div></div>
+        </div>
+        <div class="dash-score-value">${m.count?`${fmtNumeroDashboard(m.media,2)} / 5 · ${fmtNumeroDashboard(m.pct,1)}%`:'Sem notas'}
+          <small>${fmtNumeroDashboard(m.count)} respostas pontuadas</small>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('dash-root').innerHTML=`
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Dashboard</h1><p>Tabulação da Pesquisa de Engajamento Organizacional</p></div>
+      <button class="btn btn-secondary btn-sm" onclick="renderDashboard();showToast('Dashboard atualizado')">&#8635; Atualizar</button>
+    </div>
+  </div>
+  <div class="card dash-filters">
+    <div class="chart-title"><span class="ctdot" style="background:var(--g2a)"></span>Filtros demográficos</div>
+    <div class="dash-filter-grid">
+      <div class="field"><label for="dash-filtro-estado">Estado</label>
+        <select id="dash-filtro-estado" onchange="alterarFiltroDashboard('estado',this.value)">${opcoesFiltroDashboard('estado')}</select></div>
+      <div class="field"><label for="dash-filtro-tempoCasa">Tempo de casa</label>
+        <select id="dash-filtro-tempoCasa" onchange="alterarFiltroDashboard('tempoCasa',this.value)">${opcoesFiltroDashboard('tempoCasa')}</select></div>
+      <button class="btn btn-secondary btn-sm" onclick="limparFiltrosDashboard()">Limpar filtros</button>
+    </div>
+    <p class="dash-scope" role="status">${filtrosAtivos?'Recorte selecionado':'Base completa'}: <strong>${fmtNumeroDashboard(totalRespostas)} de ${fmtNumeroDashboard(respostas.length)}</strong> questionários recebidos. Os dois filtros são combinados e aplicados a todos os indicadores e competências abaixo.</p>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad2)"></div>
+      <div class="kpi-label">Respostas recebidas</div><div class="kpi-val" id="dash-total">${fmtNumeroDashboard(totalRespostas)}</div>
+      <div class="kpi-sub">Questionários no recorte</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad3)"></div>
+      <div class="kpi-label">Respostas pontuadas</div><div class="kpi-val" id="dash-count">${fmtNumeroDashboard(geral.count)}</div>
+      <div class="kpi-sub">Notas válidas nas perguntas de escala</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad1)"></div>
+      <div class="kpi-label">Média geral da pesquisa</div><div class="kpi-val" id="dash-media">${fmtNumeroDashboard(geral.media,2)}</div>
+      <div class="kpi-sub">${geral.count?`Resultado: ${fmtNumeroDashboard(geral.soma)} pontos ÷ ${fmtNumeroDashboard(geral.count)} respostas`:'Sem notas válidas para calcular'} · escala de 1 a 5</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:var(--grad2)"></div>
+      <div class="kpi-label">Porcentagem geral</div><div class="kpi-val" id="dash-pct">${geral.pct===null?'—':fmtNumeroDashboard(geral.pct,1)+'%'}</div>
+      <div class="kpi-sub">Conversão da média: 1 = 0% e 5 = 100%</div></div>
+  </div>
+  <details class="card dash-method">
+    <summary>Como os resultados são calculados</summary>
+    <p><strong>Média geral = resultado ÷ quantitativo de respostas.</strong> O resultado é a soma das notas; o quantitativo é o número de respostas válidas às perguntas de escala, e não o número de questionários. Cada nota tem o mesmo peso, independentemente do tamanho do bloco.</p>
+    <p><strong>Porcentagem geral = ((média geral − 1) ÷ 4) × 100.</strong> Regra percentual preservada do módulo: por exemplo, média 4,00 equivale a 75,0%. Não representa taxa de participação nem percentual de respostas favoráveis.</p>
+    <p>Campos demográficos, textos, notas ausentes e valores fora da escala não entram no cálculo. São usadas as notas originais das perguntas atuais, sem inversão de itens; o arredondamento ocorre somente na exibição. “Não informado” reúne registros sem o dado demográfico, inclusive quando a pergunta não foi exibida.</p>
+  </details>
+  <div class="chart-grid" style="grid-template-columns:1fr">
+    <div class="chart-card">
+      <div class="chart-title"><span class="ctdot" style="background:var(--g2a)"></span>Resultado por competência (bloco)</div>
+      <div id="chart-blocos">${bhtml}</div>
+      <p class="dash-chart-note">Média, porcentagem e base de respostas por competência. As barras usam a mesma escala percentual do indicador geral.</p>
+    </div>
+  </div>`;
+}
+
+/* ====================== PESQUISA: COMPETÊNCIAS (BLOCOS) & PERGUNTAS ====================== */
+function renderPesquisa(){
+  if(!blocoSelecionadoId&&blocos.length)blocoSelecionadoId=blocosOrdenados()[0].id;
+  let html=`
+  <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>Construtor da Pesquisa</h1><p>Elabore as competências (blocos temáticos) e o banco de perguntas avaliado pelos colaboradores</p></div>
+    </div>
+  </div>
+  <div class="grid2" style="align-items:start">
+    <div class="section">
+      <div class="section-header"><div class="section-num sn1">01</div><span class="section-title">Competências / Blocos temáticos</span></div>
+      <div class="card">
+        <div id="blocos-list"></div>
+        <div class="actions" style="margin-top:14px"><button class="btn btn-purple btn-sm btn-block" onclick="abrirModalBloco()">+ Nova competência (bloco)</button></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-num sn2">02</div><span class="section-title" id="perguntas-titulo">Perguntas do bloco</span></div>
+      <div class="card">
+        <div id="perguntas-list"></div>
+        <div class="actions" style="margin-top:14px"><button class="btn btn-primary btn-sm btn-block" onclick="abrirModalPergunta()">+ Nova pergunta</button></div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('pesquisa-root').innerHTML=html;
+  renderBlocosList();renderPerguntasList();
+}
+function renderBlocosList(){
+  let h='';
+  blocosOrdenados().forEach((b,idx)=>{
+    const qtd=perguntasDoBloco(b.id).length;
+    h+=`<div class="item-row ${b.id===blocoSelecionadoId?'active-item':''}" onclick="selecionarBloco('${b.id}')">
+      <div style="width:6px;align-self:stretch;border-radius:4px;background:${b.cor}"></div>
+      <div class="item-main"><div class="item-title">${esc(b.nome)}</div><div class="item-sub">${qtd} pergunta(s) · ${esc(b.descricao||'')}</div></div>
+      <div class="item-actions">
+        <button class="icon-btn" title="Subir" onclick="event.stopPropagation();moverBloco('${b.id}',-1)">&#8593;</button>
+        <button class="icon-btn" title="Descer" onclick="event.stopPropagation();moverBloco('${b.id}',1)">&#8595;</button>
+        <button class="icon-btn" title="Editar" onclick="event.stopPropagation();abrirModalBloco('${b.id}')">&#9998;</button>
+        <button class="icon-btn danger" title="Excluir" onclick="event.stopPropagation();excluirBloco('${b.id}')">&#10005;</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('blocos-list').innerHTML=h||'<div class="empty-note">Nenhuma competência cadastrada.</div>';
+}
+function selecionarBloco(id){blocoSelecionadoId=id;renderBlocosList();renderPerguntasList();}
+function moverBloco(id,dir){
+  const ord=blocosOrdenados();
+  const i=ord.findIndex(b=>b.id===id);
+  const j=i+dir;
+  if(j<0||j>=ord.length)return;
+  const tmp=ord[i].ordem;ord[i].ordem=ord[j].ordem;ord[j].ordem=tmp;
+  salvarTudo();renderBlocosList();
+}
+function excluirBloco(id){
+  const b=blocos.find(x=>x.id===id);if(!b)return;
+  if(!confirm('Excluir a competência "'+b.nome+'" e todas as suas perguntas? Esta ação não pode ser desfeita.'))return;
+  perguntas=perguntas.filter(p=>p.blocoId!==id);
+  blocos=blocos.filter(x=>x.id!==id);
+  if(blocoSelecionadoId===id)blocoSelecionadoId=blocos.length?blocosOrdenados()[0].id:null;
+  salvarTudo();renderPesquisa();showToast('Competência excluída');
+}
+function abrirModalBloco(id){
+  editandoBlocoId=id||null;
+  const b=id?blocos.find(x=>x.id===id):null;
+  const body=`
+    <button class="modal-close" onclick="fecharModal('modal-generico')">&times;</button>
+    <div class="modal-title">${id?'Editar competência':'Nova competência (bloco temático)'}</div>
+    <div class="modal-sub">Competências agrupam perguntas relacionadas (ex.: Engajamento, Liderança, Cultura)</div>
+    <div class="field" style="margin-bottom:14px"><label>Nome da competência</label><input type="text" id="mb-nome" value="${b?esc(b.nome):''}" placeholder="Ex.: Engajamento"></div>
+    <div class="field" style="margin-bottom:14px"><label>Descrição</label><input type="text" id="mb-desc" value="${b?esc(b.descricao||''):''}" placeholder="Breve descrição do que este bloco avalia"></div>
+    <div class="field" style="margin-bottom:6px"><label>Cor de identificação</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap" id="mb-cores">
+        ${CORES_BLOCO.map(c=>`<div onclick="selecionarCorBloco('${c}')" data-cor="${c}" style="width:30px;height:30px;border-radius:8px;background:${c};cursor:pointer;border:3px solid ${b&&b.cor===c?'#2a2f42':'transparent'}"></div>`).join('')}
+      </div>
+      <input type="hidden" id="mb-cor" value="${b?b.cor:CORES_BLOCO[0]}">
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvarBloco()">Salvar competência</button>
+      <button class="btn btn-secondary" onclick="fecharModal('modal-generico')">Cancelar</button>
+    </div>`;
+  document.getElementById('modal-generico-body').innerHTML=body;
+  abrirModal('modal-generico');
+}
+function selecionarCorBloco(c){
+  document.getElementById('mb-cor').value=c;
+  document.querySelectorAll('#mb-cores > div').forEach(d=>d.style.border=(d.dataset.cor===c?'3px solid #2a2f42':'3px solid transparent'));
+}
+function salvarBloco(){
+  const nome=document.getElementById('mb-nome').value.trim();
+  if(!nome){showToast('Informe o nome da competência');return;}
+  const desc=document.getElementById('mb-desc').value.trim();
+  const cor=document.getElementById('mb-cor').value;
+  if(editandoBlocoId){
+    const b=blocos.find(x=>x.id===editandoBlocoId);
+    b.nome=nome;b.descricao=desc;b.cor=cor;
+  }else{
+    const novoId=uid('b');
+    blocos.push({id:novoId,nome,descricao:desc,cor,ordem:blocos.length+1});
+    blocoSelecionadoId=novoId;
+  }
+  salvarTudo();fecharModal('modal-generico');renderPesquisa();showToast('Competência salva com sucesso');
+}
+
+function renderPerguntasList(){
+  const b=blocos.find(x=>x.id===blocoSelecionadoId);
+  document.getElementById('perguntas-titulo').textContent=b?('Perguntas — '+b.nome):'Perguntas do bloco';
+  if(!b){document.getElementById('perguntas-list').innerHTML='<div class="empty-note">Selecione uma competência ao lado.</div>';return;}
+  let h='';
+  perguntasDoBloco(b.id).forEach(p=>{
+    const pillClass=p.tipo==='likert'?'pill-likert':(p.tipo==='unica'?'pill-unica':'pill-texto');
+    const pillLabel=p.tipo==='likert'?'Escala (concordância)':(p.tipo==='unica'?'Escolha única':'Texto aberto');
+    const condTag=p.dependeDe?' · <span class="pill" style="background:#eef1f6;color:var(--gray600)">condicional</span>':'';
+    h+=`<div class="item-row">
+      <div class="item-main"><div class="item-title">${esc(p.texto)}</div><div class="item-sub"><span class="pill ${pillClass}">${pillLabel}</span>${p.tipo==='unica'&&!p.dependeDe?' · '+(p.opcoes||[]).length+' opção(ões)':''}${condTag}</div></div>
+      <div class="item-actions">
+        <button class="icon-btn" title="Editar" onclick="abrirModalPergunta('${p.id}')">&#9998;</button>
+        <button class="icon-btn danger" title="Excluir" onclick="excluirPergunta('${p.id}')">&#10005;</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('perguntas-list').innerHTML=h||'<div class="empty-note">Nenhuma pergunta cadastrada neste bloco.</div>';
+}
+function excluirPergunta(id){
+  if(!confirm('Excluir esta pergunta? Esta ação não pode ser desfeita.'))return;
+  perguntas=perguntas.filter(p=>p.id!==id);
+  salvarTudo();renderPerguntasList();showToast('Pergunta excluída');
+}
+function abrirModalPergunta(id){
+  if(!blocoSelecionadoId){showToast('Selecione uma competência primeiro');return;}
+  editandoPerguntaId=id||null;
+  const p=id?perguntas.find(x=>x.id===id):null;
+  if(p&&p.dependeDe){
+    const body=`
+      <button class="modal-close" onclick="fecharModal('modal-generico')">&times;</button>
+      <div class="modal-title">Editar pergunta condicional</div>
+      <div class="modal-sub">As opções desta pergunta são geradas automaticamente a partir da resposta anterior e não podem ser editadas aqui.</div>
+      <div class="field" style="margin-bottom:14px"><label>Texto da pergunta</label><textarea id="mp-texto" rows="2">${esc(p.texto)}</textarea></div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="salvarPerguntaCondicional()">Salvar texto</button>
+        <button class="btn btn-secondary" onclick="fecharModal('modal-generico')">Cancelar</button>
+      </div>`;
+    document.getElementById('modal-generico-body').innerHTML=body;
+    abrirModal('modal-generico');
+    return;
+  }
+  const body=`
+    <button class="modal-close" onclick="fecharModal('modal-generico')">&times;</button>
+    <div class="modal-title">${id?'Editar pergunta':'Nova pergunta'}</div>
+    <div class="modal-sub">Bloco: ${esc((blocos.find(x=>x.id===blocoSelecionadoId)||{}).nome||'')}</div>
+    <div class="field" style="margin-bottom:14px"><label>Texto da pergunta</label><textarea id="mp-texto" rows="2" placeholder="Ex.: Sinto que pertenço e faço parte da organização.">${p?esc(p.texto):''}</textarea></div>
+    <div class="field" style="margin-bottom:14px"><label>Tipo de resposta</label>
+      <select id="mp-tipo" onchange="toggleOpcoesPergunta()">
+        <option value="likert" ${p&&p.tipo==='likert'?'selected':''}>Escala de concordância (5 pontos)</option>
+        <option value="unica" ${p&&p.tipo==='unica'?'selected':''}>Escolha única (lista de opções)</option>
+        <option value="texto" ${p&&p.tipo==='texto'?'selected':''}>Texto aberto</option>
+      </select>
+    </div>
+    <div class="field hidden" id="mp-opcoes-wrap" style="margin-bottom:6px"><label>Opções (uma por linha)</label>
+      <textarea id="mp-opcoes" rows="4" placeholder="Opção 1&#10;Opção 2&#10;Opção 3">${p&&p.opcoes?p.opcoes.join('\n'):''}</textarea>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="salvarPergunta()">Salvar pergunta</button>
+      <button class="btn btn-secondary" onclick="fecharModal('modal-generico')">Cancelar</button>
+    </div>`;
+  document.getElementById('modal-generico-body').innerHTML=body;
+  abrirModal('modal-generico');
+  toggleOpcoesPergunta();
+}
+function salvarPerguntaCondicional(){
+  const texto=document.getElementById('mp-texto').value.trim();
+  if(!texto){showToast('Informe o texto da pergunta');return;}
+  const p=perguntas.find(x=>x.id===editandoPerguntaId);
+  p.texto=texto;
+  salvarTudo();fecharModal('modal-generico');renderPerguntasList();showToast('Pergunta salva com sucesso');
+}
+function toggleOpcoesPergunta(){
+  const t=document.getElementById('mp-tipo').value;
+  document.getElementById('mp-opcoes-wrap').classList.toggle('hidden',t!=='unica');
+}
+function salvarPergunta(){
+  const texto=document.getElementById('mp-texto').value.trim();
+  if(!texto){showToast('Informe o texto da pergunta');return;}
+  const tipo=document.getElementById('mp-tipo').value;
+  let opcoes=[];
+  if(tipo==='unica'){
+    opcoes=document.getElementById('mp-opcoes').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    if(!opcoes.length){showToast('Informe ao menos uma opção');return;}
+  }
+  if(editandoPerguntaId){
+    const p=perguntas.find(x=>x.id===editandoPerguntaId);
+    p.texto=texto;p.tipo=tipo;p.opcoes=opcoes;
+  }else{
+    perguntas.push({id:uid('p'),blocoId:blocoSelecionadoId,texto,tipo,opcoes,ordem:perguntasDoBloco(blocoSelecionadoId).length+1});
+  }
+  salvarTudo();fecharModal('modal-generico');renderPerguntasList();renderBlocosList();showToast('Pergunta salva com sucesso');
+}
+
+/* ====================== HOME PÚBLICA (GATE) ====================== */
+function renderHomePublic(){
+  const h=config.home||homePadrao();
+  document.getElementById('home-eyebrow').textContent=h.eyebrow;
+  document.getElementById('home-titulo').textContent=h.titulo;
+  document.getElementById('home-subtitulo').textContent=h.subtitulo;
+  document.getElementById('home-status').textContent=h.status;
+  document.getElementById('home-duracao').textContent=h.duracao;
+  document.getElementById('home-participacao').textContent=h.participacao;
+  document.getElementById('home-temas').textContent=h.temas;
+  document.getElementById('home-descricao').textContent=h.descricao;
+  document.getElementById('home-btn-texto').textContent=h.textoBotao;
+  document.getElementById('home-nota').textContent=h.nota;
+}
+
+/* ====================== RESPOSTAS ====================== */
+function renderRespostas(){
+  const html=`
+  <div class="header"><div class="header-band"></div>
+
+    <div class="header-inner">
+      <div class="header-title"><h1>Respostas</h1><p>Todas as submissões individuais da pesquisa</p></div>
+      <button class="btn btn-purple btn-sm" onclick="exportarCSV()">⬇ Exportar CSV</button>
+    </div>
+  </div>
+  <div class="card" style="padding:0;margin-top:14px"><div class="dash-table-wrap"><table class="dtable" id="respostas-table"></table></div></div>`;
+  document.getElementById('respostas-root').innerHTML=html;
+  renderRespostasTabela();
+}
+function renderRespostasTabela(){
+  const lista=respostas.slice().sort((a,b)=>new Date(b.data)-new Date(a.data));
+  let t='<tr><th>Data</th><th>Tempo de casa</th><th></th><th></th></tr>';
+  t+=lista.length?lista.map(r=>`<tr>
+    <td>${fmtData(r.data)}</td><td>${esc(r.tempoCasa||'—')}</td>
+    <td><button class="tlink" onclick="verDetalheResposta('${r.id}')">Ver detalhes</button></td>
+    <td><button class="tlink" style="color:#e0003c" onclick="excluirResposta('${r.id}')">Excluir</button></td></tr>`).join(''):
+    '<tr><td colspan="4" style="text-align:center;color:var(--gray400);padding:26px">Nenhuma resposta encontrada.</td></tr>';
+  document.getElementById('respostas-table').innerHTML=t;
+}
+function verDetalheResposta(id){
+  const r=respostas.find(x=>x.id===id);if(!r)return;
+  let corpo='';
+  blocosOrdenados().forEach(b=>{
+    const qs=perguntasDoBloco(b.id).filter(q=>q.campo!=='unidade'&&q.campo!=='estado');
+    if(!qs.length)return;
+    corpo+=`<div style="margin-bottom:16px"><div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:${b.cor};margin-bottom:8px">${esc(b.nome)}</div>`;
+    qs.forEach(q=>{
+      const v=r.valores[q.id];
+      let vdisp='—';
+      if(v!==undefined&&v!==null&&v!==''){
+        vdisp=q.tipo==='likert'?(LIKERT_OPTS[v-1]||v):v;
+      }
+      corpo+=`<div class="det-strow" style="align-items:flex-start"><div class="det-stlbl" style="max-width:60%">${esc(q.texto)}</div><div style="font-weight:700;text-align:right;color:var(--gray800)">${esc(vdisp.toString())}</div></div>`;
+    });
+    corpo+='</div>';
+  });
+  const body=`
+    <button class="modal-close" onclick="fecharModal('modal-generico')">&times;</button>
+    <div class="modal-title">Detalhe da resposta</div>
+    <div class="modal-sub">${fmtData(r.data)}</div>
+    <div style="max-height:60vh;overflow-y:auto;padding-right:6px">${corpo}</div>
+    <div class="actions"><button class="btn btn-secondary" onclick="fecharModal('modal-generico')">Fechar</button></div>`;
+  document.getElementById('modal-generico-body').innerHTML=body;
+  abrirModal('modal-generico');
+}
+function excluirResposta(id){
+  const r=respostas.find(x=>x.id===id);if(!r)return;
+  if(!confirm('Tem certeza que deseja excluir esta resposta? Esta ação não pode ser desfeita.'))return;
+  respostas=respostas.filter(x=>x.id!==id);
+  salvarTudo();
+  renderRespostasTabela();
+  renderDashboard();
+  showToast('Resposta excluída com sucesso');
+}
+function exportarCSV(){
+  const cols=[];
+  blocosOrdenados().forEach(b=>perguntasDoBloco(b.id).forEach(q=>cols.push(q)));
+  const hdr=['Data'].concat(cols.map(c=>c.texto));
+  const rows=respostas.map(r=>{
+    const base=[fmtData(r.data)];
+    const vals=cols.map(c=>{
+      const v=r.valores[c.id];
+      if(v===undefined||v===null||v==='')return'';
+      return c.tipo==='likert'?(LIKERT_OPTS[v-1]||v):v;
+    });
+    return base.concat(vals).map(v=>'"'+(v||'').toString().replace(/"/g,'""')+'"');
+  });
+  const csv=[hdr.map(h=>'"'+h.replace(/"/g,'""')+'"'),...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='Pesquisa_Engajamento_Respostas_'+new Date().toISOString().substring(0,10)+'.csv';a.click();
+  showToast('CSV exportado com sucesso');
+}
+
+/* ====================== PORTAL DO COLABORADOR ====================== */
+function perguntaVisivel(q){
+  if(!q.dependeDe)return true;
+  const paiVal=colabState.valores[q.dependeDe.perguntaId];
+  if(q.opcoesCondicionais)return!!(paiVal&&q.opcoesCondicionais[paiVal]&&q.opcoesCondicionais[paiVal].length);
+  return!!paiVal;
+}
+function opcoesDePergunta(q){
+  if(q.dependeDe&&q.opcoesCondicionais){
+    const paiVal=colabState.valores[q.dependeDe.perguntaId];
+    return(paiVal&&q.opcoesCondicionais[paiVal])||[];
+  }
+  return q.opcoes||[];
+}
+function renderColab(){
+  const ord=blocosOrdenados();
+  if(!ord.length){document.getElementById('colab-root').innerHTML='<div class="empty-note">A pesquisa ainda não foi configurada pelo administrador.</div>';return;}
+  if(colabState.step>=ord.length){renderColabDone();return;}
+  const b=ord[colabState.step];
+  const qs=perguntasDoBloco(b.id).filter(perguntaVisivel);
+  const pct=Math.round((colabState.step/ord.length)*100);
+  let html=`
+   <div class="header"><div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title"><h1>${esc(b.nome)}</h1><p>${esc(b.descricao||'Pesquisa de Engajamento Organizacional')}</p></div>
+    </div>
+   </div>
+   <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
+   <div class="progress-lbl">Etapa ${colabState.step+1} de ${ord.length}</div>
+   <div id="colab-questions"></div>
+   <div class="actions">
+     ${colabState.step>0?'<button class="btn btn-secondary" onclick="colabVoltar()">&larr; Voltar</button>':''}
+     <button class="btn btn-primary" onclick="colabProximo()">${colabState.step===ord.length-1?'Enviar respostas':'Próximo &rarr;'}</button>
+   </div>`;
+  document.getElementById('colab-root').innerHTML=html;
+
+  let qhtml='';
+  qs.forEach((q,i)=>{qhtml+=renderPerguntaColab(q,i+1,qs.length);});
+  document.getElementById('colab-questions').innerHTML=qhtml;
+}
+function renderPerguntaColab(q,numLabel,totalVisivel){
+  let inner='';
+  if(q.tipo==='likert'){
+    inner=`<div class="likert-row">${LIKERT_OPTS.map((op,i)=>`<div class="likert-pill ${colabState.valores[q.id]==(i+1)?'selected':''}" onclick="setRespostaColab('${q.id}',${i+1})">${esc(op)}</div>`).join('')}</div>`;
+  }else if(q.tipo==='unica'){
+    const opcoes=opcoesDePergunta(q);
+    const maiorOpcao=Math.max(0,...opcoes.map(o=>o.length));
+    const empilhar=opcoes.length<=2||maiorOpcao>28;
+    inner=`<div class="opt-grid${empilhar?' opt-grid-stack':''}">${opcoes.map(op=>`<div class="opt-card ${colabState.valores[q.id]===op?'selected':''}" onclick="setRespostaColab('${q.id}',this.dataset.op)" data-op="${esc(op)}">${esc(op)}</div>`).join('')}</div>`;
+  }else{
+    inner=`<textarea rows="3" placeholder="Escreva sua resposta..." oninput="colabState.valores['${q.id}']=this.value">${esc(colabState.valores[q.id]||'')}</textarea>`;
+  }
+  return `<div class="q-card"><div class="q-num">Pergunta ${numLabel} de ${totalVisivel}</div><div class="q-text serif">${esc(q.texto)}</div>${inner}</div>`;
+}
+function limparDependentes(qid){
+  perguntas.filter(q=>q.dependeDe&&q.dependeDe.perguntaId===qid).forEach(dep=>{delete colabState.valores[dep.id];});
+}
+function setRespostaColab(qid,val){colabState.valores[qid]=val;limparDependentes(qid);renderColab();}
+function colabProximo(){
+  const ord=blocosOrdenados();
+  const b=ord[colabState.step];
+  const qs=perguntasDoBloco(b.id).filter(perguntaVisivel);
+  for(const q of qs){
+    if(q.tipo!=='texto'){
+      const v=colabState.valores[q.id];
+      if(v===undefined||v===null||v===''){showToast('Por favor, responda: "'+q.texto+'"');return;}
+    }
+  }
+  if(colabState.step<ord.length-1){colabState.step++;renderColab();window.scrollTo({top:0,behavior:'smooth'});}
+  else{submeterPesquisa();}
+}
+function colabVoltar(){if(colabState.step>0){colabState.step--;renderColab();window.scrollTo({top:0,behavior:'smooth'});}}
+function submeterPesquisa(){
+  let pessoaId=null;
+  if(!colabState.anonimo){
+    if(colabState.email){const f=pessoas.find(p=>p.email&&p.email.toLowerCase()===colabState.email.toLowerCase());if(f)pessoaId=f.id;}
+    if(!pessoaId&&colabState.nome){const f=pessoas.find(p=>p.nome.toLowerCase()===colabState.nome.toLowerCase());if(f)pessoaId=f.id;}
+  }
+  const qUnidade=perguntas.find(q=>q.campo==='unidade');
+  const qEstado=perguntas.find(q=>q.campo==='estado');
+  const qArea=perguntas.find(q=>q.campo==='area');
+  const qTempo=perguntas.find(q=>q.campo==='tempoCasa');
+  const rec={
+    id:uid('r'),data:new Date().toISOString(),pessoaId,
+    nome:colabState.anonimo?'':colabState.nome,
+    email:colabState.anonimo?'':colabState.email,
+    anonimo:colabState.anonimo,
+    unidade:qUnidade?colabState.valores[qUnidade.id]:'',
+    estado:qEstado?(colabState.valores[qEstado.id]||''):'',
+    area:qArea?colabState.valores[qArea.id]:'',
+    tempoCasa:qTempo?colabState.valores[qTempo.id]:'',
+    valores:Object.assign({},colabState.valores)
+  };
+  respostas.push(rec);
+  salvarTudo();
+  colabState.step=blocosOrdenados().length;
+  renderColab();
+}
+function renderColabDone(){
+  document.getElementById('colab-root').innerHTML=`
+   <div class="done-wrap">
+     <div class="done-icon">&#10003;</div>
+     <h2 style="font-size:24px;margin-bottom:10px">Obrigado por participar!</h2>
+     <p style="color:var(--gray400);font-size:13.5px;max-width:420px;margin:0 auto 26px;line-height:1.6">Sua resposta foi registrada com sucesso. Sua opinião é muito importante para construirmos um ambiente de trabalho cada vez melhor.</p>
+     <button class="btn btn-primary" onclick="sairColaborador()">Concluir</button>
+   </div>`;
+}
+
+/* ====================== FECHAR MODAL AO CLICAR FORA ====================== */
+document.querySelectorAll('.modal-bg').forEach(m=>{
+  m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+});
+
+/* ====================== INICIALIZAÇÃO ====================== */
+carregarTudo();
+</script>
+</body>
+</html>

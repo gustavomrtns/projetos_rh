@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Prestadores de Serviço</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ── VARIÁVEIS ─────────────────────────────────────────── */
+:root {
+  --g1a: #f7a800; --g1b: #ff4e00;
+  --g2a: #0099e5; --g2b: #00e5a0;
+  --g3a: #7b2ff7; --g3b: #e0009e;
+  --grad1: linear-gradient(160deg, var(--g1a) 0%, var(--g1b) 100%);
+  --grad2: linear-gradient(160deg, var(--g2a) 0%, var(--g2b) 100%);
+  --grad3: linear-gradient(160deg, var(--g3a) 0%, var(--g3b) 100%);
+  --gradFull: linear-gradient(135deg, #f7a800 0%, #ff4e00 20%, #e0009e 40%, #7b2ff7 60%, #0099e5 80%, #00e5a0 100%);
+  --white: #ffffff;
+  --offwhite: #f8f9fc;
+  --gray50: #f4f5f8;
+  --gray100: #e8eaf0;
+  --gray200: #d0d4e0;
+  --gray400: #9098b0;
+  --gray600: #5a6278;
+  --gray800: #2a2f42;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--offwhite);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif;
+  min-height: 100vh;
+  padding: 32px 20px 100px;
+}
+
+/* ── CONTAINER ─────────────────────────────────────────── */
+.container { max-width: 860px; margin: 0 auto; }
+
+/* ── HEADER ────────────────────────────────────────────── */
+.header {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0;
+  margin-bottom: 24px;
+  overflow: hidden;
+  animation: fadeUp .5s ease both;
+}
+.header-band {
+  height: 7px;
+  background: var(--gradFull);
+}
+.header-inner {
+  padding: 28px 32px 26px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.header-title h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--gray800);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.header-title p { font-size: 13px; color: var(--gray400); font-weight: 300; }
+.period-badge {
+  background: var(--grad2);
+  color: #fff;
+  font-size: 11px; font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  margin-top: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,153,229,0.3);
+}
+
+/* ── SECTIONS ──────────────────────────────────────────── */
+.section { margin-bottom: 20px; animation: fadeUp .4s ease both; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.section:nth-child(1){animation-delay:.05s}
+.section:nth-child(2){animation-delay:.10s}
+.section:nth-child(3){animation-delay:.15s}
+.section:nth-child(4){animation-delay:.20s}
+.section:nth-child(5){animation-delay:.25s}
+.section:nth-child(6){animation-delay:.30s}
+
+.section-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding: 0 4px;
+}
+.section-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.section-num.c1 { background: var(--grad1); }
+.section-num.c2 { background: var(--grad2); }
+.section-num.c3 { background: var(--grad3); }
+.section-num.c4 { background: var(--grad1); }
+.section-num.c5 { background: var(--grad2); }
+.section-num.c6 { background: var(--grad3); }
+
+.section-title {
+  font-size: 12px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+/* ── CARD ──────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+.card:focus-within { box-shadow: var(--shadow-lg); }
+
+/* ── FORM GRID ─────────────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.span2 { grid-column: span 2; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 11px; font-weight: 700;
+  color: var(--gray600); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.field input, .field select {
+  background: var(--gray50);
+  border: 1.5px solid var(--gray100);
+  color: var(--gray800);
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px; padding: 10px 13px;
+  border-radius: 8px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%; appearance: none; -webkit-appearance: none;
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 36px; cursor: pointer;
+}
+.field select option { background: #fff; color: var(--gray800); }
+.field input:focus, .field select:focus {
+  border-color: #0099e5;
+  box-shadow: 0 0 0 3px rgba(0,153,229,0.1);
+  background: #fff;
+}
+.field input[readonly] {
+  background: var(--gray100); color: var(--gray400); cursor: not-allowed;
+}
+
+/* ── SEGMENTAÇÃO ───────────────────────────────────────── */
+.seg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.seg-card {
+  border: 2px solid var(--gray100);
+  border-radius: var(--radius); padding: 20px 16px;
+  cursor: pointer; transition: all 0.2s; position: relative;
+  user-select: none; background: var(--white);
+}
+.seg-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.seg-card.selected { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.seg-card.estrategico.selected { border-color: #ff4e00; }
+.seg-card.critico.selected     { border-color: #0099e5; }
+.seg-card.baixo.selected       { border-color: #7b2ff7; }
+
+.seg-pill {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: #fff; margin-bottom: 10px;
+}
+.seg-card.estrategico .seg-pill { background: var(--grad1); }
+.seg-card.critico     .seg-pill { background: var(--grad2); }
+.seg-card.baixo       .seg-pill { background: var(--grad3); }
+.seg-name { font-size: 14px; font-weight: 700; color: var(--gray800); margin-bottom: 6px; }
+.seg-desc { font-size: 11.5px; color: var(--gray400); line-height: 1.5; }
+.seg-check {
+  position: absolute; top: 12px; right: 14px;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #fff; opacity: 0; transition: opacity 0.2s;
+}
+.seg-card.estrategico.selected .seg-check { background: var(--grad1); opacity:1; }
+.seg-card.critico.selected     .seg-check { background: var(--grad2); opacity:1; }
+.seg-card.baixo.selected       .seg-check { background: var(--grad3); opacity:1; }
+
+/* ── CRITÉRIOS ─────────────────────────────────────────── */
+.criteria-list { display: flex; flex-direction: column; gap: 3px; }
+.criteria-item {
+  background: var(--white);
+  border: 1.5px solid var(--gray100);
+  border-radius: var(--radius);
+  overflow: hidden; transition: all 0.2s;
+}
+.criteria-item.scored { border-color: var(--gray200); }
+
+.criteria-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; padding: 16px 18px 10px; align-items: start;
+}
+.criteria-name { font-size: 13px; font-weight: 600; color: var(--gray800); line-height: 1.4; }
+.criteria-name small {
+  display: block; font-size: 11.5px; color: var(--gray800);
+  font-weight: 400; margin-top: 3px; line-height: 1.45;
+}
+.score-display {
+  font-family: 'DM Serif Display', serif; font-size: 32px; font-weight: 400;
+  line-height: 1; text-align: right; min-width: 32px;
+  background: var(--gradFull); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.score-display.empty { -webkit-text-fill-color: var(--gray200); background: none; }
+
+/* NOTE BUTTONS */
+.note-options { display: flex; gap: 0; padding: 0 18px 14px; }
+.note-btn {
+  flex: 1; background: var(--gray50); border: 1.5px solid var(--gray100);
+  color: var(--gray400); font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 500; padding: 8px 4px;
+  cursor: pointer; transition: all 0.15s; text-align: center;
+  line-height: 1.3; border-right: none; position: relative;
+}
+.note-btn:first-child { border-radius: 8px 0 0 8px; }
+.note-btn:last-child  { border-radius: 0 8px 8px 0; border-right: 1.5px solid var(--gray100); }
+.note-btn:hover { background: var(--gray100); color: var(--gray800); z-index:1; }
+.note-btn.active {
+  z-index: 2; color: #fff; border-color: transparent; font-weight: 700;
+}
+.note-btn:nth-child(1).active { background: linear-gradient(135deg,#ff4e00,#f7a800); }
+.note-btn:nth-child(2).active { background: linear-gradient(135deg,#e0009e,#ff4e00); }
+.note-btn:nth-child(3).active { background: linear-gradient(135deg,#7b2ff7,#e0009e); }
+.note-btn:nth-child(4).active { background: linear-gradient(135deg,#0099e5,#7b2ff7); }
+.note-btn:nth-child(5).active { background: linear-gradient(135deg,#00e5a0,#0099e5); }
+.note-num   { font-size: 16px; font-weight: 700; display: block; }
+.note-label { font-size: 9px; display: block; margin-top: 2px; opacity: 0.85; }
+
+/* ── RESULTADO ─────────────────────────────────────────── */
+.result-card {
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 22px 24px; margin-top: 3px;
+  border-top: 4px solid transparent;
+  border-image: var(--gradFull) 1;
+}
+.result-row {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;
+}
+.result-label {
+  font-size: 11px; font-weight: 700; color: var(--gray400);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.result-value {
+  font-family: 'DM Serif Display', serif; font-size: 44px; line-height: 1;
+  background: var(--gradFull); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.result-value.empty { -webkit-text-fill-color: var(--gray200); background: none; }
+.result-pct {
+  font-size: 14px; color: var(--gray400); margin-left: 8px;
+  font-family: 'Sora', sans-serif;
+}
+.bar-track {
+  background: var(--gray100); border-radius: 100px; height: 10px;
+  overflow: hidden; margin-bottom: 10px;
+}
+.bar-fill {
+  height: 100%; border-radius: 100px;
+  background: var(--gradFull);
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%;
+}
+.classification-tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+  color: #fff;
+}
+
+/* ── AÇÕES ─────────────────────────────────────────────── */
+.action-result {
+  border-radius: var(--radius); padding: 20px 22px;
+  border: 1.5px solid var(--gray100); background: var(--white);
+  transition: all 0.3s; box-shadow: var(--shadow);
+}
+.action-result.active-rever        { border-color: #ff4e00; background: #fff8f6; }
+.action-result.active-melhoria     { border-color: #0099e5; background: #f6fbff; }
+.action-result.active-preferencial { border-color: #00c07a; background: #f5fff9; }
+.action-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.action-result.active-rever        .action-title { color: #ff4e00; }
+.action-result.active-melhoria     .action-title { color: #0099e5; }
+.action-result.active-preferencial .action-title { color: #00c07a; }
+.action-desc { font-size: 13px; color: var(--gray600); line-height: 1.6; }
+.action-pct-badge {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+  letter-spacing: 0.06em; color: #fff;
+}
+.action-result.active-rever        .action-pct-badge { background: var(--grad1); }
+.action-result.active-melhoria     .action-pct-badge { background: var(--grad2); }
+.action-result.active-preferencial .action-pct-badge { background: linear-gradient(135deg,#00e5a0,#00c07a); }
+.action-pending {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--gray400); font-size: 13px; font-style: italic;
+}
+
+/* ── DECLARAÇÕES ───────────────────────────────────────── */
+.declaration {
+  font-size: 13px; color: var(--gray600); padding: 14px 16px;
+  background: var(--gray50); border-left: 4px solid transparent;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.55; margin-bottom: 10px; font-style: italic;
+}
+.declaration:nth-child(1) { border-left-color: #f7a800; }
+.declaration:nth-child(2) { border-left-color: #0099e5; }
+.declaration:last-child { margin-bottom: 0; }
+
+/* ── ASSINATURAS ───────────────────────────────────────── */
+.signatures-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.sig-block {
+  padding: 22px 20px; background: var(--white);
+  border: 1.5px solid var(--gray100); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.sig-block-title {
+  font-size: 11px; font-weight: 700; color: var(--gray600);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--gray100);
+}
+.sig-row { margin-bottom: 16px; }
+.sig-row label {
+  font-size: 10px; font-weight: 700; color: var(--gray400);
+  text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;
+}
+.sig-row input[type="date"],
+.sig-row input[type="text"] {
+  width: 100%; background: var(--gray50); border: 1.5px solid var(--gray100);
+  border-radius: 8px; padding: 9px 12px;
+  font-family: 'Sora', sans-serif; font-size: 13px; color: var(--gray800);
+  outline: none; transition: border-color 0.2s;
+}
+.sig-row input:focus { border-color: #0099e5; background: #fff; }
+
+/* LINHAS PONTILHADAS PARA ASSINATURA MANUAL */
+.sig-dotted-area {
+  margin-top: 4px;
+}
+.sig-dotted-line {
+  border-bottom: 2px dashed var(--gray200);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  min-height: 40px;
+  position: relative;
+}
+.sig-dotted-line:last-child { margin-bottom: 0; }
+.sig-dotted-label {
+  font-size: 10px; color: var(--gray400); font-weight: 500;
+  position: absolute; bottom: -18px; left: 0;
+}
+.sig-info-readonly {
+  font-size: 11.5px; font-weight: 600; color: var(--gray600);
+  margin-top: 6px; padding: 6px 10px;
+  background: var(--gray50); border-radius: 6px;
+}
+
+/* ── SUBMIT BAR ────────────────────────────────────────── */
+.submit-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--gray100);
+  padding: 14px 20px;
+  display: flex; justify-content: center; gap: 12px; z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.btn {
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 11px 28px; border-radius: 8px;
+  cursor: pointer; border: none; letter-spacing: 0.04em; transition: all 0.15s;
+}
+.btn-primary {
+  background: var(--gradFull); color: #fff;
+  box-shadow: 0 4px 14px rgba(0,153,229,0.3);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,153,229,0.4); }
+.btn-export {
+  background: var(--grad3); color: #fff;
+  box-shadow: 0 4px 14px rgba(123,47,247,0.3);
+}
+.btn-export:hover { transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; border: 1.5px solid var(--gray200); color: var(--gray600);
+}
+.btn-secondary:hover { border-color: var(--gray400); color: var(--gray800); }
+
+/* ── TOAST ─────────────────────────────────────────────── */
+.toast {
+  position: fixed; top: 24px; right: 24px;
+  background: var(--white); border-left: 4px solid #00c07a;
+  font-size: 13px; font-weight: 600; color: var(--gray800);
+  padding: 14px 20px; border-radius: 10px; display: none; z-index: 200;
+  box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(20px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRINT / PDF STYLES
+══════════════════════════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .submit-bar, .toast, .no-print { display: none !important; }
+
+  .container { max-width: 100%; padding: 0 16px; }
+
+  .header, .card, .criteria-item, .result-card,
+  .action-result, .sig-block { box-shadow: none !important; }
+
+  .section { margin-bottom: 14px; page-break-inside: avoid; }
+
+  .header-band { height: 6px; }
+
+  /* Hide score buttons and selects in print, show values */
+  .note-options { display: none !important; }
+  .field select  { background-image: none; }
+
+  /* Signature blocks get more space */
+  .sig-block { border: 1.5px solid #ccc; }
+
+  .sig-dotted-line {
+    border-bottom: 2px dashed #aaa !important;
+    min-height: 50px;
+    margin-bottom: 28px;
+  }
+
+  /* Print header */
+  .print-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(135deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0) 1;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .note-options-print { display: flex !important; gap: 4px; padding: 0 18px 12px; }
+  .note-btn-print {
+    padding: 4px 8px; font-size: 10px; border: 1px solid #ccc;
+    border-radius: 4px; font-weight: 500;
+  }
+  .note-btn-print.active-print {
+    background: #2a2f42 !important; color: #fff !important; border-color: #2a2f42;
+  }
+
+  /* Keep gradients in print for seg pills */
+  .seg-pill { -webkit-print-color-adjust: exact; }
+}
+
+/* Print header — hidden on screen */
+.print-header { display: none; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-grid, .signatures-grid, .seg-grid { grid-template-columns: 1fr; }
+  .span2 { grid-column: span 1; }
+  .header-inner { flex-direction: column; gap: 10px; }
+  .note-label { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">✓ Avaliação salva com sucesso</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-band"></div>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Avaliação de Prestadores de Serviço</h1>
+        <p>Qualidade do serviço – Conformidade técnica, acabamento e resultado final</p>
+        <span class="period-badge">Período 2025</span>
+      </div>
+      <div style="flex-shrink:0;display:flex;align-items:center;margin-top:-20px;">
+        <div style="display:flex;align-items:center;gap:10px;"><div style="width:44px;height:44px;border-radius:12px;background:var(--gradFull);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'DM Serif Display',serif;font-size:20px;">A</div><span style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--gray800);">ACME CORP</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 01 IDENTIFICAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c1">01</div>
+      <span class="section-title">Identificação do Prestador</span>
+    </div>
+    <div class="card">
+      <div class="form-grid">
+        <div class="field">
+          <label>Praça</label>
+          <select id="sel-praca" onchange="filtrarSetores()">
+            <option value="">— Selecione —</option>
+            <option>REGIÃO SUL</option><option>REGIÃO LESTE</option><option>REGIÃO CENTRAL</option>
+            <option>REGIÃO CAPITAL</option><option>REGIÃO NORTE</option><option>REGIÃO OESTE</option><option>REGIÃO NOROESTE</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Setor</label>
+          <select id="sel-setor" onchange="filtrarPJs()">
+            <option value="">— Selecione —</option>
+          </select>
+        </div>
+        <div class="field span2">
+          <label>Razão Social</label>
+          <select id="sel-empresa" onchange="preencherDados()">
+            <option value="">— Selecione a empresa —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>CNPJ</label>
+          <input type="text" id="cnpj" readonly placeholder="Preenchido automaticamente">
+        </div>
+        <div class="field">
+          <label>Representante Legal</label>
+          <input type="text" id="representante" readonly placeholder="Preenchido automaticamente">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 02 SEGMENTAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c2">02</div>
+      <span class="section-title">Segmentação do Prestador / Criticidade</span>
+    </div>
+    <div class="card">
+      <div class="seg-grid">
+        <div class="seg-card estrategico" id="seg-estrategico" onclick="selecionarSeg('estrategico')">
+          <div class="seg-pill">Estratégico</div>
+          <div class="seg-name">Estratégico</div>
+          <div class="seg-desc">Alto impacto direto no negócio. Sua interrupção compromete operações críticas, receita ou imagem. Exige monitoramento contínuo e gestão próxima.</div>
+          <div class="seg-check">✓</div>
+        </div>
+        <div class="seg-card critico" id="seg-critico" onclick="selecionarSeg('critico')">
+          <div class="seg-pill">Crítico</div>
+          <div class="seg-name">Crítico</div>
+          <div class="seg-desc">Relevante para a continuidade das operações. Falhas causam impacto moderado a alto. Requer acompanhamento periódico e plano de contingência.</div>
+          <div class="seg-check">✓</div>
+        </div>
+        <div class="seg-card baixo" id="seg-baixo" onclick="selecionarSeg('baixo')">
+          <div class="seg-pill">Baixo Impacto</div>
+          <div class="seg-name">Baixo Impacto</div>
+          <div class="seg-desc">Impacto limitado nas operações. Falhas podem ser absorvidas sem prejuízo relevante. Avaliação simplificada e menor frequência de monitoramento.</div>
+          <div class="seg-check">✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 03 AVALIAÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c3">03</div>
+      <span class="section-title">Avaliação por Critérios — Resultados Contratuais</span>
+    </div>
+    <div class="criteria-list">
+
+      <div class="criteria-item" id="ci-0">
+        <div class="criteria-top">
+          <div class="criteria-name">Qualidade do Serviço
+            <small>Conformidade técnica, organização, acabamento e resultado final. Avalie se o serviço entregue atende aos requisitos técnicos contratados, prezando pela qualidade e conformidade com os padrões estabelecidos.</small>
+          </div>
+          <div class="score-display empty" id="disp-0">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(0,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(0,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(0,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(0,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(0,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-1">
+        <div class="criteria-top">
+          <div class="criteria-name">Custo-Benefício
+            <small>Relação entre preço, qualidade e entrega do serviço. Avalie se o valor cobrado é compatível com a qualidade e eficiência dos serviços prestados.</small>
+          </div>
+          <div class="score-display empty" id="disp-1">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(1,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(1,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(1,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(1,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(1,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-2">
+        <div class="criteria-top">
+          <div class="criteria-name">Comunicação e Responsividade
+            <small>Clareza e completude de relatório e tempo de respostas à solicitações internas. Avalie a qualidade da comunicação, pontualidade nos retornos e clareza dos relatórios entregues.</small>
+          </div>
+          <div class="score-display empty" id="disp-2">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(2,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(2,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(2,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(2,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(2,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-3">
+        <div class="criteria-top">
+          <div class="criteria-name">Segurança, Conformidade Legal e Gestão de Risco
+            <small>Cumprimento de normas internas (seg. trabalho / código de conduta) e documentação exigida (CNDs Municipal, Estadual, Federal). Avalie a regularidade documental e aderência às normas de compliance.</small>
+          </div>
+          <div class="score-display empty" id="disp-3">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(3,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(3,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(3,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(3,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(3,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-4">
+        <div class="criteria-top">
+          <div class="criteria-name">Proatividade / Iniciativa
+            <small>Registro de melhorias, ações corretivas eficazes e solução de imprevistos. Avalie se o prestador antecipa problemas, propõe melhorias e age de forma resolutiva diante de situações não previstas.</small>
+          </div>
+          <div class="score-display empty" id="disp-4">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(4,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(4,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(4,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(4,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(4,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+      <div class="criteria-item" id="ci-5">
+        <div class="criteria-top">
+          <div class="criteria-name">Atendimento dos Entregáveis Contratados
+            <small>Cumprimento dos prazos acordados e acurácia dos serviços prestados. Avalie se os entregáveis foram concluídos dentro dos prazos e com o nível de exatidão e qualidade exigidos no contrato.</small>
+          </div>
+          <div class="score-display empty" id="disp-5">—</div>
+        </div>
+        <div class="note-options">
+          <button class="note-btn" onclick="setNota(5,1)"><span class="note-num">1</span><span class="note-label">Não Atende</span></button>
+          <button class="note-btn" onclick="setNota(5,2)"><span class="note-num">2</span><span class="note-label">Atende Parc.</span></button>
+          <button class="note-btn" onclick="setNota(5,3)"><span class="note-num">3</span><span class="note-label">Satisfatório</span></button>
+          <button class="note-btn" onclick="setNota(5,4)"><span class="note-num">4</span><span class="note-label">Muito Bom</span></button>
+          <button class="note-btn" onclick="setNota(5,5)"><span class="note-num">5</span><span class="note-label">Excelente</span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESULTADO FINAL -->
+    <div class="result-card">
+      <div class="result-row">
+        <span class="result-label">Resultado Final</span>
+        <div style="display:flex;align-items:baseline;gap:4px;">
+          <span class="result-value empty" id="result-val">—</span>
+          <span class="result-pct" id="result-pct"></span>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
+      <div id="result-class" style="margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- SEC 04 AÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c4">04</div>
+      <span class="section-title">Ações e Recomendações</span>
+    </div>
+    <div id="action-box" class="action-result">
+      <div class="action-pending">
+        <span style="font-size:22px;opacity:0.25">◎</span>
+        Preencha todos os critérios para obter a recomendação automática.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 05 DECLARAÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c5">05</div>
+      <span class="section-title">Declarações</span>
+    </div>
+    <div class="card">
+      <div class="declaration">
+        <strong>4.1</strong> — A presente avaliação refere-se exclusivamente à prestação de serviços contratada, não configurando controle de natureza trabalhista.
+      </div>
+      <div class="declaration">
+        <strong>4.2</strong> — A eventual aplicação de ações corretivas não aplica poder disciplinar típico de vínculo de emprego.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEC 06 ASSINATURAS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num c6">06</div>
+      <span class="section-title">Assinaturas</span>
+    </div>
+    <div class="signatures-grid">
+
+      <!-- Responsável pela avaliação -->
+      <div class="sig-block">
+        <div class="sig-block-title">Responsável pela Avaliação</div>
+        <div class="sig-row">
+          <label>Data</label>
+          <input type="date" id="data-avaliacao">
+        </div>
+        <div class="sig-row">
+          <label>Nome do Responsável</label>
+          <input type="text" id="nome-avaliador" placeholder="Nome completo">
+        </div>
+        <div style="margin-top:18px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Assinatura</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-top:20px;margin-bottom:6px;">Carimbo</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ciência do prestador -->
+      <div class="sig-block">
+        <div class="sig-block-title">Ciência do Prestador de Serviço</div>
+        <div class="sig-row">
+          <label>Data</label>
+          <input type="date" id="data-ciencia">
+        </div>
+        <div class="sig-row">
+          <label>Responsável Legal</label>
+          <div class="sig-info-readonly" id="sig-empresa">—</div>
+        </div>
+        <div class="sig-row">
+          <label>CNPJ</label>
+          <div class="sig-info-readonly" id="sig-cnpj" style="color:var(--gray400);font-size:11px;">—</div>
+        </div>
+        <div style="margin-top:12px;">
+          <div style="font-size:10px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Assinatura do Responsável Legal</div>
+          <div class="sig-dotted-area">
+            <div class="sig-dotted-line" style="min-height:54px;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- SUBMIT BAR -->
+<div class="submit-bar no-print">
+  <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
+  <button class="btn btn-secondary" onclick="salvar()">Salvar</button>
+  <button class="btn btn-export" onclick="exportarPDF()">⬇ Exportar PDF</button>
+</div>
+
+<script>
+// ── DATA ATUAL ──────────────────────────────────────────
+(function(){
+  const d = new Date();
+  const s = d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  // date removed
+})();
+
+// ── BASE DE DADOS ──────────────────────────────────────
+const pjs = [
+  {empresa:"SR. MIGUEL REZENDE",representante:"SR. MIGUEL REZENDE",cnpj:"29.504.766/0001-16",praca:"REGIÃO LESTE",setor:"JORNALISMO"},
+  {empresa:"BRAYAN NASCIMENTO",representante:"BRAYAN NASCIMENTO",cnpj:"78.196.474/0001-84",praca:"REGIÃO CENTRAL",setor:"COMERCIAL"},
+  {empresa:"LUIZ OTÁVIO PACHECO",representante:"LUIZ OTÁVIO PACHECO",cnpj:"74.319.138/0001-21",praca:"REGIÃO OESTE",setor:"JORNALISMO"},
+  {empresa:"Thiago Produções S/S LTDA",representante:"THIAGO CUNHA",cnpj:"21.664.534/0001-17",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+  {empresa:"Caio Produções S/S LTDA",representante:"CAIO LOPES",cnpj:"90.742.696/0001-17",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"Ana Engenharia LTDA",representante:"ANA LÍVIA DA COSTA",cnpj:"38.147.670/0001-27",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"YURI LIMA",representante:"YURI LIMA",cnpj:"28.653.220/0001-83",praca:"REGIÃO SUL",setor:"PROGRAMAÇÃO"},
+  {empresa:"DAVI CÂMARA",representante:"DAVI CÂMARA",cnpj:"97.285.205/0001-84",praca:"REGIÃO SUL",setor:"JORNALISMO"},
+  {empresa:"Ana Assessoria SERVIÇOS",representante:"ANA LIZ OLIVEIRA",cnpj:"22.660.829/0001-18",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+  {empresa:"Maria Tecnologia S/S LTDA",representante:"MARIA LAURA ARAGÃO",cnpj:"73.796.644/0001-64",praca:"REGIÃO SUL",setor:"JORNALISMO"},
+  {empresa:"Augusto Mídia CONSULTORIA",representante:"AUGUSTO NOVAIS",cnpj:"56.406.354/0001-33",praca:"REGIÃO SUL",setor:"COMERCIAL"},
+  {empresa:"João Assessoria ME",representante:"JOÃO VITOR LEÃO",cnpj:"83.407.637/0001-73",praca:"REGIÃO OESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Vitor Projetos CONSULTORIA",representante:"VITOR HUGO CAMPOS",cnpj:"46.723.174/0001-25",praca:"REGIÃO CENTRAL",setor:"TECNOLOGIA"},
+  {empresa:"Lorena Comunicação SERVIÇOS",representante:"LORENA NOVAIS",cnpj:"29.600.531/0001-15",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"Emilly Produções SERVIÇOS",representante:"EMILLY CALDEIRA",cnpj:"53.811.458/0001-86",praca:"REGIÃO CENTRAL",setor:"FINANCEIRO"},
+  {empresa:"Esther Mídia ME",representante:"ESTHER FREITAS",cnpj:"21.376.585/0001-99",praca:"REGIÃO SUL",setor:"COMERCIAL"},
+  {empresa:"Yan Consultoria - ME",representante:"YAN SILVA",cnpj:"92.691.797/0001-67",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+  {empresa:"BENTO PINTO",representante:"BENTO PINTO",cnpj:"59.784.455/0001-12",praca:"REGIÃO SUL",setor:"JORNALISMO"},
+  {empresa:"Theo Serviços EIRELI",representante:"THEO RODRIGUES",cnpj:"88.219.605/0001-17",praca:"REGIÃO LESTE",setor:"MARKETING"},
+  {empresa:"MARIANE VASCONCELOS",representante:"MARIANE VASCONCELOS",cnpj:"46.232.856/0001-41",praca:"REGIÃO SUL",setor:"COMERCIAL"},
+  {empresa:"Dr. Mídia ME",representante:"DR. RAFAEL FONSECA",cnpj:"31.559.511/0001-80",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"JOSUÉ VIEIRA",representante:"JOSUÉ VIEIRA",cnpj:"27.938.540/0001-80",praca:"REGIÃO CENTRAL",setor:"FINANCEIRO"},
+  {empresa:"JOAQUIM BARROS",representante:"JOAQUIM BARROS",cnpj:"63.467.799/0001-58",praca:"REGIÃO CENTRAL",setor:"FINANCEIRO"},
+  {empresa:"Letícia Comunicação ME",representante:"LETÍCIA MOURA",cnpj:"32.254.337/0001-94",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+  {empresa:"MANUELA SIQUEIRA",representante:"MANUELA SIQUEIRA",cnpj:"72.951.703/0001-33",praca:"REGIÃO CENTRAL",setor:"INFRAESTRUTURA"},
+  {empresa:"LAURA PEREIRA",representante:"LAURA PEREIRA",cnpj:"10.249.529/0001-78",praca:"REGIÃO SUL",setor:"PROGRAMAÇÃO"},
+  {empresa:"Dante Tecnologia SERVIÇOS",representante:"DANTE MORAES",cnpj:"26.807.979/0001-75",praca:"REGIÃO CENTRAL",setor:"COMERCIAL"},
+  {empresa:"Eloah Representações LTDA",representante:"ELOAH SÁ",cnpj:"68.991.898/0001-97",praca:"REGIÃO OESTE",setor:"ENGENHARIA"},
+  {empresa:"Sr. Engenharia PRODUÇÕES",representante:"SR. SAMUEL LEÃO",cnpj:"61.503.206/0001-71",praca:"REGIÃO SUL",setor:"MARKETING"},
+  {empresa:"Breno Consultoria S/S LTDA",representante:"BRENO TEIXEIRA",cnpj:"18.313.551/0001-30",praca:"REGIÃO CAPITAL",setor:"DIRETORIA EXECUTIVA"},
+  {empresa:"LUARA FERNANDES",representante:"LUARA FERNANDES",cnpj:"86.153.204/0001-10",praca:"REGIÃO OESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Sra. Estúdio ME",representante:"SRA. SARA PACHECO",cnpj:"56.728.126/0001-19",praca:"REGIÃO CENTRAL",setor:"INFRAESTRUTURA"},
+  {empresa:"Ana Tecnologia PRODUÇÕES",representante:"ANA LÍVIA BORGES",cnpj:"29.749.358/0001-54",praca:"REGIÃO NORTE",setor:"JORNALISMO"},
+  {empresa:"Renan Mídia ME",representante:"RENAN SAMPAIO",cnpj:"24.969.599/0001-69",praca:"REGIÃO OESTE",setor:"ENGENHARIA"},
+  {empresa:"Ana Soluções ME",representante:"ANA LUIZA ARAÚJO",cnpj:"28.204.867/0001-53",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"Dra. Mídia EIRELI",representante:"DRA. LUANA RAMOS",cnpj:"76.123.310/0001-77",praca:"REGIÃO CENTRAL",setor:"MARKETING"},
+  {empresa:"Melissa Projetos LTDA",representante:"MELISSA DA PAZ",cnpj:"77.405.758/0001-21",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"Sra. Soluções SERVIÇOS",representante:"SRA. MANUELLA ALMEIDA",cnpj:"31.464.890/0001-38",praca:"REGIÃO OESTE",setor:"JORNALISMO"},
+  {empresa:"Maria Estúdio SERVIÇOS",representante:"MARIA CAVALCANTE",cnpj:"91.328.727/0001-34",praca:"REGIÃO NOROESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Bruna Engenharia S/S LTDA",representante:"BRUNA MONTEIRO",cnpj:"35.630.604/0001-55",praca:"REGIÃO NOROESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Henrique Consultoria - ME",representante:"HENRIQUE VARGAS",cnpj:"70.365.298/0001-98",praca:"REGIÃO OESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Davi Serviços CONSULTORIA",representante:"DAVI LUCCA SOUSA",cnpj:"54.473.182/0001-38",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"MIGUEL GONÇALVES",representante:"MIGUEL GONÇALVES",cnpj:"70.301.445/0001-36",praca:"REGIÃO OESTE",setor:"JORNALISMO"},
+  {empresa:"Anna Tecnologia LTDA",representante:"ANNA LIZ CAVALCANTE",cnpj:"71.768.452/0001-92",praca:"REGIÃO LESTE",setor:"JORNALISMO"},
+  {empresa:"MARIA LIZ NOVAES",representante:"MARIA LIZ NOVAES",cnpj:"94.222.497/0001-35",praca:"REGIÃO SUL",setor:"JORNALISMO"},
+  {empresa:"Davi Comunicação PRODUÇÕES",representante:"DAVI MIGUEL LOPES",cnpj:"91.440.188/0001-60",praca:"REGIÃO LESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Lara Projetos ME",representante:"LARA SANTOS",cnpj:"30.274.230/0001-13",praca:"REGIÃO NOROESTE",setor:"JORNALISMO"},
+  {empresa:"MARIA ALICE RODRIGUES",representante:"MARIA ALICE RODRIGUES",cnpj:"69.925.771/0001-28",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"Isabel Tecnologia CONSULTORIA",representante:"ISABEL CASSIANO",cnpj:"94.458.259/0001-80",praca:"REGIÃO LESTE",setor:"JORNALISMO"},
+  {empresa:"Felipe Consultoria LTDA",representante:"FELIPE CASSIANO",cnpj:"93.205.639/0001-27",praca:"REGIÃO NOROESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Igor Assessoria S/S LTDA",representante:"IGOR ALBUQUERQUE",cnpj:"13.357.317/0001-47",praca:"REGIÃO OESTE",setor:"JORNALISMO"},
+  {empresa:"Emilly Tecnologia SERVIÇOS",representante:"EMILLY DA LUZ",cnpj:"43.657.529/0001-26",praca:"REGIÃO OESTE",setor:"ENGENHARIA"},
+  {empresa:"ANDRÉ CASA GRANDE",representante:"ANDRÉ CASA GRANDE",cnpj:"55.569.778/0001-84",praca:"REGIÃO CAPITAL",setor:"JORNALISMO"},
+  {empresa:"Yasmin Estúdio PRODUÇÕES",representante:"YASMIN FREITAS",cnpj:"74.233.644/0001-29",praca:"REGIÃO OESTE",setor:"COMERCIAL"},
+  {empresa:"Luiza Consultoria CONSULTORIA",representante:"LUIZA CARDOSO",cnpj:"33.723.104/0001-29",praca:"REGIÃO CENTRAL",setor:"PRODUÇÃO"},
+  {empresa:"DRA. ANA JÚLIA MARQUES",representante:"DRA. ANA JÚLIA MARQUES",cnpj:"70.733.842/0001-25",praca:"REGIÃO NOROESTE",setor:"ENGENHARIA"},
+  {empresa:"Maria Serviços CONSULTORIA",representante:"MARIA JÚLIA GONÇALVES",cnpj:"23.673.158/0001-41",praca:"REGIÃO CENTRAL",setor:"RECURSOS HUMANOS"},
+  {empresa:"MARIA JÚLIA CALDEIRA",representante:"MARIA JÚLIA CALDEIRA",cnpj:"15.890.200/0001-74",praca:"REGIÃO CENTRAL",setor:"ENGENHARIA"},
+  {empresa:"Maria Consultoria ME",representante:"MARIA LIZ ARAÚJO",cnpj:"66.433.727/0001-74",praca:"REGIÃO OESTE",setor:"ENGENHARIA"},
+  {empresa:"Bernardo Assessoria - ME",representante:"BERNARDO COSTELA",cnpj:"67.620.646/0001-71",praca:"REGIÃO OESTE",setor:"JORNALISMO"},
+  {empresa:"Elisa Assessoria - ME",representante:"ELISA CAMARGO",cnpj:"81.307.960/0001-67",praca:"REGIÃO CENTRAL",setor:"INFRAESTRUTURA"},
+  {empresa:"SR. CAUÃ ABREU",representante:"SR. CAUÃ ABREU",cnpj:"25.501.552/0001-50",praca:"REGIÃO LESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"CLARICE NASCIMENTO",representante:"CLARICE NASCIMENTO",cnpj:"40.538.174/0001-37",praca:"REGIÃO CENTRAL",setor:"MARKETING"},
+  {empresa:"Luiz Produções EIRELI",representante:"LUIZ OTÁVIO PIMENTA",cnpj:"92.776.474/0001-28",praca:"REGIÃO CENTRAL",setor:"JURÍDICO"},
+  {empresa:"BRAYAN COSTELA",representante:"BRAYAN COSTELA",cnpj:"27.578.324/0001-22",praca:"REGIÃO CENTRAL",setor:"ENGENHARIA"},
+  {empresa:"Maria Mídia EIRELI",representante:"MARIA FLOR CASSIANO",cnpj:"95.952.329/0001-30",praca:"REGIÃO LESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"Isis Estúdio PRODUÇÕES",representante:"ISIS FERREIRA",cnpj:"53.531.300/0001-55",praca:"REGIÃO OESTE",setor:"COMERCIAL"},
+  {empresa:"MARIA CLARA MELO",representante:"MARIA CLARA MELO",cnpj:"56.119.446/0001-80",praca:"REGIÃO NOROESTE",setor:"ENGENHARIA"},
+  {empresa:"Danilo Projetos LTDA",representante:"DANILO MENDONÇA",cnpj:"59.439.629/0001-89",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+  {empresa:"PIETRA MENDES",representante:"PIETRA MENDES",cnpj:"18.215.907/0001-39",praca:"REGIÃO CENTRAL",setor:"PRODUÇÃO"},
+  {empresa:"Bryan Produções ME",representante:"BRYAN CASA GRANDE",cnpj:"43.378.140/0001-33",praca:"REGIÃO OESTE",setor:"PROGRAMAÇÃO"},
+  {empresa:"LUIGI SOUSA",representante:"LUIGI SOUSA",cnpj:"26.939.532/0001-96",praca:"REGIÃO SUL",setor:"ENGENHARIA"},
+  {empresa:"Rhavi Soluções PRODUÇÕES",representante:"RHAVI SALES",cnpj:"29.649.627/0001-83",praca:"REGIÃO CENTRAL",setor:"OPERAÇÕES"},
+  {empresa:"Valentim Serviços ME",representante:"VALENTIM ALMEIDA",cnpj:"45.158.918/0001-98",praca:"REGIÃO CENTRAL",setor:"JORNALISMO"},
+  {empresa:"VINÍCIUS FONSECA",representante:"VINÍCIUS FONSECA",cnpj:"19.375.117/0001-91",praca:"REGIÃO CENTRAL",setor:"PROGRAMAÇÃO"},
+];
+
+const pracaSetores = {
+  "REGIÃO SUL":     ["COMERCIAL","ENGENHARIA","JORNALISMO","MARKETING","PROGRAMAÇÃO"],
+  "REGIÃO LESTE":    ["JORNALISMO","MARKETING","PROGRAMAÇÃO"],
+  "REGIÃO CENTRAL": ["TECNOLOGIA","COMERCIAL","ENGENHARIA","FINANCEIRO","PRODUÇÃO","JORNALISMO","JURÍDICO","MARKETING","OPERAÇÕES","PROGRAMAÇÃO","RECURSOS HUMANOS","INFRAESTRUTURA"],
+  "REGIÃO CAPITAL": ["DIRETORIA EXECUTIVA","JORNALISMO"],
+  "REGIÃO NORTE":     ["JORNALISMO"],
+  "REGIÃO OESTE": ["COMERCIAL","ENGENHARIA","JORNALISMO","PROGRAMAÇÃO"],
+  "REGIÃO NOROESTE":  ["ENGENHARIA","JORNALISMO","PROGRAMAÇÃO"],
+};
+
+const weights   = [2.0, 1.5, 1.5, 2.0, 1.0, 2.0];
+const totalW    = weights.reduce((a,b)=>a+b,0); // 10
+const maxScore  = totalW * 5; // 50
+const notas     = [null,null,null,null,null,null];
+
+// ── FILTROS ──
+function filtrarSetores(){
+  const praca=document.getElementById('sel-praca').value;
+  const s=document.getElementById('sel-setor');
+  s.innerHTML='<option value="">— Selecione —</option>';
+  if(praca&&pracaSetores[praca]) pracaSetores[praca].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;s.appendChild(o);});
+  filtrarPJs();
+}
+function filtrarPJs(){
+  const praca=document.getElementById('sel-praca').value;
+  const setor=document.getElementById('sel-setor').value;
+  const s=document.getElementById('sel-empresa');
+  s.innerHTML='<option value="">— Selecione a empresa —</option>';
+  pjs.filter(p=>(!praca||p.praca===praca)&&(!setor||p.setor===setor))
+     .sort((a,b)=>a.empresa.localeCompare(b.empresa))
+     .forEach(p=>{const o=document.createElement('option');o.value=p.empresa;o.textContent=p.empresa;s.appendChild(o);});
+  clearPJ();
+}
+function preencherDados(){
+  const nome=document.getElementById('sel-empresa').value;
+  const f=pjs.find(p=>p.empresa===nome);
+  if(f){
+    document.getElementById('cnpj').value=f.cnpj;
+    document.getElementById('representante').value=f.representante;
+    document.getElementById('sig-empresa').textContent=f.representante;
+    document.getElementById('sig-cnpj').textContent=f.cnpj;
+    if(!document.getElementById('sel-praca').value){
+      document.getElementById('sel-praca').value=f.praca;
+      filtrarSetores();
+      document.getElementById('sel-setor').value=f.setor;
+      filtrarPJs();
+      document.getElementById('sel-empresa').value=nome;
+      document.getElementById('cnpj').value=f.cnpj;
+      document.getElementById('representante').value=f.representante;
+      document.getElementById('sig-empresa').textContent=f.representante;
+      document.getElementById('sig-cnpj').textContent=f.cnpj;
+    }
+  }
+}
+function clearPJ(){
+  document.getElementById('cnpj').value='';
+  document.getElementById('representante').value='';
+  document.getElementById('sig-empresa').textContent='—';
+  document.getElementById('sig-cnpj').textContent='—';
+}
+
+// ── SEGMENTAÇÃO ──
+function selecionarSeg(t){
+  ['estrategico','critico','baixo'].forEach(x=>{
+    const el=document.getElementById('seg-'+x);
+    el.className='seg-card '+x;
+  });
+  document.getElementById('seg-'+t).classList.add('selected');
+}
+
+// ── NOTAS ──
+function setNota(idx,val){
+  notas[idx]=val;
+  const d=document.getElementById('disp-'+idx);
+  d.textContent=val; d.classList.remove('empty');
+  document.querySelectorAll('.criteria-item')[idx]
+    .querySelectorAll('.note-btn')
+    .forEach((b,i)=>b.classList.toggle('active',i+1===val));
+  document.querySelectorAll('.criteria-item')[idx].classList.add('scored');
+  calcular();
+}
+
+// ── CÁLCULO ──
+function calcular(){
+  const filled=notas.filter(n=>n!==null).length;
+  if(filled===0){resetResult();return;}
+
+  let ws=0,wt=0;
+  notas.forEach((n,i)=>{if(n!==null){ws+=n*weights[i];wt+=weights[i];}});
+  const avg=ws/wt;
+  const allFilled=filled===6;
+  const pct=allFilled?(ws/maxScore)*100:null;
+
+  const rv=document.getElementById('result-val');
+  const rp=document.getElementById('result-pct');
+  const bar=document.getElementById('bar-fill');
+  const rc=document.getElementById('result-class');
+  const ab=document.getElementById('action-box');
+
+  rv.textContent=avg.toFixed(2);
+  rv.classList.remove('empty');
+
+  if(allFilled){
+    rp.textContent='('+pct.toFixed(0)+'%)';
+    bar.style.width=pct+'%';
+
+    let tag,bg;
+    if(pct>=90){tag='Excelente';bg='linear-gradient(135deg,#00e5a0,#0099e5)';}
+    else if(pct>=61){tag='Bom';bg='linear-gradient(135deg,#0099e5,#7b2ff7)';}
+    else if(pct>=40){tag='Regular';bg='linear-gradient(135deg,#f7a800,#ff4e00)';}
+    else{tag='Crítico';bg='linear-gradient(135deg,#ff4e00,#e0009e)';}
+
+    rc.innerHTML=`<span class="classification-tag" style="background:${bg}">${tag}</span>`;
+
+    if(pct<60){
+      ab.className='action-result active-rever';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Abaixo de 60%</div><div class="action-title">⚠ Rever Contrato</div><div class="action-desc">O desempenho é insatisfatório, com falhas que comprometem a qualidade, segurança, prazos ou conformidade. Esse nível indica alto risco operacional e baixo alinhamento com os padrões exigidos pela empresa.</div>`;
+    } else if(pct<=89){
+      ab.className='action-result active-melhoria';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Entre 61% e 89%</div><div class="action-title">◈ Solicitar Plano de Melhoria</div><div class="action-desc">O desempenho é adequado, porém apresenta pontos de atenção que precisam ser aprimorados. Esse intervalo indica que o prestador atende às necessidades, mas possui oportunidades claras de evolução.</div>`;
+    } else {
+      ab.className='action-result active-preferencial';
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Acima de 90%</div><div class="action-title">★ Manter no Cadastro Preferencial</div><div class="action-desc">O prestador demonstra desempenho superior e consistente, atendendo plenamente aos requisitos técnicos, operacionais e de qualidade.</div>`;
+    }
+  } else {
+    rp.textContent=`(${filled}/6 critérios)`;
+    bar.style.width=((filled/6)*(avg/5)*100)+'%';
+    rc.innerHTML='';
+    ab.className='action-result';
+    ab.innerHTML=`<div class="action-pending"><span style="font-size:22px;opacity:0.25">◎</span> Preencha os ${6-filled} critério(s) restante(s) para obter a recomendação.</div>`;
+  }
+}
+
+function resetResult(){
+  const rv=document.getElementById('result-val');
+  rv.textContent='—'; rv.classList.add('empty');
+  document.getElementById('result-pct').textContent='';
+  document.getElementById('bar-fill').style.width='0%';
+  document.getElementById('result-class').innerHTML='';
+  const ab=document.getElementById('action-box');
+  ab.className='action-result';
+  ab.innerHTML=`<div class="action-pending"><span style="font-size:22px;opacity:0.25">◎</span> Preencha todos os critérios de avaliação para obter a recomendação automática.</div>`;
+}
+
+function limpar(){
+  if(!confirm('Deseja limpar todo o formulário?')) return;
+  document.getElementById('sel-praca').value='';
+  document.getElementById('sel-setor').innerHTML='<option value="">— Selecione —</option>';
+  document.getElementById('sel-empresa').innerHTML='<option value="">— Selecione a empresa —</option>';
+  clearPJ();
+  document.getElementById('nome-avaliador').value='';
+  document.getElementById('data-avaliacao').value='';
+  document.getElementById('data-ciencia').value='';
+  for(let i=0;i<6;i++){
+    notas[i]=null;
+    const d=document.getElementById('disp-'+i);
+    d.textContent='—'; d.classList.add('empty');
+    document.querySelectorAll('.criteria-item')[i].querySelectorAll('.note-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.criteria-item')[i].classList.remove('scored');
+  }
+  ['estrategico','critico','baixo'].forEach(t=>{document.getElementById('seg-'+t).className='seg-card '+t;});
+  resetResult();
+}
+
+function salvar(){
+  if(!document.getElementById('sel-empresa').value){alert('Selecione a empresa prestadora.');return;}
+  const t=document.getElementById('toast');
+  t.style.display='block';
+  setTimeout(()=>{t.style.display='none';},2800);
+}
+
+// ── EXPORTAR PDF ──────────────────────────────────────
+function exportarPDF(){
+  const empresa = document.getElementById('sel-empresa').value || 'Avaliação';
+  // Preparar nome do arquivo
+  const safe = empresa.replace(/[^a-zA-Z0-9\s]/g,'').trim().replace(/\s+/g,'_').substring(0,40);
+  const d = new Date();
+  const dataStr = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  document.title = `Avaliacao_PJ_${safe}_${dataStr}`;
+
+  // Adicionar classe de impressão temporária para ocultar botões
+  document.body.classList.add('printing');
+
+  // Esconder submit bar
+  document.querySelector('.submit-bar').style.display='none';
+  document.querySelector('.toast').style.display='none';
+
+  window.print();
+
+  // Restaurar
+  setTimeout(()=>{
+    document.querySelector('.submit-bar').style.display='flex';
+    document.body.classList.remove('printing');
+    document.title = 'Avaliação de Prestadores de Serviço';
+  }, 1000);
+}
+</script>
+</body>
+</html>
