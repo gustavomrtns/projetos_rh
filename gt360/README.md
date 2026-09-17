@@ -24,7 +24,7 @@ No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o 
 
 1. **Agrupar por tarefa de RH.** Os módulos foram distribuídos em Jornada do Colaborador, Engajamento e Saúde Organizacional, Desenvolvimento de Talentos e Qualidade e Processos.
 2. **Manter os fluxos próprios de cada aplicação.** Onboarding, avaliações, pesquisa e treinamentos têm etapas e informações diferentes; o workspace dá acesso a eles sem reduzir tudo a um formulário único.
-3. **Permitir acesso direto a um módulo.** Links específicos abrem a aplicação correspondente, inclusive para preservar endereços dos projetos anteriormente publicados separadamente.
+3. **Permitir acesso direto a um módulo.** Links específicos abrem cada aplicação dentro do workspace e permitem compartilhar diretamente o módulo desejado.
 4. **Preservar uma cópia dos registros de demonstração.** O workspace permite baixar e restaurar um backup JSON dos dados locais de seus módulos. O arquivo pode conter todas as informações cadastradas pela pessoa que o gerou.
 5. **Mostrar as capacidades sem atribuir resultados não medidos.** Indicadores existentes nas aplicações demonstram acompanhamento e análise; este case não afirma ganhos percentuais ou ROI já comprovados.
 
