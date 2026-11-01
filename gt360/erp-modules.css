@@ -157,3 +157,25 @@
   .view.active,.page.active,.home-view.active,.modal{animation:none!important}
   .btn,.side-item,.home-card,.nav-tab,.subtab-btn{transition:none!important;transform:none!important}
 }
+
+/* Refinamentos de ergonomia e densidade */
+@media screen{
+  .erp-home-eyebrow{font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    font-weight:700;color:#a21818;margin:0 0 12px}
+  html.erp-embedded:not(.erp-has-role) body>header,
+  html.erp-embedded:not(.erp-has-role) body>.brand-band{display:none!important}
+  .sp-andamento,.st-btn.s-andamento,.st-btn.s-planejado{
+    background:#eef2f5!important;color:#455868!important;border-color:#dbe2e7!important;
+  }
+  .badge,.pill,.period-badge{letter-spacing:0}
+  button[disabled],.btn:disabled{cursor:not-allowed;opacity:.48;transform:none!important}
+  .view-inner,.container{scroll-margin-top:14px}
+  .table-scroll{scrollbar-width:thin;scrollbar-color:#c9c4bf transparent}
+  @media(max-width:780px){
+    html.erp-embedded .workspace-body{flex:1;min-height:0}
+    html.erp-embedded .content{min-height:0}
+    .form-grid>*,.dash-filter-grid>*{min-width:0}
+    .dtable{min-width:520px}
+    .dtable th,.dtable td{white-space:normal;vertical-align:top}
+  }
+}
