@@ -166,8 +166,9 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 
     <div class="view home-view" id="home-view" inert aria-hidden="true">
       <div class="home-inner">
-        <h1>Bem-vindo ao GT 360°</h1>
-        <p>Escolha uma aplicação abaixo para começar a trabalhar.</p>
+        <div class="erp-home-eyebrow">GT360° / Gestão de Pessoas</div>
+        <h1>Gestão de pessoas em um só lugar.</h1>
+        <p>Acesse processos da jornada, desenvolvimento, pesquisas e conformidade em um único ambiente de trabalho.</p>
         <div id="home-grid"></div>
       </div>
     </div>
@@ -193,7 +194,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 const GROUPS_CONFIG = [
   {id:'jornada',   label:'Jornada do Colaborador',        dot:'d1'},
   {id:'clima',     label:'Engajamento e Saúde Organizacional', dot:'d2'},
-  {id:'talentos',  label:'Desenvolvimento de Talentos',   dot:'d3'},
+  {id:'talentos',  label:'Desenvolvimento e Aprendizagem',   dot:'d3'},
   {id:'qualidade', label:'Qualidade e Processos',         dot:'d4'}
 ];
 
@@ -204,7 +205,7 @@ const APPS_CONFIG = [
   {id:'tempo-casa',           group:'jornada',   label:'Gestão de Tempo de Casa',          desc:'Acompanhamento de marcos de tempo de casa e envio de celebrações aos colaboradores.'},
   {id:'desligamento',         group:'jornada',   label:'Questionário de Desligamento',     desc:'Coleta de feedback de saída, dashboard consolidado e exportação de respostas.'},
   {id:'engajamento',          group:'clima',     label:'Pesquisa de Engajamento',           desc:'Pesquisa de engajamento organizacional com blocos de perguntas, respostas anônimas e dashboard de análise.'},
-  {id:'riscos-psicossociais', group:'clima',     label:'Gestão de Riscos Psicossociais',   desc:'Planos de ação a partir da avaliação psicossocial por unidade e setor (PROART).'},
+  {id:'riscos-psicossociais', group:'clima',     label:'Gestão de Riscos Psicossociais',   desc:'Planos de ação e acompanhamento de fatores psicossociais por unidade e setor.'},
   {id:'treinamentos',         group:'talentos',  label:'Painel de Treinamentos',           desc:'Gestão de turmas, mensuração de impacto e indicadores de treinamentos corporativos.'},
   {id:'checklist-5s',         group:'qualidade', label:'Checklist 5S',                     desc:'Auditoria de organização e qualidade do ambiente de trabalho, com histórico de auditorias.'}
 ];
