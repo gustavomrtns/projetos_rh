@@ -110,6 +110,12 @@
     } catch(_) {}
     demoSuggestions();
     associateLabels(document);
+    var toast=document.getElementById('toast');
+    if(toast){
+      toast.setAttribute('role','status');
+      toast.setAttribute('aria-live','polite');
+      toast.setAttribute('aria-atomic','true');
+    }
     if(typeof MutationObserver==="function"){
       var pending=false;
       new MutationObserver(function(){if(!pending){pending=true;requestAnimationFrame(function(){pending=false;associateLabels(document);demoSuggestions();});}}).observe(document.body,{subtree:true,childList:true});
