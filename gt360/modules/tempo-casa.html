@@ -985,12 +985,10 @@ async function testarIntegracao(tipo){
   if(!url){ showToast('Informe o endpoint antes de testar'); return; }
   const payload={ tipo:'teste', origem:'Tempo de Casa', timestamp:new Date().toISOString() };
   let ok=true;
-  try{
-    await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-  }catch(e){ ok=false; }
+  /* Endpoint não é acionado na vitrine pública. */ ok=true;
   DB.integracoes[tipo].ultimoTeste={ok,data:new Date().toISOString()};
   save(); renderIntegracao();
-  showToast(ok ? 'Requisição de teste enviada — confirme o recebimento na sua automação' : 'Não foi possível contatar o endpoint informado');
+  showToast(ok ? 'Integração simulada sem comunicação externa' : 'Não foi possível contatar o endpoint informado');
 }
 
 /* ================= CARTÃO / MODAL ================= */
@@ -1042,17 +1040,14 @@ async function enviarCartao(canal){
     const payload = canal==='email'
       ? { canal:'email', destino, remetente:integ.remetente, assunto:integ.assunto, colaborador:c.nome, marco:m.label, cargo:c.cargo, unidade:c.unidade }
       : { canal:'telefone', destino, provedor:integ.canal, mensagem:integ.modelo.replace('{{nome}}',c.nome).replace('{{marco}}',m.label), colaborador:c.nome, marco:m.label };
-    try{
-      await fetch(webhook,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      status='enviado';
-    }catch(e){ status='falhou'; }
+    /* Não enviar informações de teste para endpoints externos. */ status='simulado';
   }
 
   DB.envios.push({ id:'e'+Date.now(), colabId:c.id, colabNome:c.nome, marcoDias:m.dias, canal, destino, data:new Date().toISOString(), status });
   save();
   refreshAll();
 
-  if(status==='simulado') showToast('Envio simulado — configure o webhook em Integração para disparar de verdade');
+  if(status==='simulado') showToast('Envio de teste registrado apenas nesta sessão; nenhum contato externo foi realizado');
   else if(status==='enviado') showToast('Cartão enviado para '+destino);
   else showToast('Falha ao contatar o endpoint configurado');
 }
