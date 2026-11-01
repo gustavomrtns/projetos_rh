@@ -268,6 +268,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <link rel="stylesheet" href="../editorial-02.css">
 <!-- Base fictícia compartilhada, em memória. -->
 <script src="../../shared/demo-core.js"></script>
+<script src="../print-document.js"></script>
 </head>
 <body>
 
@@ -276,7 +277,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <!-- PRINT OVERLAY -->
 <div id="print-overlay">
   <button class="print-close" onclick="fecharPrint()">Fechar visualização</button>
-  <button class="print-close" style="right:200px;background:var(--grad3)" onclick="window.print()">Imprimir / Salvar PDF</button>
+  <button class="print-close" style="right:200px;background:var(--grad3)" onclick="imprimirRelatorioDesligamento()">Imprimir / Salvar PDF</button>
   <div id="print-content" style="max-width:900px;margin:0 auto;padding-bottom:40px"></div>
 </div>
 
@@ -1179,7 +1180,7 @@ function gerarPDFHtml(r){
         <div class="phdr-sub">Gestão de Pessoas — Relatório de Desligamento</div>
         <span class="phdr-badge">FM-GT-04 A</span>
       </div>
-      <img class="pdf-logo" src="${document.querySelector('.nav-logo').src}" alt="Logo">
+      <img class="pdf-logo" src="${(document.querySelector('.logo-wrap img')?.src || '')}" alt="Logo">
     </div>
     <div class="pbody">
 
@@ -1245,9 +1246,16 @@ function gerarPDFHtml(r){
 }
 
 function abrirPrint(html){
-  document.getElementById('print-content').innerHTML = html;
+  const panel=document.getElementById('print-content');
+  panel.innerHTML=html;
   document.getElementById('print-overlay').classList.add('visible');
-  document.getElementById('print-overlay').scrollTop = 0;
+  document.getElementById('print-overlay').scrollTop=0;
+  imprimirRelatorioDesligamento();
+}
+function imprimirRelatorioDesligamento(){
+  const content=document.getElementById('print-content');
+  if(!content||!content.innerHTML.trim()){showToast('Gere o relatório antes de imprimir.');return;}
+  ERPPrint.open({title:'Questionario_de_Desligamento',html:content.innerHTML});
 }
 function fecharPrint(){
   document.getElementById('print-overlay').classList.remove('visible');
