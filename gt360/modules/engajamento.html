@@ -1322,7 +1322,7 @@ if(window.self !== window.top){
   const sepSair = document.getElementById('admin-sep-sair');
   if(sepSair) sepSair.style.display = 'none';
 }
-window.addEventListener('load',function(){if(location.hash==='#responder')entrarColaborador();});
+window.addEventListener('load',function(){if(location.hash==='#responder'){entrarColaborador();document.querySelectorAll('.topbar-right .erp-admin-link').forEach(b=>b.hidden=true);}});
 </script>
 </body>
 </html>
