@@ -711,19 +711,11 @@ function decodificarEstado(str){
   return JSON.parse(decodeURIComponent(escape(utf8)));
 }
 function gerarLinkTransferencia(registro){
-  // Dentro do workspace GT360, este módulo roda num iframe carregado via
-  // srcdoc — location.href aponta para "about:srcdoc", que não é um
-  // endereço utilizável fora daquela sessão. Quando embutido, o link
-  // precisa apontar para a página de nível mais alto (o próprio
-  // GT360_workspace.html, se/quando estiver hospedado numa URL real);
-  // o shell é responsável por ler esse link e abrir o módulo certo.
-  let base;
-  try{
-    base = (window.top && window.top !== window.self) ? window.top.location.href.split('#')[0] : location.href.split('#')[0];
-  }catch(e){
-    base = location.href.split('#')[0];
-  }
-  return base + '#av=' + codificarEstado(registro);
+  /* URL real do módulo, independente do iframe ou do workspace.
+     Permite que qualquer leitor do QR abra o checklist em outro aparelho. */
+  const destino=new URL('checklist-5s.html',location.href);
+  destino.hash='av='+codificarEstado(registro);
+  return destino.href;
 }
 function gerarMailtoLink(destinatario, assunto, corpo){
   return 'mailto:' + encodeURIComponent(destinatario) + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
