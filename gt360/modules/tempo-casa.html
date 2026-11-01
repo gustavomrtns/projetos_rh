@@ -587,7 +587,10 @@ function diasDesde(iso){ return Math.floor((Date.now()-new Date(iso).getTime())/
 function isoDiasAtras(d){ return new Date(Date.now()-d*86400000).toISOString(); }
 
 function seedDB(){
-  const colaboradores=[];
+  const colaboradores=window.PortfolioDemo.copyPeople().map(function(p,i){
+    return {id:100+i,nome:p.nome,cargo:p.cargo,setor:p.setor,unidade:p.unidade,
+      admissao:p.admissao,email:p.email,telefone:''};
+  });
 
   const marcosConfig={};
   MARCOS.forEach(m=>marcosConfig[m.dias]=true);
