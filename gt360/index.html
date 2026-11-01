@@ -304,18 +304,35 @@ function toggleErpMobileMenu(force){
   sidebar.classList.toggle('mobile-open',enabled);
   trigger.setAttribute('aria-expanded',String(enabled));
   scrim.hidden=!enabled;
+  document.getElementById('content').inert=enabled;
   if(enabled){
-    const first=sidebar.querySelector('.side-item');
+    sidebar.setAttribute('role','dialog');
+    sidebar.setAttribute('aria-modal','true');
+    const first=sidebar.querySelector('.erp-menu-close');
     if(first)first.focus({preventScroll:true});
+  }else{
+    sidebar.removeAttribute('role');
+    sidebar.removeAttribute('aria-modal');
   }
 }
 window.addEventListener('resize',function(){
   if(!window.matchMedia('(max-width:780px)').matches)toggleErpMobileMenu(false);
 });
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'&&document.getElementById('sidebar').classList.contains('mobile-open')){
-    toggleErpMobileMenu(false);
+  const sidebar=document.getElementById('sidebar');
+  if(!sidebar||!sidebar.classList.contains('mobile-open'))return;
+  if(e.key==='Escape'){
+    e.preventDefault();toggleErpMobileMenu(false);
     document.getElementById('erp-menu-trigger').focus();
+    return;
+  }
+  if(e.key==='Tab'){
+    const items=[...sidebar.querySelectorAll('button:not([disabled]),a[href]')]
+      .filter(el=>el.getClientRects().length);
+    if(!items.length)return;
+    const first=items[0],last=items[items.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   }
 });
 function abrirApp(view, conviteHash=''){
