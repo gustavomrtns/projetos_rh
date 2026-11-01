@@ -317,7 +317,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
       <div class="header-title">
         <h1>Questionário de Desligamento</h1>
         <p>Sua opinião nos ajuda a melhorar — respostas tratadas com confidencialidade pela Gestão de Pessoas</p>
-        <span class="hbadge" style="background:var(--grad3)">FM-GT-04 A</span>
+        <span class="hbadge" style="background:var(--grad3)"></span>
       </div>
     </div>
   </div>
@@ -1179,7 +1179,7 @@ function gerarPDFHtml(r){
       <div>
         <div class="phdr-title">Questionário de Desligamento</div>
         <div class="phdr-sub">Gestão de Pessoas — Relatório de Desligamento</div>
-        <span class="phdr-badge">FM-GT-04 A</span>
+        
       </div>
       <img class="pdf-logo" src="${(document.querySelector('.logo-wrap img')?.src || '')}" alt="Logo">
     </div>
@@ -1240,7 +1240,7 @@ function gerarPDFHtml(r){
       </div>
 
     </div>
-    <div class="pfooter"><span>Documento gerado em ${dataHoje()}</span><span>FM-GT-04 A — Gestão de Pessoas</span></div>
+    <div class="pfooter"><span>Documento gerado em ${dataHoje()}</span><span>Gestão de Pessoas</span></div>
   </div>`;
 
   abrirPrint(html);
@@ -1354,10 +1354,10 @@ function renderConvites(){
     <div class="convite-row">
       <div><div class="convite-name">${esc(c.nome)}</div><div class="convite-meta">${esc(c.email||'sem e-mail informado')} · ${c.dataDesligamento?new Date(c.dataDesligamento+'T12:00').toLocaleDateString('pt-BR'):'data não informada'}</div></div>
       <span class="convite-badge ${c.status}">${c.status==='concluido'?'Respondido':'Pendente'}</span>
-      <button class="convite-del" onclick="excluirConvite(${i})">✕</button>
+      <button type="button" class="convite-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="excluirConvite(${i})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`).join('');
 }
-function excluirConvite(i){
+function excluirConvite(i){ if(!confirm('Confirma a exclusão deste registro?'))return; 
   convites.splice(i,1);
   salvarConvites();
   renderConvites();

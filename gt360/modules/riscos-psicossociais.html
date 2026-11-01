@@ -269,6 +269,9 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
 <link rel="stylesheet" href="../erp-modules.css">
+<link rel="stylesheet" href="../share-modal.css">
+<script src="../qr-generator.js"></script>
+<script src="../share-modal.js"></script>
 <!-- Base fictícia compartilhada, em memória. -->
 <script src="../../shared/demo-core.js"></script>
 </head>
@@ -285,7 +288,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
   <div class="access-band"></div>
   <div class="access-inner">
     <img class="access-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
-    <h1>Gestão de Riscos Psicossociais</h1>
+    <h1>Gestão de Riscos Psicossociais</h1><button type="button" class="btn btn-secondary erp-share-trigger" onclick="compartilharRiscos()" title="Compartilhar formulário por link ou QR Code">Compartilhar formulário</button>
     <div class="access-grid">
       <div class="access-card" onclick="entrarComo('gestor')">
         <div class="access-card-band" style="background:var(--grad2)"></div>
@@ -317,7 +320,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     </div>
   </div>
   <div class="header-role">
-    <span class="role-chip" id="role-chip">—</span>
+    <button type="button" class="btn btn-secondary" onclick="compartilharRiscos()" title="Compartilhar com gestores">Compartilhar</button>
+<span class="role-chip" id="role-chip">—</span>
     <button class="btn-sair-top" id="btn-sair-top" onclick="sair()">Sair</button>
   </div>
 </header>
@@ -409,7 +413,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
       <!-- SUCCESS -->
       <div id="wz-success" style="display:none">
         <div class="card success-box">
-          <div class="success-icon">✓</div>
+          <div class="success-icon"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
           <h2>Plano de Ação enviado com sucesso!</h2>
           <p>Seu Plano de Ação foi registrado e o documento PDF foi gerado.<br>ID do registro: <b id="success-id"></b></p>
           <div class="actions" style="justify-content:center">
@@ -709,6 +713,7 @@ async function entrarComoAdmin(){
   await carregarDados();
   irPara('admin-planos');
 }
+function compartilharRiscos(){GTShare.open({title:'Compartilhar formulário',description:'Compartilhe o acesso para gestores preencherem os planos de ação.',url:GTShare.publicModuleUrl('#gestor')});}
 async function entrarComo(role){
   currentRole = role;
   document.getElementById('access-screen').style.display='none';
@@ -1339,6 +1344,7 @@ function entrarComoAdminEmbutido(){
     if(btnSair) btnSair.style.display = 'none';
   }
 })();
+window.addEventListener('load',function(){if(location.hash==='#gestor')entrarComo('gestor');});
 </script>
 </body>
 </html>

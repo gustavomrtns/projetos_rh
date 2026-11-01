@@ -300,6 +300,9 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
 <link rel="stylesheet" href="../erp-modules.css">
+<link rel="stylesheet" href="../share-modal.css">
+<script src="../qr-generator.js"></script>
+<script src="../share-modal.js"></script>
 <!-- Base fictícia compartilhada, em memória. -->
 <script src="../../shared/demo-core.js"></script>
 </head>
@@ -312,7 +315,8 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
   </div>
   <div class="topbar-right">
     <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
-    <button type="button" class="erp-admin-link" onclick="abrirLoginAdmin()" aria-label="Abrir a gestão da pesquisa">Gestão da pesquisa</button>
+    <button type="button" class="erp-admin-link" onclick="compartilharPesquisa()" aria-label="Compartilhar pesquisa" title="Compartilhar pesquisa por link ou QR Code">Compartilhar pesquisa</button>
+<button type="button" class="erp-admin-link" onclick="abrirLoginAdmin()" aria-label="Abrir a gestão da pesquisa">Gestão da pesquisa</button>
   </div>
 </div>
 
@@ -717,6 +721,7 @@ function sairAdmin(){
   document.getElementById('view-gate').classList.remove('hidden');
   document.getElementById('topbar-status').textContent='Pesquisa de Engajamento Organizacional';
 }
+function compartilharPesquisa(){GTShare.open({title:'Compartilhar pesquisa',description:'Compartilhe o questionário com os colaboradores por link ou QR Code.',url:GTShare.publicModuleUrl('#responder')});}
 function entrarColaborador(){
   document.getElementById('view-gate').classList.add('hidden');
   document.getElementById('view-colab').classList.remove('hidden');
@@ -1122,7 +1127,7 @@ function renderRespostas(){
 
     <div class="header-inner">
       <div class="header-title"><h1>Respostas</h1><p>Todas as submissões individuais da pesquisa</p></div>
-      <button class="btn btn-purple btn-sm" onclick="exportarCSV()">⬇ Exportar CSV</button>
+      <button class="btn btn-purple btn-sm" onclick="exportarCSV()"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px;vertical-align:-3px;margin-right:6px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/></svg> Exportar CSV</button>
     </div>
   </div>
   <div class="card" style="padding:0;margin-top:14px"><div class="dash-table-wrap"><table class="dtable" id="respostas-table"></table></div></div>`;
@@ -1317,6 +1322,7 @@ if(window.self !== window.top){
   const sepSair = document.getElementById('admin-sep-sair');
   if(sepSair) sepSair.style.display = 'none';
 }
+window.addEventListener('load',function(){if(location.hash==='#responder'){entrarColaborador();document.querySelectorAll('.topbar-right .erp-admin-link').forEach(b=>b.hidden=true);}});
 </script>
 </body>
 </html>
