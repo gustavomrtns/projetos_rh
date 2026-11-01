@@ -913,7 +913,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="submit-bar no-print">
   <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
   <button class="btn btn-secondary" onclick="salvar()">Salvar</button>
-  <button class="btn btn-secondary" onclick="exportarPDF()">⬇ Exportar PDF</button>
+  <button class="btn btn-secondary" onclick="exportarPDF()"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px;vertical-align:-3px;margin-right:6px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/></svg> Exportar PDF</button>
   <button class="btn btn-export" onclick="enviarParaCienciaPrestador()">Enviar para Ciência do Prestador</button>
 </div>
 
@@ -1237,12 +1237,12 @@ function renderHistoricoPJ(){
   el.innerHTML = lista.map((r) => {
     const i = listaCompleta.indexOf(r);
     const aguardando = r.etapa === 'aguardando_prestador';
-    const badge = aguardando ? '<span class="pdf-nota-badge" style="background:var(--gray200);color:var(--gray600)">⏳ Aguardando Prestador</span>' : (r.resultadoTag||'');
+    const badge = aguardando ? '<span class="pdf-nota-badge" style="background:var(--gray200);color:var(--gray600)">Aguardando Prestador</span>' : (r.resultadoTag||'');
     return `
     <div class="hist-row" onclick="reabrirRegistroPJ(${i})">
       <div><div class="hist-name">${r.empresa||'—'}</div><div class="hist-meta">${r.praca||'—'} · ${r.setor||'—'} · ${r.dataAvaliacao||''}</div></div>
       <span>${badge}</span>
-      <button class="hist-del" onclick="event.stopPropagation();excluirRegistroPJ(${i})">✕</button>
+      <button type="button" class="hist-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="event.stopPropagation();excluirRegistroPJ(${i})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`;
   }).join('');
 }
