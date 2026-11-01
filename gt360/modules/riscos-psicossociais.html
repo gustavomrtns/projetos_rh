@@ -297,7 +297,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
       <div class="access-card" onclick="toggleAdminForm()">
         <div class="access-card-band" style="background:var(--grad3)"></div>
         <div class="access-card-inner">
-          <div class="access-dot" style="background:var(--grad3)">PG</div>
+          
           <h3>Painel Gerencial</h3>
           <button class="btn-acessar" style="background:var(--grad3)">Acessar</button>
         </div>
@@ -338,8 +338,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="view" id="view-inicio"><div class="view-inner narrow">
       <div class="hero"><div class="hero-band"></div><div class="hero-inner">
         <h1>Plano de Ação — Riscos Psicossociais</h1>
-        <div class="sub">Preenchimento do Plano de Ação — avaliação de riscos psicossociais</div>
-        <p>Este formulário foi elaborado com base nos resultados da avaliação de riscos psicossociais. As dimensões apresentadas abaixo correspondem aos resultados identificados para o seu setor.</p>
+        <div class="sub">Elaboração do plano de ação</div>
+        <p>Este plano orienta a definição de ações conforme os riscos identificados para o setor. As dimensões apresentadas abaixo correspondem aos resultados identificados para o seu setor.</p>
       </div></div>
       <button class="btn btn-primary" style="width:100%;padding:16px;font-size:14px" onclick="irPara('novo-plano'); iniciarNovoPlano()">Novo Plano de Ação</button>
     </div></div>
@@ -547,64 +547,10 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     </div></div>
 
     <!-- ============ ADMIN: BANCO DE DADOS (+ Exportações) ============ -->
-    <div class="view" id="view-admin-bd"><div class="view-inner">
-      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
-        <h1>Banco de Dados</h1>
-        <p>Visualização bruta das tabelas normalizadas RESPOSTAS e AÇÕES, com exportação dos dados filtrados.</p>
-      </div></div>
-      <div class="refresh-bar">
-        <div class="subtabs" data-group="bd" style="margin-bottom:0">
-          <button class="subtab-btn active" onclick="showSubTab('bd','tabelas',this)">Tabelas</button>
-          <button class="subtab-btn" onclick="showSubTab('bd','exportacoes',this)">Exportações</button>
-        </div>
-        <button class="btn btn-secondary btn-sm" onclick="atualizarDadosAdmin()">↻ Atualizar dados</button>
-      </div>
-
-      <div class="subtab-panel" data-group="bd" data-tab="tabelas">
-        <div class="section-header"><div class="section-num sn1">R</div><span class="section-title">Tabela RESPOSTAS</span></div>
-        <div class="table-wrap" style="margin-bottom:22px"><div class="table-scroll">
-          <table class="dtable"><thead><tr><th>ID_Resposta</th><th>Data</th><th>Hora</th><th>Unidade</th><th>Setor</th><th>Gestor</th><th>Cargo</th><th>Email</th><th>Status</th></tr></thead><tbody id="bd-respostas-tbody"></tbody></table>
-        </div></div>
-        <div class="section-header"><div class="section-num sn2">A</div><span class="section-title">Tabela AÇÕES</span></div>
-        <div class="table-wrap"><div class="table-scroll">
-          <table class="dtable"><thead><tr><th>ID_Acao</th><th>ID_Resposta</th><th>Dimensão</th><th>Prioridade</th><th>Área de apoio</th><th>Responsável</th><th>Prazo início</th><th>Prazo conclusão</th><th>Status</th></tr></thead><tbody id="bd-acoes-tbody"></tbody></table>
-        </div></div>
-      </div>
-
-      <div class="subtab-panel" data-group="bd" data-tab="exportacoes" style="display:none">
-        <div class="card" style="max-width:820px">
-          <div class="form-grid">
-            <div class="field"><label>Unidade</label><select id="ex-praca"><option value="">Todas</option></select></div>
-            <div class="field"><label>Dimensão</label><select id="ex-dim"><option value="">Todas</option></select></div>
-            <div class="field"><label>Status</label><select id="ex-status"><option value="">Todos</option><option value="pendente">Pendente</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluída</option><option value="atrasada">Atrasada</option></select></div>
-            <div class="field"><label>Prioridade</label><select id="ex-prio"><option value="">Todas</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select></div>
-          </div>
-          <div class="actions">
-            <button class="btn btn-primary" onclick="exportarDados('xlsx')">Exportar Excel (.xlsx)</button>
-            <button class="btn btn-secondary" onclick="exportarDados('csv')">Exportar CSV</button>
-            <button class="btn btn-print" onclick="exportarDados('pdf')">Exportar PDF (relatório)</button>
-          </div>
-          <p style="font-size:11.5px;color:var(--gray400);margin-top:14px">O arquivo conterá somente os registros (ações) que atendem aos filtros selecionados acima.</p>
-        </div>
-      </div>
-    </div></div>
+    
 
     <!-- ============ ADMIN: CONFIGURAÇÕES ============ -->
-    <div class="view" id="view-admin-config"><div class="view-inner narrow">
-      <div class="hero"><div class="hero-band"></div><div class="hero-inner">
-        <h1>Configurações</h1>
-        <p>Ajustes do Painel Gerencial no ambiente de demonstração.</p>
-      </div></div>
-      <div class="card" style="margin-bottom:16px">
-        <div class="kv-lbl" style="margin-bottom:8px">Base de dados</div>
-        <p style="font-size:12.5px;color:var(--gray600);margin-bottom:14px">Todos os planos de ação enviados ficam salvos no armazenamento deste navegador (visível em qualquer aba deste mesmo navegador, mas não em outros computadores ou navegadores). Use o botão abaixo apenas se quiser reiniciar completamente os dados de demonstração.</p>
-        <button class="btn btn-danger" onclick="abrirModalReset()">Apagar todos os planos registrados</button>
-      </div>
-      <div class="card">
-        <div class="kv-lbl" style="margin-bottom:8px">Sobre este ambiente</div>
-        <p style="font-size:12.5px;color:var(--gray600);line-height:1.6">Este é um protótipo funcional que roda inteiramente no navegador. Não há backend, autenticação real, banco de dados relacional ou integração com Excel/SQL em produção — os dados ficam salvos apenas no armazenamento local deste navegador, o que significa que um plano enviado em um computador não aparece automaticamente em outro. Para uso corporativo real (login de gestores e do Painel Gerencial, permissões verificadas no servidor, base de dados única acessível de qualquer lugar), é necessário desenvolver um backend dedicado.</p>
-      </div>
-    </div></div>
+    
 
   </main>
 </div>
@@ -775,8 +721,7 @@ const SIDEBAR_GESTOR = [
 const SIDEBAR_ADMIN = [
   {id:'admin-planos', label:'Planos de Ação', dot:'d1'},
   {id:'admin-analise', label:'Análise de Dados', dot:'d2'},
-  {id:'admin-bd', label:'Banco de Dados', dot:'d3'},
-  {id:'admin-config', label:'Configurações', dot:'d1'},
+
 ];
 function buildSidebar(role){
   const items = role==='gestor'?SIDEBAR_GESTOR:SIDEBAR_ADMIN;
