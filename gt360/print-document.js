@@ -58,7 +58,7 @@
       '.card,.header,.section{break-inside:avoid}'+
       '@page{size:A4;margin:12mm}'+
       '@media print{.erp-print-tools{display:none!important}'+
-      'body>*:not(#print-overlay){display:block!important}'+
+      'body>.erp-print-tools{display:none!important}'+
       '.erp-print-root{display:block!important}'+
       '.container,.pdf-doc{max-width:100%!important;box-shadow:none!important}'+
       '.section,.psect{break-inside:avoid}}'+
