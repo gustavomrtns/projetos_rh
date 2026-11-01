@@ -34,6 +34,15 @@
       display.className="erp-print-value";display.textContent=value||"—";
       field.replaceWith(display);
     }
+    /* As opções de notas somem na CSS de impressão original. Substituí-las
+       pelo valor selecionado antes de remover os botões evita um PDF sem notas. */
+    clone.querySelectorAll(".criteria-item .note-options").forEach(function(group){
+      var buttons=Array.from(group.querySelectorAll(".note-btn"));
+      var selected=buttons.findIndex(function(b){return b.classList.contains("active");});
+      var summary=document.createElement("div");summary.className="erp-print-score";
+      summary.textContent=selected>=0 ? "Nota atribuída: "+(selected+1)+" / "+buttons.length : "Nota não atribuída";
+      group.replaceWith(summary);
+    });
     clone.querySelectorAll("button,.submit-bar,.no-print,.toast,.modal-bg,[data-print-hide]").forEach(function(el){el.remove();});
     return cleanMarkup(clone.outerHTML);
   }
@@ -53,6 +62,7 @@
       '.erp-print-tools{position:sticky;top:0;z-index:99999;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 18px;background:#232220;color:#fff;font:500 13px system-ui,sans-serif}'+
       '.erp-print-tools button{background:#8fff00;color:#232220;border:0;border-radius:8px;padding:12px 15px;font:700 13px system-ui,sans-serif;cursor:pointer;min-height:44px}'+
       '.erp-print-value{display:block;min-height:18px;padding:6px 0;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere}'+
+      '.erp-print-score{padding:9px 18px 14px;font-size:12px;font-weight:700;color:#252320}'+
       '.print-only{display:block!important}.print-header{display:flex!important}'+
       '.container,.pdf-doc{max-width:950px!important;width:100%!important;margin:0 auto!important}'+
       '.card,.header,.section{break-inside:avoid}'+
