@@ -323,6 +323,8 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 <div id="pdf-parecer" style="display:none;"></div>
@@ -763,7 +765,7 @@ function verificarLinkRecebido(){
 /* ═══════════ FIM core.js ═══════════ */
 
 // ── LOGO (placeholder genérico) ──
-document.getElementById('logo-img').src = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22140%22%20height%3D%22140%22%3E%3Crect%20width%3D%22140%22%20height%3D%22140%22%20rx%3D%2224%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2264%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EA%3C/text%3E%3C/svg%3E';
+document.getElementById('logo-img').src = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22140%22%20height%3D%22140%22%3E%3Crect%20width%3D%22140%22%20height%3D%22140%22%20rx%3D%2224%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2264%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EA%3C/text%3E%3C/svg%3E';
 
 // ── SETORES POR PRAÇA ──
 const pracaSetores = {
@@ -1093,10 +1095,10 @@ function exportarPDF(){
   }, 120);
 }
 
-/* ── HISTÓRICO / REPOSITÓRIO (localStorage) ── */
+/* ── HISTÓRICO / REPOSITÓRIO (demoStore) ── */
 const CLT_STORAGE_KEY = 'clt_avaliacoes';
-function carregarHistoricoCLT(){ try{ return JSON.parse(localStorage.getItem(CLT_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
-function salvarHistoricoCLT(lista){ try{ localStorage.setItem(CLT_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico', e); } }
+function carregarHistoricoCLT(){ try{ return JSON.parse(demoStore.getItem(CLT_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function salvarHistoricoCLT(lista){ try{ demoStore.setItem(CLT_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico', e); } }
 function registrarNoHistorico(registro){
   const lista = carregarHistoricoCLT();
   registro.id = Date.now();
@@ -1370,11 +1372,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('clt_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('clt_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('clt_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('clt_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';

@@ -423,6 +423,8 @@ a{color:inherit}
 <!-- IDV Editorial 02 independente: este case não integra o workspace GT360°. -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="editorial-02.css">
+<!-- Base fictícia compartilhada e operações somente em memória. -->
+<script src="../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -566,7 +568,7 @@ a{color:inherit}
           <i class="g-brasa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></i>
           <h5>Publicações salvas</h5><p id="qtd-salvos">nenhuma ainda</p>
         </button>
-        <a class="atalho" id="link-etica" href="mailto:redeam.etica@gmail.com?subject=Canal%20de%20Escuta&body=Descreva%20aqui%20o%20que%20voce%20precisa%20relatar.">
+        <a class="atalho" id="link-etica" href="mailto:canal.etica@example.invalid?subject=Canal%20de%20Escuta&body=Descreva%20aqui%20o%20que%20voce%20precisa%20relatar.">
           <i class="g-noite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 2a7 7 0 00-7 7v4a3 3 0 003 3h1v-7H7V9a5 5 0 0110 0v3h-2v7h1a3 3 0 003-3V9a7 7 0 00-7-7z"/></svg></i>
           <h5>Canal de escuta</h5><p>Sigiloso, direto ao Comitê de Ética</p>
         </a>
@@ -618,7 +620,7 @@ a{color:inherit}
 
 <script>
 "use strict";
-var LOGO="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Crect%20width%3D%22160%22%20height%3D%22160%22%20rx%3D%2228%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2276%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EH%3C/text%3E%3C/svg%3E";
+var LOGO="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Crect%20width%3D%22160%22%20height%3D%22160%22%20rx%3D%2228%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2276%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EH%3C/text%3E%3C/svg%3E";
 /* ==========================================================
    1. BASE — mesmo modelo de dados da Intranet Horizonte
    ========================================================== */
@@ -635,18 +637,10 @@ function semear(){
   var H=function(n){return new Date(Date.now()-n*3600000).toISOString();};
   var M=function(n){return new Date(Date.now()-n*60000).toISOString();};
 
-  var users=[
-    {id:'u0',nome:'Mariana Alves',cargo:'Analista de Comunicação Interna',setor:'Comunicação',unidade:'HORIZONTE TV',contato:'mariana.alves@horizonte.com.br',ramal:'2140'},
-    {id:'u1',nome:'Fernanda Lima',cargo:'Coordenadora de Marketing',setor:'Marketing',unidade:'HORIZONTE FM',contato:'fernanda.lima@horizonte.com.br',ramal:'2201'},
-    {id:'u2',nome:'Ricardo Souza',cargo:'Analista de TI',setor:'Tecnologia',unidade:'HORIZONTE TV',contato:'ricardo.souza@horizonte.com.br',ramal:'2310'},
-    {id:'u3',nome:'Juliana Castro',cargo:'Analista de Gente e Gestão',setor:'Gente e Gestão',unidade:'FUNDAÇÃO HORIZONTE',contato:'juliana.castro@horizonte.com.br',ramal:'2405'},
-    {id:'u4',nome:'Bruno Tavares',cargo:'Repórter',setor:'Jornalismo',unidade:'HORIZONTE SAT',contato:'bruno.tavares@horizonte.com.br',ramal:'2512'},
-    {id:'u5',nome:'Camila Rocha',cargo:'Executiva de Contas',setor:'Comercial',unidade:'HORIZONTE AGENCY',contato:'camila.rocha@horizonte.com.br',ramal:'2620'},
-    {id:'u6',nome:'Pedro Henrique',cargo:'Editor de Vídeo',setor:'Produção',unidade:'ESTÚDIO HORIZONTE',contato:'pedro.henrique@horizonte.com.br',ramal:'2733'},
-    {id:'u7',nome:'Larissa Nunes',cargo:'Analista Financeiro',setor:'Financeiro',unidade:'HORIZONTE EMPREENDIMENTOS',contato:'larissa.nunes@horizonte.com.br',ramal:'2841'},
-    {id:'u8',nome:'Diego Martins',cargo:'Fotógrafo',setor:'Multimídia',unidade:'HORIZONTE FM',contato:'diego.martins@horizonte.com.br',ramal:'2955'}
-  ];
-  users.forEach(function(u,i){u.cor=CORES[i%CORES.length];});
+  var users=window.PortfolioDemo.copyPeople().map(function(p,i){
+ return {id:'u'+i,nome:p.nome,cargo:p.cargo,setor:p.setor,unidade:p.unidade,
+ contato:p.email,ramal:p.ramal,cor:CORES[i%CORES.length]};
+});
 
   var spaces=[
     {id:'s1',nome:'Comunicação Interna',grad:'g-agua',desc:'Avisos oficiais e comunicados para todas as unidades.',membros:['u0','u1','u2','u3','u4','u5','u6','u7','u8']},
@@ -671,7 +665,7 @@ function semear(){
      texto:'Bastidores da gravação do especial de 60 anos da Horizonte TV. Em breve divulgamos a data de estreia por aqui.',
      midia:{grad:'g-noite',dur:'01:38',titulo:'Especial 60 anos — bastidores'},data:H(26),curtidas:['u4','u8']},
     {id:'p5',autorId:'u5',spaceId:'s6',etiqueta:'Voluntariado',
-     texto:'Fechamos a arrecadação da campanha do agasalho com mais de 300 peças. Obrigada a todas as unidades que participaram.',
+     texto:'Fechamos a arrecadação da campanha do agasalho com mais de 300 peças. Obrigado a todas as unidades que participaram.',
      data:H(48),curtidas:['u0','u1','u3','u6','u7']},
     {id:'p6',autorId:'u2',spaceId:'s3',etiqueta:'Tecnologia',
      texto:'A nova automação de chamados do suporte interno reduziu o tempo médio de resposta em 40%. Semana que vem liberamos para todas as unidades.',
@@ -680,22 +674,22 @@ function semear(){
 
   var conversas=[
     {id:'c1',userId:'u1',naoLidas:0,mensagens:[
-      {de:'ele',texto:'Oi Mariana! O material da Semana da Segurança já pode subir no acervo?',hora:M(150)},
-      {de:'eu',texto:'Pode sim, Fernanda. Já revisei a versão final.',hora:M(142)}
+      {de:'ele',texto:'Oi Ana! O material da Semana da Segurança já pode subir no acervo?',hora:M(150)},
+      {de:'eu',texto:'Pode sim, Bruno. Já revisei a versão final.',hora:M(142)}
     ]},
     {id:'c2',userId:'u2',naoLidas:1,mensagens:[
-      {de:'ele',texto:'Mariana, consegue me passar a lista de colaboradores para eu testar a automação?',hora:M(38)}
+      {de:'ele',texto:'Ana, consegue me passar a lista de colaboradores para eu testar a automação?',hora:M(38)}
     ]},
     {id:'c3',userId:'u4',naoLidas:0,mensagens:[
       {de:'eu',texto:'Bruno, boa sorte na cobertura de amanhã.',hora:M(200)},
-      {de:'ele',texto:'Valeu, Mariana. A equipe está pronta.',hora:M(190)}
+      {de:'ele',texto:'Valeu, Ana. A equipe está pronta.',hora:M(190)}
     ]}
   ];
 
   var notificacoes=[
-    {id:'n1',tipo:'curtida',texto:'Fernanda Lima curtiu sua publicação no mural',data:M(55),lida:false,alvo:'u1'},
-    {id:'n2',tipo:'mensagem',texto:'Ricardo Souza enviou uma mensagem',data:M(38),lida:false,alvo:'u2'},
-    {id:'n3',tipo:'espaco',texto:'Você foi adicionada ao espaço Voluntariado',data:M(600),lida:true,alvo:'s6'},
+    {id:'n1',tipo:'curtida',texto:'Bruno Almeida curtiu sua publicação no mural',data:M(55),lida:false,alvo:'u1'},
+    {id:'n2',tipo:'mensagem',texto:'Camila Rocha enviou uma mensagem',data:M(38),lida:false,alvo:'u2'},
+    {id:'n3',tipo:'espaco',texto:'Você foi adicionado ao espaço Voluntariado',data:M(600),lida:true,alvo:'s6'},
     {id:'n4',tipo:'evento',texto:'Encontro de Lideranças começa hoje às 15h',data:M(720),lida:true}
   ];
 
@@ -736,19 +730,26 @@ function semear(){
     {id:'a8',nome:'Gravação: Resultados do 1º semestre',tipo:'MP4',grad:'g-brasa',meta:'41:07 · 1.204 visualizações',cat:'video',chaves:'balanço metas diretoria resultado'}
   ];
 
-  return {versao:3,euId:'u0',users:users,spaces:spaces,posts:posts,conversas:conversas,
-          notificacoes:notificacoes,ativacoes:ativacoes,eventos:eventos,arquivos:arquivos,
-          salvos:[],participando:[],lembretes:[]};
+  // Base de pessoas única e conjunto de eventos deliberadamente pequeno.
+var idsPermitidos=new Set(users.map(function(u){return u.id;}));
+spaces=spaces.slice(0,4).map(function(sp){sp.membros=sp.membros.filter(function(id){return idsPermitidos.has(id);});return sp;});
+posts=posts.filter(function(p){return idsPermitidos.has(p.autorId);}).slice(0,4).map(function(p){p.curtidas=p.curtidas.filter(function(id){return idsPermitidos.has(id);});return p;});
+conversas=conversas.filter(function(c){return idsPermitidos.has(c.userId);}).slice(0,2);
+notificacoes=notificacoes.slice(0,2);
+ativacoes=ativacoes.slice(0,2);eventos=eventos.slice(0,3);arquivos=arquivos.slice(0,4);
+return {versao:3,euId:'u0',users:users,spaces:spaces,posts:posts,conversas:conversas,
+ notificacoes:notificacoes,ativacoes:ativacoes,eventos:eventos,arquivos:arquivos,
+ salvos:[],participando:[],lembretes:[]};
 }
 
 var MEM=null;
 function carregar(){
-  try{var r=localStorage.getItem(CHAVE);if(r)return JSON.parse(r);}catch(e){}
+  try{var r=demoStore.getItem(CHAVE);if(r)return JSON.parse(r);}catch(e){}
   return MEM;
 }
 function salvar(){
   MEM=DB;
-  try{localStorage.setItem(CHAVE,JSON.stringify(DB));}catch(e){}
+  try{demoStore.setItem(CHAVE,JSON.stringify(DB));}catch(e){}
 }
 var DB=carregar();
 if(!DB||DB.versao!==3||!DB.users||!DB.arquivos)DB=semear();
@@ -1481,14 +1482,14 @@ function enviarMensagem(id){
   var cc=$('chat-corpo');
   if(cc){cc.innerHTML=baloes(c);cc.scrollTop=cc.scrollHeight;}
   setTimeout(function(){
-    c.mensagens.push({de:'ele',texto:'Recebido, Mariana. Já olho isso e te retorno.',hora:new Date().toISOString()});
+    c.mensagens.push({de:'ele',texto:'Recebido, Ana. Já olho isso e te retorno.',hora:new Date().toISOString()});
     salvar();
     var cc2=$('chat-corpo');
     if(cc2&&$('folha').classList.contains('on')){cc2.innerHTML=baloes(c);cc2.scrollTop=cc2.scrollHeight;}
     else{
       c.naoLidas++;atualizarContadores();
       var u=acharUser(id);
-      empurrar(u,u.nome,'Recebido, Mariana. Já olho isso e te retorno.',[['Responder','chat',id]]);
+      empurrar(u,u.nome,'Recebido, Ana. Já olho isso e te retorno.',[['Responder','chat',id]]);
     }
   },2800);
 }
@@ -1567,7 +1568,7 @@ function atualizarContadores(){
 
 function roteiro(){
   setTimeout(function(){
-    empurrar(acharUser('u1'),'Fernanda Lima curtiu sua publicação','Semana da Segurança — cronograma por unidade',
+    empurrar(acharUser('u1'),'Bruno Almeida curtiu sua publicação','Semana da Segurança — cronograma por unidade',
       [['Ver perfil','perfil','u1'],['Fechar','fechar-push']]);
   },8000);
 
@@ -1579,11 +1580,11 @@ function roteiro(){
 
   setTimeout(function(){
     var c=conversaCom('u3');
-    c.mensagens.push({de:'ele',texto:'Mariana, a trilha de liderança já pode ir para o mural das outras praças?',hora:new Date().toISOString()});
+    c.mensagens.push({de:'ele',texto:'Ana, a trilha de liderança já pode ir para o mural das outras praças?',hora:new Date().toISOString()});
     c.naoLidas++;
-    DB.notificacoes.unshift({id:'n'+Date.now(),tipo:'mensagem',texto:'Juliana Castro enviou uma mensagem',data:new Date().toISOString(),lida:false,alvo:'u3'});
+    DB.notificacoes.unshift({id:'n'+Date.now(),tipo:'mensagem',texto:'Daniel Costa enviou uma mensagem',data:new Date().toISOString(),lida:false,alvo:'u3'});
     salvar();atualizarContadores();
-    empurrar(acharUser('u3'),'Juliana Castro','A trilha de liderança já pode ir para o mural das outras praças?',
+    empurrar(acharUser('u3'),'Daniel Costa','A trilha de liderança já pode ir para o mural das outras praças?',
       [['Responder','chat','u3'],['Depois','fechar-push']]);
   },36000);
 }

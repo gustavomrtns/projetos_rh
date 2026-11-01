@@ -124,6 +124,8 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="editorial-02.css">
+<!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
+<script src="../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -136,12 +138,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
       <div class="tag">Workspace de Gestão de Talentos</div>
     </div>
   </div>
-  <div class="header-actions">
-    <button type="button" onclick="baixarBackup()">Baixar backup</button>
-    <button type="button" onclick="document.getElementById('backup-file').click()">Restaurar backup</button>
-    <input id="backup-file" type="file" accept="application/json,.json" hidden onchange="restaurarBackup(event)">
-    <span class="backup-status" id="backup-status" role="status" aria-live="polite"></span>
-  </div>
+  <div class="header-actions"><span class="backup-status" role="status">Dados fictícios · memória temporária</span></div>
 </header>
 
 <div class="workspace-body">
@@ -179,7 +176,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 
 <script>
 // Os módulos ficam em arquivos HTML da mesma origem, carregados somente ao abrir.
-// Seus registros continuam no localStorage do navegador; não há autenticação.
+// Seus registros continuam no demoStore do navegador; não há autenticação.
 
 // Config central das aplicações do workspace — adicionar uma aplicação aqui atualiza
 // automaticamente a sidebar e a página inicial (unifica o fluxo por aplicações adicionadas).
@@ -204,10 +201,15 @@ const APPS_CONFIG = [
 const apps = APPS_CONFIG.map(a=>a.id);
 function grupoDe(appId){ const a=APPS_CONFIG.find(x=>x.id===appId); const g=GROUPS_CONFIG.find(x=>x.id===a.group); return g; }
 
-const LOGO_B64 = "iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAALMUlEQVR42u3d3ctsVRkA8GcNBBFBGurR8ANFhLrqw6JQCsLIjnXRRRD9PRJRp8QLQRBEvIiDmJgYhCgSeJCDmIGJIIgXXpybuiiMeCVmdTGz98yer3fmPe+8s55zfgsOe2af2e/sgfnxrLXmWc8q0Wj79NGoUSOO+1fi+NcMXr94LnZ8/THXl7rj/URErSWijiJqiVpHk8cx97g7HwuvqSXq9FzU0fT89PGq87Hwmun7LL13/3e3uacV773u/Jp7WnrvjZ913T1t/1nnz0eMYhwRNUrUUtYev/K/X5QWnTRxU0e/mmA9yZcfXnj3jXf5GFFLia8e/axct4CPfj2MsPDCmwnv4vn7//vTcs0DPvrNFO0pfPnhhbcVvOOF59/5z0/KNQX46MJctIUX3msY7/zxwU/Ol9SAj367MBEFL7zXCd75677374dLKsBHv1sxgwwvvNch3vnz3//XD07d2wheeOHdP95aSrx6w2u1acDwwgtvbPz/V258vTbXhT56bE3SBbzwwrvyOC4lzv/zu+XgERheeOHdHW+NEi/f9EY9KGB44YX3ZHi76166+VI9CGB44YX36vB251+85c16poDhhRfe08HbHV84d7meCWB44YX3dPF2x+fPvVX3ChheeOHdD97u8XO3vl33AhheeOHdL97uePG2d+qpAoYXXnjPBm93/P2X/lZPLwLDCy+8Z4a3u+ZUAEuPhBfes8dbo8Szt79brwowvPDCexi83d965o736okAwwsvvIfF2z1/+s736+4RGF544T043u64E2CVNOCFtx28tZR46q4P6vYRGF544W0Gb3fcCrACdPDC2x7eGiWevPvDenwEhhdeeJvD2123EbC6zfDC2y7eWko8cc9HdX0EhhdeeJvFu2osPNo0gQUvvPC2hXfxJ6UesL2K4IW3fby1lHj83o/rcgSGF154m8e72I1eAgwvvPC2jXccC4DtzwsvvHnw1lLiwn1X6iwCwwsvvGnwznejRxHwwgtvNrzdbPQoAl544c2GdxCB4YUX3lx4Ow7l00fXFKyDF154m8XbPR/BCy+8OfHWsgVgeOGFt028x0ZgeOGFt128GyMwvPDC2zbetREYXnjhbR/vyggML7zw5sC7FIHhhRfePHgHERheeOHNhbeP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";
+const EDITORIAL_LOGO = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">'+
+  '<rect width="96" height="96" rx="21" fill="#c71717"/>'+
+  '<rect x="70" y="0" width="26" height="96" fill="#8fff00"/>'+
+  '<text x="37" y="58" font-size="32" font-family="Arial,sans-serif" font-weight="700" text-anchor="middle" fill="#fff">GT</text>'+
+  '</svg>');
 
-document.getElementById('logo-img').src = 'data:image/png;base64,' + LOGO_B64;
-document.getElementById('boot-logo').src = 'data:image/png;base64,' + LOGO_B64;
+document.getElementById('logo-img').src = EDITORIAL_LOGO;
+document.getElementById('boot-logo').src = EDITORIAL_LOGO;
 
 const APP_PATH = {
   'onboarding': 'modules/onboarding.html',
@@ -222,76 +224,6 @@ const APP_PATH = {
 };
 
 // Somente os registros dos módulos: outros projetos no mesmo domínio não entram no arquivo.
-const BACKUP_KEYS = [
-  'onb_colaboradores','onb_termosMap','onb_condutor',
-  'clt_avaliacoes','pj_avaliacoes','tempoDeCasaDB_v1',
-  'desl_respostas','desl_convites',
-  'peo_blocos','peo_perguntas','peo_pessoas','peo_respostas','peo_lembretes','peo_config','peo_seed_version',
-  'psicossocial_sistema_v1',
-  'trn_treinamentos','trn_impactos','trn_questionarios','trn_inscricoes','trn_certmodelos','trn_turmas','trn_base_url',
-  '5s_gt_state','5s_gt_meta','5s_gt_auditorias','5s_gt_agendamentos'
-];
-
-function baixarBackup(){
-  const status=document.getElementById('backup-status');
-  try{
-    const entries={};
-    BACKUP_KEYS.forEach(key=>{
-      const value=localStorage.getItem(key);
-      if(value!==null) entries[key]=value;
-    });
-    const content=JSON.stringify({format:'gt360-local-backup',version:1,createdAt:new Date().toISOString(),entries},null,2);
-    const url=URL.createObjectURL(new Blob([content],{type:'application/json'}));
-    const link=document.createElement('a');
-    link.href=url;
-    link.download='gt360-backup-'+new Date().toISOString().slice(0,10)+'.json';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
-    status.textContent='Arquivo baixado. Guarde-o com cuidado: ele contém os dados registrados.';
-  }catch(e){
-    status.textContent='Não foi possível baixar o backup neste navegador.';
-    console.error(e);
-  }
-}
-
-async function restaurarBackup(event){
-  const input=event.target;
-  const file=input.files && input.files[0];
-  input.value='';
-  if(!file) return;
-  const status=document.getElementById('backup-status');
-  try{
-    if(file.size>12*1024*1024) throw new Error('Arquivo muito grande para um backup local.');
-    const backup=JSON.parse(await file.text());
-    if(backup.format!=='gt360-local-backup'||backup.version!==1||!backup.entries||
-       typeof backup.entries!=='object'||Array.isArray(backup.entries)){
-      throw new Error('Formato de backup incompatível.');
-    }
-    const allowed=new Set(BACKUP_KEYS);
-    for(const [key,value] of Object.entries(backup.entries)){
-      if(!allowed.has(key)||typeof value!=='string') throw new Error('O arquivo contém dados não reconhecidos pelo GT360°.');
-    }
-    if(!confirm('Restaurar este arquivo? Os registros atuais dos módulos neste navegador serão substituídos.')) return;
-    const previous={};
-    BACKUP_KEYS.forEach(key=>{previous[key]=localStorage.getItem(key)});
-    try{
-      BACKUP_KEYS.forEach(key=>localStorage.removeItem(key));
-      Object.entries(backup.entries).forEach(([key,value])=>localStorage.setItem(key,value));
-    }catch(e){
-      BACKUP_KEYS.forEach(key=>{
-        try{if(previous[key]===null)localStorage.removeItem(key);else localStorage.setItem(key,previous[key])}catch(_){}
-      });
-      throw e;
-    }
-    location.reload();
-  }catch(e){
-    status.textContent=e.message||'Não foi possível restaurar o backup.';
-    console.error(e);
-  }
-}
-
 function montarSidebar(){
   const nav=document.getElementById('sidebar-nav');
   let html=`<button class="side-item" id="side-home" onclick="abrirApp('home')" title="Início"><span class="dot dhome"></span><span class="label">Início</span></button>
@@ -316,7 +248,7 @@ function toggleSidebar(){
     const lbl=btn.querySelector('.label');
     if(lbl) lbl.textContent=collapsed?'Expandir':'Recolher';
   }
-  try{ localStorage.setItem('gt360_sidebar_collapsed', collapsed?'1':'0'); }catch(e){}
+  try{ demoStore.setItem('gt360_sidebar_collapsed', collapsed?'1':'0'); }catch(e){}
 }
 
 function montarHome(){
@@ -386,7 +318,7 @@ function abrirApp(view, conviteHash=''){
     const frame=document.getElementById('frame-'+view);
     try{ if(frame.contentWindow) frame.contentWindow.scrollTo(0,0); }catch(e){}
   }
-  try{ sessionStorage.setItem('gt360_app_ativo', view); }catch(e){}
+  try{ demoStore.setItem('gt360_app_ativo', view); }catch(e){}
 }
 
 /* Decodifica o mesmo formato de link usado pelos módulos — o shell
@@ -410,7 +342,7 @@ window.addEventListener('load', ()=>{
   montarSidebar();
   montarHome();
   try{
-    if(localStorage.getItem('gt360_sidebar_collapsed')==='1') toggleSidebar();
+    if(demoStore.getItem('gt360_sidebar_collapsed')==='1') toggleSidebar();
   }catch(e){}
 
   // O shell identifica o módulo e repassa o hash para o arquivo da aplicação.

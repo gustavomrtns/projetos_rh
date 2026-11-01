@@ -74,8 +74,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .btn-acessar{align-self:flex-start;padding:10px 22px;border-radius:10px;border:none;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;transition:opacity .2s,transform .2s;pointer-events:none}
 .access-card:hover .btn-acessar{opacity:.9;transform:translateY(-1px)}
 .access-notice{margin-top:28px;font-size:11.5px;color:var(--gray400);background:var(--white);border:1.5px solid var(--gray100);border-radius:10px;padding:12px 16px;text-align:left}
-.access-admin-form{display:none;margin-top:18px;background:var(--white);border-radius:12px;box-shadow:var(--shadow);padding:20px;text-align:left}
-.access-admin-form.open{display:block}
+
 
 /* HEADER TITLE / HERO */
 .hero{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
@@ -269,6 +268,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -282,7 +283,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="access-screen" id="access-screen">
   <div class="access-band"></div>
   <div class="access-inner">
-    <img class="access-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
+    <img class="access-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
     <h1>Gestão de Riscos Psicossociais</h1>
     <div class="access-grid">
       <div class="access-card" onclick="entrarComo('gestor')">
@@ -302,22 +303,13 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
         </div>
       </div>
     </div>
-    <div class="access-admin-form" id="access-admin-form">
-      <div class="form-grid">
-        <div class="field span2"><label>Senha de acesso ao Painel Gerencial</label><input type="password" id="admin-pass" placeholder="Senha"></div>
-      </div>
-      <div class="actions" style="margin-top:14px">
-        <button class="btn btn-primary" onclick="entrarComoAdmin()">Entrar</button>
-      </div>
-      <div class="access-notice" style="margin-top:14px">Ambiente de demonstração — senha padrão: <b>admin123</b></div>
     </div>
-  </div>
 </div>
 <!-- ===================== APP SHELL ===================== -->
 <div class="brand-band"></div>
 <header>
   <div class="logo-wrap">
-    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
+    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Gestão de Riscos Psicossociais</div>
       <div class="tag">PROART</div>
@@ -729,9 +721,8 @@ const DIM_CONCEITOS = {
 };
 const STATUS_LABEL = {pendente:'Pendente', em_andamento:'Em andamento', concluida:'Concluída', atrasada:'Atrasada'};
 const AREA_OPCOES = ['RH','SESMT','TI','Gestão','Comunicação','Diretoria','Outro'];
-const ADMIN_PASS = 'admin123';
 const STORAGE_KEY = 'psicossocial_sistema_v1';
-const LOGO_DATA_URI = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E';
+const LOGO_DATA_URI = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E';
 
 let currentRole = null;
 let RESPOSTAS = [];
@@ -752,10 +743,8 @@ function abrirModal(id){ document.getElementById(id).classList.add('open'); }
 function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
 /* ===================== ACESSO / SESSÃO ===================== */
-function toggleAdminForm(){ document.getElementById('access-admin-form').classList.add('open'); }
+function toggleAdminForm(){ entrarComoAdmin(); }
 async function entrarComoAdmin(){
-  const p = document.getElementById('admin-pass').value;
-  if(p !== ADMIN_PASS){ showToast('Senha incorreta.'); return; }
   currentRole = 'admin';
   document.getElementById('access-screen').style.display='none';
   document.getElementById('role-chip').textContent = 'Painel Gerencial';
@@ -774,8 +763,8 @@ async function entrarComo(role){
 function sair(){
   currentRole = null;
   document.getElementById('access-screen').style.display='flex';
-  document.getElementById('admin-pass').value='';
-  document.getElementById('access-admin-form').classList.remove('open');
+  
+  
 }
 
 const SIDEBAR_GESTOR = [
@@ -799,11 +788,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('riscos_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('riscos_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('riscos_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('riscos_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';
@@ -839,7 +828,7 @@ async function irPara(viewId){
   if(side) side.classList.add('active');
   document.getElementById('content').scrollTop = 0;
 
-  // Os planos ficam salvos no navegador (localStorage) e valem para todas as
+  // Os planos ficam salvos no navegador (demoStore) e valem para todas as
   // abas/sessões deste mesmo navegador. Por isso, buscamos a versão mais
   // recente antes de exibir qualquer tela que dependa deles — útil, por
   // exemplo, se o Gestor e o Painel Gerencial estiverem em abas diferentes
@@ -854,17 +843,17 @@ async function irPara(viewId){
 }
 
 /* ===================== PERSISTÊNCIA ===================== */
-// Armazenamento local do navegador (localStorage). Os dados ficam disponíveis
+// Armazenamento local do navegador (demoStore). Os dados ficam disponíveis
 // para todas as abas/sessões deste mesmo navegador, mas não são compartilhados
 // entre navegadores, computadores ou pessoas diferentes — para isso, seria
 // necessário um backend real com banco de dados.
 async function storageGetSafe(key){
-  try{ const v = localStorage.getItem(key); return v ? {key, value:v} : null; }
-  catch(e){ console.error('localStorage.getItem falhou', e); return null; }
+  try{ const v = demoStore.getItem(key); return v ? {key, value:v} : null; }
+  catch(e){ console.error('demoStore.getItem falhou', e); return null; }
 }
 async function storageSetSafe(key, value){
-  try{ localStorage.setItem(key, value); return {key, value}; }
-  catch(e){ console.error('localStorage.setItem falhou', e); return null; }
+  try{ demoStore.setItem(key, value); return {key, value}; }
+  catch(e){ console.error('demoStore.setItem falhou', e); return null; }
 }
 async function carregarDados(){
   const r = await storageGetSafe(STORAGE_KEY);

@@ -535,6 +535,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -1190,10 +1192,10 @@ function exportarPDF(){
   }, 1000);
 }
 
-/* ── HISTÓRICO / REPOSITÓRIO (localStorage) ── */
+/* ── HISTÓRICO / REPOSITÓRIO (demoStore) ── */
 const PJ_STORAGE_KEY = 'pj_avaliacoes';
-function carregarHistoricoPJ(){ try{ return JSON.parse(localStorage.getItem(PJ_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
-function salvarHistoricoPJ(lista){ try{ localStorage.setItem(PJ_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico', e); } }
+function carregarHistoricoPJ(){ try{ return JSON.parse(demoStore.getItem(PJ_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function salvarHistoricoPJ(lista){ try{ demoStore.setItem(PJ_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico', e); } }
 
 function registrarNoHistoricoPJ(){
   const registro = {
@@ -1536,11 +1538,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('pj_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('pj_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('pj_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('pj_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';

@@ -277,6 +277,8 @@ button,input,select,textarea{font-family:'Sora',sans-serif}
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -585,7 +587,10 @@ function diasDesde(iso){ return Math.floor((Date.now()-new Date(iso).getTime())/
 function isoDiasAtras(d){ return new Date(Date.now()-d*86400000).toISOString(); }
 
 function seedDB(){
-  const colaboradores=[];
+  const colaboradores=window.PortfolioDemo.copyPeople().map(function(p,i){
+    return {id:100+i,nome:p.nome,cargo:p.cargo,setor:p.setor,unidade:p.unidade,
+      admissao:p.admissao,email:p.email,telefone:''};
+  });
 
   const marcosConfig={};
   MARCOS.forEach(m=>marcosConfig[m.dias]=true);
@@ -603,13 +608,13 @@ function seedDB(){
 
 function load(){
   try{
-    const raw=localStorage.getItem(STORE_KEY);
+    const raw=demoStore.getItem(STORE_KEY);
     if(raw){ DB=JSON.parse(raw); return; }
   }catch(e){ console.warn(e); }
   DB=seedDB();
   save();
 }
-function save(){ try{ localStorage.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ console.warn(e); } }
+function save(){ try{ demoStore.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ console.warn(e); } }
 
 
 /* ================= CÁLCULO DE TEMPO DE CASA ================= */
@@ -660,11 +665,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('tc_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('tc_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('tc_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('tc_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';
@@ -799,7 +804,7 @@ function excluirColab(id){
 
 /* ================= IMPORTAR DO ONBOARDING ================= */
 function lerOnboardingColaboradores(){
-  try{ return JSON.parse(localStorage.getItem('onb_colaboradores')||'[]'); }catch(e){ return []; }
+  try{ return JSON.parse(demoStore.getItem('onb_colaboradores')||'[]'); }catch(e){ return []; }
 }
 function abrirImportOnboarding(){
   const doOnboarding = lerOnboardingColaboradores();
@@ -980,12 +985,10 @@ async function testarIntegracao(tipo){
   if(!url){ showToast('Informe o endpoint antes de testar'); return; }
   const payload={ tipo:'teste', origem:'Tempo de Casa', timestamp:new Date().toISOString() };
   let ok=true;
-  try{
-    await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-  }catch(e){ ok=false; }
+  /* Endpoint não é acionado na vitrine pública. */ ok=true;
   DB.integracoes[tipo].ultimoTeste={ok,data:new Date().toISOString()};
   save(); renderIntegracao();
-  showToast(ok ? 'Requisição de teste enviada — confirme o recebimento na sua automação' : 'Não foi possível contatar o endpoint informado');
+  showToast(ok ? 'Integração simulada sem comunicação externa' : 'Não foi possível contatar o endpoint informado');
 }
 
 /* ================= CARTÃO / MODAL ================= */
@@ -1037,17 +1040,14 @@ async function enviarCartao(canal){
     const payload = canal==='email'
       ? { canal:'email', destino, remetente:integ.remetente, assunto:integ.assunto, colaborador:c.nome, marco:m.label, cargo:c.cargo, unidade:c.unidade }
       : { canal:'telefone', destino, provedor:integ.canal, mensagem:integ.modelo.replace('{{nome}}',c.nome).replace('{{marco}}',m.label), colaborador:c.nome, marco:m.label };
-    try{
-      await fetch(webhook,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      status='enviado';
-    }catch(e){ status='falhou'; }
+    /* Não enviar informações de teste para endpoints externos. */ status='simulado';
   }
 
   DB.envios.push({ id:'e'+Date.now(), colabId:c.id, colabNome:c.nome, marcoDias:m.dias, canal, destino, data:new Date().toISOString(), status });
   save();
   refreshAll();
 
-  if(status==='simulado') showToast('Envio simulado — configure o webhook em Integração para disparar de verdade');
+  if(status==='simulado') showToast('Envio de teste registrado apenas nesta sessão; nenhum contato externo foi realizado');
   else if(status==='enviado') showToast('Cartão enviado para '+destino);
   else showToast('Falha ao contatar o endpoint configurado');
 }

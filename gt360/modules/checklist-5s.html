@@ -460,6 +460,8 @@ textarea:focus {
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada e operações somente em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -826,8 +828,8 @@ let currentTab = 1;
 /* ════════ STATE ════════ */
 function loadState() {
   try {
-    const s = localStorage.getItem('5s_gt_state'); if(s) state = JSON.parse(s);
-    const m = JSON.parse(localStorage.getItem('5s_gt_meta') || '{}');
+    const s = demoStore.getItem('5s_gt_state'); if(s) state = JSON.parse(s);
+    const m = JSON.parse(demoStore.getItem('5s_gt_meta') || '{}');
     if(m.area)  document.getElementById('area').value = m.area;
     if(m.resp)  document.getElementById('responsavel').value = m.resp;
     if(m.data)  document.getElementById('data').value = m.data;
@@ -837,8 +839,8 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem('5s_gt_state', JSON.stringify(state));
-    localStorage.setItem('5s_gt_meta', JSON.stringify({
+    demoStore.setItem('5s_gt_state', JSON.stringify(state));
+    demoStore.setItem('5s_gt_meta', JSON.stringify({
       area:  document.getElementById('area').value,
       resp:  document.getElementById('responsavel').value,
       data:  document.getElementById('data').value,
@@ -963,11 +965,11 @@ function toggleCheckSidebar(){
   const sb = document.getElementById('check-sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('check-side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('5s_check_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('5s_check_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoCheckSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('5s_check_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('5s_check_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('check-sidebar').classList.add('collapsed');
     document.getElementById('check-side-toggle-btn').title = 'Expandir menu';
@@ -1064,8 +1066,8 @@ function showToast(msg, isError) {
 
 /* ════════ HISTÓRICO / REPOSITÓRIO DE AUDITORIAS ════════ */
 const AUD_STORAGE_KEY = '5s_gt_auditorias';
-function carregarAuditorias(){ try{ return JSON.parse(localStorage.getItem(AUD_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
-function salvarAuditorias(lista){ try{ localStorage.setItem(AUD_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico de auditorias', e); } }
+function carregarAuditorias(){ try{ return JSON.parse(demoStore.getItem(AUD_STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+function salvarAuditorias(lista){ try{ demoStore.setItem(AUD_STORAGE_KEY, JSON.stringify(lista)); }catch(e){ console.warn('Não foi possível salvar o histórico de auditorias', e); } }
 
 function arquivarAuditoria(meta){
   const registro = {
@@ -1144,8 +1146,8 @@ function reabrirAuditoria(i){
    o resultado volta para o gestor por e-mail, para ser importado ao painel. */
 
 let agendamentos = [];
-function salvarAgendamentos(){ try{ localStorage.setItem('5s_gt_agendamentos', JSON.stringify(agendamentos)); }catch(e){} }
-function carregarAgendamentos(){ try{ agendamentos = JSON.parse(localStorage.getItem('5s_gt_agendamentos')||'[]'); }catch(e){ agendamentos = []; } }
+function salvarAgendamentos(){ try{ demoStore.setItem('5s_gt_agendamentos', JSON.stringify(agendamentos)); }catch(e){} }
+function carregarAgendamentos(){ try{ agendamentos = JSON.parse(demoStore.getItem('5s_gt_agendamentos')||'[]'); }catch(e){ agendamentos = []; } }
 
 function abrirModalNovaAuditoria(){
   ['na-area','na-responsavel','na-data','na-email','na-email-gestor'].forEach(id=>document.getElementById(id).value='');

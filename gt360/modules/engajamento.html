@@ -299,17 +299,19 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
 <div class="nav-band"></div>
 <div class="topbar">
   <div class="brand">
-    <img class="brand-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPEO%3C/text%3E%3C/svg%3E" alt="Identidade visual da Pesquisa de Engajamento Organizacional">
+    <img class="brand-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPEO%3C/text%3E%3C/svg%3E" alt="Identidade visual da Pesquisa de Engajamento Organizacional">
   </div>
   <div class="topbar-right">
     <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
-    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%237b2ff7%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
+    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23292725%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
   </div>
 </div>
 
@@ -415,11 +417,11 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
           <div class="ref-info-box"><div class="ref-info-label">Temas avaliados</div><div class="ref-info-value" id="home-temas">7 blocos</div></div>
         </div>
 
-        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. As respostas são anônimas.</div>
+        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.</div>
 
         <div class="ref-actions">
           <button class="btn-pill btn-pill-primary" onclick="entrarColaborador()"><span id="home-btn-texto">Responder pesquisa</span> &rarr;</button>
-          <span class="ref-note" id="home-nota">100% anônima</span>
+          <span class="ref-note" id="home-nota">Sem identificação pessoal</span>
         </div>
       </div>
     </div>
@@ -558,7 +560,7 @@ const UNIDADES=['Unidade A','Unidade B'];
 const ESTADOS_POR_UNIDADE={'Unidade A':['Região Sul','Região Leste','Região Central','Região Norte','Região Oeste','Região Noroeste']};
 const TEMPO_CASA=['Menos de 1 ano','1 a 2 anos','3 a 5 anos','6 a 10 anos','Mais de 10 anos'];
 const LIKERT_OPTS=['Discordo Totalmente','Discordo Parcialmente','Neutro','Concordo Parcialmente','Concordo Totalmente'];
-const ADMIN_SENHA=null;
+
 const CORES_BLOCO=['#b84c4c','#ac1515','#393734','#8b837d','#8fff00','#c71717','#58524c'];
 /* Sempre que o conteúdo padrão de blocos/perguntas mudar, incremente esta versão
    para que o navegador do usuário recarregue o banco de perguntas mais recente,
@@ -570,36 +572,52 @@ let blocos=[],perguntas=[],pessoas=[],respostas=[],lembretesLog=[],config={};
 let editandoBlocoId=null,editandoPerguntaId=null,editandoPessoaId=null;
 let blocoSelecionadoId=null;
 let dashboardFiltros={estado:'',tempoCasa:''};
-let colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+let colabState={step:0,unidade:'',area:'',tempoCasa:'',anonimo:true,valores:{}};
 
 /* ====================== PERSISTÊNCIA ====================== */
 function salvarTudo(){
   try{
-    localStorage.setItem('peo_blocos',JSON.stringify(blocos));
-    localStorage.setItem('peo_perguntas',JSON.stringify(perguntas));
-    localStorage.setItem('peo_pessoas',JSON.stringify(pessoas));
-    localStorage.setItem('peo_respostas',JSON.stringify(respostas));
-    localStorage.setItem('peo_lembretes',JSON.stringify(lembretesLog));
-    localStorage.setItem('peo_config',JSON.stringify(config));
+    demoStore.setItem('peo_blocos',JSON.stringify(blocos));
+    demoStore.setItem('peo_perguntas',JSON.stringify(perguntas));
+    demoStore.setItem('peo_pessoas','[]');
+    demoStore.setItem('peo_respostas',JSON.stringify(respostas));
+    demoStore.setItem('peo_lembretes',JSON.stringify(lembretesLog));
+    demoStore.setItem('peo_config',JSON.stringify(config));
   }catch(e){console.warn('Erro ao salvar',e);}
+}
+function criarRespostasFicticias(){
+  const tempos=['Menos de 1 ano','1 a 2 anos','3 a 5 anos'];
+  return [0,1,2].map(function(i){
+    const vals={};
+    perguntas.forEach(function(q){
+      if(q.campo==='unidade')vals[q.id]='Unidade A';
+      else if(q.campo==='estado')vals[q.id]=['Região Sul','Região Leste','Região Central'][i];
+      else if(q.campo==='tempoCasa')vals[q.id]=tempos[i];
+      else if(q.tipo==='likert')vals[q.id]=[4,5,3][i];
+      else if(q.tipo==='unica'&&q.opcoes&&q.opcoes.length)vals[q.id]=q.opcoes[0];
+    });
+    return {id:'demo_resposta_'+(i+1),data:new Date(Date.now()-(i+1)*86400000).toISOString(),
+      anonimo:true,unidade:'Unidade A',estado:['Região Sul','Região Leste','Região Central'][i],
+      area:'',tempoCasa:tempos[i],valores:vals};
+  });
 }
 function carregarTudo(){
   try{
-    const b=localStorage.getItem('peo_blocos');
-    const p=localStorage.getItem('peo_perguntas');
-    const pe=localStorage.getItem('peo_pessoas');
-    const r=localStorage.getItem('peo_respostas');
-    const l=localStorage.getItem('peo_lembretes');
-    const c=localStorage.getItem('peo_config');
-    const versaoSalva=parseInt(localStorage.getItem('peo_seed_version')||'0',10);
+    const b=demoStore.getItem('peo_blocos');
+    const p=demoStore.getItem('peo_perguntas');
+    const pe=demoStore.getItem('peo_pessoas');
+    const r=demoStore.getItem('peo_respostas');
+    const l=demoStore.getItem('peo_lembretes');
+    const c=demoStore.getItem('peo_config');
+    const versaoSalva=parseInt(demoStore.getItem('peo_seed_version')||'0',10);
     if(b&&JSON.parse(b).length&&versaoSalva>=SEED_VERSION){
       blocos=JSON.parse(b);perguntas=JSON.parse(p||'[]');
     }else{
       seedDefaults();
-      localStorage.setItem('peo_seed_version',String(SEED_VERSION));
+      demoStore.setItem('peo_seed_version',String(SEED_VERSION));
     }
-    if(pe)pessoas=JSON.parse(pe);
-    if(r)respostas=JSON.parse(r);
+    pessoas=[];
+    if(r)respostas=JSON.parse(r);else respostas=criarRespostasFicticias();
     if(l)lembretesLog=JSON.parse(l);
     if(c)config=JSON.parse(c); else config=configPadrao();
     if(!config.home)config.home=homePadrao();
@@ -611,8 +629,8 @@ function configPadrao(){
   return{
     linkPesquisa:window.location.href.split('#')[0],
     assuntoEmail:'Sua opinião é importante — Pesquisa de Engajamento {empresa}',
-    corpoEmail:'Olá, {nome}!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
-    msgWhats:'Olá, {nome}! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
+    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
+    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
     home:homePadrao()
   };
 }
@@ -625,9 +643,9 @@ function homePadrao(){
     duracao:'≈ 5 minutos',
     participacao:'Todas as unidades',
     temas:'7 blocos',
-    descricao:'Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. As respostas são anônimas.',
+    descricao:'Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.',
     textoBotao:'Responder pesquisa',
-    nota:'100% anônima'
+    nota:'Sem identificação pessoal'
   };
 }
 function uid(pref){return pref+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
@@ -635,7 +653,7 @@ function uid(pref){return pref+'_'+Date.now().toString(36)+Math.random().toStrin
 /* ====================== DADOS SEMENTE (Banco de Perguntas) ====================== */
 function seedDefaults(){
   blocos=[
-    {id:'b1',nome:'Perfil Demográfico',ordem:1,cor:CORES_BLOCO[0],descricao:'Identificação do respondente'},
+    {id:'b1',nome:'Perfil Demográfico',ordem:1,cor:CORES_BLOCO[0],descricao:'Contexto demográfico sem identificação pessoal'},
     {id:'b2',nome:'Engajamento',ordem:2,cor:CORES_BLOCO[1],descricao:'Percepção geral de engajamento com a organização'},
     {id:'b3',nome:'Desenvolvimento',ordem:3,cor:CORES_BLOCO[2],descricao:'Oportunidades de crescimento e carreira'},
     {id:'b4',nome:'Lideranças e Comunicação',ordem:4,cor:CORES_BLOCO[3],descricao:'Relação com lideranças e fluxo de comunicação'},
@@ -717,7 +735,7 @@ function entrarColaborador(){
   document.getElementById('view-gate').classList.add('hidden');
   document.getElementById('view-colab').classList.remove('hidden');
   document.getElementById('topbar-status').textContent='Portal do Colaborador';
-  colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+  colabState={step:0,unidade:'',area:'',tempoCasa:'',anonimo:true,valores:{}};
   renderColab();
 }
 function sairColaborador(){
@@ -740,11 +758,11 @@ function toggleAdminSidebar(){
   const sb = document.getElementById('admin-sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('admin-side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('peo_admin_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('peo_admin_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoAdminSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('peo_admin_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('peo_admin_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('admin-sidebar').classList.add('collapsed');
     document.getElementById('admin-side-toggle-btn').title = 'Expandir menu';
@@ -1263,30 +1281,23 @@ function colabProximo(){
 }
 function colabVoltar(){if(colabState.step>0){colabState.step--;renderColab();window.scrollTo({top:0,behavior:'smooth'});}}
 function submeterPesquisa(){
-  let pessoaId=null;
-  if(!colabState.anonimo){
-    if(colabState.email){const f=pessoas.find(p=>p.email&&p.email.toLowerCase()===colabState.email.toLowerCase());if(f)pessoaId=f.id;}
-    if(!pessoaId&&colabState.nome){const f=pessoas.find(p=>p.nome.toLowerCase()===colabState.nome.toLowerCase());if(f)pessoaId=f.id;}
-  }
-  const qUnidade=perguntas.find(q=>q.campo==='unidade');
-  const qEstado=perguntas.find(q=>q.campo==='estado');
-  const qArea=perguntas.find(q=>q.campo==='area');
-  const qTempo=perguntas.find(q=>q.campo==='tempoCasa');
+  /* Nenhum identificador pessoal entra no registro de participação. */
+  const buscarCampo=function(campo){return perguntas.find(q=>q.campo===campo);};
+  const valorCampo=function(campo){const q=buscarCampo(campo);return q?(colabState.valores[q.id]||''):'';};
+  const valores={};
+  Object.keys(colabState.valores).forEach(function(id){
+    const q=perguntas.find(function(item){return String(item.id)===String(id);});
+    if(!q || /^(nome|email|telefone|matricula|cpf|documento|identificador)$/i.test(q.campo||''))return;
+    /* Campos de texto aberto não são associados ao perfil de ninguém. */
+    valores[id]=colabState.valores[id];
+  });
   const rec={
-    id:uid('r'),data:new Date().toISOString(),pessoaId,
-    nome:colabState.anonimo?'':colabState.nome,
-    email:colabState.anonimo?'':colabState.email,
-    anonimo:colabState.anonimo,
-    unidade:qUnidade?colabState.valores[qUnidade.id]:'',
-    estado:qEstado?(colabState.valores[qEstado.id]||''):'',
-    area:qArea?colabState.valores[qArea.id]:'',
-    tempoCasa:qTempo?colabState.valores[qTempo.id]:'',
-    valores:Object.assign({},colabState.valores)
+    id:uid('r'),data:new Date().toISOString(),anonimo:true,
+    unidade:valorCampo('unidade'),estado:valorCampo('estado'),
+    area:valorCampo('area'),tempoCasa:valorCampo('tempoCasa'),valores:valores
   };
-  respostas.push(rec);
-  salvarTudo();
-  colabState.step=blocosOrdenados().length;
-  renderColab();
+  respostas.push(rec);salvarTudo();
+  colabState.step=blocosOrdenados().length;renderColab();
 }
 function renderColabDone(){
   document.getElementById('colab-root').innerHTML=`
