@@ -64,6 +64,22 @@
   w.PortfolioDemo={people:clone(people), units:["UNIDADE 1 - FILIAL 1","UNIDADE 1 - FILIAL 2","UNIDADE 2","UNIDADE 3"],copyPeople:function(){return clone(people);},reset:function(){w.location.reload();}};
 
   /* Acessibilidade básica para formulários que já têm rótulos visíveis. */
+  function demoSuggestions(){
+    if(!document.body)return;
+    var list=document.getElementById("demo-nomes-ficticios");
+    if(!list){
+      list=document.createElement("datalist");list.id="demo-nomes-ficticios";
+      people.forEach(function(person){var option=document.createElement("option");option.value=person.nome;list.appendChild(option);});
+      document.body.appendChild(list);
+    }
+    var ids=["nome","f-nome","f-colaborador","f-gestor","nome-avaliador","f-responsavel","f-gestor-responsavel"];
+    ids.forEach(function(id){
+      var field=document.getElementById(id);
+      if(field&&field.tagName==="INPUT"&&!field.hasAttribute("list")&&(!field.type||field.type==="text")){
+        field.setAttribute("list","demo-nomes-ficticios");
+      }
+    });
+  }
   function associateLabels(rootEl){
     var fields=(rootEl||document).querySelectorAll(".field, .sig-row, .form-field, .campo");
     for(var i=0;i<fields.length;i++){
@@ -82,10 +98,11 @@
     }
   }
   function startA11y(){
+    demoSuggestions();
     associateLabels(document);
     if(typeof MutationObserver==="function"){
       var pending=false;
-      new MutationObserver(function(){if(!pending){pending=true;requestAnimationFrame(function(){pending=false;associateLabels(document);});}}).observe(document.body,{subtree:true,childList:true});
+      new MutationObserver(function(){if(!pending){pending=true;requestAnimationFrame(function(){pending=false;associateLabels(document);demoSuggestions();});}}).observe(document.body,{subtree:true,childList:true});
     }
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",startA11y);
