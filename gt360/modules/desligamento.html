@@ -1188,23 +1188,23 @@ function gerarPDFHtml(r){
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad1)">01</div>Identificação</div>
         <div class="pgrid">
-          <div class="pfield wide"><span class="pflbl">Nome</span><span class="pfval">${r.nome||'—'}</span></div>
-          <div class="pfield"><span class="pflbl">Matrícula</span><span class="pfval">${r.matricula||'—'}</span></div>
-          <div class="pfield"><span class="pflbl">Setor</span><span class="pfval">${r.setor||'—'}</span></div>
+          <div class="pfield wide"><span class="pflbl">Nome</span><span class="pfval">${esc(r.nome||'—')}</span></div>
+          <div class="pfield"><span class="pflbl">Matrícula</span><span class="pfval">${esc(r.matricula||'—')}</span></div>
+          <div class="pfield"><span class="pflbl">Setor</span><span class="pfval">${esc(r.setor||'—')}</span></div>
           <div class="pfield"><span class="pflbl">Data de Desligamento</span><span class="pfval">${fmtDate(r.data_desligamento)}</span></div>
-          <div class="pfield"><span class="pflbl">Tempo de Empresa</span><span class="pfval">${r.tempo_empresa||'—'}</span></div>
+          <div class="pfield"><span class="pflbl">Tempo de Empresa</span><span class="pfval">${esc(r.tempo_empresa||'—')}</span></div>
         </div>
       </div>
 
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad2)">02</div>Motivo do Desligamento</div>
-        <div class="pgrid"><div class="pfield wide"><span class="pflbl">Motivo</span><span class="pfval">${motivoTxt||'—'}</span></div>
-        ${r.pediu_continuasse?`<div class="pfield wide"><span class="pflbl">O que poderíamos ter feito para que continuasse conosco?</span><span class="pfval">${r.pediu_continuasse}</span></div>`:''}
+        <div class="pgrid"><div class="pfield wide"><span class="pflbl">Motivo</span><span class="pfval">${esc(motivoTxt||'—')}</span></div>
+        ${r.pediu_continuasse?`<div class="pfield wide"><span class="pflbl">O que poderíamos ter feito para que continuasse conosco?</span><span class="pfval">${esc(r.pediu_continuasse)}</span></div>`:''}
         </div>
       </div>
 
       <div class="psect">
-        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">03</div>Avaliação — Superior Imediato (${r.nome_superior||'—'})</div>
+        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">03</div>Avaliação — Superior Imediato (${esc(r.nome_superior||'—')})</div>
         ${critSup.map(([c,l])=>`<div class="pratrow"><div class="pratlbl">${l}</div>${ratingBadge(r.av_superior?r.av_superior[c]:'')}</div>`).join('')}
       </div>
 
@@ -1220,16 +1220,16 @@ function gerarPDFHtml(r){
           <div class="pfield"><span class="pflbl">Indicaria a Empresa</span><span class="pfval">${simNaoLabel(r.indicaria)}</span></div>
           <div class="pfield"><span class="pflbl">Desenvolveu-se na Empresa</span><span class="pfval">${simNaoLabel(r.desenvolveu)}</span></div>
           <div class="pfield"><span class="pflbl">Voltaria a Trabalhar</span><span class="pfval">${simNaoLabel(r.voltaria)}</span></div>
-          ${r.feedback_obs?`<div class="pfield wide"><span class="pflbl">Opinião sobre o Feedback</span><span class="pfval">${r.feedback_obs}</span></div>`:''}
-          ${r.indicaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (indicação)</span><span class="pfval">${r.indicaria_porque}</span></div>`:''}
-          ${r.voltaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (retorno)</span><span class="pfval">${r.voltaria_porque}</span></div>`:''}
+          ${r.feedback_obs?`<div class="pfield wide"><span class="pflbl">Opinião sobre o Feedback</span><span class="pfval">${esc(r.feedback_obs)}</span></div>`:''}
+          ${r.indicaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (indicação)</span><span class="pfval">${esc(r.indicaria_porque)}</span></div>`:''}
+          ${r.voltaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (retorno)</span><span class="pfval">${esc(r.voltaria_porque)}</span></div>`:''}
           <div class="pfield wide"><span class="pflbl">Como chegou até a Empresa</span><span class="pfval">${chegadaLabel(r)}</span></div>
         </div>
       </div>
 
       ${r.sugestoes?`<div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad3)">06</div>Sugestões de Melhoria</div>
-        <div class="pfield wide"><span class="pfval">${r.sugestoes}</span></div>
+        <div class="pfield wide"><span class="pfval">${esc(r.sugestoes)}</span></div>
       </div>`:''}
 
       <div class="psect">
