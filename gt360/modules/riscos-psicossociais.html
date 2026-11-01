@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestão de Riscos Psicossociais | avaliação de riscos psicossociais</title>
+<title>Gestão de Riscos Psicossociais | GT360°</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -313,7 +313,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Gestão de Riscos Psicossociais</div>
-      <div class="tag">avaliação de riscos psicossociais</div>
+      <div class="tag">Gestão de Pessoas</div>
     </div>
   </div>
   <div class="header-role">
@@ -370,7 +370,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 
       <!-- STEP 2 -->
       <div id="wz-step-2" style="display:none">
-        <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Resultados do avaliação de riscos psicossociais</span></div>
+        <div class="section-header"><div class="section-num sn2">02</div><span class="section-title">Resultados da avaliação</span></div>
         <div id="dims-readonly"></div>
         <div class="actions">
           <button class="btn btn-primary" onclick="avancarStep2()">Continuar para o Plano de Ação</button>
@@ -495,7 +495,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="view" id="view-admin-analise"><div class="view-inner">
       <div class="hero"><div class="hero-band"></div><div class="hero-inner">
         <h1>Análise de Dados</h1>
-        <p>Indicadores gerais e recortes por Unidade, Setor e Dimensão do avaliação de riscos psicossociais.</p>
+        <p>Indicadores gerais e recortes por Unidade, Setor e Dimensão avaliada.</p>
       </div></div>
       <div class="refresh-bar">
         <div class="subtabs" data-group="analise" style="margin-bottom:0">
@@ -877,14 +877,14 @@ function avancarStep1(){
   if(!ok){ showToast('Existem campos obrigatórios não preenchidos. Revise o formulário antes de continuar.'); return; }
   wzData = {praca, setor, gestor, cargo, email, data: document.getElementById('f-data').value};
   wzDims = dimensoesDe(praca, setor);
-  if(wzDims.length===0){ showToast('Não há dimensões do avaliação de riscos psicossociais registradas para este setor.'); return; }
+  if(wzDims.length===0){ showToast('Não há dimensões de risco registradas para este setor.'); return; }
   document.getElementById('acoes-blocks').innerHTML = ''; // evita reaproveitar campos de uma combinação Unidade/Setor anterior
   renderDimsReadonly();
   goStep(2);
 }
 function renderDimsReadonly(){
   document.getElementById('dims-readonly').innerHTML = wzDims.map(d=>
-    '<div class="dim-card"><div class="dim-card-top"><span class="dim-card-name">'+esc(d.dimNome)+'</span><span class="rbadge '+d.classificacao+'">'+CLASSIF_LABEL[d.classificacao]+'</span></div><div class="dim-card-nota">Nota: '+fmtNota(d.nota)+' — valores obtidos na avaliação avaliação de riscos psicossociais, somente para visualização.</div></div>'
+    '<div class="dim-card"><div class="dim-card-top"><span class="dim-card-name">'+esc(d.dimNome)+'</span><span class="rbadge '+d.classificacao+'">'+CLASSIF_LABEL[d.classificacao]+'</span></div><div class="dim-card-nota">Nota: '+fmtNota(d.nota)+' — valores obtidos na avaliação de riscos psicossociais, somente para visualização.</div></div>'
   ).join('');
 }
 async function avancarStep2(){
@@ -1307,7 +1307,7 @@ function imprimirResposta(idResposta){
         '<div class="kv"><div class="kv-lbl">Gestor responsável</div><div class="kv-val">'+esc(r.gestor)+' — '+esc(r.cargo)+'</div></div>'+
         '<div class="kv"><div class="kv-lbl">Data</div><div class="kv-val">'+fmtDataISO(r.dataPreenchimento)+'</div></div>'+
       '</div></div>'+
-      '<div class="psect"><div class="pstitle">2. Notas do avaliação de riscos psicossociais</div><table class="dtable" style="min-width:0"><thead><tr><th>Dimensão</th><th>Classificação do risco</th><th>Nota</th></tr></thead><tbody>'+notasRows+'</tbody></table></div>'+
+      '<div class="psect"><div class="pstitle">2. Notas da avaliação</div><table class="dtable" style="min-width:0"><thead><tr><th>Dimensão</th><th>Classificação do risco</th><th>Nota</th></tr></thead><tbody>'+notasRows+'</tbody></table></div>'+
       '<div class="psect"><div class="pstitle">3. Plano de Ação</div>'+planoBlocks+'</div>'+
     '</div></div>';
   document.getElementById('print-content').innerHTML = html;
