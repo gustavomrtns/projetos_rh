@@ -1,0 +1,89 @@
+/* ================================================================
+   eu + horizonte · Editorial 02
+   INTRANET INDEPENDENTE — não faz parte do workspace GT360°.
+   Somente identidade visual. Navegação, estado e ações preservados.
+   ================================================================ */
+:root {
+  --editorial-red:#c71717;
+  --editorial-lime:#8fff00;
+  --editorial-ink:#232220;
+  --editorial-paper:#f8f7f4;
+
+  --papel:#ffffff;
+  --nevoa:#f8f7f4;
+  --nevoa-2:#eeeae4;
+  --linha:rgba(35,34,32,.11);
+  --linha-forte:rgba(35,34,32,.23);
+  --tinta:#232220;
+  --tinta-media:#5d5751;
+  --tinta-fraca:#766f67;
+  --ouro:#b17b25;
+  --brasa:#c71717;
+  --magenta:#c71717;
+  --violeta:#38332e;
+  --rio:#c71717;
+  --seiva:#8fff00;
+  --espectro:linear-gradient(90deg,#c71717 0%,#c71717 84%,#8fff00 84%,#8fff00 100%);
+  --agua:linear-gradient(140deg,#393531,#c71717);
+  --brasa-grad:linear-gradient(140deg,#c71717,#9f1111);
+  --noite-grad:linear-gradient(140deg,#2e2b28,#c71717);
+  --r-md:16px;
+  --r-lg:20px;
+  --r-xl:25px;
+  --sombra:0 2px 12px rgba(42,33,27,.055);
+  --sombra-media:0 16px 34px rgba(42,33,27,.11);
+  --sombra-alta:0 28px 65px rgba(42,33,27,.17);
+}
+body { background:var(--editorial-paper); color:var(--editorial-ink); }
+::selection { background:var(--editorial-lime); color:var(--editorial-ink); }
+.aparelho { border-color:var(--linha); background:var(--papel); }
+.ambiente span:nth-child(1) { background:var(--editorial-red); opacity:.14; }
+.ambiente span:nth-child(2) { background:var(--editorial-lime); opacity:.20; }
+.ambiente span:nth-child(3) { background:var(--tinta); opacity:.06; }
+.topo { border-bottom:1px solid var(--linha); }
+.fita { background:var(--nevoa-2); }
+.fita i { background:var(--espectro); animation:none; }
+.abertura h1,.saudacao h2,.rotulo h3,.portal h4,.palco-live h4,.capa h4 {
+  font-family:'DM Serif Display', Georgia, serif;
+  font-weight:400;
+  letter-spacing:-.025em;
+}
+.saudacao h2 { color:var(--tinta); }
+.rotulo h3 { font-size:20px; }
+.rotulo button { color:var(--editorial-red); font-weight:600; }
+.selo-anel { border-radius:21px; }
+.selo-anel u { border-radius:19px; }
+.cartao,.linha-item,.pasta,.atalho,.portal {
+  box-shadow:var(--sombra);
+  border-color:var(--linha);
+}
+.cartao:hover,.linha-item:hover,.pasta:hover,.atalho:hover,.portal:hover {
+  border-color:var(--linha-forte);
+  box-shadow:var(--sombra-media);
+}
+.pasta-icone,.atalho i { background:var(--brasa-grad); }
+.acao.ligado { color:var(--editorial-red); background:#fff3f0; border-color:#eac3bc; }
+.seg.on { color:var(--editorial-red); box-shadow:inset 0 -2px 0 var(--editorial-red); }
+.chip.on { background:var(--editorial-red); color:#fff; }
+.barra i { background:var(--editorial-lime); }
+.busca:focus-within { border-color:var(--editorial-red); box-shadow:0 0 0 3px rgba(199,23,23,.09); }
+.face.frente { background:linear-gradient(145deg,#282624,#c71717); box-shadow:0 20px 44px -20px rgba(199,23,23,.36); }
+.palco-live { background:linear-gradient(140deg,#c71717,#801313); }
+.portal::before { background:var(--espectro); }
+.portal::after { background:var(--editorial-lime); opacity:.12; }
+.contador { background:var(--editorial-red); }
+.icone-btn:focus-visible,.avatar-btn:focus-visible,.seg:focus-visible,
+.chip:focus-visible,.acao:focus-visible,.atalho:focus-visible,
+.portal:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,
+textarea:focus-visible {
+  outline:3px solid var(--editorial-red);
+  outline-offset:2px;
+}
+.g-espectro { background:var(--espectro); }
+.g-agua { background:var(--agua); }
+.g-brasa { background:var(--brasa-grad); }
+.g-noite { background:var(--noite-grad); }
+@media(prefers-reduced-motion:reduce){
+  .fita i { animation:none!important; }
+}
+/* Layout mobile original, rotas e ações permanecem como no case. */
