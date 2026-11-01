@@ -572,14 +572,14 @@ let blocos=[],perguntas=[],pessoas=[],respostas=[],lembretesLog=[],config={};
 let editandoBlocoId=null,editandoPerguntaId=null,editandoPessoaId=null;
 let blocoSelecionadoId=null;
 let dashboardFiltros={estado:'',tempoCasa:''};
-let colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+let colabState={step:0,unidade:'',area:'',tempoCasa:'',anonimo:true,valores:{}};
 
 /* ====================== PERSISTÊNCIA ====================== */
 function salvarTudo(){
   try{
     demoStore.setItem('peo_blocos',JSON.stringify(blocos));
     demoStore.setItem('peo_perguntas',JSON.stringify(perguntas));
-    demoStore.setItem('peo_pessoas',JSON.stringify(pessoas));
+    demoStore.setItem('peo_pessoas','[]');
     demoStore.setItem('peo_respostas',JSON.stringify(respostas));
     demoStore.setItem('peo_lembretes',JSON.stringify(lembretesLog));
     demoStore.setItem('peo_config',JSON.stringify(config));
@@ -600,7 +600,7 @@ function carregarTudo(){
       seedDefaults();
       demoStore.setItem('peo_seed_version',String(SEED_VERSION));
     }
-    if(pe)pessoas=JSON.parse(pe);
+    pessoas=[];
     if(r)respostas=JSON.parse(r);
     if(l)lembretesLog=JSON.parse(l);
     if(c)config=JSON.parse(c); else config=configPadrao();
@@ -719,7 +719,7 @@ function entrarColaborador(){
   document.getElementById('view-gate').classList.add('hidden');
   document.getElementById('view-colab').classList.remove('hidden');
   document.getElementById('topbar-status').textContent='Portal do Colaborador';
-  colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone:'',anonimo:true,valores:{}};
+  colabState={step:0,unidade:'',area:'',tempoCasa:'',anonimo:true,valores:{}};
   renderColab();
 }
 function sairColaborador(){
@@ -1265,30 +1265,23 @@ function colabProximo(){
 }
 function colabVoltar(){if(colabState.step>0){colabState.step--;renderColab();window.scrollTo({top:0,behavior:'smooth'});}}
 function submeterPesquisa(){
-  let pessoaId=null;
-  if(!colabState.anonimo){
-    if(colabState.email){const f=pessoas.find(p=>p.email&&p.email.toLowerCase()===colabState.email.toLowerCase());if(f)pessoaId=f.id;}
-    if(!pessoaId&&colabState.nome){const f=pessoas.find(p=>p.nome.toLowerCase()===colabState.nome.toLowerCase());if(f)pessoaId=f.id;}
-  }
-  const qUnidade=perguntas.find(q=>q.campo==='unidade');
-  const qEstado=perguntas.find(q=>q.campo==='estado');
-  const qArea=perguntas.find(q=>q.campo==='area');
-  const qTempo=perguntas.find(q=>q.campo==='tempoCasa');
+  /* Nenhum identificador pessoal entra no registro de participação. */
+  const buscarCampo=function(campo){return perguntas.find(q=>q.campo===campo);};
+  const valorCampo=function(campo){const q=buscarCampo(campo);return q?(colabState.valores[q.id]||''):'';};
+  const valores={};
+  Object.keys(colabState.valores).forEach(function(id){
+    const q=perguntas.find(function(item){return String(item.id)===String(id);});
+    if(!q || /^(nome|email|telefone|matricula|cpf|documento|identificador)$/i.test(q.campo||''))return;
+    /* Campos de texto aberto não são associados ao perfil de ninguém. */
+    valores[id]=colabState.valores[id];
+  });
   const rec={
-    id:uid('r'),data:new Date().toISOString(),pessoaId,
-    nome:colabState.anonimo?'':colabState.nome,
-    email:colabState.anonimo?'':colabState.email,
-    anonimo:colabState.anonimo,
-    unidade:qUnidade?colabState.valores[qUnidade.id]:'',
-    estado:qEstado?(colabState.valores[qEstado.id]||''):'',
-    area:qArea?colabState.valores[qArea.id]:'',
-    tempoCasa:qTempo?colabState.valores[qTempo.id]:'',
-    valores:Object.assign({},colabState.valores)
+    id:uid('r'),data:new Date().toISOString(),anonimo:true,
+    unidade:valorCampo('unidade'),estado:valorCampo('estado'),
+    area:valorCampo('area'),tempoCasa:valorCampo('tempoCasa'),valores:valores
   };
-  respostas.push(rec);
-  salvarTudo();
-  colabState.step=blocosOrdenados().length;
-  renderColab();
+  respostas.push(rec);salvarTudo();
+  colabState.step=blocosOrdenados().length;renderColab();
 }
 function renderColabDone(){
   document.getElementById('colab-root').innerHTML=`
