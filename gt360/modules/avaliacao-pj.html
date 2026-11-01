@@ -1115,7 +1115,7 @@ function calcular(){
       ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Entre 61% e 89%</div><div class="action-title">◈ Solicitar Plano de Melhoria</div><div class="action-desc">O desempenho é adequado, porém apresenta pontos de atenção que precisam ser aprimorados. Esse intervalo indica que o prestador atende às necessidades, mas possui oportunidades claras de evolução.</div>`;
     } else {
       ab.className='action-result active-preferencial';
-      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Acima de 90%</div><div class="action-title">★ Manter no Cadastro Preferencial</div><div class="action-desc">O prestador demonstra desempenho superior e consistente, atendendo plenamente aos requisitos técnicos, operacionais e de qualidade.</div>`;
+      ab.innerHTML=`<div class="action-pct-badge">Resultado: ${pct.toFixed(0)}% — Acima de 90%</div><div class="action-title">Manter no Cadastro Preferencial</div><div class="action-desc">O prestador demonstra desempenho superior e consistente, atendendo plenamente aos requisitos técnicos, operacionais e de qualidade.</div>`;
     }
   } else {
     rp.textContent=`(${filled}/6 critérios)`;
@@ -1247,7 +1247,7 @@ function renderHistoricoPJ(){
   }).join('');
 }
 
-function excluirRegistroPJ(i){
+function excluirRegistroPJ(i){ if(!confirm('Confirma a exclusão deste registro?'))return; 
   const lista = carregarHistoricoPJ();
   lista.splice(i,1);
   salvarHistoricoPJ(lista);
