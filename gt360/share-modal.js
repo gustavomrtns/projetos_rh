@@ -50,7 +50,7 @@ function open(options){
  try{
   if(typeof qrcode!=='function')throw Error('Gerador indisponível');
   const qr=qrcode(0,'M');qr.addData(currentUrl);qr.make();
-  currentSvg=qr.createSvgTag(6,4).replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" ');
+  currentSvg=qr.createSvgTag(6,4);
   document.getElementById('erp-share-qr').innerHTML=currentSvg;
  }catch(e){
   currentSvg='';document.getElementById('erp-share-qr').textContent='QR Code indisponível; copie o link.';
