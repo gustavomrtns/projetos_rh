@@ -7,14 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --g1a:#b84c4c;--g1b:#c71717;--g2a:#ac1515;--g2b:#8fff00;--g3a:#393734;--g3b:#8b837d;
   --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
   --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
   --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
-  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
-  --white:#fff;--offwhite:#f8f9fc;
-  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
-  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --gradFull:linear-gradient(135deg,#b84c4c 0%,#c71717 20%,#8b837d 40%,#393734 60%,#ac1515 80%,#8fff00 100%);
+  --white:#fff;--offwhite:#f8f7f4;
+  --gray50:#f6f4f1;--gray100:#eae5df;--gray200:#d7d0c8;
+  --gray400:#77716c;--gray600:#58524c;--gray800:#232220;
   --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -86,11 +86,11 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 .ref-info-box{background:var(--gray50);border-radius:12px;padding:12px 16px}
 .ref-info-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin-bottom:5px}
 .ref-info-value{font-size:14px;font-weight:700;color:var(--gray800)}
-.ref-pill{display:inline-block;padding:4px 13px;border-radius:20px;font-size:11.5px;font-weight:800;background:linear-gradient(135deg,#00c48c,#00e5a0);color:#fff}
+.ref-pill{display:inline-block;padding:4px 13px;border-radius:20px;font-size:11.5px;font-weight:800;background:linear-gradient(135deg,#8fff00,#8fff00);color:#fff}
 .ref-desc-box{background:var(--gray50);border-radius:12px;padding:16px 18px;font-size:12.5px;color:var(--gray600);line-height:1.65;margin-bottom:24px}
 .ref-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .btn-pill{border-radius:999px;padding:13px 28px;font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif}
-.btn-pill-primary{background:linear-gradient(135deg,#00c2b2,#0065a5);color:#fff;box-shadow:0 8px 20px rgba(0,101,165,.32)}
+.btn-pill-primary{background:linear-gradient(135deg,#8fff00,#9f1111);color:#fff;box-shadow:0 8px 20px rgba(0,101,165,.32)}
 .btn-pill-primary:hover{opacity:.92;transform:translateY(-1px)}
 .ref-note{font-size:11.5px;color:var(--gray400);display:flex;align-items:center;gap:6px}
 
@@ -157,19 +157,19 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 .field label{font-size:10.5px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.07em}
 .field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#ac1515;box-shadow:0 0 0 3px rgba(199,23,23,.1);background:#fff}
 .hint{font-size:11px;color:var(--gray400);margin-top:2px}
 
 /* BUTTONS */
 .actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
 .btn{padding:11px 22px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(199,23,23,.35)}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
 .btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
-.btn-danger{background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)}
+.btn-danger{background:linear-gradient(135deg,#c71717,#9f1111);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)}
 .btn-danger:hover{opacity:.9}
-.btn-purple{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-purple{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(39,32,28,.3)}
 .btn-purple:hover{opacity:.9}
 .btn-sm{padding:7px 14px;font-size:11px;border-radius:8px}
 .btn-block{width:100%;justify-content:center}
@@ -180,9 +180,9 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 
 /* BADGES */
 .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap}
-.bd-ok{background:linear-gradient(135deg,#00c48c,#00e5a0)}
-.bd-pend{background:linear-gradient(135deg,#f7a800,#ff9500)}
-.bd-mut{background:linear-gradient(135deg,#9098b0,#5a6278)}
+.bd-ok{background:linear-gradient(135deg,#8fff00,#8fff00)}
+.bd-pend{background:linear-gradient(135deg,#b84c4c,#b57b1f)}
+.bd-mut{background:linear-gradient(135deg,#77716c,#58524c)}
 .bd-info{background:var(--grad2)}
 .bd-purple{background:var(--grad3)}
 
@@ -218,20 +218,20 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 /* LIST ROWS (blocos/perguntas/pessoas) */
 .item-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid var(--gray100);border-radius:10px;margin-bottom:8px;transition:all .2s;background:#fff}
 .item-row:hover{border-color:var(--gray200)}
-.item-row.active-item{border-color:#0099e5;background:#f0f9ff}
+.item-row.active-item{border-color:#ac1515;background:#fff5f2}
 .item-main{flex:1;min-width:0}
 .item-title{font-size:13px;font-weight:700;color:var(--gray800)}
 .item-sub{font-size:11px;color:var(--gray400);margin-top:1px}
 .item-actions{display:flex;gap:6px;flex-shrink:0}
 .icon-btn{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--gray600)}
 .icon-btn:hover{border-color:var(--gray400);color:var(--gray800)}
-.icon-btn.danger:hover{border-color:#e0003c;color:#e0003c;background:#fff0f2}
+.icon-btn.danger:hover{border-color:#9f1111;color:#9f1111;background:#fff2ef}
 
 /* PILLS de tipo */
 .pill{display:inline-block;padding:3px 10px;border-radius:14px;font-size:10px;font-weight:700;letter-spacing:.03em}
-.pill-likert{background:#eef4ff;color:#0060c9}
-.pill-unica{background:#f3eaff;color:#6b1fd6}
-.pill-texto{background:#fff2e0;color:#c46a00}
+.pill-likert{background:#f8f4ef;color:#9f1111}
+.pill-unica{background:#f4f1ed;color:#393734}
+.pill-texto{background:#f7f2e9;color:#c46a00}
 
 /* LIKERT (colaborador) */
 .likert-row{display:flex;gap:8px;flex-wrap:wrap}
@@ -243,7 +243,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 .opt-card{border:2px solid var(--gray100);border-radius:10px;padding:13px 16px;cursor:pointer;transition:all .2s;text-align:center;background:#fff;user-select:none;font-size:12.5px;font-weight:700;color:var(--gray800);line-height:1.45;display:flex;align-items:center;justify-content:center}
 .opt-grid-stack .opt-card{text-align:left;justify-content:flex-start;padding:14px 18px}
 .opt-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.opt-card.selected{border-color:#0099e5;background:#f0f9ff;transform:translateY(-2px);box-shadow:var(--shadow)}
+.opt-card.selected{border-color:#ac1515;background:#fff5f2;transform:translateY(-2px);box-shadow:var(--shadow)}
 
 /* PROGRESS */
 .progress-wrap{height:8px;background:var(--gray100);border-radius:20px;overflow:hidden;margin-bottom:6px}
@@ -296,6 +296,9 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 .topbar,.nav-tabs{background:rgba(255,255,255,.78);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
 .topbar,.nav-tabs,.page,.gate-wrap,.modal-bg{position:relative;z-index:1}
 </style>
+
+<!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
+<link rel="stylesheet" href="../editorial-02.css">
 </head>
 <body>
 
@@ -456,7 +459,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
         <button class="admin-side-item" data-tab="tab-pesquisa" onclick="mudarTabAdmin('tab-pesquisa',this)" title="Competências e Perguntas"><span class="dot" style="background:var(--grad3)"></span><span>Competências &amp; Perguntas</span></button>
         <button class="admin-side-item" data-tab="tab-respostas" onclick="mudarTabAdmin('tab-respostas',this)" title="Respostas"><span class="dot" style="background:var(--grad1)"></span><span>Respostas</span></button>
         <div style="height:1px;background:var(--gray100);margin:10px 4px" id="admin-sep-sair"></div>
-        <button class="admin-side-item" id="tab-sair-admin" onclick="sairAdmin()" title="Sair" style="color:#e0003c"><span class="dot" style="background:#e0003c"></span><span>Sair</span></button>
+        <button class="admin-side-item" id="tab-sair-admin" onclick="sairAdmin()" title="Sair" style="color:#9f1111"><span class="dot" style="background:#9f1111"></span><span>Sair</span></button>
       </nav>
     </aside>
 
@@ -556,7 +559,7 @@ const ESTADOS_POR_UNIDADE={'Unidade A':['Região Sul','Região Leste','Região C
 const TEMPO_CASA=['Menos de 1 ano','1 a 2 anos','3 a 5 anos','6 a 10 anos','Mais de 10 anos'];
 const LIKERT_OPTS=['Discordo Totalmente','Discordo Parcialmente','Neutro','Concordo Parcialmente','Concordo Totalmente'];
 const ADMIN_SENHA=null;
-const CORES_BLOCO=['#f7a800','#0099e5','#7b2ff7','#e0009e','#00c48c','#ff4e6a','#5a6278'];
+const CORES_BLOCO=['#b84c4c','#ac1515','#393734','#8b837d','#8fff00','#c71717','#58524c'];
 /* Sempre que o conteúdo padrão de blocos/perguntas mudar, incremente esta versão
    para que o navegador do usuário recarregue o banco de perguntas mais recente,
    mesmo que já exista dado salvo localmente de uma versão anterior. */
@@ -968,7 +971,7 @@ function abrirModalBloco(id){
     <div class="field" style="margin-bottom:14px"><label>Descrição</label><input type="text" id="mb-desc" value="${b?esc(b.descricao||''):''}" placeholder="Breve descrição do que este bloco avalia"></div>
     <div class="field" style="margin-bottom:6px"><label>Cor de identificação</label>
       <div style="display:flex;gap:8px;flex-wrap:wrap" id="mb-cores">
-        ${CORES_BLOCO.map(c=>`<div onclick="selecionarCorBloco('${c}')" data-cor="${c}" style="width:30px;height:30px;border-radius:8px;background:${c};cursor:pointer;border:3px solid ${b&&b.cor===c?'#2a2f42':'transparent'}"></div>`).join('')}
+        ${CORES_BLOCO.map(c=>`<div onclick="selecionarCorBloco('${c}')" data-cor="${c}" style="width:30px;height:30px;border-radius:8px;background:${c};cursor:pointer;border:3px solid ${b&&b.cor===c?'#232220':'transparent'}"></div>`).join('')}
       </div>
       <input type="hidden" id="mb-cor" value="${b?b.cor:CORES_BLOCO[0]}">
     </div>
@@ -981,7 +984,7 @@ function abrirModalBloco(id){
 }
 function selecionarCorBloco(c){
   document.getElementById('mb-cor').value=c;
-  document.querySelectorAll('#mb-cores > div').forEach(d=>d.style.border=(d.dataset.cor===c?'3px solid #2a2f42':'3px solid transparent'));
+  document.querySelectorAll('#mb-cores > div').forEach(d=>d.style.border=(d.dataset.cor===c?'3px solid #232220':'3px solid transparent'));
 }
 function salvarBloco(){
   const nome=document.getElementById('mb-nome').value.trim();
@@ -1128,7 +1131,7 @@ function renderRespostasTabela(){
   t+=lista.length?lista.map(r=>`<tr>
     <td>${fmtData(r.data)}</td><td>${esc(r.tempoCasa||'—')}</td>
     <td><button class="tlink" onclick="verDetalheResposta('${r.id}')">Ver detalhes</button></td>
-    <td><button class="tlink" style="color:#e0003c" onclick="excluirResposta('${r.id}')">Excluir</button></td></tr>`).join(''):
+    <td><button class="tlink" style="color:#9f1111" onclick="excluirResposta('${r.id}')">Excluir</button></td></tr>`).join(''):
     '<tr><td colspan="4" style="text-align:center;color:var(--gray400);padding:26px">Nenhuma resposta encontrada.</td></tr>';
   document.getElementById('respostas-table').innerHTML=t;
 }
