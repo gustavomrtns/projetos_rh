@@ -560,7 +560,7 @@ const UNIDADES=['Unidade A','Unidade B'];
 const ESTADOS_POR_UNIDADE={'Unidade A':['Região Sul','Região Leste','Região Central','Região Norte','Região Oeste','Região Noroeste']};
 const TEMPO_CASA=['Menos de 1 ano','1 a 2 anos','3 a 5 anos','6 a 10 anos','Mais de 10 anos'];
 const LIKERT_OPTS=['Discordo Totalmente','Discordo Parcialmente','Neutro','Concordo Parcialmente','Concordo Totalmente'];
-const ADMIN_SENHA=null;
+
 const CORES_BLOCO=['#b84c4c','#ac1515','#393734','#8b837d','#8fff00','#c71717','#58524c'];
 /* Sempre que o conteúdo padrão de blocos/perguntas mudar, incremente esta versão
    para que o navegador do usuário recarregue o banco de perguntas mais recente,
@@ -585,6 +585,22 @@ function salvarTudo(){
     demoStore.setItem('peo_config',JSON.stringify(config));
   }catch(e){console.warn('Erro ao salvar',e);}
 }
+function criarRespostasFicticias(){
+  const tempos=['Menos de 1 ano','1 a 2 anos','3 a 5 anos'];
+  return [0,1,2].map(function(i){
+    const vals={};
+    perguntas.forEach(function(q){
+      if(q.campo==='unidade')vals[q.id]='Unidade A';
+      else if(q.campo==='estado')vals[q.id]=['Região Sul','Região Leste','Região Central'][i];
+      else if(q.campo==='tempoCasa')vals[q.id]=tempos[i];
+      else if(q.tipo==='likert')vals[q.id]=[4,5,3][i];
+      else if(q.tipo==='unica'&&q.opcoes&&q.opcoes.length)vals[q.id]=q.opcoes[0];
+    });
+    return {id:'demo_resposta_'+(i+1),data:new Date(Date.now()-(i+1)*86400000).toISOString(),
+      anonimo:true,unidade:'Unidade A',estado:['Região Sul','Região Leste','Região Central'][i],
+      area:'',tempoCasa:tempos[i],valores:vals};
+  });
+}
 function carregarTudo(){
   try{
     const b=demoStore.getItem('peo_blocos');
@@ -601,7 +617,7 @@ function carregarTudo(){
       demoStore.setItem('peo_seed_version',String(SEED_VERSION));
     }
     pessoas=[];
-    if(r)respostas=JSON.parse(r);
+    if(r)respostas=JSON.parse(r);else respostas=criarRespostasFicticias();
     if(l)lembretesLog=JSON.parse(l);
     if(c)config=JSON.parse(c); else config=configPadrao();
     if(!config.home)config.home=homePadrao();
@@ -613,8 +629,8 @@ function configPadrao(){
   return{
     linkPesquisa:window.location.href.split('#')[0],
     assuntoEmail:'Sua opinião é importante — Pesquisa de Engajamento {empresa}',
-    corpoEmail:'Olá, {nome}!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
-    msgWhats:'Olá, {nome}! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
+    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
+    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
     home:homePadrao()
   };
 }
@@ -637,7 +653,7 @@ function uid(pref){return pref+'_'+Date.now().toString(36)+Math.random().toStrin
 /* ====================== DADOS SEMENTE (Banco de Perguntas) ====================== */
 function seedDefaults(){
   blocos=[
-    {id:'b1',nome:'Perfil Demográfico',ordem:1,cor:CORES_BLOCO[0],descricao:'Identificação do respondente'},
+    {id:'b1',nome:'Perfil Demográfico',ordem:1,cor:CORES_BLOCO[0],descricao:'Contexto demográfico sem identificação pessoal'},
     {id:'b2',nome:'Engajamento',ordem:2,cor:CORES_BLOCO[1],descricao:'Percepção geral de engajamento com a organização'},
     {id:'b3',nome:'Desenvolvimento',ordem:3,cor:CORES_BLOCO[2],descricao:'Oportunidades de crescimento e carreira'},
     {id:'b4',nome:'Lideranças e Comunicação',ordem:4,cor:CORES_BLOCO[3],descricao:'Relação com lideranças e fluxo de comunicação'},
