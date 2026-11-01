@@ -1109,7 +1109,7 @@ function renderHistoricoAuditorias(){
     </div>`).join('');
 }
 
-function excluirAuditoria(i){
+function excluirAuditoria(i){ if(!confirm('Confirma a exclusão deste registro?'))return; 
   const lista = carregarAuditorias();
   lista.splice(i,1);
   salvarAuditorias(lista);
@@ -1225,7 +1225,7 @@ function renderPainel(){
       </div>`).join('');
   }
 }
-function excluirAgendamento(id){
+function excluirAgendamento(id){ if(!confirm('Excluir este agendamento?'))return;
   agendamentos = agendamentos.filter(a=>a.id!==id);
   salvarAgendamentos();
   renderPainel();
