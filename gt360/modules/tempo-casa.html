@@ -875,8 +875,8 @@ function renderColaboradores(){
     else if(k.proximo) nextTxt=`Próximo marco: <b>${k.proximo.label}</b> em ${k.diasParaProximo}d`;
     return `<div class="person-card">
       <div class="person-card-actions">
-        <button class="person-card-icon-btn" title="Editar" onclick="abrirModalColab('${c.id}')">✎</button>
-        <button class="person-card-icon-btn" title="Excluir" onclick="excluirColab('${c.id}')">✕</button>
+        <button class="person-card-icon-btn" title="Editar" onclick="abrirModalColab('${c.id}')" aria-label="Editar colaborador"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l4 4M4 20l4-.8L20 7a2 2 0 0 0-3-3L4.8 16.2 4 20z"/></svg></button>
+        <button class="person-card-icon-btn" title="Excluir" onclick="excluirColab('${c.id}')" aria-label="Excluir"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
       </div>
       <div class="person-avt" style="background:${c.avt}">${iniciais(c.nome)}</div>
       <h4>${c.nome}</h4>
