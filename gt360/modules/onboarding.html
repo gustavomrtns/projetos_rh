@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fluxo de Onboarding — Gestão de Talentos</title>
+<title>Fluxo de Onboarding — Gestão de Pessoas</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -289,6 +289,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<link rel="stylesheet" href="../erp-modules.css">
 <!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
 <script src="../../shared/demo-core.js"></script>
 </head>
@@ -308,7 +309,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Fluxo de Onboarding</div>
-      <div class="tag">Gestão de Talentos</div>
+      <div class="tag">Gestão de Pessoas</div>
     </div>
   </div>
 </header>
@@ -337,7 +338,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="header-inner">
       <div class="header-title">
         <h1>Processo de Onboarding</h1>
-        <p>Registro e acompanhamento de integração de colaboradores — Gestão de Talentos</p>
+        <p>Registro e acompanhamento de integração de colaboradores — Gestão de Pessoas</p>
         <span class="hbadge" style="background:var(--grad1)" onclick="abrirModalCond()">Responsável pela condução: <strong id="cond-nome">Selecionar</strong></span>
       </div>
       <div style="text-align:right">
@@ -396,7 +397,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
           </div>
         </div>
         <div class="status-item">
-          <div><div class="status-label">Cadastro UniGlobo</div><div class="status-sub">Plataforma interna — pode ser não obrigatório conforme cargo</div></div>
+          <div><div class="status-label">Cadastro Plataforma de Educação Corporativa</div><div class="status-sub">Plataforma interna — pode ser não obrigatório conforme cargo</div></div>
           <div class="status-btns" id="st-uniglobo">
             <button class="st-btn" onclick="setSt('st-uniglobo',this,'ok')" data-val="Cadastrado">Cadastrado</button>
             <button class="st-btn" onclick="setSt('st-uniglobo',this,'no')" data-val="Não cadastrado">Não cadastrado</button>
@@ -413,7 +414,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
           </div>
         </div>
         <div class="status-item" style="grid-template-columns:1fr;border-bottom:none">
-          <div><div class="status-label">Parecer — Gestão de Talentos</div><div class="status-sub">Data de conclusão e observações do processo</div></div>
+          <div><div class="status-label">Parecer — Gestão de Pessoas</div><div class="status-sub">Data de conclusão e observações do processo</div></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
             <div class="field"><label>Data de Conclusão</label><input type="date" id="f-parecer-data"></div>
             <div class="field"><label>Observações</label><input type="text" id="f-parecer-obs" placeholder="Ex.: Processo concluído com êxito"></div>
@@ -570,12 +571,12 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div style="display:flex;flex-direction:column;gap:12px">
       <div class="unid-card" id="cond-usuario1" onclick="setCond('Usuário 1')" style="text-align:left;display:flex;align-items:center;gap:14px;padding:16px 20px">
         <div style="width:44px;height:44px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0">U1</div>
-        <div><div style="font-weight:700;color:var(--gray800)">Usuário 1</div><div style="font-size:12px;color:var(--gray400)">Gestão de Talentos</div></div>
+        <div><div style="font-weight:700;color:var(--gray800)">Usuário 1</div><div style="font-size:12px;color:var(--gray400)">Gestão de Pessoas</div></div>
         <div class="unid-check" id="chk-usuario1" style="position:static;margin-left:auto">v</div>
       </div>
       <div class="unid-card" id="cond-usuario2" onclick="setCond('Usuário 2')" style="text-align:left;display:flex;align-items:center;gap:14px;padding:16px 20px">
         <div style="width:44px;height:44px;border-radius:50%;background:var(--grad3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0">U2</div>
-        <div><div style="font-weight:700;color:var(--gray800)">Usuário 2</div><div style="font-size:12px;color:var(--gray400)">Gestão de Talentos</div></div>
+        <div><div style="font-weight:700;color:var(--gray800)">Usuário 2</div><div style="font-size:12px;color:var(--gray400)">Gestão de Pessoas</div></div>
         <div class="unid-check" id="chk-usuario2" style="position:static;margin-left:auto">v</div>
       </div>
     </div>
@@ -1019,7 +1020,7 @@ function gerarDocOnboarding(){
   const g=['linear-gradient(160deg,#b84c4c,#c71717)','linear-gradient(160deg,#ac1515,#8fff00)','linear-gradient(160deg,#393734,#8b837d)'];
   const html=`<div class="pdf-doc"><div class="ptband"></div>
     <div class="phdr">
-      <div><div class="phdr-title">Processo de Onboarding</div><div class="phdr-sub">Registro de Integração — Gestão de Talentos</div>
+      <div><div class="phdr-title">Processo de Onboarding</div><div class="phdr-sub">Registro de Integração — Gestão de Pessoas</div>
         ${c.condutor?`<span class="phdr-badge">Conduzido por: ${c.condutor}</span>`:''}
         ${c.integracao==='nao'?`<span class="phdr-badge" style="background:linear-gradient(135deg,#77716c,#58524c);margin-left:6px">Sem integração — apenas registro</span>`:''}
       </div>
@@ -1045,9 +1046,9 @@ function gerarDocOnboarding(){
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:${g[1]}">02</div>Status do Processo</div>
         <div class="pstrow"><span class="pstlbl">Envio de Documentos Norteadores</span>${pdfBadge(c.st_envio)}</div>
-        <div class="pstrow"><span class="pstlbl">Cadastro UniGlobo</span>${pdfBadge(c.st_uniglobo)}</div>
+        <div class="pstrow"><span class="pstlbl">Cadastro Plataforma de Educação Corporativa</span>${pdfBadge(c.st_uniglobo)}</div>
         <div class="pstrow"><span class="pstlbl">Cursos Obrigatórios de Onboarding</span>${pdfBadge(c.st_cursos)}</div>
-        ${c.parecer_data?`<div class="pstrow" style="margin-top:4px"><span class="pstlbl">Parecer — Gestão de Talentos</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' — '+c.parecer_obs:''}</span></div>`:''}
+        ${c.parecer_data?`<div class="pstrow" style="margin-top:4px"><span class="pstlbl">Parecer — Gestão de Pessoas</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' — '+c.parecer_obs:''}</span></div>`:''}
       </div>
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:${g[2]}">03</div>Assinaturas</div>
@@ -1067,7 +1068,7 @@ function gerarDocOnboarding(){
         </div>
       </div>
     </div>
-    <div class="pfooter"><span>Gestão de Talentos — Processo de Onboarding</span><span>Emitido em ${dataHoje()}</span></div>
+    <div class="pfooter"><span>Gestão de Pessoas — Processo de Onboarding</span><span>Emitido em ${dataHoje()}</span></div>
   </div>`;
   abrirPrint(html);
 }
@@ -1160,7 +1161,7 @@ function gerarDocTermos(){
     <div class="phdr">
       <div>
         <div class="phdr-title">Controle de Termos</div>
-        <div class="phdr-sub">Relação de Assinatura de Termos — Gestão de Talentos</div>
+        <div class="phdr-sub">Relação de Assinatura de Termos — Gestão de Pessoas</div>
         ${condutor?`<span class="phdr-badge">Elaborado por: ${condutor}</span>`:''}
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -1208,7 +1209,7 @@ function gerarDocTermos(){
         </div>
       </div>`;
     const doc=cabecalho+corpo+`</div>
-      <div class="pfooter"><span>Gestão de Talentos — Controle de Termos</span><span>Emitido em ${dataHoje()}</span></div>
+      <div class="pfooter"><span>Gestão de Pessoas — Controle de Termos</span><span>Emitido em ${dataHoje()}</span></div>
     </div>`;
     abrirPrint(doc);
   } else {
@@ -1260,7 +1261,7 @@ function gerarDocTermos(){
         </div>
       </div>`;
     const doc=cabecalho+tabela+`</div>
-      <div class="pfooter"><span>Gestão de Talentos — Controle de Termos (${sels.length} colaboradores)</span><span>Emitido em ${dataHoje()}</span></div>
+      <div class="pfooter"><span>Gestão de Pessoas — Controle de Termos (${sels.length} colaboradores)</span><span>Emitido em ${dataHoje()}</span></div>
     </div>`;
     abrirPrint(doc);
   }
@@ -1517,10 +1518,10 @@ function abrirDetalhe(gi){
     </div>
     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray600);margin-bottom:10px">Movimentação do Processo</div>
     <div class="det-strow"><span class="det-stlbl">Envio de Documentos Norteadores</span>${inlinePill(c.st_envio)}</div>
-    <div class="det-strow"><span class="det-stlbl">Cadastro UniGlobo</span>${inlinePill(c.st_uniglobo)}</div>
+    <div class="det-strow"><span class="det-stlbl">Cadastro Plataforma de Educação Corporativa</span>${inlinePill(c.st_uniglobo)}</div>
     <div class="det-strow"><span class="det-stlbl">Cursos Obrigatórios de Onboarding</span>${inlinePill(c.st_cursos)}</div>
     <div class="det-strow"><span class="det-stlbl">Termo de Ciência e Compromisso</span>${inlinePill(stT)}</div>
-    ${c.parecer_data?`<div class="det-strow" style="margin-top:4px"><span class="det-stlbl">Parecer — Gestão de Talentos</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' · '+c.parecer_obs:''}</span></div>`:''}
+    ${c.parecer_data?`<div class="det-strow" style="margin-top:4px"><span class="det-stlbl">Parecer — Gestão de Pessoas</span><span style="font-size:13px;font-weight:600;color:var(--gray800)">${fmtDate(c.parecer_data)}${c.parecer_obs?' · '+c.parecer_obs:''}</span></div>`:''}
     ${c.matricula?`<div style="margin-top:12px;padding:10px 14px;background:var(--gray50);border-radius:8px;font-size:12px;color:var(--gray600)">Matrícula: <strong>${c.matricula}</strong>${sv.data?' · Data de assinatura dos termos: <strong>'+fmtDate(sv.data)+'</strong>':''}</div>`:''}`;
   document.getElementById('det-edit-btn').onclick=()=>{fecharModal('modal-det');showPage('onboarding');setTimeout(()=>editarColaborador(gi),200);};
   /* botão remover marcação */
@@ -1542,7 +1543,7 @@ function excluirDetModal(){
 /* CSV */
 function exportarCSV(){
   const data=getFiltered();
-  const hdr=['Colaborador','Matrícula','Unidade','Setor','Cargo','Data Início','Integração','Condutor','Envio Docs','Assinatura Docs','UniGlobo','Cursos','Status','Data Parecer','Observações'];
+  const hdr=['Colaborador','Matrícula','Unidade','Setor','Cargo','Data Início','Integração','Condutor','Envio Docs','Assinatura Docs','Plataforma de Educação Corporativa','Cursos','Status','Data Parecer','Observações'];
   const rows=data.map(c=>[c.colaborador,c.matricula,unidadeLabel(c.unidade),c.setor,c.cargo,fmtDate(c.datainicio),c.integracao==='nao'?'Sem integração':'Com integração',c.condutor,c.st_envio,termoAssinatura(c),c.st_uniglobo,c.st_cursos,calcSt(c).label,fmtDate(c.parecer_data),c.parecer_obs].map(v=>`"${(v||'').replace(/"/g,'""')}"`));
   const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
   const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});

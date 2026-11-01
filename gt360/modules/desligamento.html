@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Questionário de Desligamento — Gestão de Talentos</title>
+<title>Questionário de Desligamento — Gestão de Pessoas</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -266,8 +266,10 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<link rel="stylesheet" href="../erp-modules.css">
 <!-- Base fictícia compartilhada, em memória. -->
 <script src="../../shared/demo-core.js"></script>
+<script src="../print-document.js"></script>
 </head>
 <body>
 
@@ -276,7 +278,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <!-- PRINT OVERLAY -->
 <div id="print-overlay">
   <button class="print-close" onclick="fecharPrint()">Fechar visualização</button>
-  <button class="print-close" style="right:200px;background:var(--grad3)" onclick="window.print()">Imprimir / Salvar PDF</button>
+  <button class="print-close" style="right:200px;background:var(--grad3)" onclick="imprimirRelatorioDesligamento()">Imprimir / Salvar PDF</button>
   <div id="print-content" style="max-width:900px;margin:0 auto;padding-bottom:40px"></div>
 </div>
 
@@ -286,7 +288,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Questionário de Desligamento</div>
-      <div class="tag">Gestão de Talentos</div>
+      <div class="tag">Gestão de Pessoas</div>
     </div>
   </div>
 </header>
@@ -314,7 +316,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="header-inner">
       <div class="header-title">
         <h1>Questionário de Desligamento</h1>
-        <p>Sua opinião nos ajuda a melhorar — respostas tratadas com confidencialidade pela Gestão de Talentos</p>
+        <p>Sua opinião nos ajuda a melhorar — respostas tratadas com confidencialidade pela Gestão de Pessoas</p>
         <span class="hbadge" style="background:var(--grad3)">FM-GT-04 A</span>
       </div>
     </div>
@@ -579,7 +581,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="header-inner">
       <div class="header-title">
         <h1>Dashboard de Desligamentos</h1>
-        <p>Análise consolidada das respostas ao Questionário de Desligamento — Gestão de Talentos</p>
+        <p>Análise consolidada das respostas ao Questionário de Desligamento — Gestão de Pessoas</p>
       </div>
     </div>
   </div>
@@ -1176,33 +1178,33 @@ function gerarPDFHtml(r){
     <div class="phdr">
       <div>
         <div class="phdr-title">Questionário de Desligamento</div>
-        <div class="phdr-sub">Gestão de Talentos — Relatório de Desligamento</div>
+        <div class="phdr-sub">Gestão de Pessoas — Relatório de Desligamento</div>
         <span class="phdr-badge">FM-GT-04 A</span>
       </div>
-      <img class="pdf-logo" src="${document.querySelector('.nav-logo').src}" alt="Logo">
+      <img class="pdf-logo" src="${(document.querySelector('.logo-wrap img')?.src || '')}" alt="Logo">
     </div>
     <div class="pbody">
 
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad1)">01</div>Identificação</div>
         <div class="pgrid">
-          <div class="pfield wide"><span class="pflbl">Nome</span><span class="pfval">${r.nome||'—'}</span></div>
-          <div class="pfield"><span class="pflbl">Matrícula</span><span class="pfval">${r.matricula||'—'}</span></div>
-          <div class="pfield"><span class="pflbl">Setor</span><span class="pfval">${r.setor||'—'}</span></div>
+          <div class="pfield wide"><span class="pflbl">Nome</span><span class="pfval">${esc(r.nome||'—')}</span></div>
+          <div class="pfield"><span class="pflbl">Matrícula</span><span class="pfval">${esc(r.matricula||'—')}</span></div>
+          <div class="pfield"><span class="pflbl">Setor</span><span class="pfval">${esc(r.setor||'—')}</span></div>
           <div class="pfield"><span class="pflbl">Data de Desligamento</span><span class="pfval">${fmtDate(r.data_desligamento)}</span></div>
-          <div class="pfield"><span class="pflbl">Tempo de Empresa</span><span class="pfval">${r.tempo_empresa||'—'}</span></div>
+          <div class="pfield"><span class="pflbl">Tempo de Empresa</span><span class="pfval">${esc(r.tempo_empresa||'—')}</span></div>
         </div>
       </div>
 
       <div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad2)">02</div>Motivo do Desligamento</div>
-        <div class="pgrid"><div class="pfield wide"><span class="pflbl">Motivo</span><span class="pfval">${motivoTxt||'—'}</span></div>
-        ${r.pediu_continuasse?`<div class="pfield wide"><span class="pflbl">O que poderíamos ter feito para que continuasse conosco?</span><span class="pfval">${r.pediu_continuasse}</span></div>`:''}
+        <div class="pgrid"><div class="pfield wide"><span class="pflbl">Motivo</span><span class="pfval">${esc(motivoTxt||'—')}</span></div>
+        ${r.pediu_continuasse?`<div class="pfield wide"><span class="pflbl">O que poderíamos ter feito para que continuasse conosco?</span><span class="pfval">${esc(r.pediu_continuasse)}</span></div>`:''}
         </div>
       </div>
 
       <div class="psect">
-        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">03</div>Avaliação — Superior Imediato (${r.nome_superior||'—'})</div>
+        <div class="pstitle"><div class="psnum" style="background:var(--grad3)">03</div>Avaliação — Superior Imediato (${esc(r.nome_superior||'—')})</div>
         ${critSup.map(([c,l])=>`<div class="pratrow"><div class="pratlbl">${l}</div>${ratingBadge(r.av_superior?r.av_superior[c]:'')}</div>`).join('')}
       </div>
 
@@ -1218,16 +1220,16 @@ function gerarPDFHtml(r){
           <div class="pfield"><span class="pflbl">Indicaria a Empresa</span><span class="pfval">${simNaoLabel(r.indicaria)}</span></div>
           <div class="pfield"><span class="pflbl">Desenvolveu-se na Empresa</span><span class="pfval">${simNaoLabel(r.desenvolveu)}</span></div>
           <div class="pfield"><span class="pflbl">Voltaria a Trabalhar</span><span class="pfval">${simNaoLabel(r.voltaria)}</span></div>
-          ${r.feedback_obs?`<div class="pfield wide"><span class="pflbl">Opinião sobre o Feedback</span><span class="pfval">${r.feedback_obs}</span></div>`:''}
-          ${r.indicaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (indicação)</span><span class="pfval">${r.indicaria_porque}</span></div>`:''}
-          ${r.voltaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (retorno)</span><span class="pfval">${r.voltaria_porque}</span></div>`:''}
+          ${r.feedback_obs?`<div class="pfield wide"><span class="pflbl">Opinião sobre o Feedback</span><span class="pfval">${esc(r.feedback_obs)}</span></div>`:''}
+          ${r.indicaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (indicação)</span><span class="pfval">${esc(r.indicaria_porque)}</span></div>`:''}
+          ${r.voltaria_porque?`<div class="pfield wide"><span class="pflbl">Por quê (retorno)</span><span class="pfval">${esc(r.voltaria_porque)}</span></div>`:''}
           <div class="pfield wide"><span class="pflbl">Como chegou até a Empresa</span><span class="pfval">${chegadaLabel(r)}</span></div>
         </div>
       </div>
 
       ${r.sugestoes?`<div class="psect">
         <div class="pstitle"><div class="psnum" style="background:var(--grad3)">06</div>Sugestões de Melhoria</div>
-        <div class="pfield wide"><span class="pfval">${r.sugestoes}</span></div>
+        <div class="pfield wide"><span class="pfval">${esc(r.sugestoes)}</span></div>
       </div>`:''}
 
       <div class="psect">
@@ -1238,16 +1240,23 @@ function gerarPDFHtml(r){
       </div>
 
     </div>
-    <div class="pfooter"><span>Documento gerado em ${dataHoje()}</span><span>FM-GT-04 A — Gestão de Talentos</span></div>
+    <div class="pfooter"><span>Documento gerado em ${dataHoje()}</span><span>FM-GT-04 A — Gestão de Pessoas</span></div>
   </div>`;
 
   abrirPrint(html);
 }
 
 function abrirPrint(html){
-  document.getElementById('print-content').innerHTML = html;
+  const panel=document.getElementById('print-content');
+  panel.innerHTML=html;
   document.getElementById('print-overlay').classList.add('visible');
-  document.getElementById('print-overlay').scrollTop = 0;
+  document.getElementById('print-overlay').scrollTop=0;
+  imprimirRelatorioDesligamento();
+}
+function imprimirRelatorioDesligamento(){
+  const content=document.getElementById('print-content');
+  if(!content||!content.innerHTML.trim()){showToast('Gere o relatório antes de imprimir.');return;}
+  ERPPrint.open({title:'Questionario_de_Desligamento',html:content.innerHTML});
 }
 function fecharPrint(){
   document.getElementById('print-overlay').classList.remove('visible');
@@ -1334,7 +1343,7 @@ function enviarConvitePorEmail(){
   const assunto = 'Questionário de Desligamento';
   const corpo = 'Olá, '+nome+'!\n\nGostaríamos de ouvir sua opinião sobre sua passagem pela empresa. '
     + 'Por favor, acesse o link abaixo para responder ao questionário de desligamento:\n\n'+ultimoLinkConvite
-    + '\n\nSuas respostas são tratadas com confidencialidade pela Gestão de Talentos.\n\nObrigado!';
+    + '\n\nSuas respostas são tratadas com confidencialidade pela Gestão de Pessoas.\n\nObrigado!';
   window.location.href = gerarMailtoLink(email, assunto, corpo);
 }
 

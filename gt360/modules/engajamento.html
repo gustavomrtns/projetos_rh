@@ -299,6 +299,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<link rel="stylesheet" href="../erp-modules.css">
 <!-- Base fictícia compartilhada, em memória. -->
 <script src="../../shared/demo-core.js"></script>
 </head>
@@ -311,7 +312,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
   </div>
   <div class="topbar-right">
     <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
-    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23292725%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
+    <button type="button" class="erp-admin-link" onclick="abrirLoginAdmin()" aria-label="Abrir a gestão da pesquisa">Gestão da pesquisa</button>
   </div>
 </div>
 
@@ -406,7 +407,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
     <div class="ref-card">
       <div class="ref-card-band"></div>
       <div class="ref-card-body">
-        <div class="ref-card-eyebrow" id="home-eyebrow">Gestão de Talentos</div>
+        <div class="ref-card-eyebrow" id="home-eyebrow">Gestão de Pessoas</div>
         <div class="ref-card-title" id="home-titulo">Pesquisa de Engajamento Organizacional</div>
         <div class="ref-card-sub" id="home-subtitulo">A sua opinião constrói um lugar de trabalho melhor</div>
 
@@ -417,7 +418,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
           <div class="ref-info-box"><div class="ref-info-label">Temas avaliados</div><div class="ref-info-value" id="home-temas">7 blocos</div></div>
         </div>
 
-        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.</div>
+        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Pessoas a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.</div>
 
         <div class="ref-actions">
           <button class="btn-pill btn-pill-primary" onclick="entrarColaborador()"><span id="home-btn-texto">Responder pesquisa</span> &rarr;</button>
@@ -429,25 +430,10 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 </div>
 
 <!-- ============ MODAL LOGIN ADMIN ============ -->
-<div class="modal-bg" id="modal-login">
-  <div class="modal narrow"><div class="modal-band"></div>
-    <div class="modal-inner">
-      <button class="modal-close" onclick="fecharModal('modal-login')">&times;</button>
-      <div class="modal-title">Painel Administrativo · Demonstração</div>
-      <div class="modal-sub">Este portfólio utiliza um acesso demonstrativo, sem autenticação real ou backend.</div>
-      <div class="actions"><button class="btn btn-primary btn-block" onclick="validarLogin()">Acessar painel</button></div>
-    </div>
-  </div>
-</div>
+
 
 <!-- ============ ADMIN APP ============ -->
 <div id="view-admin" class="hidden" style="display:flex;flex-direction:column;overflow:hidden">
-  <div style="max-width:1080px;margin:14px auto 0;padding:0 20px;flex-shrink:0;width:100%;box-sizing:border-box">
-    <div class="card" style="padding:12px 16px;font-size:11.5px;color:var(--gray600);line-height:1.55">
-      <strong>Modo demonstração:</strong> protótipo front-end com persistência local no navegador. Não há autenticação real nem banco de dados externo; os dados inseridos ficam armazenados somente neste dispositivo.
-    </div>
-  </div>
-
   <div class="admin-workspace-body">
     <aside class="admin-sidebar" id="admin-sidebar">
       <div class="admin-sidebar-top">
@@ -629,21 +615,21 @@ function configPadrao(){
   return{
     linkPesquisa:window.location.href.split('#')[0],
     assuntoEmail:'Sua opinião é importante — Pesquisa de Engajamento {empresa}',
-    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
-    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
+    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Pessoas',
+    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Pessoas',
     home:homePadrao()
   };
 }
 function homePadrao(){
   return{
-    eyebrow:'Gestão de Talentos',
+    eyebrow:'Gestão de Pessoas',
     titulo:'Pesquisa de Engajamento Organizacional',
     subtitulo:'A sua opinião constrói um lugar de trabalho melhor',
     status:'Aberta',
     duracao:'≈ 5 minutos',
     participacao:'Todas as unidades',
     temas:'7 blocos',
-    descricao:'Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.',
+    descricao:'Sua opinião ajuda a Gestão de Pessoas a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.',
     textoBotao:'Responder pesquisa',
     nota:'Sem identificação pessoal'
   };
@@ -719,11 +705,11 @@ function fmtData(iso){if(!iso)return'—';const d=new Date(iso);return d.toLocal
 
 /* ====================== GATE / LOGIN ====================== */
 function abrirLoginAdmin(){entrarAdminDemo();}
-function validarLogin(){fecharModal('modal-login');entrarAdminDemo();}
+function validarLogin(){entrarAdminDemo();}
 function entrarAdminDemo(){
   document.getElementById('view-gate').classList.add('hidden');
   document.getElementById('view-admin').classList.remove('hidden');
-  document.getElementById('topbar-status').textContent='Painel Administrativo · Demonstração';
+  document.getElementById('topbar-status').textContent='Gestão da pesquisa';
   renderDashboard();renderPesquisa();renderRespostas();
 }
 function sairAdmin(){

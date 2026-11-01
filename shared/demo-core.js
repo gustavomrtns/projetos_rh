@@ -98,6 +98,16 @@
     }
   }
   function startA11y(){
+    /* No workspace ERP, o módulo não precisa repetir a barra de marca do shell.
+       O módulo de riscos mantém seu cabeçalho porque contém a troca de perfil. */
+    try {
+      if(w.top!==w.self&&w.top.location.origin===w.location.origin){
+        document.documentElement.classList.add("erp-embedded");
+        if(document.querySelector("header .header-role")){
+          document.documentElement.classList.add("erp-has-role");
+        }
+      }
+    } catch(_) {}
     demoSuggestions();
     associateLabels(document);
     if(typeof MutationObserver==="function"){

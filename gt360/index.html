@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GT 360° — Workspace de Gestão de Talentos</title>
+<title>GT 360° — Workspace de Gestão de Pessoas</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -124,6 +124,8 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="editorial-02.css">
+<link rel="stylesheet" href="erp-modules.css">
+<link rel="stylesheet" href="workspace-erp.css">
 <!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
 <script src="../shared/demo-core.js"></script>
 </head>
@@ -131,19 +133,27 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 
 <div class="brand-band"></div>
 <header>
+  <button type="button" class="erp-menu-trigger" id="erp-menu-trigger"
+    aria-controls="sidebar" aria-expanded="false" onclick="toggleErpMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>Módulos
+  </button>
   <div class="logo-wrap">
     <img id="logo-img" alt="GT 360°">
     <div class="brand-text">
       <div class="name">GT 360°</div>
-      <div class="tag">Workspace de Gestão de Talentos</div>
+      <div class="tag">Workspace de Gestão de Pessoas</div>
     </div>
   </div>
-  <div class="header-actions"><span class="backup-status" role="status">Dados fictícios · memória temporária</span></div>
+  
 </header>
 
 <div class="workspace-body">
-  <p class="mobile-nav-hint">Deslize o menu para ver os módulos →</p>
+  <div class="erp-menu-scrim" id="erp-menu-scrim" hidden onclick="toggleErpMobileMenu(false)"></div>
   <aside class="sidebar" id="sidebar">
+    <div class="erp-menu-head">Módulos GT360° <button class="erp-menu-close" type="button"
+      aria-label="Fechar menu" onclick="toggleErpMobileMenu(false)">×</button></div>
     <div class="sidebar-label">Navegação</div>
     <nav id="sidebar-nav" aria-label="Módulos do GT360°"></nav>
     <button class="side-toggle" id="side-toggle" onclick="toggleSidebar()" title="Recolher menu">
@@ -156,8 +166,9 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 
     <div class="view home-view" id="home-view" inert aria-hidden="true">
       <div class="home-inner">
-        <h1>Bem-vindo ao GT 360°</h1>
-        <p>Escolha uma aplicação abaixo para começar a trabalhar.</p>
+        <div class="erp-home-eyebrow">GT360° / Gestão de Pessoas</div>
+        <h1>Gestão de pessoas em um só lugar.</h1>
+        <p>Acesse processos da jornada, desenvolvimento, pesquisas e conformidade em um único ambiente de trabalho.</p>
         <div id="home-grid"></div>
       </div>
     </div>
@@ -183,7 +194,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 const GROUPS_CONFIG = [
   {id:'jornada',   label:'Jornada do Colaborador',        dot:'d1'},
   {id:'clima',     label:'Engajamento e Saúde Organizacional', dot:'d2'},
-  {id:'talentos',  label:'Desenvolvimento de Talentos',   dot:'d3'},
+  {id:'talentos',  label:'Desenvolvimento e Aprendizagem',   dot:'d3'},
   {id:'qualidade', label:'Qualidade e Processos',         dot:'d4'}
 ];
 
@@ -194,7 +205,7 @@ const APPS_CONFIG = [
   {id:'tempo-casa',           group:'jornada',   label:'Gestão de Tempo de Casa',          desc:'Acompanhamento de marcos de tempo de casa e envio de celebrações aos colaboradores.'},
   {id:'desligamento',         group:'jornada',   label:'Questionário de Desligamento',     desc:'Coleta de feedback de saída, dashboard consolidado e exportação de respostas.'},
   {id:'engajamento',          group:'clima',     label:'Pesquisa de Engajamento',           desc:'Pesquisa de engajamento organizacional com blocos de perguntas, respostas anônimas e dashboard de análise.'},
-  {id:'riscos-psicossociais', group:'clima',     label:'Gestão de Riscos Psicossociais',   desc:'Planos de ação a partir da avaliação psicossocial por praça e setor (PROART).'},
+  {id:'riscos-psicossociais', group:'clima',     label:'Gestão de Riscos Psicossociais',   desc:'Planos de ação e acompanhamento de fatores psicossociais por unidade e setor.'},
   {id:'treinamentos',         group:'talentos',  label:'Painel de Treinamentos',           desc:'Gestão de turmas, mensuração de impacto e indicadores de treinamentos corporativos.'},
   {id:'checklist-5s',         group:'qualidade', label:'Checklist 5S',                     desc:'Auditoria de organização e qualidade do ambiente de trabalho, com histórico de auditorias.'}
 ];
@@ -283,7 +294,49 @@ function carregarFrame(app, conviteHash=''){
 }
 
 /* Cada módulo é carregado na primeira visita e permanece ativo ao alternar. */
+function toggleErpMobileMenu(force){
+  const sidebar=document.getElementById('sidebar');
+  const trigger=document.getElementById('erp-menu-trigger');
+  const scrim=document.getElementById('erp-menu-scrim');
+  if(!sidebar||!trigger||!scrim)return;
+  const open=typeof force==='boolean'?force:!sidebar.classList.contains('mobile-open');
+  const enabled=open&&window.matchMedia('(max-width:780px)').matches;
+  sidebar.classList.toggle('mobile-open',enabled);
+  trigger.setAttribute('aria-expanded',String(enabled));
+  scrim.hidden=!enabled;
+  document.getElementById('content').inert=enabled;
+  if(enabled){
+    sidebar.setAttribute('role','dialog');
+    sidebar.setAttribute('aria-modal','true');
+    const first=sidebar.querySelector('.erp-menu-close');
+    if(first)first.focus({preventScroll:true});
+  }else{
+    sidebar.removeAttribute('role');
+    sidebar.removeAttribute('aria-modal');
+  }
+}
+window.addEventListener('resize',function(){
+  if(!window.matchMedia('(max-width:780px)').matches)toggleErpMobileMenu(false);
+});
+document.addEventListener('keydown',function(e){
+  const sidebar=document.getElementById('sidebar');
+  if(!sidebar||!sidebar.classList.contains('mobile-open'))return;
+  if(e.key==='Escape'){
+    e.preventDefault();toggleErpMobileMenu(false);
+    document.getElementById('erp-menu-trigger').focus();
+    return;
+  }
+  if(e.key==='Tab'){
+    const items=[...sidebar.querySelectorAll('button:not([disabled]),a[href]')]
+      .filter(el=>el.getClientRects().length);
+    if(!items.length)return;
+    const first=items[0],last=items[items.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
 function abrirApp(view, conviteHash=''){
+  if(window.matchMedia('(max-width:780px)').matches)toggleErpMobileMenu(false);
   const home = document.getElementById('home-view');
   home.classList.toggle('active', view==='home');
   home.inert = view!=='home';
