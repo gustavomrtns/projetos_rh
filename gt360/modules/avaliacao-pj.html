@@ -546,7 +546,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
       <button class="modal-close" onclick="fecharHistorico()">×</button>
       <div class="modal-title">Histórico de Avaliações</div>
       <div class="modal-sub">Avaliações de prestadores salvas neste navegador — clique para reabrir e revisar</div>
-      <input type="text" id="busca-historico" placeholder="Buscar por empresa, praça ou setor..." oninput="renderHistoricoPJ()" style="width:100%;padding:10px 13px;border:1.5px solid var(--gray100);border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;margin-bottom:14px;outline:none;">
+      <input type="text" id="busca-historico" placeholder="Buscar por empresa, unidade ou setor..." oninput="renderHistoricoPJ()" style="width:100%;padding:10px 13px;border:1.5px solid var(--gray100);border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;margin-bottom:14px;outline:none;">
       <div id="lista-historico"></div>
     </div>
   </div>
@@ -583,7 +583,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
   <div class="logo-wrap">
     <div class="brand-text">
       <div class="name">Avaliação de PJ</div>
-      <div class="tag">Gestão de Talentos</div>
+      <div class="tag">Gestão de Pessoas</div>
     </div>
   </div>
 </header>
@@ -629,7 +629,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div class="card">
       <div class="form-grid">
         <div class="field">
-          <label>Praça</label>
+          <label>Unidade</label>
           <select id="sel-praca" onchange="filtrarSetores()">
             <option value="">— Selecione —</option>
             <option>REGIÃO SUL</option><option>REGIÃO LESTE</option><option>REGIÃO CENTRAL</option>
@@ -1428,7 +1428,7 @@ function enviarParaCienciaPrestador(){
   const corpo = 'Olá!\n\nA avaliação de prestação de serviço referente a ' + d.empresa + ' foi preenchida pelo(a) gestor(a) de contrato '
     + (d.nomeAvaliador||'—') + ' e está disponível para ciência.\n\n'
     + 'Acesse o link abaixo para revisar e confirmar:\n' + link + '\n\n'
-    + 'Atenciosamente,\nGestão de Talentos';
+    + 'Atenciosamente,\nGestão de Pessoas';
   houveAlteracaoNaoSalva = false;
   window.location.href = gerarMailtoLink(d.emailRepresentante, assunto, corpo);
 }
@@ -1458,7 +1458,7 @@ function renderTelaCienciaPJ(registro){
       <div class="form-grid">
         <div class="field"><label>Empresa</label><div style="font-weight:700">${esc(d.empresa)}</div></div>
         <div class="field"><label>CNPJ</label><div>${esc(d.cnpj||'—')}</div></div>
-        <div class="field"><label>Praça / Setor</label><div>${esc(d.praca)} · ${esc(d.setor)}</div></div>
+        <div class="field"><label>Unidade / Setor</label><div>${esc(d.praca)} · ${esc(d.setor)}</div></div>
         <div class="field"><label>Avaliador</label><div>${esc(d.nomeAvaliador||'—')}</div></div>
       </div>
     </div>
