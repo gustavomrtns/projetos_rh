@@ -11,20 +11,20 @@
    DESIGN TOKENS — Sistema de Auditoria
 ═══════════════════════════════════════════ */
 :root{
-  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --g1a:#b84c4c;--g1b:#c71717;--g2a:#ac1515;--g2b:#8fff00;--g3a:#393734;--g3b:#8b837d;
   --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
   --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
   --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
-  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
-  --white:#fff;--offwhite:#f8f9fc;
-  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
-  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --gradFull:linear-gradient(135deg,#b84c4c 0%,#c71717 20%,#8b837d 40%,#393734 60%,#ac1515 80%,#8fff00 100%);
+  --white:#fff;--offwhite:#f8f7f4;
+  --gray50:#f6f4f1;--gray100:#eae5df;--gray200:#d7d0c8;
+  --gray400:#77716c;--gray600:#58524c;--gray800:#232220;
   --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
-  --s1-grad:linear-gradient(160deg,#f7a800,#ff4e00);
-  --s2-grad:linear-gradient(160deg,#ff4e00,#e0009e);
-  --s3-grad:linear-gradient(160deg,#0099e5,#00e5a0);
-  --s4-grad:linear-gradient(160deg,#00c48c,#0099e5);
-  --s5-grad:linear-gradient(160deg,#7b2ff7,#e0009e);
+  --s1-grad:linear-gradient(160deg,#b84c4c,#c71717);
+  --s2-grad:linear-gradient(160deg,#c71717,#8b837d);
+  --s3-grad:linear-gradient(160deg,#ac1515,#8fff00);
+  --s4-grad:linear-gradient(160deg,#8fff00,#ac1515);
+  --s5-grad:linear-gradient(160deg,#393734,#8b837d);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -195,7 +195,7 @@ body {
 }
 .field input:focus, .field select:focus, .field textarea:focus {
   border-color: var(--g3a);
-  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  box-shadow: 0 0 0 3px rgba(39,32,28,.1);
   background: #fff;
 }
 
@@ -280,7 +280,7 @@ body {
 }
 .check-item:last-child { border-bottom: none; }
 .check-item:hover { background: var(--gray50); }
-.check-item.ok  { border-left-color: var(--ok);  background: #f0fdf8; }
+.check-item.ok  { border-left-color: var(--ok);  background: #f4ffe2; }
 .check-item.nok { border-left-color: var(--nok); background: #fff2f2; }
 .check-item.na  { border-left-color: var(--na);  background: var(--gray50); opacity: .6; }
 .item-text     { font-size: 13px; line-height: 1.55; color: var(--gray800); font-weight: 500; }
@@ -298,7 +298,7 @@ body {
 .btn-check:hover { transform: scale(1.1); }
 .btn-check.ok-btn:hover, .btn-check.ok-btn.active {
   background: var(--grad-green); border-color: var(--ok);
-  color: #fff; box-shadow: 0 2px 10px rgba(0,196,140,.35);
+  color: #fff; box-shadow: 0 2px 10px rgba(100,176,10,.35);
 }
 .btn-check.nok-btn:hover, .btn-check.nok-btn.active {
   background: var(--grad-red); border-color: var(--nok);
@@ -336,7 +336,7 @@ textarea {
 }
 textarea:focus {
   border-color: var(--g3a);
-  box-shadow: 0 0 0 3px rgba(123,47,247,.1);
+  box-shadow: 0 0 0 3px rgba(39,32,28,.1);
   background: #fff;
 }
 
@@ -367,7 +367,7 @@ textarea:focus {
   color: white; background: var(--grad3);
   border: none; cursor: pointer;
   transition: opacity .2s, transform .15s;
-  box-shadow: 0 4px 14px rgba(123,47,247,.3);
+  box-shadow: 0 4px 14px rgba(39,32,28,.3);
 }
 .btn-primary:hover  { opacity: .9; transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); }
@@ -380,7 +380,7 @@ textarea:focus {
   border: 1.5px solid var(--gray200); cursor: pointer;
   transition: all .2s;
 }
-.btn-secondary:hover { border-color: var(--g3a); color: var(--g3a); background: #f5f0ff; }
+.btn-secondary:hover { border-color: var(--g3a); color: var(--g3a); background: #f4f1ed; }
 
 .btn-export {
   display: inline-flex; align-items: center; gap: 8px;
@@ -457,6 +457,9 @@ textarea:focus {
 .painel-badge.pendente{background:var(--gray400);}
 .painel-empty{text-align:center;color:var(--gray400);padding:20px;font-size:13px;background:var(--white);border-radius:10px;}
 </style>
+
+<!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
+<link rel="stylesheet" href="../editorial-02.css">
 </head>
 <body>
 
@@ -752,7 +755,7 @@ function gerarQRCodeSVG(texto, cellSize){
 const SS = [
   {
     id:1, nome:"Seiri", subtitulo:"Utilização",
-    grad:"var(--s1-grad)", cor:"#f7a800",
+    grad:"var(--s1-grad)", cor:"#b84c4c",
     desc:"Separar o necessário do desnecessário. Manter no local de trabalho apenas o que é realmente utilizado.",
     itens:[
       {texto:"Materiais e ferramentas desnecessários removidos da área",criterio:"Nenhum item sem uso nos últimos 30 dias presente na área de trabalho"},
@@ -765,7 +768,7 @@ const SS = [
   },
   {
     id:2, nome:"Seiton", subtitulo:"Organização",
-    grad:"var(--s2-grad)", cor:"#ff4e00",
+    grad:"var(--s2-grad)", cor:"#c71717",
     desc:"Um lugar para cada coisa e cada coisa em seu lugar. Organizar os itens necessários de forma que sejam fáceis de encontrar, usar e repor.",
     itens:[
       {texto:"Ferramentas e equipamentos possuem local definido e identificado",criterio:"Todo item tem posição fixa marcada (shadow board, fita, etiqueta)"},
@@ -778,7 +781,7 @@ const SS = [
   },
   {
     id:3, nome:"Seiso", subtitulo:"Limpeza",
-    grad:"var(--s3-grad)", cor:"#0099e5",
+    grad:"var(--s3-grad)", cor:"#ac1515",
     desc:"Limpar e inspecionar. Manter o ambiente limpo e usar a limpeza como forma de inspeção para identificar anomalias.",
     itens:[
       {texto:"Pisos limpos, sem manchas, resíduos ou líquidos",criterio:"Nenhum resíduo visível; manchas antigas sinalizadas para tratamento"},
@@ -791,7 +794,7 @@ const SS = [
   },
   {
     id:4, nome:"Seiketsu", subtitulo:"Padronização",
-    grad:"var(--s4-grad)", cor:"#00c48c",
+    grad:"var(--s4-grad)", cor:"#8fff00",
     desc:"Padronizar as boas práticas. Criar padrões visuais e procedimentos para manter os três primeiros S de forma consistente.",
     itens:[
       {texto:"Procedimentos de limpeza e organização documentados e disponíveis",criterio:"POP (Procedimento Operacional Padrão) de 5S afixado ou acessível na área"},
@@ -804,7 +807,7 @@ const SS = [
   },
   {
     id:5, nome:"Shitsuke", subtitulo:"Disciplina",
-    grad:"var(--s5-grad)", cor:"#7b2ff7",
+    grad:"var(--s5-grad)", cor:"#393734",
     desc:"Manter a autodisciplina. Garantir que os hábitos 5S sejam praticados de forma natural, contínua e com melhoria constante.",
     itens:[
       {texto:"Equipe treinada e consciente sobre a metodologia 5S",criterio:"Registro de treinamento disponível; colaboradores conhecem os 5 sensos"},
@@ -999,21 +1002,21 @@ function exportarPDF() {
   arquivarAuditoria({area, resp, data, turno});
 
   const grads = [
-    '#f7a800,#ff4e00','#ff4e00,#e0009e','#0099e5,#00e5a0','#00c48c,#00e5a0','#7b2ff7,#e0009e'
+    '#b84c4c,#c71717','#c71717,#8b837d','#ac1515,#8fff00','#8fff00,#8fff00','#393734,#8b837d'
   ];
 
   let html = `<html><head><meta charset="UTF-8"><title>Relatório 5S</title>
   <style>
     body{font-family:Arial,sans-serif;font-size:11px;color:#222;margin:24px}
     h1{font-size:20px;margin-bottom:6px;font-weight:900}
-    .meta{display:flex;gap:28px;margin-bottom:20px;font-size:10px;color:#555;padding:12px;background:#f4f5f8;border-radius:6px;flex-wrap:wrap}
+    .meta{display:flex;gap:28px;margin-bottom:20px;font-size:10px;color:#555;padding:12px;background:#f6f4f1;border-radius:6px;flex-wrap:wrap}
     table{width:100%;border-collapse:collapse;margin-bottom:18px}
     th{padding:8px 12px;text-align:left;font-size:10px;color:#fff}
     td{padding:7px 12px;border-bottom:1px solid #eee;vertical-align:top}
-    .ok{color:#00c48c;font-weight:bold}.nok{color:#e0003c;font-weight:bold}.na{color:#9098b0}
-    .criteria{font-size:9px;color:#9098b0;margin-top:2px}
-    .notes{background:#f8f9fc;padding:10px 12px;font-size:10px;margin-bottom:18px;border-radius:6px;border-left:4px solid #7b2ff7}
-    .score-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:10px;color:#fff;background:linear-gradient(135deg,#7b2ff7,#e0009e)}
+    .ok{color:#8fff00;font-weight:bold}.nok{color:#9f1111;font-weight:bold}.na{color:#77716c}
+    .criteria{font-size:9px;color:#77716c;margin-top:2px}
+    .notes{background:#f8f7f4;padding:10px 12px;font-size:10px;margin-bottom:18px;border-radius:6px;border-left:4px solid #393734}
+    .score-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:10px;color:#fff;background:linear-gradient(135deg,#393734,#8b837d)}
   </style></head><body>
   <h1>Relatório de Auditoria 5S</h1>
   <div class="meta">
@@ -1026,13 +1029,13 @@ function exportarPDF() {
 
   SS.forEach((s, si) => {
     html += `<table><thead><tr><th colspan="2" style="background:linear-gradient(135deg,${grads[si]})">${s.id}° S — ${s.nome} (${s.subtitulo}) — ${calcScore(s.id)}%</th></tr>
-    <tr style="background:#f4f5f8"><th>Ponto de Verificação</th><th style="width:110px">Status</th></tr></thead><tbody>`;
+    <tr style="background:#f6f4f1"><th>Ponto de Verificação</th><th style="width:110px">Status</th></tr></thead><tbody>`;
     s.itens.forEach((item, i) => {
       const v = state.checks[`s${s.id}_i${i}`];
       const label = v==='ok' ? '<span class="ok">✓ Conforme</span>'
                   : v==='nok'? '<span class="nok">✗ N. Conforme</span>'
                   : v==='na' ? '<span class="na">— N/A</span>'
-                  : '<span style="color:#d0d4e0">Não avaliado</span>';
+                  : '<span style="color:#d7d0c8">Não avaliado</span>';
       html += `<tr><td>${item.texto}<div class="criteria">Critério: ${item.criterio}</div></td><td>${label}</td></tr>`;
     });
     html += '</tbody></table>';
@@ -1093,10 +1096,10 @@ function arquivarAuditoria(meta){
 function abrirHistoricoAuditorias(){ renderHistoricoAuditorias(); document.getElementById('modalHistoricoAuditorias').classList.add('open'); }
 
 function corConformidade(pct){
-  if(pct>=90) return 'linear-gradient(135deg,#00c48c,#00e5a0)';
-  if(pct>=70) return 'linear-gradient(135deg,#0099e5,#00e5a0)';
-  if(pct>=50) return 'linear-gradient(135deg,#f7a800,#ff4e00)';
-  return 'linear-gradient(135deg,#e0003c,#ff4e6a)';
+  if(pct>=90) return 'linear-gradient(135deg,#8fff00,#8fff00)';
+  if(pct>=70) return 'linear-gradient(135deg,#ac1515,#8fff00)';
+  if(pct>=50) return 'linear-gradient(135deg,#b84c4c,#c71717)';
+  return 'linear-gradient(135deg,#9f1111,#c71717)';
 }
 
 function renderHistoricoAuditorias(){

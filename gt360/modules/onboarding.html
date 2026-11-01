@@ -7,14 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g1a:#f7a800;--g1b:#ff4e00;--g2a:#0099e5;--g2b:#00e5a0;--g3a:#7b2ff7;--g3b:#e0009e;
+  --g1a:#b84c4c;--g1b:#c71717;--g2a:#ac1515;--g2b:#8fff00;--g3a:#393734;--g3b:#8b837d;
   --grad1:linear-gradient(160deg,var(--g1a),var(--g1b));
   --grad2:linear-gradient(160deg,var(--g2a),var(--g2b));
   --grad3:linear-gradient(160deg,var(--g3a),var(--g3b));
-  --gradFull:linear-gradient(135deg,#f7a800 0%,#ff4e00 20%,#e0009e 40%,#7b2ff7 60%,#0099e5 80%,#00e5a0 100%);
-  --white:#fff;--offwhite:#f8f9fc;
-  --gray50:#f4f5f8;--gray100:#e8eaf0;--gray200:#d0d4e0;
-  --gray400:#9098b0;--gray600:#5a6278;--gray800:#2a2f42;
+  --gradFull:linear-gradient(135deg,#b84c4c 0%,#c71717 20%,#8b837d 40%,#393734 60%,#ac1515 80%,#8fff00 100%);
+  --white:#fff;--offwhite:#f8f7f4;
+  --gray50:#f6f4f1;--gray100:#eae5df;--gray200:#d7d0c8;
+  --gray400:#77716c;--gray600:#58524c;--gray800:#232220;
   --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -81,9 +81,9 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .dtable th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray400);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--gray100);white-space:nowrap;position:sticky;top:0;background:var(--white);z-index:2}
 .dtable td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--gray50);vertical-align:middle;white-space:nowrap}
 .dtable tr:last-child td{border-bottom:none}
-.dtable tr:hover td{background:#f0f9ff}
+.dtable tr:hover td{background:#fff5f2}
 .collab-link{color:var(--gray800);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1.5px solid transparent;transition:border-color .15s,color .15s}
-.collab-link:hover{color:#0099e5;border-bottom-color:#0099e5}
+.collab-link:hover{color:#ac1515;border-bottom-color:#ac1515}
 
 /* HEADER */
 .header{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;overflow:hidden}
@@ -112,14 +112,14 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .field label{font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.08em}
 .field input,.field select,.field textarea{background:var(--gray50);border:1.5px solid var(--gray100);color:var(--gray800);font-family:'Sora',sans-serif;font-size:13.5px;padding:10px 13px;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;appearance:none;-webkit-appearance:none;resize:vertical}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239098b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#0099e5;box-shadow:0 0 0 3px rgba(0,153,229,.1);background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#ac1515;box-shadow:0 0 0 3px rgba(199,23,23,.1);background:#fff}
 .field input[readonly]{background:var(--gray100);color:var(--gray600);cursor:default}
 
 /* UNIDADE */
 .unidade-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .unid-card{border:2px solid var(--gray100);border-radius:10px;padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;background:var(--white);user-select:none;position:relative}
 .unid-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-.unid-card.selected{border-color:#0099e5;background:#f0f9ff;transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.unid-card.selected{border-color:#ac1515;background:#fff5f2;transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .unid-name{font-size:12px;font-weight:700;color:var(--gray800)}
 .unid-check{position:absolute;top:6px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;opacity:0;transition:opacity .2s;font-weight:700}
 .unid-card.selected .unid-check{opacity:1}
@@ -133,24 +133,24 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .status-btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .st-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:var(--gray600);cursor:pointer;transition:all .2s;white-space:nowrap}
 .st-btn:hover{border-color:var(--gray400);color:var(--gray800)}
-.st-btn.s-ok{background:linear-gradient(135deg,#00c48c,#00e5a0);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,196,140,.3)}
-.st-btn.s-pend{background:linear-gradient(135deg,#f7a800,#ff9500);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(247,168,0,.3)}
-.st-btn.s-no{background:linear-gradient(135deg,#ff4e6a,#e0003c);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(224,0,60,.3)}
-.st-btn.s-andamento{background:linear-gradient(135deg,#0099e5,#7b2ff7);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(0,153,229,.3)}
-.st-btn.s-parcial{background:linear-gradient(135deg,#e0009e,#7b2ff7);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(123,47,247,.3)}
-.st-btn.s-naoobrg{background:linear-gradient(135deg,#9098b0,#5a6278);border-color:transparent;color:#fff}
+.st-btn.s-ok{background:linear-gradient(135deg,#8fff00,#8fff00);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(100,176,10,.3)}
+.st-btn.s-pend{background:linear-gradient(135deg,#b84c4c,#b57b1f);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(247,168,0,.3)}
+.st-btn.s-no{background:linear-gradient(135deg,#c71717,#9f1111);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(224,0,60,.3)}
+.st-btn.s-andamento{background:linear-gradient(135deg,#ac1515,#393734);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(199,23,23,.3)}
+.st-btn.s-parcial{background:linear-gradient(135deg,#8b837d,#393734);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(39,32,28,.3)}
+.st-btn.s-naoobrg{background:linear-gradient(135deg,#77716c,#58524c);border-color:transparent;color:#fff}
 
 /* BUTTONS */
 .actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
 @keyframes gradLoop{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.btn-novocadastro{background-image:linear-gradient(270deg,#f7a800,#ff4e00,#e0009e,#7b2ff7,#0099e5,#00e5a0,#f7a800);background-size:400% 400%;animation:gradLoop 6s ease infinite;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)}
+.btn-novocadastro{background-image:linear-gradient(270deg,#b84c4c,#c71717,#8b837d,#393734,#ac1515,#8fff00,#b84c4c);background-size:400% 400%;animation:gradLoop 6s ease infinite;color:#fff;box-shadow:0 4px 14px rgba(39,32,28,.3)}
 .btn-novocadastro:hover{opacity:.92;transform:translateY(-1px)}
 .btn{padding:11px 24px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em}
-.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(0,153,229,.35)}
+.btn-primary{background:var(--grad2);color:#fff;box-shadow:0 4px 14px rgba(199,23,23,.35)}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .btn-secondary{background:var(--white);color:var(--gray600);border:1.5px solid var(--gray200)}
 .btn-secondary:hover{border-color:var(--gray400);color:var(--gray800)}
-.btn-print{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.35)}
+.btn-print{background:var(--grad3);color:#fff;box-shadow:0 4px 14px rgba(39,32,28,.35)}
 .btn-print:hover{opacity:.9;transform:translateY(-1px)}
 
 /* COLLAB LIST */
@@ -162,9 +162,9 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .collab-info p{font-size:12px;color:var(--gray400)}
 .spill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
 .sp-andamento{background:var(--grad2)}
-.sp-concluido{background:linear-gradient(135deg,#00c48c,#00e5a0)}
-.sp-atraso{background:linear-gradient(135deg,#ff4e6a,#e0003c)}
-.sp-novo{background:linear-gradient(135deg,#9098b0,#5a6278)}
+.sp-concluido{background:linear-gradient(135deg,#8fff00,#8fff00)}
+.sp-atraso{background:linear-gradient(135deg,#c71717,#9f1111)}
+.sp-novo{background:linear-gradient(135deg,#77716c,#58524c)}
 
 /* DASHBOARD */
 .dash-filters{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr auto;gap:14px;align-items:end}
@@ -197,7 +197,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .dtable tr:last-child td{border-bottom:none}
 .dtable tr:hover td{background:var(--gray50)}
 .tedit{padding:5px 14px;border-radius:8px;border:1.5px solid var(--gray200);background:var(--gray50);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--gray600);cursor:pointer;transition:all .2s}
-.tedit:hover{border-color:#0099e5;color:#0099e5;background:#f0f9ff}
+.tedit:hover{border-color:#ac1515;color:#ac1515;background:#fff5f2}
 
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray800);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:transform .3s;pointer-events:none;white-space:nowrap}
@@ -218,7 +218,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .mclist{display:flex;flex-direction:column;gap:8px;max-height:360px;overflow-y:auto;margin-bottom:20px;padding-right:4px}
 .mcitem{display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid var(--gray100);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none}
 .mcitem:hover{background:var(--gray50);border-color:var(--gray200)}
-.mcitem.checked{border-color:#0099e5;background:#f0f9ff}
+.mcitem.checked{border-color:#ac1515;background:#fff5f2}
 .mcbox{width:20px;height:20px;border-radius:5px;border:2px solid var(--gray200);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all .2s}
 .mcitem.checked .mcbox{background:var(--grad2);border-color:transparent;color:#fff}
 .mcname{font-size:13px;font-weight:700;color:var(--gray800)}
@@ -287,6 +287,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 .nav-logo{height:32px;object-fit:contain;display:block;margin-right:16px}
 .pdf-logo{height:44px;object-fit:contain;display:block}
 </style>
+<!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
+<link rel="stylesheet" href="../editorial-02.css">
 </head>
 <body>
 
@@ -626,10 +628,10 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
     <div id="det-body"></div>
     <div id="det-actions" style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
       <button class="btn btn-primary" id="det-edit-btn">Editar Cadastro</button>
-      <button class="btn" id="det-declinou-btn" style="background:linear-gradient(135deg,#ff4e6a,#e0003c);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)" onclick="marcarDetModal('Declinou')">Declinou</button>
-      <button class="btn" id="det-demitido-btn" style="background:linear-gradient(135deg,#7b2ff7,#e0009e);color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)" onclick="marcarDetModal('Demitido')">Demitido</button>
+      <button class="btn" id="det-declinou-btn" style="background:linear-gradient(135deg,#c71717,#9f1111);color:#fff;box-shadow:0 4px 14px rgba(224,0,60,.3)" onclick="marcarDetModal('Declinou')">Declinou</button>
+      <button class="btn" id="det-demitido-btn" style="background:linear-gradient(135deg,#393734,#8b837d);color:#fff;box-shadow:0 4px 14px rgba(39,32,28,.3)" onclick="marcarDetModal('Demitido')">Demitido</button>
       <button class="btn" id="det-remover-marc-btn" style="background:var(--gray100);color:var(--gray600);display:none" onclick="marcarDetModal('')">Remover Marcação</button>
-      <button class="btn" id="det-excluir-btn" style="background:var(--white);color:#ff4e6a;border:1.5px solid #ff4e6a" onclick="excluirDetModal()">Excluir Cadastro</button>
+      <button class="btn" id="det-excluir-btn" style="background:var(--white);color:#c71717;border:1.5px solid #c71717" onclick="excluirDetModal()">Excluir Cadastro</button>
       <button class="btn btn-secondary" onclick="fecharModal('modal-det')">Fechar</button>
     </div>
   </div>
@@ -718,7 +720,7 @@ const UNIDADES_LIST=[
   {v:'UNIDADE 6',l:'Unidade 6',grupo:'Demais Unidades'},
   {v:'UNIDADE 7',l:'Unidade 7',grupo:'Demais Unidades'}
 ];
-const UNID_BARCOLORS=['linear-gradient(90deg,#f7a800,#ff4e00)','linear-gradient(90deg,#0099e5,#00e5a0)','linear-gradient(90deg,#7b2ff7,#e0009e)','linear-gradient(90deg,#00c48c,#0099e5)','linear-gradient(90deg,#e0009e,#ff4e00)','linear-gradient(90deg,#ff9500,#f7a800)','linear-gradient(90deg,#7b2ff7,#0099e5)','linear-gradient(90deg,#00c48c,#00e5a0)'];
+const UNID_BARCOLORS=['linear-gradient(90deg,#b84c4c,#c71717)','linear-gradient(90deg,#ac1515,#8fff00)','linear-gradient(90deg,#393734,#8b837d)','linear-gradient(90deg,#8fff00,#ac1515)','linear-gradient(90deg,#8b837d,#c71717)','linear-gradient(90deg,#b57b1f,#b84c4c)','linear-gradient(90deg,#393734,#ac1515)','linear-gradient(90deg,#8fff00,#8fff00)'];
 
 function unidadeOptionsHTML(selected){
   const grupos={};
@@ -980,14 +982,14 @@ function fmtDate(str){if(!str)return'—';const[y,m,d]=str.split('-');return`${d
 function dataHoje(){const n=new Date();return`${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()}`;}
 
 function badgeBg(val){
-  const m={'Enviado':'linear-gradient(135deg,#00c48c,#00e5a0)','Assinado':'linear-gradient(135deg,#00c48c,#00e5a0)',
-    'Cadastrado':'linear-gradient(135deg,#00c48c,#00e5a0)','Realizados completamente':'linear-gradient(135deg,#00c48c,#00e5a0)',
-    'Em andamento':'linear-gradient(135deg,#0099e5,#7b2ff7)','Pendente validação':'linear-gradient(135deg,#f7a800,#e0009e)',
-    'Realizados parcialmente':'linear-gradient(135deg,#e0009e,#7b2ff7)',
-    'Não enviado':'linear-gradient(135deg,#ff4e6a,#e0003c)','Não assinado':'linear-gradient(135deg,#ff4e6a,#e0003c)',
-    'Não cadastrado':'linear-gradient(135deg,#ff4e6a,#e0003c)','Não realizado':'linear-gradient(135deg,#ff4e6a,#e0003c)',
-    'Não obrigatório':'linear-gradient(135deg,#9098b0,#5a6278)'};
-  return m[val]||'linear-gradient(135deg,#9098b0,#5a6278)';
+  const m={'Enviado':'linear-gradient(135deg,#8fff00,#8fff00)','Assinado':'linear-gradient(135deg,#8fff00,#8fff00)',
+    'Cadastrado':'linear-gradient(135deg,#8fff00,#8fff00)','Realizados completamente':'linear-gradient(135deg,#8fff00,#8fff00)',
+    'Em andamento':'linear-gradient(135deg,#ac1515,#393734)','Pendente validação':'linear-gradient(135deg,#b84c4c,#8b837d)',
+    'Realizados parcialmente':'linear-gradient(135deg,#8b837d,#393734)',
+    'Não enviado':'linear-gradient(135deg,#c71717,#9f1111)','Não assinado':'linear-gradient(135deg,#c71717,#9f1111)',
+    'Não cadastrado':'linear-gradient(135deg,#c71717,#9f1111)','Não realizado':'linear-gradient(135deg,#c71717,#9f1111)',
+    'Não obrigatório':'linear-gradient(135deg,#77716c,#58524c)'};
+  return m[val]||'linear-gradient(135deg,#77716c,#58524c)';
 }
 function pdfBadge(val){return`<span class="pbadge" style="background:${badgeBg(val)}">${val||'—'}</span>`;}
 function inlinePill(val){return`<span class="spill" style="background:${badgeBg(val)};font-size:11px;padding:3px 10px">${val||'—'}</span>`;}
@@ -1012,12 +1014,12 @@ function gerarDocOnboarding(){
     parecer_obs:document.getElementById('f-parecer-obs').value.trim()
   };
   if(!c.colaborador||c.colaborador==='—'){showToast('Preencha os dados antes de gerar');return;}
-  const g=['linear-gradient(160deg,#f7a800,#ff4e00)','linear-gradient(160deg,#0099e5,#00e5a0)','linear-gradient(160deg,#7b2ff7,#e0009e)'];
+  const g=['linear-gradient(160deg,#b84c4c,#c71717)','linear-gradient(160deg,#ac1515,#8fff00)','linear-gradient(160deg,#393734,#8b837d)'];
   const html=`<div class="pdf-doc"><div class="ptband"></div>
     <div class="phdr">
       <div><div class="phdr-title">Processo de Onboarding</div><div class="phdr-sub">Registro de Integração — Gestão de Talentos</div>
         ${c.condutor?`<span class="phdr-badge">Conduzido por: ${c.condutor}</span>`:''}
-        ${c.integracao==='nao'?`<span class="phdr-badge" style="background:linear-gradient(135deg,#9098b0,#5a6278);margin-left:6px">Sem integração — apenas registro</span>`:''}
+        ${c.integracao==='nao'?`<span class="phdr-badge" style="background:linear-gradient(135deg,#77716c,#58524c);margin-left:6px">Sem integração — apenas registro</span>`:''}
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
         <img class="pdf-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa">
@@ -1330,11 +1332,11 @@ function renderDash(){
   const cursosPct=cursosTotal?Math.round(cursosConc/cursosTotal*100):0;
 
   document.getElementById('kpi-grid').innerHTML=`
-    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#f7a800,#ff4e00)"></div><div class="kpi-label">Total de colaboradores</div><div class="kpi-val">${total}</div><div class="kpi-sub">no período filtrado</div></div>
-    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#00c48c,#00e5a0)"></div><div class="kpi-label">Taxa de conclusão</div><div class="kpi-val">${pct}%</div><div class="kpi-sub">${conc} de ${total} concluídos</div></div>
-    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#0099e5,#7b2ff7)"></div><div class="kpi-label">Tempo médio de conclusão</div><div class="kpi-val">${media}</div><div class="kpi-sub">dias em média</div></div>
-    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#ff4e6a,#e0003c)"></div><div class="kpi-label">Em atraso (mais de 10 dias)</div><div class="kpi-val">${atras}</div><div class="kpi-sub">sem conclusão no prazo</div></div>
-    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#7b2ff7,#e0009e)"></div><div class="kpi-label">Cursos concluídos</div><div class="kpi-val">${cursosPct}%</div><div class="kpi-sub">${cursosConc} de ${cursosTotal} com cursos concluídos${cursosIsentos?' · '+cursosIsentos+' isento'+(cursosIsentos!==1?'s':''):''}</div></div>`;
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#b84c4c,#c71717)"></div><div class="kpi-label">Total de colaboradores</div><div class="kpi-val">${total}</div><div class="kpi-sub">no período filtrado</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#8fff00,#8fff00)"></div><div class="kpi-label">Taxa de conclusão</div><div class="kpi-val">${pct}%</div><div class="kpi-sub">${conc} de ${total} concluídos</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#ac1515,#393734)"></div><div class="kpi-label">Tempo médio de conclusão</div><div class="kpi-val">${media}</div><div class="kpi-sub">dias em média</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#c71717,#9f1111)"></div><div class="kpi-label">Em atraso (mais de 10 dias)</div><div class="kpi-val">${atras}</div><div class="kpi-sub">sem conclusão no prazo</div></div>
+    <div class="kpi-card"><div class="kpi-band" style="background:linear-gradient(90deg,#393734,#8b837d)"></div><div class="kpi-label">Cursos concluídos</div><div class="kpi-val">${cursosPct}%</div><div class="kpi-sub">${cursosConc} de ${cursosTotal} com cursos concluídos${cursosIsentos?' · '+cursosIsentos+' isento'+(cursosIsentos!==1?'s':''):''}</div></div>`;
 
   let barH='';
   UNIDADES_LIST.forEach((u,i)=>{
@@ -1357,14 +1359,14 @@ function renderDash(){
     document.getElementById(elId).innerHTML=`<div class="pie-wrap">
       <svg width="200" height="200" viewBox="0 0 200 200">${paths}
         <circle cx="100" cy="100" r="48" fill="white"/>
-        <text x="100" y="96" text-anchor="middle" fill="#2a2f42" font-family="DM Serif Display,serif" font-size="26">${centerPct}%</text>
-        <text x="100" y="112" text-anchor="middle" fill="#9098b0" font-family="Sora,sans-serif" font-size="10" font-weight="700">${centerLabel}</text>
+        <text x="100" y="96" text-anchor="middle" fill="#232220" font-family="DM Serif Display,serif" font-size="26">${centerPct}%</text>
+        <text x="100" y="112" text-anchor="middle" fill="#77716c" font-family="Sora,sans-serif" font-size="10" font-weight="700">${centerLabel}</text>
       </svg>
       <div class="pie-leg">${Object.entries(counts).map(([l,v],i)=>`<div class="pie-li"><div class="pie-dot" style="background:${colors[i%colors.length]}"></div>${l}<div class="pie-v">${v}</div></div>`).join('')}</div>
     </div>`;
   }
-  renderDonut('chart-status',stC,['#00c48c','#0099e5','#ff4e6a','#9098b0'],pct,'CONCLUSÃO');
-  renderDonut('chart-cursos',cursosC,['#7b2ff7','#0099e5','#ff4e6a','#9098b0'],cursosPct,'CURSOS');
+  renderDonut('chart-status',stC,['#8fff00','#ac1515','#c71717','#77716c'],pct,'CONCLUSÃO');
+  renderDonut('chart-cursos',cursosC,['#393734','#ac1515','#c71717','#77716c'],cursosPct,'CURSOS');
 
   /* Tabela todos */
   const allFiltColab=(document.getElementById('d-all-colab')||{value:''}).value.toLowerCase().trim();
@@ -1413,7 +1415,7 @@ function renderDash(){
         <tbody>${dataAll.length===0?`<tr><td colspan="10" style="text-align:center;color:var(--gray400);padding:20px">Nenhum resultado encontrado para os filtros aplicados</td></tr>`:dataAll.map(c=>{
           const gi=colaboradores.indexOf(c), st=calcSt(c);
           const marc=c.marcacao||'';
-          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':marc==='Demitido'?'linear-gradient(135deg,#7b2ff7,#e0009e)':'';
+          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#c71717,#9f1111)':marc==='Demitido'?'linear-gradient(135deg,#393734,#8b837d)':'';
           return`<tr style="${marc?'opacity:0.72;':''}">
             <td><span class="collab-link" onclick="abrirDetalhe(${gi})">${c.colaborador}</span></td>
             <td>${unidadeLabel(c.unidade)}</td><td>${c.setor||'—'}</td><td>${c.cargo||'—'}</td>
@@ -1463,13 +1465,13 @@ function renderDash(){
         <tbody>${alertasFilt.length===0?`<tr><td colspan="10" style="text-align:center;color:var(--gray400);padding:20px">Nenhum resultado encontrado para os filtros aplicados</td></tr>`:alertasFilt.map(c=>{
           const gi=colaboradores.indexOf(c), dias=Math.floor((hoje-new Date(c.datainicio+'T00:00:00'))/864e5);
           const marc=c.marcacao||'';
-          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':marc==='Demitido'?'linear-gradient(135deg,#7b2ff7,#e0009e)':'';
+          const marcBg=marc==='Declinou'?'linear-gradient(135deg,#c71717,#9f1111)':marc==='Demitido'?'linear-gradient(135deg,#393734,#8b837d)':'';
           const st=calcSt(c);
           return`<tr style="${marc?'opacity:0.72;':''}">
             <td><span class="collab-link" onclick="abrirDetalhe(${gi})">${c.colaborador}</span></td>
             <td>${unidadeLabel(c.unidade)}</td><td>${c.setor||'—'}</td>
             <td>${fmtDate(c.datainicio)}</td>
-            <td><span style="color:#ff4e6a;font-weight:700;background:#fff0f3;padding:3px 10px;border-radius:20px">${dias} dias</span></td>
+            <td><span style="color:#c71717;font-weight:700;background:#fff2ef;padding:3px 10px;border-radius:20px">${dias} dias</span></td>
             <td>${inlinePill(c.st_envio)}</td><td>${inlinePill(termoAssinatura(c))}</td><td>${inlinePill(c.st_cursos)}</td>
             <td><span class="spill ${st.cls}">${st.label}</span></td>
           </tr>`;
@@ -1502,7 +1504,7 @@ function abrirDetalhe(gi){
   document.getElementById('det-body').innerHTML=`
     <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">
       <span class="spill ${st.cls}" style="font-size:13px;padding:5px 16px">${st.label}</span>
-      ${marc?`<span class="spill" style="font-size:13px;padding:5px 16px;background:${marc==='Declinou'?'linear-gradient(135deg,#ff4e6a,#e0003c)':'linear-gradient(135deg,#7b2ff7,#e0009e)'}">${marc}</span>`:''}
+      ${marc?`<span class="spill" style="font-size:13px;padding:5px 16px;background:${marc==='Declinou'?'linear-gradient(135deg,#c71717,#9f1111)':'linear-gradient(135deg,#393734,#8b837d)'}">${marc}</span>`:''}
       ${c.integracao==='nao'?'<span class="spill sp-novo" style="font-size:13px;padding:5px 16px">Sem integração — apenas registro</span>':''}
     </div>
     <div class="det-grid" style="margin-bottom:18px">
