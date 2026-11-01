@@ -124,6 +124,8 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="editorial-02.css">
+<!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
+<script src="../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -179,7 +181,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 
 <script>
 // Os módulos ficam em arquivos HTML da mesma origem, carregados somente ao abrir.
-// Seus registros continuam no localStorage do navegador; não há autenticação.
+// Seus registros continuam no demoStore do navegador; não há autenticação.
 
 // Config central das aplicações do workspace — adicionar uma aplicação aqui atualiza
 // automaticamente a sidebar e a página inicial (unifica o fluxo por aplicações adicionadas).
@@ -237,7 +239,7 @@ function baixarBackup(){
   try{
     const entries={};
     BACKUP_KEYS.forEach(key=>{
-      const value=localStorage.getItem(key);
+      const value=demoStore.getItem(key);
       if(value!==null) entries[key]=value;
     });
     const content=JSON.stringify({format:'gt360-local-backup',version:1,createdAt:new Date().toISOString(),entries},null,2);
@@ -275,13 +277,13 @@ async function restaurarBackup(event){
     }
     if(!confirm('Restaurar este arquivo? Os registros atuais dos módulos neste navegador serão substituídos.')) return;
     const previous={};
-    BACKUP_KEYS.forEach(key=>{previous[key]=localStorage.getItem(key)});
+    BACKUP_KEYS.forEach(key=>{previous[key]=demoStore.getItem(key)});
     try{
-      BACKUP_KEYS.forEach(key=>localStorage.removeItem(key));
-      Object.entries(backup.entries).forEach(([key,value])=>localStorage.setItem(key,value));
+      BACKUP_KEYS.forEach(key=>demoStore.removeItem(key));
+      Object.entries(backup.entries).forEach(([key,value])=>demoStore.setItem(key,value));
     }catch(e){
       BACKUP_KEYS.forEach(key=>{
-        try{if(previous[key]===null)localStorage.removeItem(key);else localStorage.setItem(key,previous[key])}catch(_){}
+        try{if(previous[key]===null)demoStore.removeItem(key);else demoStore.setItem(key,previous[key])}catch(_){}
       });
       throw e;
     }
@@ -316,7 +318,7 @@ function toggleSidebar(){
     const lbl=btn.querySelector('.label');
     if(lbl) lbl.textContent=collapsed?'Expandir':'Recolher';
   }
-  try{ localStorage.setItem('gt360_sidebar_collapsed', collapsed?'1':'0'); }catch(e){}
+  try{ demoStore.setItem('gt360_sidebar_collapsed', collapsed?'1':'0'); }catch(e){}
 }
 
 function montarHome(){
@@ -386,7 +388,7 @@ function abrirApp(view, conviteHash=''){
     const frame=document.getElementById('frame-'+view);
     try{ if(frame.contentWindow) frame.contentWindow.scrollTo(0,0); }catch(e){}
   }
-  try{ sessionStorage.setItem('gt360_app_ativo', view); }catch(e){}
+  try{ demoStore.setItem('gt360_app_ativo', view); }catch(e){}
 }
 
 /* Decodifica o mesmo formato de link usado pelos módulos — o shell
@@ -410,7 +412,7 @@ window.addEventListener('load', ()=>{
   montarSidebar();
   montarHome();
   try{
-    if(localStorage.getItem('gt360_sidebar_collapsed')==='1') toggleSidebar();
+    if(demoStore.getItem('gt360_sidebar_collapsed')==='1') toggleSidebar();
   }catch(e){}
 
   // O shell identifica o módulo e repassa o hash para o arquivo da aplicação.
