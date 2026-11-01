@@ -795,7 +795,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="modal-bg" id="modal-questionario">
   <div class="modal wide"><div class="modal-band"></div>
     <div class="modal-inner">
-      <button class="modal-close" onclick="fecharModal('modal-questionario')">✕</button>
+      <button class="modal-close" onclick="fecharModal('modal-questionario')" aria-label="Fechar" title="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="modal-title">Questionário de Aproveitamento</div>
       <div class="modal-sub">Selecione o curso, escreva as perguntas e as alternativas (da melhor para a pior)</div>
       <div class="form-grid" style="margin-bottom:18px">
@@ -889,7 +889,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="modal-bg" id="modal-detalhe">
   <div class="modal wide"><div class="modal-band"></div>
     <div class="modal-inner">
-      <button class="modal-close" onclick="fecharModal('modal-detalhe')">✕</button>
+      <button class="modal-close" onclick="fecharModal('modal-detalhe')" aria-label="Fechar" title="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="modal-title" id="det-title">—</div>
       <div class="modal-sub" id="det-sub">—</div>
       <div id="det-body"></div>
@@ -907,7 +907,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="modal-bg" id="modal-certificacao">
   <div class="modal wide"><div class="modal-band"></div>
     <div class="modal-inner">
-      <button class="modal-close" onclick="fecharModal('modal-certificacao')">✕</button>
+      <button class="modal-close" onclick="fecharModal('modal-certificacao')" aria-label="Fechar" title="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="modal-title">Certificação</div>
       <div class="modal-sub">Anexe o certificado, posicione o campo do nome e emita para quem participou</div>
 
@@ -1771,7 +1771,7 @@ function qzAddPergunta(texto, opcoes, correta){
   div.innerHTML = `
     <div style="display:flex;gap:10px;align-items:flex-start">
       <div class="field" style="flex:1"><label>Pergunta</label><input type="text" class="qz-p-texto" placeholder="Digite a pergunta..." value="${(texto||'').replace(/"/g,'&quot;')}"></div>
-      <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.qz-pergunta').remove()" style="margin-top:22px">✕</button>
+      <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.qz-pergunta').remove()" style="margin-top:22px" aria-label="Excluir" title="Excluir"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>
     <div style="font-size:10.5px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.06em;margin-top:12px">Alternativas — marque qual é a correta</div>
     <div class="qz-opcoes" style="margin-top:8px"></div>
@@ -1796,7 +1796,7 @@ function qzAddOpcaoEl(wrap, valor, pid, isCorreta){
       <input type="radio" name="${pid}" class="qz-opcao-correta" ${isCorreta?'checked':''} style="width:17px;height:17px;accent-color:#8fff00;cursor:pointer">
     </label>
     <input type="text" class="qz-opcao-input" style="flex:1;background:var(--white);border:1.5px solid var(--gray100);border-radius:8px;padding:8px 12px;font-family:'Sora',sans-serif;font-size:13px;outline:none" placeholder="Alternativa">
-    <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--gray400);cursor:pointer;font-size:16px;padding:4px">✕</button>
+    <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--gray400);cursor:pointer;font-size:16px;padding:4px" aria-label="Excluir" title="Excluir"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
   `;
   row.querySelector('.qz-opcao-input').value = valor||'';
   wrap.appendChild(row);
@@ -1951,7 +1951,7 @@ function renderImpactoHistorico(tidx){
       <td style="font-size:12px">${imp.setor||'—'}</td>
       <td><strong>${imp.score}%</strong></td>
       <td style="font-size:11px">${fmtDate(imp.data)}</td>
-      <td><button class="btn btn-secondary btn-sm" style="color:#c71717;border-color:#c71717" onclick="excluirImpacto(${impactos.indexOf(imp)})">✕</button></td>
+      <td><button class="btn btn-secondary btn-sm" style="color:#c71717;border-color:#c71717" onclick="excluirImpacto(${impactos.indexOf(imp)})" aria-label="Excluir" title="Excluir"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button></td>
     </tr>`).join('');
 }
 
@@ -2159,7 +2159,7 @@ function renderTurmas(){
         <div style="font-family:'DM Serif Display',serif;font-size:22px;background:var(--gradFull);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${t.qtd}</div>
         <div style="font-size:10px;color:var(--gray400);font-weight:600">pessoas</div>
       </div>
-      <button onclick="removerTurma(${t.id})" style="background:none;border:none;cursor:pointer;color:var(--gray400);font-size:16px;padding:4px 8px;border-radius:6px;line-height:1" title="Remover">✕</button>
+      <button onclick="removerTurma(${t.id})" style="background:none;border:none;cursor:pointer;color:var(--gray400);font-size:16px;padding:4px 8px;border-radius:6px;line-height:1" title="Remover" aria-label="Excluir"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`).join('') +
     `<div style="padding:12px 0 4px;display:flex;justify-content:space-between;align-items:center">
       <span style="font-size:11px;font-weight:700;color:var(--gray600);text-transform:uppercase;letter-spacing:.07em">Total acumulado</span>
@@ -2409,7 +2409,7 @@ function enviarInscricao(treinoId){
   if(idx!=='' && String(treinamentos[parseInt(idx)].id)===String(treinoId)) renderInscritosFluxo(treinoId);
   document.getElementById('pub-card').innerHTML = `
     <div class="pub-done">
-      <div class="mark">✓</div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
       <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:6px">Inscrição confirmada</div>
       <p style="font-size:13px;color:var(--gray400);line-height:1.6">Você receberá as orientações do treinamento pelo e-mail informado.</p>
     </div>`;
@@ -2480,7 +2480,7 @@ function enviarAvaliacaoPublica(treinoId, questId){
   if(avalTreinoId!==null && String(avalTreinoId)===String(treinoId)) mostrarBlocoAvaliacao(idx);
   document.getElementById('pub-card').innerHTML = `
     <div class="pub-done">
-      <div class="mark">✓</div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
       <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--gray800);margin-bottom:6px">Respostas enviadas</div>
       <p style="font-size:13px;color:var(--gray400);line-height:1.6">Obrigado por avaliar o treinamento. Seu aproveitamento foi de <strong>${score}%</strong>.</p>
     </div>`;
