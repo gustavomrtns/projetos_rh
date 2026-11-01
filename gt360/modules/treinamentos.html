@@ -311,6 +311,8 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 </style>
 <!-- IDV Editorial 02: camada visual compartilhada; os fluxos originais permanecem intactos. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada e operações somente em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -320,7 +322,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <div class="brand-band"></div>
 <header>
   <div class="logo-wrap">
-    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
+    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Logo da empresa" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Painel de Treinamentos</div>
       <div class="tag">Gestão de Talentos</div>
@@ -1367,27 +1369,27 @@ let qaRespostas = {};
 // ===================== PERSISTENCE =====================
 function salvarBase(){
   try{
-    localStorage.setItem('trn_treinamentos', JSON.stringify(treinamentos));
-    localStorage.setItem('trn_impactos', JSON.stringify(impactos));
-    localStorage.setItem('trn_questionarios', JSON.stringify(questionarios));
-    localStorage.setItem('trn_inscricoes', JSON.stringify(inscricoes));
-    localStorage.setItem('trn_certmodelos', JSON.stringify(certModelos));
+    demoStore.setItem('trn_treinamentos', JSON.stringify(treinamentos));
+    demoStore.setItem('trn_impactos', JSON.stringify(impactos));
+    demoStore.setItem('trn_questionarios', JSON.stringify(questionarios));
+    demoStore.setItem('trn_inscricoes', JSON.stringify(inscricoes));
+    demoStore.setItem('trn_certmodelos', JSON.stringify(certModelos));
   }catch(e){
-    console.warn('localStorage indisponível', e);
+    console.warn('demoStore indisponível', e);
     if(e && (e.name==='QuotaExceededError' || e.code===22))
       showToast('Espaço de armazenamento cheio — use um arquivo de certificado menor');
   }
 }
 function carregarBase(){
   try{
-    const t = localStorage.getItem('trn_treinamentos');
-    const i = localStorage.getItem('trn_impactos');
-    const q = localStorage.getItem('trn_questionarios');
+    const t = demoStore.getItem('trn_treinamentos');
+    const i = demoStore.getItem('trn_impactos');
+    const q = demoStore.getItem('trn_questionarios');
     if(t) treinamentos = JSON.parse(t);
     if(i) impactos = JSON.parse(i);
     if(q) questionarios = JSON.parse(q);
-    const ins = localStorage.getItem('trn_inscricoes');
-    const cm = localStorage.getItem('trn_certmodelos');
+    const ins = demoStore.getItem('trn_inscricoes');
+    const cm = demoStore.getItem('trn_certmodelos');
     if(ins) inscricoes = JSON.parse(ins);
     if(cm) certModelos = JSON.parse(cm);
   }catch(e){ console.warn('Erro ao carregar base', e); }
@@ -1414,11 +1416,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('trn_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('trn_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('trn_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('trn_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';
@@ -2109,9 +2111,9 @@ function exportDashCSV(){
 }
 
 // ===================== MENSURAÇÃO DE PÚBLICO =====================
-let turmas = JSON.parse(localStorage.getItem('trn_turmas')||'[]');
+let turmas = JSON.parse(demoStore.getItem('trn_turmas')||'[]');
 
-function salvarTurmas(){ localStorage.setItem('trn_turmas', JSON.stringify(turmas)); }
+function salvarTurmas(){ demoStore.setItem('trn_turmas', JSON.stringify(turmas)); }
 
 function adicionarTurma(){
   const data = document.getElementById('mens-data').value;
@@ -2193,14 +2195,14 @@ function calcMensuracao(){
 // ===================== LINK PÚBLICO E QR CODE =====================
 function getBaseUrl(){
   try{
-    const b = localStorage.getItem('trn_base_url');
+    const b = demoStore.getItem('trn_base_url');
     if(b) return b;
   }catch(e){}
   const h = location.href.split('#')[0];
   return /^https?:/i.test(h) ? h : '';
 }
 function salvarBaseUrl(val){
-  try{ localStorage.setItem('trn_base_url', (val||'').trim()); }catch(e){}
+  try{ demoStore.setItem('trn_base_url', (val||'').trim()); }catch(e){}
   document.querySelectorAll('.cfg-base-url').forEach(el=>{ if(el.value!==val) el.value = val; });
   if(inscTreinoId!==null) mostrarBlocoInscricao(idxPorId(inscTreinoId));
   if(avalTreinoId!==null) mostrarBlocoAvaliacao(idxPorId(avalTreinoId));
