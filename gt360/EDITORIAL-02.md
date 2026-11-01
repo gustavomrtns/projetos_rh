@@ -1,40 +1,55 @@
-# GT360° — Identidade Editorial 02 (piloto)
+# Identidade visual Editorial 02 — implantação no portfólio
 
-## Escopo aplicado nesta branch
+## Escopo
 
-- `gt360/index.html` — workspace de acesso aos nove módulos.
-- `gt360/modules/avaliacao-clt.html` — avaliação por etapas.
-- `gt360/modules/onboarding.html` — cadastro, termos e dashboard.
-- `gt360/modules/treinamentos.html` — cadastro, fluxo, impacto e dashboard.
-- `gt360/editorial-02.css` — camada de estilos compartilhada e tokens da IDV.
+Identidade autoral aplicada aos HTMLs existentes, sem redesenhar o fluxo de trabalho:
+- **Portfólio público**: `../index.html`, com links distintos para cada case.
+- **GT360°**: workspace `index.html` e **nove módulos** em `modules/`.
+- **eu + horizonte**: `../eu-horizonte-intranet/index.html`, aplicação independente do GT360°.
 
-## Diretrizes
+## Paleta e arquivos de estilo
 
-- Paleta: vermelho `#c71717`, verde-limão `#8fff00`, branco e neutros quentes.
-- Priorizar legibilidade e estados semânticos: alerta em âmbar, erro em vermelho, concluído em verde-limão com texto escuro.
-- Preservar textos, campos, IDs, scripts, filtros, cálculos, persistência, exports, modais e rotas já existentes.
-- A camada CSS é carregada **depois** dos estilos originais para facilitar rollback.
-- A substituição de valores hexadecimais existentes é apenas apresentação visual, inclusive onde são usados em gráficos/renderização JavaScript.
+- Vermelho institucional: `#c71717`.
+- Verde-limão de destaque: `#8fff00`.
+- Branco, superfícies off-white e neutros quentes, com contraste em grafite.
+- Tokens compartilhados do GT360°: `editorial-02.css` (carregado nos nove módulos e no workspace).
+- Tokens próprios da intranet: `../eu-horizonte-intranet/editorial-02.css`.
+- A página de apresentação do portfólio usa os mesmos valores de vermelho e verde no CSS local.
 
-## Fora do escopo deste piloto
+## Escopo funcional protegido
 
-- Os outros cinco módulos GT360° ainda não foram migrados nesta branch.
-- `eu + horizonte` é um **case independente**, fora do workspace GT360°, com sua navegação e acesso próprios; recebe a identidade editorial em uma etapa separada.
-- Nenhum cadastro, integração ou funcionalidade foi adicionado/removido.
+Permanecem os identificadores HTML, campos, formulários, menus e eventos, scripts de regras de negócio, navegação, filtros, cálculos, importação/exportação, estrutura do armazenamento local e URLs de acesso. Foram atualizados exclusivamente valores de cor e folhas de estilo. Cores em strings de JavaScript destinadas à renderização receberam equivalentes da nova paleta.
 
-## Validação efetuada
+## Separação arquitetural
 
-- Conferidos links relativos do CSS nas quatro páginas e existência do arquivo na branch.
-- Estrutura e quantidade de blocos de script dos HTMLs mantidas.
-- Verificação estática de que apenas referências de cor e a importação da camada CSS foram alteradas.
-- Tokens anteriores da paleta arco-íris substituídos nas quatro páginas.
+`/gt360/` hospeda o workspace com nove módulos internos. `/eu-horizonte-intranet/` é uma aplicação externa/independente, acessada diretamente pelo portfólio, com seus próprios menus e telas. A folha visual da intranet é independente e não tem dependência da estrutura do GT360°.
 
-## QA manual antes do merge
+## Implantação GitHub Pages
 
-1. Abrir o workspace em desktop e mobile; acessar cada módulo piloto pelo menu e retornar.
-2. CLT: preencher identificação, avaliar desempenho e competências, navegar para parecer, assinaturas e exportar PDF.
-3. Onboarding: criar/editar colaborador, atualizar status, registrar termos, filtrar dashboard e exportar CSV.
-4. Treinamentos: cadastrar evento, percorrer fluxo, listar participantes, consultar impacto e indicadores.
-5. Validar foco, contraste de badges, alertas, formulários, modais, impressão/PDF e persistência após recarregar.
+A branch `main` é a base solicitada para publicação automática. O deploy depende da configuração e do processamento do GitHub Pages; após a integração, consultar o site publicado e atualizar a página caso o cache permaneça antigo.
 
-**Nota:** QA de navegação em navegador real não foi executado nesta etapa; a validação foi estática, e o merge deve ocorrer depois da revisão visual e funcional.
+## Verificações
+
+- HTMLs legíveis e links relativos de CSS em cada módulo;
+- Quantidade de blocos de scripts HTML preservada;
+- Ausência da paleta-arco-íris histórica nos arquivos alterados;
+- Substituições limitadas à apresentação (cores + inclusão do CSS);
+- Links públicos dos dois cases mantidos no portfólio;
+- QA visual e funcional em navegador real ainda recomendado para todos os fluxos, especialmente exportação PDF, QR Code, modais, responsividade e persistência.
+
+## Checklist de aceitação pós-publicação
+
+1. Portfólio: abrir os links de GT360° e de eu + horizonte separadamente.
+2. GT360°: navegar pelos nove módulos via workspace e alternar telas internas.
+3. Avaliação CLT: identificação, desempenho, competências, parecer, assinaturas e PDF.
+4. Avaliação PJ: identificação, notas, resultado e ciência do prestador.
+5. Onboarding: cadastro, termos, dashboard, filtro e CSV.
+6. Tempo de Casa: colaboradores, marcos, cartões e histórico.
+7. Desligamento: questionário, respostas, dashboard e PDF/CSV.
+8. Engajamento: resposta, construtor, resultados e exportação.
+9. Riscos Psicossociais: gestor, plano de ação e painel.
+10. Treinamentos: cadastro, fluxo, impacto, certificados e relatórios.
+11. Checklist 5S: auditoria, pontuação, histórico e relatório.
+12. Intranet eu + horizonte: mural, ativações, agenda, acervo, pessoas, espaços e mensagens.
+
+Nenhum sistema comercial, login remoto ou integração de produção foi acrescentado aos cases.
