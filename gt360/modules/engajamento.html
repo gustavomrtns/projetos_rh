@@ -406,7 +406,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
     <div class="ref-card">
       <div class="ref-card-band"></div>
       <div class="ref-card-body">
-        <div class="ref-card-eyebrow" id="home-eyebrow">Gestão de Talentos</div>
+        <div class="ref-card-eyebrow" id="home-eyebrow">Gestão de Pessoas</div>
         <div class="ref-card-title" id="home-titulo">Pesquisa de Engajamento Organizacional</div>
         <div class="ref-card-sub" id="home-subtitulo">A sua opinião constrói um lugar de trabalho melhor</div>
 
@@ -417,7 +417,7 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
           <div class="ref-info-box"><div class="ref-info-label">Temas avaliados</div><div class="ref-info-value" id="home-temas">7 blocos</div></div>
         </div>
 
-        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.</div>
+        <div class="ref-desc-box" id="home-descricao">Sua opinião ajuda a Gestão de Pessoas a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.</div>
 
         <div class="ref-actions">
           <button class="btn-pill btn-pill-primary" onclick="entrarColaborador()"><span id="home-btn-texto">Responder pesquisa</span> &rarr;</button>
@@ -629,21 +629,21 @@ function configPadrao(){
   return{
     linkPesquisa:window.location.href.split('#')[0],
     assuntoEmail:'Sua opinião é importante — Pesquisa de Engajamento {empresa}',
-    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Talentos',
-    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Talentos',
+    corpoEmail:'Olá!\n\nA sua opinião é muito importante para nós. Convidamos você a responder a Pesquisa de Engajamento Organizacional da empresa. Leva poucos minutos e suas respostas são fundamentais para melhorarmos o nosso ambiente de trabalho.\n\nAcesse o link abaixo para responder:\n{link}\n\nContamos com você!\nGestão de Pessoas',
+    msgWhats:'Olá! Passando para lembrar de responder a Pesquisa de Engajamento Organizacional. Leva poucos minutos: {link} — Gestão de Pessoas',
     home:homePadrao()
   };
 }
 function homePadrao(){
   return{
-    eyebrow:'Gestão de Talentos',
+    eyebrow:'Gestão de Pessoas',
     titulo:'Pesquisa de Engajamento Organizacional',
     subtitulo:'A sua opinião constrói um lugar de trabalho melhor',
     status:'Aberta',
     duracao:'≈ 5 minutos',
     participacao:'Todas as unidades',
     temas:'7 blocos',
-    descricao:'Sua opinião ajuda a Gestão de Talentos a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.',
+    descricao:'Sua opinião ajuda a Gestão de Pessoas a identificar oportunidades de melhoria na comunicação, no desenvolvimento de carreira, nas condições de trabalho e na cultura da empresa. Não coletamos nome, e-mail ou matrícula nas respostas.',
     textoBotao:'Responder pesquisa',
     nota:'Sem identificação pessoal'
   };
