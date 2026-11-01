@@ -243,3 +243,42 @@
   .erp-icon-action[data-danger="true"]:hover{background:#fff0ed;border-color:#c71717}
   .erp-icon-action svg{height:16px;width:16px;flex-shrink:0;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 }
+
+/* V2 · Listagens: separar registro, estado e ação de exclusão. */
+@media screen {
+  .hist-row{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto auto;
+    align-items:center!important;
+    gap:11px;
+    min-width:0;
+    border:1px solid #e8e5e1;
+    border-radius:10px;
+    box-shadow:none!important;
+    padding:12px 14px!important;
+    background:#fff;
+  }
+  .hist-row>div:first-child{min-width:0}
+  .hist-row .hist-name{font-weight:700;color:#252320;overflow-wrap:anywhere;line-height:1.4}
+  .hist-row .hist-meta{font-size:11px;color:#69645e;overflow-wrap:anywhere;line-height:1.55}
+  .hist-row .pdf-nota-badge,.hist-row .hist-score{
+    display:inline-flex;align-items:center;justify-content:center;
+    max-width:190px;padding:6px 9px;border-radius:7px;
+    font-size:11px;line-height:1.5;white-space:normal!important;text-align:center;
+  }
+  .hist-row .hist-del.erp-icon-action,.hist-row .erp-icon-action{
+    height:38px;min-width:38px;flex-shrink:0;justify-self:end;
+    border:1px solid #e1dad6;border-radius:8px;padding:7px;
+    background:#fff;color:#a52323;
+  }
+  .hist-row .hist-del.erp-icon-action:hover{background:#fff0ed;border-color:#c71717}
+  .hist-row .hist-del.erp-icon-action svg{display:block}
+  .erp-share-trigger{margin:10px 0 16px;min-height:43px}
+  .erp-admin-link[hidden]{display:none!important}
+}
+@media screen and (max-width:620px){
+  .hist-row{grid-template-columns:minmax(0,1fr) auto;gap:9px}
+  .hist-row>div:first-child{grid-column:1 / -1}
+  .hist-row>span{grid-column:1;justify-self:start}
+  .hist-row>.erp-icon-action{grid-column:2;grid-row:2}
+}
