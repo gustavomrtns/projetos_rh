@@ -1574,7 +1574,7 @@ function renderLista(){
         <div class="tc-tags">
           ${statusPill(t.st_treinamento)}
           ${t.facilitador?`<span class="tc-tag">${t.facilitador}</span>`:''}
-          ${t.carga?`<span class="tc-tag">⏱ ${t.carga}h</span>`:''}
+          ${t.carga?`<span class="tc-tag">${t.carga} horas</span>`:''}
           ${t.participantes?`<span class="tc-tag">${t.participantes} pessoas</span>`:''}
         </div>
       </div>`).join('');
