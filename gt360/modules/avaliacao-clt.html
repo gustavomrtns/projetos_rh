@@ -1130,7 +1130,7 @@ function renderHistoricoCLT(){
     </div>`;
   }).join('');
 }
-function excluirRegistroCLT(i){
+function excluirRegistroCLT(i){ if(!confirm('Confirma a exclusão deste registro?'))return; 
   const lista = carregarHistoricoCLT();
   lista.splice(i,1);
   salvarHistoricoCLT(lista);
