@@ -1354,7 +1354,7 @@ function renderConvites(){
     <div class="convite-row">
       <div><div class="convite-name">${esc(c.nome)}</div><div class="convite-meta">${esc(c.email||'sem e-mail informado')} · ${c.dataDesligamento?new Date(c.dataDesligamento+'T12:00').toLocaleDateString('pt-BR'):'data não informada'}</div></div>
       <span class="convite-badge ${c.status}">${c.status==='concluido'?'Respondido':'Pendente'}</span>
-      <button class="convite-del" onclick="excluirConvite(${i})">✕</button>
+      <button type="button" class="convite-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="excluirConvite(${i})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`).join('');
 }
 function excluirConvite(i){
