@@ -1357,7 +1357,7 @@ function renderConvites(){
       <button type="button" class="convite-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="excluirConvite(${i})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`).join('');
 }
-function excluirConvite(i){
+function excluirConvite(i){ if(!confirm('Confirma a exclusão deste registro?'))return; 
   convites.splice(i,1);
   salvarConvites();
   renderConvites();
