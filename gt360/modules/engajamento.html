@@ -299,17 +299,19 @@ h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
 <div class="nav-band"></div>
 <div class="topbar">
   <div class="brand">
-    <img class="brand-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7a800%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%23ff4e00%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23e0009e%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%237b2ff7%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%230099e5%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2300e5a0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPEO%3C/text%3E%3C/svg%3E" alt="Identidade visual da Pesquisa de Engajamento Organizacional">
+    <img class="brand-logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%3E%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2220%22%20fill%3D%22url%28%23g%29%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2220%25%22%20stop-color%3D%22%239f1111%22/%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23292725%22/%3E%3Cstop%20offset%3D%2280%25%22%20stop-color%3D%22%23c71717%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fff00%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPEO%3C/text%3E%3C/svg%3E" alt="Identidade visual da Pesquisa de Engajamento Organizacional">
   </div>
   <div class="topbar-right">
     <span id="topbar-status">Pesquisa de Engajamento Organizacional</span>
-    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%237b2ff7%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
+    <img class="gt-trigger" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20320%20320%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22grad%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23292725%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2225%25%22%20stop-color%3D%22%23e0509e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ff8a00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2275%25%22%20stop-color%3D%22%232fa84f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230072ce%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22320%22%20fill%3D%22url%28%23grad%29%22/%3E%0A%3C/svg%3E" alt="Acessar painel administrativo em modo demonstração" title="Painel administrativo · Demonstração" onclick="abrirLoginAdmin()">
   </div>
 </div>
 
@@ -575,28 +577,28 @@ let colabState={step:0,unidade:'',area:'',tempoCasa:'',nome:'',email:'',telefone
 /* ====================== PERSISTÊNCIA ====================== */
 function salvarTudo(){
   try{
-    localStorage.setItem('peo_blocos',JSON.stringify(blocos));
-    localStorage.setItem('peo_perguntas',JSON.stringify(perguntas));
-    localStorage.setItem('peo_pessoas',JSON.stringify(pessoas));
-    localStorage.setItem('peo_respostas',JSON.stringify(respostas));
-    localStorage.setItem('peo_lembretes',JSON.stringify(lembretesLog));
-    localStorage.setItem('peo_config',JSON.stringify(config));
+    demoStore.setItem('peo_blocos',JSON.stringify(blocos));
+    demoStore.setItem('peo_perguntas',JSON.stringify(perguntas));
+    demoStore.setItem('peo_pessoas',JSON.stringify(pessoas));
+    demoStore.setItem('peo_respostas',JSON.stringify(respostas));
+    demoStore.setItem('peo_lembretes',JSON.stringify(lembretesLog));
+    demoStore.setItem('peo_config',JSON.stringify(config));
   }catch(e){console.warn('Erro ao salvar',e);}
 }
 function carregarTudo(){
   try{
-    const b=localStorage.getItem('peo_blocos');
-    const p=localStorage.getItem('peo_perguntas');
-    const pe=localStorage.getItem('peo_pessoas');
-    const r=localStorage.getItem('peo_respostas');
-    const l=localStorage.getItem('peo_lembretes');
-    const c=localStorage.getItem('peo_config');
-    const versaoSalva=parseInt(localStorage.getItem('peo_seed_version')||'0',10);
+    const b=demoStore.getItem('peo_blocos');
+    const p=demoStore.getItem('peo_perguntas');
+    const pe=demoStore.getItem('peo_pessoas');
+    const r=demoStore.getItem('peo_respostas');
+    const l=demoStore.getItem('peo_lembretes');
+    const c=demoStore.getItem('peo_config');
+    const versaoSalva=parseInt(demoStore.getItem('peo_seed_version')||'0',10);
     if(b&&JSON.parse(b).length&&versaoSalva>=SEED_VERSION){
       blocos=JSON.parse(b);perguntas=JSON.parse(p||'[]');
     }else{
       seedDefaults();
-      localStorage.setItem('peo_seed_version',String(SEED_VERSION));
+      demoStore.setItem('peo_seed_version',String(SEED_VERSION));
     }
     if(pe)pessoas=JSON.parse(pe);
     if(r)respostas=JSON.parse(r);
@@ -740,11 +742,11 @@ function toggleAdminSidebar(){
   const sb = document.getElementById('admin-sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('admin-side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('peo_admin_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('peo_admin_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoAdminSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('peo_admin_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('peo_admin_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('admin-sidebar').classList.add('collapsed');
     document.getElementById('admin-side-toggle-btn').title = 'Expandir menu';
