@@ -565,7 +565,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
   </div>
 </div>
 
-<div class="toast" id="toast">✓ Avaliação salva com sucesso</div>
+<div class="toast" id="toast">Avaliação salva com sucesso</div>
 
 <div id="tela-recebimento" class="container" style="display:none;">
   <div class="header">
@@ -681,19 +681,19 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
           <div class="seg-pill">Estratégico</div>
           <div class="seg-name">Estratégico</div>
           <div class="seg-desc">Alto impacto direto no negócio. Sua interrupção compromete operações críticas, receita ou imagem. Exige monitoramento contínuo e gestão próxima.</div>
-          <div class="seg-check">✓</div>
+          <div class="seg-check"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
         </div>
         <div class="seg-card critico" id="seg-critico" onclick="selecionarSeg('critico')">
           <div class="seg-pill">Crítico</div>
           <div class="seg-name">Crítico</div>
           <div class="seg-desc">Relevante para a continuidade das operações. Falhas causam impacto moderado a alto. Requer acompanhamento periódico e plano de contingência.</div>
-          <div class="seg-check">✓</div>
+          <div class="seg-check"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
         </div>
         <div class="seg-card baixo" id="seg-baixo" onclick="selecionarSeg('baixo')">
           <div class="seg-pill">Baixo Impacto</div>
           <div class="seg-name">Baixo Impacto</div>
           <div class="seg-desc">Impacto limitado nas operações. Falhas podem ser absorvidas sem prejuízo relevante. Avaliação simplificada e menor frequência de monitoramento.</div>
-          <div class="seg-check">✓</div>
+          <div class="seg-check"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
         </div>
       </div>
     </div>
@@ -1480,7 +1480,7 @@ function confirmarCienciaPrestador(registro){
     + new Date().toLocaleDateString('pt-BR') + '.\n\n'
     + 'Acesse o link abaixo para registrar esta avaliação no painel de acompanhamento:\n' + link;
 
-  document.getElementById('receb-conteudo').innerHTML = `<div class="card"><h3 style="font-family:'DM Serif Display',serif;margin-bottom:8px">Ciência registrada ✓</h3><p style="color:var(--gray600);font-size:13.5px">Um e-mail de confirmação será preparado para o gestor de contrato. Obrigado!</p></div>`;
+  document.getElementById('receb-conteudo').innerHTML = `<div class="card"><h3 style="font-family:'DM Serif Display',serif;margin-bottom:8px">Ciência registrada</h3><p style="color:var(--gray600);font-size:13.5px">Um e-mail de confirmação será preparado para o gestor de contrato. Obrigado!</p></div>`;
   window.location.href = gerarMailtoLink(registro.dados.emailGestorContrato, assunto, corpo);
 }
 
@@ -1517,7 +1517,7 @@ function importarAvaliacaoConcluidaPJ(registro){
   });
   salvarHistoricoPJ(lista);
   reconstruirPjsDoHistorico();
-  document.getElementById('receb-conteudo').innerHTML = '<div class="card"><h3 style="font-family:\'DM Serif Display\',serif">Avaliação adicionada ao seu painel ✓</h3><p style="color:var(--gray600);font-size:13.5px;margin-top:8px">Você já pode fechar esta janela ou consultá-la pelo Dashboard / Histórico.</p></div>';
+  document.getElementById('receb-conteudo').innerHTML = '<div class="card"><h3 style="font-family:\'DM Serif Display\',serif">Avaliação adicionada ao seu painel</h3><p style="color:var(--gray600);font-size:13.5px;margin-top:8px">Você já pode fechar esta janela ou consultá-la pelo Dashboard / Histórico.</p></div>';
 }
 
 reconstruirPjsDoHistorico();
