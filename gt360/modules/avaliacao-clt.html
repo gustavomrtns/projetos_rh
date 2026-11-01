@@ -348,7 +348,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
       <button class="modal-close" onclick="fecharHistorico()">×</button>
       <div class="modal-title">Histórico de Avaliações</div>
       <div class="modal-sub">Avaliações salvas neste navegador — clique para reabrir o parecer gerado</div>
-      <input type="text" id="busca-historico" placeholder="Buscar por nome, praça ou setor..." oninput="renderHistoricoCLT()" style="width:100%;padding:10px 13px;border:1.5px solid var(--gray100);border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;margin-bottom:14px;outline:none;">
+      <input type="text" id="busca-historico" placeholder="Buscar por nome, unidade ou setor..." oninput="renderHistoricoCLT()" style="width:100%;padding:10px 13px;border:1.5px solid var(--gray100);border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;margin-bottom:14px;outline:none;">
       <div id="lista-historico"></div>
     </div>
   </div>
@@ -371,7 +371,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
     <img id="logo-img" alt="Logo" style="height:32px;object-fit:contain">
     <div class="brand-text">
       <div class="name">Avaliação de Experiência</div>
-      <div class="tag">Gestão de Talentos</div>
+      <div class="tag">Gestão de Pessoas</div>
     </div>
   </div>
 </header>
@@ -407,7 +407,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
     <div class="header-title">
       <h1>Avaliação de Período de Experiência</h1>
       <p>Desempenho · Competências · Parecer Final</p>
-      <span class="period-badge">Gestão de Talentos</span>
+      <span class="period-badge">Gestão de Pessoas</span>
     </div>
   </div>
 </div>
@@ -427,7 +427,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
           <input type="text" id="cargo" placeholder="Cargo ocupado">
         </div>
         <div class="field">
-          <label>Praça *</label>
+          <label>Unidade *</label>
           <select id="sel-praca" onchange="filtrarSetores()">
             <option value="">— Selecione —</option>
             <option>REGIÃO SUL</option><option>REGIÃO LESTE</option><option>REGIÃO CENTRAL</option>
@@ -437,7 +437,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
         <div class="field">
           <label>Setor / Departamento *</label>
           <select id="sel-setor">
-            <option value="">— Selecione a praça primeiro —</option>
+            <option value="">— Selecione a unidade primeiro —</option>
           </select>
         </div>
         <div class="field">
@@ -676,7 +676,7 @@ input[type="range"]::-webkit-slider-thumb{appearance:none;width:18px;height:18px
     <div class="section-header"><div class="section-num c5">05</div><span class="section-title">Assinaturas</span></div>
     <div class="signatures-grid">
       <div class="sig-block">
-        <div class="sig-block-title">Responsável pela Avaliação — Gestão de Talentos</div>
+        <div class="sig-block-title">Responsável pela Avaliação — Gestão de Pessoas</div>
         <div class="sig-row"><label>Data da Avaliação</label><input type="date" id="sig-data-aval"></div>
         <div class="sig-row"><label>Nome do Responsável</label><input type="text" id="sig-avaliador" placeholder="Nome completo"></div>
         <p style="font-size:11px;color:var(--gray400);margin-top:10px">A assinatura e o carimbo ficam disponíveis no PDF exportado, para registro físico se necessário.</p>
@@ -992,11 +992,11 @@ function exportarPDF(){
     <div class="pdf-header">
       <div class="pdf-header-info">
         <div class="pdf-header-title">Avaliação de Período de Experiência</div>
-        <div class="pdf-header-sub">Parecer Final · Gestão de Talentos</div>
+        <div class="pdf-header-sub">Parecer Final · Gestão de Pessoas</div>
       </div>
       <div class="pdf-header-right">
         ${logoHTML}
-        <div><span class="pdf-header-badge">Gestão de Talentos</span></div>
+        <div><span class="pdf-header-badge">Gestão de Pessoas</span></div>
         <div class="pdf-header-date">Emitido em ${dataHoje}</div>
       </div>
     </div>
@@ -1006,7 +1006,7 @@ function exportarPDF(){
       <div class="pdf-id-grid">
         <div><span class="pdf-id-label">Nome</span><div class="pdf-id-value">${nome}</div></div>
         <div><span class="pdf-id-label">Cargo</span><div class="pdf-id-value">${cargo}</div></div>
-        <div><span class="pdf-id-label">Praça</span><div class="pdf-id-value">${praca}</div></div>
+        <div><span class="pdf-id-label">Unidade</span><div class="pdf-id-value">${praca}</div></div>
         <div><span class="pdf-id-label">Setor</span><div class="pdf-id-value">${setor}</div></div>
         <div><span class="pdf-id-label">Gestor Responsável</span><div class="pdf-id-value">${gestor}${cargoG ? ' · '+cargoG : ''}</div></div>
         <div><span class="pdf-id-label">Contrato</span><div class="pdf-id-value">${contrato}</div></div>
@@ -1059,7 +1059,7 @@ function exportarPDF(){
       <div class="pdf-section-title"><span class="pdf-snum pdf-snum-6">06</span>Assinaturas</div>
       <div class="pdf-sig-grid">
         <div class="pdf-sig-block">
-          <div class="pdf-sig-block-title">Responsável pela Avaliação — Gestão de Talentos</div>
+          <div class="pdf-sig-block-title">Responsável pela Avaliação — Gestão de Pessoas</div>
           <div class="pdf-sig-field"><span class="pdf-sig-label">Nome</span><div class="pdf-sig-value">${sigAval||'&nbsp;'}</div></div>
           <div class="pdf-sig-field"><span class="pdf-sig-label">Data</span><div class="pdf-sig-value">${fmt(sigData)}</div></div>
           <div style="margin-top:12px"><div class="pdf-sig-label" style="margin-bottom:5px">Assinatura</div><div class="pdf-sig-line"></div><div class="pdf-sig-line-label">Assine acima</div><div class="pdf-sig-label" style="margin-bottom:5px">Carimbo</div><div class="pdf-sig-line"></div></div>
@@ -1074,7 +1074,7 @@ function exportarPDF(){
     </div>
 
     <div class="pdf-footer">
-      <span>Avaliação de Período de Experiência · Gestão de Talentos</span>
+      <span>Avaliação de Período de Experiência · Gestão de Pessoas</span>
       <span>Gerado em ${dataHoje}</span>
     </div>`;
 
@@ -1179,7 +1179,7 @@ function renderDashboardCLT(){
       <div class="dash-card reprovado"><div class="num">${reprovados}</div><div class="lbl">Não Aprovados</div></div>
     </div>
     ${incompletas>0?`<div style="font-size:11.5px;color:var(--gray400);margin-bottom:6px">+ ${incompletas} avaliação(ões) incompleta(s) no momento do salvamento</div>`:''}
-    <div class="dash-section-title">Avaliações por Praça</div>
+    <div class="dash-section-title">Avaliações por Unidade</div>
     ${pracasOrdenadas.map(([praca,qtd])=>`
       <div class="dash-bar-row">
         <div class="dash-bar-label">${esc(praca)}</div>
@@ -1268,7 +1268,7 @@ function enviarParaColaborador(){
   const corpo = 'Olá, ' + dados.nome + '!\n\n'
     + 'Sua avaliação de período de experiência foi preenchida pelo(a) gestor(a) ' + dados.gestor + ' e está disponível para sua ciência.\n\n'
     + 'Acesse o link abaixo para revisar e confirmar:\n' + link + '\n\n'
-    + 'Atenciosamente,\nGestão de Talentos';
+    + 'Atenciosamente,\nGestão de Pessoas';
   houveAlteracaoNaoSalva = false;
   window.location.href = gerarMailtoLink(dados.emailColaborador, assunto, corpo);
 }
@@ -1296,7 +1296,7 @@ function renderTelaCiencia(registro){
       <div class="form-grid">
         <div class="field"><label>Colaborador</label><div style="font-weight:700">${esc(d.nome)}</div></div>
         <div class="field"><label>Cargo</label><div>${esc(d.cargo)}</div></div>
-        <div class="field"><label>Praça / Setor</label><div>${esc(d.praca)} · ${esc(d.setor)}</div></div>
+        <div class="field"><label>Unidade / Setor</label><div>${esc(d.praca)} · ${esc(d.setor)}</div></div>
         <div class="field"><label>Gestor Responsável</label><div>${esc(d.gestor)}</div></div>
       </div>
     </div>
