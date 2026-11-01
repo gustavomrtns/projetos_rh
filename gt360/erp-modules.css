@@ -179,3 +179,22 @@
     .dtable th,.dtable td{white-space:normal;vertical-align:top}
   }
 }
+
+/* Fluxos mais densos em telas pequenas */
+@media screen and (max-width:780px){
+  .status-item{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
+  .status-label{font-size:12.5px;line-height:1.5}
+  .status-btns{justify-content:flex-start!important;gap:7px}
+  .status-btns button{min-height:36px;white-space:normal;padding:7px 10px}
+  .steps-bar,.wizard-steps{display:flex;gap:7px;overflow-x:auto!important;
+    overscroll-behavior-x:contain;scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch}
+  .step-item,.wz-step{min-width:110px;flex-shrink:0;scroll-snap-align:start}
+  .wizard-steps .wz-step{min-width:136px;text-align:center}
+  .admin-sidebar{flex-shrink:0;max-width:100vw;overflow-x:auto!important}
+  #admin-sidebar-nav{display:flex;gap:6px;min-width:max-content}
+  .admin-side-item{white-space:nowrap;flex-shrink:0}
+  .q-card{padding:18px 14px!important}
+  .action-result,.result-card,.ref-card{max-width:100%}
+  .field .status-btns,.form-grid .status-btns{max-width:100%}
+}
