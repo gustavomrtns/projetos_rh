@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tempo de Casa — Gestão de Talentos</title>
+<title>Tempo de Casa — Gestão de Pessoas</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -642,9 +642,9 @@ function formatTempo(dias){
   const anos=Math.floor(dias/365);
   const restoDias=dias%365;
   const meses=Math.floor(restoDias/30.44);
-  if(anos>0 && meses>0) return anos+' ano'+(anos>1?'s':'')+' e '+meses+' mês'+(meses>1?'es':'');
+  if(anos>0 && meses>0) return anos+' ano'+(anos>1?'s':'')+' e '+meses+' '+(meses>1?'meses':'mês');
   if(anos>0) return anos+' ano'+(anos>1?'s':'');
-  if(meses>0) return meses+' mês'+(meses>1?'es':'')+' e '+(restoDias%30)+' dias';
+  if(meses>0) return meses+' '+(meses>1?'meses':'mês')+' e '+(restoDias%30)+' dias';
   return dias+' dias';
 }
 
