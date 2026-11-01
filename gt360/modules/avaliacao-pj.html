@@ -537,6 +537,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
 <link rel="stylesheet" href="../editorial-02.css">
 <!-- Base fictícia compartilhada, em memória, sem persistência pessoal. -->
 <script src="../../shared/demo-core.js"></script>
+<script src="../print-document.js"></script>
 </head>
 <body>
 
@@ -615,7 +616,7 @@ header{background:var(--white);box-shadow:var(--shadow);display:flex;align-items
       <div class="header-title">
         <h1>Avaliação de Prestadores de Serviço</h1>
         <p>Qualidade do serviço – Conformidade técnica, acabamento e resultado final</p>
-        <span class="period-badge">Período 2025</span>
+        <span class="period-badge">Avaliação de fornecedores</span>
       </div>
     </div>
   </div>
@@ -1168,28 +1169,13 @@ function salvar(){
 
 // ── EXPORTAR PDF ──────────────────────────────────────
 function exportarPDF(){
-  const empresa = document.getElementById('sel-empresa').value || 'Avaliação';
-  // Preparar nome do arquivo
-  const safe = empresa.replace(/[^a-zA-Z0-9\s]/g,'').trim().replace(/\s+/g,'_').substring(0,40);
-  const d = new Date();
-  const dataStr = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
-  document.title = `Avaliacao_PJ_${safe}_${dataStr}`;
-
-  // Adicionar classe de impressão temporária para ocultar botões
-  document.body.classList.add('printing');
-
-  // Esconder submit bar
-  document.querySelector('.submit-bar').style.display='none';
-  document.querySelector('.toast').style.display='none';
-
-  window.print();
-
-  // Restaurar
-  setTimeout(()=>{
-    document.querySelector('.submit-bar').style.display='flex';
-    document.body.classList.remove('printing');
-    document.title = 'Avaliação de Prestadores de Serviço';
-  }, 1000);
+  const documento=document.getElementById('container-principal');
+  if(!documento){showToast('Não foi possível preparar o relatório.');return;}
+  const nome=(document.getElementById('sel-empresa').value||'Prestador').trim();
+  const data=new Date().toISOString().slice(0,10);
+  /* Imprime um documento isolado, sem sidebar, modais ou formulário de edição.
+     O usuário escolhe "Salvar como PDF" na janela nativa de impressão. */
+  ERPPrint.open({title:'Avaliacao_PJ_'+nome.slice(0,45)+'_'+data,node:documento});
 }
 
 /* ── HISTÓRICO / REPOSITÓRIO (demoStore) ── */
