@@ -898,7 +898,7 @@ function renderChecklist(s) {
     return `<div class="check-item${val?' '+val:''}" id="row_s${s.id}_i${iIdx}">
       <div>
         <div class="item-text">${esc(item.texto)}</div>
-        <div class="item-criteria">✦ Critério: ${esc(item.criterio)}</div>
+        <div class="item-criteria">Critério: ${esc(item.criterio)}</div>
       </div>
       <div class="item-controls">
         <button class="btn-check ok-btn${val==='ok'?' active':''}" id="btn_s${s.id}_i${iIdx}_ok"  title="Conforme"       onclick="setCheck(${s.id},${iIdx},'ok')">✓</button>
@@ -1027,8 +1027,8 @@ function exportarPDF() {
     <tr style="background:#f6f4f1"><th>Ponto de Verificação</th><th style="width:110px">Status</th></tr></thead><tbody>`;
     s.itens.forEach((item, i) => {
       const v = state.checks[`s${s.id}_i${i}`];
-      const label = v==='ok' ? '<span class="ok">✓ Conforme</span>'
-                  : v==='nok'? '<span class="nok">✗ N. Conforme</span>'
+      const label = v==='ok' ? '<span class="ok">Conforme</span>'
+                  : v==='nok'? '<span class="nok">Não conforme</span>'
                   : v==='na' ? '<span class="na">— N/A</span>'
                   : '<span style="color:#d7d0c8">Não avaliado</span>';
       html += `<tr><td>${item.texto}<div class="criteria">Critério: ${item.criterio}</div></td><td>${label}</td></tr>`;
@@ -1105,7 +1105,7 @@ function renderHistoricoAuditorias(){
     <div class="hist-row" onclick="reabrirAuditoria(${i})">
       <div><div class="hist-name">${esc(r.area||'Área não informada')}</div><div class="hist-meta">${esc(r.resp||'—')} · ${esc(r.turno||'—')} · ${esc(r.data||'')}</div></div>
       <span class="hist-score" style="background:${corConformidade(r.conformidade)}">${r.conformidade}%</span>
-      <button class="hist-del" onclick="event.stopPropagation();excluirAuditoria(${i})">✕</button>
+      <button type="button" class="hist-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="event.stopPropagation();excluirAuditoria(${i})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
     </div>`).join('');
 }
 
@@ -1209,7 +1209,7 @@ function renderPainel(){
       <div class="agendada-row">
         <div><div class="agendada-name">${esc(a.area)}</div><div class="agendada-meta">${esc(a.responsavel||'sem responsável definido')} · ${a.data?new Date(a.data+'T12:00').toLocaleDateString('pt-BR'):'sem data'} · ${esc(a.turno)}</div></div>
         <span class="painel-badge ${a.status}">${a.status==='concluida'?'Concluída':'Pendente'}</span>
-        <button class="hist-del" onclick="excluirAgendamento(${a.id})">✕</button>
+        <button type="button" class="hist-del erp-icon-action" data-danger="true" aria-label="Excluir registro" title="Excluir registro" onclick="excluirAgendamento(${a.id})"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></svg></button>
       </div>`).join('');
   }
 
