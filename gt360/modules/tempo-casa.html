@@ -277,6 +277,8 @@ button,input,select,textarea{font-family:'Sora',sans-serif}
 
 <!-- IDV Editorial 02: aparência renovada; HTML e fluxos originais preservados. -->
 <link rel="stylesheet" href="../editorial-02.css">
+<!-- Base fictícia compartilhada, em memória. -->
+<script src="../../shared/demo-core.js"></script>
 </head>
 <body>
 
@@ -603,13 +605,13 @@ function seedDB(){
 
 function load(){
   try{
-    const raw=localStorage.getItem(STORE_KEY);
+    const raw=demoStore.getItem(STORE_KEY);
     if(raw){ DB=JSON.parse(raw); return; }
   }catch(e){ console.warn(e); }
   DB=seedDB();
   save();
 }
-function save(){ try{ localStorage.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ console.warn(e); } }
+function save(){ try{ demoStore.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ console.warn(e); } }
 
 
 /* ================= CÁLCULO DE TEMPO DE CASA ================= */
@@ -660,11 +662,11 @@ function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const colapsado = sb.classList.toggle('collapsed');
   document.getElementById('side-toggle-btn').title = colapsado ? 'Expandir menu' : 'Recolher menu';
-  try{ localStorage.setItem('tc_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
+  try{ demoStore.setItem('tc_sidebar_colapsada', colapsado ? '1' : '0'); }catch(e){}
 }
 function restaurarEstadoSidebar(){
   let colapsado = false;
-  try{ colapsado = localStorage.getItem('tc_sidebar_colapsada') === '1'; }catch(e){}
+  try{ colapsado = demoStore.getItem('tc_sidebar_colapsada') === '1'; }catch(e){}
   if(colapsado){
     document.getElementById('sidebar').classList.add('collapsed');
     document.getElementById('side-toggle-btn').title = 'Expandir menu';
@@ -799,7 +801,7 @@ function excluirColab(id){
 
 /* ================= IMPORTAR DO ONBOARDING ================= */
 function lerOnboardingColaboradores(){
-  try{ return JSON.parse(localStorage.getItem('onb_colaboradores')||'[]'); }catch(e){ return []; }
+  try{ return JSON.parse(demoStore.getItem('onb_colaboradores')||'[]'); }catch(e){ return []; }
 }
 function abrirImportOnboarding(){
   const doOnboarding = lerOnboardingColaboradores();
