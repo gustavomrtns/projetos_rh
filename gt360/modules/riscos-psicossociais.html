@@ -794,7 +794,7 @@ async function irPara(viewId){
 
   if(viewId==='admin-planos'){ renderPlanosAdmin(); renderControleRespostas(); renderPendencias(); }
   if(viewId==='admin-analise'){ renderDashboardAdmin(); renderAnalise('praca'); renderAnalise('setor'); renderAnalise('dim'); }
-  if(viewId==='admin-bd'){ renderBancoDados(); popularSelectsExport(); }
+  
   if(viewId==='meus-planos'){ const tb=document.getElementById('mp-tbody'); if(tb && !document.getElementById('mp-email').value) tb.innerHTML='<tr class="empty-row"><td colspan="6">Informe seu e-mail e clique em Buscar.</td></tr>'; }
 }
 
