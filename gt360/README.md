@@ -1,4 +1,4 @@
-# GT360° — Workspace de Gestão de Talentos
+# GT360° — Workspace de Gestão de Pessoas
 
 > Um ambiente que reúne nove aplicações de Gestão de Pessoas, organizadas pela jornada do colaborador e pelas rotinas de RH.
 
@@ -50,7 +50,7 @@ No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o 
 2. Explore o [Onboarding](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=onboarding) para ver um fluxo operacional.
 3. Acesse a [Pesquisa de Engajamento](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=engajamento) e o [Painel de Treinamentos](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=treinamentos) para conhecer frentes de escuta e desenvolvimento.
 
-![Representação ilustrativa da navegação e dos nove módulos do GT360°](./gt360-case-overview.png)
+![Capa editorial do GT360° — Workspace de Gestão de Pessoas](./gt360-case-editorial.svg)
 
 *Imagem ilustrativa da organização do workspace. Abra a aplicação para conhecer a interface em funcionamento.*
 
