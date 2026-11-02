@@ -144,12 +144,16 @@ class BrowserSmokeTests(unittest.TestCase):
                     )
                     page.screenshot(path=str(preview_dir / f"portfolio-inicio-{device}.png"))
                     if device == "mobile":
+                        self.assertLessEqual(float(page.locator(".orb-a").evaluate("(el) => getComputedStyle(el).opacity")), 0.15)
                         button = page.locator("#menuButton")
                         button.click()
                         self.assertEqual(button.get_attribute("aria-expanded"), "true")
                         page.locator('.nav-links a[href="#projetos"]').click()
                         self.assertEqual(button.get_attribute("aria-expanded"), "false")
                     page.locator("#projetos").scroll_into_view_if_needed()
+                    # Nas capturas dos cards, ocultar apenas a navegação fixa para não cobrir o recorte.
+                    # O site real permanece com cabeçalho e botão de retorno ao topo.
+                    page.add_style_tag(content="nav,.back-top,.scroll-progress{visibility:hidden!important}")
                     for idx, name in enumerate(("gt360", "eu-horizonte"), start=1):
                         page.locator("#projetos .project-card").nth(idx - 1).screenshot(
                             path=str(preview_dir / f"card-{name}-{device}.png"),
