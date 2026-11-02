@@ -242,7 +242,7 @@ body{background:var(--b-canvas);color:var(--b-ink);}
   .doca{background:#fff;border-top:1px solid var(--b-line);}
   .folha{background:#fff;}
 }
-@media(max-width:520px),(max-height:760px){
+@media(max-width:520px),(max-width:959px) and (max-height:760px){
   .aparelho{width:100vw;height:100dvh;border:0;border-radius:0;}
 }
 @media(prefers-reduced-motion:reduce){
