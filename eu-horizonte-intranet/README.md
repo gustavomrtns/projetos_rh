@@ -19,7 +19,7 @@
 
 ## Evidência visual
 
-![Visão geral do eu + horizonte — mural, agenda, acervo e publicação](./eu-horizonte-case-overview.png)
+![Capa editorial do eu + horizonte — intranet, mural, agenda, acervo e navegação](./eu-horizonte-case-editorial.svg)
 
 *A composição apresenta quatro pontos centrais da experiência: mural e ativações, agenda e transmissões, acervo de conteúdos e documentos e fluxo de criação/publicação.*
 
