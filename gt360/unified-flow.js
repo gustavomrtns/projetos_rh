@@ -72,8 +72,9 @@ function init5S(info){
  wrap.append(makeElement("p","erp-unified-subtitle",info.subtitle));
  const tools=makeElement("div","erp-unified-tools");
  const originalCreate=panel.querySelector('.header-card button[onclick*="abrirModalNovaAuditoria"]');
+ let create=null;
  if(originalCreate){
-   const create=makeElement("button","erp-unified-create","Nova auditoria");
+   create=makeElement("button","erp-unified-create","Nova auditoria");
    create.type="button";create.addEventListener("click",()=>originalCreate.click());
    tools.append(create);
  }
@@ -87,6 +88,7 @@ function init5S(info){
  function sync(){
    pending=false;
    const checklistOpen=!audit.classList.contains("hidden-view");
+   if(create)create.hidden=checklistOpen;
    const buttons=checklistOpen?[...original.querySelectorAll("button.check-side-item")]:[];
    const active=buttons.find(b=>b.classList.contains("active"));
    const state=[checklistOpen,active&&active.dataset.s,buttons.length].join("|");
