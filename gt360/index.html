@@ -392,30 +392,53 @@ function appDoTipoConvite(tipo){
   return null;
 }
 
-window.addEventListener('load', ()=>{
-  montarSidebar();
-  montarHome();
+/* Inicializar no DOM pronto, sem depender do carregamento completo de fontes,
+   imagens ou outros recursos externos (importante em navegadores mobile). */
+let workspaceInicializado=false;
+function inicializarWorkspace(){
+  if(workspaceInicializado)return;
+  workspaceInicializado=true;
   try{
-    if(demoStore.getItem('gt360_sidebar_collapsed')==='1') toggleSidebar();
-  }catch(e){}
-
-  // O shell identifica o módulo e repassa o hash para o arquivo da aplicação.
-  const hash = location.hash;
-  if(hash.indexOf('#av=') === 0){
+    montarSidebar();
+    montarHome();
     try{
-      const registro = decodificarEstadoShell(hash.slice(4));
-      const app = appDoTipoConvite(registro.tipo);
-      if(app){
-        abrirApp(app, hash);
-        return;
-      }
-    }catch(e){ console.warn('Link de convite inválido', e); }
-  }
+      if(window.demoStore && demoStore.getItem('gt360_sidebar_collapsed')==='1' && !window.matchMedia('(max-width:780px)').matches)toggleSidebar();
+    }catch(e){}
 
-  // Links antigos das aplicações apontam para o módulo correspondente.
-  const modulo = new URLSearchParams(location.search).get('modulo');
-  abrirApp(apps.includes(modulo) ? modulo : 'home');
-});
+    // O shell identifica o módulo e repassa o hash para o arquivo da aplicação.
+    const hash=location.hash;
+    if(hash.indexOf('#av=')===0){
+      try{
+        const registro=decodificarEstadoShell(hash.slice(4));
+        const app=appDoTipoConvite(registro.tipo);
+        if(app){abrirApp(app,hash);return;}
+      }catch(e){console.warn('Link de convite inválido',e);}
+    }
+
+    const modulo=new URLSearchParams(location.search).get('modulo');
+    abrirApp(apps.includes(modulo)?modulo:'home');
+  }catch(erro){
+    console.error('Erro ao inicializar GT360°:',erro);
+    // A tela de entrada nunca deve ficar presa em "Carregando workspace".
+    const boot=document.getElementById('boot');
+    if(boot){boot.hidden=true;boot.style.display='none';}
+    const home=document.getElementById('home-view');
+    if(home){
+      home.classList.add('active');
+      home.inert=false;
+      home.setAttribute('aria-hidden','false');
+    }
+    const grade=document.getElementById('home-grid');
+    if(grade && !grade.children.length){
+      grade.innerHTML='<p class="home-empty" role="alert">Não foi possível abrir todos os módulos automaticamente. Atualize a página para tentar novamente.</p>';
+    }
+  }
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',inicializarWorkspace,{once:true});
+}else{
+  inicializarWorkspace();
+}
 </script>
 
 </body>
