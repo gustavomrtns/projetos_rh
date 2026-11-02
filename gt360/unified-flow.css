@@ -1,4 +1,4 @@
-/* GT360° · Fluxo Unificado / 3 módulos
+/* GT360° · Fluxo Unificado / todos os 9 módulos
    Navegação contextual e cabeçalho do ERP, preservando o DOM e as rotinas originais.
    Só opera dentro do iframe de workspace, não nos formulários públicos por QR. */
 html.erp-unified-flow body{background:#f8f8f6!important}
@@ -121,4 +121,73 @@ html.erp-unified-flow .admin-workspace-body>main.admin-content{
 }
 @media(prefers-reduced-motion:reduce){
   .erp-unified-tab,.erp-unified-tools>button{transition:none!important}
+}
+
+/* Etapas e ações complementares usam componentes diferentes: abas navegam,
+   ações de histórico e dashboard abrem suas janelas originais. */
+.erp-unified-tools .erp-unified-utility,
+.erp-unified-tools .erp-unified-create{
+  appearance:none;background:#fff;border:1px solid #e1ddd9;
+  color:#38332e;min-height:40px;padding:9px 12px;
+  border-radius:8px;white-space:nowrap;cursor:pointer;
+  font:650 12px 'Sora',system-ui,sans-serif;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease;
+}
+.erp-unified-tools .erp-unified-create{
+  background:#c71717;color:#fff;border-color:#c71717;
+}
+.erp-unified-tools .erp-unified-create:hover{
+  background:#a61212;color:#fff;border-color:#a61212;
+}
+.erp-unified-tools .erp-unified-utility:hover{
+  background:#fbf4f2;color:#c71717;border-color:#c71717;
+}
+.erp-unified-tools [hidden]{display:none!important}
+.erp-unified-tab[aria-current="page"]{font-weight:750}
+@media screen {
+  /* Checklist 5S: painel e formulário de auditoria ocupam o mesmo espaço,
+     mas preservam o estado e os handlers internos originais. */
+  html.erp-unified-five-s body{
+    height:100dvh;display:flex;flex-direction:column;overflow:hidden;
+  }
+  html.erp-unified-five-s #view-painel,
+  html.erp-unified-five-s #view-checklist{
+    flex:1 1 auto;min-height:0;max-height:100%;min-width:0;
+  }
+  html.erp-unified-five-s #view-painel{overflow-y:auto;overscroll-behavior-y:contain}
+  html.erp-unified-five-s #view-checklist{
+    display:flex;flex-direction:column;overflow:hidden
+  }
+  html.erp-unified-five-s #view-checklist.hidden-view,
+  html.erp-unified-five-s #view-painel.hidden-view{display:none!important}
+  html.erp-unified-five-s #view-checklist>.nav-band{display:none!important}
+  html.erp-unified-five-s .check-workspace-body{
+    flex:1 1 auto;display:flex!important;flex-direction:column!important;
+    min-height:0;min-width:0;overflow:hidden;
+  }
+  html.erp-unified-five-s .check-workspace-body>.check-sidebar{display:none!important}
+  html.erp-unified-five-s .check-workspace-body>.check-content{
+    flex:1 1 auto;min-width:0;min-height:0;width:100%;overflow-y:auto;
+    overflow-x:hidden;overscroll-behavior-y:contain;
+  }
+  html.erp-unified-five-s .header-card{
+    border:1px solid #e9e7e3;border-radius:12px;
+    box-shadow:0 2px 8px rgba(21,19,17,.025);
+  }
+  html.erp-unified-five-s #view-painel .container,
+  html.erp-unified-five-s .check-content .container{
+    max-width:1160px;margin-inline:auto;
+  }
+}
+@media(max-width:760px){
+  .erp-unified-tools .erp-unified-utility,
+  .erp-unified-tools .erp-unified-create{min-height:42px}
+  html.erp-unified-five-s #view-painel .container,
+  html.erp-unified-five-s .check-content .container{
+    padding-left:14px!important;padding-right:14px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .erp-unified-tools .erp-unified-utility,
+  .erp-unified-tools .erp-unified-create{transition:none!important}
 }
