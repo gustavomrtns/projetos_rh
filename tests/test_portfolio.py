@@ -166,6 +166,7 @@ class BrowserSmokeTests(unittest.TestCase):
 
     def test_editorial_images_are_framed_without_crop(self):
         """Capas dos dois flagships respeitam margens, proporção e centralização."""
+        (ROOT / "artifacts/screenshots").mkdir(parents=True, exist_ok=True)
         for device in DEVICES:
             with self.subTest(device=device):
                 context, page = self._new_page(device)
