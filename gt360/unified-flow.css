@@ -92,7 +92,7 @@ html.erp-unified-flow .admin-workspace-body>main.admin-content{
   outline:2px solid #c71717;outline-offset:2px;
 }
 .erp-unified-flow .container,
-.erp-unified-flow .view-inner{max-width:1160px;margin-inline:auto}
+.erp-unified-flow .view-inner:not(.narrow){max-width:1160px;margin-inline:auto}
 .erp-unified-flow .header,
 .erp-unified-flow .hero{
   border:1px solid #e9e7e3!important;border-radius:12px!important;
