@@ -52,3 +52,12 @@ jobs:
 
       - name: Verificar links, documentação, módulos e navegação responsiva
         run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Disponibilizar capturas para revisão visual
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-capturas-desktop-mobile
+          path: artifacts/screenshots/
+          if-no-files-found: warn
+          retention-days: 14
