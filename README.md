@@ -16,7 +16,7 @@ Sou profissional com trajetória em Recursos Humanos e atuação em projetos, pr
 
 | Projeto | Proposta | Aplicação | Case |
 |---|---|---|---|
-| **GT360°** | Workspace de Gestão de Talentos com nove aplicações organizadas por jornada do colaborador, engajamento e saúde organizacional, desenvolvimento de talentos, qualidade e processos. | [Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o case](./gt360/README.md) |
+| **GT360°** | Workspace de Gestão de Pessoas com nove aplicações organizadas por jornada do colaborador, engajamento e saúde organizacional, desenvolvimento de talentos, qualidade e processos. | [Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o case](./gt360/README.md) |
 | **eu + horizonte** | Intranet orientada à comunicação interna, cultura e experiência do colaborador. | [Abrir eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o case](./eu-horizonte-intranet/README.md) |
 
 ### GT360° — módulos do workspace
@@ -30,7 +30,7 @@ Sou profissional com trajetória em Recursos Humanos e atuação em projetos, pr
 
 [![Ilustração da navegação pelos nove módulos do GT360°](./gt360/gt360-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/gt360/)
 
-O GT360° reúne os módulos por navegação. Cada aplicação mantém seus registros localmente no navegador; não há conta, banco de dados compartilhado ou sincronização entre usuários nesta versão. A imagem acima ilustra a organização dos módulos.
+O GT360° reúne os módulos por navegação. Nesta versão de demonstração, os registros usam **estado temporário em memória (`demoStore`)**, compartilhado pelos módulos durante a sessão do workspace. **Ao atualizar ou fechar a página, as alterações são descartadas**. Não existem conta, banco de dados compartilhado, sincronização entre pessoas/dispositivos ou botões de backup/restauração do workspace. Use apenas dados fictícios. A imagem acima ilustra a organização dos módulos.
 
 ### eu + horizonte
 
