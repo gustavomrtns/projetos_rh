@@ -119,6 +119,47 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_portfolio_editorial_preview_navigation_and_screenshots(self):
+        """Regressão da V3: metadados, textos, READMEs e menu mobile."""
+        preview_dir = ROOT / "artifacts" / "screenshots"
+        preview_dir.mkdir(parents=True, exist_ok=True)
+        for device in DEVICES:
+            with self.subTest(device=device):
+                context, page = self._new_page(device)
+                try:
+                    errors = []
+                    page.on("pageerror", lambda exc: errors.append(str(exc)))
+                    page.goto(self.base + "/", wait_until="domcontentloaded")
+                    self.assertIn("Gestão de Pessoas", page.locator(".hero-specialties").inner_text())
+                    self.assertEqual(page.locator(".hero-specialties span").count(), 4)
+                    self.assertEqual(page.locator("#projetos .challenge").count(), 2)
+                    self.assertEqual(page.locator("#projetos h3").first.inner_text(), "GT360°")
+                    self.assertEqual(page.locator('meta[property="og:image"]').count(), 1)
+                    self.assertEqual(page.locator('meta[name="twitter:card"]').get_attribute("content"), "summary_large_image")
+                    self.assertEqual(
+                        page.locator('a[href="https://github.com/gustavomrtns/projetos_rh/blob/main/gt360/README.md"]').count(), 1
+                    )
+                    self.assertEqual(
+                        page.locator('a[href="https://github.com/gustavomrtns/projetos_rh/blob/main/eu-horizonte-intranet/README.md"]').count(), 1
+                    )
+                    page.screenshot(path=str(preview_dir / f"portfolio-inicio-{device}.png"))
+                    if device == "mobile":
+                        button = page.locator("#menuButton")
+                        button.click()
+                        self.assertEqual(button.get_attribute("aria-expanded"), "true")
+                        page.locator('.nav-links a[href="#projetos"]').click()
+                        self.assertEqual(button.get_attribute("aria-expanded"), "false")
+                    page.locator("#projetos").scroll_into_view_if_needed()
+                    for idx, name in enumerate(("gt360", "eu-horizonte"), start=1):
+                        page.locator("#projetos .project-card").nth(idx - 1).screenshot(
+                            path=str(preview_dir / f"card-{name}-{device}.png"),
+                            animations="disabled",
+                            timeout=12000,
+                        )
+                    self.assertFalse(errors, f"Erros JavaScript no portfólio ({device}): {errors[:3]}")
+                finally:
+                    context.close()
+
     def test_gt360_startup_and_nine_modules(self):
         for device in DEVICES:
             with self.subTest(device=device):
