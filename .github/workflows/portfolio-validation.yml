@@ -1,0 +1,54 @@
+name: Validação automatizada do portfólio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "README.md"
+      - "gt360/**"
+      - "eu-horizonte-intranet/**"
+      - "shared/**"
+      - "tests/**"
+      - "requirements-validation.txt"
+      - ".github/workflows/portfolio-validation.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "README.md"
+      - "gt360/**"
+      - "eu-horizonte-intranet/**"
+      - "shared/**"
+      - "tests/**"
+      - "requirements-validation.txt"
+      - ".github/workflows/portfolio-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Desktop, mobile e documentação
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright
+        run: |
+          python -m pip install -r requirements-validation.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Verificar links, documentação, módulos e navegação responsiva
+        run: python -m unittest discover -s tests -p "test_*.py" -v
