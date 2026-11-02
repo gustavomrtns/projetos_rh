@@ -164,6 +164,53 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_editorial_images_are_framed_without_crop(self):
+        """Capas dos dois flagships respeitam margens, proporção e centralização."""
+        for device in DEVICES:
+            with self.subTest(device=device):
+                context, page = self._new_page(device)
+                try:
+                    page.goto(self.base + "/", wait_until="domcontentloaded")
+                    page.locator("#projetos").scroll_into_view_if_needed()
+                    page.wait_for_function(
+                        "() => [...document.querySelectorAll('#projetos .project-visual img')]"
+                        ".every(im => im.complete && im.naturalWidth > 0)"
+                    )
+                    visuals = page.locator("#projetos .project-visual")
+                    for idx, minimum_padding in enumerate((12, 18)):
+                        card = visuals.nth(idx)
+                        measurements = card.evaluate("""el => {
+                            const img = el.querySelector('img');
+                            const frame = el.getBoundingClientRect();
+                            const picture = img.getBoundingClientRect();
+                            const style = getComputedStyle(img);
+                            const box = getComputedStyle(el);
+                            return {
+                              fit: style.objectFit, transform: style.transform,
+                              padLeft: parseFloat(box.paddingLeft), padRight: parseFloat(box.paddingRight),
+                              frameW: frame.width, imgW: picture.width,
+                              frameH: frame.height, imgH: picture.height,
+                              centeredX: Math.abs((picture.left + picture.right)/2 - (frame.left+frame.right)/2)
+                            };
+                        }""")
+                        self.assertEqual(measurements["fit"], "contain")
+                        self.assertEqual(measurements["transform"], "none")
+                        self.assertGreaterEqual(measurements["padLeft"], minimum_padding)
+                        self.assertGreaterEqual(measurements["padRight"], minimum_padding)
+                        self.assertLessEqual(measurements["imgW"], measurements["frameW"] - 2 * minimum_padding + 1)
+                        self.assertLessEqual(measurements["imgH"], measurements["frameH"] + 1)
+                        self.assertLess(measurements["centeredX"], 2)
+                    page.locator("#projetos .project-card").first.screenshot(
+                        path=str(ROOT / "artifacts/screenshots" / f"card-gt360-{device}.png"),
+                        animations="disabled",
+                    )
+                    page.locator("#projetos .project-card").nth(1).screenshot(
+                        path=str(ROOT / "artifacts/screenshots" / f"card-eu-horizonte-{device}.png"),
+                        animations="disabled",
+                    )
+                finally:
+                    context.close()
+
     def test_gt360_startup_and_nine_modules(self):
         for device in DEVICES:
             with self.subTest(device=device):
