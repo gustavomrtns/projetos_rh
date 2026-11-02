@@ -58,6 +58,10 @@ A aplicação adota uma linguagem inspirada em produtos digitais contemporâneos
 
 **5. Navegação mobile-first** → utiliza uma arquitetura inspirada em aplicativos, com transições, feedback visual, componentes interativos e comportamento responsivo.
 
+## Dados da demonstração
+
+A intranet usa as mesmas cinco pessoas fictícias cadastradas em `shared/demo-core.js`. Publicações e interações feitas durante a visita são mantidas apenas em **memória (`demoStore`)** e são reiniciadas quando a página é recarregada. Não há conta, persistência durável, sincronização entre usuários nem backup/restauração da aplicação. Use somente dados fictícios.
+
 ## Valor potencial
 
 A solução foi concebida para contribuir com:
