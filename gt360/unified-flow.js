@@ -60,7 +60,10 @@ function init(){
    if(notice){
      notice.setAttribute("role","button");notice.setAttribute("tabindex","0");
      notice.setAttribute("aria-label","Comemorações de hoje");
-     notice.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();notice.click();}});
+     if(!notice.__demoKeyAccess){
+       notice.__demoKeyAccess=true;
+       notice.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();notice.click();}});
+     }
      tools.append(notice);
    }
  }
