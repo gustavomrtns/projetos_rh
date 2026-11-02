@@ -15,7 +15,7 @@ Os dois cases continuam **aplicações independentes**, mas compartilham as mesm
 - A limpeza não atua remotamente em dispositivos que não revisitem a página, não altera backups pessoais previamente baixados e não apaga histórico antigo de commits por si só.
 - Recarregar a página reinicia os dados fictícios e descarta as alterações realizadas naquela instância. No GT360°, os iframes compartilham o mesmo estado em memória enquanto o workspace permanece aberto.
 - **Não existe sincronização durável entre dispositivos ou entre abas independentes.** A integração entre GT360° e intranet é de **cadastro e referência visual**, não um backend de produção.
-- Backups/restaurações anteriormente expostos no workspace foram retirados para evitar a reintrodução de dados antigos.
+- Os botões de backup/restauração anteriormente expostos no **workspace GT360°** foram retirados. As exportações/relatórios disponíveis em alguns módulos não correspondem ao backup completo do workspace.
 - Webhooks de Tempo de Casa funcionam apenas como simulação e não executam POSTs externos.
 
 ## Limites de confidencialidade
