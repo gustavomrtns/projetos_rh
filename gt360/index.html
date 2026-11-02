@@ -161,7 +161,7 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
     </button>
   </aside>
 
-  <main class="content">
+  <main class="content" id="content">
     <div class="boot" id="boot" role="status" aria-live="polite"><img id="boot-logo" alt="">Carregando workspace…</div>
 
     <div class="view home-view" id="home-view" inert aria-hidden="true">
@@ -304,7 +304,8 @@ function toggleErpMobileMenu(force){
   sidebar.classList.toggle('mobile-open',enabled);
   trigger.setAttribute('aria-expanded',String(enabled));
   scrim.hidden=!enabled;
-  document.getElementById('content').inert=enabled;
+  const content=document.getElementById('content');
+  if(content)content.inert=enabled;
   if(enabled){
     sidebar.setAttribute('role','dialog');
     sidebar.setAttribute('aria-modal','true');
