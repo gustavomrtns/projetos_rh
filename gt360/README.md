@@ -12,7 +12,7 @@
 | **Públicos considerados** | Profissionais de RH, lideranças, colaboradores e prestadores, conforme o fluxo de cada aplicação. |
 | **Minha atuação** | Levantamento de necessidades, mapeamento de jornadas e processos, definição de escopo, requisitos e regras de negócio, priorização, arquitetura de navegação, experiência de uso, desenvolvimento web e indicadores. |
 | **Entrega atual** | Workspace navegável com nove aplicações, agrupadas em quatro frentes. Cada módulo é carregado quando aberto. |
-| **Tecnologia e dados** | HTML, CSS e JavaScript; os registros ficam no navegador usado por cada pessoa. |
+| **Tecnologia e dados** | HTML, CSS e JavaScript; dados demonstrativos fictícios gerenciados em memória pelo `demoStore`, sem persistência após recarregar a página. |
 
 ## Problema e abordagem
 
@@ -25,7 +25,7 @@ No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o 
 1. **Agrupar por tarefa de RH.** Os módulos foram distribuídos em Jornada do Colaborador, Engajamento e Saúde Organizacional, Desenvolvimento de Talentos e Qualidade e Processos.
 2. **Manter os fluxos próprios de cada aplicação.** Onboarding, avaliações, pesquisa e treinamentos têm etapas e informações diferentes; o workspace dá acesso a eles sem reduzir tudo a um formulário único.
 3. **Permitir acesso direto a um módulo.** Links específicos abrem cada aplicação dentro do workspace e permitem compartilhar diretamente o módulo desejado.
-4. **Preservar uma cópia dos registros de demonstração.** O workspace permite baixar e restaurar um backup JSON dos dados locais de seus módulos. O arquivo pode conter todas as informações cadastradas pela pessoa que o gerou.
+4. **Manter uma base temporária e fictícia para a demonstração.** Os módulos compartilham o `demoStore` enquanto o workspace está aberto. Os dados inseridos são descartados ao recarregar a página; o workspace não oferece backup nem restauração de registros.
 5. **Mostrar as capacidades sem atribuir resultados não medidos.** Indicadores existentes nas aplicações demonstram acompanhamento e análise; este case não afirma ganhos percentuais ou ROI já comprovados.
 
 ## Módulos
@@ -56,9 +56,9 @@ No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o 
 
 ## Estágio atual e próximos passos
 
-Esta versão demonstra as interfaces e fluxos das aplicações. A integração **atual é de navegação**: os módulos não compartilham um banco de dados central. Cada módulo é carregado em um arquivo HTML próprio quando aberto. Os registros ficam no armazenamento local de cada navegador e não são sincronizados entre pessoas ou dispositivos. O endereço público deve ser usado com dados fictícios, sem cadastrar informações pessoais reais.
+Esta versão demonstra as interfaces e fluxos das aplicações. A integração **atual é de navegação**, com uma base fictícia compartilhada entre os módulos por `shared/demo-core.js`, e não um banco de dados central. Cada módulo é carregado em um arquivo HTML próprio quando aberto. O `demoStore` mantém as alterações **somente na memória da sessão da página**: os módulos acessam esse estado enquanto o workspace está aberto, mas atualizar ou fechar a página reinicia os dados de demonstração. Não há sincronização entre pessoas, dispositivos ou abas independentes. **Não cadastre informações pessoais reais no endereço público.**
 
-Os botões **Baixar backup** e **Restaurar backup**, no cabeçalho, salvam e recuperam os registros locais do GT360°. Restaurar substitui os registros atuais deste navegador; o arquivo não é enviado a um servidor. O backup não sincroniza usuários e não substitui as funções de banco de dados, autenticação e permissões necessárias para uso compartilhado.
+**Backup e restauração:** o workspace atual **não possui** os botões "Baixar backup" e "Restaurar backup". Esses recursos foram retirados da demonstração; os registros temporários não são enviados ao servidor nem preservados entre recarregamentos. Exportações e relatórios específicos de alguns módulos, quando oferecidos, são funcionalidades distintas e não representam backup completo do workspace.
 
 As próximas evoluções técnicas incluem validar a experiência em dispositivos e navegadores reais, ampliar os testes de acessibilidade e, para uso compartilhado, planejar autenticação, permissões, banco de dados e rotinas de auditoria.
 
