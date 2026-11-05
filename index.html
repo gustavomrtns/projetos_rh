@@ -99,6 +99,19 @@
     @media(max-width:720px){.wrap{width:calc(100% - 28px)}.location{display:none}.menu-button{display:block}.nav-links{position:fixed;inset:0;background:rgba(245,242,236,.98);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;font:800 30px Manrope;letter-spacing:-.03em;opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s ease}.nav-links.open{opacity:1;visibility:visible;transform:none}.nav-links a{padding:10px}.hero{padding-top:108px}.hero-layout{grid-template-columns:1fr}.hero h1{font-size:clamp(44px,14vw,62px)}.identity-card{padding:24px;transform:none}.identity-top{margin-bottom:42px}.scroll-cue{display:none}section{padding:78px 0}.section-head{grid-template-columns:1fr;gap:12px}.section-head h2{font-size:38px}.panel{padding:23px}.about-copy{font-size:16px}.project-card{border-radius:28px}.project-copy{padding:30px 24px}.project-visual{min-height:270px;margin:0 14px 14px}.practice-grid,.education-grid,.cert-grid{grid-template-columns:1fr}.practice-card{min-height:210px}.timeline-items{padding-left:0}.timeline-items:before,.job:before{display:none}.job{grid-template-columns:1fr;padding:22px}.cta{padding:36px 24px}.contact-links,.contact-links .button{width:100%}.orb-b{right:6%;bottom:17%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}.project-visual img{transform:none!important}}
     @media(max-width:900px){.hero .orb-a{opacity:.06;right:-360px;top:6%}.hero .orb-b{opacity:.35;bottom:5%}}
+    /* Ampliação de atuação e capacitações, preservando a identidade visual. */
+    .experience-note{display:flex;align-items:center;gap:24px;margin-top:20px;padding:23px 28px;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:18px;background:var(--card)}
+    .note-label{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--red);flex:0 0 145px}.experience-note p{font-size:14px;line-height:1.65;color:var(--muted)}
+    .teaching-heading{margin-top:44px}.teaching-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .teaching-card{padding:24px;border:1px solid var(--line);border-radius:22px;background:var(--card)}.teaching-card>span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lime);font-size:11px;font-weight:800;color:var(--ink)}.teaching-card h4{font:800 18px/1.3 Manrope,sans-serif;letter-spacing:-.025em;margin:20px 0 10px}.teaching-card p{font-size:13px;line-height:1.6;color:var(--muted)}
+    .delivery-cycle{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0 0 18px}
+    .delivery-cycle li{padding:18px;border-top:2px solid var(--red);background:var(--card);border-radius:0 0 14px 14px}.delivery-cycle span{display:block;font-size:10px;font-weight:800;color:var(--red);margin-bottom:10px}.delivery-cycle b{font-size:13px;line-height:1.5;display:block}
+    .demo-context{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 26px;max-width:850px}
+    .cert-groups{display:grid;gap:12px}.cert-group{border:1px solid var(--line);border-radius:22px;background:var(--card);overflow:hidden}.cert-group>summary{display:list-item;list-style-position:inside;padding:24px 26px;font-size:17px;font-weight:700;cursor:pointer;color:var(--ink)}.cert-group>summary::marker{color:var(--red)}.cert-group>summary span{margin-left:8px}.cert-group>summary small{display:inline-block;margin-left:16px;color:var(--muted);font-size:11px;font-weight:500}.cert-group[open]>summary{border-bottom:1px solid var(--line)}.cert-group .cert-grid{padding:22px;align-items:stretch}.cert-group .cert{border:1px solid var(--line);border-top:2px solid var(--red);border-radius:0 0 12px 12px;min-height:140px;background:var(--paper)}.cert-group .cert h3{overflow-wrap:anywhere}
+    .course-list{display:flex;gap:10px;flex-wrap:wrap;list-style:none;margin:0;padding:24px 26px 12px}.course-list li{padding:10px 14px;border:1px solid var(--line);border-radius:12px;font-size:13px;line-height:1.5}.course-source{padding:0 26px 24px;font-size:12px;color:var(--muted);line-height:1.6}.course-source a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+    #interesses{padding-top:70px}.interests-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.interests-grid li{position:relative;padding:24px 24px 24px 47px;border:1px solid var(--line);border-radius:22px;background:var(--card);font-size:15px;font-weight:600;line-height:1.55}.interests-grid li:before{content:"";position:absolute;left:23px;top:32px;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(143,255,0,.13)}
+    @media(max-width:900px){.teaching-grid,.interests-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-cycle{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:720px){.experience-note{align-items:flex-start;flex-direction:column;gap:10px;padding:22px}.note-label{flex-basis:auto}.teaching-grid,.interests-grid{grid-template-columns:1fr}.delivery-cycle{grid-template-columns:1fr}.delivery-cycle li{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:0;border-left:2px solid var(--red);border-radius:0 14px 14px 0}.delivery-cycle span{margin:0;min-width:22px}.cert-group>summary{padding:20px;font-size:15px;line-height:1.6}.cert-group>summary small{display:block;margin-left:24px}.cert-group .cert-grid{padding:16px}.course-list{padding:20px 20px 12px}.course-source{padding:0 20px 20px}#interesses{padding-top:45px}}
   </style>
 </head>
 <body>
@@ -139,14 +152,14 @@
         <div class="section-head" data-reveal><div class="section-index">01 / SOBRE</div><div><h2>Minha trajetória em Recursos Humanos.</h2><p>Uma atuação que combina a rotina da área com desenvolvimento, análise e melhoria de processos.</p></div></div>
         <div class="about-grid">
           <div class="panel about-copy" data-reveal="left">
-            <p><strong>Sou Manoel Gustavo, profissional de Recursos Humanos e Analista Técnico Comportamental — DISC</strong>, com experiência em recrutamento e seleção, integração, benefícios, rotinas de Departamento Pessoal, treinamentos e desenvolvimento organizacional.</p>
-            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também desenvolvo projetos, indicadores e soluções digitais a partir de necessidades reais do RH.</p>
+            <p><strong>Sou Manoel Gustavo, profissional de Recursos Humanos e Analista Técnico Comportamental — DISC</strong>, com experiência em recrutamento e seleção, integração, benefícios, rotinas de Departamento Pessoal, treinamentos, desenvolvimento organizacional, comunicação interna e design de identidades visuais.</p>
+            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também desenvolvo projetos, indicadores e aplicações full stack a partir de necessidades reais do RH, conectando a ideação à implantação e à capacitação dos usuários.</p>
             <p>Minha base em Gestão de Recursos Humanos, os estudos em Psicologia e o MBA em Gestão de Projetos ampliam meu olhar para as pessoas, o negócio e a execução.</p>
           </div>
           <div class="panel skill-stack" data-stagger>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">01</span><span><b>Rotinas e atendimento</b><small>Organização, escuta e acompanhamento</small></span><em aria-hidden="true">↗</em></div>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">02</span><span><b>Pessoas e desenvolvimento</b><small>Integração, aprendizagem e lideranças</small></span><em aria-hidden="true">↗</em></div>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Dados, projetos e soluções digitais</small></span><em aria-hidden="true">↗</em></div>
+            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Projetos, desenvolvimento full stack e adoção</small></span><em aria-hidden="true">↗</em></div>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">04</span><span><b>Analista Técnico Comportamental — DISC</b><small>Perfis comportamentais, comunicação e desenvolvimento</small></span><em aria-hidden="true">↗</em></div>
           </div>
         </div>
@@ -160,7 +173,7 @@
           <article class="practice-card"><strong aria-hidden="true">01</strong><h3>Operações de RH e DP</h3><p>Recrutamento e seleção, admissão, integração, benefícios, ponto, organização documental e atendimento aos colaboradores.</p></article>
           <article class="practice-card"><strong aria-hidden="true">02</strong><h3>Desenvolvimento e experiência</h3><p>Treinamentos, desempenho, planos de desenvolvimento, apoio às lideranças, comunicação interna e ações de diversidade.</p></article>
           <article class="practice-card"><strong aria-hidden="true">03</strong><h3>Dados e indicadores</h3><p>Pesquisas organizacionais, análise de dados, painéis e relatórios para acompanhar resultados e apoiar decisões.</p></article>
-          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Mapeamento de necessidades, organização de etapas, melhoria de processos e desenvolvimento de soluções digitais.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Mapeamento de necessidades, práticas ágeis, desenvolvimento full stack, testes, implantação e capacitação para uso de soluções digitais.</p></article>
         </div>
       </div>
     </section>
@@ -187,17 +200,29 @@
           <article class="delivery-card"><span class="delivery-label">APRENDIZAGEM E INTEGRAÇÃO</span><h3>Treinamentos e jornada de entrada</h3><p>Organização de integrações, trilhas de capacitação, ações de aprendizagem e acompanhamento de treinamentos.</p><dl><dt>Entregas</dt><dd>Programações, materiais de apoio, registros de participação e indicadores de aprendizagem.</dd></dl></article>
           <article class="delivery-card"><span class="delivery-label">DESEMPENHO E DESENVOLVIMENTO</span><h3>Competências, PDI e apoio às lideranças</h3><p>Apoio a avaliações de desempenho, mapeamento de competências e planos de desenvolvimento individual e de lideranças.</p><dl><dt>Entregas</dt><dd>Matrizes de competências, planos de desenvolvimento e materiais para orientar conversas e acompanhar ações.</dd></dl></article>
           <article class="delivery-card"><span class="delivery-label">SELEÇÃO E ANÁLISE COMPORTAMENTAL</span><h3>Recrutamento por competências e DISC</h3><p>Alinhamento de perfis, condução de entrevistas e análise comportamental como apoio à seleção e ao desenvolvimento.</p><dl><dt>Entregas</dt><dd>Perfis de vaga, roteiros de entrevista e análises de perfil DISC, considerando a escuta e o contexto de cada pessoa.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">CULTURA, COMUNICAÇÃO E INCLUSÃO</span><h3>Conexão entre pessoas e organização</h3><p>Organização de workshops e campanhas de engajamento, diversidade, bem-estar e comunicação com colaboradores e lideranças.</p><dl><dt>Entregas</dt><dd>Encontros de diversidade geracional, comunicados, materiais de desenvolvimento e conteúdos de governança e compliance.</dd></dl></article>
+          <article class="delivery-card"><span class="delivery-label">DESIGN, COMUNICAÇÃO E CULTURA</span><h3>Identidade visual e endomarketing</h3><p>Criação de identidades visuais, peças e campanhas de comunicação interna, da ideação à operação, com foco na experiência do colaborador.</p><dl><dt>Entregas</dt><dd>Identidades de projetos, materiais gráficos, comunicados, campanhas de engajamento e bem-estar, workshops de diversidade geracional e conteúdos de governança e compliance.</dd></dl></article>
           <article class="delivery-card"><span class="delivery-label">PROCESSOS E MELHORIA CONTÍNUA</span><h3>Organização das rotinas e soluções de RH</h3><p>Mapeamento e melhoria de fluxos de RH, Departamento Pessoal e benefícios, com apoio de sistemas e ferramentas digitais.</p><dl><dt>Entregas</dt><dd>Fluxos documentados, controles, relatórios e melhorias em processos e sistemas para apoiar a operação e o acompanhamento das demandas.</dd></dl></article>
         </div>
-        <div class="subsection-head apps-heading" data-reveal><h3>Soluções digitais de RH</h3><p>Projetos autorais apresentados em versões de demonstração. Os ambientes públicos utilizam dados fictícios e não devem receber informações pessoais reais.</p></div>
+        <aside class="experience-note" data-reveal aria-label="Vivência em CIPA"><span class="note-label">VIVÊNCIA EM CIPA</span><p>Também atuei como membro da CIPA, uma experiência ligada ao cuidado com as pessoas e à atenção ao ambiente de trabalho.</p></aside>
+        <div class="subsection-head teaching-heading" data-reveal><h3>Cursos e treinamentos que ministrei</h3><p>Conhecimento compartilhado em ações de formação e facilitação, com aplicação às rotinas e às relações de trabalho.</p></div>
+        <div class="teaching-grid" data-stagger>
+          <article class="teaching-card"><span>01</span><h4>Processos</h4><p>Organização de fluxos e melhoria das rotinas de trabalho.</p></article>
+          <article class="teaching-card"><span>02</span><h4>Práticas ágeis</h4><p>Organização de entregas, colaboração e melhoria contínua.</p></article>
+          <article class="teaching-card"><span>03</span><h4>5S</h4><p>Organização, padronização e cuidado com os ambientes.</p></article>
+          <article class="teaching-card"><span>04</span><h4>Diversidade e inclusão</h4><p>Respeito às diferenças e construção de relações mais inclusivas.</p></article>
+        </div>
+        <div class="subsection-head apps-heading" data-reveal><h3>Soluções digitais de RH</h3><p>Atuação ponta a ponta em aplicações full stack: ideação com práticas de Scrum, alinhamento com stakeholders, desenvolvimento, testes, implantação e capacitação para uso das ferramentas.</p></div>
+        <ol class="delivery-cycle" aria-label="Etapas da minha atuação no desenvolvimento de aplicações" data-stagger>
+          <li><span>01</span><b>Ideação e alinhamento</b></li><li><span>02</span><b>Desenvolvimento full stack</b></li><li><span>03</span><b>Testes e validação</b></li><li><span>04</span><b>Implantação</b></li><li><span>05</span><b>Capacitação e adoção</b></li>
+        </ol>
+        <p class="demo-context">As versões públicas são adaptações para o portfólio e utilizam dados fictícios. Não cadastre informações pessoais reais nesses ambientes.</p>
         <div class="project-stage">
           <article class="project-card" data-reveal>
             <div class="project-copy">
               <span class="number">01 · DEMONSTRAÇÃO DE PORTFÓLIO</span><h3>GT360°</h3>
               <p>Um ambiente com nove aplicações para organizar rotinas de RH: integração, avaliações, engajamento, treinamentos e acompanhamento de processos.</p>
               <div class="identity-tags"><span>Rotinas de RH</span><span>Desenvolvimento</span><span>Indicadores</span></div>
-              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Mapeamento das rotinas, definição de requisitos e prioridades, organização dos fluxos e desenvolvimento da demonstração.</dd><dt>Entrega</dt><dd>Sistema e módulos desenvolvidos e implantados no ambiente interno. Esta versão pública é uma adaptação do produto implantado, reunindo diferentes rotinas e recursos de RH em um ambiente de apresentação com dados fictícios.</dd><dt>Métodos e ferramentas</dt><dd>Levantamento de necessidades, visão de produto, gestão visual e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
+              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Ideação, reuniões com stakeholders, definição de requisitos e prioridades, organização das entregas com práticas de Scrum, desenvolvimento, testes, implantação e capacitação para uso do sistema interno. A versão pública adapta esse trabalho para o portfólio.</dd><dt>Entrega</dt><dd>Sistema e módulos desenvolvidos e implantados no ambiente interno. Esta versão pública é uma adaptação do produto implantado, reunindo diferentes rotinas e recursos de RH em um ambiente de apresentação com dados fictícios.</dd><dt>Métodos e ferramentas</dt><dd>Levantamento de necessidades, visão de produto, gestão visual e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
               <div class="project-actions"><a class="button" href="./gt360/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener">Conhecer o projeto ↗</a></div>
             </div>
             <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Visão geral das aplicações de RH do GT360°" loading="lazy"></a>
@@ -230,18 +255,48 @@
 
     <section id="certificacoes">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">06 / CAPACITAÇÕES</div><div><h2>Capacitações que complementam minha atuação.</h2><p>Formação complementar em comportamento, dados, tecnologia, projetos, compliance e Gestão de Pessoas.</p></div></div>
-        <div class="cert-grid" data-stagger>
-          <article class="cert"><small>COMPORTAMENTO</small><h3>Análise Técnica Comportamental DISC</h3><p>Freedom Start</p></article>
-          <article class="cert"><small>DADOS</small><h3>People Analytics</h3><p>DIO</p></article>
-          <article class="cert"><small>TECNOLOGIA</small><h3>IA aplicada a RH</h3><p>Qulture Rocks</p></article>
-          <article class="cert"><small>PROJETOS</small><h3>Metodologias Ágeis e Ativas</h3><p>FGV & UniGlobo</p></article>
-          <article class="cert"><small>EDUCAÇÃO CORPORATIVA</small><h3>Indicadores de T&D</h3><p>Sólides</p></article>
-          <article class="cert"><small>ANALYTICS</small><h3>Análise de Dados</h3><p>Descomplica</p></article>
-          <article class="cert"><small>COMPLIANCE</small><h3>NR-1 e Saúde Mental no Trabalho</h3><p>UniGlobo & Sólides</p></article>
-          <article class="cert"><small>DEPARTAMENTO PESSOAL</small><h3>Formação em Departamento Pessoal</h3><p>INOVAR RH & Sólides</p></article>
-          <article class="cert"><small>SUSTENTABILIDADE</small><h3>Formação em ESG</h3><p>DD&L Advogados Associados</p></article>
+        <div class="section-head" data-reveal><div class="section-index">06 / CAPACITAÇÕES</div><div><h2>Capacitações que complementam minha atuação.</h2><p>Aprendizado em RH, comportamento, dados, tecnologia, projetos e governança. Abra cada tema para conhecer as formações.</p></div></div>
+        <div class="cert-groups">
+          <details class="cert-group" open><summary><span>RH, comportamento e desenvolvimento</span><small>5 capacitações</small></summary><div class="cert-grid">
+            <article class="cert"><small>COMPORTAMENTO</small><h3>Análise Técnica Comportamental DISC</h3><p>Freedom Start</p></article>
+            <article class="cert"><small>EDUCAÇÃO CORPORATIVA</small><h3>Indicadores de T&D</h3><p>Sólides</p></article>
+            <article class="cert"><small>DEPARTAMENTO PESSOAL</small><h3>Formação em Departamento Pessoal</h3><p>INOVAR RH & Sólides</p></article>
+            <article class="cert"><small>RECRUTAMENTO</small><h3>Formação em Tech Recruiter</h3><p>Sólides</p></article>
+            <article class="cert"><small>DIVERSIDADE</small><h3>Diversidade e Inclusão</h3><p>Globo</p></article>
+          </div></details>
+          <details class="cert-group"><summary><span>Dados e inteligência artificial</span><small>5 capacitações</small></summary><div class="cert-grid">
+            <article class="cert"><small>DADOS</small><h3>People Analytics</h3><p>DIO</p></article>
+            <article class="cert"><small>TECNOLOGIA</small><h3>IA aplicada a RH</h3><p>Qulture Rocks</p></article>
+            <article class="cert"><small>ANALYTICS</small><h3>Análise de Dados</h3><p>Descomplica</p></article>
+            <article class="cert"><small>INTELIGÊNCIA ARTIFICIAL</small><h3>IA na Prática</h3><p>Descomplica</p></article>
+            <article class="cert"><small>COMUNICAÇÃO E DADOS</small><h3>Marketing Orientado a Dados e IA: da Estratégia à Execução</h3><p>MBA USP/Esalq</p></article>
+          </div></details>
+          <details class="cert-group"><summary><span>Projetos, legislação e governança</span><small>4 capacitações</small></summary><div class="cert-grid">
+            <article class="cert"><small>PROJETOS</small><h3>Metodologias Ágeis e Ativas</h3><p>FGV & UniGlobo</p></article>
+            <article class="cert"><small>LEGISLAÇÃO</small><h3>Normas e Legislações Trabalhistas e Previdenciárias</h3><p>Rede Amazônica</p></article>
+            <article class="cert"><small>GOVERNANÇA</small><h3>Governança Cooperativa e Compliance</h3><p>COOP</p></article>
+            <article class="cert"><small>COMPLIANCE</small><h3>NR-1 e Saúde Mental no Trabalho</h3><p>UniGlobo & Sólides</p></article>
+          </div></details>
+          <details class="cert-group"><summary><span>ESG e sustentabilidade</span><small>2 capacitações</small></summary><div class="cert-grid">
+            <article class="cert"><small>SUSTENTABILIDADE</small><h3>Formação em ESG</h3><p>DD&L Advogados Associados</p></article>
+            <article class="cert"><small>SUSTENTABILIDADE</small><h3>ESG: Aspectos Gerais</h3><p>Instituto Brasileiro de Sustentabilidade - INBS</p></article>
+          </div></details>
+          <details class="cert-group complementary-courses"><summary><span>Outros cursos do meu percurso</span><small>4 cursos</small></summary><ul class="course-list"><li>Fotografia</li><li>Lei Geral da Proteção de Dados - LGPD</li><li>Segurança da Informação</li><li>Tecnologia da Informação e Comunicação</li></ul><p class="course-source">Cursos também listados no meu <a href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">perfil do LinkedIn ↗</a>.</p></details>
         </div>
+      </div>
+    </section>
+
+    <section id="interesses">
+      <div class="wrap">
+        <div class="section-head" data-reveal><div class="section-index">07 / INTERESSES</div><div><h2>Tenho interesse em:</h2><p>Temas em que busco aprofundar conhecimentos, colaborar e desenvolver projetos.</p></div></div>
+        <ul class="interests-grid" data-stagger>
+          <li>Desenvolvimento organizacional e de lideranças</li>
+          <li>Operações e melhoria de processos de RH</li>
+          <li>Gestão de projetos e práticas ágeis</li>
+          <li>People Analytics e IA aplicada ao RH</li>
+          <li>Design, comunicação interna e experiência do colaborador</li>
+          <li>Tecnologia e desenvolvimento de soluções para RH</li>
+        </ul>
       </div>
     </section>
 
