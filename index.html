@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Portfólio profissional de Manoel Gustavo: Recursos Humanos, Gestão de Projetos, Processos, Dados, Produto e Agilidade.">
+  <meta name="description" content="Portfólio profissional de Manoel Gustavo: operações de RH, desenvolvimento de pessoas, dados, projetos e inovação na prática.">
   <meta name="theme-color" content="#c71717">
   <meta name="robots" content="index,follow">
   <title>Portfólio Profissional | Manoel Gustavo</title>
@@ -71,18 +71,44 @@
     footer{padding:32px 0 46px;font-size:11px;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
     [data-reveal]{opacity:0;transform:translateY(38px);transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1)}[data-reveal="left"]{transform:translateX(-42px)}[data-reveal="right"]{transform:translateX(42px)}[data-reveal].is-visible{opacity:1;transform:none}[data-stagger]>*{opacity:0;transform:translateY(24px);transition:.65s cubic-bezier(.2,.8,.2,1)}[data-stagger].is-visible>*{opacity:1;transform:none}[data-stagger].is-visible>*:nth-child(2){transition-delay:.08s}[data-stagger].is-visible>*:nth-child(3){transition-delay:.16s}[data-stagger].is-visible>*:nth-child(4){transition-delay:.24s}
     .back-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border:0;border-radius:50%;background:var(--ink);color:#fff;z-index:100;opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s ease;cursor:pointer}.back-top.show{opacity:1;transform:none;pointer-events:auto}
+    /* RH e inovação: linguagem direta, trajetória em destaque e projetos compactos. */
+    h1{font-size:clamp(48px,5.6vw,72px);line-height:1.05;letter-spacing:-.045em}
+    .hero-layout{grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);gap:48px}
+    .identity-top{margin-bottom:44px}.identity-top small{line-height:1.6}
+    .nav-links{gap:18px}.practice-card{min-height:280px}.practice-card h3{margin-top:28px;line-height:1.25}
+    .subsection-head{margin:0 0 22px}.subsection-head h3{font-size:25px;letter-spacing:-.03em}.subsection-head p{margin-top:10px;max-width:780px;color:var(--muted);line-height:1.65;font-size:14px}
+    .apps-heading{margin-top:48px}
+    .delivery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .delivery-card{padding:28px;border:1px solid var(--line);border-radius:26px;background:var(--card)}
+    .delivery-label{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--red)}
+    .delivery-card h3{font-size:22px;line-height:1.25;margin:20px 0 14px}
+    .delivery-card p,.delivery-card dd{font-size:14px;line-height:1.65;color:var(--muted)}
+    .delivery-card dl{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line)}.delivery-card dt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}.delivery-card dd{margin:0}
+    .project-card{min-height:450px;grid-template-columns:1fr 1fr}.project-copy{padding:36px}.project-copy h3{font-size:clamp(34px,4.1vw,54px);margin:18px 0 14px;line-height:1.1}.project-copy p{font-size:15px;line-height:1.65}
+    .project-visual{margin:22px 22px 22px 0}.project-visual--contain img{object-fit:contain;object-position:center;transform:none}.project-card.is-visible .project-visual--contain img{transform:none}
+    .project-details{margin-top:22px;width:100%;border-top:1px solid rgba(255,255,255,.24);padding-top:16px}
+    .project-details summary{cursor:pointer;font-size:13px;font-weight:700;line-height:1.5}
+    .project-details dl{margin:18px 0 0}.project-details dt{font-size:11px;font-weight:800;margin-top:15px;color:var(--lime);text-transform:uppercase;letter-spacing:.05em}.project-details dd{margin:6px 0 0;font-size:13px;line-height:1.65;color:rgba(255,255,255,.85)}
+    .skip-link{position:fixed;top:-100px;left:16px;z-index:300;padding:14px 20px;background:var(--ink);color:#fff;border-radius:10px}.skip-link:focus{top:12px}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:5px}.project-card a:focus-visible,.project-card summary:focus-visible,.cta a:focus-visible{outline-color:var(--lime)}
+    .project-card.alt .project-details dt{color:#fff}.project-card.alt .project-details dd,.project-card.alt .project-copy p{color:rgba(255,255,255,.94)}
+    @media(min-width:721px) and (max-width:1080px){.location{display:none}.nav-inner{gap:18px}.nav-links{gap:14px}}
+    @media(max-width:900px){.delivery-grid{grid-template-columns:1fr}.project-visual{margin:0 22px 22px;min-height:320px}.delivery-card{padding:26px}}
+    @media(max-width:720px){.hero h1{font-size:clamp(42px,11.5vw,62px)}.hero .eyebrow{font-size:10px;letter-spacing:.07em}.hero .lead{font-size:17px}.hero-actions .button{width:100%}.practice-card{min-height:210px}.project-copy{padding:30px 24px}.project-visual{margin:0 14px 14px;min-height:260px}.project-copy h3{font-size:38px}.subsection-head h3{font-size:23px}}
     @media(max-width:900px){.hero-layout,.about-grid,.project-card{grid-template-columns:1fr}.hero-layout{gap:36px}.identity-card{max-width:540px}.orb-a{right:-280px}.project-card{min-height:auto}.project-visual{margin:0 22px 22px;min-height:390px}.project-copy{padding:38px}.practice-grid{grid-template-columns:1fr 1fr}.section-head{grid-template-columns:100px 1fr}.job{grid-template-columns:150px 1fr}.cert-grid{grid-template-columns:1fr 1fr}.cta{align-items:flex-start;flex-direction:column}}
     @media(max-width:720px){.wrap{width:calc(100% - 28px)}.location{display:none}.menu-button{display:block}.nav-links{position:fixed;inset:0;background:rgba(245,242,236,.98);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;font:800 30px Manrope;letter-spacing:-.03em;opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s ease}.nav-links.open{opacity:1;visibility:visible;transform:none}.nav-links a{padding:10px}.hero{padding-top:108px}.hero-layout{grid-template-columns:1fr}.hero h1{font-size:clamp(44px,14vw,62px)}.identity-card{padding:24px;transform:none}.identity-top{margin-bottom:42px}.scroll-cue{display:none}section{padding:78px 0}.section-head{grid-template-columns:1fr;gap:12px}.section-head h2{font-size:38px}.panel{padding:23px}.about-copy{font-size:16px}.project-card{border-radius:28px}.project-copy{padding:30px 24px}.project-visual{min-height:270px;margin:0 14px 14px}.practice-grid,.education-grid,.cert-grid{grid-template-columns:1fr}.practice-card{min-height:210px}.timeline-items{padding-left:0}.timeline-items:before,.job:before{display:none}.job{grid-template-columns:1fr;padding:22px}.cta{padding:36px 24px}.contact-links,.contact-links .button{width:100%}.orb-b{right:6%;bottom:17%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}.project-visual img{transform:none!important}}
+    @media(max-width:900px){.hero .orb-a{opacity:.06;right:-360px;top:6%}.hero .orb-b{opacity:.35;bottom:5%}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#sobre">Pular para o conteúdo</a>
   <div class="scroll-progress" aria-hidden="true"><span id="progress"></span></div>
-  <nav id="nav">
+  <nav id="nav" aria-label="Navegação principal">
     <div class="wrap nav-inner">
       <a class="brand" href="#inicio" aria-label="Ir para o início"><span class="brand-mark"></span><span>MANOEL GUSTAVO</span></a>
-      <div class="nav-links" id="navLinks" aria-label="Navegação principal">
-        <a href="#sobre">Sobre</a><a href="#projetos">Projetos</a><a href="#atuacao">Atuação</a><a href="#experiencia">Experiência</a><a href="#formacao">Formação</a><a href="#contato">Contato</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre</a><a href="#atuacao">Atuação</a><a href="#experiencia">Experiência</a><a href="#projetos">Projetos e entregas</a><a href="#formacao">Formação</a><a href="#contato">Contato</a>
       </div>
       <span class="location">MANAUS · AM</span>
       <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false"><span></span></button>
@@ -90,85 +116,105 @@
   </nav>
 
   <header class="hero" id="inicio">
-    <div class="grid-bg"></div><div class="orb orb-a" data-parallax="-.08"></div><div class="orb orb-b" data-parallax=".12"></div>
+    <div class="grid-bg" aria-hidden="true"></div><div class="orb orb-a" data-parallax="-.08" aria-hidden="true"></div><div class="orb orb-b" data-parallax=".12" aria-hidden="true"></div>
     <div class="wrap hero-layout">
       <div data-reveal="left">
-        <div class="eyebrow">Portfólio profissional</div>
-        <h1>Pessoas, projetos e <span>movimento.</span></h1>
-        <p class="lead"><b>Transformo necessidades em experiências aplicáveis.</b> Uma atuação que conecta Gestão de Pessoas, projetos, processos, dados e produtos digitais.</p>
-        <div class="hero-actions"><a class="button primary" href="#projetos">Explorar projetos ↓</a><a class="button" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">Conectar no LinkedIn ↗</a></div>
+        <div class="eyebrow">Manoel Gustavo · Recursos Humanos</div>
+        <h1>Recursos Humanos.<br><span>Inovação na prática.</span></h1>
+        <p class="lead"><b>Visão de negócio, cuidado com as pessoas e organização para fazer acontecer.</b> Atuo em operações de RH, desenvolvimento de pessoas e projetos que melhoram processos com apoio de dados e tecnologia.</p>
+        <div class="hero-actions"><a class="button primary" href="#experiencia">Conhecer minha trajetória ↓</a><a class="button" href="#projetos">Ver projetos e entregas ↓</a></div>
       </div>
       <div class="identity-card" data-reveal="right" data-parallax=".035">
-        <div class="identity-top"><small>ESTRATÉGIA · PROCESSOS · DADOS</small><span class="identity-dot"></span></div>
-        <h3>RH que entende o problema antes de construir a <em>solução.</em></h3>
-        <div class="identity-tags"><span>Gestão de Projetos</span><span>People Analytics</span><span>Product Thinking</span><span>Agilidade</span></div>
+        <div class="identity-top"><small>OPERAÇÃO · DESENVOLVIMENTO · INOVAÇÃO</small><span class="identity-dot"></span></div>
+        <h3>Experiência no dia a dia do RH. Iniciativa para <em>melhorar.</em></h3>
+        <div class="identity-tags"><span>RH Generalista</span><span>Desenvolvimento de Pessoas</span><span>Dados e Indicadores</span><span>Projetos de RH</span></div>
       </div>
     </div>
-    <div class="scroll-cue"><i></i><span>ROLE PARA EXPLORAR</span></div>
+    <div class="scroll-cue" aria-hidden="true"><i></i><span>CONHEÇA MINHA ATUAÇÃO</span></div>
   </header>
 
   <main>
     <section id="sobre">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">01 / SOBRE</div><div><h2>Pessoas, produtos e processos em uma perspectiva multidisciplinar.</h2><p>Uma trajetória construída na conexão entre Gestão de Pessoas, projetos, processos, dados e tecnologia.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">01 / SOBRE</div><div><h2>Minha trajetória em Recursos Humanos.</h2><p>Uma atuação que combina a rotina da área com desenvolvimento, análise e melhoria de processos.</p></div></div>
         <div class="about-grid">
           <div class="panel about-copy" data-reveal="left">
-            <p><strong>Profissional com mais de quatro anos de experiência em Recursos Humanos</strong>, com atuação crescente em Gestão de Projetos, Dados e soluções digitais.</p>
-            <p>Transformo necessidades organizacionais em fluxos estruturados, indicadores e soluções aplicáveis ao negócio, atuando com escopo, requisitos funcionais, priorização, stakeholders e melhoria contínua.</p>
+            <p><strong>Sou Manoel Gustavo, profissional de Recursos Humanos</strong>, com experiência em recrutamento e seleção, integração, benefícios, rotinas de Departamento Pessoal, treinamentos e desenvolvimento organizacional.</p>
+            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também desenvolvo projetos, indicadores e soluções digitais a partir de necessidades reais do RH.</p>
+            <p>Minha base em Gestão de Recursos Humanos, os estudos em Psicologia e o MBA em Gestão de Projetos ampliam meu olhar para as pessoas, o negócio e a execução.</p>
           </div>
           <div class="panel skill-stack" data-stagger>
-            <div class="skill-row"><span class="skill-icon">P</span><span><b>Pessoas & Negócio</b><small>Contexto, escuta e solução</small></span><em>01</em></div>
-            <div class="skill-row"><span class="skill-icon">D</span><span><b>Dados & Indicadores</b><small>Leitura para decisão</small></span><em>02</em></div>
-            <div class="skill-row"><span class="skill-icon">A</span><span><b>Agilidade & Produto</b><small>Fluxos, valor e evolução</small></span><em>03</em></div>
+            <div class="skill-row"><span class="skill-icon" aria-hidden="true">01</span><span><b>Rotinas e atendimento</b><small>Organização, escuta e acompanhamento</small></span><em aria-hidden="true">↗</em></div>
+            <div class="skill-row"><span class="skill-icon" aria-hidden="true">02</span><span><b>Pessoas e desenvolvimento</b><small>Integração, aprendizagem e lideranças</small></span><em aria-hidden="true">↗</em></div>
+            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Dados, projetos e soluções digitais</small></span><em aria-hidden="true">↗</em></div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projetos">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">02 / PROJETOS</div><div><h2>Cases apresentados como uma história, não como uma vitrine estática.</h2><p>Projetos que conectam necessidades reais, experiência do usuário, organização de processos e aplicação de tecnologia em Gestão de Pessoas.</p></div></div>
-        <div class="project-stage">
-          <article class="project-card" data-reveal>
-            <div class="project-copy"><span class="number">01 · PROJETO FLAGSHIP</span><h3>GT360º</h3><p>Workspace de Gestão de Pessoas com nove aplicações voltadas à jornada do colaborador, engajamento, riscos psicossociais, desenvolvimento e qualidade.</p><div class="identity-tags"><span>9 módulos</span><span>People Analytics</span><span>Processos</span></div><div class="project-actions"><a class="button" href="./gt360/">Abrir aplicação →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener">Ver case ↗</a></div></div>
-            <a class="project-visual" href="./gt360/" aria-label="Abrir GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Visão do workspace GT360°"></a>
-          </article>
-          <article class="project-card alt" data-reveal>
-            <div class="project-copy"><span class="number">02 · PRODUTO DIGITAL</span><h3>eu + horizonte</h3><p>Intranet orientada à comunicação interna, à experiência do colaborador e ao acesso simples a informações relevantes.</p><div class="identity-tags"><span>Employee Experience</span><span>Comunicação</span><span>Produto</span></div><div class="project-actions"><a class="button" href="./eu-horizonte-intranet/">Abrir aplicação →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener">Ver case ↗</a></div></div>
-            <a class="project-visual project-visual--contain" href="./eu-horizonte-intranet/" aria-label="Abrir eu mais horizonte"><img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Visão da intranet eu mais horizonte"></a>
-          </article>
         </div>
       </div>
     </section>
 
     <section id="atuacao">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">03 / ATUAÇÃO</div><div><h2>Competências conectadas à entrega.</h2><p>Uma visão integrada para compreender o problema, organizar a execução e acompanhar o valor gerado.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">02 / ATUAÇÃO</div><div><h2>Onde minha experiência se conecta.</h2><p>Quatro frentes que se complementam, do atendimento ao colaborador à melhoria dos processos de RH.</p></div></div>
         <div class="practice-grid" data-stagger>
-          <article class="practice-card"><strong>01</strong><h3>Projetos & Processos</h3><p>Diagnóstico, escopo, requisitos, priorização, indicadores e melhoria contínua.</p></article>
-          <article class="practice-card"><strong>02</strong><h3>People Analytics</h3><p>Pesquisas, dashboards e leitura de dados para apoiar decisões em Gestão de Pessoas.</p></article>
-          <article class="practice-card"><strong>03</strong><h3>T&D & Experiência</h3><p>Onboarding, desenvolvimento, comunicação interna e jornada do colaborador.</p></article>
-          <article class="practice-card"><strong>04</strong><h3>Produto & Agilidade</h3><p>Product Thinking, Scrum, Kanban, gestão visual e evolução orientada a valor.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">01</strong><h3>Operações de RH e DP</h3><p>Recrutamento e seleção, admissão, integração, benefícios, ponto, organização documental e atendimento aos colaboradores.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">02</strong><h3>Desenvolvimento e experiência</h3><p>Treinamentos, desempenho, planos de desenvolvimento, apoio às lideranças, comunicação interna e ações de diversidade.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">03</strong><h3>Dados e indicadores</h3><p>Pesquisas organizacionais, análise de dados, painéis e relatórios para acompanhar resultados e apoiar decisões.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Mapeamento de necessidades, organização de etapas, melhoria de processos e desenvolvimento de soluções digitais.</p></article>
         </div>
       </div>
     </section>
 
     <section id="experiencia">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">04 / EXPERIÊNCIA</div><div><h2>Uma trajetória profissional fácil de acompanhar.</h2><p>Da base operacional à condução de projetos, processos, dados e soluções digitais em Recursos Humanos.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">03 / EXPERIÊNCIA</div><div><h2>Experiência que sustenta minha atuação.</h2><p>Vivências em Recursos Humanos, administração e ambiente industrial, com responsabilidades e aprendizados que se complementam.</p></div></div>
         <div class="timeline-items">
-          <article class="job" data-reveal><time>01/2026 — ATUAL</time><div><h3>Analista de Recursos Humanos<span>Rede Amazônica · Afiliada Globo</span></h3><p>Projetos e soluções digitais de RH, identificação de necessidades, definição de escopo, priorização de entregas, stakeholders e indicadores. Atuação também em T&D, comunicação interna, pesquisas organizacionais, desenvolvimento de lideranças, DEI e iniciativas ESG.</p><div class="job-tags"><span>Projetos</span><span>People Analytics</span><span>T&D</span><span>Processos</span></div></div></article>
-          <article class="job" data-reveal><time>11/2024 — 01/2026</time><div><h3>Analista de Recursos Humanos Generalista<span>Alitz LTDA</span></h3><p>Atuação generalista em onboarding, PDI e PDL, indicadores, dashboards, processos e sistemas de RH, Departamento Pessoal, benefícios, recrutamento por competências e pesquisas organizacionais.</p><div class="job-tags"><span>Onboarding</span><span>Indicadores</span><span>Processos</span><span>Sistemas</span></div></div></article>
-          <article class="job" data-reveal><time>05/2024 — 10/2024</time><div><h3>Assistente Administrativo Generalista<span>Conseven Serviços</span></h3><p>Atuação integrada em RH e rotinas administrativas, com recrutamento, admissão, férias, benefícios, ponto, treinamentos, indicadores, comunicação interna, SESMT, folha e contratos.</p><div class="job-tags"><span>RH Generalista</span><span>T&D</span><span>Administração</span></div></div></article>
-          <article class="job" data-reveal><time>12/2023 — 04/2024</time><div><h3>Aprendiz de Recursos Humanos<span>Orient Relógios</span></h3><p>Apoio aos processos de Recursos Humanos e Departamento Pessoal, incluindo admissão, organização documental, onboarding, integração, endomarketing e interface com SESMT.</p><div class="job-tags"><span>DP</span><span>Onboarding</span><span>Endomarketing</span></div></div></article>
+          <article class="job" data-reveal><time>01/2026 — ATUAL</time><div><h3>Analista de Recursos Humanos<span>Rede Amazônica · Afiliada Globo</span></h3><p>Atuação em treinamento e desenvolvimento, comunicação interna, pesquisas organizacionais, desenvolvimento de lideranças, diversidade, equidade e inclusão e iniciativas ESG. Condução de projetos de RH e soluções digitais, com levantamento de necessidades, definição de etapas, articulação entre áreas e acompanhamento de indicadores.</p><div class="job-tags"><span>Desenvolvimento de Pessoas</span><span>Comunicação Interna</span><span>Indicadores</span><span>Projetos de RH</span></div></div></article>
+          <article class="job" data-reveal><time>11/2024 — 01/2026</time><div><h3>Analista de Recursos Humanos Generalista<span>Alitz LTDA</span></h3><p>Atuação em recrutamento por competências, integração, Departamento Pessoal, benefícios e atendimento aos colaboradores. Participação em planos de desenvolvimento individual e de lideranças, pesquisas organizacionais, indicadores, painéis e melhoria de processos e sistemas de RH.</p><div class="job-tags"><span>RH Generalista</span><span>Recrutamento e Seleção</span><span>DP e Benefícios</span><span>Desenvolvimento</span></div></div></article>
+          <article class="job" data-reveal><time>05/2024 — 10/2024</time><div><h3>Assistente Administrativo Generalista<span>Conseven Serviços</span></h3><p>Atuação integrada em RH e rotinas administrativas, com recrutamento, admissão, férias, benefícios, ponto, treinamentos, indicadores, comunicação interna, interface com SESMT, folha e contratos.</p><div class="job-tags"><span>Rotinas de RH e DP</span><span>Administração</span><span>Treinamentos</span></div></div></article>
+          <article class="job" data-reveal><time>12/2023 — 04/2024</time><div><h3>Aprendiz de Recursos Humanos<span>Orient Relógios</span></h3><p>Apoio aos processos de Recursos Humanos e Departamento Pessoal, incluindo admissão, organização documental, integração de novos colaboradores, endomarketing e interface com SESMT.</p><div class="job-tags"><span>DP</span><span>Integração</span><span>Endomarketing</span></div></div></article>
           <article class="job" data-reveal><time>09/2022 — 01/2024</time><div><h3>Aprendiz de Processo de Produção<span>ARMOR Brasil</span></h3><p>Experiência operacional em ambiente industrial, com atuação em processos produtivos, organização, qualidade e colaboração entre áreas.</p><div class="job-tags"><span>Processos</span><span>Produção</span><span>Qualidade</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="wrap">
+        <div class="section-head" data-reveal><div class="section-index">04 / PROJETOS E ENTREGAS</div><div><h2>O RH na prática: pessoas, processos e soluções.</h2><p>Entregas profissionais e aplicações de portfólio que mostram como conecto a experiência da área à melhoria dos processos.</p></div></div>
+        <div class="subsection-head" data-reveal><h3>Entregas profissionais</h3><p>Exemplos da minha participação em iniciativas de Gestão de Talentos na Rede Amazônica.</p></div>
+        <div class="delivery-grid" data-stagger>
+          <article class="delivery-card"><span class="delivery-label">ESCUTA E INDICADORES</span><h3>Pesquisa de Engajamento Organizacional</h3><p>Estruturação da pesquisa, comunicação e mobilização, acompanhamento da participação e análise dos resultados.</p><dl><dt>Entrega</dt><dd>Consolidação de dados e apresentação executiva para apoiar a leitura das necessidades e prioridades.</dd></dl></article>
+          <article class="delivery-card"><span class="delivery-label">DESENVOLVIMENTO E DIVERSIDADE</span><h3>Workshop de Diversidade Geracional</h3><p>Organização da ação, articulação com convidados e áreas parceiras, comunicação e apoio à realização presencial e on-line.</p><dl><dt>Entrega</dt><dd>Encontro voltado à inclusão etária e à colaboração entre gerações no ambiente de trabalho.</dd></dl></article>
+          <article class="delivery-card"><span class="delivery-label">COMUNICAÇÃO E CULTURA</span><h3>Comunicação interna e apoio às lideranças</h3><p>Produção de comunicados, conteúdos de governança e compliance e divulgação de ações de desenvolvimento e bem-estar.</p><dl><dt>Entrega</dt><dd>Materiais e orientações para aproximar colaboradores e lideranças das iniciativas de RH.</dd></dl></article>
+        </div>
+        <div class="subsection-head apps-heading" data-reveal><h3>Soluções digitais de RH</h3><p>Projetos autorais apresentados em versões de demonstração. Os ambientes públicos utilizam dados fictícios e não devem receber informações pessoais reais.</p></div>
+        <div class="project-stage">
+          <article class="project-card" data-reveal>
+            <div class="project-copy">
+              <span class="number">01 · DEMONSTRAÇÃO DE PORTFÓLIO</span><h3>GT360°</h3>
+              <p>Um ambiente com nove aplicações para organizar rotinas de RH: integração, avaliações, engajamento, treinamentos e acompanhamento de processos.</p>
+              <div class="identity-tags"><span>Rotinas de RH</span><span>Desenvolvimento</span><span>Indicadores</span></div>
+              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Mapeamento das rotinas, definição de requisitos e prioridades, organização dos fluxos e desenvolvimento da demonstração.</dd><dt>Entrega</dt><dd>Nove módulos navegáveis com dados fictícios. A versão pública não comprova resultados de uma implantação corporativa.</dd><dt>Métodos e ferramentas</dt><dd>Levantamento de necessidades, visão de produto, gestão visual e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
+              <div class="project-actions"><a class="button" href="./gt360/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener">Conhecer o projeto ↗</a></div>
+            </div>
+            <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Visão geral das aplicações de RH do GT360°" loading="lazy"></a>
+          </article>
+          <article class="project-card alt" data-reveal>
+            <div class="project-copy">
+              <span class="number">02 · PROTÓTIPO DE PORTFÓLIO</span><h3>eu + horizonte</h3>
+              <p>Uma proposta de intranet para reunir comunicados, agenda e conteúdos internos, facilitando o acesso à informação no dia a dia do colaborador.</p>
+              <div class="identity-tags"><span>Comunicação Interna</span><span>Experiência do Colaborador</span><span>Cultura</span></div>
+              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Tornar conteúdos e informações internas mais fáceis de encontrar e acompanhar.</dd><dt>Minha participação</dt><dd>Organização dos conteúdos e da navegação, desenho da experiência e desenvolvimento do protótipo.</dd><dt>Entrega</dt><dd>Intranet demonstrativa com mural, agenda, acervo e fluxo de publicação. Não representa um ambiente corporativo em produção.</dd><dt>Métodos e ferramentas</dt><dd>Organização da informação, experiência do colaborador e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
+              <div class="project-actions"><a class="button" href="./eu-horizonte-intranet/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener">Conhecer o projeto ↗</a></div>
+            </div>
+            <a class="project-visual project-visual--contain" href="./eu-horizonte-intranet/" aria-label="Explorar demonstração do eu mais horizonte"><img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Visão ampliada da intranet eu mais horizonte" loading="lazy"></a>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="formacao">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">05 / FORMAÇÃO</div><div><h2>Formação multidisciplinar.</h2><p>Base em Gestão de Pessoas, Psicologia, tecnologia e Gestão de Projetos para ampliar a leitura sobre pessoas, negócio e execução.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">05 / FORMAÇÃO</div><div><h2>Formação acadêmica.</h2><p>Gestão de Pessoas, Psicologia e Gestão de Projetos como bases para compreender o negócio e apoiar as pessoas.</p></div></div>
         <div class="education-grid" data-stagger>
           <article class="education-card"><small>PÓS-GRADUAÇÃO</small><h3>MBA em Gestão de Projetos</h3><p>USP/ESALQ</p><time>2026 — Em andamento</time></article>
           <article class="education-card"><small>GRADUAÇÃO</small><h3>Bacharelado em Psicologia</h3><p>Faculdade Santa Teresa</p><time>2025 — Em andamento</time></article>
@@ -180,7 +226,7 @@
 
     <section id="certificacoes">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">06 / DESENVOLVIMENTO</div><div><h2>Aprendizado contínuo aplicado à prática.</h2><p>Formação complementar em comportamento, dados, tecnologia, projetos, compliance e Gestão de Pessoas.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">06 / CAPACITAÇÕES</div><div><h2>Capacitações que complementam minha atuação.</h2><p>Formação complementar em comportamento, dados, tecnologia, projetos, compliance e Gestão de Pessoas.</p></div></div>
         <div class="cert-grid" data-stagger>
           <article class="cert"><small>COMPORTAMENTO</small><h3>Análise Técnica Comportamental DISC</h3><p>Freedom Start</p></article>
           <article class="cert"><small>DADOS</small><h3>People Analytics</h3><p>DIO</p></article>
@@ -196,11 +242,11 @@
     </section>
 
     <section id="contato">
-      <div class="wrap"><div class="cta" data-reveal><div><h2>Vamos transformar necessidades em soluções?</h2><p>Conexões e oportunidades em Recursos Humanos, Gestão de Projetos, Processos, Dados, Produto e Agilidade.</p><div class="contact-links"><a class="button" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="button" href="mailto:manoel.gustavo@outlook.com">E-mail ↗</a><a class="button" href="https://wa.me/5592981322424" target="_blank" rel="noopener">WhatsApp ↗</a><a class="button" href="https://github.com/gustavomrtns" target="_blank" rel="noopener">GitHub ↗</a></div></div></div></div>
+      <div class="wrap"><div class="cta" data-reveal><div><h2>Vamos conversar sobre pessoas, RH e melhorias?</h2><p>Conexões e oportunidades em Recursos Humanos, desenvolvimento de pessoas, processos, dados e projetos de inovação.</p><div class="contact-links"><a class="button" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="button" href="mailto:manoel.gustavo@outlook.com">E-mail ↗</a><a class="button" href="https://wa.me/5592981322424" target="_blank" rel="noopener">WhatsApp ↗</a><a class="button" href="https://github.com/gustavomrtns" target="_blank" rel="noopener">GitHub ↗</a></div></div></div></div>
     </section>
   </main>
 
-  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Portfólio Profissional</span><span>RH · Projetos · Processos · Dados · Produto</span></div></footer>
+  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Portfólio Profissional</span><span>Recursos Humanos · Pessoas · Processos · Inovação</span></div></footer>
   <button class="back-top" id="backTop" aria-label="Voltar ao topo">↑</button>
 
   <script>
