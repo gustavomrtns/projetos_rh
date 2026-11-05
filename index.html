@@ -112,6 +112,24 @@
     #interesses{padding-top:70px}.interests-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.interests-grid li{position:relative;padding:24px 24px 24px 47px;border:1px solid var(--line);border-radius:22px;background:var(--card);font-size:15px;font-weight:600;line-height:1.55}.interests-grid li:before{content:"";position:absolute;left:23px;top:32px;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(143,255,0,.13)}
     @media(max-width:900px){.teaching-grid,.interests-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-cycle{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:720px){.experience-note{align-items:flex-start;flex-direction:column;gap:10px;padding:22px}.note-label{flex-basis:auto}.teaching-grid,.interests-grid{grid-template-columns:1fr}.delivery-cycle{grid-template-columns:1fr}.delivery-cycle li{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:0;border-left:2px solid var(--red);border-radius:0 14px 14px 0}.delivery-cycle span{margin:0;min-width:22px}.cert-group>summary{padding:20px;font-size:15px;line-height:1.6}.cert-group>summary small{display:block;margin-left:24px}.cert-group .cert-grid{padding:16px}.course-list{padding:20px 20px 12px}.course-source{padding:0 20px 20px}#interesses{padding-top:45px}}
+    /* Leitura em camadas: o conteúdo completo permanece disponível. */
+    .hero{min-height:82svh;padding:112px 0 56px}.hero .scroll-cue{bottom:14px}
+    section{padding:72px 0}.section-head{grid-template-columns:150px 1fr;gap:26px;margin-bottom:30px}.section-head h2{font-size:clamp(32px,4vw,50px);line-height:1.08}.section-head p{margin-top:14px;line-height:1.65}
+    .panel{padding:28px}.about-copy{font-size:16px;line-height:1.72}.skill-row{padding:14px}
+    .practice-card{padding:24px;min-height:230px}.practice-card h3{margin-top:22px}
+    .timeline-items{gap:12px}.job{padding:22px;gap:20px}.job h3{font-size:20px}.job p{line-height:1.6}
+    .delivery-card{padding:24px}.delivery-card h3{font-size:20px;margin:16px 0 12px}.delivery-card dl{margin-top:18px;padding-top:15px}
+    .project-copy{padding:30px}.project-card{min-height:410px}.project-copy h3{font-size:clamp(34px,3.8vw,48px)}
+    .education-card{padding:24px;min-height:170px}.education-card h3{font-size:20px;margin-top:20px}
+    .cta{padding:44px}.cta h2{font-size:clamp(34px,4vw,52px)}#interesses{padding-top:54px}
+    .section-shortcuts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line)}.section-shortcuts>span{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}.section-shortcuts a{font-size:12px;font-weight:600;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.section-shortcuts a:hover{color:var(--red);border-color:var(--red)}
+    #relatos,#solucoes-digitais,#cursos-ministrados,#eu-horizonte{scroll-margin-top:100px}
+    .case-studies{margin-top:32px}.case-studies .subsection-head{margin-bottom:16px}
+    .experience-case{border:1px solid var(--line);border-radius:18px;background:var(--card);margin-top:10px;overflow:hidden}
+    .experience-case summary{padding:20px 23px;cursor:pointer;font-size:15px;font-weight:700;line-height:1.5;list-style-position:inside}.experience-case summary::marker{color:var(--red)}.experience-case summary small{display:block;margin:5px 0 0 18px;color:var(--muted);font-size:12px;font-weight:400}
+    .experience-case[open] summary{border-bottom:1px solid var(--line)}.experience-case dl{display:grid;grid-template-columns:145px minmax(0,1fr);gap:12px 18px;margin:22px 24px}.experience-case dt{font-size:12px;font-weight:800;color:var(--red);line-height:1.6}.experience-case dd{margin:0;color:var(--muted);font-size:14px;line-height:1.65}.experience-case>a{display:inline-block;margin:0 24px 24px;font-size:12px;font-weight:700;color:var(--red);text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:900px){.section-head{grid-template-columns:100px 1fr}.project-copy{padding:28px}.hero{min-height:auto}.hero-layout{gap:28px}}
+    @media(max-width:720px){.hero{padding:106px 0 44px}.section-shortcuts{padding:16px 0;gap:8px}.section-shortcuts>span{width:100%}.section-shortcuts a{font-size:11px;padding:8px 10px}section{padding:54px 0}.section-head{grid-template-columns:1fr;gap:10px}.section-head h2{font-size:34px}.panel,.job,.delivery-card{padding:22px}.practice-card{min-height:205px}.project-copy{padding:27px 23px}.cta{padding:32px 24px}.experience-case summary{padding:18px}.experience-case dl{grid-template-columns:1fr;gap:6px;margin:20px}.experience-case dt:not(:first-child){margin-top:10px}.experience-case>a{margin:0 20px 20px}.experience-case summary small{margin-left:0}#interesses{padding-top:40px}}
   </style>
 </head>
 <body>
@@ -146,6 +164,10 @@
     <div class="scroll-cue" aria-hidden="true"><i></i><span>CONHEÇA MINHA ATUAÇÃO</span></div>
   </header>
 
+  <div class="wrap section-shortcuts" role="navigation" aria-label="Atalhos do portfólio">
+    <span>Explore por tema</span><a href="#relatos">Projetos em contexto</a><a href="#solucoes-digitais">Soluções digitais</a><a href="#cursos-ministrados">Cursos ministrados</a><a href="#certificacoes">Capacitações</a><a href="#interesses">Interesses</a>
+  </div>
+
   <main>
     <section id="sobre">
       <div class="wrap">
@@ -153,13 +175,13 @@
         <div class="about-grid">
           <div class="panel about-copy" data-reveal="left">
             <p><strong>Sou Manoel Gustavo, profissional de Recursos Humanos e Analista Técnico Comportamental — DISC</strong>, com experiência em recrutamento e seleção, integração, benefícios, rotinas de Departamento Pessoal, treinamentos, desenvolvimento organizacional, comunicação interna e design de identidades visuais.</p>
-            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também desenvolvo projetos, indicadores e aplicações full stack a partir de necessidades reais do RH, conectando a ideação à implantação e à capacitação dos usuários.</p>
+            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também conduzo projetos, indicadores e soluções digitais a partir de necessidades reais do RH, com visão de Product Owner e estratégias de Scrum Master, em parceria com Tecnologia para desenvolver, homologar, validar e colocar as ferramentas em operação.</p>
             <p>Minha base em Gestão de Recursos Humanos, os estudos em Psicologia e o MBA em Gestão de Projetos ampliam meu olhar para as pessoas, o negócio e a execução.</p>
           </div>
           <div class="panel skill-stack" data-stagger>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">01</span><span><b>Rotinas e atendimento</b><small>Organização, escuta e acompanhamento</small></span><em aria-hidden="true">↗</em></div>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">02</span><span><b>Pessoas e desenvolvimento</b><small>Integração, aprendizagem e lideranças</small></span><em aria-hidden="true">↗</em></div>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Projetos, desenvolvimento full stack e adoção</small></span><em aria-hidden="true">↗</em></div>
+            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Visão de produto, facilitação ágil e adoção</small></span><em aria-hidden="true">↗</em></div>
             <div class="skill-row"><span class="skill-icon" aria-hidden="true">04</span><span><b>Analista Técnico Comportamental — DISC</b><small>Perfis comportamentais, comunicação e desenvolvimento</small></span><em aria-hidden="true">↗</em></div>
           </div>
         </div>
@@ -173,7 +195,7 @@
           <article class="practice-card"><strong aria-hidden="true">01</strong><h3>Operações de RH e DP</h3><p>Recrutamento e Seleção, Departamento Pessoal, Benefícios, Treinamento e Desenvolvimento, Implantação e Mapeamento de Processos e Sistemas de Gestão, e Projetos de Recursos Humanos.</p></article>
           <article class="practice-card"><strong aria-hidden="true">02</strong><h3>Desenvolvimento e experiência</h3><p>Treinamentos, desempenho, planos de desenvolvimento, apoio às lideranças, comunicação interna e ações de diversidade.</p></article>
           <article class="practice-card"><strong aria-hidden="true">03</strong><h3>Dados e indicadores</h3><p>Pesquisas organizacionais, análise de dados, painéis e relatórios para acompanhar resultados e apoiar decisões.</p></article>
-          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Mapeamento de necessidades, práticas ágeis, desenvolvimento full stack, testes, implantação e capacitação para uso de soluções digitais.</p></article>
+          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Identificação de necessidades, mapeamento, ideação e priorização, com desenvolvimento, homologação e implantação em parceria com Tecnologia.</p></article>
         </div>
       </div>
     </section>
@@ -203,17 +225,38 @@
           <article class="delivery-card"><span class="delivery-label">DESIGN, COMUNICAÇÃO E CULTURA</span><h3>Identidade visual e endomarketing</h3><p>Criação de identidades visuais, peças e campanhas de comunicação interna, da ideação à operação, com foco na experiência do colaborador.</p><dl><dt>Entregas</dt><dd>Identidades de projetos, materiais gráficos, comunicados, campanhas de engajamento e bem-estar, e conteúdos de desenvolvimento organizacional.</dd></dl></article>
           <article class="delivery-card"><span class="delivery-label">PROCESSOS E MELHORIA CONTÍNUA</span><h3>Organização das rotinas e soluções de RH</h3><p>Mapeamento e melhoria de fluxos de RH, Departamento Pessoal e benefícios, com apoio de sistemas e ferramentas digitais.</p><dl><dt>Entregas</dt><dd>Fluxos documentados, controles, relatórios e melhorias em processos e sistemas para apoiar a operação e o acompanhamento das demandas.</dd></dl></article>
         </div>
+        <div class="case-studies" id="relatos">
+          <div class="subsection-head" data-reveal><h3>Projetos em contexto</h3><p>Relatos sintéticos da minha atuação, sem reproduzir documentos, telas ou indicadores internos. Abra cada projeto para conhecer o contexto, a contribuição e a entrega.</p></div>
+          <details class="experience-case"><summary>Pesquisa de Engajamento Organizacional <small>Escuta, operação e parceria com Tecnologia</small></summary><dl>
+            <dt>Necessidade</dt><dd>Organizar a escuta dos colaboradores e viabilizar a aplicação e a leitura da pesquisa em um fluxo de RH.</dd>
+            <dt>Minha atuação</dt><dd>Mapeamento de necessidades, estruturação do instrumento, ideação da experiência de aplicação, comunicação, mobilização e orientação às lideranças.</dd>
+            <dt>Construção conjunta</dt><dd>Alinhamentos com Tecnologia para transformar as necessidades em funcionalidades, acompanhar ajustes e participar da homologação e validação.</dd>
+            <dt>Entrega</dt><dd>Módulo de pesquisa homologado e colocado em operação com Tecnologia, com acompanhamento da participação, consolidação das respostas e apresentação executiva.</dd>
+          </dl><a href="./gt360/?modulo=engajamento">Explorar a adaptação pública da pesquisa ↗</a></details>
+          <details class="experience-case"><summary>Onboarding e gestão de treinamentos <small>Fluxos, requisitos e desenvolvimento de pessoas</small></summary><dl>
+            <dt>Necessidade</dt><dd>Organizar a jornada de entrada e o acompanhamento das ações de aprendizagem, reduzindo a dispersão de informações e controles.</dd>
+            <dt>Minha atuação</dt><dd>Mapeamento das rotinas, desenho dos fluxos e da jornada, definição de necessidades e prioridades e encaminhamento de orientações para o desenvolvimento.</dd>
+            <dt>Construção conjunta</dt><dd>Tradução das demandas de RH para o time de Tecnologia, alinhamento das etapas e participação nos testes, ajustes e validações das funcionalidades.</dd>
+            <dt>Entrega</dt><dd>Fluxos estruturados para integração e acompanhamento de treinamentos, turmas, materiais, certificações e indicadores, construídos em parceria com Tecnologia.</dd>
+          </dl><a href="./gt360/?modulo=onboarding">Explorar a adaptação pública do onboarding ↗</a></details>
+          <details class="experience-case"><summary>Comunicação e identidade visual de ações de RH <small>Da ideação à execução</small></summary><dl>
+            <dt>Necessidade</dt><dd>Tornar as iniciativas de RH compreensíveis e próximas dos colaboradores e das lideranças.</dd>
+            <dt>Minha atuação</dt><dd>Ideação de campanhas, criação de identidade visual, organização das mensagens e produção de peças, comunicados, orientações e conteúdos de desenvolvimento organizacional.</dd>
+            <dt>Articulação</dt><dd>Alinhamento com áreas parceiras para conectar a comunicação à programação e à operação das ações, considerando público e canais internos.</dd>
+            <dt>Entrega</dt><dd>Campanhas de engajamento e bem-estar, materiais de orientação e comunicação interna, com atuação da concepção à execução e atenção à experiência do colaborador.</dd>
+          </dl><a href="#eu-horizonte">Conhecer a proposta de intranet eu + horizonte ↓</a></details>
+        </div>
         <aside class="experience-note" data-reveal aria-label="Vivência em CIPA"><span class="note-label">VIVÊNCIA EM CIPA</span><p>Também atuei como membro da CIPA, uma experiência ligada ao cuidado com as pessoas e à atenção ao ambiente de trabalho.</p></aside>
-        <div class="subsection-head teaching-heading" data-reveal><h3>Cursos e treinamentos que ministrei</h3><p>Conhecimento compartilhado em ações de formação e facilitação, com aplicação às rotinas e às relações de trabalho.</p></div>
+        <div class="subsection-head teaching-heading" id="cursos-ministrados" data-reveal><h3>Cursos e treinamentos que ministrei</h3><p>Conhecimento compartilhado em ações de formação e facilitação, com aplicação às rotinas e às relações de trabalho.</p></div>
         <div class="teaching-grid" data-stagger>
           <article class="teaching-card"><span>01</span><h4>Processos</h4><p>Organização de fluxos e melhoria das rotinas de trabalho.</p></article>
           <article class="teaching-card"><span>02</span><h4>Práticas ágeis</h4><p>Organização de entregas, colaboração e melhoria contínua.</p></article>
           <article class="teaching-card"><span>03</span><h4>5S</h4><p>Organização, padronização e cuidado com os ambientes.</p></article>
           <article class="teaching-card"><span>04</span><h4>Diversidade e inclusão</h4><p>Respeito às diferenças e construção de relações mais inclusivas.</p></article>
         </div>
-        <div class="subsection-head apps-heading" data-reveal><h3>Soluções digitais de RH</h3><p>Atuação ponta a ponta em aplicações full stack: ideação com práticas de Scrum, alinhamento com stakeholders, desenvolvimento, testes, implantação e capacitação para uso das ferramentas.</p></div>
+        <div class="subsection-head apps-heading" id="solucoes-digitais" data-reveal><h3>Soluções digitais de RH</h3><p>Da identificação de necessidades à operação: mapeamento e ideação, visão de Product Owner, estratégias de Scrum Master e alinhamentos com o time de Tecnologia para desenvolver, homologar, validar e implantar as soluções em conjunto.</p></div>
         <ol class="delivery-cycle" aria-label="Etapas da minha atuação no desenvolvimento de aplicações" data-stagger>
-          <li><span>01</span><b>Ideação e alinhamento</b></li><li><span>02</span><b>Desenvolvimento full stack</b></li><li><span>03</span><b>Testes e validação</b></li><li><span>04</span><b>Implantação</b></li><li><span>05</span><b>Capacitação e adoção</b></li>
+          <li><span>01</span><b>Necessidades e mapeamento</b></li><li><span>02</span><b>Ideação e priorização</b></li><li><span>03</span><b>Desenvolvimento com Tecnologia</b></li><li><span>04</span><b>Homologação e validação</b></li><li><span>05</span><b>Implantação e adoção</b></li>
         </ol>
         <p class="demo-context">As versões públicas são adaptações para o portfólio e utilizam dados fictícios. Não cadastre informações pessoais reais nesses ambientes.</p>
         <div class="project-stage">
@@ -222,17 +265,17 @@
               <span class="number">01 · DEMONSTRAÇÃO DE PORTFÓLIO</span><h3>GT360°</h3>
               <p>Um ambiente com nove aplicações para organizar rotinas de RH: integração, avaliações, engajamento, treinamentos e acompanhamento de processos.</p>
               <div class="identity-tags"><span>Rotinas de RH</span><span>Desenvolvimento</span><span>Indicadores</span></div>
-              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Ideação, reuniões com stakeholders, definição de requisitos e prioridades, organização das entregas com práticas de Scrum, desenvolvimento, testes, implantação e capacitação para uso do sistema interno. A versão pública adapta esse trabalho para o portfólio.</dd><dt>Entrega</dt><dd>Sistema e módulos desenvolvidos e implantados no ambiente interno. Esta versão pública é uma adaptação do produto implantado, reunindo diferentes rotinas e recursos de RH em um ambiente de apresentação com dados fictícios.</dd><dt>Métodos e ferramentas</dt><dd>Levantamento de necessidades, visão de produto, gestão visual e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
+              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Identificação de necessidades, mapeamento de processos, ideação, definição de requisitos e priorização. Alinhamentos com stakeholders e com Tecnologia, acompanhamento do desenvolvimento, testes funcionais, homologação, validação e implantação conjunta, com orientação aos usuários.</dd><dt>Entrega</dt><dd>Sistema e módulos desenvolvidos e implantados no ambiente interno em parceria entre RH e Tecnologia. Esta versão pública é uma adaptação do produto implantado, reunindo diferentes rotinas e recursos de RH em um ambiente de apresentação com dados fictícios.</dd><dt>Métodos e ferramentas</dt><dd>Práticas de Product Owner e Scrum Master, mapeamento de processos, priorização, facilitação e validação funcional com Tecnologia. A adaptação pública utiliza HTML, CSS e JavaScript.</dd></dl></details>
               <div class="project-actions"><a class="button" href="./gt360/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener">Conhecer o projeto ↗</a></div>
             </div>
             <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Visão geral das aplicações de RH do GT360°" loading="lazy"></a>
           </article>
-          <article class="project-card alt" data-reveal>
+          <article class="project-card alt" id="eu-horizonte" data-reveal>
             <div class="project-copy">
               <span class="number">02 · PROTÓTIPO DE PORTFÓLIO</span><h3>eu + horizonte</h3>
               <p>Uma proposta de intranet para reunir comunicados, agenda e conteúdos internos, facilitando o acesso à informação no dia a dia do colaborador.</p>
               <div class="identity-tags"><span>Comunicação Interna</span><span>Experiência do Colaborador</span><span>Cultura</span></div>
-              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Tornar conteúdos e informações internas mais fáceis de encontrar e acompanhar.</dd><dt>Minha participação</dt><dd>Organização dos conteúdos e da navegação, desenho da experiência e desenvolvimento do protótipo.</dd><dt>Entrega</dt><dd>Intranet com mural, agenda, acervo e fluxo de publicação. Projeto idealizado como apoio organizacional ao desenvolvimento, à valorização e à retenção de talentos, com o propósito de integrar colaboradores e gerar valor à experiência interna.</dd><dt>Métodos e ferramentas</dt><dd>Organização da informação, experiência do colaborador e desenvolvimento em HTML, CSS e JavaScript.</dd></dl></details>
+              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Tornar conteúdos e informações internas mais fáceis de encontrar e acompanhar.</dd><dt>Minha participação</dt><dd>Ideação da intranet, organização dos conteúdos e da navegação, definição das jornadas e da experiência do colaborador e validação funcional da proposta.</dd><dt>Entrega</dt><dd>Intranet com mural, agenda, acervo e fluxo de publicação. Projeto idealizado como apoio organizacional ao desenvolvimento, à valorização e à retenção de talentos, com o propósito de integrar colaboradores e gerar valor à experiência interna.</dd><dt>Métodos e ferramentas</dt><dd>Comunicação interna, experiência do colaborador, organização da informação e práticas ágeis. A versão pública utiliza HTML, CSS e JavaScript.</dd></dl></details>
               <div class="project-actions"><a class="button" href="./eu-horizonte-intranet/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener">Conhecer o projeto ↗</a></div>
             </div>
             <a class="project-visual project-visual--contain" href="./eu-horizonte-intranet/" aria-label="Explorar demonstração do eu mais horizonte"><img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Visão ampliada da intranet eu mais horizonte" loading="lazy"></a>
@@ -257,7 +300,7 @@
       <div class="wrap">
         <div class="section-head" data-reveal><div class="section-index">06 / CAPACITAÇÕES</div><div><h2>Capacitações que complementam minha atuação.</h2><p>Aprendizado em RH, comportamento, dados, tecnologia, projetos e governança. Abra cada tema para conhecer as formações.</p></div></div>
         <div class="cert-groups">
-          <details class="cert-group" open><summary><span>RH, comportamento e desenvolvimento</span><small>5 capacitações</small></summary><div class="cert-grid">
+          <details class="cert-group"><summary><span>RH, comportamento e desenvolvimento</span><small>5 capacitações</small></summary><div class="cert-grid">
             <article class="cert"><small>COMPORTAMENTO</small><h3>Análise Técnica Comportamental DISC</h3><p>Freedom Start</p></article>
             <article class="cert"><small>EDUCAÇÃO CORPORATIVA</small><h3>Indicadores de T&D</h3><p>Sólides</p></article>
             <article class="cert"><small>DEPARTAMENTO PESSOAL</small><h3>Formação em Departamento Pessoal</h3><p>INOVAR RH & Sólides</p></article>

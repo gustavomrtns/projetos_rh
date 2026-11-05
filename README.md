@@ -1,23 +1,39 @@
-# Manoel Gustavo — Recursos Humanos, Projetos e Produtos Digitais
+# Manoel Gustavo — Recursos Humanos, Desenvolvimento Organizacional e Inovação
 
-> **Recursos Humanos | Business Analysis | Projetos | Produtos Digitais**
+> Recursos Humanos · Pessoas · Processos · Projetos · Dados
 
-Este portfólio reúne dois produtos digitais que conectam Gestão de Pessoas, processos, experiência do usuário e dados. Os módulos de RH são apresentados como partes do GT360°, em vez de projetos independentes.
+Atuo em operações de RH, desenvolvimento de pessoas, comunicação interna e melhoria de processos. Conecto essas experiências à identificação de necessidades, ao mapeamento e à ideação de soluções, com visão de Product Owner e estratégias de Scrum Master.
 
-[**▶ Visualizar Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [**LinkedIn**](https://www.linkedin.com/in/manoel-gustavo/)
+Nos projetos de sistemas, trabalho em parceria com Tecnologia: alinhamos requisitos e prioridades, acompanhamos o desenvolvimento, homologamos, validamos e colocamos as soluções em operação em conjunto.
 
-## Sobre mim
+[▶ Conhecer meu portfólio profissional](https://gustavomrtns.github.io/projetos_rh/) · [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/)
 
-Sou profissional com trajetória em Recursos Humanos e atuação em projetos, processos, produtos digitais e dados. Trabalho com identificação de necessidades, organização de requisitos, priorização, experiência de uso e melhoria de processos, sem dissociar a solução do contexto das pessoas e do negócio.
+## Minha atuação
 
-**Contato:** [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)
+- **Operações de RH:** recrutamento e seleção, Departamento Pessoal, benefícios e organização de rotinas.
+- **Desenvolvimento organizacional:** integração, treinamentos, desempenho, competências e apoio às lideranças.
+- **Dados e escuta:** pesquisas organizacionais, indicadores, painéis e relatórios.
+- **Comunicação e design:** identidades visuais, campanhas, endomarketing e experiência do colaborador.
+- **Projetos e soluções digitais:** necessidades, processos, ideação, priorização, facilitação e trabalho conjunto com Tecnologia.
 
-## Projetos
+Os cargos e períodos profissionais, a formação acadêmica, as capacitações e os cursos que ministrei estão apresentados no [portfólio](https://gustavomrtns.github.io/projetos_rh/).
 
-| Projeto | Proposta | Aplicação | Case |
+## Projetos em contexto
+
+Os [relatos de atuação](https://gustavomrtns.github.io/projetos_rh/#relatos) explicam o contexto, minha participação, a construção conjunta e as entregas de pesquisa de engajamento, onboarding, treinamentos e comunicação interna. Não reproduzem documentos, telas, dados individuais ou indicadores internos.
+
+## Soluções digitais de RH
+
+| Projeto | Proposta | Versão pública | Documentação |
 |---|---|---|---|
-| **GT360°** | Workspace de Gestão de Pessoas com nove aplicações organizadas por jornada do colaborador, engajamento e saúde organizacional, desenvolvimento de talentos, qualidade e processos. | [Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o case](./gt360/README.md) |
-| **eu + horizonte** | Intranet orientada à comunicação interna, cultura e experiência do colaborador. | [Abrir eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o case](./eu-horizonte-intranet/README.md) |
+| **GT360°** | Ambiente de Gestão de Pessoas com nove aplicações de jornada do colaborador, engajamento, desenvolvimento e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
+| **eu + horizonte** | Intranet idealizada para integrar colaboradores e apoiar comunicação, desenvolvimento, valorização e retenção de talentos. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
+
+### Implantação interna e apresentação pública
+
+O sistema e os módulos internos do GT360° foram construídos e implantados em parceria entre RH e Tecnologia. Minha contribuição está na identificação de necessidades, no mapeamento, na ideação e priorização, nos alinhamentos e na homologação, validação e implantação conjunta.
+
+Este repositório apresenta **adaptações públicas com dados fictícios**, e não o código, os documentos ou a infraestrutura dos ambientes corporativos. As informações técnicas abaixo descrevem somente as demonstrações disponíveis neste endereço.
 
 ### GT360° — módulos do workspace
 
@@ -28,10 +44,17 @@ Sou profissional com trajetória em Recursos Humanos e atuação em projetos, pr
 | Desenvolvimento de Talentos | Painel de Treinamentos |
 | Qualidade e Processos | Checklist 5S |
 
-[![Ilustração da navegação pelos nove módulos do GT360°](./gt360/gt360-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/gt360/)
 
-O GT360° reúne os módulos por navegação. Nesta versão de demonstração, os registros usam **estado temporário em memória (`demoStore`)**, compartilhado pelos módulos durante a sessão do workspace. **Ao atualizar ou fechar a página, as alterações são descartadas**. Não existem conta, banco de dados compartilhado, sincronização entre pessoas/dispositivos ou botões de backup/restauração do workspace. Use apenas dados fictícios. A imagem acima ilustra a organização dos módulos.
+[![Visão do GT360°](./gt360/gt360-case-editorial.svg)](https://gustavomrtns.github.io/projetos_rh/gt360/)
 
-### eu + horizonte
+[![Visão do eu + horizonte](./eu-horizonte-intranet/eu-horizonte-case-editorial.svg)](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
 
-[![Visão da intranet eu + horizonte](./eu-horizonte-intranet/eu-horizonte-case-overview.png)](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
+## Dados e funcionamento das versões públicas
+
+As aplicações públicas usam **estado temporário em memória (`demoStore`)**. No GT360°, os módulos compartilham esse estado enquanto o workspace está aberto. Ao atualizar ou fechar a página, os registros temporários são descartados.
+
+As demonstrações não possuem conta, banco de dados compartilhado, sincronização entre pessoas ou dispositivos nem backup/restauração. Exportações específicas, quando oferecidas, não equivalem a backup do ambiente.
+
+**Use apenas dados fictícios. Não cadastre informações pessoais reais.** Essas limitações pertencem às adaptações públicas e não descrevem a infraestrutura dos sistemas internos.
+
+[Contato pelo LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/)

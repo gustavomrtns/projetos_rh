@@ -1,86 +1,55 @@
-# eu + horizonte — Intranet & Employee Experience
+# eu + horizonte — Comunicação Interna e Experiência do Colaborador
 
-> Protótipo de ambiente digital de comunicação interna concebido para aproximar pessoas, conteúdos e cultura em uma experiência única, acessível e orientada à jornada do colaborador.
+> Uma proposta de intranet para integrar pessoas, conteúdos e cultura.
 
-[▶ **Explorar aplicação**](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 **Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
+[▶ Explorar a versão pública](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [Portfólio profissional](https://gustavomrtns.github.io/projetos_rh/#eu-horizonte) · [Visão geral](../README.md)
 
----
+## Necessidade e propósito
 
-## Visão executiva
+Quando comunicados, agendas e documentos ficam distribuídos em vários canais, encontrar informações exige mais esforço e a experiência interna perde consistência.
 
-| Dimensão | eu + horizonte |
+O **eu + horizonte** foi idealizado como apoio organizacional ao desenvolvimento, à valorização e à retenção de talentos, com o propósito de integrar colaboradores e gerar valor à experiência interna.
+
+## Minha participação
+
+- Identificação de necessidades de comunicação e experiência do colaborador.
+- Ideação do projeto e definição da proposta de valor para o público interno.
+- Organização de conteúdos, arquitetura de informação e jornadas de navegação.
+- Concepção da identidade visual e da experiência de uso.
+- Priorização e validação funcional da proposta, com visão de Product Owner e práticas de facilitação ágil.
+
+Minha abordagem em projetos de sistemas conecta necessidades e mapeamento à ideação e aos alinhamentos com Tecnologia para desenvolvimento, homologação, validação e implantação conjunta. A apresentação pública evidencia o conceito, a navegação e os fluxos do eu + horizonte, sem divulgar código, documentos ou infraestrutura corporativa.
+
+## O que a versão pública apresenta
+
+| Frente | Proposta |
 |---|---|
-| **Área** | Recursos Humanos / Gestão de Pessoas |
-| **Frentes** | Comunicação Interna · Employee Experience · Cultura · Employer Branding |
-| **Objetivo** | Centralizar conteúdos e pontos de contato da jornada interna em uma experiência digital mais simples e integrada |
-| **Minha atuação** | Arquitetura de informação, organização de conteúdos, desenho de jornadas, UX e desenvolvimento do protótipo digital |
-| **Abordagens** | Comunicação Interna · Employee Experience · UX · Gestão de Conteúdo |
-| **Tecnologias** | HTML · CSS · JavaScript |
+| **Mural e ativações** | Organizar comunicados, campanhas e conteúdos internos. |
+| **Agenda** | Facilitar o acompanhamento de eventos e programações. |
+| **Acervo** | Reunir documentos e materiais em uma navegação organizada. |
+| **Publicação** | Estruturar a criação e o compartilhamento de conteúdos. |
+| **Pessoas** | Aproximar os pontos de contato da experiência interna. |
 
-## Evidência visual
+![Visão do eu + horizonte](./eu-horizonte-case-editorial.svg)
 
-![Capa editorial do eu + horizonte — intranet, mural, agenda, acervo e navegação](./eu-horizonte-case-editorial.svg)
+*Composição de apresentação da proposta pública, sem materiais internos.*
 
-*A composição apresenta quatro pontos centrais da experiência: mural e ativações, agenda e transmissões, acervo de conteúdos e documentos e fluxo de criação/publicação.*
+## Comunicação, design e desenvolvimento organizacional
 
-## O desafio
+A proposta conecta criação de identidade visual, comunicação interna, endomarketing e experiência do colaborador. O valor pretendido está em facilitar o acesso à informação e a conexão com as iniciativas da organização.
 
-Quando informações institucionais, comunicados e conteúdos relevantes ficam distribuídos em diferentes canais, o colaborador precisa despender mais esforço para encontrar o que necessita. Esse cenário também pode reduzir a consistência da comunicação e enfraquecer a experiência digital ao longo da jornada interna.
-
-O projeto parte desse problema para explorar uma questão central: **como transformar a comunicação interna em uma experiência digital mais integrada, intuitiva e próxima das pessoas?**
-
-## Minha atuação
-
-Minha atuação envolveu a estruturação do conceito e da experiência do produto, conectando necessidades de Gestão de Pessoas com princípios de organização da informação e design de interação.
-
-- Estruturação da arquitetura de informação.
-- Organização de conteúdos e jornadas de navegação.
-- Definição da experiência e dos pontos de contato dentro da aplicação.
-- Desenvolvimento do protótipo funcional da intranet.
-- Aplicação de princípios de Employee Experience e Comunicação Interna.
-- Construção da interface em HTML, CSS e JavaScript.
-
-## A solução
-
-O **eu + horizonte** foi concebido como um ambiente digital de comunicação interna que concentra informações, conteúdos e interações relacionadas à experiência do colaborador.
-
-A aplicação adota uma linguagem inspirada em produtos digitais contemporâneos, com navegação orientada a telas, hierarquia visual clara, componentes interativos e experiência responsiva.
-
-## Como funciona
-
-**1. Mural e ativações** → concentra comunicados, destaques e conteúdos de comunicação interna.
-
-**2. Agenda e transmissões** → organiza eventos, compromissos e conteúdos ao vivo em um mesmo ponto de contato.
-
-**3. Acervo** → centraliza conteúdos, documentos e materiais relevantes para a jornada interna.
-
-**4. Publicação** → estrutura o fluxo de criação e compartilhamento de conteúdos dentro da experiência.
-
-**5. Navegação mobile-first** → utiliza uma arquitetura inspirada em aplicativos, com transições, feedback visual, componentes interativos e comportamento responsivo.
+Os [relatos profissionais](https://gustavomrtns.github.io/projetos_rh/#relatos) explicam a atuação em comunicação e design sem reproduzir peças internas ou afirmar ganhos de retenção não mensurados.
 
 ## Dados da demonstração
 
-A intranet usa as mesmas cinco pessoas fictícias cadastradas em `shared/demo-core.js`. Publicações e interações feitas durante a visita são mantidas apenas em **memória (`demoStore`)** e são reiniciadas quando a página é recarregada. Não há conta, persistência durável, sincronização entre usuários nem backup/restauração da aplicação. Use somente dados fictícios.
+A versão pública utiliza HTML, CSS e JavaScript e as pessoas fictícias de `shared/demo-core.js`. Publicações e interações ficam somente em **memória (`demoStore`)** e são reiniciadas quando a página é recarregada.
 
-## Valor potencial
+Não há conta, persistência durável, sincronização entre usuários ou backup/restauração. As características técnicas deste repositório descrevem a apresentação pública, e não a infraestrutura de ambientes internos.
 
-A solução foi concebida para contribuir com:
+**Use somente dados fictícios. Não cadastre informações pessoais reais.**
 
-- centralização da comunicação e dos conteúdos internos;
-- acesso mais simples a informações relevantes;
-- maior consistência na experiência digital do colaborador;
-- fortalecimento dos pontos de contato entre pessoas e organização;
-- apoio à disseminação de cultura e comunicação institucional;
-- construção de uma experiência interna mais próxima de produtos digitais contemporâneos.
+## Como continuar a visita
 
-## Competências demonstradas
+Use **Voltar ao portfólio**, no cabeçalho da intranet, para retornar às experiências e aos demais projetos.
 
-`Comunicação Interna` · `Employee Experience` · `Employer Branding` · `UX` · `Arquitetura de Informação` · `Gestão de Conteúdo` · `Design de Interação`
-
-## Tecnologias e abordagens
-
-`HTML` · `CSS` · `JavaScript` · `Mobile-first` · `Employee Experience` · `Comunicação Interna` · `UX` · `Arquitetura de Informação`
-
----
-
-[▶ **Abrir eu + horizonte**](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [🌐 **Ver Portfólio Profissional**](https://gustavomrtns.github.io/projetos_rh/) · [← **Todos os projetos**](../README.md)
+[▶ Abrir eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/#projetos)

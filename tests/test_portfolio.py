@@ -178,6 +178,30 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_public_apps_return_to_portfolio(self):
+        for device in DEVICES:
+            for case_path in ("/gt360/", "/eu-horizonte-intranet/"):
+                with self.subTest(device=device, case=case_path):
+                    context, page = self._new_page(device)
+                    try:
+                        page.goto(self.base + case_path, wait_until="domcontentloaded")
+                        if case_path == "/gt360/":
+                            page.locator("#home-view.active").wait_for(state="visible", timeout=20000)
+                        else:
+                            page.locator("#abertura").wait_for(state="detached", timeout=12000)
+                        link = page.get_by_role("link", name="Voltar ao portfólio profissional", exact=True)
+                        self.assertEqual(link.count(), 1)
+                        self.assertTrue(link.is_visible())
+                        bounds = link.bounding_box()
+                        self.assertIsNotNone(bounds)
+                        self.assertGreaterEqual(bounds["x"], 0)
+                        self.assertLessEqual(bounds["x"] + bounds["width"], page.viewport_size["width"] + 1)
+                        link.click()
+                        page.wait_for_url(self.base + "/#projetos")
+                        self.assertTrue(page.locator("#projetos").is_visible())
+                    finally:
+                        context.close()
+
     def test_demo_store_is_memory_only_after_reload(self):
         for case_path in ("/gt360/", "/eu-horizonte-intranet/"):
             with self.subTest(case=case_path):

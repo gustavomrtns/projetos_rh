@@ -1,32 +1,35 @@
 # GT360° — Workspace de Gestão de Pessoas
 
-> Um ambiente que reúne nove aplicações de Gestão de Pessoas, organizadas pela jornada do colaborador e pelas rotinas de RH.
+> Rotinas de RH organizadas a partir das necessidades das pessoas e dos processos.
 
-[▶ Explorar o workspace](https://gustavomrtns.github.io/projetos_rh/gt360/) · [Ver portfólio](https://gustavomrtns.github.io/projetos_rh/) · [Voltar aos projetos](../README.md)
+[▶ Explorar a versão pública](https://gustavomrtns.github.io/projetos_rh/gt360/) · [Portfólio profissional](https://gustavomrtns.github.io/projetos_rh/#solucoes-digitais) · [Visão geral](../README.md)
 
-## Visão do case
+## Contexto profissional
 
-| Dimensão | Descrição |
+A rotina de RH envolve integração, avaliações, escuta, desenvolvimento e acompanhamento de processos. Informações e controles dispersos dificultam a visão da jornada e a organização das demandas.
+
+O GT360° nasceu dessas necessidades e evoluiu como um ambiente de Gestão de Pessoas. **O sistema e os módulos internos foram desenvolvidos e implantados em parceria entre RH e Tecnologia.** A versão deste repositório adapta esse trabalho para apresentação pública, com nove aplicações navegáveis e dados fictícios.
+
+## Minha participação e construção conjunta
+
+| Etapa | Contribuição |
 |---|---|
-| **Problema** | Fluxos de RH distribuídos em ferramentas e controles diferentes dificultam encontrar informações, acompanhar etapas e analisar cada processo. |
-| **Públicos considerados** | Profissionais de RH, lideranças, colaboradores e prestadores, conforme o fluxo de cada aplicação. |
-| **Minha atuação** | Levantamento de necessidades, mapeamento de jornadas e processos, definição de escopo, requisitos e regras de negócio, priorização, arquitetura de navegação, experiência de uso, desenvolvimento web e indicadores. |
-| **Entrega atual** | Workspace navegável com nove aplicações, agrupadas em quatro frentes. Cada módulo é carregado quando aberto. |
-| **Tecnologia e dados** | HTML, CSS e JavaScript; dados demonstrativos fictícios gerenciados em memória pelo `demoStore`, sem persistência após recarregar a página. |
+| **Identificar e mapear** | Compreender necessidades, ouvir as áreas envolvidas e organizar processos e jornadas de RH. |
+| **Idear e priorizar** | Estruturar a proposta, o escopo, os requisitos, as regras de negócio e as prioridades, com visão de Product Owner. |
+| **Alinhar e acompanhar** | Facilitar conversas com stakeholders e Tecnologia, organizar entregas e apoiar a colaboração com estratégias de Scrum Master. |
+| **Homologar e validar** | Participar de testes funcionais, registrar ajustes e validar a aderência das funcionalidades às rotinas de RH junto ao time de Tecnologia. |
+| **Implantar e apoiar a adoção** | Colocar as soluções em operação em conjunto, orientar os usuários e acompanhar necessidades de evolução. |
 
-## Problema e abordagem
+O desenvolvimento técnico é apresentado como **trabalho conjunto com Tecnologia**. A participação descrita não deve ser confundida com a execução individual de toda a implementação técnica.
 
-A operação de RH envolve momentos distintos: entrada, experiência, desenvolvimento, escuta, desligamento e qualidade dos ambientes de trabalho. Quando cada rotina é apresentada isoladamente, fica mais difícil enxergar a jornada completa e localizar a ferramenta certa para cada atividade.
+## Entregas apresentadas
 
-No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o entendimento dos fluxos de Gestão de Pessoas com a definição de requisitos, navegação e interfaces das aplicações. A pergunta orientadora foi: **como tornar esses processos mais fáceis de localizar, executar e acompanhar em um único ponto de acesso?**
+- Fluxos para integração e acompanhamento da jornada do colaborador.
+- Pesquisa de engajamento e organização da leitura de resultados.
+- Gestão de treinamentos e acompanhamento de processos.
+- Navegação que reúne nove aplicações em um único ambiente público.
 
-## Decisões de produto
-
-1. **Agrupar por tarefa de RH.** Os módulos foram distribuídos em Jornada do Colaborador, Engajamento e Saúde Organizacional, Desenvolvimento de Talentos e Qualidade e Processos.
-2. **Manter os fluxos próprios de cada aplicação.** Onboarding, avaliações, pesquisa e treinamentos têm etapas e informações diferentes; o workspace dá acesso a eles sem reduzir tudo a um formulário único.
-3. **Permitir acesso direto a um módulo.** Links específicos abrem cada aplicação dentro do workspace e permitem compartilhar diretamente o módulo desejado.
-4. **Manter uma base temporária e fictícia para a demonstração.** Os módulos compartilham o `demoStore` enquanto o workspace está aberto. Os dados inseridos são descartados ao recarregar a página; o workspace não oferece backup nem restauração de registros.
-5. **Mostrar as capacidades sem atribuir resultados não medidos.** Indicadores existentes nas aplicações demonstram acompanhamento e análise; este case não afirma ganhos percentuais ou ROI já comprovados.
+Os [relatos de atuação](https://gustavomrtns.github.io/projetos_rh/#relatos) contextualizam pesquisa, onboarding e treinamentos sem expor materiais internos nem atribuir resultados quantitativos não divulgados.
 
 ## Módulos
 
@@ -44,22 +47,29 @@ No GT360°, organizei essas necessidades em um workspace. O trabalho combinou o 
 
 > **Distinção conceitual:** a Pesquisa de Engajamento Organizacional é apresentada como pesquisa de engajamento, não como pesquisa de clima organizacional.
 
-## Percurso sugerido para conhecer o produto
 
-1. Abra a [página inicial do workspace](https://gustavomrtns.github.io/projetos_rh/gt360/) e observe como as aplicações foram agrupadas.
-2. Explore o [Onboarding](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=onboarding) para ver um fluxo operacional.
-3. Acesse a [Pesquisa de Engajamento](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=engajamento) e o [Painel de Treinamentos](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=treinamentos) para conhecer frentes de escuta e desenvolvimento.
+## Percurso para explorar a versão pública
 
-![Capa editorial do GT360° — Workspace de Gestão de Pessoas](./gt360-case-editorial.svg)
+1. Abra a [página inicial](https://gustavomrtns.github.io/projetos_rh/gt360/) para conhecer a organização dos módulos.
+2. Explore o [Onboarding](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=onboarding).
+3. Conheça a [Pesquisa de Engajamento](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=engajamento) e o [Painel de Treinamentos](https://gustavomrtns.github.io/projetos_rh/gt360/?modulo=treinamentos).
+4. Use o link **Voltar ao portfólio**, no cabeçalho, para continuar a visita.
 
-*Imagem ilustrativa da organização do workspace. Abra a aplicação para conhecer a interface em funcionamento.*
+![Visão do GT360°](./gt360-case-editorial.svg)
 
-## Estágio atual e próximos passos
+*Imagem de apresentação da adaptação pública. Não reproduz telas ou dados internos.*
+
+## Limites da demonstração
+
+A descrição técnica a seguir se refere **exclusivamente à adaptação pública**, feita em HTML, CSS e JavaScript. Não documenta a arquitetura, as permissões, o banco de dados ou a infraestrutura da implantação interna.
+
+### Funcionamento e dados da versão pública
 
 Esta versão demonstra as interfaces e fluxos das aplicações. A integração **atual é de navegação**, com uma base fictícia compartilhada entre os módulos por `shared/demo-core.js`, e não um banco de dados central. Cada módulo é carregado em um arquivo HTML próprio quando aberto. O `demoStore` mantém as alterações **somente na memória da sessão da página**: os módulos acessam esse estado enquanto o workspace está aberto, mas atualizar ou fechar a página reinicia os dados de demonstração. Não há sincronização entre pessoas, dispositivos ou abas independentes. **Não cadastre informações pessoais reais no endereço público.**
 
 **Backup e restauração:** o workspace atual **não possui** os botões "Baixar backup" e "Restaurar backup". Esses recursos foram retirados da demonstração; os registros temporários não são enviados ao servidor nem preservados entre recarregamentos. Exportações e relatórios específicos de alguns módulos, quando oferecidos, são funcionalidades distintas e não representam backup completo do workspace.
 
-As próximas evoluções técnicas incluem validar a experiência em dispositivos e navegadores reais, ampliar os testes de acessibilidade e, para uso compartilhado, planejar autenticação, permissões, banco de dados e rotinas de auditoria.
+Uma eventual evolução desta demonstração para um novo ambiente multiusuário exigiria planejar autenticação, permissões, banco de dados e auditoria, além de testes de experiência e acessibilidade. Isso não descreve a infraestrutura corporativa já existente.
 
-[▶ Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/)
+
+[▶ Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/#projetos)

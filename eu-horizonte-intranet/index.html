@@ -409,6 +409,12 @@ a{color:inherit}
 <link rel="stylesheet" href="modular-b.css?v=1">
 <!-- Base fictícia compartilhada e operações somente em memória. -->
 <script src="../shared/demo-core.js"></script>
+<style>
+.portfolio-return{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:36px;padding:8px 12px;border:1px solid #e4dddd;border-radius:10px;background:#fff;color:#c71717;font:600 11px/1.3 'Sora',system-ui,sans-serif;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.portfolio-return:hover{background:#fff3f3;border-color:#c71717}.portfolio-return:focus-visible{outline:3px solid #8fff00;outline-offset:3px}
+@media(max-width:780px){.portfolio-return-prefix{display:none}.portfolio-return{min-height:34px;padding:7px 9px;font-size:10px}}
+.portfolio-return-row{display:flex;justify-content:flex-start;margin:0 0 8px}
+</style>
 </head>
 <body>
 
@@ -425,6 +431,7 @@ a{color:inherit}
   </div>
 
   <header class="topo">
+    <div class="portfolio-return-row"><a class="portfolio-return" href="../#projetos" aria-label="Voltar ao portfólio profissional"><span aria-hidden="true">←</span> <span class="portfolio-return-prefix">Voltar ao </span>portfólio</a></div>
     <div class="topo-linha">
       <div class="saudacao">
         <span id="data-hoje"></span>
