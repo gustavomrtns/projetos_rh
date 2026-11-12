@@ -18,20 +18,24 @@ Nos projetos de sistemas, trabalho em parceria com Tecnologia: alinhamos requisi
 
 Os cargos e períodos profissionais, a formação acadêmica, as capacitações e os cursos que ministrei estão apresentados no [portfólio](https://gustavomrtns.github.io/projetos_rh/).
 
-## Projetos em contexto
+## Ações realizadas
 
-Os [relatos de atuação](https://gustavomrtns.github.io/projetos_rh/#relatos) explicam o contexto, minha participação, a construção conjunta e as entregas de pesquisa de engajamento, onboarding, treinamentos e comunicação interna. Não reproduzem documentos, telas, dados individuais ou indicadores internos.
+Na seção [T&D, DHO e Comunicação Interna na prática](https://gustavomrtns.github.io/projetos_rh/#acoes-dho), os registros estão organizados por frente:
 
-## Ações de DHO na prática
+- **T&D — Rede Amazônica:** treinamento de 5S e Processos com foco em Team Building.
+- **DHO — Rede Amazônica:** primeira Pesquisa de Engajamento Organizacional, Oficina de Letramento Étnico-Racial, Workshop de Diversidade Geracional e campanha de Dia das Crianças.
+- **DHO e Comunicação Interna — Alitz LTDA:** palestras, cerimônias internas, ações sociais e eventos corporativos.
 
-Na seção [Ações de DHO](https://gustavomrtns.github.io/projetos_rh/#acoes-dho), reúno registros do treinamento de 5S e Processos que ministrei, da primeira Pesquisa de Engajamento Organizacional e de iniciativas de inclusão, cultura e responsabilidade social na Rede Amazônica. A seção também inclui registros da minha atuação em palestras, cerimônias, ações sociais e eventos corporativos na Alitz LTDA.
+## Cases profissionais
 
-## Soluções digitais de RH
+Os [cases profissionais](https://gustavomrtns.github.io/projetos_rh/#relatos) descrevem a necessidade, minha atuação e as entregas em **T&D e integração** (onboarding e gestão de treinamentos), **DHO** (pesquisa de engajamento) e **Comunicação Interna** (campanhas e identidade visual). Não reproduzem documentos, telas, dados individuais ou indicadores internos.
 
-| Projeto | Proposta | Versão pública | Documentação |
+## Projetos digitais de RH
+
+| Projeto | Status e proposta | Versão pública | Documentação |
 |---|---|---|---|
-| **GT360°** | Ambiente de Gestão de Pessoas com nove aplicações de jornada do colaborador, engajamento, desenvolvimento e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
-| **eu + horizonte** | Intranet idealizada para integrar colaboradores e apoiar comunicação, desenvolvimento, valorização e retenção de talentos. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
+| **GT360°** | Solução implantada. A demonstração reúne nove aplicações de jornada do colaborador, engajamento, desenvolvimento e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
+| **eu + horizonte** | Protótipo navegável de intranet para integrar colaboradores e apoiar comunicação, desenvolvimento, valorização e retenção de talentos. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
 
 ### Implantação interna e apresentação pública
 

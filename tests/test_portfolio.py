@@ -125,8 +125,14 @@ class BrowserSmokeTests(unittest.TestCase):
                 context, page = self._new_page(device)
                 try:
                     page.goto(self.base + "/#acoes-dho", wait_until="domcontentloaded")
-                    showcase = page.get_by_role("region", name="Ações de DHO na prática")
+                    showcase = page.get_by_role("region", name="T&D, DHO e Comunicação Interna na prática")
                     self.assertTrue(showcase.is_visible())
+                    self.assertEqual(showcase.locator(".dho-kicker").all_text_contents(), [
+                        "T&D · Rede Amazônica",
+                        "DHO · Rede Amazônica",
+                        "DHO",
+                        "DHO e Comunicação Interna",
+                    ])
                     for img in showcase.get_by_role("img").all():
                         img.scroll_into_view_if_needed()
                         self.assertEqual(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 1200)
@@ -134,6 +140,10 @@ class BrowserSmokeTests(unittest.TestCase):
                     self.assertEqual(showcase.get_by_role("link", name=re.compile(r"^Registro [1-5]")).count(), 5)
                     showcase.get_by_role("link", name=re.compile("Conhecer o processo")).click()
                     self.assertTrue(page.locator("#case-pesquisa-engajamento").evaluate("(node) => node.open"))
+                    page.locator("#gt360-projeto a[href='#case-onboarding-treinamentos']").click()
+                    self.assertTrue(page.locator("#case-onboarding-treinamentos").evaluate("(node) => node.open"))
+                    page.locator("#eu-horizonte a[href='#case-comunicacao-interna']").click()
+                    self.assertTrue(page.locator("#case-comunicacao-interna").evaluate("(node) => node.open"))
                     self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), DEVICES[device]["viewport"]["width"])
                 finally:
                     context.close()
