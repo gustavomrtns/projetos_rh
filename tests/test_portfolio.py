@@ -111,11 +111,11 @@ class BrowserSmokeTests(unittest.TestCase):
                     page.locator("#projetos").scroll_into_view_if_needed()
                     for href in ("./gt360/", "./eu-horizonte-intranet/"):
                         self.assertEqual(page.locator(f'#projetos a[href="{href}"]').count(), 2, href)
-                    page.wait_for_function(
-                        "() => [...document.querySelectorAll('#projetos .project-visual img')]"
-                        ".length === 2 && [...document.querySelectorAll('#projetos .project-visual img')]"
-                        ".every(im => im.complete && im.naturalWidth > 0)"
-                    )
+                    images = page.locator("#projetos .project-visual img")
+                    self.assertEqual(images.count(), 2)
+                    for img in images.all():
+                        img.scroll_into_view_if_needed()
+                        self.assertGreater(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 0)
                 finally:
                     context.close()
 
