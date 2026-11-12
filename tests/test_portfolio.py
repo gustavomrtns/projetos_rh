@@ -133,11 +133,16 @@ class BrowserSmokeTests(unittest.TestCase):
                         "DHO",
                         "DHO e Comunicação Interna",
                     ])
-                    for img in showcase.get_by_role("img").all():
+                    for img in showcase.locator(".dho-feature img").all():
                         img.scroll_into_view_if_needed()
                         self.assertEqual(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 1200)
-                    showcase.get_by_text("Ver cinco registros no Instagram").click()
-                    self.assertEqual(showcase.get_by_role("link", name=re.compile(r"^Registro [1-5]")).count(), 5)
+                    images = showcase.locator(".dho-organization img")
+                    self.assertEqual(images.count(), 9)
+                    for img in images.all():
+                        img.scroll_into_view_if_needed()
+                        self.assertGreater(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 0)
+                    self.assertEqual(showcase.locator("a.dho-cover[href^='https://www.instagram.com/p/']").count(), 6)
+                    self.assertTrue(showcase.get_by_role("link", name=re.compile("Setembro Amarelo")).is_visible())
                     showcase.get_by_role("link", name=re.compile("Conhecer o processo")).click()
                     self.assertTrue(page.locator("#case-pesquisa-engajamento").evaluate("(node) => node.open"))
                     page.locator("#gt360-projeto a[href='#case-onboarding-treinamentos']").click()

@@ -61,9 +61,16 @@ class ProfessionalPresentationTests(unittest.TestCase):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
         self.assertIn("#acoes-dho", [attrs.get("href") for tag, attrs in elements if tag == "a"])
         images = [attrs for tag, attrs in elements if tag == "img" and attrs.get("src", "").startswith("./assets/dho/")]
-        self.assertEqual(len(images), 2)
+        self.assertEqual(len(images), 11)
+        covers = [attrs for attrs in images if "/registros/alitz-" in attrs["src"]]
+        article_photos = [attrs for attrs in images if "/registros/rede-" in attrs["src"]]
+        self.assertEqual(len(covers), 6)
+        self.assertEqual(len(article_photos), 3)
         for attrs in images:
-            self.assertTrue(attrs.get("alt"))
+            if attrs not in covers:
+                self.assertTrue(attrs.get("alt"))
+            else:
+                self.assertIn("alt", attrs)
             self.assertEqual(attrs.get("loading"), "lazy")
             self.assertTrue((ROOT / attrs["src"]).is_file())
         links = [attrs.get("href", "") for tag, attrs in elements if tag == "a"]

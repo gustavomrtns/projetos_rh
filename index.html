@@ -145,7 +145,7 @@
     .dho-content p,.dho-organization p{color:var(--muted);font-size:14px;line-height:1.65}
     .dho-content>.dho-link{margin-top:auto}
     .dho-link{color:var(--red-deep);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;line-height:1.55}
-    .dho-link:focus-visible,.dho-posts summary:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:3px}
+    .dho-link:focus-visible,.dho-cover:focus-visible{outline:2px solid var(--red);outline-offset:4px}
     .dho-organizations{margin-top:16px;align-items:start}
     .dho-organization{padding:24px}
     .dho-organization>.dho-kicker{display:block;margin-bottom:8px}
@@ -154,8 +154,16 @@
     .dho-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:14px}
     .dho-list>li{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:13px}
     .dho-organization h5{font-size:15px}
-    .dho-posts summary{font-size:13px;font-weight:700;color:var(--red-deep);cursor:pointer;width:fit-content}
-    .dho-posts ul{display:flex;gap:6px 14px;flex-wrap:wrap;list-style:none;margin:8px 0 0;padding:0}
+    .dho-record-photo{margin:6px 0 2px}
+    .dho-record-photo img,.dho-cover img{width:100%;height:auto;object-fit:contain;background:var(--paper);display:block}
+    .dho-record-photo img{aspect-ratio:16/10;border-radius:12px;border:1px solid var(--line)}
+    .dho-record-photo figcaption,.dho-organization .dho-credit{color:var(--muted);font-size:11px;line-height:1.55;margin-top:4px}
+    .dho-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;margin:6px 0 0;padding:0}
+    .dho-cover{display:grid;grid-template-rows:auto 1fr;height:100%;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+    .dho-cover img{aspect-ratio:4/5}
+    .dho-cover>span{font-size:12px;line-height:1.45;padding:8px 10px;color:var(--red-deep);font-weight:700}
+    .dho-cover:hover>span{text-decoration:underline;text-underline-offset:3px}
+    .dho-cover--featured{width:min(190px,100%);margin-top:5px}
     .project-related{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin-top:16px;font-size:12px}
     .project-related a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
     .project-related a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
@@ -291,16 +299,28 @@
                 <li>
                   <h5>Oficina de Letramento Étnico-Racial</h5>
                   <p>Participei da idealização, do planejamento, da mobilização dos colaboradores e da realização da oficina do projeto Consciência Coletiva, sobre racismo estrutural, representatividade e práticas antirracistas no trabalho.</p>
+                  <figure class="dho-record-photo">
+                    <img src="./assets/dho/registros/rede-letramento.webp" alt="Participantes da Oficina de Letramento Étnico-Racial reunidos no auditório da Rede Amazônica" width="960" height="720" loading="lazy" decoding="async">
+                    <figcaption>Foto: Manoel Gustavo / Rede Amazônica</figcaption>
+                  </figure>
                   <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/grupo-rede-amazonica-realiza-oficina-de-letramento-etnico-racial.ghtml" target="_blank" rel="noopener">Ler matéria sobre a oficina ↗</a>
                 </li>
                 <li>
                   <h5>Workshop de Diversidade Geracional</h5>
                   <p>Atuei da idealização à execução do workshop, incluindo o planejamento, a comunicação e a mobilização dos colaboradores. O encontro sobre inclusão e colaboração entre gerações aconteceu em Manaus, com transmissão para outras unidades.</p>
+                  <figure class="dho-record-photo">
+                    <img src="./assets/dho/registros/rede-diversidade.webp" alt="Participantes do Workshop de Diversidade Geracional reunidos no auditório após o encontro" width="960" height="640" loading="lazy" decoding="async">
+                    <figcaption>Foto: Emilly Silva / Rede Amazônica</figcaption>
+                  </figure>
                   <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-realiza-workshop-sobre-diversidade-geracional.ghtml" target="_blank" rel="noopener">Ler matéria sobre o workshop ↗</a>
                 </li>
                 <li>
                   <h5>Campanha de Dia das Crianças · ESG social</h5>
                   <p>Contribuí em todas as etapas da campanha: idealização, planejamento, comunicação, mobilização dos colaboradores e execução da arrecadação de doações para o Abrigo Monte Salém, em Manaus.</p>
+                  <figure class="dho-record-photo">
+                    <img src="./assets/dho/registros/rede-dia-das-criancas.webp" alt="Caixas e cestas de doações arrecadadas na campanha de Dia das Crianças" width="840" height="630" loading="lazy" decoding="async">
+                    <figcaption>Foto: Divulgação / Rede Amazônica</figcaption>
+                  </figure>
                   <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-arrecada-doacoes-para-abrigo-infantil-em-manaus.ghtml" target="_blank" rel="noopener">Ler matéria sobre a campanha ↗</a>
                 </li>
               </ul>
@@ -312,21 +332,32 @@
                 <li>
                   <h5>Palestras organizacionais</h5>
                   <p>Organizei e facilitei palestras voltadas ao público interno.</p>
-                  <a class="dho-link" href="https://www.instagram.com/p/DPPpLxAEWcN/" target="_blank" rel="noopener">Ver registro da palestra no Instagram ↗</a>
+                  <a class="dho-cover dho-cover--featured" href="https://www.instagram.com/p/DPPpLxAEWcN/" target="_blank" rel="noopener">
+                    <img src="./assets/dho/registros/alitz-setembro-amarelo.webp" alt="" width="361" height="640" loading="lazy" decoding="async">
+                    <span>Setembro Amarelo ↗</span>
+                  </a>
                 </li>
                 <li>
                   <h5>Cerimônias internas, ações sociais e eventos corporativos</h5>
                   <p>Organizei iniciativas internas e ações sociais voltadas ao engajamento e à convivência entre equipes.</p>
-                  <details class="dho-posts">
-                    <summary>Ver cinco registros no Instagram</summary>
-                    <ul>
-                      <li><a class="dho-link" href="https://www.instagram.com/p/DJcSlW0RwcA/" target="_blank" rel="noopener">Registro 1 ↗</a></li>
-                      <li><a class="dho-link" href="https://www.instagram.com/p/DNHI2NARgf0/" target="_blank" rel="noopener">Registro 2 ↗</a></li>
-                      <li><a class="dho-link" href="https://www.instagram.com/p/DSDrBackdCK/" target="_blank" rel="noopener">Registro 3 ↗</a></li>
-                      <li><a class="dho-link" href="https://www.instagram.com/p/DJsEt0jRSJT/?img_index=1" target="_blank" rel="noopener">Registro 4 ↗</a></li>
-                      <li><a class="dho-link" href="https://www.instagram.com/p/DIji9EVREc1/" target="_blank" rel="noopener">Registro 5 ↗</a></li>
-                    </ul>
-                  </details>
+                  <ul class="dho-gallery" aria-label="Capas das publicações no Instagram">
+                    <li><a class="dho-cover" href="https://www.instagram.com/p/DJcSlW0RwcA/" target="_blank" rel="noopener">
+                      <img src="./assets/dho/registros/alitz-dia-das-maes.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Dia das Mães ↗</span>
+                    </a></li>
+                    <li><a class="dho-cover" href="https://www.instagram.com/p/DNHI2NARgf0/" target="_blank" rel="noopener">
+                      <img src="./assets/dho/registros/alitz-dia-dos-pais.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Dia dos Pais ↗</span>
+                    </a></li>
+                    <li><a class="dho-cover" href="https://www.instagram.com/p/DSDrBackdCK/" target="_blank" rel="noopener">
+                      <img src="./assets/dho/registros/alitz-confraternizacao.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Confraternização de fim de ano ↗</span>
+                    </a></li>
+                    <li><a class="dho-cover" href="https://www.instagram.com/p/DJsEt0jRSJT/?img_index=1" target="_blank" rel="noopener">
+                      <img src="./assets/dho/registros/alitz-conectarh.webp" alt="" width="640" height="640" loading="lazy" decoding="async"><span>ConectaRH 2025 ↗</span>
+                    </a></li>
+                    <li><a class="dho-cover" href="https://www.instagram.com/p/DIji9EVREc1/" target="_blank" rel="noopener">
+                      <img src="./assets/dho/registros/alitz-pascoa.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Confraternização de Páscoa ↗</span>
+                    </a></li>
+                  </ul>
+                  <p class="dho-credit">Capas: @bsc.contabilidade / Instagram</p>
                 </li>
               </ul>
             </div>
