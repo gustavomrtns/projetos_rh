@@ -127,11 +127,35 @@
     .education-card{padding:24px;min-height:170px}.education-card h3{font-size:20px;margin-top:20px}
     .cta{padding:44px}.cta h2{font-size:clamp(34px,4vw,52px)}#interesses{padding-top:54px}
     .section-shortcuts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line)}.section-shortcuts>span{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}.section-shortcuts a{font-size:12px;font-weight:600;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.section-shortcuts a:hover{color:var(--red);border-color:var(--red)}
-    #relatos,#solucoes-digitais,#cursos-ministrados,#eu-horizonte{scroll-margin-top:100px}
+    #relatos,#case-pesquisa-engajamento,#solucoes-digitais,#cursos-ministrados,#eu-horizonte{scroll-margin-top:100px}
     .case-studies{margin-top:32px}.case-studies .subsection-head{margin-bottom:16px}
     .experience-case{border:1px solid var(--line);border-radius:18px;background:var(--card);margin-top:10px;overflow:hidden}
     .experience-case summary{padding:20px 23px;cursor:pointer;font-size:15px;font-weight:700;line-height:1.5;list-style-position:inside}.experience-case summary::marker{color:var(--red)}.experience-case summary small{display:block;margin:5px 0 0 18px;color:var(--muted);font-size:12px;font-weight:400}
     .experience-case[open] summary{border-bottom:1px solid var(--line)}.experience-case dl{display:grid;grid-template-columns:145px minmax(0,1fr);gap:12px 18px;margin:22px 24px}.experience-case dt{font-size:12px;font-weight:800;color:var(--red);line-height:1.6}.experience-case dd{margin:0;color:var(--muted);font-size:14px;line-height:1.65}.experience-case>a{display:inline-block;margin:0 24px 24px;font-size:12px;font-weight:700;color:var(--red);text-decoration:underline;text-underline-offset:3px}
+    .dho-showcase{margin-top:36px;scroll-margin-top:100px}
+    .dho-showcase .subsection-head{margin-bottom:18px}
+    .dho-features,.dho-organizations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .dho-feature,.dho-organization{background:var(--card);border:1px solid var(--line);border-radius:22px;min-width:0}
+    .dho-feature{display:flex;flex-direction:column;overflow:hidden}
+    .dho-media{margin:0}.dho-media img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--paper)}
+    .dho-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:12px;padding:24px}
+    .dho-kicker{color:var(--red-deep);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .dho-feature h4,.dho-organization h4,.dho-organization h5{font-family:Manrope,sans-serif;margin:0;line-height:1.3}
+    .dho-feature h4{font-size:clamp(19px,2.5vw,24px);letter-spacing:-.025em}
+    .dho-content p,.dho-organization p{color:var(--muted);font-size:14px;line-height:1.65}
+    .dho-content>.dho-link{margin-top:auto}
+    .dho-link{color:var(--red-deep);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;line-height:1.55}
+    .dho-link:focus-visible,.dho-posts summary:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:3px}
+    .dho-organizations{margin-top:16px;align-items:start}
+    .dho-organization{padding:24px}
+    .dho-organization h4{display:flex;align-items:center;gap:10px;font-size:19px}
+    .dho-organization h4::before{content:"";display:block;width:10px;height:10px;flex:none;border-radius:50%;background:var(--lime);border:1px solid #559900}
+    .dho-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:14px}
+    .dho-list>li{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:13px}
+    .dho-organization h5{font-size:15px}
+    .dho-posts summary{font-size:13px;font-weight:700;color:var(--red-deep);cursor:pointer;width:fit-content}
+    .dho-posts ul{display:flex;gap:6px 14px;flex-wrap:wrap;list-style:none;margin:8px 0 0;padding:0}
+    @media(max-width:720px){.dho-features,.dho-organizations{grid-template-columns:1fr}.dho-content,.dho-organization{padding:19px}}
     @media(max-width:900px){.section-head{grid-template-columns:100px 1fr}.project-copy{padding:28px}.hero{min-height:auto}.hero-layout{gap:28px}}
     @media(max-width:720px){.hero{padding:106px 0 44px}.section-shortcuts{padding:16px 0;gap:8px}.section-shortcuts>span{width:100%}.section-shortcuts a{font-size:11px;padding:8px 10px}section{padding:54px 0}.section-head{grid-template-columns:1fr;gap:10px}.section-head h2{font-size:34px}.panel,.job,.delivery-card{padding:22px}.practice-card{min-height:205px}.project-copy{padding:27px 23px}.cta{padding:32px 24px}.experience-case summary{padding:18px}.experience-case dl{grid-template-columns:1fr;gap:6px;margin:20px}.experience-case dt:not(:first-child){margin-top:10px}.experience-case>a{margin:0 20px 20px}.experience-case summary small{margin-left:0}#interesses{padding-top:40px}}
   </style>
@@ -169,7 +193,7 @@
   </header>
 
   <div class="wrap section-shortcuts" role="navigation" aria-label="Atalhos do portfólio">
-    <span>Explore por tema</span><a href="#relatos">Projetos em contexto</a><a href="#solucoes-digitais">Soluções digitais</a><a href="#cursos-ministrados">Cursos ministrados</a><a href="#certificacoes">Capacitações</a><a href="#interesses">Interesses</a>
+    <span>Explore por tema</span><a href="#acoes-dho">Ações de DHO</a><a href="#relatos">Projetos em contexto</a><a href="#solucoes-digitais">Soluções digitais</a><a href="#cursos-ministrados">Cursos ministrados</a><a href="#certificacoes">Capacitações</a><a href="#interesses">Interesses</a>
   </div>
 
   <main>
@@ -232,9 +256,78 @@
           <article class="delivery-card"><span class="delivery-label">DESIGN, COMUNICAÇÃO E CULTURA</span><h3>Identidade visual e endomarketing</h3><p>Criação de identidades visuais, peças e campanhas de comunicação interna, da ideação à operação, com foco na experiência do colaborador.</p><dl><dt>Entregas</dt><dd>Identidades de projetos, materiais gráficos, comunicados, campanhas de engajamento e bem-estar, e conteúdos de desenvolvimento organizacional.</dd></dl></article>
           <article class="delivery-card"><span class="delivery-label">PROCESSOS E MELHORIA CONTÍNUA</span><h3>Organização das rotinas e soluções de RH</h3><p>Mapeamento e melhoria de fluxos de RH, Departamento Pessoal e benefícios, com apoio de sistemas e ferramentas digitais.</p><dl><dt>Entregas</dt><dd>Fluxos documentados, controles, relatórios e melhorias em processos e sistemas para apoiar a operação e o acompanhamento das demandas.</dd></dl></article>
         </div>
+        <div class="dho-showcase" id="acoes-dho" role="region" aria-labelledby="acoes-dho-titulo">
+          <div class="subsection-head"><h3 id="acoes-dho-titulo">Ações de DHO na prática</h3><p>Treinamentos que ministrei, iniciativas de escuta organizacional e ações de cultura, inclusão e responsabilidade social das quais participei.</p></div>
+          <div class="dho-features">
+            <article class="dho-feature">
+              <figure class="dho-media"><img src="./assets/dho/treinamento-5s.webp" alt="Participantes do treinamento de 5S discutem uma atividade prática em pequenos grupos" width="1200" height="675" loading="lazy" decoding="async"></figure>
+              <div class="dho-content">
+                <span class="dho-kicker">Rede Amazônica · Treinamento e Desenvolvimento</span>
+                <h4>Treinamento em 5S e Processos com foco em Team Building</h4>
+                <p>Ministrei o treinamento em duas turmas. Usei dinâmicas em grupo para que os participantes identificassem desperdícios e discutissem como aplicar o 5S à rotina, conectando cultura Lean, colaboração e melhoria contínua.</p>
+                <a class="dho-link" href="./assets/dho/treinamento-5s-outra-turma.webp" target="_blank" rel="noopener">Ver foto da outra turma de 5S ↗</a>
+              </div>
+            </article>
+            <article class="dho-feature">
+              <figure class="dho-media"><img src="./assets/dho/pesquisa-engajamento.webp" alt="Colaboradora usa o celular para acessar a Pesquisa de Engajamento a partir de um cartaz" width="1200" height="675" loading="lazy" decoding="async"></figure>
+              <div class="dho-content">
+                <span class="dho-kicker">Rede Amazônica · Escuta organizacional</span>
+                <h4>1ª Pesquisa de Engajamento Organizacional</h4>
+                <p>Atuei na estruturação do questionário, na comunicação e na mobilização dos colaboradores. Acompanhei a participação e a consolidação das respostas para a apresentação executiva.</p>
+                <a class="dho-link" href="#case-pesquisa-engajamento">Conhecer o processo da pesquisa ↓</a>
+              </div>
+            </article>
+          </div>
+          <div class="dho-organizations">
+            <div class="dho-organization">
+              <h4>Rede Amazônica</h4>
+              <ul class="dho-list">
+                <li>
+                  <h5>Oficina de Letramento Étnico-Racial</h5>
+                  <p>Contribuí com o registro da oficina do projeto Consciência Coletiva, que reuniu colaboradores para discutir racismo estrutural, representatividade e práticas antirracistas no trabalho.</p>
+                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/grupo-rede-amazonica-realiza-oficina-de-letramento-etnico-racial.ghtml" target="_blank" rel="noopener">Ler matéria sobre a oficina ↗</a>
+                </li>
+                <li>
+                  <h5>Workshop de Diversidade Geracional</h5>
+                  <p>Atuei na preparação e na comunicação do encontro sobre convivência, inclusão e colaboração entre gerações, realizado em Manaus e transmitido para outras unidades.</p>
+                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-realiza-workshop-sobre-diversidade-geracional.ghtml" target="_blank" rel="noopener">Ler matéria sobre o workshop ↗</a>
+                </li>
+                <li>
+                  <h5>Campanha de Dia das Crianças · ESG social</h5>
+                  <p>Contribuí com a comunicação e a mobilização dos colaboradores para arrecadar doações destinadas ao Abrigo Monte Salém, em Manaus.</p>
+                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-arrecada-doacoes-para-abrigo-infantil-em-manaus.ghtml" target="_blank" rel="noopener">Ler matéria sobre a campanha ↗</a>
+                </li>
+              </ul>
+            </div>
+            <div class="dho-organization">
+              <h4>Alitz LTDA</h4>
+              <ul class="dho-list">
+                <li>
+                  <h5>Palestras organizacionais</h5>
+                  <p>Organizei e facilitei palestras voltadas ao público interno.</p>
+                  <a class="dho-link" href="https://www.instagram.com/p/DPPpLxAEWcN/" target="_blank" rel="noopener">Ver registro da palestra no Instagram ↗</a>
+                </li>
+                <li>
+                  <h5>Cerimônias internas, ações sociais e eventos corporativos</h5>
+                  <p>Organizei iniciativas internas e ações sociais voltadas ao engajamento e à convivência entre equipes.</p>
+                  <details class="dho-posts">
+                    <summary>Ver cinco registros no Instagram</summary>
+                    <ul>
+                      <li><a class="dho-link" href="https://www.instagram.com/p/DJcSlW0RwcA/" target="_blank" rel="noopener">Registro 1 ↗</a></li>
+                      <li><a class="dho-link" href="https://www.instagram.com/p/DNHI2NARgf0/" target="_blank" rel="noopener">Registro 2 ↗</a></li>
+                      <li><a class="dho-link" href="https://www.instagram.com/p/DSDrBackdCK/" target="_blank" rel="noopener">Registro 3 ↗</a></li>
+                      <li><a class="dho-link" href="https://www.instagram.com/p/DJsEt0jRSJT/?img_index=1" target="_blank" rel="noopener">Registro 4 ↗</a></li>
+                      <li><a class="dho-link" href="https://www.instagram.com/p/DIji9EVREc1/" target="_blank" rel="noopener">Registro 5 ↗</a></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         <div class="case-studies" id="relatos">
           <div class="subsection-head" data-reveal><h3>Projetos em contexto</h3><p>Relatos sintéticos da minha atuação, sem reproduzir documentos, telas ou indicadores internos. Abra cada projeto para conhecer o contexto, a contribuição e a entrega.</p></div>
-          <details class="experience-case"><summary>Pesquisa de Engajamento Organizacional <small>Escuta, operação e parceria com Tecnologia</small></summary><dl>
+          <details class="experience-case" id="case-pesquisa-engajamento"><summary>Pesquisa de Engajamento Organizacional <small>Escuta, operação e parceria com Tecnologia</small></summary><dl>
             <dt>Necessidade</dt><dd>Organizar a escuta dos colaboradores e viabilizar a aplicação e a leitura da pesquisa em um fluxo de RH.</dd>
             <dt>Minha atuação</dt><dd>Mapeamento de necessidades, estruturação do instrumento, ideação da experiência de aplicação, comunicação, mobilização e orientação às lideranças.</dd>
             <dt>Construção conjunta</dt><dd>Alinhamentos com Tecnologia para transformar as necessidades em funcionalidades, acompanhar ajustes e participar da homologação e validação.</dd>
@@ -390,6 +483,11 @@
       }
       menuButton.addEventListener('click',()=>{const open=!navLinks.classList.contains('open');navLinks.classList.toggle('open',open);document.body.classList.toggle('menu-open',open);menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});
       links.forEach(link=>link.addEventListener('click',closeMenu));
+      const researchCase=document.getElementById('case-pesquisa-engajamento');
+      const researchHash='#'+researchCase.id;
+      const openResearchCase=()=>{if(location.hash===researchHash)researchCase.open=true};
+      document.querySelector('a[href="'+researchHash+'"]').addEventListener('click',()=>{researchCase.open=true});
+      addEventListener('hashchange',openResearchCase);openResearchCase();
       addEventListener('scroll',update,{passive:true});addEventListener('resize',()=>{if(innerWidth>720)closeMenu();update()},{passive:true});update();
       backTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
     })();

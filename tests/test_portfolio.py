@@ -119,6 +119,25 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_dho_section_loads_photos_and_opens_the_research_case(self):
+        for device in DEVICES:
+            with self.subTest(device=device):
+                context, page = self._new_page(device)
+                try:
+                    page.goto(self.base + "/#acoes-dho", wait_until="domcontentloaded")
+                    showcase = page.get_by_role("region", name="Ações de DHO na prática")
+                    self.assertTrue(showcase.is_visible())
+                    for img in showcase.get_by_role("img").all():
+                        img.scroll_into_view_if_needed()
+                        self.assertEqual(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 1200)
+                    showcase.get_by_text("Ver cinco registros no Instagram").click()
+                    self.assertEqual(showcase.get_by_role("link", name=re.compile(r"^Registro [1-5]")).count(), 5)
+                    showcase.get_by_role("link", name=re.compile("Conhecer o processo")).click()
+                    self.assertTrue(page.locator("#case-pesquisa-engajamento").evaluate("(node) => node.open"))
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), DEVICES[device]["viewport"]["width"])
+                finally:
+                    context.close()
+
     def test_gt360_startup_and_nine_modules(self):
         for device in DEVICES:
             with self.subTest(device=device):

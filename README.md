@@ -22,6 +22,10 @@ Os cargos e períodos profissionais, a formação acadêmica, as capacitações 
 
 Os [relatos de atuação](https://gustavomrtns.github.io/projetos_rh/#relatos) explicam o contexto, minha participação, a construção conjunta e as entregas de pesquisa de engajamento, onboarding, treinamentos e comunicação interna. Não reproduzem documentos, telas, dados individuais ou indicadores internos.
 
+## Ações de DHO na prática
+
+Na seção [Ações de DHO](https://gustavomrtns.github.io/projetos_rh/#acoes-dho), reúno registros do treinamento de 5S e Processos que ministrei, da primeira Pesquisa de Engajamento Organizacional e de iniciativas de inclusão, cultura e responsabilidade social na Rede Amazônica. A seção também inclui registros da minha atuação em palestras, cerimônias, ações sociais e eventos corporativos na Alitz LTDA.
+
 ## Soluções digitais de RH
 
 | Projeto | Proposta | Versão pública | Documentação |
