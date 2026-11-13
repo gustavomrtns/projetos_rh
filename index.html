@@ -122,6 +122,14 @@
     .panel{padding:28px}.about-copy{font-size:16px;line-height:1.72}.skill-row{padding:14px}
     .practice-card{padding:24px;min-height:230px}.practice-card h3{margin-top:22px}
     .timeline-items{gap:12px}.job{padding:22px;gap:20px}.job h3{font-size:20px}.job p{line-height:1.6}
+    .job>div{min-width:0}
+    .job-scope{margin-top:16px;border-top:1px solid var(--line)}
+    .job-scope summary{display:list-item;width:fit-content;padding:10px 4px 4px;cursor:pointer;color:var(--red-deep);font-size:13px;font-weight:700;line-height:1.5;list-style-position:inside}
+    .job-scope summary:hover{text-decoration:underline;text-underline-offset:3px}
+    .job-scope summary:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+    .job-scope ul{display:grid;gap:9px;margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14px;line-height:1.6}
+    .job-scope li::marker{color:var(--red)}
+    .job-scope strong{color:var(--ink)}
     .delivery-card{padding:24px}.delivery-card h3{font-size:20px;margin:16px 0 12px}.delivery-card dl{margin-top:18px;padding-top:15px}
     .project-copy{padding:30px}.project-card{min-height:410px}.project-copy h3{font-size:clamp(34px,3.8vw,48px)}
     .education-card{padding:24px;min-height:170px}.education-card h3{font-size:20px;margin-top:20px}
@@ -247,13 +255,93 @@
 
     <section id="experiencia">
       <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">03 / EXPERIÊNCIA</div><div><h2>Experiência que sustenta minha atuação.</h2><p>Vivências em Recursos Humanos, administração e ambiente industrial, com responsabilidades e aprendizados que se complementam.</p></div></div>
+        <div class="section-head" data-reveal><div class="section-index">03 / EXPERIÊNCIA</div><div><h2>Experiência que sustenta minha atuação.</h2><p>Da operação industrial ao desenvolvimento organizacional: conheça as responsabilidades que assumi em cada etapa da minha trajetória em Gestão de Pessoas.</p></div></div>
         <div class="timeline-items">
-          <article class="job" data-reveal><time>01/2026 — ATUAL</time><div><h3>Analista de Recursos Humanos<span>Rede Amazônica · Afiliada Globo</span></h3><p>Atuação em treinamento e desenvolvimento, comunicação interna, pesquisas organizacionais, desenvolvimento de lideranças, diversidade, equidade e inclusão e iniciativas ESG. Condução de projetos de RH e soluções digitais, com levantamento de necessidades, definição de etapas, articulação entre áreas e acompanhamento de indicadores.</p><div class="job-tags"><span>Desenvolvimento de Pessoas</span><span>Comunicação Interna</span><span>Indicadores</span><span>Projetos de RH</span></div></div></article>
-          <article class="job" data-reveal><time>11/2024 — 01/2026</time><div><h3>Business Partner<span>Alitz LTDA</span></h3><p>Atuação em recrutamento por competências, integração, Departamento Pessoal, benefícios e atendimento aos colaboradores. Participação em Planos de Desenvolvimento Individual (PDI) e Programas de Desenvolvimento de Lideranças (PDL), pesquisas organizacionais, indicadores, painéis e melhoria de processos e sistemas de RH.</p><div class="job-tags"><span>RH Generalista</span><span>Recrutamento e Seleção</span><span>DP e Benefícios</span><span>Desenvolvimento</span></div></div></article>
-          <article class="job" data-reveal><time>05/2024 — 10/2024</time><div><h3>Assistente Administrativo Generalista<span>Conseven Serviços</span></h3><p>Atuação integrada em RH e rotinas administrativas, com recrutamento, admissão, férias, benefícios, ponto, treinamentos, indicadores, comunicação interna, interface com SESMT, folha e contratos.</p><div class="job-tags"><span>Rotinas de RH e DP</span><span>Administração</span><span>Treinamentos</span></div></div></article>
-          <article class="job" data-reveal><time>12/2023 — 04/2024</time><div><h3>Aprendiz de Recursos Humanos<span>Orient Relógios</span></h3><p>Apoio aos processos de Recursos Humanos e Departamento Pessoal, incluindo admissão, organização documental, integração de novos colaboradores, endomarketing e interface com SESMT.</p><div class="job-tags"><span>DP</span><span>Integração</span><span>Endomarketing</span></div></div></article>
-          <article class="job" data-reveal><time>09/2022 — 01/2024</time><div><h3>Aprendiz de Processo de Produção<span>ARMOR Brasil</span></h3><p>Experiência operacional em ambiente industrial, com atuação em processos produtivos, organização, qualidade e colaboração entre áreas.</p><div class="job-tags"><span>Processos</span><span>Produção</span><span>Qualidade</span></div></div></article>
+          <article class="job" data-reveal>
+            <time>01/2026 — ATUAL</time>
+            <div>
+              <h3>Analista de Recursos Humanos<span>Rede Amazônica · Afiliada Globo</span></h3>
+              <p>Estruturei processos de desenvolvimento organizacional que conectavam o diagnóstico de necessidades à formação de colaboradores e lideranças. Também conduzi projetos de RH que transformavam demandas da área em melhorias de processos e soluções digitais.</p>
+              <div class="job-tags"><span>DHO e T&amp;D</span><span>People Analytics</span><span>Comunicação Interna</span><span>Projetos de RH</span></div>
+              <details class="job-scope">
+                <summary>Ver responsabilidades do cargo</summary>
+                <ul>
+                  <li><strong>Desempenho e lideranças.</strong> Gerenciei ciclos de avaliação de desempenho, levantamento de necessidades de treinamento (LNT), planos de desenvolvimento individual (PDI) e programas de desenvolvimento de lideranças (PDL). Analisei matrizes de competências e acompanhei a execução das ações definidas.</li>
+                  <li><strong>Educação corporativa.</strong> Planejei trilhas de capacitação e acompanhei programas de T&amp;D em plataformas EAD/LMS, organizando turmas, materiais, registros, certificações e indicadores de aprendizagem. Ministrei treinamento em 5S e processos com atividades práticas em equipe.</li>
+                  <li><strong>Escuta e indicadores.</strong> Estruturei instrumentos de escuta e atuei em pesquisas de clima, engajamento, censo interno e fatores psicossociais. Mobilizei lideranças e acompanhei a participação; consolidei dados em Excel e Power BI para devolutivas e priorização de planos de ação.</li>
+                  <li><strong>Comunicação, cultura e ESG.</strong> Criei conteúdos e campanhas internas e contribuí, da ideação à execução, para oficinas de diversidade, equidade e inclusão, workshops e ações sociais. Articulei áreas, mobilizei colaboradores e acompanhei a logística dos encontros, incluindo ações transmitidas para outras unidades.</li>
+                  <li><strong>Processos e soluções digitais.</strong> Mapeei fluxos de RH, defini escopo, regras de negócio e critérios de aceite e organizei as prioridades com Scrum e Kanban. Conduzi etapas de desenvolvimento, teste, homologação, implantação e orientação de usuários, com automações em Power Automate, Make e n8n.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+          <article class="job" data-reveal>
+            <time>11/2024 — 01/2026</time>
+            <div>
+              <h3>Business Partner<span>Alitz LTDA</span></h3>
+              <p>Atuei junto a gestores e colaboradores, combinando desenvolvimento de pessoas, carreira e remuneração com a operação de RH. Usei indicadores para orientar decisões e traduzi necessidades das áreas em melhorias de processos e sistemas.</p>
+              <div class="job-tags"><span>RH Consultivo</span><span>Desenvolvimento de Pessoas</span><span>Cargos e Remuneração</span><span>Sistemas de RH</span></div>
+              <details class="job-scope">
+                <summary>Ver responsabilidades do cargo</summary>
+                <ul>
+                  <li><strong>Atração, integração e desenvolvimento.</strong> Conduzi recrutamento por competências, com alinhamento de perfis e análise comportamental DISC. Gerenciei onboarding, PDI e PDL, acompanhei avaliações de desempenho e usei o mapeamento de competências para organizar trilhas e materiais de capacitação.</li>
+                  <li><strong>Carreira e remuneração.</strong> Elaborei descrições de cargos, participei do planejamento sucessório e trabalhei com enquadramento salarial e pesquisas de mercado. Analisei metas comerciais para remuneração variável e lançamento em folha, acompanhei comissões e contratos e contribuí para processos de PLR.</li>
+                  <li><strong>Departamento Pessoal e benefícios.</strong> Executei rotinas de admissão, desligamento, férias e ponto; administrei benefícios, atendi colaboradores e atuei em demandas de relações sindicais e registros de treinamentos de segurança do trabalho.</li>
+                  <li><strong>Clima e indicadores de gestão.</strong> Acompanhei pesquisas de clima e planos de ação. Estruturei painéis, relatórios e apresentações para que gestores acompanhassem indicadores de desempenho e definissem prioridades.</li>
+                  <li><strong>Implantação de sistemas.</strong> Levantei necessidades com clientes e gestores, mapeei fluxos de RH e DP, parametrizei plataformas, validei funcionalidades e treinei usuários para a adoção dos novos processos.</li>
+                  <li><strong>DHO e comunicação interna.</strong> Organizei e facilitei palestras e ações de desenvolvimento, além de atuar na organização de cerimônias, eventos corporativos e ações sociais. Produzi materiais e orientei equipes sobre políticas e procedimentos internos.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+          <article class="job" data-reveal>
+            <time>05/2024 — 10/2024</time>
+            <div>
+              <h3>Assistente Administrativo Generalista<span>Conseven Serviços</span></h3>
+              <p>Combinei rotinas de gestão de pessoas com administração de contratos e melhoria de fluxos. O trabalho envolvia desde recrutamento e treinamento até a conferência de informações para folha e a articulação com Financeiro, Faturamento e Segurança do Trabalho.</p>
+              <div class="job-tags"><span>RH e Departamento Pessoal</span><span>Treinamento</span><span>Contratos e Processos</span></div>
+              <details class="job-scope">
+                <summary>Ver responsabilidades do cargo</summary>
+                <ul>
+                  <li><strong>Operações de RH e DP.</strong> Executei atividades de recrutamento, admissão, desligamento, férias, benefícios e ponto. Apoiei as rotinas de folha e apuração de encargos, conferindo informações, registros e prazos.</li>
+                  <li><strong>Cargos e remuneração variável.</strong> Elaborei descrições de cargos e participei de pesquisas salariais, adequações de remuneração e planejamento sucessório. Analisei metas e comissões para lançamento em folha e acompanhei informações para PLR.</li>
+                  <li><strong>Treinamento e comunicação.</strong> Ministrei treinamentos internos, acompanhei indicadores de T&amp;D e participei do planejamento anual de capacitações. Produzi comunicados e orientações sobre políticas e procedimentos e contribuí para ações de reconhecimento e ESG.</li>
+                  <li><strong>Contratos e processos administrativos.</strong> Elaborei, mantive e faturei contratos de serviços. Mapeei fluxos setoriais e acompanhei indicadores e demandas operacionais nas interfaces com Faturamento, Financeiro e SESMT.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+          <article class="job" data-reveal>
+            <time>12/2023 — 04/2024</time>
+            <div>
+              <h3>Aprendiz de Recursos Humanos<span>Orient Relógios</span></h3>
+              <p>Desenvolvi minha base em Recursos Humanos e Departamento Pessoal acompanhando a admissão e os primeiros passos dos colaboradores na empresa.</p>
+              <div class="job-tags"><span>Departamento Pessoal</span><span>Integração</span><span>Endomarketing</span></div>
+              <details class="job-scope">
+                <summary>Ver responsabilidades do cargo</summary>
+                <ul>
+                  <li><strong>Admissão e documentação.</strong> Apoiei a conferência de documentos admissionais, o arquivamento e a organização dos registros de colaboradores.</li>
+                  <li><strong>Integração e comunicação.</strong> Preparei materiais para a chegada de novos colaboradores e apoiei atividades de onboarding, endomarketing e demandas administrativas em interface com o SESMT.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+          <article class="job" data-reveal>
+            <time>09/2022 — 01/2024</time>
+            <div>
+              <h3>Aprendiz de Processo de Produção<span>ARMOR Brasil</span></h3>
+              <p>Comecei no ambiente industrial, apoiando o Planejamento e Controle da Produção (PCP). Aprendi a acompanhar metas e fluxos operacionais e a orientar outras pessoas nas rotinas da área.</p>
+              <div class="job-tags"><span>PCP</span><span>Indicadores de Produção</span><span>Orientação de Aprendizes</span></div>
+              <details class="job-scope">
+                <summary>Ver responsabilidades do cargo</summary>
+                <ul>
+                  <li><strong>Ordens de produção e insumos.</strong> Apoiei a liberação de ordens de produção para faturamento e a emissão e o controle de pedidos de insumos.</li>
+                  <li><strong>Indicadores operacionais.</strong> Acompanhei metas produtivas e elaborei relatórios de desempenho em apoio a Produção, Logística, PCP e Controladoria.</li>
+                  <li><strong>Treinamento de aprendizes.</strong> Orientei jovens aprendizes na execução das rotinas e no desenvolvimento de competências para o trabalho na operação.</li>
+                </ul>
+              </details>
+            </div>
+          </article>
         </div>
         <aside class="experience-note" data-reveal aria-label="Vivência em CIPA"><span class="note-label">VIVÊNCIA EM CIPA</span><p>Também atuei como membro da CIPA, uma experiência ligada ao cuidado com as pessoas e à atenção ao ambiente de trabalho.</p></aside>
       </div>
