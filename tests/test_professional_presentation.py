@@ -23,21 +23,19 @@ class ProfessionalPresentationTests(unittest.TestCase):
             self.assertIn("Product Owner", content, path)
         self.assertIn("Scrum Master", (ROOT / "index.html").read_text(encoding="utf-8"))
 
-    def test_professional_content_is_retained(self):
+    def test_landing_focuses_on_applications_and_short_bio(self):
         content = (ROOT / "index.html").read_text(encoding="utf-8")
         elements = Elements(content).elements
-        def count_class(name):
-            return sum(name in attrs.get("class", "").split() for _, attrs in elements)
-        self.assertEqual(count_class("job"), 5)
-        self.assertEqual(count_class("education-card"), 4)
-        self.assertEqual(count_class("cert"), 17)
-        self.assertEqual(count_class("delivery-card"), 6)
-        self.assertEqual(count_class("teaching-card"), 4)
-        self.assertEqual(count_class("experience-case"), 3)
-        self.assertIn("01/2026 — ATUAL", content)
-        self.assertIn("Analista Técnico Comportamental — DISC", content)
-        self.assertIn("Identidades de projetos, materiais gráficos, comunicados, campanhas de engajamento e bem-estar, e conteúdos de desenvolvimento organizacional.", content)
-        self.assertIn("Recrutamento e Seleção, Departamento Pessoal, Benefícios, Treinamento e Desenvolvimento, Implantação e Mapeamento de Processos e Sistemas de Gestão, e Projetos de RH.", content)
+        ids = {attrs.get("id") for _, attrs in elements}
+        projects = [attrs for tag, attrs in elements if tag == "article"
+                    and "project-card" in attrs.get("class", "").split()]
+        self.assertEqual(len(projects), 2)
+        self.assertEqual({attrs["id"] for attrs in projects}, {"gt360-projeto", "eu-horizonte"})
+        self.assertIn("sobre", ids)
+        self.assertTrue({"experiencia", "formacao", "certificacoes", "acoes-dho"}.isdisjoint(ids))
+        self.assertIn("que <span>projetei.</span>", content)
+        self.assertIn("Protótipo navegável", content)
+        self.assertIn("Demonstração pública", content)
 
     def test_landing_anchors_resolve_and_ids_are_unique(self):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
@@ -57,27 +55,15 @@ class ProfessionalPresentationTests(unittest.TestCase):
             self.assertEqual(links[0]["aria-label"], "Voltar ao portfólio profissional")
             self.assertTrue((ROOT / Path(path).parent / links[0]["href"].split("#")[0] / "index.html").resolve().is_file())
 
-    def test_dho_evidence_is_linked_from_the_landing(self):
+    def test_landing_links_to_all_nine_existing_modules(self):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
-        self.assertIn("#acoes-dho", [attrs.get("href") for tag, attrs in elements if tag == "a"])
-        images = [attrs for tag, attrs in elements if tag == "img" and attrs.get("src", "").startswith("./assets/dho/")]
-        self.assertEqual(len(images), 11)
-        covers = [attrs for attrs in images if "/registros/alitz-" in attrs["src"]]
-        article_photos = [attrs for attrs in images if "/registros/rede-" in attrs["src"]]
-        self.assertEqual(len(covers), 6)
-        self.assertEqual(len(article_photos), 3)
-        for attrs in images:
-            if attrs not in covers:
-                self.assertTrue(attrs.get("alt"))
-            else:
-                self.assertIn("alt", attrs)
-            self.assertEqual(attrs.get("loading"), "lazy")
-            self.assertTrue((ROOT / attrs["src"]).is_file())
-        links = [attrs.get("href", "") for tag, attrs in elements if tag == "a"]
-        self.assertEqual(sum(url.startswith("https://redeglobo.globo.com/redeamazonica/noticia/") for url in links), 3)
-        self.assertEqual(sum(url.startswith("https://www.instagram.com/p/") for url in links), 6)
-        self.assertIn("./assets/dho/treinamento-5s-outra-turma.webp", links)
-        self.assertTrue((ROOT / "assets/dho/treinamento-5s-outra-turma.webp").is_file())
+        links = [attrs["href"] for tag, attrs in elements if tag == "a"
+                 and attrs.get("href", "").startswith("./gt360/?modulo=")]
+        self.assertEqual(len(links), 9)
+        self.assertEqual(len(set(links)), 9)
+        for link in links:
+            module = link.split("=", 1)[1]
+            self.assertTrue((ROOT / "gt360" / "modules" / (module + ".html")).is_file(), module)
 
     def test_documents_distinguish_public_demo_from_internal_project(self):
         for path in ("README.md", "gt360/README.md", "eu-horizonte-intranet/README.md"):

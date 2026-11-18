@@ -29,7 +29,7 @@ O desenvolvimento técnico é apresentado como **trabalho conjunto com Tecnologi
 - Gestão de treinamentos e acompanhamento de processos.
 - Navegação que reúne nove aplicações em um único ambiente público.
 
-Os [relatos de atuação](https://gustavomrtns.github.io/projetos_rh/#relatos) contextualizam pesquisa, onboarding e treinamentos sem expor materiais internos nem atribuir resultados quantitativos não divulgados.
+A [apresentação do projeto](https://gustavomrtns.github.io/projetos_rh/#gt360-projeto) contextualiza minha participação e oferece acesso direto às nove aplicações.
 
 ## Módulos
 

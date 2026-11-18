@@ -3,623 +3,282 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Portfólio profissional de Manoel Gustavo: operações de RH, desenvolvimento de pessoas, dados, projetos e inovação na prática.">
-  <meta name="theme-color" content="#c71717">
+  <meta name="description" content="Aplicações projetadas por Manoel Gustavo. Explore o GT360°, workspace de Gestão de Pessoas, e o eu + horizonte, protótipo de intranet.">
+  <meta name="theme-color" content="#f8f7f4">
   <meta name="robots" content="index,follow">
-  <title>Portfólio Profissional | Manoel Gustavo</title>
+  <title>Projetos e aplicações | Manoel Gustavo</title>
   <link rel="canonical" href="https://gustavomrtns.github.io/projetos_rh/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c71717'/%3E%3Ccircle cx='50' cy='14' r='6' fill='%238fff00'/%3E%3Ctext x='32' y='42' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EMG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --red:#c71717;--red-deep:#9f1111;--lime:#8fff00;--ink:#191817;--muted:#6f6b66;
-      --paper:#f8f7f4;--card:#ffffff;--line:rgba(25,24,23,.12);
-      --shadow:0 28px 80px rgba(38,28,22,.11);--radius:30px
+    :root {
+      --paper: #f8f7f4;
+      --ink: #1b1b19;
+      --muted: #615f59;
+      --line: #deddd6;
+      --red: #c71717;
+      --lime: #8fff00;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--paper)}
-    body{margin:0;color:var(--ink);background:var(--paper);font-family:"DM Sans",sans-serif;overflow-x:hidden}
-    body.menu-open{overflow:hidden}
-    a{color:inherit;text-decoration:none}button{font:inherit}
-    h1,h2,h3{font-family:Manrope,sans-serif;margin:0;letter-spacing:-.04em}p{margin:0}
-    .wrap{width:min(1180px,calc(100% - 48px));margin-inline:auto}
-    .scroll-progress{position:fixed;inset:0 0 auto;z-index:220;height:4px;background:rgba(255,255,255,.2)}
-    .scroll-progress span{display:block;height:100%;width:0;background:var(--lime);box-shadow:0 0 18px rgba(185,255,54,.65)}
-    nav{position:fixed;top:4px;left:0;right:0;z-index:200;transition:.35s ease}
-    nav.scrolled{background:rgba(245,242,236,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-    .nav-inner{height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .brand{display:flex;align-items:center;gap:13px;font-size:13px;font-weight:800;letter-spacing:.08em;position:relative;z-index:205}
-    .brand-mark{width:36px;height:36px;background:var(--red);border-radius:12px 18px 13px 18px;transform:rotate(8deg);position:relative;flex:0 0 auto}
-    .brand-mark:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:var(--lime);right:-3px;top:-3px}
-    .nav-links{display:flex;align-items:center;gap:24px;font-size:12px;font-weight:700;color:var(--muted)}
-    .nav-links a{position:relative;padding:12px 0}.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:2px;background:var(--red);transition:.3s ease}
-    .nav-links a.active{color:var(--ink)}.nav-links a.active:after,.nav-links a:hover:after{right:0}
-    .location{padding:9px 13px;border:1px solid var(--line);border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;background:rgba(255,253,249,.75)}
-    .menu-button{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--card);position:relative;z-index:205;cursor:pointer}
-    .menu-button span,.menu-button:before,.menu-button:after{content:"";position:absolute;left:12px;right:12px;height:2px;background:var(--ink);transition:.25s ease}
-    .menu-button:before{top:13px}.menu-button span{top:19px}.menu-button:after{top:25px}
-    .menu-button[aria-expanded="true"]:before{top:19px;transform:rotate(45deg)}.menu-button[aria-expanded="true"] span{opacity:0}.menu-button[aria-expanded="true"]:after{top:19px;transform:rotate(-45deg)}
-    .hero{min-height:100svh;display:grid;align-items:center;position:relative;padding:120px 0 70px;overflow:hidden}
-    .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000 10%,transparent 88%);opacity:.35}
-    .orb{position:absolute;border-radius:999px;pointer-events:none;will-change:transform}.orb-a{width:480px;height:480px;background:var(--red);right:-150px;top:10%;filter:saturate(.9)}.orb-b{width:170px;height:170px;background:var(--lime);right:28%;bottom:9%}
-    .hero-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(350px,.82fr);gap:70px;align-items:center;position:relative;z-index:2}
-    .eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--red);font-weight:800;letter-spacing:.13em;text-transform:uppercase}.eyebrow:before{content:"";width:32px;height:2px;background:currentColor}
-    h1{font-size:clamp(52px,7vw,94px);line-height:.98;margin:22px 0 28px;max-width:900px}h1 span{color:var(--red);display:inline-block}
-    .lead{font-size:clamp(17px,2vw,21px);line-height:1.55;max-width:720px;color:#3c3936}.lead b{color:var(--ink)}
-    .hero-actions,.project-actions,.contact-links{display:flex;gap:12px;flex-wrap:wrap}.hero-actions{margin-top:34px}
-    .button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:0 20px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:800;background:var(--card);transition:.25s ease}
-    .button:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(25,24,23,.1)}.button.primary{background:var(--red);color:#fff;border-color:var(--red)}
-    .identity-card{background:rgba(255,253,249,.9);border:1px solid rgba(255,255,255,.72);border-radius:34px;padding:30px;box-shadow:var(--shadow);backdrop-filter:blur(12px);transform:rotate(2deg);position:relative}
-    .identity-card:before{content:"";position:absolute;inset:12px;border:1px solid var(--line);border-radius:24px;pointer-events:none}.identity-top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:64px}.identity-top small{color:var(--muted);font-size:10px;letter-spacing:.09em}.identity-dot{width:13px;height:13px;background:var(--lime);border-radius:50%;box-shadow:0 0 0 8px rgba(185,255,54,.2)}
-    .identity-card h3{font-size:clamp(27px,3vw,39px);line-height:1.08;max-width:360px}.identity-card h3 em{font-style:normal;color:var(--red)}
-    .identity-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:26px}.identity-tags span{font-size:10px;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
-    .scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.08em}.scroll-cue i{width:1px;height:34px;background:var(--ink);position:relative;overflow:hidden}.scroll-cue i:after{content:"";position:absolute;inset:-100% 0 0;background:var(--lime);animation:scrollCue 1.8s infinite}@keyframes scrollCue{to{transform:translateY(200%)}}
-    section{padding:110px 0;position:relative;scroll-margin-top:74px}.section-head{display:grid;grid-template-columns:180px 1fr;gap:32px;margin-bottom:46px;align-items:start}.section-index{font-family:Manrope,sans-serif;font-size:12px;color:var(--red);font-weight:800;letter-spacing:.12em}.section-head h2{font-size:clamp(36px,5vw,66px);line-height:1.02;max-width:880px}.section-head p{color:var(--muted);line-height:1.75;max-width:760px;margin-top:20px}
-    .about-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:0 18px 50px rgba(38,28,22,.05)}.about-copy{font-size:18px;line-height:1.76}.about-copy p+p{margin-top:16px}.about-copy strong{color:var(--red)}
-    .about-profile{display:grid;grid-template-columns:clamp(112px,13vw,160px) minmax(0,1fr);gap:20px;align-items:center}
-    .about-portrait{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 24px rgba(38,28,22,.10)}
-    .about-profile+p{margin-top:16px}
-    @media(max-width:540px){.about-profile{grid-template-columns:1fr;gap:16px}.about-portrait{width:min(148px,100%)}}
-    .skill-stack{display:grid;gap:10px}.skill-row{display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;padding:17px;border-bottom:1px solid var(--line)}.skill-row:last-child{border-bottom:0}.skill-icon{width:42px;height:42px;border-radius:14px;background:#f2eee7;display:grid;place-items:center;color:var(--red);font-weight:800}.skill-row b{display:block;font-size:14px}.skill-row small{color:var(--muted)}.skill-row em{font-style:normal;color:var(--red);font-size:13px}
-    .project-stage{display:grid;gap:24px}.project-card{min-height:540px;border-radius:38px;overflow:hidden;display:grid;grid-template-columns:.9fr 1.1fr;position:relative;background:var(--ink);color:#fff;box-shadow:var(--shadow)}.project-card.alt{background:var(--red)}
-    .project-copy{padding:52px;display:flex;flex-direction:column;align-items:flex-start;z-index:2}.project-copy .number{font-size:11px;color:var(--lime);font-weight:800;letter-spacing:.13em}.project-copy h3{font-size:clamp(42px,5vw,70px);margin:25px 0 18px}.project-copy p{color:rgba(255,255,255,.76);line-height:1.72;max-width:520px}.project-copy .identity-tags{margin-top:20px}.project-copy .identity-tags span{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15)}.project-actions{margin-top:auto;padding-top:28px}.project-actions .button{background:#fff;color:var(--ink);border-color:#fff}.project-actions .button:first-child{background:var(--lime);border-color:var(--lime)}
-    .project-visual{position:relative;margin:28px 28px 28px 0;border-radius:26px;overflow:hidden;background:#eceef3;display:grid;place-items:center;min-width:0}.project-visual img{width:100%;height:100%;object-fit:cover;object-position:left top;transform:scale(1.04);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}.project-card.is-visible .project-visual img{transform:scale(1)}
-    .project-visual--contain{background:#fff}.project-visual--contain img{object-fit:contain;object-position:center;transform:scale(.96)}.project-card.is-visible .project-visual--contain img{transform:scale(.98)}
-    .practice-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.practice-card{min-height:250px;padding:28px;border-radius:26px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;transition:.3s ease}.practice-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}.practice-card strong{font:800 42px Manrope;color:var(--red)}.practice-card h3{font-size:18px;margin-top:auto}.practice-card p{color:var(--muted);font-size:13px;line-height:1.6;margin-top:10px}
-    .timeline-items{display:grid;gap:18px;position:relative;padding-left:58px}.timeline-items:before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:2px;background:var(--line)}.job{padding:28px;border:1px solid var(--line);border-radius:24px;background:rgba(255,253,249,.75);display:grid;grid-template-columns:190px 1fr;gap:24px;position:relative}.job:before{content:"";position:absolute;left:-58px;top:28px;width:36px;height:36px;border:1px solid var(--line);background:var(--paper);border-radius:50%;transition:.35s ease}.job.is-visible:before{background:var(--lime);border-color:var(--lime);box-shadow:0 0 0 10px rgba(185,255,54,.18)}.job time{font-size:11px;color:var(--red);font-weight:800}.job h3{font-size:21px}.job h3 span{display:block;font:600 12px "DM Sans",sans-serif;letter-spacing:0;color:var(--muted);margin-top:5px}.job p{color:var(--muted);line-height:1.65;margin-top:10px;font-size:14px}.job-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.job-tags span{font-size:10px;padding:6px 9px;border-radius:999px;background:#f0ece5;color:#514d48}
-    .education-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.education-card{padding:28px;border:1px solid var(--line);border-radius:26px;background:var(--card);min-height:190px;display:flex;flex-direction:column}.education-card small{font-weight:800;color:var(--red);letter-spacing:.08em}.education-card h3{font-size:22px;margin:28px 0 8px}.education-card p{color:var(--muted);font-size:14px;line-height:1.5}.education-card time{margin-top:auto;padding-top:18px;font-size:11px;font-weight:800}
-    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.cert{padding:22px;border-top:2px solid var(--red);background:rgba(255,253,249,.68);min-height:150px}.cert small{color:var(--red);font-size:10px;font-weight:800;letter-spacing:.08em}.cert h3{font-size:16px;margin:18px 0 8px;letter-spacing:-.02em}.cert p{font-size:12px;color:var(--muted);line-height:1.5}
-    .cta{padding:64px;border-radius:38px;background:var(--red);color:#fff;display:flex;align-items:end;justify-content:space-between;gap:40px;overflow:hidden;position:relative}.cta:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--lime);right:-160px;top:-160px}.cta h2{font-size:clamp(36px,5vw,68px);max-width:760px;position:relative;z-index:2}.cta p{color:rgba(255,255,255,.8);margin-top:18px;max-width:700px;position:relative;z-index:2}.contact-links{position:relative;z-index:2;margin-top:28px}.contact-links .button{background:#fff;color:var(--ink);border-color:#fff}.contact-links .button:first-child{background:var(--lime);border-color:var(--lime)}
-    footer{padding:32px 0 46px;font-size:11px;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
-    [data-reveal]{opacity:0;transform:translateY(38px);transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1)}[data-reveal="left"]{transform:translateX(-42px)}[data-reveal="right"]{transform:translateX(42px)}[data-reveal].is-visible{opacity:1;transform:none}[data-stagger]>*{opacity:0;transform:translateY(24px);transition:.65s cubic-bezier(.2,.8,.2,1)}[data-stagger].is-visible>*{opacity:1;transform:none}[data-stagger].is-visible>*:nth-child(2){transition-delay:.08s}[data-stagger].is-visible>*:nth-child(3){transition-delay:.16s}[data-stagger].is-visible>*:nth-child(4){transition-delay:.24s}
-    .back-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border:0;border-radius:50%;background:var(--ink);color:#fff;z-index:100;opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s ease;cursor:pointer}.back-top.show{opacity:1;transform:none;pointer-events:auto}
-    /* RH e inovação: linguagem direta, trajetória em destaque e projetos compactos. */
-    h1{font-size:clamp(48px,5.6vw,72px);line-height:1.05;letter-spacing:-.045em}
-    .hero-layout{grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);gap:48px}
-    .identity-top{margin-bottom:44px}.identity-top small{line-height:1.6}
-    .nav-links{gap:18px}.practice-card{min-height:280px}.practice-card h3{margin-top:28px;line-height:1.25}
-    .subsection-head{margin:0 0 22px}.subsection-head h3{font-size:25px;letter-spacing:-.03em}.subsection-head p{margin-top:10px;max-width:780px;color:var(--muted);line-height:1.65;font-size:14px}
-    .apps-heading{margin-top:48px}
-    .delivery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .delivery-card{padding:28px;border:1px solid var(--line);border-radius:26px;background:var(--card)}
-    .delivery-label{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--red)}
-    .delivery-card h3{font-size:22px;line-height:1.25;margin:20px 0 14px}
-    .delivery-card p,.delivery-card dd{font-size:14px;line-height:1.65;color:var(--muted)}
-    .delivery-card dl{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line)}.delivery-card dt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}.delivery-card dd{margin:0}
-    .project-card{min-height:450px;grid-template-columns:1fr 1fr}.project-copy{padding:36px}.project-copy h3{font-size:clamp(34px,4.1vw,54px);margin:18px 0 14px;line-height:1.1}.project-copy p{font-size:15px;line-height:1.65}
-    .project-visual{margin:22px 22px 22px 0}.project-visual--contain img{object-fit:contain;object-position:center;transform:none}.project-card.is-visible .project-visual--contain img{transform:none}
-    .project-details{margin-top:22px;width:100%;border-top:1px solid rgba(255,255,255,.24);padding-top:16px}
-    .project-details summary{cursor:pointer;font-size:13px;font-weight:700;line-height:1.5}
-    .project-details dl{margin:18px 0 0}.project-details dt{font-size:11px;font-weight:800;margin-top:15px;color:var(--lime);text-transform:uppercase;letter-spacing:.05em}.project-details dd{margin:6px 0 0;font-size:13px;line-height:1.65;color:rgba(255,255,255,.85)}
-    .skip-link{position:fixed;top:-100px;left:16px;z-index:300;padding:14px 20px;background:var(--ink);color:#fff;border-radius:10px}.skip-link:focus{top:12px}
-    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:5px}.project-card a:focus-visible,.project-card summary:focus-visible,.cta a:focus-visible{outline-color:var(--lime)}
-    .project-card.alt .project-details dt{color:#fff}.project-card.alt .project-details dd,.project-card.alt .project-copy p{color:rgba(255,255,255,.94)}
-    @media(min-width:721px) and (max-width:1080px){.location{display:none}.nav-inner{gap:18px}.nav-links{gap:14px}}
-    @media(max-width:900px){.delivery-grid{grid-template-columns:1fr}.project-visual{margin:0 22px 22px;min-height:320px}.delivery-card{padding:26px}}
-    @media(max-width:720px){.hero h1{font-size:clamp(42px,11.5vw,62px)}.hero .eyebrow{font-size:10px;letter-spacing:.07em}.hero .lead{font-size:17px}.hero-actions .button{width:100%}.practice-card{min-height:210px}.project-copy{padding:30px 24px}.project-visual{margin:0 14px 14px;min-height:260px}.project-copy h3{font-size:38px}.subsection-head h3{font-size:23px}}
-    @media(max-width:900px){.hero-layout,.about-grid,.project-card{grid-template-columns:1fr}.hero-layout{gap:36px}.identity-card{max-width:540px}.orb-a{right:-280px}.project-card{min-height:auto}.project-visual{margin:0 22px 22px;min-height:390px}.project-copy{padding:38px}.practice-grid{grid-template-columns:1fr 1fr}.section-head{grid-template-columns:100px 1fr}.job{grid-template-columns:150px 1fr}.cert-grid{grid-template-columns:1fr 1fr}.cta{align-items:flex-start;flex-direction:column}}
-    @media(max-width:720px){.wrap{width:calc(100% - 28px)}.location{display:none}.menu-button{display:block}.nav-links{position:fixed;inset:0;background:rgba(245,242,236,.98);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;font:800 30px Manrope;letter-spacing:-.03em;opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s ease}.nav-links.open{opacity:1;visibility:visible;transform:none}.nav-links a{padding:10px}.hero{padding-top:108px}.hero-layout{grid-template-columns:1fr}.hero h1{font-size:clamp(44px,14vw,62px)}.identity-card{padding:24px;transform:none}.identity-top{margin-bottom:42px}.scroll-cue{display:none}section{padding:78px 0}.section-head{grid-template-columns:1fr;gap:12px}.section-head h2{font-size:38px}.panel{padding:23px}.about-copy{font-size:16px}.project-card{border-radius:28px}.project-copy{padding:30px 24px}.project-visual{min-height:270px;margin:0 14px 14px}.practice-grid,.education-grid,.cert-grid{grid-template-columns:1fr}.practice-card{min-height:210px}.timeline-items{padding-left:0}.timeline-items:before,.job:before{display:none}.job{grid-template-columns:1fr;padding:22px}.cta{padding:36px 24px}.contact-links,.contact-links .button{width:100%}.orb-b{right:6%;bottom:17%}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}.project-visual img{transform:none!important}}
-    @media(max-width:900px){.hero .orb-a{opacity:.06;right:-360px;top:6%}.hero .orb-b{opacity:.35;bottom:5%}}
-    /* Ampliação de atuação e capacitações, preservando a identidade visual. */
-    .experience-note{display:flex;align-items:center;gap:24px;margin-top:20px;padding:23px 28px;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:18px;background:var(--card)}
-    .note-label{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--red);flex:0 0 145px}.experience-note p{font-size:14px;line-height:1.65;color:var(--muted)}
-    .teaching-heading{margin-top:44px}.teaching-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    .teaching-card{padding:24px;border:1px solid var(--line);border-radius:22px;background:var(--card)}.teaching-card>span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lime);font-size:11px;font-weight:800;color:var(--ink)}.teaching-card h4{font:800 18px/1.3 Manrope,sans-serif;letter-spacing:-.025em;margin:20px 0 10px}.teaching-card p{font-size:13px;line-height:1.6;color:var(--muted)}
-    .delivery-cycle{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0 0 18px}
-    .delivery-cycle li{padding:18px;border-top:2px solid var(--red);background:var(--card);border-radius:0 0 14px 14px}.delivery-cycle span{display:block;font-size:10px;font-weight:800;color:var(--red);margin-bottom:10px}.delivery-cycle b{font-size:13px;line-height:1.5;display:block}
-    .demo-context{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 26px;max-width:850px}
-    .cert-groups{display:grid;gap:12px}.cert-group{border:1px solid var(--line);border-radius:22px;background:var(--card);overflow:hidden}.cert-group>summary{display:list-item;list-style-position:inside;padding:24px 26px;font-size:17px;font-weight:700;cursor:pointer;color:var(--ink)}.cert-group>summary::marker{color:var(--red)}.cert-group>summary span{margin-left:8px}.cert-group>summary small{display:inline-block;margin-left:16px;color:var(--muted);font-size:11px;font-weight:500}.cert-group[open]>summary{border-bottom:1px solid var(--line)}.cert-group .cert-grid{padding:22px;align-items:stretch}.cert-group .cert{border:1px solid var(--line);border-top:2px solid var(--red);border-radius:0 0 12px 12px;min-height:140px;background:var(--paper)}.cert-group .cert h3{overflow-wrap:anywhere}
-    .course-list{display:flex;gap:10px;flex-wrap:wrap;list-style:none;margin:0;padding:24px 26px 12px}.course-list li{padding:10px 14px;border:1px solid var(--line);border-radius:12px;font-size:13px;line-height:1.5}.course-source{padding:0 26px 24px;font-size:12px;color:var(--muted);line-height:1.6}.course-source a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
-    #interesses{padding-top:70px}.interests-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.interests-grid li{position:relative;padding:24px 24px 24px 47px;border:1px solid var(--line);border-radius:22px;background:var(--card);font-size:15px;font-weight:600;line-height:1.55}.interests-grid li:before{content:"";position:absolute;left:23px;top:32px;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(143,255,0,.13)}
-    @media(max-width:900px){.teaching-grid,.interests-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-cycle{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media(max-width:720px){.experience-note{align-items:flex-start;flex-direction:column;gap:10px;padding:22px}.note-label{flex-basis:auto}.teaching-grid,.interests-grid{grid-template-columns:1fr}.delivery-cycle{grid-template-columns:1fr}.delivery-cycle li{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:0;border-left:2px solid var(--red);border-radius:0 14px 14px 0}.delivery-cycle span{margin:0;min-width:22px}.cert-group>summary{padding:20px;font-size:15px;line-height:1.6}.cert-group>summary small{display:block;margin-left:24px}.cert-group .cert-grid{padding:16px}.course-list{padding:20px 20px 12px}.course-source{padding:0 20px 20px}#interesses{padding-top:45px}}
-    /* Leitura em camadas: o conteúdo completo permanece disponível. */
-    .hero{min-height:82svh;padding:112px 0 56px}.hero .scroll-cue{bottom:14px}
-    section{padding:72px 0}.section-head{grid-template-columns:150px 1fr;gap:26px;margin-bottom:30px}.section-head h2{font-size:clamp(32px,4vw,50px);line-height:1.08}.section-head p{margin-top:14px;line-height:1.65}
-    .panel{padding:28px}.about-copy{font-size:16px;line-height:1.72}.skill-row{padding:14px}
-    .practice-card{padding:24px;min-height:230px}.practice-card h3{margin-top:22px}
-    .timeline-items{gap:12px}.job{padding:22px;gap:20px}.job h3{font-size:20px}.job p{line-height:1.6}
-    .job>div{min-width:0}
-    .job-scope{margin-top:16px;border-top:1px solid var(--line)}
-    .job-scope summary{display:list-item;width:fit-content;padding:10px 4px 4px;cursor:pointer;color:var(--red-deep);font-size:13px;font-weight:700;line-height:1.5;list-style-position:inside}
-    .job-scope summary:hover{text-decoration:underline;text-underline-offset:3px}
-    .job-scope summary:focus-visible{outline:2px solid var(--red);outline-offset:3px}
-    .job-scope ul{display:grid;gap:9px;margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14px;line-height:1.6}
-    .job-scope li::marker{color:var(--red)}
-    .job-scope strong{color:var(--ink)}
-    .delivery-card{padding:24px}.delivery-card h3{font-size:20px;margin:16px 0 12px}.delivery-card dl{margin-top:18px;padding-top:15px}
-    .project-copy{padding:30px}.project-card{min-height:410px}.project-copy h3{font-size:clamp(34px,3.8vw,48px)}
-    .education-card{padding:24px;min-height:170px}.education-card h3{font-size:20px;margin-top:20px}
-    .cta{padding:44px}.cta h2{font-size:clamp(34px,4vw,52px)}#interesses{padding-top:54px}
-    .section-shortcuts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line)}.section-shortcuts>span{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}.section-shortcuts a{font-size:12px;font-weight:600;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card)}.section-shortcuts a:hover{color:var(--red);border-color:var(--red)}
-    #relatos,.experience-case[id],#solucoes-digitais,#cursos-ministrados,#eu-horizonte,#gt360-projeto{scroll-margin-top:100px}
-    .case-studies{margin-top:32px}.case-studies .subsection-head{margin-bottom:16px}
-    .experience-case{border:1px solid var(--line);border-radius:18px;background:var(--card);margin-top:10px;overflow:hidden}
-    .experience-case summary{padding:20px 23px;cursor:pointer;font-size:15px;font-weight:700;line-height:1.5;list-style-position:inside}.experience-case summary::marker{color:var(--red)}.experience-case summary small{display:block;margin:5px 0 0 18px;color:var(--muted);font-size:12px;font-weight:400}
-    .experience-case[open] summary{border-bottom:1px solid var(--line)}.experience-case dl{display:grid;grid-template-columns:145px minmax(0,1fr);gap:12px 18px;margin:22px 24px}.experience-case dt{font-size:12px;font-weight:800;color:var(--red);line-height:1.6}.experience-case dd{margin:0;color:var(--muted);font-size:14px;line-height:1.65}.experience-case>a{display:inline-block;margin:0 24px 24px;font-size:12px;font-weight:700;color:var(--red);text-decoration:underline;text-underline-offset:3px}
-    .dho-showcase{margin-top:36px;scroll-margin-top:100px}
-    .dho-showcase .subsection-head{margin-bottom:18px}
-    .dho-features,.dho-organizations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-    .dho-feature,.dho-organization{background:var(--card);border:1px solid var(--line);border-radius:22px;min-width:0}
-    .dho-feature{display:flex;flex-direction:column;overflow:hidden}
-    .dho-media{margin:0}.dho-media img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--paper)}
-    .dho-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:12px;padding:24px}
-    .dho-kicker{color:var(--red-deep);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-    .dho-feature h4,.dho-organization h4,.dho-organization h5{font-family:Manrope,sans-serif;margin:0;line-height:1.3}
-    .dho-feature h4{font-size:clamp(19px,2.5vw,24px);letter-spacing:-.025em}
-    .dho-content p,.dho-organization p{color:var(--muted);font-size:14px;line-height:1.65}
-    .dho-content>.dho-link{margin-top:auto}
-    .dho-link{color:var(--red-deep);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;line-height:1.55}
-    .dho-link:focus-visible,.dho-cover:focus-visible{outline:2px solid var(--red);outline-offset:4px}
-    .dho-organizations{margin-top:16px;align-items:start}
-    .dho-organization{padding:24px}
-    .dho-organization>.dho-kicker{display:block;margin-bottom:8px}
-    .dho-organization h4{display:flex;align-items:center;gap:10px;font-size:19px}
-    .dho-organization h4::before{content:"";display:block;width:10px;height:10px;flex:none;border-radius:50%;background:var(--lime);border:1px solid #559900}
-    .dho-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:14px}
-    .dho-list>li{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:13px}
-    .dho-organization h5{font-size:15px}
-    .dho-record-photo{margin:6px 0 2px}
-    .dho-record-photo img,.dho-cover img{width:100%;height:auto;object-fit:contain;background:var(--paper);display:block}
-    .dho-record-photo img{aspect-ratio:16/10;border-radius:12px;border:1px solid var(--line)}
-    .dho-record-photo--portrait{width:min(100%,420px);margin-inline:auto}
-    .dho-record-photo--portrait img{aspect-ratio:3/4}
-    .dho-record-photo figcaption,.dho-organization .dho-credit{color:var(--muted);font-size:11px;line-height:1.55;margin-top:4px}
-    .dho-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;margin:6px 0 0;padding:0}
-    .dho-cover{display:grid;grid-template-rows:auto 1fr;height:100%;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--card)}
-    .dho-cover img{aspect-ratio:4/5}
-    .dho-cover>span{font-size:12px;line-height:1.45;padding:8px 10px;color:var(--red-deep);font-weight:700}
-    .dho-cover:hover>span{text-decoration:underline;text-underline-offset:3px}
-    .dho-cover--featured{width:min(190px,100%);margin-top:5px}
-    .project-related{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin-top:16px;font-size:12px}
-    .project-related a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
-    .project-related a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-    @media(max-width:720px){.dho-features,.dho-organizations{grid-template-columns:1fr}.dho-content,.dho-organization{padding:19px}}
-    @media(max-width:900px){.section-head{grid-template-columns:100px 1fr}.project-copy{padding:28px}.hero{min-height:auto}.hero-layout{gap:28px}}
-    @media(max-width:720px){.hero{padding:106px 0 44px}.section-shortcuts{padding:16px 0;gap:8px}.section-shortcuts>span{width:100%}.section-shortcuts a{font-size:11px;padding:8px 10px}section{padding:54px 0}.section-head{grid-template-columns:1fr;gap:10px}.section-head h2{font-size:34px}.panel,.job,.delivery-card{padding:22px}.practice-card{min-height:205px}.project-copy{padding:27px 23px}.cta{padding:32px 24px}.experience-case summary{padding:18px}.experience-case dl{grid-template-columns:1fr;gap:6px;margin:20px}.experience-case dt:not(:first-child){margin-top:10px}.experience-case>a{margin:0 20px 20px}.experience-case summary small{margin-left:0}#interesses{padding-top:40px}}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "DM Sans", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    [aria-hidden="true"] { font-family: Arial, sans-serif; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: "Bricolage Grotesque", sans-serif; letter-spacing: -.045em; }
+    ::selection { background: var(--lime); color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--red); outline-offset: 5px; }
+    .wrap { width: min(1200px, calc(100% - 80px)); margin-inline: auto; }
+    .skip-link { position: fixed; top: 12px; left: 12px; z-index: 10; padding: 14px 20px; background: var(--ink); color: white; transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
+    .site-header { position: sticky; top: 0; z-index: 5; background: rgba(248, 247, 244, .96); border-bottom: 1px solid var(--line); }
+    .nav-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; }
+    .brand-mark { display: grid; place-items: center; width: 32px; height: 32px; background: var(--red); color: white; border-radius: 9px; font-size: 11px; letter-spacing: -.04em; }
+    .nav-links { display: flex; align-items: center; gap: 30px; font-size: 13px; }
+    .nav-links a { padding-block: 12px; }
+    .nav-links a:hover, .inline-link:hover { color: var(--red); }
+    .nav-contact { border-bottom: 1px solid var(--ink); }
+    .intro { padding: 86px 0 62px; }
+    h1 { font-size: clamp(48px, 7.3vw, 100px); font-weight: 600; line-height: 1; max-width: 1000px; }
+    h1 span { color: var(--red); }
+    .intro-bottom { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-top: 30px; }
+    .intro-copy { font-size: 17px; line-height: 1.65; color: var(--muted); max-width: 530px; }
+    .intro-link { display: inline-flex; align-items: center; gap: 16px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .intro-link span { display: grid; place-items: center; width: 40px; height: 40px; background: var(--lime); border-radius: 50%; font-size: 20px; transition: transform .2s ease; }
+    .intro-link:hover span { transform: translateY(4px); }
+    .projects { padding-bottom: 96px; }
+    .section-title { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; border-top: 1px solid var(--ink); }
+    .section-title h2 { font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
+    .section-title p { color: var(--muted); font-size: 12px; }
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 28px; }
+    .project-card { min-width: 0; }
+    .project-visual { display: block; overflow: hidden; aspect-ratio: 10 / 7; background: #eeebe7; border-radius: 18px; position: relative; }
+    .project-visual img { width: 100%; height: 100%; object-fit: contain; transition: transform .5s ease; }
+    .project-visual:hover img { transform: scale(1.035); }
+    .project-copy { padding: 23px 0 0; }
+    .project-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+    .project-heading h3 { font-size: clamp(29px, 3vw, 39px); line-height: 1.1; font-weight: 600; }
+    .project-state { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; white-space: nowrap; color: var(--muted); }
+    .project-state::before { content: ""; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+    .project-card.alt .project-state::before { background: #6a6860; }
+    .project-description { font-size: 15px; color: var(--muted); line-height: 1.65; min-height: 75px; max-width: 540px; }
+    .project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding: 22px 0; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; min-height: 46px; padding: 11px 19px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: white; font-size: 13px; font-weight: 600; transition: background .2s ease, color .2s ease; }
+    .button:hover { background: var(--lime); color: var(--ink); }
+    .inline-link { font-size: 13px; padding: 12px 0; }
+    details { border-top: 1px solid var(--line); }
+    summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 18px; min-height: 54px; padding: 14px 0; font-size: 13px; font-weight: 600; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--muted); }
+    details[open] > summary::after { content: "−"; }
+    .detail-body { padding: 2px 0 23px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .detail-body p + p { margin-top: 14px; }
+    .detail-body strong { color: var(--ink); font-weight: 600; }
+    .module-links { list-style: none; padding: 0 0 12px; margin: 0; }
+    .module-links li + li { border-top: 1px solid var(--line); }
+    .module-links a { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; font-size: 13px; color: var(--muted); }
+    .module-links a span { color: var(--red); }
+    .module-links a:hover { color: var(--red); }
+    .demo-note { font-size: 12px; line-height: 1.7; color: var(--muted); padding-top: 26px; max-width: 710px; }
+    .about { padding: 64px 0; background: #eeede7; border-block: 1px solid var(--line); }
+    .about-layout { display: grid; grid-template-columns: 210px 1fr; gap: 68px; align-items: start; }
+    .about-identity img { width: 112px; height: 112px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; }
+    .about-identity h2 { font-size: 17px; letter-spacing: -.02em; }
+    .about-copy { max-width: 710px; }
+    .about-copy h3 { font-size: clamp(27px, 3vw, 39px); font-weight: 500; margin-bottom: 20px; line-height: 1.15; }
+    .about-copy p { font-size: 15px; line-height: 1.8; color: var(--muted); }
+    .about-copy p + p { margin-top: 12px; }
+    .contact-links { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 24px; }
+    .contact-links a { font-size: 13px; padding-block: 8px; border-bottom: 1px solid var(--ink); }
+    .contact-links a:hover { color: var(--red); border-color: var(--red); }
+    footer { padding: 26px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; font-size: 12px; color: var(--muted); }
+    .footer-inner a:hover { color: var(--red); }
+    [data-reveal] { transition: opacity .6s ease, transform .6s ease; }
+    .will-reveal { opacity: 0; transform: translateY(18px); }
+    .is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .wrap { width: calc(100% - 48px); }
+      .intro { padding-top: 62px; }
+      .project-grid { gap: 24px; }
+      .project-heading { align-items: start; flex-direction: column; gap: 8px; }
+      .project-description { min-height: 100px; }
+      .about-layout { grid-template-columns: 160px 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      html { scroll-padding-top: 85px; }
+      .wrap { width: calc(100% - 36px); }
+      .nav-inner { min-height: 72px; gap: 14px; }
+      .brand { font-size: 12px; gap: 8px; }
+      .brand-mark { width: 28px; height: 28px; font-size: 10px; }
+      .nav-links { gap: 18px; font-size: 12px; }
+      .nav-contact { display: none; }
+      .intro { padding: 46px 0 38px; }
+      h1 { font-size: clamp(44px, 11.7vw, 70px); }
+      .intro-bottom { display: block; margin-top: 22px; }
+      .intro-copy { font-size: 15px; }
+      .intro-link { margin-top: 22px; }
+      .intro-link span { width: 34px; height: 34px; }
+      .section-title { padding: 16px 0; align-items: end; }
+      .section-title p { max-width: 120px; text-align: right; line-height: 1.5; }
+      .project-grid { grid-template-columns: 1fr; gap: 44px; }
+      .project-heading { flex-direction: row; align-items: center; gap: 12px; }
+      .project-heading h3 { font-size: 31px; }
+      .project-state { font-size: 10px; }
+      .project-description { min-height: 0; }
+      .project-copy { padding-top: 20px; }
+      .project-actions { gap: 20px; }
+      .project-visual { border-radius: 12px; }
+      .projects { padding-bottom: 50px; }
+      .about { padding: 40px 0; }
+      .about-layout { grid-template-columns: 1fr; gap: 24px; }
+      .about-identity { display: flex; align-items: center; gap: 16px; }
+      .about-identity img { width: 64px; height: 64px; margin: 0; }
+      .footer-inner { font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .will-reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#sobre">Pular para o conteúdo</a>
-  <div class="scroll-progress" aria-hidden="true"><span id="progress"></span></div>
-  <nav id="nav" aria-label="Navegação principal">
-    <div class="wrap nav-inner">
-      <a class="brand" href="#inicio" aria-label="Ir para o início"><span class="brand-mark"></span><span>MANOEL GUSTAVO</span></a>
-      <div class="nav-links" id="navLinks">
-        <a href="#sobre">Sobre</a><a href="#atuacao">Atuação</a><a href="#experiencia">Experiência</a><a href="#projetos">Projetos e entregas</a><a href="#formacao">Formação</a><a href="#contato">Contato</a>
+  <a class="skip-link" href="#projetos">Pular para os projetos</a>
+  <header class="site-header" id="inicio">
+    <nav class="wrap nav-inner" aria-label="Navegação principal">
+      <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">MG</span> Manoel Gustavo</a>
+      <div class="nav-links">
+        <a href="#projetos">Projetos</a>
+        <a href="#sobre">Sobre mim</a>
+        <a class="nav-contact" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
       </div>
-      <span class="location">GESTÃO DE PESSOAS</span>
-      <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false"><span></span></button>
-    </div>
-  </nav>
-
-  <header class="hero" id="inicio">
-    <div class="grid-bg" aria-hidden="true"></div><div class="orb orb-a" data-parallax="-.08" aria-hidden="true"></div><div class="orb orb-b" data-parallax=".12" aria-hidden="true"></div>
-    <div class="wrap hero-layout">
-      <div data-reveal="left">
-        <div class="eyebrow">Manoel Gustavo · Recursos Humanos</div>
-        <h1>Recursos Humanos<br><span>Inovação na prática</span></h1>
-        <p class="lead"><b>Visão de negócio, cuidado com as pessoas e organização para fazer acontecer.</b> Atuo em operações de RH, desenvolvimento de pessoas e projetos que melhoram processos com apoio de dados e tecnologia.</p>
-        <div class="hero-actions"><a class="button primary" href="#experiencia">Conheça minha trajetória ↓</a><a class="button" href="#projetos">Veja meus projetos e entregas ↓</a></div>
-      </div>
-      <div class="identity-card" data-reveal="right" data-parallax=".035">
-        <div class="identity-top"><small>OPERAÇÃO · DESENVOLVIMENTO · INOVAÇÃO</small><span class="identity-dot"></span></div>
-        <h3>Experiência no dia a dia do RH. Iniciativa para <em>melhorar.</em></h3>
-        <div class="identity-tags"><span>RH Generalista</span><span>Desenvolvimento de Pessoas</span><span>Dados e Indicadores</span><span>Projetos de RH</span></div>
-      </div>
-    </div>
-    <div class="scroll-cue" aria-hidden="true"><i></i><span>CONHEÇA MINHA ATUAÇÃO</span></div>
+    </nav>
   </header>
 
-  <div class="wrap section-shortcuts" role="navigation" aria-label="Atalhos do portfólio">
-    <span>Explore por tema</span><a href="#acoes-dho">Ações realizadas</a><a href="#cursos-ministrados">Cursos ministrados</a><a href="#relatos">Cases profissionais</a><a href="#solucoes-digitais">Projetos digitais</a><a href="#certificacoes">Capacitações</a><a href="#interesses">Interesses</a>
-  </div>
-
   <main>
-    <section id="sobre">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">01 / SOBRE</div><div><h2>Minha trajetória em Recursos Humanos.</h2><p>Uma atuação que combina a rotina da área com desenvolvimento, análise e melhoria de processos.</p></div></div>
-        <div class="about-grid">
-          <div class="panel about-copy" data-reveal="left">
-            <div class="about-profile">
-              <img class="about-portrait" src="./assets/manoel-gustavo.webp" alt="Retrato de Manoel Gustavo" width="640" height="616" loading="lazy" decoding="async">
-              <p><strong>Sou Manoel Gustavo, profissional de Recursos Humanos e Analista Técnico Comportamental DISC</strong>, com experiência em recrutamento e seleção, desenvolvimento humano organizacional, benefícios, rotinas de departamento pessoal, treinamentos, comunicação interna e design de projetos.</p>
-            </div>
-            <p>Trabalho próximo a colaboradores, lideranças e áreas parceiras para organizar demandas, apoiar decisões e acompanhar entregas. Também conduzo projetos, indicadores e soluções digitais a partir de necessidades reais do RH, com visão de Product Owner e estratégias de Scrum Master, para desenvolver, homologar, validar e colocar as aplicações em operação.</p>
-            <p>Minha base em Gestão de Recursos Humanos, os estudos em Psicologia e o MBA em Gestão de Projetos ampliam meu olhar para as pessoas, o negócio e a execução.</p>
-          </div>
-          <div class="panel skill-stack" data-stagger>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">01</span><span><b>Rotinas e atendimento</b><small>Organização, escuta e acompanhamento</small></span><em aria-hidden="true">↗</em></div>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">02</span><span><b>Pessoas e desenvolvimento</b><small>Integração, aprendizagem e lideranças</small></span><em aria-hidden="true">↗</em></div>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">03</span><span><b>Processos e inovação</b><small>Visão de produto, facilitação ágil e adoção</small></span><em aria-hidden="true">↗</em></div>
-            <div class="skill-row"><span class="skill-icon" aria-hidden="true">04</span><span><b>Analista Técnico Comportamental — DISC</b><small>Perfis comportamentais, comunicação e desenvolvimento</small></span><em aria-hidden="true">↗</em></div>
-          </div>
-        </div>
+    <div class="intro wrap">
+      <h1>Aplicações<br>que <span>projetei.</span></h1>
+      <div class="intro-bottom">
+        <p class="intro-copy">Minha experiência em RH se transforma em aplicações para organizar processos e melhorar a experiência das pessoas.</p>
+        <a class="intro-link" href="#projetos">Explorar os projetos <span aria-hidden="true">↓</span></a>
       </div>
-    </section>
+    </div>
 
-    <section id="atuacao">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">02 / ATUAÇÃO</div><div><h2>Onde minha experiência se conecta.</h2><p>Quatro frentes que se complementam, do atendimento ao colaborador à melhoria dos processos de RH.</p></div></div>
-        <div class="practice-grid" data-stagger>
-          <article class="practice-card"><strong aria-hidden="true">01</strong><h3>Operações de RH e DP</h3><p>Recrutamento e Seleção, Departamento Pessoal, Benefícios, Treinamento e Desenvolvimento, Implantação e Mapeamento de Processos e Sistemas de Gestão, e Projetos de RH.</p></article>
-          <article class="practice-card"><strong aria-hidden="true">02</strong><h3>Desenvolvimento e experiência</h3><p>Treinamentos, avaliações de desempenho, planos de desenvolvimento individual (PDI), programas de desenvolvimento de lideranças (PDL), comunicação interna e ações de diversidade e ESG.</p></article>
-          <article class="practice-card"><strong aria-hidden="true">03</strong><h3>Dados e indicadores</h3><p>Pesquisas organizacionais, análise de dados, painéis e relatórios para acompanhar resultados e apoiar decisões.</p></article>
-          <article class="practice-card"><strong aria-hidden="true">04</strong><h3>Projetos e inovação em RH</h3><p>Identificação de necessidades, mapeamento, ideação e priorização, com desenvolvimento, homologação e implantação do produto.</p></article>
-        </div>
+    <section class="projects wrap" id="projetos" aria-labelledby="projects-title">
+      <div class="section-title">
+        <h2 id="projects-title">Projetos</h2>
+        <p>Versões públicas navegáveis</p>
       </div>
-    </section>
-
-    <section id="experiencia">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">03 / EXPERIÊNCIA</div><div><h2>Experiência que sustenta minha atuação.</h2><p>Da operação industrial ao desenvolvimento organizacional: conheça as responsabilidades que assumi em cada etapa da minha trajetória em Gestão de Pessoas.</p></div></div>
-        <div class="timeline-items">
-          <article class="job" data-reveal>
-            <time>01/2026 — ATUAL</time>
-            <div>
-              <h3>Analista de Recursos Humanos<span>Rede Amazônica · Afiliada Globo</span></h3>
-              <p>Estruturei processos de desenvolvimento organizacional que conectavam o diagnóstico de necessidades à formação de colaboradores e lideranças. Também conduzi projetos de RH que transformavam demandas da área em melhorias de processos e soluções digitais.</p>
-              <div class="job-tags"><span>DHO e T&amp;D</span><span>People Analytics</span><span>Comunicação Interna</span><span>Projetos de RH</span></div>
-              <details class="job-scope">
-                <summary>Ver responsabilidades do cargo</summary>
-                <ul>
-                  <li><strong>Desempenho e lideranças.</strong> Gerenciei ciclos de avaliação de desempenho, levantamento de necessidades de treinamento (LNT), planos de desenvolvimento individual (PDI) e programas de desenvolvimento de lideranças (PDL). Analisei matrizes de competências e acompanhei a execução das ações definidas.</li>
-                  <li><strong>Educação corporativa.</strong> Planejei trilhas de capacitação e acompanhei programas de T&amp;D em plataformas EAD/LMS, organizando turmas, materiais, registros, certificações e indicadores de aprendizagem. Ministrei treinamento em 5S e processos com atividades práticas em equipe.</li>
-                  <li><strong>Escuta e indicadores.</strong> Estruturei instrumentos de escuta e atuei em pesquisas de clima, engajamento, censo interno e fatores psicossociais. Mobilizei lideranças e acompanhei a participação; consolidei dados em Excel e Power BI para devolutivas e priorização de planos de ação.</li>
-                  <li><strong>Comunicação, cultura e ESG.</strong> Criei conteúdos e campanhas internas e contribuí, da ideação à execução, para oficinas de diversidade, equidade e inclusão, workshops e ações sociais. Articulei áreas, mobilizei colaboradores e acompanhei a logística dos encontros, incluindo ações transmitidas para outras unidades.</li>
-                  <li><strong>Processos e soluções digitais.</strong> Mapeei fluxos de RH, defini escopo, regras de negócio e critérios de aceite e organizei as prioridades com Scrum e Kanban. Conduzi etapas de desenvolvimento, teste, homologação, implantação e orientação de usuários, com automações em Power Automate, Make e n8n.</li>
-                </ul>
-              </details>
+      <div class="project-grid" id="solucoes-digitais">
+        <article class="project-card" id="gt360-projeto" data-reveal>
+          <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°">
+            <img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Apresentação visual das aplicações de RH do GT360°" width="1600" height="1120" fetchpriority="high" decoding="async">
+          </a>
+          <div class="project-copy">
+            <div class="project-heading"><h3>GT360°</h3><span class="project-state">Demonstração pública</span></div>
+            <p class="project-description">Workspace de Gestão de Pessoas com nove aplicações. Integração, treinamentos, avaliações e pesquisas reunidos em uma navegação única.</p>
+            <div class="project-actions">
+              <a class="button" href="./gt360/">Explorar aplicação <span aria-hidden="true">↗</span></a>
+              <a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub <span aria-hidden="true">↗</span></a>
             </div>
-          </article>
-          <article class="job" data-reveal>
-            <time>11/2024 — 01/2026</time>
-            <div>
-              <h3>HR Business Partner<span>Alitz LTDA</span></h3>
-              <p>Atuei junto a gestores e colaboradores, combinando desenvolvimento de pessoas, carreira e remuneração com a operação de RH. Usei indicadores para orientar decisões e traduzi necessidades das áreas em melhorias de processos e sistemas.</p>
-              <div class="job-tags"><span>RH Consultivo</span><span>Desenvolvimento de Pessoas</span><span>Cargos e Remuneração</span><span>Sistemas de RH</span></div>
-              <details class="job-scope">
-                <summary>Ver responsabilidades do cargo</summary>
-                <ul>
-                  <li><strong>Atração, integração e desenvolvimento.</strong> Conduzi recrutamento por competências, com alinhamento de perfis e análise comportamental DISC. Gerenciei onboarding, PDI e PDL, acompanhei avaliações de desempenho e usei o mapeamento de competências para organizar trilhas e materiais de capacitação.</li>
-                  <li><strong>Carreira e remuneração.</strong> Elaborei descrições de cargos, participei do planejamento sucessório e trabalhei com enquadramento salarial e pesquisas de mercado. Analisei metas comerciais para remuneração variável e lançamento em folha, acompanhei comissões e contratos e contribuí para processos de PLR.</li>
-                  <li><strong>Departamento Pessoal e benefícios.</strong> Executei rotinas de admissão, desligamento, férias e ponto; administrei benefícios, atendi colaboradores e atuei em demandas de relações sindicais e registros de treinamentos de segurança do trabalho.</li>
-                  <li><strong>Clima e indicadores de gestão.</strong> Acompanhei pesquisas de clima e planos de ação. Estruturei painéis, relatórios e apresentações para que gestores acompanhassem indicadores de desempenho e definissem prioridades.</li>
-                  <li><strong>Implantação de sistemas.</strong> Levantei necessidades com clientes e gestores, mapeei fluxos de RH e DP, parametrizei plataformas, validei funcionalidades e treinei usuários para a adoção dos novos processos.</li>
-                  <li><strong>DHO e comunicação interna.</strong> Organizei e facilitei palestras e ações de desenvolvimento, além de atuar na organização de cerimônias, eventos corporativos e ações sociais. Produzi materiais e orientei equipes sobre políticas e procedimentos internos.</li>
-                </ul>
-              </details>
-            </div>
-          </article>
-          <article class="job" data-reveal>
-            <time>05/2024 — 10/2024</time>
-            <div>
-              <h3>Assistente Administrativo Generalista<span>Conseven Serviços</span></h3>
-              <p>Combinei rotinas de gestão de pessoas com administração de contratos e melhoria de fluxos. O trabalho envolvia desde recrutamento e treinamento até a conferência de informações para folha e a articulação com Financeiro, Faturamento e Segurança do Trabalho.</p>
-              <div class="job-tags"><span>RH e Departamento Pessoal</span><span>Treinamento</span><span>Contratos e Processos</span></div>
-              <details class="job-scope">
-                <summary>Ver responsabilidades do cargo</summary>
-                <ul>
-                  <li><strong>Operações de RH e DP.</strong> Executei atividades de recrutamento, admissão, desligamento, férias, benefícios e ponto. Apoiei as rotinas de folha e apuração de encargos, conferindo informações, registros e prazos.</li>
-                  <li><strong>Cargos e remuneração variável.</strong> Elaborei descrições de cargos e participei de pesquisas salariais, adequações de remuneração e planejamento sucessório. Analisei metas e comissões para lançamento em folha e acompanhei informações para PLR.</li>
-                  <li><strong>Treinamento e comunicação.</strong> Ministrei treinamentos internos, acompanhei indicadores de T&amp;D e participei do planejamento anual de capacitações. Produzi comunicados e orientações sobre políticas e procedimentos e contribuí para ações de reconhecimento e ESG.</li>
-                  <li><strong>Contratos e processos administrativos.</strong> Elaborei, mantive e faturei contratos de serviços. Mapeei fluxos setoriais e acompanhei indicadores e demandas operacionais nas interfaces com Faturamento, Financeiro e SESMT.</li>
-                </ul>
-              </details>
-            </div>
-          </article>
-          <article class="job" data-reveal>
-            <time>12/2023 — 04/2024</time>
-            <div>
-              <h3>Aprendiz de Recursos Humanos<span>Orient Relógios</span></h3>
-              <p>Desenvolvi minha base em Recursos Humanos e Departamento Pessoal acompanhando a admissão e os primeiros passos dos colaboradores na empresa.</p>
-              <div class="job-tags"><span>Departamento Pessoal</span><span>Integração</span><span>Endomarketing</span></div>
-              <details class="job-scope">
-                <summary>Ver responsabilidades do cargo</summary>
-                <ul>
-                  <li><strong>Admissão e documentação.</strong> Apoiei a conferência de documentos admissionais, o arquivamento e a organização dos registros de colaboradores.</li>
-                  <li><strong>Integração e comunicação.</strong> Preparei materiais para a chegada de novos colaboradores e apoiei atividades de onboarding, endomarketing e demandas administrativas em interface com o SESMT.</li>
-                </ul>
-              </details>
-            </div>
-          </article>
-          <article class="job" data-reveal>
-            <time>09/2022 — 01/2024</time>
-            <div>
-              <h3>Aprendiz de Processo de Produção<span>ARMOR Brasil</span></h3>
-              <p>Comecei no ambiente industrial, apoiando o Planejamento e Controle da Produção (PCP). Aprendi a acompanhar metas e fluxos operacionais e a orientar outras pessoas nas rotinas da área.</p>
-              <div class="job-tags"><span>PCP</span><span>Indicadores de Produção</span><span>Orientação de Aprendizes</span></div>
-              <details class="job-scope">
-                <summary>Ver responsabilidades do cargo</summary>
-                <ul>
-                  <li><strong>Ordens de produção e insumos.</strong> Apoiei a liberação de ordens de produção para faturamento e a emissão e o controle de pedidos de insumos.</li>
-                  <li><strong>Indicadores operacionais.</strong> Acompanhei metas produtivas e elaborei relatórios de desempenho em apoio a Produção, Logística, PCP e Controladoria.</li>
-                  <li><strong>Treinamento de aprendizes.</strong> Orientei jovens aprendizes na execução das rotinas e no desenvolvimento de competências para o trabalho na operação.</li>
-                </ul>
-              </details>
-            </div>
-          </article>
-        </div>
-        <aside class="experience-note" data-reveal aria-label="Vivência em CIPA"><span class="note-label">VIVÊNCIA EM CIPA</span><p>Também atuei como membro da CIPA, uma experiência ligada ao cuidado com as pessoas e à atenção ao ambiente de trabalho.</p></aside>
-      </div>
-    </section>
-
-    <section id="projetos">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">04 / PROJETOS E ENTREGAS</div><div><h2>O RH na prática: pessoas, processos e soluções.</h2><p>Entregas profissionais e aplicações de portfólio que mostram como conecto a experiência da área à melhoria dos processos.</p></div></div>
-        <div class="subsection-head" data-reveal><h3>Entregas profissionais</h3><p>Contribuições construídas ao longo da minha trajetória para desenvolver pessoas, apoiar lideranças e melhorar os processos da organização.</p></div>
-        <div class="delivery-grid" data-stagger>
-          <article class="delivery-card"><span class="delivery-label">DIAGNÓSTICO E INDICADORES</span><h3>Escuta organizacional e análise de dados</h3><p>Estruturação e acompanhamento de pesquisas de engajamento e de clima, censos internos e levantamentos de necessidades.</p><dl><dt>Entregas</dt><dd>Questionários, consolidação de respostas, painéis e relatórios executivos para apoiar a identificação de prioridades.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">APRENDIZAGEM E INTEGRAÇÃO</span><h3>Treinamentos e jornada de entrada</h3><p>Organização de integrações, trilhas de capacitação, ações de aprendizagem e acompanhamento de treinamentos.</p><dl><dt>Entregas</dt><dd>Programações, materiais de apoio, registros de participação e indicadores de aprendizagem.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">DESEMPENHO E DESENVOLVIMENTO</span><h3>Competências, PDI e PDL</h3><p>Gerenciamento de processos de avaliação de desempenho, Planos de Desenvolvimento Individual (PDI) e Programas de Desenvolvimento de Lideranças (PDL). Minha atuação inclui mapear competências, levantar necessidades de treinamento, definir prioridades de desenvolvimento com as lideranças e acompanhar a execução dos planos e ações.</p><dl><dt>Entregas</dt><dd>Matrizes de competências, planos individuais, ações de desenvolvimento de lideranças e materiais para orientar conversas e acompanhar a evolução das ações.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">SELEÇÃO E ANÁLISE COMPORTAMENTAL</span><h3>Recrutamento por competências e análise DISC</h3><p>Alinhamento de perfis, condução de entrevistas e análise comportamental como apoio à seleção e ao desenvolvimento.</p><dl><dt>Entregas</dt><dd>Perfis de vaga, roteiros de entrevista e análises de perfil DISC, considerando a escuta e o contexto de cada pessoa.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">DESIGN, COMUNICAÇÃO E CULTURA</span><h3>Identidade visual e endomarketing</h3><p>Criação de identidades visuais, peças e campanhas de comunicação interna, da ideação à operação, com foco na experiência do colaborador.</p><dl><dt>Entregas</dt><dd>Identidades de projetos, materiais gráficos, comunicados, campanhas de engajamento e bem-estar, e conteúdos de desenvolvimento organizacional.</dd></dl></article>
-          <article class="delivery-card"><span class="delivery-label">PROCESSOS E MELHORIA CONTÍNUA</span><h3>Organização das rotinas e soluções de RH</h3><p>Mapeamento e melhoria de fluxos de RH, Departamento Pessoal e benefícios, com apoio de sistemas e ferramentas digitais.</p><dl><dt>Entregas</dt><dd>Fluxos documentados, controles, relatórios e melhorias em processos e sistemas para apoiar a operação e o acompanhamento das demandas.</dd></dl></article>
-        </div>
-        <div class="dho-showcase" id="acoes-dho" role="region" aria-labelledby="acoes-dho-titulo">
-          <div class="subsection-head"><h3 id="acoes-dho-titulo">T&amp;D, DHO e Comunicação Interna na prática</h3><p>Registros de treinamentos que ministrei e de ações de escuta, inclusão, cultura e comunicação com colaboradores.</p></div>
-          <div class="dho-features">
-            <article class="dho-feature">
-              <figure class="dho-media"><img src="./assets/dho/treinamento-5s.webp" alt="Participantes do treinamento de 5S discutem uma atividade prática em pequenos grupos" width="1200" height="675" loading="lazy" decoding="async"></figure>
-              <div class="dho-content">
-                <span class="dho-kicker">T&amp;D · Rede Amazônica</span>
-                <h4>Treinamento em 5S e Processos com foco em Team Building</h4>
-                <p>Ministrei o treinamento em duas turmas. Usei dinâmicas em grupo para que os participantes identificassem desperdícios e discutissem como aplicar o 5S à rotina, conectando cultura Lean, colaboração e melhoria contínua.</p>
-                <a class="dho-link" href="./assets/dho/treinamento-5s-outra-turma.webp" target="_blank" rel="noopener">Ver foto da outra turma de 5S ↗</a>
+            <details class="project-details">
+              <summary>Sobre o projeto e minha participação</summary>
+              <div class="detail-body">
+                <p><strong>A necessidade.</strong> Organizar rotinas de RH distribuídas em diferentes controles e facilitar o acompanhamento da jornada do colaborador.</p>
+                <p><strong>Minha participação.</strong> Identificação de necessidades, mapeamento de processos, desenho de fluxos, requisitos e priorização, com visão de Product Owner e práticas de facilitação de Scrum Master. Alinhamentos com Tecnologia, testes funcionais, homologação e implantação conjunta.</p>
+                <p><strong>A entrega.</strong> O sistema interno foi desenvolvido e implantado em parceria entre RH e Tecnologia. A versão pública adapta o projeto para explorar suas interfaces e fluxos.</p>
               </div>
-            </article>
-            <article class="dho-feature">
-              <figure class="dho-media"><img src="./assets/dho/pesquisa-engajamento.webp" alt="Colaboradora usa o celular para acessar a Pesquisa de Engajamento a partir de um cartaz" width="1200" height="675" loading="lazy" decoding="async"></figure>
-              <div class="dho-content">
-                <span class="dho-kicker">DHO · Rede Amazônica</span>
-                <h4>1ª Pesquisa de Engajamento Organizacional</h4>
-                <p>Atuei na estruturação do questionário, na comunicação e na mobilização dos colaboradores. Acompanhei a participação e a consolidação das respostas para a apresentação executiva.</p>
-                <a class="dho-link" href="#case-pesquisa-engajamento">Conhecer o processo da pesquisa ↓</a>
+            </details>
+            <details class="project-modules">
+              <summary>Explorar as nove aplicações</summary>
+              <ul class="module-links">
+                <li><a href="./gt360/?modulo=onboarding">Fluxo de Onboarding <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=avaliacao-clt">Avaliação de Experiência CLT <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=avaliacao-pj">Avaliação de Prestadores PJ <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=tempo-casa">Gestão de Tempo de Casa <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=desligamento">Questionário de Desligamento <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=engajamento">Pesquisa de Engajamento <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=riscos-psicossociais">Gestão de Riscos Psicossociais <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=treinamentos">Painel de Treinamentos <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=checklist-5s">Checklist 5S <span aria-hidden="true">↗</span></a></li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+        <article class="project-card alt" id="eu-horizonte" data-reveal>
+          <a class="project-visual" href="./eu-horizonte-intranet/" aria-label="Explorar protótipo do eu mais horizonte">
+            <img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Apresentação visual do mural, agenda e acervo da intranet eu mais horizonte" width="1600" height="1120" loading="lazy" decoding="async">
+          </a>
+          <div class="project-copy">
+            <div class="project-heading"><h3>eu + horizonte</h3><span class="project-state">Protótipo navegável</span></div>
+            <p class="project-description">Intranet para aproximar colaboradores da comunicação interna. Mural, agenda e acervo organizados para facilitar o acesso aos conteúdos da empresa.</p>
+            <div class="project-actions">
+              <a class="button" href="./eu-horizonte-intranet/">Explorar aplicação <span aria-hidden="true">↗</span></a>
+              <a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+            <details class="project-details">
+              <summary>Sobre o projeto e minha participação</summary>
+              <div class="detail-body">
+                <p><strong>A necessidade.</strong> Reunir comunicados, eventos e documentos em um espaço que facilite encontrar informações e acompanhar as iniciativas internas.</p>
+                <p><strong>Minha participação.</strong> Ideação da intranet, definição da proposta, arquitetura de informação, identidade visual, desenho das jornadas e validação funcional da experiência.</p>
+                <p><strong>A entrega.</strong> Protótipo navegável com mural, agenda, acervo e fluxo de publicação, projetado para a experiência do colaborador.</p>
               </div>
-            </article>
+            </details>
           </div>
-          <div class="dho-organizations">
-            <div class="dho-organization">
-              <span class="dho-kicker">DHO</span>
-              <h4>Rede Amazônica</h4>
-              <ul class="dho-list">
-                <li>
-                  <h5>Oficina de Letramento Étnico-Racial</h5>
-                  <p>Participei da idealização, do planejamento, da mobilização dos colaboradores e da realização da oficina do projeto Consciência Coletiva, sobre racismo estrutural, representatividade e práticas antirracistas no trabalho.</p>
-                  <figure class="dho-record-photo">
-                    <img src="./assets/dho/registros/rede-letramento.webp" alt="Participantes da Oficina de Letramento Étnico-Racial reunidos no auditório da Rede Amazônica" width="960" height="720" loading="lazy" decoding="async">
-                    <figcaption>Foto: Manoel Gustavo / Rede Amazônica</figcaption>
-                  </figure>
-                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/grupo-rede-amazonica-realiza-oficina-de-letramento-etnico-racial.ghtml" target="_blank" rel="noopener">Ler matéria sobre a oficina ↗</a>
-                </li>
-                <li>
-                  <h5>Workshop de Diversidade Geracional</h5>
-                  <p>Atuei da idealização à execução do workshop, incluindo o planejamento, a comunicação e a mobilização dos colaboradores. O encontro sobre inclusão e colaboração entre gerações aconteceu em Manaus, com transmissão para outras unidades.</p>
-                  <figure class="dho-record-photo">
-                    <img src="./assets/dho/registros/rede-diversidade.webp" alt="Participantes do Workshop de Diversidade Geracional reunidos no auditório após o encontro" width="960" height="640" loading="lazy" decoding="async">
-                    <figcaption>Foto: Emilly Silva / Rede Amazônica</figcaption>
-                  </figure>
-                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-realiza-workshop-sobre-diversidade-geracional.ghtml" target="_blank" rel="noopener">Ler matéria sobre o workshop ↗</a>
-                </li>
-                <li>
-                  <h5>Campanha de Dia das Crianças · ESG social</h5>
-                  <p>Contribuí em todas as etapas da campanha: idealização, planejamento, comunicação, mobilização dos colaboradores e execução da arrecadação de doações para o Abrigo Monte Salém, em Manaus.</p>
-                  <figure class="dho-record-photo dho-record-photo--portrait">
-                    <img src="./assets/dho/registros/rede-dia-das-criancas-monte-salem.webp" alt="Três pessoas em frente ao mural do Abrigo Monte Salém durante a campanha de Dia das Crianças" width="840" height="1120" loading="lazy" decoding="async">
-                    <figcaption>Registro da campanha no Abrigo Monte Salém</figcaption>
-                  </figure>
-                  <a class="dho-link" href="https://redeglobo.globo.com/redeamazonica/noticia/rede-amazonica-arrecada-doacoes-para-abrigo-infantil-em-manaus.ghtml" target="_blank" rel="noopener">Ler matéria sobre a campanha ↗</a>
-                </li>
-              </ul>
-            </div>
-            <div class="dho-organization">
-              <span class="dho-kicker">DHO e Comunicação Interna</span>
-              <h4>Alitz LTDA</h4>
-              <ul class="dho-list">
-                <li>
-                  <h5>Palestras organizacionais</h5>
-                  <p>Organizei e facilitei palestras voltadas ao público interno.</p>
-                  <a class="dho-cover dho-cover--featured" href="https://www.instagram.com/p/DPPpLxAEWcN/" target="_blank" rel="noopener">
-                    <img src="./assets/dho/registros/alitz-setembro-amarelo.webp" alt="" width="361" height="640" loading="lazy" decoding="async">
-                    <span>Setembro Amarelo ↗</span>
-                  </a>
-                </li>
-                <li>
-                  <h5>Cerimônias internas, ações sociais e eventos corporativos</h5>
-                  <p>Organizei iniciativas internas e ações sociais voltadas ao engajamento e à convivência entre equipes.</p>
-                  <ul class="dho-gallery" aria-label="Capas das publicações no Instagram">
-                    <li><a class="dho-cover" href="https://www.instagram.com/p/DJcSlW0RwcA/" target="_blank" rel="noopener">
-                      <img src="./assets/dho/registros/alitz-dia-das-maes.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Dia das Mães ↗</span>
-                    </a></li>
-                    <li><a class="dho-cover" href="https://www.instagram.com/p/DNHI2NARgf0/" target="_blank" rel="noopener">
-                      <img src="./assets/dho/registros/alitz-dia-dos-pais.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Dia dos Pais ↗</span>
-                    </a></li>
-                    <li><a class="dho-cover" href="https://www.instagram.com/p/DSDrBackdCK/" target="_blank" rel="noopener">
-                      <img src="./assets/dho/registros/alitz-confraternizacao.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Confraternização de fim de ano ↗</span>
-                    </a></li>
-                    <li><a class="dho-cover" href="https://www.instagram.com/p/DJsEt0jRSJT/?img_index=1" target="_blank" rel="noopener">
-                      <img src="./assets/dho/registros/alitz-conectarh.webp" alt="" width="640" height="640" loading="lazy" decoding="async"><span>ConectaRH 2025 ↗</span>
-                    </a></li>
-                    <li><a class="dho-cover" href="https://www.instagram.com/p/DIji9EVREc1/" target="_blank" rel="noopener">
-                      <img src="./assets/dho/registros/alitz-pascoa.webp" alt="" width="360" height="640" loading="lazy" decoding="async"><span>Confraternização de Páscoa ↗</span>
-                    </a></li>
-                  </ul>
-                  <p class="dho-credit">Capas: @bsc.contabilidade / Instagram</p>
-                </li>
-              </ul>
-            </div>
+        </article>
+      </div>
+      <p class="demo-note">As versões públicas utilizam dados fictícios para apresentar os projetos. Alterações na demonstração são temporárias e reiniciam ao recarregar a página.</p>
+    </section>
+
+    <section class="about" id="sobre" aria-labelledby="about-title">
+      <div class="wrap about-layout">
+        <div class="about-identity">
+          <img src="./assets/manoel-gustavo.webp" alt="Retrato de Manoel Gustavo" width="640" height="616" loading="lazy" decoding="async">
+          <h2 id="about-title">Um pouco sobre mim</h2>
+        </div>
+        <div class="about-copy">
+          <h3>Sou Manoel Gustavo.</h3>
+          <p>Profissional de Recursos Humanos, formado em Gestão de RH e estudante de Psicologia e de Gestão de Projetos.</p>
+          <p>Parto das necessidades de quem vai usar a solução, organizo requisitos e jornadas e acompanho a construção e a validação da experiência.</p>
+          <div class="contact-links" id="contato">
+            <a href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/gustavomrtns" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="mailto:manoel.gustavo@outlook.com">E-mail <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="subsection-head teaching-heading" id="cursos-ministrados" data-reveal><h3>T&amp;D: cursos e treinamentos que ministrei</h3><p>Conhecimento compartilhado em ações de formação e facilitação, com aplicação às rotinas e às relações de trabalho.</p></div>
-        <div class="teaching-grid" data-stagger>
-          <article class="teaching-card"><span>01</span><h4>Processos</h4><p>Organização de fluxos e melhoria das rotinas de trabalho.</p></article>
-          <article class="teaching-card"><span>02</span><h4>Práticas ágeis</h4><p>Organização de entregas, colaboração e melhoria contínua.</p></article>
-          <article class="teaching-card"><span>03</span><h4>5S</h4><p>Organização, padronização e cuidado com os ambientes.</p></article>
-          <article class="teaching-card"><span>04</span><h4>Diversidade e inclusão</h4><p>Respeito às diferenças e construção de relações mais inclusivas.</p></article>
-        </div>
-        <div class="case-studies" id="relatos" role="region" aria-labelledby="relatos-titulo">
-          <div class="subsection-head" data-reveal><h3 id="relatos-titulo">Cases profissionais</h3><p>Abra cada case para conhecer a necessidade, minha atuação e o que foi entregue. Os relatos não expõem documentos, telas ou indicadores internos.</p></div>
-          <details class="experience-case" id="case-onboarding-treinamentos"><summary>Onboarding e gestão de treinamentos <small>T&amp;D e integração · Fluxos e requisitos</small></summary><dl>
-            <dt>Necessidade</dt><dd>Organizar a jornada de entrada e o acompanhamento das ações de aprendizagem, reduzindo a dispersão de informações e controles.</dd>
-            <dt>Minha atuação</dt><dd>Mapeamento das rotinas, desenho dos fluxos e da jornada, definição de necessidades e prioridades e encaminhamento de orientações para o desenvolvimento.</dd>
-            <dt>Construção conjunta</dt><dd>Tradução das demandas de RH para o time de Tecnologia, alinhamento das etapas e participação nos testes, ajustes e validações das funcionalidades.</dd>
-            <dt>Entrega</dt><dd>Fluxos estruturados para integração e acompanhamento de treinamentos, turmas, materiais, certificações e indicadores, construídos em parceria com Tecnologia.</dd>
-          </dl><a href="./gt360/?modulo=onboarding">Explorar o onboarding no GT360° ↗</a><a href="./gt360/?modulo=treinamentos">Explorar o painel de treinamentos ↗</a></details>
-          <details class="experience-case" id="case-pesquisa-engajamento"><summary>Pesquisa de Engajamento Organizacional <small>DHO · Escuta organizacional</small></summary><dl>
-            <dt>Necessidade</dt><dd>Organizar a escuta dos colaboradores e viabilizar a aplicação e a leitura da pesquisa em um fluxo de RH.</dd>
-            <dt>Minha atuação</dt><dd>Mapeamento de necessidades, estruturação do instrumento, ideação da experiência de aplicação, comunicação, mobilização e orientação às lideranças.</dd>
-            <dt>Construção conjunta</dt><dd>Alinhamentos com Tecnologia para transformar as necessidades em funcionalidades, acompanhar ajustes e participar da homologação e validação.</dd>
-            <dt>Entrega</dt><dd>Módulo de pesquisa homologado e colocado em operação com Tecnologia, com acompanhamento da participação, consolidação das respostas e apresentação executiva.</dd>
-          </dl><a href="./gt360/?modulo=engajamento">Explorar a pesquisa no GT360° ↗</a></details>
-          <details class="experience-case" id="case-comunicacao-interna"><summary>Comunicação e identidade visual de ações de RH <small>Comunicação Interna · Campanhas e identidade visual</small></summary><dl>
-            <dt>Necessidade</dt><dd>Tornar as iniciativas de RH compreensíveis e próximas dos colaboradores e das lideranças.</dd>
-            <dt>Minha atuação</dt><dd>Ideação de campanhas, criação de identidade visual, organização das mensagens e produção de peças, comunicados, orientações e conteúdos de desenvolvimento organizacional.</dd>
-            <dt>Articulação</dt><dd>Alinhamento com áreas parceiras para conectar a comunicação à programação e à operação das ações, considerando público e canais internos.</dd>
-            <dt>Entrega</dt><dd>Campanhas de engajamento e bem-estar, materiais de orientação e comunicação interna, com atuação da concepção à execução e atenção à experiência do colaborador.</dd>
-          </dl><a href="#eu-horizonte">Projeto relacionado: intranet eu + horizonte ↓</a></details>
-        </div>
-        <div class="subsection-head apps-heading" id="solucoes-digitais" data-reveal><h3>Projetos digitais de RH</h3><p>Explore a adaptação pública do GT360° implantado e o protótipo da intranet eu + horizonte. Atuo com visão de Product Owner e práticas de Scrum Master, do mapeamento de necessidades à validação com Tecnologia.</p></div>
-        <ol class="delivery-cycle" aria-label="Etapas da minha atuação no desenvolvimento de aplicações" data-stagger>
-          <li><span>01</span><b>Necessidades e mapeamento</b></li><li><span>02</span><b>Ideação e priorização</b></li><li><span>03</span><b>Desenvolvimento com Tecnologia</b></li><li><span>04</span><b>Homologação e validação</b></li><li><span>05</span><b>Implantação e adoção</b></li>
-        </ol>
-        <p class="demo-context">As versões públicas são adaptações para o portfólio e utilizam dados fictícios. Não cadastre informações pessoais reais nesses ambientes.</p>
-        <div class="project-stage">
-          <article class="project-card" id="gt360-projeto" data-reveal>
-            <div class="project-copy">
-              <span class="number">01 · SOLUÇÃO IMPLANTADA · DEMONSTRAÇÃO PÚBLICA</span><h3>GT360°</h3>
-              <p>Um ambiente com nove aplicações para organizar rotinas de RH: integração, avaliações, engajamento, treinamentos e acompanhamento de processos.</p>
-              <div class="identity-tags"><span>Rotinas de RH</span><span>Desenvolvimento</span><span>Indicadores</span></div>
-              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Facilitar o acesso e o acompanhamento de processos distribuídos em diferentes controles.</dd><dt>Minha participação</dt><dd>Identificação de necessidades, mapeamento de processos, ideação, definição de requisitos e priorização. Alinhamentos com stakeholders e com Tecnologia, acompanhamento do desenvolvimento, testes funcionais, homologação, validação e implantação conjunta, com orientação aos usuários.</dd><dt>Entrega</dt><dd>Sistema e módulos desenvolvidos e implantados no ambiente interno em parceria entre RH e Tecnologia. Esta versão pública é uma adaptação do produto implantado, reunindo diferentes rotinas e recursos de RH em um ambiente de apresentação com dados fictícios.</dd><dt>Métodos e ferramentas</dt><dd>Práticas de Product Owner e Scrum Master, mapeamento de processos, priorização, facilitação e validação funcional com Tecnologia. A adaptação pública utiliza HTML, CSS e JavaScript.</dd></dl></details>
-              <div class="project-actions"><a class="button" href="./gt360/">Explorar demonstração →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener">Ver documentação ↗</a></div>
-              <p class="project-related">Cases relacionados: <a href="#case-onboarding-treinamentos">Onboarding e treinamentos ↑</a><a href="#case-pesquisa-engajamento">Pesquisa de engajamento ↑</a></p>
-            </div>
-            <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Visão geral das aplicações de RH do GT360°" loading="lazy"></a>
-          </article>
-          <article class="project-card alt" id="eu-horizonte" data-reveal>
-            <div class="project-copy">
-              <span class="number">02 · PROPOSTA DE INTRANET · PROTÓTIPO NAVEGÁVEL</span><h3>eu + horizonte</h3>
-              <p>Uma proposta de intranet para reunir comunicados, agenda e conteúdos internos, facilitando o acesso à informação no dia a dia do colaborador.</p>
-              <div class="identity-tags"><span>Comunicação Interna</span><span>Experiência do Colaborador</span><span>Cultura</span></div>
-              <details class="project-details"><summary>Minha participação e o que foi entregue</summary><dl><dt>Necessidade</dt><dd>Tornar conteúdos e informações internas mais fáceis de encontrar e acompanhar.</dd><dt>Minha participação</dt><dd>Ideação da intranet, organização dos conteúdos e da navegação, definição das jornadas e da experiência do colaborador e validação funcional da proposta.</dd><dt>Entrega</dt><dd>Intranet com mural, agenda, acervo e fluxo de publicação. Projeto idealizado como apoio organizacional ao desenvolvimento, à valorização e à retenção de talentos, com o propósito de integrar colaboradores e gerar valor à experiência interna.</dd><dt>Métodos e ferramentas</dt><dd>Comunicação interna, experiência do colaborador, organização da informação e práticas ágeis. A versão pública utiliza HTML, CSS e JavaScript.</dd></dl></details>
-              <div class="project-actions"><a class="button" href="./eu-horizonte-intranet/">Explorar protótipo →</a><a class="button" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener">Ver documentação ↗</a></div>
-              <p class="project-related">Case relacionado: <a href="#case-comunicacao-interna">Comunicação Interna ↑</a></p>
-            </div>
-            <a class="project-visual project-visual--contain" href="./eu-horizonte-intranet/" aria-label="Explorar demonstração do eu mais horizonte"><img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Visão ampliada da intranet eu mais horizonte" loading="lazy"></a>
-          </article>
-        </div>
       </div>
-    </section>
-
-    <section id="formacao">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">05 / FORMAÇÃO</div><div><h2>Formação acadêmica.</h2><p>Gestão de Pessoas, Psicologia e Gestão de Projetos como bases para compreender o negócio e apoiar as pessoas.</p></div></div>
-        <div class="education-grid" data-stagger>
-          <article class="education-card"><small>PÓS-GRADUAÇÃO</small><h3>MBA em Gestão de Projetos</h3><p>USP/ESALQ</p><time>2026 — Em andamento</time></article>
-          <article class="education-card"><small>GRADUAÇÃO</small><h3>Bacharelado em Psicologia</h3><p>Faculdade Santa Teresa</p><time>2025 — Em andamento</time></article>
-          <article class="education-card"><small>GRADUAÇÃO</small><h3>Gestão de Recursos Humanos</h3><p>Faculdade Martha Falcão</p><time>2023 — 2025</time></article>
-          <article class="education-card"><small>FORMAÇÃO TÉCNICA</small><h3>Ensino Médio Técnico em Eletrônica</h3><p>Instituto Federal do Amazonas</p><time>2020 — 2023</time></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="certificacoes">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">06 / CAPACITAÇÕES</div><div><h2>Capacitações que complementam minha atuação.</h2><p>Aprendizado em RH, comportamento, dados, tecnologia, projetos e governança. Abra cada tema para conhecer as formações.</p></div></div>
-        <div class="cert-groups">
-          <details class="cert-group"><summary><span>RH, comportamento e desenvolvimento</span><small>5 capacitações</small></summary><div class="cert-grid">
-            <article class="cert"><small>COMPORTAMENTO</small><h3>Análise Técnica Comportamental DISC</h3><p>Freedom Start</p></article>
-            <article class="cert"><small>EDUCAÇÃO CORPORATIVA</small><h3>Indicadores de T&D</h3><p>Sólides</p></article>
-            <article class="cert"><small>DEPARTAMENTO PESSOAL</small><h3>Formação em Departamento Pessoal</h3><p>INOVAR RH & Sólides</p></article>
-            <article class="cert"><small>RECRUTAMENTO</small><h3>Formação em Tech Recruiter</h3><p>Sólides</p></article>
-            <article class="cert"><small>DIVERSIDADE</small><h3>Diversidade e Inclusão</h3><p>UniGlobo</p></article>
-          </div></details>
-          <details class="cert-group"><summary><span>Dados e inteligência artificial</span><small>5 capacitações</small></summary><div class="cert-grid">
-            <article class="cert"><small>DADOS</small><h3>People Analytics</h3><p>DIO</p></article>
-            <article class="cert"><small>TECNOLOGIA</small><h3>IA aplicada a RH</h3><p>Qulture Rocks</p></article>
-            <article class="cert"><small>ANALYTICS</small><h3>Análise de Dados</h3><p>Descomplica</p></article>
-            <article class="cert"><small>INTELIGÊNCIA ARTIFICIAL</small><h3>IA na Prática</h3><p>Descomplica</p></article>
-            <article class="cert"><small>COMUNICAÇÃO E DADOS</small><h3>Marketing Orientado a Dados e IA: da Estratégia à Execução</h3><p>MBA USP/Esalq</p></article>
-          </div></details>
-          <details class="cert-group"><summary><span>Projetos, legislação e governança</span><small>4 capacitações</small></summary><div class="cert-grid">
-            <article class="cert"><small>PROJETOS</small><h3>Metodologias Ágeis e Ativas</h3><p>Fundação Getúlio Vargas & UniGlobo</p></article>
-            <article class="cert"><small>LEGISLAÇÃO</small><h3>Normas e Legislações Trabalhistas e Previdenciárias</h3><p>Grupo Rede Amazônica</p></article>
-            <article class="cert"><small>GOVERNANÇA</small><h3>Governança Cooperativa e Compliance</h3><p>COOP</p></article>
-            <article class="cert"><small>COMPLIANCE</small><h3>NR-1 e Saúde Mental no Trabalho</h3><p>UniGlobo & Sólides</p></article>
-          </div></details>
-          <details class="cert-group"><summary><span>ESG e sustentabilidade</span><small>2 capacitações</small></summary><div class="cert-grid">
-            <article class="cert"><small>ESG & SUSTENTABILIDADE</small><h3>Formação em ESG</h3><p>DD&L Advogados Associados</p></article>
-            <article class="cert"><small>ESG & SUSTENTABILIDADE</small><h3>Imersão em ESG: Aspectos Gerais</h3><p>Instituto Brasileiro de Sustentabilidade - INBS</p></article>
-            <article class="cert"><small>ESG & SUSTENTABILIDADE</small><h3>Formação em Agente de ESG</h3><p>Centro de Educação Tecnológica do Amazonas</p></article>
-
-          </div></details>
-          <details class="cert-group complementary-courses"><summary><span>Outros cursos do meu percurso</span><small>4 cursos</small></summary><ul class="course-list"><li>Fotografia</li><li>Lei Geral da Proteção de Dados - LGPD</li><li>Segurança da Informação</li><li>Tecnologia da Informação e Comunicação</li></ul><p class="course-source">Cursos também listados no meu <a href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">perfil do LinkedIn ↗</a>.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section id="interesses">
-      <div class="wrap">
-        <div class="section-head" data-reveal><div class="section-index">07 / INTERESSES</div><div><h2>Tenho interesse em:</h2><p>Temas em que busco aprofundar conhecimentos, colaborar e desenvolver projetos.</p></div></div>
-        <ul class="interests-grid" data-stagger>
-          <li>Desenvolvimento organizacional e de lideranças</li>
-          <li>Operações e melhoria de processos de RH</li>
-          <li>Gestão de projetos e práticas ágeis</li>
-          <li>People Analytics e IA aplicada ao RH</li>
-          <li>Design, comunicação interna e experiência do colaborador</li>
-          <li>Tecnologia e desenvolvimento de soluções para RH</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contato">
-      <div class="wrap"><div class="cta" data-reveal><div><h2>Vamos conversar sobre gestão de pessoas?</h2><p>Conexões e oportunidades em Recursos Humanos, desenvolvimento de pessoas, processos, dados e projetos de inovação.</p><div class="contact-links"><a class="button" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="button" href="mailto:manoel.gustavo@outlook.com">E-mail ↗</a><a class="button" href="https://wa.me/5592981322424" target="_blank" rel="noopener">WhatsApp ↗</a><a class="button" href="https://github.com/gustavomrtns" target="_blank" rel="noopener">GitHub ↗</a></div></div></div></div>
     </section>
   </main>
 
-  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Portfólio Profissional</span><span>Recursos Humanos · Pessoas · Processos · Inovação</span></div></footer>
-  <button class="back-top" id="backTop" aria-label="Voltar ao topo">↑</button>
+  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Projetos e aplicações</span><a href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a></div></footer>
 
   <script>
-    (()=>{
-      const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const reveal=[...document.querySelectorAll('[data-reveal],[data-stagger],.project-card')];
-      const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
-        if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}
-      }),{threshold:.12,rootMargin:'0px 0px -6%'});
-      reveal.forEach(el=>observer.observe(el));
+    (() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion || !('IntersectionObserver' in window)) return;
 
-      const progress=document.getElementById('progress');
-      const nav=document.getElementById('nav');
-      const backTop=document.getElementById('backTop');
-      const menuButton=document.getElementById('menuButton');
-      const navLinks=document.getElementById('navLinks');
-      const links=[...document.querySelectorAll('.nav-links a')];
-      const sections=[...document.querySelectorAll('main section[id]')];
-      const parallax=[...document.querySelectorAll('[data-parallax]')];
+      const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.05 });
 
-      function closeMenu(){navLinks.classList.remove('open');document.body.classList.remove('menu-open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menu')}
-      function update(){
-        const y=scrollY||document.documentElement.scrollTop;
-        const max=document.documentElement.scrollHeight-innerHeight;
-        progress.style.width=(max?Math.min(100,y/max*100):0)+'%';
-        nav.classList.toggle('scrolled',y>24);backTop.classList.toggle('show',y>650);
-        let current='';sections.forEach(s=>{if(y>=s.offsetTop-180)current=s.id});
-        links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
-        if(!reduce)parallax.forEach(el=>{const speed=parseFloat(el.dataset.parallax||0);el.style.translate='0 '+(y*speed)+'px'});
-      }
-      menuButton.addEventListener('click',()=>{const open=!navLinks.classList.contains('open');navLinks.classList.toggle('open',open);document.body.classList.toggle('menu-open',open);menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});
-      links.forEach(link=>link.addEventListener('click',closeMenu));
-      function openLinkedCase(hash){
-        const target=document.getElementById(hash.slice(1));
-        if(target?.matches('details.experience-case'))target.open=true;
-      }
-      document.querySelectorAll('a[href^="#case-"]').forEach(link=>link.addEventListener('click',()=>openLinkedCase(link.hash)));
-      addEventListener('hashchange',()=>openLinkedCase(location.hash));openLinkedCase(location.hash);
-      addEventListener('scroll',update,{passive:true});addEventListener('resize',()=>{if(innerWidth>720)closeMenu();update()},{passive:true});update();
-      backTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
+      document.querySelectorAll('[data-reveal]').forEach(element => {
+        element.classList.add('will-reveal');
+        observer.observe(element);
+      });
     })();
   </script>
 </body>

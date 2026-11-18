@@ -7,7 +7,6 @@ Não modifica os dados ou os arquivos das aplicações.
 from __future__ import annotations
 
 import functools
-import re
 import threading
 import unittest
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -119,37 +118,33 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
-    def test_dho_section_loads_photos_and_opens_the_research_case(self):
+    def test_project_details_module_shortcut_and_responsive_navigation(self):
         for device in DEVICES:
             with self.subTest(device=device):
                 context, page = self._new_page(device)
                 try:
-                    page.goto(self.base + "/#acoes-dho", wait_until="domcontentloaded")
-                    showcase = page.get_by_role("region", name="T&D, DHO e Comunicação Interna na prática")
-                    self.assertTrue(showcase.is_visible())
-                    self.assertEqual(showcase.locator(".dho-kicker").all_text_contents(), [
-                        "T&D · Rede Amazônica",
-                        "DHO · Rede Amazônica",
-                        "DHO",
-                        "DHO e Comunicação Interna",
-                    ])
-                    for img in showcase.locator(".dho-feature img").all():
-                        img.scroll_into_view_if_needed()
-                        self.assertEqual(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 1200)
-                    images = showcase.locator(".dho-organization img")
-                    self.assertEqual(images.count(), 9)
-                    for img in images.all():
-                        img.scroll_into_view_if_needed()
-                        self.assertGreater(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 0)
-                    self.assertEqual(showcase.locator("a.dho-cover[href^='https://www.instagram.com/p/']").count(), 6)
-                    self.assertTrue(showcase.get_by_role("link", name=re.compile("Setembro Amarelo")).is_visible())
-                    showcase.get_by_role("link", name=re.compile("Conhecer o processo")).click()
-                    self.assertTrue(page.locator("#case-pesquisa-engajamento").evaluate("(node) => node.open"))
-                    page.locator("#gt360-projeto a[href='#case-onboarding-treinamentos']").click()
-                    self.assertTrue(page.locator("#case-onboarding-treinamentos").evaluate("(node) => node.open"))
-                    page.locator("#eu-horizonte a[href='#case-comunicacao-interna']").click()
-                    self.assertTrue(page.locator("#case-comunicacao-interna").evaluate("(node) => node.open"))
+                    errors = []
+                    page.on("pageerror", lambda exc: errors.append(str(exc)))
+                    page.goto(self.base + "/", wait_until="domcontentloaded")
+                    page.get_by_role("navigation").get_by_role("link", name="Projetos", exact=True).click()
+                    page.wait_for_url(self.base + "/#projetos")
+                    for project in ("gt360-projeto", "eu-horizonte"):
+                        details = page.locator(f"#{project} .project-details")
+                        details.locator("summary").click()
+                        self.assertTrue(details.evaluate("node => node.open"))
+                        self.assertTrue(details.get_by_text("Minha participação.", exact=True).is_visible())
+                    modules = page.locator(".project-modules")
+                    modules.locator("summary").click()
+                    self.assertEqual(modules.locator("li a").count(), 9)
+                    modules.get_by_role("link", name="Fluxo de Onboarding", exact=True).click()
+                    page.wait_for_url(self.base + "/gt360/?modulo=onboarding")
+                    page.locator("#frame-onboarding.active").wait_for(state="visible", timeout=20000)
+                    page.get_by_role("link", name="Voltar ao portfólio profissional", exact=True).click()
+                    page.wait_for_url(self.base + "/#projetos")
+                    page.get_by_role("navigation").get_by_role("link", name="Sobre mim", exact=True).click()
+                    self.assertTrue(page.locator("#sobre").is_visible())
                     self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), DEVICES[device]["viewport"]["width"])
+                    self.assertFalse(errors, errors)
                 finally:
                     context.close()
 

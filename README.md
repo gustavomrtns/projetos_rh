@@ -1,68 +1,39 @@
-# Manoel Gustavo — Recursos Humanos, Desenvolvimento Organizacional e Inovação
+# Manoel Gustavo — Projetos e aplicações
 
-> Recursos Humanos · Pessoas · Processos · Projetos · Dados
+Aplicações projetadas a partir da experiência em Recursos Humanos, pessoas e processos.
 
-Atuo em operações de RH, desenvolvimento de pessoas, comunicação interna e melhoria de processos. Conecto essas experiências à identificação de necessidades, ao mapeamento e à ideação de soluções, com visão de Product Owner e estratégias de Scrum Master.
+[Explorar o portfólio](https://gustavomrtns.github.io/projetos_rh/) · [Sobre mim e contato](https://gustavomrtns.github.io/projetos_rh/#sobre)
 
-Nos projetos de sistemas, trabalho em parceria com Tecnologia: alinhamos requisitos e prioridades, acompanhamos o desenvolvimento, homologamos, validamos e colocamos as soluções em operação em conjunto.
+## Projetos
 
-[▶ Conhecer meu portfólio profissional](https://gustavomrtns.github.io/projetos_rh/) · [LinkedIn](https://www.linkedin.com/in/manoel-gustavo/)
-
-## Minha atuação
-
-- **Operações de RH:** recrutamento e seleção, Departamento Pessoal, benefícios e organização de rotinas.
-- **Desenvolvimento organizacional:** integração, treinamentos, desempenho, competências e apoio às lideranças.
-- **Dados e escuta:** pesquisas organizacionais, indicadores, painéis e relatórios.
-- **Comunicação e design:** identidades visuais, campanhas, endomarketing e experiência do colaborador.
-- **Projetos e soluções digitais:** necessidades, processos, ideação, priorização, facilitação e trabalho conjunto com Tecnologia.
-
-Os cargos e períodos profissionais, a formação acadêmica, as capacitações e os cursos que ministrei estão apresentados no [portfólio](https://gustavomrtns.github.io/projetos_rh/).
-
-## Ações realizadas
-
-Na seção [T&D, DHO e Comunicação Interna na prática](https://gustavomrtns.github.io/projetos_rh/#acoes-dho), os registros estão organizados por frente:
-
-- **T&D — Rede Amazônica:** treinamento de 5S e Processos com foco em Team Building.
-- **DHO — Rede Amazônica:** primeira Pesquisa de Engajamento Organizacional, Oficina de Letramento Étnico-Racial, Workshop de Diversidade Geracional e campanha de Dia das Crianças.
-- **DHO e Comunicação Interna — Alitz LTDA:** palestras, cerimônias internas, ações sociais e eventos corporativos.
-
-## Cases profissionais
-
-Os [cases profissionais](https://gustavomrtns.github.io/projetos_rh/#relatos) descrevem a necessidade, minha atuação e as entregas em **T&D e integração** (onboarding e gestão de treinamentos), **DHO** (pesquisa de engajamento) e **Comunicação Interna** (campanhas e identidade visual). Não reproduzem documentos, telas, dados individuais ou indicadores internos.
-
-## Projetos digitais de RH
-
-| Projeto | Status e proposta | Versão pública | Documentação |
+| Projeto | Proposta | Versão pública | Documentação |
 |---|---|---|---|
-| **GT360°** | Solução implantada. A demonstração reúne nove aplicações de jornada do colaborador, engajamento, desenvolvimento e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
-| **eu + horizonte** | Protótipo navegável de intranet para integrar colaboradores e apoiar comunicação, desenvolvimento, valorização e retenção de talentos. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
+| **GT360°** | Workspace de Gestão de Pessoas com nove aplicações de integração, avaliações, pesquisas, treinamentos e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
+| **eu + horizonte** | Protótipo navegável de intranet com mural, agenda, acervo e fluxo de publicação. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
 
-### Implantação interna e apresentação pública
+## Minha participação
 
-O sistema e os módulos internos do GT360° foram construídos e implantados em parceria entre RH e Tecnologia. Minha contribuição está na identificação de necessidades, no mapeamento, na ideação e priorização, nos alinhamentos e na homologação, validação e implantação conjunta.
+Identificação de necessidades, mapeamento de processos, desenho de jornadas, requisitos e priorização, com visão de Product Owner e práticas de facilitação de Scrum Master. Nos projetos internos, os alinhamentos com Tecnologia incluíram acompanhamento do desenvolvimento, testes, homologação e implantação conjunta.
 
-Este repositório apresenta **adaptações públicas com dados fictícios**, e não o código, os documentos ou a infraestrutura dos ambientes corporativos. As informações técnicas abaixo descrevem somente as demonstrações disponíveis neste endereço.
+O sistema interno do GT360° foi desenvolvido e implantado em parceria entre RH e Tecnologia. A versão pública adapta o projeto para apresentar as interfaces e os fluxos. O eu + horizonte apresenta a proposta e a experiência de navegação de uma intranet.
 
-### GT360° — módulos do workspace
+## Aplicações do GT360°
 
 | Frente | Aplicações |
 |---|---|
-| Jornada do Colaborador | Fluxo de Onboarding; Avaliação de Experiência CLT; Avaliação de PJ; Gestão de Tempo de Casa; Questionário de Desligamento |
-| Engajamento e Saúde Organizacional | Pesquisa de Engajamento; Gestão de Riscos Psicossociais |
-| Desenvolvimento de Talentos | Painel de Treinamentos |
+| Jornada do Colaborador | Fluxo de Onboarding, Avaliação de Experiência CLT, Avaliação de Prestadores PJ, Gestão de Tempo de Casa e Questionário de Desligamento |
+| Engajamento e Saúde Organizacional | Pesquisa de Engajamento e Gestão de Riscos Psicossociais |
+| Desenvolvimento | Painel de Treinamentos |
 | Qualidade e Processos | Checklist 5S |
 
+## Sobre mim
 
-[![Visão do GT360°](./gt360/gt360-case-editorial.svg)](https://gustavomrtns.github.io/projetos_rh/gt360/)
+Sou Manoel Gustavo, profissional de Recursos Humanos, formado em Gestão de RH e estudante de Psicologia e de Gestão de Projetos. Minha experiência com pessoas e processos orienta as aplicações que projeto.
 
-[![Visão do eu + horizonte](./eu-horizonte-intranet/eu-horizonte-case-editorial.svg)](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/)
+## Funcionamento das versões públicas
 
-## Dados e funcionamento das versões públicas
+As aplicações utilizam HTML, CSS e JavaScript e dados fictícios. O `demoStore` mantém as alterações em memória durante a sessão. Recarregar ou fechar a página reinicia os dados da demonstração.
 
-As aplicações públicas usam **estado temporário em memória (`demoStore`)**. No GT360°, os módulos compartilham esse estado enquanto o workspace está aberto. Ao atualizar ou fechar a página, os registros temporários são descartados.
+A descrição técnica deste repositório se refere às versões públicas. Os ambientes internos possuem sua própria infraestrutura. Consulte a documentação de cada projeto para os detalhes de funcionamento.
 
-As demonstrações não possuem conta, banco de dados compartilhado, sincronização entre pessoas ou dispositivos nem backup/restauração. Exportações específicas, quando oferecidas, não equivalem a backup do ambiente.
-
-**Use apenas dados fictícios. Não cadastre informações pessoais reais.** Essas limitações pertencem às adaptações públicas e não descrevem a infraestrutura dos sistemas internos.
-
-[Contato pelo LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/)
+[LinkedIn](https://www.linkedin.com/in/manoel-gustavo/) · [Portfólio](https://gustavomrtns.github.io/projetos_rh/)

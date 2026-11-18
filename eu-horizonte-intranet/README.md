@@ -38,7 +38,7 @@ Minha abordagem em projetos de sistemas conecta necessidades e mapeamento à ide
 
 A proposta conecta criação de identidade visual, comunicação interna, endomarketing e experiência do colaborador. O valor pretendido está em facilitar o acesso à informação e a conexão com as iniciativas da organização.
 
-Os [relatos profissionais](https://gustavomrtns.github.io/projetos_rh/#relatos) explicam a atuação em comunicação e design sem reproduzir peças internas ou afirmar ganhos de retenção não mensurados.
+A [apresentação do projeto](https://gustavomrtns.github.io/projetos_rh/#eu-horizonte) descreve minha participação na concepção da intranet e na experiência de navegação.
 
 ## Dados da demonstração
 
@@ -50,6 +50,6 @@ Não há conta, persistência durável, sincronização entre usuários ou backu
 
 ## Como continuar a visita
 
-Use **Voltar ao portfólio**, no cabeçalho da intranet, para retornar às experiências e aos demais projetos.
+Use **Voltar ao portfólio**, no cabeçalho da intranet, para retornar aos projetos.
 
 [▶ Abrir eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/#projetos)
