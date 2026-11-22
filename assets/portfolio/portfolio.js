@@ -1,5 +1,8 @@
 (function(){
   'use strict';
+  const header=document.querySelector('.site-header');
+  const headerOffset=()=>document.documentElement.style.setProperty('--header-offset',Math.ceil(header.getBoundingClientRect().height+16)+'px');
+  if(header){headerOffset();if('ResizeObserver' in window)new ResizeObserver(headerOffset).observe(header);else window.addEventListener('resize',headerOffset);}
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const projects=[...document.querySelectorAll('.project-card')];
   const projectLinks=[...document.querySelectorAll('.project-index a')];

@@ -118,6 +118,40 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_portfolio_mobile_sizes_touch_targets_and_expanded_content(self):
+        for width, height in ((320, 568), (360, 640), (390, 844), (430, 932), (768, 1024), (844, 390)):
+            with self.subTest(width=width, height=height):
+                context, page = self._new_page("mobile")
+                try:
+                    page.set_viewport_size({"width": width, "height": height})
+                    errors = []
+                    page.on("pageerror", lambda exc: errors.append(str(exc)))
+                    page.goto(self.base + "/", wait_until="domcontentloaded")
+                    photo = page.locator(".portrait img")
+                    self.assertGreater(photo.evaluate("im => im.decode().then(() => im.naturalWidth)"), 0)
+                    self.assertEqual(page.locator(".portrait figcaption").count(), 0)
+                    self.assertEqual(page.locator(".portrait").evaluate("el => getComputedStyle(el, '::before').content"), "none")
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
+                    for selector in (".nav-links a[href='#projetos']", ".project-index a", ".project-actions .button", ".contact-links a"):
+                        for link in page.locator(selector).all():
+                            self.assertGreaterEqual(link.bounding_box()["height"], 44, selector)
+                    page.get_by_role("navigation").get_by_role("link", name="Projetos", exact=True).click()
+                    self.assertGreaterEqual(page.locator("#projects-title").bounding_box()["y"], page.locator(".site-header").bounding_box()["height"] - 1)
+                    for project in ("gt360-projeto", "headcount-projeto", "carreira-projeto", "eu-horizonte"):
+                        card = page.locator("#" + project)
+                        image = card.locator(".project-visual img")
+                        image.scroll_into_view_if_needed()
+                        self.assertGreater(image.evaluate("im => im.decode().then(() => im.naturalWidth)"), 0)
+                        card.locator(".project-details summary").click()
+                        self.assertTrue(card.locator(".project-details").evaluate("el => el.open"))
+                        self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
+                    page.locator(".project-modules summary").click()
+                    self.assertEqual(page.locator(".module-links a").count(), 11)
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
+                    self.assertFalse(errors, errors)
+                finally:
+                    context.close()
+
     def test_portfolio_about_first_and_project_scroll_reveals(self):
         for device in DEVICES:
             with self.subTest(device=device):
