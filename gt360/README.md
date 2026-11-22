@@ -8,7 +8,7 @@
 
 A rotina de RH envolve integração, avaliações, escuta, desenvolvimento e acompanhamento de processos. Informações e controles dispersos dificultam a visão da jornada e a organização das demandas.
 
-O GT360° nasceu dessas necessidades e evoluiu como um ambiente de Gestão de Pessoas. **O sistema e os módulos internos foram desenvolvidos e implantados em parceria entre RH e Tecnologia.** A versão deste repositório adapta esse trabalho para apresentação pública, com nove aplicações navegáveis e dados fictícios.
+O GT360° nasceu dessas necessidades e evoluiu como um ambiente de Gestão de Pessoas. **O sistema e os módulos internos foram desenvolvidos e implantados em parceria entre RH e Tecnologia.** A versão deste repositório adapta esse trabalho para apresentação pública, com onze aplicações navegáveis e dados fictícios.
 
 ## Minha participação e construção conjunta
 
@@ -27,9 +27,9 @@ O desenvolvimento técnico é apresentado como **trabalho conjunto com Tecnologi
 - Fluxos para integração e acompanhamento da jornada do colaborador.
 - Pesquisa de engajamento e organização da leitura de resultados.
 - Gestão de treinamentos e acompanhamento de processos.
-- Navegação que reúne nove aplicações em um único ambiente público.
+- Navegação que reúne onze aplicações em um único ambiente público.
 
-A [apresentação do projeto](https://gustavomrtns.github.io/projetos_rh/#gt360-projeto) contextualiza minha participação e oferece acesso direto às nove aplicações.
+A [apresentação do projeto](https://gustavomrtns.github.io/projetos_rh/#gt360-projeto) contextualiza minha participação e oferece acesso direto às onze aplicações.
 
 ## Módulos
 
@@ -76,4 +76,13 @@ Uma eventual evolução desta demonstração para um novo ambiente multiusuário
 
 ## Aplicações conectadas de planejamento
 
-O início e a navegação lateral dão acesso às aplicações independentes [Quadro e custos](../headcount/) e [Cargos e carreira](../carreira/), que ampliam a base fictícia compartilhada. Os nove módulos existentes não foram substituídos. As novas páginas não alteram os cadastros do workspace nem sincronizam hipóteses entre abas.
+O grupo **Planejamento de Pessoas** reúne [Quadro e custos](./?modulo=headcount) e [Cargos e carreira](./?modulo=carreira), carregados em iframes persistentes como os demais módulos. O workspace agora possui onze módulos. As versões diretas continuam disponíveis e usam a mesma navegação por ações. As novas áreas não alteram os cadastros anteriores nem sincronizam dados entre abas independentes.
+
+### Áreas de trabalho de planejamento
+
+| Módulo | Telas |
+|---|---|
+| Quadro e custos | Visão geral; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual |
+| Cargos e carreira | Visão geral; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento |
+
+A navegação usa o cabeçalho e as abas do fluxo unificado. Apenas uma área fica visível e acessível por vez. Setas, Home/End e histórico do navegador são suportados. Filtros e formulários mantêm seus valores na alternância; módulos mantêm a instância do iframe. Exemplos de acesso direto: `?modulo=headcount&tela=encargos` e `?modulo=carreira&tela=sucessao`.

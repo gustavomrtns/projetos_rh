@@ -26,3 +26,9 @@ Simulações e indicações ficam em memória e reiniciam ao recarregar. Não h�
 ## Validação
 
 `node --test tests/planning.test.cjs` confere referências, faixas e intervalos. `tests/test_planning_apps.py` cobre filtros, simulação, indicação, escape de evidências, exportação e reinício em desktop/mobile no workflow.
+
+## Áreas de trabalho
+
+Visão geral; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
+
+[Entrar pelo workspace](../gt360/?modulo=carreira). O acesso direto continua disponível. Trocar telas ou módulos dentro do GT360° preserva os valores em andamento; recarregar reinicia a base. O fragmento `#tela=...` identifica a área atual.

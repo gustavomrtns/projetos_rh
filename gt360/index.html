@@ -134,9 +134,6 @@ iframe.view{width:100%;height:100%;border:0;background:var(--white)}
 @media(max-width:780px){.portfolio-return-prefix{display:none}.portfolio-return{min-height:34px;padding:7px 9px;font-size:10px}}
 header>.portfolio-return{margin-left:auto}
 </style>
-<style>
-.planning-links{margin-top:32px;padding-top:24px;border-top:1px solid #dce2de}.planning-links h2{font-size:21px;margin:0 0 10px}.planning-links>p{font-size:14px;line-height:1.6}.planning-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.planning-link-grid a{display:block;padding:20px;background:#fff;border:1px solid #dce2de;border-radius:12px;color:#202321;text-decoration:none;border-top:4px solid #c71717}.planning-link-grid strong{display:block;font-size:16px;margin-bottom:8px}.planning-link-grid span{font-size:14px;line-height:1.6;color:#58605c}.planning-link-grid a:hover{border-color:#c71717}.planning-side-link{text-decoration:none;font-size:14px}.planning-link-grid a:focus-visible{outline:3px solid #c71717;outline-offset:3px}@media(max-width:640px){.planning-link-grid{grid-template-columns:1fr}}
-</style>
 </head>
 <body>
 
@@ -179,14 +176,6 @@ header>.portfolio-return{margin-left:auto}
         <h1>Gestão de pessoas em um só lugar.</h1>
         <p>Acesse processos da jornada, desenvolvimento, pesquisas e conformidade em um único ambiente de trabalho.</p>
         <div id="home-grid"></div>
-        <section class="planning-links" aria-labelledby="planning-title">
-          <h2 id="planning-title">Planejamento de Pessoas</h2>
-          <p>Aplicações conectadas ao catálogo de pessoas do workspace.</p>
-          <div class="planning-link-grid">
-            <a href="../headcount/"><strong>Quadro e custos</strong><span>Posições, orçamento e simulações de headcount.</span></a>
-            <a href="../carreira/"><strong>Cargos e carreira</strong><span>Enquadramento, progressão, sucessão e desenvolvimento.</span></a>
-          </div>
-        </section>
       </div>
     </div>
 
@@ -199,6 +188,8 @@ header>.portfolio-return{margin-left:auto}
     <iframe class="view" id="frame-riscos-psicossociais" title="Gestão de Riscos Psicossociais" tabindex="-1" inert aria-hidden="true"></iframe>
     <iframe class="view" id="frame-treinamentos" title="Painel de Treinamentos" tabindex="-1" inert aria-hidden="true"></iframe>
     <iframe class="view" id="frame-checklist-5s" title="Checklist 5S" tabindex="-1" inert aria-hidden="true"></iframe>
+    <iframe class="view" id="frame-headcount" title="Quadro e custos" tabindex="-1" inert aria-hidden="true"></iframe>
+    <iframe class="view" id="frame-carreira" title="Cargos e carreira" tabindex="-1" inert aria-hidden="true"></iframe>
   </main>
 </div>
 
@@ -212,7 +203,8 @@ const GROUPS_CONFIG = [
   {id:'jornada',   label:'Jornada do Colaborador',        dot:'d1'},
   {id:'clima',     label:'Engajamento e Saúde Organizacional', dot:'d2'},
   {id:'talentos',  label:'Desenvolvimento e Aprendizagem',   dot:'d3'},
-  {id:'qualidade', label:'Qualidade e Processos',         dot:'d4'}
+  {id:'qualidade', label:'Qualidade e Processos',         dot:'d4'},
+  {id:'planejamento',label:'Planejamento de Pessoas',dot:'d3'}
 ];
 
 const APPS_CONFIG = [
@@ -224,7 +216,9 @@ const APPS_CONFIG = [
   {id:'engajamento',          group:'clima',     label:'Pesquisa de Engajamento',           desc:'Pesquisa de engajamento organizacional com blocos de perguntas, respostas anônimas e dashboard de análise.'},
   {id:'riscos-psicossociais', group:'clima',     label:'Gestão de Riscos Psicossociais',   desc:'Planos de ação e acompanhamento de fatores psicossociais por unidade e setor.'},
   {id:'treinamentos',         group:'talentos',  label:'Painel de Treinamentos',           desc:'Gestão de turmas, mensuração de impacto e indicadores de treinamentos corporativos.'},
-  {id:'checklist-5s',         group:'qualidade', label:'Checklist 5S',                     desc:'Auditoria de organização e qualidade do ambiente de trabalho, com histórico de auditorias.'}
+  {id:'checklist-5s',         group:'qualidade', label:'Checklist 5S',                     desc:'Auditoria de organização e qualidade do ambiente de trabalho, com histórico de auditorias.'},
+  {id:'headcount',group:'planejamento',label:'Quadro e custos',desc:'Quadro de posições, movimentações, encargos, composição de custos e projeção anual.'},
+  {id:'carreira',group:'planejamento',label:'Cargos e carreira',desc:'Estrutura, trilhas e competências, acomodação salarial, sucessão e desenvolvimento.'}
 ];
 const apps = APPS_CONFIG.map(a=>a.id);
 function grupoDe(appId){ const a=APPS_CONFIG.find(x=>x.id===appId); const g=GROUPS_CONFIG.find(x=>x.id===a.group); return g; }
@@ -249,6 +243,8 @@ const APP_PATH = {
   'riscos-psicossociais': 'modules/riscos-psicossociais.html',
   'treinamentos': 'modules/treinamentos.html',
   'checklist-5s': 'modules/checklist-5s.html',
+  'headcount':'../headcount/',
+  'carreira':'../carreira/',
 };
 
 // Somente os registros dos módulos: outros projetos no mesmo domínio não entram no arquivo.
@@ -264,9 +260,6 @@ function montarSidebar(){
       html+=`<button class="side-item" id="side-${a.id}" onclick="abrirApp('${a.id}')" title="${a.label}"><span class="dot ${g.dot}"></span><span class="label">${a.label}</span></button>`;
     });
   });
-  html+=`<div class="sidebar-sep"></div><div class="sidebar-label">Planejamento de Pessoas</div>
-    <a class="side-item planning-side-link" href="../headcount/"><span class="dot d3"></span><span class="label">Quadro e custos</span></a>
-    <a class="side-item planning-side-link" href="../carreira/"><span class="dot d3"></span><span class="label">Cargos e carreira</span></a>`;
   nav.innerHTML=html;
 }
 
@@ -309,7 +302,12 @@ const carregados = new Set();
 
 function carregarFrame(app, conviteHash=''){
   const frame = document.getElementById('frame-'+app);
-  frame.src = APP_PATH[app] + conviteHash;
+  const url=new URL(APP_PATH[app],location.href);
+  if(app==='headcount'||app==='carreira'){
+    const params=new URLSearchParams(location.search);
+    ['tela','cenario'].forEach(key=>{if(params.get(key))url.searchParams.set(key,params.get(key));});
+  }
+  frame.src = url.href + conviteHash;
   carregados.add(app);
 }
 
@@ -393,6 +391,27 @@ function abrirApp(view, conviteHash=''){
     try{ if(frame.contentWindow) frame.contentWindow.scrollTo(0,0); }catch(e){}
   }
   try{ demoStore.setItem('gt360_app_ativo', view); }catch(e){}
+}
+
+/* Acessos cruzados preservam os iframes e os cenários em andamento. */
+function abrirPlanejamento(modulo,tela,cenario){
+  if(!['headcount','carreira'].includes(modulo))return;
+  abrirApp(modulo);
+  const frame=document.getElementById('frame-'+modulo);
+  function aplicar(){
+    const api=frame.contentWindow.PlanningWorkspace;
+    if(!api)return;
+    api.ready.then(()=>{
+      if(cenario){
+        const select=frame.contentDocument.getElementById('scenario');
+        if(select&&[...select.options].some(option=>option.value===cenario)){
+          select.value=cenario;select.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
+        }
+      }
+      if(tela)api.show(tela);
+    });
+  }
+  if(frame.contentWindow.PlanningWorkspace)aplicar();else frame.addEventListener('load',aplicar,{once:true});
 }
 
 /* Decodifica o mesmo formato de link usado pelos módulos — o shell

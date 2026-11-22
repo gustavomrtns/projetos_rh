@@ -1,7 +1,7 @@
 # Base compartilhada — GT360°, intranet e planejamento
 
 ## Objetivo
-Os quatro cases continuam **aplicações independentes**, mas compartilham as mesmas cinco pessoas **inteiramente fictícias** por meio de `shared/demo-core.js`. O catálogo de pessoas é a única fonte autoritativa para dados demonstrativos de colaboradores. Não foram usadas planilhas reais, credenciais ou dados de colaboradores.
+Os cases possuem acessos diretos; headcount e carreira também integram os módulos do GT360°. Todos compartilham as mesmas cinco pessoas **inteiramente fictícias** por meio de `shared/demo-core.js`. O catálogo de pessoas é a única fonte autoritativa para dados demonstrativos de colaboradores. Não foram usadas planilhas reais, credenciais ou dados de colaboradores.
 
 ## Escopo dos dados fictícios
 - Cinco pessoas criadas exclusivamente para o portfólio, com matrículas `DEMO-001` a `DEMO-005` e e-mails no domínio reservado `example.invalid`.
@@ -32,7 +32,7 @@ Os quatro cases continuam **aplicações independentes**, mas compartilham as me
 
 ## Checklist mínimo de homologação
 1. `index.html`: GT360° e intranet devem abrir como cases separados.
-2. GT360°: todos os nove módulos devem carregar sem erros; alternar menu e retornar.
+2. GT360°: todos os onze módulos devem carregar sem erros; alternar menu e retornar.
 3. Onboarding: cinco pessoas iniciais, editar uma, verificar reflexo no menu de importação de Tempo de Casa.
 4. Tempo de Casa: cinco pessoas iniciais, visualizar cartão e simular envio sem rede.
 5. Treinamentos: dois registros iniciais, criar um terceiro, abrir detalhes, dashboard e fluxo.
@@ -59,3 +59,9 @@ Headcount inicia com 7 posições aprovadas (5 ocupadas e 2 vagas), 1 posição 
 Carreira apresenta 10 cargos, 6 níveis, 5 trajetórias, 2 acomodações em estudo e 1 posição crítica para indicação manual. As faixas não são pesquisa salarial.
 
 Validação das regras: `node --test tests/planning.test.cjs`. O workflow também cobre os fluxos de interface desktop/mobile.
+
+## Navegação por ações
+
+`planning-workspace.js` organiza os elementos existentes em áreas exclusivas, sem recriar formulários na alternância. O componente reutiliza as classes e o stylesheet `gt360/unified-flow.css`, com ajustes responsivos em `planning-workspace.css`. Painéis inativos usam `hidden` e `inert`; as abas seguem o padrão tablist/tab/tabpanel e mantêm histórico e foco de teclado.
+
+No GT360°, as duas aplicações são iframes persistentes registrados em `APPS_CONFIG`, no grupo Planejamento de Pessoas. Acessos cruzados usam o shell pai para manter as instâncias abertas. Não há persistência durável.

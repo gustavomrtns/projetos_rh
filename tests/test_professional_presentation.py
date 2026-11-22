@@ -59,11 +59,11 @@ class ProfessionalPresentationTests(unittest.TestCase):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
         links = [attrs["href"] for tag, attrs in elements if tag == "a"
                  and attrs.get("href", "").startswith("./gt360/?modulo=")]
-        self.assertEqual(len(links), 9)
-        self.assertEqual(len(set(links)), 9)
+        self.assertEqual(len(links), 11)
+        self.assertEqual(len(set(links)), 11)
         for link in links:
             module = link.split("=", 1)[1]
-            self.assertTrue((ROOT / "gt360" / "modules" / (module + ".html")).is_file(), module)
+            self.assertTrue((ROOT / module / "index.html" if module in ("headcount", "carreira") else ROOT / "gt360" / "modules" / (module + ".html")).is_file(), module)
 
     def test_documents_distinguish_public_demo_from_internal_project(self):
         for path in ("README.md", "gt360/README.md", "eu-horizonte-intranet/README.md"):

@@ -1,0 +1,32 @@
+/* Mesmo cabeçalho e navegação contextual dos módulos do GT360°. */
+html.planning-workspace{height:100%;background:#f8f8f6}
+html.planning-workspace body{height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:#f8f8f6;font-family:'Sora',system-ui,sans-serif}
+.planning-workspace body>header{flex:0 0 auto;border-top-width:2px;padding:.75rem max(1rem,calc((100% - 1160px)/2));gap:.5rem}
+.planning-workspace .brand{font-size:.875rem}
+.planning-workspace .brand b{padding:.4rem;border-radius:6px}
+.planning-workspace .app-nav a{font-size:.875rem;padding:.55rem}
+.planning-workspace #process-shell{flex:0 0 auto}
+.planning-workspace .erp-unified-head{padding:1rem clamp(16px,3vw,30px) .8rem;max-width:1160px}
+.planning-workspace .erp-unified-caption{font-size:.8rem;line-height:1.4}
+.planning-workspace .erp-unified-title{max-width:none;font-size:1.5rem;margin:0;line-height:1.3}
+.planning-workspace .erp-unified-subtitle{font-size:.875rem;margin-top:.4rem}
+.planning-workspace .erp-unified-tabs{max-width:1160px;padding-inline:clamp(16px,3vw,30px);scroll-padding-inline:1rem}
+.planning-workspace .erp-unified-tab{font-size:.875rem;min-height:46px;border-radius:0;outline-offset:-3px}
+.planning-workspace #conteudo{flex:1 1 auto;min-height:0;max-width:none;width:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;padding:0;margin:0}
+.planning-workspace #app{max-width:1160px;margin:auto;padding:1.25rem clamp(16px,3vw,30px) 3rem}
+.planning-workspace #app>.toolbar{margin:0 0 1rem;padding:1rem;background:white;border:1px solid var(--line);border-radius:10px;align-items:end}
+.planning-workspace #app>.muted{margin:.7rem 0 1.2rem}
+.planning-workspace .process-view{min-width:0;outline-offset:3px}
+.planning-workspace .process-view>.panel{margin-top:0}
+.planning-workspace .process-view>.columns>.panel{margin:0}
+.planning-workspace .process-view .metrics{margin-top:1rem}
+.planning-workspace .process-view h2{font-size:1.2rem}
+.planning-workspace .notice{margin-top:1.5rem;margin-bottom:0}
+.process-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
+.process-action{display:flex;flex-direction:column;align-items:start;justify-content:start;gap:.7rem;text-align:left;padding:1.3rem;min-height:145px;border-radius:12px;border-top:3px solid var(--red);line-height:1.55}
+.process-action strong{font-size:1rem;color:var(--ink)}
+.process-action span{font-size:.875rem;color:var(--muted);font-weight:400}
+.process-action:hover{background:#fff8f7}
+html.planning-embedded body>header{display:none}
+@media(max-width:850px){.process-actions{grid-template-columns:1fr 1fr}.planning-workspace .erp-unified-head{padding:1rem 16px .8rem}.planning-workspace .erp-unified-tabs{padding-inline:12px}}
+@media(max-width:520px){.process-actions{grid-template-columns:1fr}.process-action{min-height:110px;padding:1rem}.planning-workspace .erp-unified-title{font-size:1.25rem}.planning-workspace .erp-unified-caption{font-size:.75rem}.planning-workspace .erp-unified-subtitle{font-size:.875rem}.planning-workspace .erp-unified-tab{padding:10px 12px;min-height:46px}.planning-workspace #app>.toolbar{padding:.9rem;gap:.8rem}.planning-workspace #app>.toolbar label{min-width:100%}.planning-workspace .process-view .metrics{margin-bottom:1rem}}

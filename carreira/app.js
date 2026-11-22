@@ -47,15 +47,17 @@
       const rows=P.gaps(d,personId,jobId);
       return `<table><caption>Comparação entre perfil e requisitos do cargo.</caption><thead><tr><th>Competência</th><th class="num">Perfil</th><th class="num">Requisito</th><th class="num">Intervalo</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${E(r.name)}<div class="gap-meter" aria-hidden="true">${[1,2,3,4].map(i=>`<i class="${r.actual>=i?'filled':''}"></i>`).join('')}</div></td><td class="num">${r.actual??'Não avaliado'}</td><td class="num">${r.required}</td><td class="num">${r.gap===null?'Sem avaliação':r.gap===0?'Atendido':r.gap}</td></tr>`).join('')}</tbody></table>`;
     }
-    function renderCareer(){
-      if(!$('salary').checkValidity()||$('salary').value===''){$('salary').reportValidity();return false;}
+    function renderCareer(report=false){
       const p=person($('person').value), current=job(p.cargo_id), target=job($('target').value),salary=Number($('salary').value);
-      const base=d.custos_pessoas.find(c=>c.pessoa_id===p.id),range=P.band(d,target.id,salary);
+      const base=d.custos_pessoas.find(c=>c.pessoa_id===p.id);
       const paths=d.trilhas_carreira.filter(t=>t.cargo_origem_id===current.id);
       $('career-path').innerHTML=`<div class="path"><span class="muted">Cargo atual · ${E(p.nome)}</span><strong>${E(current.nome)}</strong>${paths.map(t=>`<p>Possível próximo passo: <strong>${E(job(t.cargo_destino_id).nome)}</strong></p><ol>${t.criterios_demo.map(c=>`<li>${E(c)}</li>`).join('')}</ol>`).join('')||'<p>Sem trajetória cadastrada para este cargo.</p>'}</div>`;
+      $('gaps').innerHTML=gapTable(p.id,target.id);
+      if(!$('salary').checkValidity()||$('salary').value===''){if(report)$('salary').reportValidity();return false;}
+      const range=P.band(d,target.id,salary);
       const vacancy=d.posicoes.filter(pos=>pos.cargo_id===target.id&&pos.aprovada&&!pos.ocupante_id).length;
       const currentJob=target.id===current.id;
-      $('placement').innerHTML=`<h3>Hipótese de enquadramento</h3><p>${E(target.nome)} · ${E(target.nivel_id)}</p><p><span class="status ${range.status.startsWith('Dentro')?'good':'warn'}">${E(range.status)}</span></p><p class="muted">Faixa: ${M(range.minimo)} a ${M(range.maximo)}<br>Salário atual: ${M(base.salario_base)} · proposto: ${M(salary)}<br>Variação salarial: ${M(salary-base.salario_base)}<br>Impacto mensal com encargos e provisões: <strong>${M(P.round(P.payrollCost({...base,salario_base:salary},d.encargos_base).total-P.payrollCost(base,d.encargos_base).total))}</strong></p><p class="muted">${currentJob?'Comparação no mesmo cargo; revisão salarial em estudo.':vacancy?`${vacancy} posição(ões) aprovada(s) vaga(s) no cargo de destino; unidade e orçamento ainda precisam ser validados.`:'Sem posição aprovada vaga no cargo de destino. A trajetória depende de estrutura e orçamento.'}</p><p class="muted">Usa os parâmetros iniciais de encargos do simulador de quadro.</p><a href="../headcount/">Explorar cenário de custos</a>`;
+      $('placement').innerHTML=`<h3>Hipótese de enquadramento</h3><p>${E(target.nome)} · ${E(target.nivel_id)}</p><p><span class="status ${range.status.startsWith('Dentro')?'good':'warn'}">${E(range.status)}</span></p><p class="muted">Faixa: ${M(range.minimo)} a ${M(range.maximo)}<br>Salário atual: ${M(base.salario_base)} · proposto: ${M(salary)}<br>Variação salarial: ${M(salary-base.salario_base)}<br>Impacto mensal com encargos e provisões: <strong>${M(P.round(P.payrollCost({...base,salario_base:salary},d.encargos_base).total-P.payrollCost(base,d.encargos_base).total))}</strong></p><p class="muted">${currentJob?'Comparação no mesmo cargo; revisão salarial em estudo.':vacancy?`${vacancy} posição(ões) aprovada(s) vaga(s) no cargo de destino; unidade e orçamento ainda precisam ser validados.`:'Sem posição aprovada vaga no cargo de destino. A trajetória depende de estrutura e orçamento.'}</p><p class="muted">Usa os parâmetros iniciais de encargos do simulador de quadro.</p><a href="../headcount/?tela=composicao">Explorar cenário de custos</a>`;
       $('gaps').innerHTML=gapTable(p.id,target.id);return true;
     }
     function selectPerson(){
@@ -64,9 +66,11 @@
       $('salary').value=d.custos_pessoas.find(c=>c.pessoa_id===p.id).salario_base;
       $('simulation-message').textContent='';renderCareer();
     }
-    $('accommodations').innerHTML=`<table><caption>Propostas em estudo; nenhuma alteração aplicada ao cadastro.</caption><thead><tr><th>Pessoa</th><th>Cargo proposto</th><th class="num">Salário proposto</th><th>Justificativa</th></tr></thead><tbody>${d.acomodacoes_propostas.map(a=>`<tr><td>${E(person(a.pessoa_id).nome)}</td><td>${E(job(a.cargo_proposto_id).nome)}</td><td class="num">${M(a.salario_proposto)}</td><td>${E(a.justificativa_demo)}${a.id==='AC002'?' <a href="../headcount/?cenario=CEN_ACOM">Ver cenário de custos</a>':''}</td></tr>`).join('')}</tbody></table>`;
+    $('accommodations').innerHTML=`<table><caption>Propostas em estudo; nenhuma alteração aplicada ao cadastro.</caption><thead><tr><th>Pessoa</th><th>Cargo proposto</th><th class="num">Salário proposto</th><th>Justificativa</th></tr></thead><tbody>${d.acomodacoes_propostas.map(a=>`<tr><td>${E(person(a.pessoa_id).nome)}</td><td>${E(job(a.cargo_proposto_id).nome)}</td><td class="num">${M(a.salario_proposto)}</td><td>${E(a.justificativa_demo)}${a.id==='AC002'?' <a href="../headcount/?cenario=CEN_ACOM&tela=composicao">Ver cenário de custos</a>':''}</td></tr>`).join('')}</tbody></table>`;
     function renderSuccession(){
       const critical=$('critical').value,candidate=$('candidate').value,target=job(P.lookup(d.posicoes,critical).cargo_id);
+      if($('development-person'))$('development-person').value=candidate;
+      if($('development-position'))$('development-position').value=critical;
       const selected=nominations.filter(n=>n.posicao_alvo_id===critical);
       $('nominations').innerHTML=selected.map(n=>`<article class="path"><strong>${E(person(n.candidato_pessoa_id).nome)}</strong><span class="status">${E(readiness[n.prontidao])}</span><p class="muted">Revisão: ${E(n.data_revisao.split('-').reverse().join('/'))}</p><p>${E(n.evidencia)}</p><p class="muted">Temas a desenvolver: ${P.gaps(d,n.candidato_pessoa_id,target.id).filter(g=>g.gap>0).map(g=>E(g.name)).join(', ')||'Requisitos atendidos no perfil; validar evidências.'}</p><button class="small" data-remove="${E(n.id)}" aria-label="Remover indicação de ${E(person(n.candidato_pessoa_id).nome)}">Remover indicação</button></article>`).join('')||'<p class="muted">Nenhuma indicação registrada para esta posição.</p>';
       const actions=d.planos_desenvolvimento.filter(p=>p.pessoa_id===candidate);
@@ -87,9 +91,16 @@
     $('family').addEventListener('change',renderJobs);$('search').addEventListener('input',renderJobs);
     $('person').addEventListener('change',selectPerson);
     $('target').addEventListener('change',()=>{if(renderCareer())$('simulation-message').textContent='Comparação atualizada para o cargo selecionado.';});
-    $('simulate').addEventListener('click',()=>{if(renderCareer())$('simulation-message').textContent='Enquadramento recalculado.';});
+    $('simulate').addEventListener('click',()=>{if(renderCareer(true))$('simulation-message').textContent='Enquadramento recalculado.';});
     $('salary').addEventListener('input',()=>{$('simulation-message').textContent='Valor alterado. Use Simular enquadramento para recalcular a hipótese.';});
     $('export-jobs').addEventListener('click',()=>P.csvDownload('estrutura-cargos.csv',['Cargo','Familia','Nivel','Faixa minima BRL','Faixa maxima BRL','Posicoes aprovadas','Ocupadas'],filteredJobs().map(c=>{const range=d.faixas_salariais.find(f=>f.nivel_id===c.nivel_id),positions=d.posicoes.filter(p=>p.cargo_id===c.id);return[c.nome,c.familia,c.nivel_id,range.minimo,range.maximo,positions.filter(p=>p.aprovada).length,positions.filter(p=>p.ocupante_id).length];})));
     renderJobs();selectPerson();renderSuccession();
+    window.PlanningWorkspace.career();
+    ['development-person','development-position'].forEach(id=>$(id).addEventListener('change',()=>{
+      $('candidate').value=$('development-person').value;
+      $('critical').value=$('development-position').value;
+      renderSuccession();
+    }));
+    renderSuccession();
   }catch(error){container.setAttribute('aria-busy','false');container.innerHTML=`<div class="error-box" role="alert"><h2>Não foi possível abrir o mapa</h2><p>${E(error.message)}</p><button onclick="location.reload()">Tentar novamente</button></div>`;}
 })();

@@ -56,7 +56,7 @@
         <section class="panel" aria-labelledby="events-title"><div class="panel-head"><h2 id="events-title">Movimentações do cenário</h2><button id="reset" class="small">Restaurar cenário</button></div><p class="muted">Remover uma hipótese recalcula todos os meses.</p><ul id="events" class="event-list"></ul></section>
       </div>
       <section class="panel" aria-labelledby="positions-title"><h2 id="positions-title">Quadro e custo por posição</h2><p class="muted">Posições em proposta aparecem no quadro, fora do total aprovado.</p><div id="positions" class="table-wrap"></div></section>
-      <p class="footer">Conecte as decisões de quadro à <a href="../carreira/">estrutura de cargos e carreira</a>. As alterações reiniciam ao recarregar a página e não são sincronizadas entre abas.</p>`;
+      <p class="footer">Conecte as decisões de quadro à <a href="../carreira/?tela=estrutura">estrutura de cargos e carreira</a>. As alterações reiniciam ao recarregar a página e não são sincronizadas entre abas.</p>`;
     container.setAttribute('aria-busy','false');
     const components=[['salary','Salários'],['variables','Médias remuneratórias'],['cpp','CPP / INSS patronal'],['rat','RAT × FAP'],['thirdParty','Terceiros'],['fgts','FGTS'],['thirteenth','Provisão de 13º · 1/12'],['vacation','Provisão de férias · 1/12'],['vacationThird','Terço de férias · 1/36'],['vacationOffset','Remuneração de férias já incluída nos salários',-1],['provisionCharges','Encargos sobre provisões líquidas'],['grossBenefits','Benefícios brutos'],['benefitDeduction','Participação do colaborador nos benefícios',-1],['other','Outras despesas']];
     const projection=()=>P.project(d,events,policy,$('unit').value);
@@ -113,5 +113,6 @@
     $('export-breakdown').addEventListener('click',()=>{const p=current();P.csvDownload('headcount-composicao-'+p.month+'.csv',['Mes','Unidade','Componente','Valor BRL'],[...components.map(([key,label,sign=1])=>[p.month,$('unit').selectedOptions[0].textContent,label,P.round(p.breakdown[key]*sign)]),[p.month,$('unit').selectedOptions[0].textContent,'Total',p.cost]]);});
     const requested=new URLSearchParams(location.search).get('cenario');if(P.lookup(d.cenarios,requested)){scenarioId=requested;$('scenario').value=requested;events=P.copy(P.lookup(d.cenarios,requested).eventos);}
     syncForm();render();
+    window.PlanningWorkspace.headcount();
   }catch(error){container.setAttribute('aria-busy','false');container.innerHTML=`<div class="error-box" role="alert"><h2>Não foi possível abrir o simulador</h2><p>${E(error.message)}</p><button onclick="location.reload()">Tentar novamente</button></div>`;}
 })();

@@ -48,3 +48,9 @@ Dados: `../shared/planning-data.json`. Regras: `../shared/planning-core.js`. Cen
 ## Validação
 
 `node --test tests/planning.test.cjs`: composição, incidências, compensação de férias, descontos, parâmetros, vigências, conciliação e referências. `tests/test_planning_apps.py`: fluxos desktop/mobile, alterações de encargos, limites de participação e exportação, além da navegação existente.
+
+## Áreas de trabalho
+
+Visão geral; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
+
+[Entrar pelo workspace](../gt360/?modulo=headcount). O acesso direto continua disponível. Trocar telas ou módulos dentro do GT360° preserva os valores em andamento; recarregar reinicia a base. O fragmento `#tela=...` identifica a área atual.

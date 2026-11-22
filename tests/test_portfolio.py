@@ -135,7 +135,7 @@ class BrowserSmokeTests(unittest.TestCase):
                         self.assertTrue(details.get_by_text("Minha participação.", exact=True).is_visible())
                     modules = page.locator(".project-modules")
                     modules.locator("summary").click()
-                    self.assertEqual(modules.locator("li a").count(), 9)
+                    self.assertEqual(modules.locator("li a").count(), 11)
                     modules.get_by_role("link", name="Fluxo de Onboarding", exact=True).click()
                     page.wait_for_url(self.base + "/gt360/?modulo=onboarding")
                     page.locator("#frame-onboarding.active").wait_for(state="visible", timeout=20000)
@@ -158,7 +158,7 @@ class BrowserSmokeTests(unittest.TestCase):
                     page.goto(self.base + "/gt360/", wait_until="domcontentloaded")
                     page.locator("#home-view.active").wait_for(state="visible", timeout=20000)
                     page.locator("#boot").wait_for(state="hidden", timeout=20000)
-                    self.assertEqual(page.locator("#home-grid .home-card").count(), 9)
+                    self.assertEqual(page.locator("#home-grid .home-card").count(), 11)
                     for module in MODULES:
                         if device == "mobile":
                             page.locator("#erp-menu-trigger").click()
