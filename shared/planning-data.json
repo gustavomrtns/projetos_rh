@@ -1,0 +1,1454 @@
+{
+  "meta": {
+    "versao": "1.1.0",
+    "gerado_em": "2026-11-22",
+    "referencia_base": "2026-11",
+    "totalmente_ficticio": true,
+    "fonte": "gustavomrtns/projetos_rh/shared/demo-core.js",
+    "sha_fonte": "398a3d7c7a6e050a09ddf189b2ea22b41f6c0402",
+    "limite": "Base integrada às demonstrações de headcount e carreira; cenários em memória, sem alterar os cadastros atuais do GT360°.",
+    "premissas_custos": "Valores ilustrativos BRL por mês; fator 30% é premissa fictícia editável, não cálculo legal de folha. Sem 13º, férias, provisões, encargos reais ou proporcionalidade diária.",
+    "classificacao_dados": "Campos originais preservados; todos os novos atributos são sintéticos. Gestores ausentes permanecem nulos."
+  },
+  "pessoas_gt360_originais": [
+    {
+      "id": "D001",
+      "nome": "Ana Ribeiro",
+      "cargo": "Analista de Comunicação",
+      "setor": "Comunicação",
+      "unidade": "UNIDADE 1 - FILIAL 1",
+      "admissao": "2023-04-10",
+      "email": "ana.ribeiro@example.invalid",
+      "ramal": "2101"
+    },
+    {
+      "id": "D002",
+      "nome": "Bruno Almeida",
+      "cargo": "Analista de Tecnologia",
+      "setor": "Tecnologia",
+      "unidade": "UNIDADE 1 - FILIAL 1",
+      "admissao": "2025-02-03",
+      "email": "bruno.almeida@example.invalid",
+      "ramal": "2102"
+    },
+    {
+      "id": "D003",
+      "nome": "Camila Rocha",
+      "cargo": "Analista de Gestão de Pessoas",
+      "setor": "Gestão de Pessoas",
+      "unidade": "UNIDADE 2",
+      "admissao": "2024-08-15",
+      "email": "camila.rocha@example.invalid",
+      "ramal": "2201"
+    },
+    {
+      "id": "D004",
+      "nome": "Daniel Costa",
+      "cargo": "Assistente Administrativo",
+      "setor": "Administrativo",
+      "unidade": "UNIDADE 3",
+      "admissao": "2026-02-09",
+      "email": "daniel.costa@example.invalid",
+      "ramal": "2301"
+    },
+    {
+      "id": "D005",
+      "nome": "Elisa Martins",
+      "cargo": "Coordenadora de Projetos",
+      "setor": "Projetos",
+      "unidade": "UNIDADE 1 - FILIAL 2",
+      "admissao": "2022-11-07",
+      "email": "elisa.martins@example.invalid",
+      "ramal": "2103"
+    }
+  ],
+  "pessoas": [
+    {
+      "id": "D001",
+      "nome": "Ana Ribeiro",
+      "cargo": "Analista de Comunicação",
+      "setor": "Comunicação",
+      "unidade": "UNIDADE 1 - FILIAL 1",
+      "admissao": "2023-04-10",
+      "email": "ana.ribeiro@example.invalid",
+      "ramal": "2101",
+      "pessoa_id": "D001",
+      "matricula": "DEMO-001",
+      "unidade_id": "U001",
+      "area_id": "A001",
+      "cargo_id": "J001",
+      "posicao_id": "P001",
+      "centro_custo_id": "CC001",
+      "vinculo": "CLT",
+      "status": "ativo",
+      "gestor_pessoa_id": null,
+      "nivel_id": "PL"
+    },
+    {
+      "id": "D002",
+      "nome": "Bruno Almeida",
+      "cargo": "Analista de Tecnologia",
+      "setor": "Tecnologia",
+      "unidade": "UNIDADE 1 - FILIAL 1",
+      "admissao": "2025-02-03",
+      "email": "bruno.almeida@example.invalid",
+      "ramal": "2102",
+      "pessoa_id": "D002",
+      "matricula": "DEMO-002",
+      "unidade_id": "U001",
+      "area_id": "A002",
+      "cargo_id": "J002",
+      "posicao_id": "P002",
+      "centro_custo_id": "CC002",
+      "vinculo": "CLT",
+      "status": "ativo",
+      "gestor_pessoa_id": null,
+      "nivel_id": "PL"
+    },
+    {
+      "id": "D003",
+      "nome": "Camila Rocha",
+      "cargo": "Analista de Gestão de Pessoas",
+      "setor": "Gestão de Pessoas",
+      "unidade": "UNIDADE 2",
+      "admissao": "2024-08-15",
+      "email": "camila.rocha@example.invalid",
+      "ramal": "2201",
+      "pessoa_id": "D003",
+      "matricula": "DEMO-003",
+      "unidade_id": "U002",
+      "area_id": "A003",
+      "cargo_id": "J003",
+      "posicao_id": "P003",
+      "centro_custo_id": "CC003",
+      "vinculo": "CLT",
+      "status": "ativo",
+      "gestor_pessoa_id": null,
+      "nivel_id": "PL"
+    },
+    {
+      "id": "D004",
+      "nome": "Daniel Costa",
+      "cargo": "Assistente Administrativo",
+      "setor": "Administrativo",
+      "unidade": "UNIDADE 3",
+      "admissao": "2026-02-09",
+      "email": "daniel.costa@example.invalid",
+      "ramal": "2301",
+      "pessoa_id": "D004",
+      "matricula": "DEMO-004",
+      "unidade_id": "U003",
+      "area_id": "A004",
+      "cargo_id": "J004",
+      "posicao_id": "P004",
+      "centro_custo_id": "CC004",
+      "vinculo": "CLT",
+      "status": "ativo",
+      "gestor_pessoa_id": null,
+      "nivel_id": "I"
+    },
+    {
+      "id": "D005",
+      "nome": "Elisa Martins",
+      "cargo": "Coordenadora de Projetos",
+      "setor": "Projetos",
+      "unidade": "UNIDADE 1 - FILIAL 2",
+      "admissao": "2022-11-07",
+      "email": "elisa.martins@example.invalid",
+      "ramal": "2103",
+      "pessoa_id": "D005",
+      "matricula": "DEMO-005",
+      "unidade_id": "U004",
+      "area_id": "A005",
+      "cargo_id": "J005",
+      "posicao_id": "P005",
+      "centro_custo_id": "CC005",
+      "vinculo": "CLT",
+      "status": "ativo",
+      "gestor_pessoa_id": null,
+      "nivel_id": "COORD"
+    }
+  ],
+  "unidades": [
+    {
+      "id": "U001",
+      "nome": "UNIDADE 1 - FILIAL 1",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "U002",
+      "nome": "UNIDADE 2",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "U003",
+      "nome": "UNIDADE 3",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "U004",
+      "nome": "UNIDADE 1 - FILIAL 2",
+      "origem": "GT360; identificador normalizado novo"
+    }
+  ],
+  "areas": [
+    {
+      "id": "A001",
+      "nome": "Comunicação",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "A002",
+      "nome": "Tecnologia",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "A003",
+      "nome": "Gestão de Pessoas",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "A004",
+      "nome": "Administrativo",
+      "origem": "GT360; identificador normalizado novo"
+    },
+    {
+      "id": "A005",
+      "nome": "Projetos",
+      "origem": "GT360; identificador normalizado novo"
+    }
+  ],
+  "centros_custo": [
+    {
+      "id": "CC001",
+      "nome": "Comunicação / UNIDADE 1 - FILIAL 1",
+      "unidade_id": "U001",
+      "area_id": "A001"
+    },
+    {
+      "id": "CC002",
+      "nome": "Tecnologia / UNIDADE 1 - FILIAL 1",
+      "unidade_id": "U001",
+      "area_id": "A002"
+    },
+    {
+      "id": "CC003",
+      "nome": "Gestão de Pessoas / UNIDADE 2",
+      "unidade_id": "U002",
+      "area_id": "A003"
+    },
+    {
+      "id": "CC004",
+      "nome": "Administrativo / UNIDADE 3",
+      "unidade_id": "U003",
+      "area_id": "A004"
+    },
+    {
+      "id": "CC005",
+      "nome": "Projetos / UNIDADE 1 - FILIAL 2",
+      "unidade_id": "U004",
+      "area_id": "A005"
+    }
+  ],
+  "cargos": [
+    {
+      "id": "J001",
+      "nome": "Analista de Comunicação",
+      "familia": "Comunicação",
+      "nivel_id": "PL",
+      "missao_demo": "Organizar comunicação e campanhas."
+    },
+    {
+      "id": "J002",
+      "nome": "Analista de Tecnologia",
+      "familia": "Tecnologia",
+      "nivel_id": "PL",
+      "missao_demo": "Apoiar soluções e serviços de tecnologia."
+    },
+    {
+      "id": "J003",
+      "nome": "Analista de Gestão de Pessoas",
+      "familia": "Gestão de Pessoas",
+      "nivel_id": "PL",
+      "missao_demo": "Conduzir processos e desenvolvimento de pessoas."
+    },
+    {
+      "id": "J004",
+      "nome": "Assistente Administrativo",
+      "familia": "Administrativo",
+      "nivel_id": "I",
+      "missao_demo": "Apoiar registros e controles administrativos."
+    },
+    {
+      "id": "J005",
+      "nome": "Coordenadora de Projetos",
+      "familia": "Projetos",
+      "nivel_id": "COORD",
+      "missao_demo": "Coordenar a execução de projetos."
+    },
+    {
+      "id": "J006",
+      "nome": "Especialista de Tecnologia",
+      "familia": "Tecnologia",
+      "nivel_id": "ESP",
+      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+    },
+    {
+      "id": "J007",
+      "nome": "Analista de Gestão de Pessoas Sênior",
+      "familia": "Gestão de Pessoas",
+      "nivel_id": "SR",
+      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+    },
+    {
+      "id": "J008",
+      "nome": "Coordenador de Comunicação",
+      "familia": "Comunicação",
+      "nivel_id": "COORD",
+      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+    },
+    {
+      "id": "J009",
+      "nome": "Analista Administrativo",
+      "familia": "Administrativo",
+      "nivel_id": "PL",
+      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+    },
+    {
+      "id": "J010",
+      "nome": "Gerente de Projetos",
+      "familia": "Projetos",
+      "nivel_id": "GER",
+      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+    }
+  ],
+  "niveis": [
+    {
+      "id": "I",
+      "descricao": "Assistente I"
+    },
+    {
+      "id": "PL",
+      "descricao": "Pleno"
+    },
+    {
+      "id": "SR",
+      "descricao": "Sênior"
+    },
+    {
+      "id": "ESP",
+      "descricao": "Especialista"
+    },
+    {
+      "id": "COORD",
+      "descricao": "Coordenação"
+    },
+    {
+      "id": "GER",
+      "descricao": "Gerência"
+    }
+  ],
+  "faixas_salariais": [
+    {
+      "nivel_id": "I",
+      "minimo": 2400,
+      "maximo": 3600,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    },
+    {
+      "nivel_id": "PL",
+      "minimo": 4200,
+      "maximo": 6200,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    },
+    {
+      "nivel_id": "SR",
+      "minimo": 6000,
+      "maximo": 8000,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    },
+    {
+      "nivel_id": "ESP",
+      "minimo": 6500,
+      "maximo": 9000,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    },
+    {
+      "nivel_id": "COORD",
+      "minimo": 8000,
+      "maximo": 10500,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    },
+    {
+      "nivel_id": "GER",
+      "minimo": 11000,
+      "maximo": 15000,
+      "referencia": "Faixa fictícia de demonstração; não pesquisa de mercado."
+    }
+  ],
+  "posicoes": [
+    {
+      "id": "P001",
+      "cargo_id": "J001",
+      "centro_custo_id": "CC001",
+      "unidade_id": "U001",
+      "area_id": "A001",
+      "nivel_id": "PL",
+      "aprovada": true,
+      "status": "ocupada",
+      "ocupante_id": "D001",
+      "inicio_vigencia": "2023-04-10",
+      "critica": false
+    },
+    {
+      "id": "P002",
+      "cargo_id": "J002",
+      "centro_custo_id": "CC002",
+      "unidade_id": "U001",
+      "area_id": "A002",
+      "nivel_id": "PL",
+      "aprovada": true,
+      "status": "ocupada",
+      "ocupante_id": "D002",
+      "inicio_vigencia": "2025-02-03",
+      "critica": false
+    },
+    {
+      "id": "P003",
+      "cargo_id": "J003",
+      "centro_custo_id": "CC003",
+      "unidade_id": "U002",
+      "area_id": "A003",
+      "nivel_id": "PL",
+      "aprovada": true,
+      "status": "ocupada",
+      "ocupante_id": "D003",
+      "inicio_vigencia": "2024-08-15",
+      "critica": false
+    },
+    {
+      "id": "P004",
+      "cargo_id": "J004",
+      "centro_custo_id": "CC004",
+      "unidade_id": "U003",
+      "area_id": "A004",
+      "nivel_id": "I",
+      "aprovada": true,
+      "status": "ocupada",
+      "ocupante_id": "D004",
+      "inicio_vigencia": "2026-02-09",
+      "critica": false
+    },
+    {
+      "id": "P005",
+      "cargo_id": "J005",
+      "centro_custo_id": "CC005",
+      "unidade_id": "U004",
+      "area_id": "A005",
+      "nivel_id": "COORD",
+      "aprovada": true,
+      "status": "ocupada",
+      "ocupante_id": "D005",
+      "inicio_vigencia": "2022-11-07",
+      "critica": true
+    },
+    {
+      "id": "P006",
+      "cargo_id": "J002",
+      "centro_custo_id": "CC002",
+      "unidade_id": "U001",
+      "area_id": "A002",
+      "nivel_id": "PL",
+      "aprovada": true,
+      "status": "vaga",
+      "ocupante_id": null,
+      "inicio_vigencia": "2026-11-01",
+      "critica": false
+    },
+    {
+      "id": "P007",
+      "cargo_id": "J003",
+      "centro_custo_id": "CC003",
+      "unidade_id": "U002",
+      "area_id": "A003",
+      "nivel_id": "PL",
+      "aprovada": true,
+      "status": "vaga",
+      "ocupante_id": null,
+      "inicio_vigencia": "2026-11-01",
+      "critica": false
+    },
+    {
+      "id": "P008",
+      "cargo_id": "J010",
+      "centro_custo_id": "CC005",
+      "unidade_id": "U004",
+      "area_id": "A005",
+      "nivel_id": "GER",
+      "aprovada": false,
+      "status": "proposta",
+      "ocupante_id": null,
+      "inicio_vigencia": "2026-11-01",
+      "critica": false
+    }
+  ],
+  "custos_pessoas": [
+    {
+      "pessoa_id": "D001",
+      "competencia": "2026-11",
+      "salario_base": 4800,
+      "beneficios_empresa": 900,
+      "fator_encargos_simulado": 0.3,
+      "outras_despesas": 0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "pessoa_id": "D002",
+      "competencia": "2026-11",
+      "salario_base": 6500,
+      "beneficios_empresa": 900,
+      "fator_encargos_simulado": 0.3,
+      "outras_despesas": 0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "pessoa_id": "D003",
+      "competencia": "2026-11",
+      "salario_base": 3900,
+      "beneficios_empresa": 900,
+      "fator_encargos_simulado": 0.3,
+      "outras_despesas": 0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "pessoa_id": "D004",
+      "competencia": "2026-11",
+      "salario_base": 2600,
+      "beneficios_empresa": 900,
+      "fator_encargos_simulado": 0.3,
+      "outras_despesas": 0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "pessoa_id": "D005",
+      "competencia": "2026-11",
+      "salario_base": 8800,
+      "beneficios_empresa": 900,
+      "fator_encargos_simulado": 0.3,
+      "outras_despesas": 0,
+      "origem": "novo_ficticio"
+    }
+  ],
+  "orcamento": [
+    {
+      "centro_custo_id": "CC001",
+      "competencia": "2026-11",
+      "headcount_aprovado": 1,
+      "custo_orcado": 7140.0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "centro_custo_id": "CC002",
+      "competencia": "2026-11",
+      "headcount_aprovado": 2,
+      "custo_orcado": 16490.0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "centro_custo_id": "CC003",
+      "competencia": "2026-11",
+      "headcount_aprovado": 2,
+      "custo_orcado": 13110.0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "centro_custo_id": "CC004",
+      "competencia": "2026-11",
+      "headcount_aprovado": 1,
+      "custo_orcado": 4280.0,
+      "origem": "novo_ficticio"
+    },
+    {
+      "centro_custo_id": "CC005",
+      "competencia": "2026-11",
+      "headcount_aprovado": 1,
+      "custo_orcado": 12340.0,
+      "origem": "novo_ficticio"
+    }
+  ],
+  "competencias": [
+    {
+      "id": "K001",
+      "nome": "Comunicação"
+    },
+    {
+      "id": "K002",
+      "nome": "Análise de dados"
+    },
+    {
+      "id": "K003",
+      "nome": "Gestão de projetos"
+    },
+    {
+      "id": "K004",
+      "nome": "Liderança"
+    }
+  ],
+  "perfis_competencias": [
+    {
+      "pessoa_id": "D001",
+      "competencia_id": "K001",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D001",
+      "competencia_id": "K002",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D001",
+      "competencia_id": "K003",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D001",
+      "competencia_id": "K004",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D002",
+      "competencia_id": "K001",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D002",
+      "competencia_id": "K002",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D002",
+      "competencia_id": "K003",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D002",
+      "competencia_id": "K004",
+      "nivel_demonstrativo": 1,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D003",
+      "competencia_id": "K001",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D003",
+      "competencia_id": "K002",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D003",
+      "competencia_id": "K003",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D003",
+      "competencia_id": "K004",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D004",
+      "competencia_id": "K001",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D004",
+      "competencia_id": "K002",
+      "nivel_demonstrativo": 2,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D004",
+      "competencia_id": "K003",
+      "nivel_demonstrativo": 1,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D004",
+      "competencia_id": "K004",
+      "nivel_demonstrativo": 1,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D005",
+      "competencia_id": "K001",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D005",
+      "competencia_id": "K002",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D005",
+      "competencia_id": "K003",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    },
+    {
+      "pessoa_id": "D005",
+      "competencia_id": "K004",
+      "nivel_demonstrativo": 3,
+      "escala_min": 1,
+      "escala_max": 4,
+      "data_referencia": "2026-11-22",
+      "origem": "novo_ficticio; não derivado de avaliação existente"
+    }
+  ],
+  "requisitos_competencias": [
+    {
+      "cargo_id": "J001",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J001",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J001",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J001",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J002",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J002",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J002",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J002",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J003",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J003",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J003",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J003",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J004",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J004",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J004",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J004",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J005",
+      "competencia_id": "K001",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J005",
+      "competencia_id": "K002",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J005",
+      "competencia_id": "K003",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J005",
+      "competencia_id": "K004",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J006",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J006",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J006",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J006",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J007",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J007",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J007",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J007",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J008",
+      "competencia_id": "K001",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J008",
+      "competencia_id": "K002",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J008",
+      "competencia_id": "K003",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J008",
+      "competencia_id": "K004",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J009",
+      "competencia_id": "K001",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J009",
+      "competencia_id": "K002",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J009",
+      "competencia_id": "K003",
+      "nivel_requerido": 2
+    },
+    {
+      "cargo_id": "J009",
+      "competencia_id": "K004",
+      "nivel_requerido": 1
+    },
+    {
+      "cargo_id": "J010",
+      "competencia_id": "K001",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J010",
+      "competencia_id": "K002",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J010",
+      "competencia_id": "K003",
+      "nivel_requerido": 3
+    },
+    {
+      "cargo_id": "J010",
+      "competencia_id": "K004",
+      "nivel_requerido": 3
+    }
+  ],
+  "trilhas_carreira": [
+    {
+      "id": "T001",
+      "cargo_origem_id": "J001",
+      "cargo_destino_id": "J008",
+      "tipo": "vertical",
+      "criterios_demo": [
+        "Demonstrar responsabilidades do cargo-alvo",
+        "Revisão conjunta de competências e entregas",
+        "Disponibilidade de posição e orçamento aprovado"
+      ]
+    },
+    {
+      "id": "T002",
+      "cargo_origem_id": "J002",
+      "cargo_destino_id": "J006",
+      "tipo": "especialista",
+      "criterios_demo": [
+        "Demonstrar responsabilidades do cargo-alvo",
+        "Revisão conjunta de competências e entregas",
+        "Disponibilidade de posição e orçamento aprovado"
+      ]
+    },
+    {
+      "id": "T003",
+      "cargo_origem_id": "J003",
+      "cargo_destino_id": "J007",
+      "tipo": "vertical",
+      "criterios_demo": [
+        "Demonstrar responsabilidades do cargo-alvo",
+        "Revisão conjunta de competências e entregas",
+        "Disponibilidade de posição e orçamento aprovado"
+      ]
+    },
+    {
+      "id": "T004",
+      "cargo_origem_id": "J004",
+      "cargo_destino_id": "J009",
+      "tipo": "vertical",
+      "criterios_demo": [
+        "Demonstrar responsabilidades do cargo-alvo",
+        "Revisão conjunta de competências e entregas",
+        "Disponibilidade de posição e orçamento aprovado"
+      ]
+    },
+    {
+      "id": "T005",
+      "cargo_origem_id": "J005",
+      "cargo_destino_id": "J010",
+      "tipo": "vertical",
+      "criterios_demo": [
+        "Demonstrar responsabilidades do cargo-alvo",
+        "Revisão conjunta de competências e entregas",
+        "Disponibilidade de posição e orçamento aprovado"
+      ]
+    }
+  ],
+  "acomodacoes_propostas": [
+    {
+      "id": "AC001",
+      "pessoa_id": "D002",
+      "cargo_atual_id": "J002",
+      "cargo_proposto_id": "J006",
+      "salario_atual": 6500,
+      "salario_proposto": 6500,
+      "status": "em_estudo",
+      "justificativa_demo": "Exemplo de análise de responsabilidades e enquadramento. Não altera cadastro atual."
+    },
+    {
+      "id": "AC002",
+      "pessoa_id": "D003",
+      "cargo_atual_id": "J003",
+      "cargo_proposto_id": "J003",
+      "salario_atual": 3900,
+      "salario_proposto": 4200,
+      "status": "em_estudo",
+      "justificativa_demo": "Exemplo de acomodação na faixa fictícia. Não representa obrigação ou pesquisa salarial."
+    }
+  ],
+  "sucessao": [
+    {
+      "id": "S001",
+      "posicao_alvo_id": "P005",
+      "candidato_pessoa_id": "D003",
+      "prontidao": "em_desenvolvimento_12_24_meses",
+      "data_revisao": "2027-06-30",
+      "status": "hipotese_demo_para_discussao",
+      "lacunas_competencia_ids": [
+        "K003",
+        "K004"
+      ],
+      "evidencia": "Caso inteiramente fictício; indicação manual demonstrativa; não decorre das pesquisas do GT360."
+    }
+  ],
+  "planos_desenvolvimento": [
+    {
+      "id": "PD001",
+      "pessoa_id": "D003",
+      "competencia_id": "K003",
+      "acao": "Coordenar projeto piloto com acompanhamento da liderança",
+      "inicio": "2027-01-01",
+      "prazo": "2027-06-30",
+      "status": "planejado",
+      "origem": "novo_ficticio"
+    },
+    {
+      "id": "PD002",
+      "pessoa_id": "D003",
+      "competencia_id": "K004",
+      "acao": "Mentoria e facilitação de reuniões com devolutiva estruturada",
+      "inicio": "2027-01-01",
+      "prazo": "2027-06-30",
+      "status": "planejado",
+      "origem": "novo_ficticio"
+    }
+  ],
+  "treinamentos_gt360_originais": [
+    {
+      "id": 9001,
+      "nome": "Integração e Cultura",
+      "modalidade": "Presencial",
+      "categoria": "Onboarding",
+      "inicio": "2026-09-08",
+      "termino": "2026-09-08",
+      "carga": "4",
+      "facilitador": "Equipe de Pessoas",
+      "publico": "Todas as unidades",
+      "participantes": "5",
+      "descricao": "Conhecer os processos e valores.",
+      "responsavel": "Camila Rocha",
+      "st_treinamento": "Concluído",
+      "st_comunicacao": "Enviado",
+      "st_material": "Pronto",
+      "st_certificado": "Emitido",
+      "st_avaliacao": "Avaliado",
+      "realizados": "5",
+      "conclusao_real": "2026-09-08",
+      "fluxo_obs": ""
+    },
+    {
+      "id": 9002,
+      "nome": "Comunicação e Colaboração",
+      "modalidade": "Online — Síncrono",
+      "categoria": "Desenvolvimento",
+      "inicio": "2026-11-18",
+      "termino": "2026-11-18",
+      "carga": "2",
+      "facilitador": "Equipe de Projetos",
+      "publico": "Todas as unidades",
+      "participantes": "5",
+      "descricao": "Práticas de colaboração.",
+      "responsavel": "Elisa Martins",
+      "st_treinamento": "Planejado",
+      "st_comunicacao": "Enviado",
+      "st_material": "Pronto",
+      "st_certificado": "Não emitido",
+      "st_avaliacao": "Pendente",
+      "realizados": "",
+      "conclusao_real": "",
+      "fluxo_obs": ""
+    }
+  ],
+  "vinculos_treinamentos": [
+    {
+      "treinamento_id": 9001,
+      "responsavel_pessoa_id": "D003"
+    },
+    {
+      "treinamento_id": 9002,
+      "responsavel_pessoa_id": "D005"
+    }
+  ],
+  "cenarios": [
+    {
+      "id": "CEN_BASE",
+      "nome": "Quadro atual constante",
+      "periodo_inicio": "2027-01",
+      "periodo_fim": "2027-12",
+      "premissas": "Projeção; sem alterações salariais, rotatividade ou inflação.",
+      "eventos": []
+    },
+    {
+      "id": "CEN_EXP",
+      "nome": "Preenchimento de duas posições aprovadas",
+      "periodo_inicio": "2027-01",
+      "periodo_fim": "2027-12",
+      "eventos": [
+        {
+          "tipo": "admissao_planejada",
+          "posicao_id": "P006",
+          "vigencia": "2027-03-01",
+          "salario_base": 4800,
+          "beneficios_empresa": 900
+        },
+        {
+          "tipo": "admissao_planejada",
+          "posicao_id": "P007",
+          "vigencia": "2027-04-01",
+          "salario_base": 4800,
+          "beneficios_empresa": 900
+        }
+      ]
+    },
+    {
+      "id": "CEN_ACOM",
+      "nome": "Acomodação remuneratória de Camila",
+      "periodo_inicio": "2027-01",
+      "periodo_fim": "2027-12",
+      "eventos": [
+        {
+          "tipo": "ajuste_planejado",
+          "pessoa_id": "D003",
+          "vigencia": "2027-01-01",
+          "novo_salario_base": 4200,
+          "acomodacao_id": "AC002"
+        }
+      ]
+    }
+  ],
+  "projecoes": [
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-01",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-02",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-03",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-04",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-05",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-06",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-07",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-08",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-09",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-10",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-11",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_BASE",
+      "competencia": "2027-12",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-01",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-02",
+      "headcount_projetado": 5,
+      "custo_projetado": 39080.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-03",
+      "headcount_projetado": 6,
+      "custo_projetado": 46220.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-04",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-05",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-06",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-07",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-08",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-09",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-10",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-11",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_EXP",
+      "competencia": "2027-12",
+      "headcount_projetado": 7,
+      "custo_projetado": 53360.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-01",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-02",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-03",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-04",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-05",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-06",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-07",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-08",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-09",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-10",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-11",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    },
+    {
+      "cenario_id": "CEN_ACOM",
+      "competencia": "2027-12",
+      "headcount_projetado": 5,
+      "custo_projetado": 39470.0,
+      "tipo": "projecao_ficticia_nao_realizado"
+    }
+  ]
+}

@@ -29,8 +29,8 @@ class ProfessionalPresentationTests(unittest.TestCase):
         ids = {attrs.get("id") for _, attrs in elements}
         projects = [attrs for tag, attrs in elements if tag == "article"
                     and "project-card" in attrs.get("class", "").split()]
-        self.assertEqual(len(projects), 2)
-        self.assertEqual({attrs["id"] for attrs in projects}, {"gt360-projeto", "eu-horizonte"})
+        self.assertEqual(len(projects), 4)
+        self.assertEqual({attrs["id"] for attrs in projects}, {"gt360-projeto", "eu-horizonte", "headcount-projeto", "carreira-projeto"})
         self.assertIn("sobre", ids)
         self.assertTrue({"experiencia", "formacao", "certificacoes", "acoes-dho"}.isdisjoint(ids))
         self.assertIn("que <span>projetei.</span>", content)
@@ -47,7 +47,7 @@ class ProfessionalPresentationTests(unittest.TestCase):
                 self.assertIn(href[1:], ids, href)
 
     def test_public_applications_have_portfolio_return(self):
-        for path in ("gt360/index.html", "eu-horizonte-intranet/index.html"):
+        for path in ("gt360/index.html", "eu-horizonte-intranet/index.html", "headcount/index.html", "carreira/index.html"):
             elements = Elements((ROOT / path).read_text(encoding="utf-8")).elements
             links = [attrs for tag, attrs in elements if tag == "a" and "portfolio-return" in attrs.get("class", "").split()]
             self.assertEqual(len(links), 1, path)

@@ -10,6 +10,8 @@ Aplicações projetadas a partir da experiência em Recursos Humanos, pessoas e 
 |---|---|---|---|
 | **GT360°** | Workspace de Gestão de Pessoas com nove aplicações de integração, avaliações, pesquisas, treinamentos e qualidade. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
 | **eu + horizonte** | Protótipo navegável de intranet com mural, agenda, acervo e fluxo de publicação. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
+| **Quadro e custos** | Simulação de headcount, posições, orçamento e projeção de custos. | [Explorar headcount](https://gustavomrtns.github.io/projetos_rh/headcount/) | [Conhecer o projeto](./headcount/README.md) |
+| **Cargos e carreira** | Estrutura de cargos, acomodação, progressão, competências e sucessão. | [Explorar carreira](https://gustavomrtns.github.io/projetos_rh/carreira/) | [Conhecer o projeto](./carreira/README.md) |
 
 ## Minha participação
 
@@ -32,7 +34,7 @@ Sou Manoel Gustavo, profissional de Recursos Humanos, formado em Gestão de RH e
 
 ## Funcionamento das versões públicas
 
-As aplicações utilizam HTML, CSS e JavaScript e dados fictícios. O `demoStore` mantém as alterações em memória durante a sessão. Recarregar ou fechar a página reinicia os dados da demonstração.
+As quatro aplicações utilizam HTML, CSS e JavaScript e dados fictícios. Headcount e carreira ampliam o catálogo de cinco pessoas do GT360° com posições, custos, cargos, faixas e perfis demonstrativos. Os campos originais são conferidos ao abrir os novos cases. O `demoStore` mantém as alterações dos cases anteriores em memória durante a sessão. As duas novas aplicações também mantêm cenários em memória local, sem sincronização entre abas. Recarregar ou fechar a página reinicia os dados da demonstração.
 
 A descrição técnica deste repositório se refere às versões públicas. Os ambientes internos possuem sua própria infraestrutura. Consulte a documentação de cada projeto para os detalhes de funcionamento.
 

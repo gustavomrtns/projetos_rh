@@ -73,3 +73,7 @@ Uma eventual evolução desta demonstração para um novo ambiente multiusuário
 
 
 [▶ Abrir GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) · [Voltar ao portfólio](https://gustavomrtns.github.io/projetos_rh/#projetos)
+
+## Aplicações conectadas de planejamento
+
+O início e a navegação lateral dão acesso às aplicações independentes [Quadro e custos](../headcount/) e [Cargos e carreira](../carreira/), que ampliam a base fictícia compartilhada. Os nove módulos existentes não foram substituídos. As novas páginas não alteram os cadastros do workspace nem sincronizam hipóteses entre abas.

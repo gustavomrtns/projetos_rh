@@ -1,7 +1,7 @@
-# Base única de demonstração — GT360° e eu + horizonte
+# Base compartilhada — GT360°, intranet e planejamento
 
 ## Objetivo
-Os dois cases continuam **aplicações independentes**, mas compartilham as mesmas cinco pessoas **inteiramente fictícias** por meio de `shared/demo-core.js`. O catálogo de pessoas é a única fonte autoritativa para dados demonstrativos de colaboradores. Não foram usadas planilhas reais, credenciais ou dados de colaboradores.
+Os quatro cases continuam **aplicações independentes**, mas compartilham as mesmas cinco pessoas **inteiramente fictícias** por meio de `shared/demo-core.js`. O catálogo de pessoas é a única fonte autoritativa para dados demonstrativos de colaboradores. Não foram usadas planilhas reais, credenciais ou dados de colaboradores.
 
 ## Escopo dos dados fictícios
 - Cinco pessoas criadas exclusivamente para o portfólio, com matrículas `DEMO-001` a `DEMO-005` e e-mails no domínio reservado `example.invalid`.
@@ -45,3 +45,17 @@ Os dois cases continuam **aplicações independentes**, mas compartilham as mesm
 12. Atualizar as páginas: estado deve ser reiniciado a partir do mesmo catálogo fictício.
 
 **Convenção de commits: apenas `add`, sem descrição.**
+
+## Planejamento de Pessoas
+
+`planning-data.json` acrescenta os catálogos normalizados de unidades, áreas, centros de custo, níveis, cargos, posições, orçamento, custos, competências, trajetórias, acomodações, sucessão e planos de desenvolvimento. `planning-core.js` valida o catálogo original contra `PortfolioDemo.copyPeople()` ao abrir headcount ou carreira. Os campos originais não foram alterados.
+
+As tabelas novas são inteiramente sintéticas. Notas de competências e indicações de sucessão não vêm das pesquisas anônimas nem de avaliações existentes. Os dois eventos originais de treinamento são preservados apenas como referência de responsabilidade, sem presumir participação ou conclusão.
+
+As aplicações `headcount/` e `carreira/` usam estado JavaScript em memória, sem `localStorage` ou `sessionStorage`. A navegação tem acessos cruzados e retorno ao portfólio. Os nove módulos existentes do GT360° mantêm sua estrutura.
+
+Headcount inicia com 7 posições aprovadas (5 ocupadas e 2 vagas), 1 posição em proposta, custo simulado de R$ 39.080/mês e orçamento de referência de R$ 53.360/mês. A posição em proposta não integra o quadro aprovado. Fator inicial de 30%, sem cálculo legal de folha ou provisões.
+
+Carreira apresenta 10 cargos, 6 níveis, 5 trajetórias, 2 acomodações em estudo e 1 posição crítica para indicação manual. As faixas não são pesquisa salarial.
+
+Validação das regras: `node --test tests/planning.test.cjs`. O workflow também cobre os fluxos de interface desktop/mobile.

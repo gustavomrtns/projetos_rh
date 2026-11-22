@@ -101,17 +101,17 @@ class BrowserSmokeTests(unittest.TestCase):
         page.set_default_timeout(12000)
         return context, page
 
-    def test_portfolio_has_two_working_case_links_and_images(self):
+    def test_portfolio_has_four_working_case_links_and_images(self):
         for device in DEVICES:
             with self.subTest(device=device):
                 context, page = self._new_page(device)
                 try:
                     page.goto(self.base + "/", wait_until="domcontentloaded")
                     page.locator("#projetos").scroll_into_view_if_needed()
-                    for href in ("./gt360/", "./eu-horizonte-intranet/"):
+                    for href in ("./gt360/", "./eu-horizonte-intranet/", "./headcount/", "./carreira/"):
                         self.assertEqual(page.locator(f'#projetos a[href="{href}"]').count(), 2, href)
                     images = page.locator("#projetos .project-visual img")
-                    self.assertEqual(images.count(), 2)
+                    self.assertEqual(images.count(), 4)
                     for img in images.all():
                         img.scroll_into_view_if_needed()
                         self.assertGreater(img.evaluate("(im) => im.decode().then(() => im.naturalWidth)"), 0)

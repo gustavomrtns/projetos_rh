@@ -9,6 +9,8 @@ on:
       - "gt360/**"
       - "eu-horizonte-intranet/**"
       - "shared/**"
+      - "headcount/**"
+      - "carreira/**"
       - "tests/**"
       - "requirements-validation.txt"
       - ".github/workflows/portfolio-validation.yml"
@@ -19,6 +21,8 @@ on:
       - "gt360/**"
       - "eu-horizonte-intranet/**"
       - "shared/**"
+      - "headcount/**"
+      - "carreira/**"
       - "tests/**"
       - "requirements-validation.txt"
       - ".github/workflows/portfolio-validation.yml"
@@ -44,6 +48,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Verificar regras de planejamento
+        run: node --test tests/planning.test.cjs
 
       - name: Instalar Playwright
         run: |

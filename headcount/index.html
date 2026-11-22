@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quadro e custos | Planejamento de Pessoas</title>
+  <meta name="description" content="Simulador de headcount, posições e custos de pessoas. Demonstração com dados fictícios compartilhados com o GT360°.">
+  <meta name="theme-color" content="#c71717">
+  <link rel="stylesheet" href="../shared/planning.css">
+  <script defer src="../shared/demo-core.js"></script><script defer src="../shared/planning-core.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header>
+    <a class="brand" href="./"><b>HC</b> Quadro e custos</a>
+    <nav class="app-nav" aria-label="Aplicações"><a href="./" aria-current="page">Headcount</a><a href="../carreira/">Cargos e carreira</a><a href="../gt360/">GT360°</a><a class="portfolio-return" href="../#projetos" aria-label="Voltar ao portfólio profissional">Portfólio</a></nav>
+  </header>
+  <main id="conteudo">
+    <div class="eyebrow">Planejamento de Pessoas / demonstração</div>
+    <h1>O próximo movimento do quadro, com os custos à vista.</h1>
+    <p class="lead">Compare posições aprovadas, ocupação e orçamento. Simule admissões, ajustes de salário e saídas antes de decidir.</p>
+    <details class="notice"><summary>Como funciona esta simulação</summary><p>Base inteiramente fictícia de novembro de 2026, com as mesmas cinco pessoas do GT360°. Projeção de janeiro a dezembro de 2027; orçamento mensal da base mantido constante, apenas para comparação.</p><p>Custo = salário × (1 + fator simulado) + benefícios + outras despesas. O fator inicial de 30% é uma premissa ilustrativa: não inclui cálculo legal de folha, 13º, férias, provisões ou rescisão. Movimentações valem pelo mês inteiro.</p><p>Alterações ficam nesta página e reiniciam ao recarregar. As aplicações compartilham o catálogo fictício, sem sincronização entre abas.</p></details>
+    <div id="app" aria-busy="true"><p class="app-loading" role="status">Carregando o quadro fictício…</p></div>
+    <noscript>Ative o JavaScript para explorar o simulador.</noscript>
+  </main>
+</body></html>
