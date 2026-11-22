@@ -5,7 +5,7 @@
     const d=await P.load();
     const job=id=>P.lookup(d.cargos,id), person=id=>P.lookup(d.pessoas,id);
     const opt=(id,name)=>`<option value="${E(id)}">${E(name)}</option>`;
-    let nominations=P.copy(d.sucessao);
+    let nominations=P.copy(d.sucessao),dashboard=null;
     const readiness={em_desenvolvimento_12_24_meses:'Em desenvolvimento · 12 a 24 meses',em_desenvolvimento_ate_12_meses:'Em desenvolvimento · até 12 meses',pronto_para_discussao:'Pronto para discussão'};
     const families=[...new Set(d.cargos.map(c=>c.familia))];
     container.innerHTML=`
@@ -75,6 +75,7 @@
       $('nominations').innerHTML=selected.map(n=>`<article class="path"><strong>${E(person(n.candidato_pessoa_id).nome)}</strong><span class="status">${E(readiness[n.prontidao])}</span><p class="muted">Revisão: ${E(n.data_revisao.split('-').reverse().join('/'))}</p><p>${E(n.evidencia)}</p><p class="muted">Temas a desenvolver: ${P.gaps(d,n.candidato_pessoa_id,target.id).filter(g=>g.gap>0).map(g=>E(g.name)).join(', ')||'Requisitos atendidos no perfil; validar evidências.'}</p><button class="small" data-remove="${E(n.id)}" aria-label="Remover indicação de ${E(person(n.candidato_pessoa_id).nome)}">Remover indicação</button></article>`).join('')||'<p class="muted">Nenhuma indicação registrada para esta posição.</p>';
       const actions=d.planos_desenvolvimento.filter(p=>p.pessoa_id===candidate);
       $('development').innerHTML=`<h3>${E(person(candidate).nome)} · comparação com ${E(target.nome)}</h3>${gapTable(candidate,target.id)}`+(actions.length?`<table><caption>Ações de desenvolvimento de ${E(person(candidate).nome)}.</caption><thead><tr><th>Competência</th><th>Ação</th><th>Prazo</th><th>Status</th></tr></thead><tbody>${actions.map(a=>`<tr><td>${E(P.lookup(d.competencias,a.competencia_id).nome)}</td><td>${E(a.acao)}</td><td>${E(a.prazo.split('-').reverse().join('/'))}</td><td>${E(a.status)}</td></tr>`).join('')}</tbody></table>`:'<p class="muted">Sem ações cadastradas para esta pessoa. A indicação ainda precisa de um plano de desenvolvimento.</p>');
+      if(dashboard)dashboard.render();
     }
     $('nomination').addEventListener('submit',e=>{
       e.preventDefault();const position=P.lookup(d.posicoes,$('critical').value),candidate=$('candidate').value;
@@ -96,6 +97,7 @@
     $('export-jobs').addEventListener('click',()=>P.csvDownload('estrutura-cargos.csv',['Cargo','Familia','Nivel','Faixa minima BRL','Faixa maxima BRL','Posicoes aprovadas','Ocupadas'],filteredJobs().map(c=>{const range=d.faixas_salariais.find(f=>f.nivel_id===c.nivel_id),positions=d.posicoes.filter(p=>p.cargo_id===c.id);return[c.nome,c.familia,c.nivel_id,range.minimo,range.maximo,positions.filter(p=>p.aprovada).length,positions.filter(p=>p.ocupante_id).length];})));
     renderJobs();selectPerson();renderSuccession();
     window.PlanningWorkspace.career();
+    dashboard=window.PlanningDashboards.career(d,{getNominations:()=>nominations});
     ['development-person','development-position'].forEach(id=>$(id).addEventListener('change',()=>{
       $('candidate').value=$('development-person').value;
       $('critical').value=$('development-position').value;

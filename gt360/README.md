@@ -82,7 +82,7 @@ O grupo **Planejamento de Pessoas** reúne [Quadro e custos](./?modulo=headcount
 
 | Módulo | Telas |
 |---|---|
-| Quadro e custos | Visão geral; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual |
-| Cargos e carreira | Visão geral; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento |
+| Quadro e custos | Dashboard; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual |
+| Cargos e carreira | Dashboard; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento |
 
 A navegação usa o cabeçalho e as abas do fluxo unificado. Apenas uma área fica visível e acessível por vez. Setas, Home/End e histórico do navegador são suportados. Filtros e formulários mantêm seus valores na alternância; módulos mantêm a instância do iframe. Exemplos de acesso direto: `?modulo=headcount&tela=encargos` e `?modulo=carreira&tela=sucessao`.

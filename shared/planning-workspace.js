@@ -39,9 +39,10 @@
     try{if(window.self!==window.top&&window.top.location.origin===location.origin)document.documentElement.classList.add('planning-embedded');}catch(_){}
     function route(){
       const raw=location.hash.slice(1),hash=new URLSearchParams(raw);
-      return hash.get('tela')||aliases[raw]||new URLSearchParams(location.search).get('tela')||screens[0].id;
+      return aliases[hash.get('tela')]||hash.get('tela')||aliases[raw]||aliases[new URLSearchParams(location.search).get('tela')]||new URLSearchParams(location.search).get('tela')||screens[0].id;
     }
     function show(id,{history=true,focus=false}={}){
+      id=aliases[id]||id;
       if(!panels.has(id))id=screens[0].id;
       const changed=active!==id;active=id;
       panels.forEach((view,key)=>{const selected=key===id;view.hidden=!selected;view.inert=!selected;});
@@ -77,7 +78,7 @@
   }
   function headcount(){
     const screens=[
-      {id:'visao-geral',label:'Visão geral',description:'Indicadores do cenário e acesso rápido às ações de planejamento.'},
+      {id:'dashboard',label:'Dashboard',description:'Evolução do quadro, custos, orçamento e antecipação dos impactos do cenário.'},
       {id:'quadro',label:'Quadro de posições',description:'Consulte ocupação, vagas aprovadas e custo de cada posição.'},
       {id:'movimentacoes',label:'Movimentações',description:'Simule admissões, reajustes, benefícios e saídas no cenário selecionado.'},
       {id:'encargos',label:'Encargos e provisões',description:'Configure os parâmetros de custeio e os reflexos de folha.'},
@@ -86,20 +87,21 @@
     ];
     return mount({module:'headcount',title:'Quadro e custos',screens,build:({app,notice,panel,columns,actions,element})=>{
       const $=id=>document.getElementById(id),context=app.querySelector('.toolbar'),metrics=$('metrics'),footer=app.querySelector('.footer');
-      const scope='visao-geral quadro composicao projecao';
+      const scope='dashboard quadro composicao projecao';
       $('unit').closest('label').dataset.forScreens=scope;$('month').closest('label').dataset.forScreens=scope;
-      const premise=$('premise');premise.dataset.forScreens='visao-geral quadro composicao projecao';
+      const premise=$('premise');premise.dataset.forScreens='dashboard quadro composicao projecao';
       const config=$('payroll-policy'),configIntro=config.previousElementSibling;
       const charges=panel('Parâmetros de encargos e provisões',configIntro,config,notice);
       const moves=$('movement').closest('section'),events=$('events').closest('section');
       const positions=$('positions').closest('section'),breakdown=$('breakdown').closest('section'),forecast=$('forecast').closest('section');
-      const overview=element('div');overview.append(element('h2','','Visão geral do cenário'),metrics,actions(screens.slice(1)),footer);
-      return {context:[context,premise],views:{'visao-geral':[overview],quadro:[positions],movimentacoes:[columns(moves,events)],encargos:[charges],composicao:[breakdown],projecao:[forecast]}};
-    },aliases:{quadro:'quadro',encargos:'encargos'}});
+      const dashboard=element('div','dashboard-headcount');dashboard.id='headcount-dashboard';
+      const overview=element('div');overview.append(element('h2','','Dashboard de quadro e custos'),metrics,dashboard,footer);
+      return {context:[context,premise],views:{dashboard:[overview],quadro:[positions],movimentacoes:[columns(moves,events)],encargos:[charges],composicao:[breakdown],projecao:[forecast]}};
+    },aliases:{'visao-geral':'dashboard',quadro:'quadro',encargos:'encargos'}});
   }
   function career(){
     const screens=[
-      {id:'visao-geral',label:'Visão geral',description:'Indicadores da estrutura e acesso às ações de cargos e carreira.'},
+      {id:'dashboard',label:'Dashboard',description:'Estrutura, enquadramento salarial, propostas e horizontes de sucessão.'},
       {id:'estrutura',label:'Estrutura de cargos',description:'Consulte famílias, níveis, faixas e ocupação por cargo.'},
       {id:'carreira',label:'Trilhas e competências',description:'Compare o perfil da pessoa com os requisitos e caminhos do cargo.'},
       {id:'acomodacao',label:'Acomodação salarial',description:'Analise enquadramento, faixa e impacto financeiro das propostas.'},
@@ -119,13 +121,15 @@
         const wrapper=element('label','',label),select=element('select');select.id=id;
         [...$(original).options].forEach(option=>select.append(option.cloneNode(true)));wrapper.append(select);controls.append(wrapper);
       });
-      const overview=element('div');overview.append(element('h2','','Visão geral da estrutura'),metrics,actions(screens.slice(1)),footer);
+      metrics.id='career-metrics';
+      const dashboard=element('div','dashboard-career');dashboard.id='career-dashboard';
+      const overview=element('div');overview.append(element('h2','','Dashboard de cargos e carreira'),metrics,dashboard,footer);
       const careerView=panel('Trilhas e competências',columns(path,gaps),notice);
       const accommodationView=panel('Enquadramento e propostas',placement,accommodations);
       const successionView=panel('Gestão de sucessão',columns(nominations,nominationList));
       const developmentView=panel('Planos de desenvolvimento',controls,development);
-      return {context:[analysis,message],views:{'visao-geral':[overview],estrutura:[structure],carreira:[careerView],acomodacao:[accommodationView],sucessao:[successionView],desenvolvimento:[developmentView]}};
-    },aliases:{estrutura:'estrutura',progressao:'carreira',sucessao:'sucessao'}});
+      return {context:[analysis,message],views:{dashboard:[overview],estrutura:[structure],carreira:[careerView],acomodacao:[accommodationView],sucessao:[successionView],desenvolvimento:[developmentView]}};
+    },aliases:{'visao-geral':'dashboard',estrutura:'estrutura',progressao:'carreira',sucessao:'sucessao'}});
   }
   window.PlanningWorkspace={ready,mount,headcount,career};
 })(window,document);

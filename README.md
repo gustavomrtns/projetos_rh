@@ -43,4 +43,4 @@ A descrição técnica deste repositório se refere às versões públicas. Os a
 
 ## Navegação por processo
 
-Headcount e carreira também são módulos do GT360°, dentro do grupo Planejamento de Pessoas. Cada módulo possui visão geral e áreas de trabalho delimitadas por abas, com acesso por teclado e links diretos para telas. As alterações são preservadas ao alternar áreas e módulos dentro do mesmo workspace; recarregar a página reinicia o estado.
+Headcount e carreira também são módulos do GT360°, dentro do grupo Planejamento de Pessoas. Cada módulo possui dashboard e áreas de trabalho delimitadas por abas, com acesso por teclado e links diretos para telas. As alterações são preservadas ao alternar áreas e módulos dentro do mesmo workspace; recarregar a página reinicia o estado.

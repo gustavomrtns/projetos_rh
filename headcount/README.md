@@ -51,6 +51,12 @@ Dados: `../shared/planning-data.json`. Regras: `../shared/planning-core.js`. Cen
 
 ## Áreas de trabalho
 
-Visão geral; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
+Dashboard; Quadro de posições; Movimentações; Encargos e provisões; Composição de custos; Projeção anual. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
 
 [Entrar pelo workspace](../gt360/?modulo=headcount). O acesso direto continua disponível. Trocar telas ou módulos dentro do GT360° preserva os valores em andamento; recarregar reinicia a base. O fragmento `#tela=...` identifica a área atual.
+
+## Dashboard de previsibilidade
+
+A abertura mostra curvas do cenário, quadro constante e orçamento de referência; evolução mensal do headcount e capacidade aprovada; composição do custo; e distribuição por unidade. A leitura do cenário calcula o primeiro mês acima do orçamento, o impacto anual das movimentações, o saldo anual e as vagas restantes em dezembro. Os filtros e parâmetros do cenário atualizam todos os visuais. Selecionar um mês no gráfico atualiza os indicadores e as demais telas.
+
+Os cards e cabeçalhos dos gráficos levam à consulta ou ação correspondente. A projeção é condicional às movimentações registradas, não uma previsão estatística de eventos futuros.

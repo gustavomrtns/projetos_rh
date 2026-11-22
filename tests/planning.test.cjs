@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const P = require('../shared/planning-core.js');
 const data = require('../shared/planning-data.json');
+const Analytics = require('../shared/planning-dashboards.js');
 
 test('catálogo preserva os campos do GT360 e todos os vínculos de planejamento', () => {
   // O catálogo original é extraído sem executar os manipuladores do navegador.
@@ -113,4 +114,34 @@ test('valida política e impede coparticipação maior que benefício',()=>{
   assert.equal(P.round(base.cost-shared.cost),100);
   assert.equal(shared.breakdown.employerCharges,base.breakdown.employerCharges);
   assert.equal(P.snapshot(data,[event],'2027-01').cost,base.cost);
+});
+test('dashboard identifica pressão de orçamento a partir de abril e impacto anual do cenário',()=>{
+  const scenario=data.cenarios.find(s=>s.id==='CEN_EXP');
+  const s=Analytics.headcountSummary(data,scenario.eventos,data.encargos_base,'','2027-04');
+  assert.equal(s.firstOver,'2027-04');assert.equal(s.last.headcount,7);assert.equal(s.last.vacancies,0);
+  assert.equal(s.annualCost,690348.25);assert.equal(s.annualBudget,640320);
+  assert.equal(s.annualDelta,154710.73);assert.equal(s.annualBalance,-50028.25);
+  assert.equal(s.selected.month,'2027-04');assert.equal(s.occupation,100);
+});
+test('dashboard mantém o recorte de unidade e distingue cenário constante',()=>{
+  const s=Analytics.headcountSummary(data,[],data.encargos_base,'U002');
+  assert.equal(s.firstOver,null);assert.equal(s.annualDelta,0);assert.equal(s.last.headcount,1);
+  assert.equal(s.units.length,1);assert.equal(s.units[0].id,'U002');
+  assert.equal(s.units[0].cost,s.selected.cost);assert.equal(s.occupation,50);
+});
+test('dashboard de carreira separa enquadramento, indicações e prontidão',()=>{
+  const s=Analytics.careerSummary(data);
+  assert.deepEqual(s.salaryCounts,{below:1,within:3,above:1});
+  assert.equal(s.covered,1);assert.equal(s.coverage,100);
+  assert.equal(s.readiness.find(r=>r.id==='pronto_para_discussao').count,0);
+  assert.equal(s.readiness.find(r=>r.id==='em_desenvolvimento_12_24_meses').count,1);
+  assert.equal(s.proposalDelta,452.66);assert.equal(s.agenda.length,3);
+  assert.equal(s.families.reduce((n,f)=>n+f.jobs,0),10);
+  assert.equal(s.families.reduce((n,f)=>n+f.people,0),5);
+});
+test('remover indicação atualiza cobertura sem criar prontidão ou histórico',()=>{
+  const before=JSON.stringify(data),s=Analytics.careerSummary(data,[]);
+  assert.equal(s.coverage,0);assert.equal(s.covered,0);
+  assert.equal(s.readiness.reduce((n,r)=>n+r.count,0),0);
+  assert.equal(s.agenda.length,2);assert.equal(JSON.stringify(data),before);
 });

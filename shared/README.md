@@ -65,3 +65,5 @@ Validação das regras: `node --test tests/planning.test.cjs`. O workflow també
 `planning-workspace.js` organiza os elementos existentes em áreas exclusivas, sem recriar formulários na alternância. O componente reutiliza as classes e o stylesheet `gt360/unified-flow.css`, com ajustes responsivos em `planning-workspace.css`. Painéis inativos usam `hidden` e `inert`; as abas seguem o padrão tablist/tab/tabpanel e mantêm histórico e foco de teclado.
 
 No GT360°, as duas aplicações são iframes persistentes registrados em `APPS_CONFIG`, no grupo Planejamento de Pessoas. Acessos cruzados usam o shell pai para manter as instâncias abertas. Não há persistência durável.
+
+`planning-dashboards.js` calcula indicadores sem alterar o cadastro e fornece os visuais interativos dos dois dashboards. As métricas usam o cenário/parametrização aberto para headcount e os registros atuais/propostas para carreira. Links anteriores com `tela=visao-geral` continuam válidos como alias do Dashboard.

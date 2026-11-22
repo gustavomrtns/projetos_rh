@@ -3,7 +3,7 @@
   const P=window.Planning,$=id=>document.getElementById(id),E=P.esc,M=P.money,container=$('app');
   try {
     const d=await P.load();
-    let events=[],scenarioId='CEN_BASE',policy=P.copy(d.encargos_base||P.payrollDefaults);
+    let events=[],scenarioId='CEN_BASE',policy=P.copy(d.encargos_base||P.payrollDefaults),dashboard=null;
     const job=id=>P.lookup(d.cargos,id)?.nome||id,person=id=>P.lookup(d.pessoas,id)?.nome||'Admissão planejada';
     const opt=(value,text)=>`<option value="${E(value)}">${E(text)}</option>`;
     const months=Array.from({length:12},(_,i)=>`2027-${String(i+1).padStart(2,'0')}`);
@@ -80,6 +80,7 @@
       $('forecast').innerHTML=`<table><caption>Custo por competência com provisões mensalizadas; não representa o fluxo de caixa.</caption><thead><tr><th>Mês</th><th class="num">Pessoas</th><th class="num">Remuneração</th><th class="num">Encargos do mês</th><th class="num">Provisões líquidas</th><th class="num">Encargos sobre provisões</th><th class="num">Benefícios líquidos</th><th class="num">Custo total</th><th class="num">Saldo</th></tr></thead><tbody>${projections.map(p=>`<tr><td>${monthName(p.month)}/2027</td><td class="num">${p.headcount}</td>${['remuneration','employerCharges','provisions','provisionCharges','netBenefits'].map(k=>`<td class="num">${M(p.breakdown[k])}</td>`).join('')}<td class="num">${M(p.cost)}</td><td class="num">${M(p.budget-p.cost)}</td></tr>`).join('')}</tbody></table>`;
       $('events').innerHTML=events.length?events.map((e,i)=>`<li><div><p>${E(eventText(e))}</p><span class="muted">Vigência: ${E(e.vigencia.slice(0,7))} · mês integral</span></div><button class="small" data-remove="${i}" aria-label="Remover ${E(eventText(e))}">Remover</button></li>`).join(''):'<li class="muted">Sem movimentações. O quadro atual permanece constante.</li>';
       $('positions').innerHTML=`<table><caption>Quadro de ${monthName(selected.month)}/2027.</caption><thead><tr><th>Posição / cargo</th><th>Unidade</th><th>Ocupação</th><th>Status</th><th class="num">Remuneração</th><th class="num">Encargos</th><th class="num">Provisões líquidas</th><th class="num">Reflexos</th><th class="num">Benefícios líquidos</th><th class="num">Outras despesas</th><th class="num">Custo / mês</th></tr></thead><tbody>${selected.rows.map(p=>`<tr><td>${E(p.id)} · ${E(job(p.cargo_id))}<small>${E(P.lookup(d.centros_custo,p.centro_custo_id).nome)}</small></td><td>${E(P.lookup(d.unidades,p.unidade_id).nome)}</td><td>${p.ocupada?E(person(p.pessoa_planejada_id)):'Sem ocupante'}</td><td><span class="status ${!p.aprovada?'warn':p.ocupada?'good':''}">${!p.aprovada?'Em proposta':p.ocupada?'Ocupada':'Vaga aprovada'}</span></td>${['remuneration','employerCharges','provisions','provisionCharges','netBenefits','other'].map(k=>`<td class="num">${M(p.composicao[k])}</td>`).join('')}<td class="num">${M(p.custo)}</td></tr>`).join('')}</tbody></table>`;
+      if(dashboard)dashboard.render();
     }
     function syncForm(){
       const type=$('type').value,hire=type==='admissao_planejada',salary=hire||type==='ajuste_planejado',pack=hire||type==='pacote_planejado';
@@ -114,5 +115,6 @@
     const requested=new URLSearchParams(location.search).get('cenario');if(P.lookup(d.cenarios,requested)){scenarioId=requested;$('scenario').value=requested;events=P.copy(P.lookup(d.cenarios,requested).eventos);}
     syncForm();render();
     window.PlanningWorkspace.headcount();
+    dashboard=window.PlanningDashboards.headcount(d,{getState:()=>({events,policy,unit:$('unit').value,month:$('month').value}),selectMonth:month=>{$('month').value=month;render();}});
   }catch(error){container.setAttribute('aria-busy','false');container.innerHTML=`<div class="error-box" role="alert"><h2>Não foi possível abrir o simulador</h2><p>${E(error.message)}</p><button onclick="location.reload()">Tentar novamente</button></div>`;}
 })();

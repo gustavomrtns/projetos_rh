@@ -29,6 +29,12 @@ Simulações e indicações ficam em memória e reiniciam ao recarregar. Não h�
 
 ## Áreas de trabalho
 
-Visão geral; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
+Dashboard; Estrutura de cargos; Trilhas e competências; Acomodação salarial; Sucessão; Desenvolvimento. Cada ação ocupa uma tela própria, com apenas seus controles visíveis. O cabeçalho e as abas seguem o fluxo unificado do GT360°.
 
 [Entrar pelo workspace](../gt360/?modulo=carreira). O acesso direto continua disponível. Trocar telas ou módulos dentro do GT360° preserva os valores em andamento; recarregar reinicia a base. O fragmento `#tela=...` identifica a área atual.
+
+## Dashboard de cargos e carreira
+
+A abertura apresenta enquadramento salarial por pessoa, distribuição por família, cobertura de indicações para posições críticas, horizontes de prontidão, impacto mensal das acomodações em estudo e agenda de revisões/PDI. A cobertura considera posições com indicação registrada e não implica sucessor pronto: os horizontes e candidatos prontos para discussão aparecem separadamente. Não há séries históricas ou evolução temporal inferida das notas de competências.
+
+Cada pessoa ou proposta leva à análise correspondente, já com o contexto selecionado. Alterar indicações atualiza cobertura, prontidão e revisões do painel. Faixas e propostas representam o cadastro atual; hipóteses não salvas de enquadramento permanecem na tela de acomodação.
