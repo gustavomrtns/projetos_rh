@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "assets/portfolio/**"
       - "README.md"
       - "gt360/**"
       - "eu-horizonte-intranet/**"
@@ -17,6 +18,7 @@ on:
   pull_request:
     paths:
       - "index.html"
+      - "assets/portfolio/**"
       - "README.md"
       - "gt360/**"
       - "eu-horizonte-intranet/**"

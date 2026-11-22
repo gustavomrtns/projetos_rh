@@ -118,6 +118,28 @@ class BrowserSmokeTests(unittest.TestCase):
                 finally:
                     context.close()
 
+    def test_portfolio_about_first_and_project_scroll_reveals(self):
+        for device in DEVICES:
+            with self.subTest(device=device):
+                context, page = self._new_page(device)
+                try:
+                    page.emulate_media(reduced_motion="no-preference")
+                    page.goto(self.base + "/", wait_until="domcontentloaded")
+                    self.assertTrue(page.locator("#sobre h1").is_visible())
+                    self.assertLess(page.locator("#sobre").bounding_box()["y"], page.locator("#projetos").bounding_box()["y"])
+                    self.assertEqual(page.locator(".project-card").count(), 4)
+                    page.locator(".project-index a[href='#headcount-projeto']").click()
+                    page.wait_for_url(self.base + "/#headcount-projeto")
+                    page.wait_for_function("document.querySelector('#headcount-projeto').classList.contains('is-visible')")
+                    self.assertIn("GT360°", page.locator("#headcount-projeto .module-origin").inner_text())
+                    page.locator(".project-index a[href='#carreira-projeto']").click()
+                    page.wait_for_url(self.base + "/#carreira-projeto")
+                    page.wait_for_function("document.querySelector('#carreira-projeto').classList.contains('is-visible')")
+                    self.assertIn("GT360°", page.locator("#carreira-projeto .module-origin").inner_text())
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), page.viewport_size["width"])
+                finally:
+                    context.close()
+
     def test_project_details_module_shortcut_and_responsive_navigation(self):
         for device in DEVICES:
             with self.subTest(device=device):

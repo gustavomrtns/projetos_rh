@@ -10,8 +10,8 @@ Aplicações projetadas a partir da experiência em Recursos Humanos, pessoas e 
 |---|---|---|---|
 | **GT360°** | Workspace de Gestão de Pessoas com onze aplicações de jornada, desenvolvimento, pesquisas, qualidade e planejamento de pessoas. | [Explorar GT360°](https://gustavomrtns.github.io/projetos_rh/gt360/) | [Conhecer o projeto](./gt360/README.md) |
 | **eu + horizonte** | Protótipo navegável de intranet com mural, agenda, acervo e fluxo de publicação. | [Explorar eu + horizonte](https://gustavomrtns.github.io/projetos_rh/eu-horizonte-intranet/) | [Conhecer o projeto](./eu-horizonte-intranet/README.md) |
-| **Quadro e custos** | Simulação de headcount, posições, orçamento e projeção de custos. | [Explorar headcount](https://gustavomrtns.github.io/projetos_rh/headcount/) | [Conhecer o projeto](./headcount/README.md) |
-| **Cargos e carreira** | Estrutura de cargos, acomodação, progressão, competências e sucessão. | [Explorar carreira](https://gustavomrtns.github.io/projetos_rh/carreira/) | [Conhecer o projeto](./carreira/README.md) |
+| **Quadro e custos** | Módulo do GT360°: simulação de headcount, posições, orçamento e projeção de custos. | [Explorar headcount](https://gustavomrtns.github.io/projetos_rh/headcount/) | [Conhecer o projeto](./headcount/README.md) |
+| **Cargos e carreira** | Módulo do GT360°: estrutura de cargos, acomodação, progressão, competências e sucessão. | [Explorar carreira](https://gustavomrtns.github.io/projetos_rh/carreira/) | [Conhecer o projeto](./carreira/README.md) |
 
 ## Minha participação
 
@@ -44,3 +44,9 @@ A descrição técnica deste repositório se refere às versões públicas. Os a
 ## Navegação por processo
 
 Headcount e carreira também são módulos do GT360°, dentro do grupo Planejamento de Pessoas. Cada módulo possui dashboard e áreas de trabalho delimitadas por abas, com acesso por teclado e links diretos para telas. As alterações são preservadas ao alternar áreas e módulos dentro do mesmo workspace; recarregar a página reinicia o estado.
+
+## Apresentação do portfólio
+
+A página abre com uma apresentação profissional breve e segue com os projetos ao longo do scroll: GT360°, Quadro e custos, Cargos e carreira e eu + horizonte. Cada projeto apresenta propósito, processos contemplados e participação na construção, com navegação direta. Quadro e custos e Cargos e carreira têm seções próprias e são identificados como módulos do GT360°, com acesso também pelo workspace.
+
+A identidade preserva branco, vermelho e verde, com o retrato aprovado. As transições de entrada respeitam a preferência por movimento reduzido. O conteúdo permanece acessível sem JavaScript; há atalhos para cada projeto e links de contato ao final. Os estilos e comportamentos da página estão em `assets/portfolio/`.

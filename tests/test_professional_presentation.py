@@ -35,7 +35,9 @@ class ProfessionalPresentationTests(unittest.TestCase):
         self.assertTrue({"experiencia", "formacao", "certificacoes", "acoes-dho"}.isdisjoint(ids))
         self.assertIn("que <span>projetei.</span>", content)
         self.assertIn("Protótipo navegável", content)
-        self.assertIn("Demonstração pública", content)
+        self.assertIn("Workspace de Gestão de Pessoas", content)
+        self.assertLess(content.index('id="sobre"'), content.index('id="projetos"'))
+        self.assertEqual(content.count('class="module-origin"'), 2)
 
     def test_landing_anchors_resolve_and_ids_are_unique(self):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
@@ -59,7 +61,7 @@ class ProfessionalPresentationTests(unittest.TestCase):
         elements = Elements((ROOT / "index.html").read_text(encoding="utf-8")).elements
         links = [attrs["href"] for tag, attrs in elements if tag == "a"
                  and attrs.get("href", "").startswith("./gt360/?modulo=")]
-        self.assertEqual(len(links), 11)
+        self.assertEqual(len(links), 13)
         self.assertEqual(len(set(links)), 11)
         for link in links:
             module = link.split("=", 1)[1]

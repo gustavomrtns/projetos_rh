@@ -3,192 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Aplicações projetadas por Manoel Gustavo. Explore GT360°, headcount, cargos e carreira e o eu + horizonte, protótipo de intranet.">
-  <meta name="theme-color" content="#f8f7f4">
+  <meta name="description" content="Manoel Gustavo. Recursos Humanos, pessoas, processos e tecnologia. Conheça os projetos GT360°, Quadro e custos, Cargos e carreira e eu + horizonte.">
+  <meta name="theme-color" content="#ffffff">
   <meta name="robots" content="index,follow">
-  <title>Projetos e aplicações | Manoel Gustavo</title>
+  <title>Manoel Gustavo | Pessoas, processos e projetos</title>
   <link rel="canonical" href="https://gustavomrtns.github.io/projetos_rh/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c71717'/%3E%3Ccircle cx='50' cy='14' r='6' fill='%238fff00'/%3E%3Ctext x='32' y='42' font-size='24' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EMG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #f8f7f4;
-      --ink: #1b1b19;
-      --muted: #615f59;
-      --line: #deddd6;
-      --red: #c71717;
-      --lime: #8fff00;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "DM Sans", sans-serif; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    [aria-hidden="true"] { font-family: Arial, sans-serif; }
-    img { display: block; max-width: 100%; }
-    h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { font-family: "Bricolage Grotesque", sans-serif; letter-spacing: -.045em; }
-    ::selection { background: var(--lime); color: var(--ink); }
-    :focus-visible { outline: 3px solid var(--red); outline-offset: 5px; }
-    .wrap { width: min(1200px, calc(100% - 80px)); margin-inline: auto; }
-    .skip-link { position: fixed; top: 12px; left: 12px; z-index: 10; padding: 14px 20px; background: var(--ink); color: white; transform: translateY(-160%); }
-    .skip-link:focus { transform: translateY(0); }
-    .site-header { position: sticky; top: 0; z-index: 5; background: rgba(248, 247, 244, .96); border-bottom: 1px solid var(--line); }
-    .nav-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; }
-    .brand-mark { display: grid; place-items: center; width: 32px; height: 32px; background: var(--red); color: white; border-radius: 9px; font-size: 11px; letter-spacing: -.04em; }
-    .nav-links { display: flex; align-items: center; gap: 30px; font-size: 13px; }
-    .nav-links a { padding-block: 12px; }
-    .nav-links a:hover, .inline-link:hover { color: var(--red); }
-    .nav-contact { border-bottom: 1px solid var(--ink); }
-    .intro { padding: 86px 0 62px; }
-    h1 { font-size: clamp(48px, 7.3vw, 100px); font-weight: 600; line-height: 1; max-width: 1000px; }
-    h1 span { color: var(--red); }
-    .intro-bottom { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-top: 30px; }
-    .intro-copy { font-size: 17px; line-height: 1.65; color: var(--muted); max-width: 530px; }
-    .intro-link { display: inline-flex; align-items: center; gap: 16px; font-size: 13px; font-weight: 600; white-space: nowrap; }
-    .intro-link span { display: grid; place-items: center; width: 40px; height: 40px; background: var(--lime); border-radius: 50%; font-size: 20px; transition: transform .2s ease; }
-    .intro-link:hover span { transform: translateY(4px); }
-    .projects { padding-bottom: 96px; }
-    .section-title { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; border-top: 1px solid var(--ink); }
-    .section-title h2 { font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
-    .section-title p { color: var(--muted); font-size: 12px; }
-    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 28px; }
-    .project-card { min-width: 0; }
-    .project-visual { display: block; overflow: hidden; aspect-ratio: 10 / 7; background: #eeebe7; border-radius: 18px; position: relative; }
-    .project-visual img { width: 100%; height: 100%; object-fit: contain; transition: transform .5s ease; }
-    .project-visual:hover img { transform: scale(1.035); }
-    .project-copy { padding: 23px 0 0; }
-    .project-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
-    .project-heading h3 { font-size: clamp(29px, 3vw, 39px); line-height: 1.1; font-weight: 600; }
-    .project-state { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; white-space: nowrap; color: var(--muted); }
-    .project-state::before { content: ""; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
-    .project-card.alt .project-state::before { background: #6a6860; }
-    .project-description { font-size: 15px; color: var(--muted); line-height: 1.65; min-height: 75px; max-width: 540px; }
-    .project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding: 22px 0; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; min-height: 46px; padding: 11px 19px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: white; font-size: 13px; font-weight: 600; transition: background .2s ease, color .2s ease; }
-    .button:hover { background: var(--lime); color: var(--ink); }
-    .inline-link { font-size: 13px; padding: 12px 0; }
-    details { border-top: 1px solid var(--line); }
-    summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 18px; min-height: 54px; padding: 14px 0; font-size: 13px; font-weight: 600; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--muted); }
-    details[open] > summary::after { content: "−"; }
-    .detail-body { padding: 2px 0 23px; font-size: 14px; color: var(--muted); line-height: 1.7; }
-    .detail-body p + p { margin-top: 14px; }
-    .detail-body strong { color: var(--ink); font-weight: 600; }
-    .module-links { list-style: none; padding: 0 0 12px; margin: 0; }
-    .module-links li + li { border-top: 1px solid var(--line); }
-    .module-links a { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; font-size: 13px; color: var(--muted); }
-    .module-links a span { color: var(--red); }
-    .module-links a:hover { color: var(--red); }
-    .demo-note { font-size: 12px; line-height: 1.7; color: var(--muted); padding-top: 26px; max-width: 710px; }
-    .about { padding: 64px 0; background: #eeede7; border-block: 1px solid var(--line); }
-    .about-layout { display: grid; grid-template-columns: 210px 1fr; gap: 68px; align-items: start; }
-    .about-identity img { width: 112px; height: 112px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; }
-    .about-identity h2 { font-size: 17px; letter-spacing: -.02em; }
-    .about-copy { max-width: 710px; }
-    .about-copy h3 { font-size: clamp(27px, 3vw, 39px); font-weight: 500; margin-bottom: 20px; line-height: 1.15; }
-    .about-copy p { font-size: 15px; line-height: 1.8; color: var(--muted); }
-    .about-copy p + p { margin-top: 12px; }
-    .contact-links { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 24px; }
-    .contact-links a { font-size: 13px; padding-block: 8px; border-bottom: 1px solid var(--ink); }
-    .contact-links a:hover { color: var(--red); border-color: var(--red); }
-    footer { padding: 26px 0; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 20px; font-size: 12px; color: var(--muted); }
-    .footer-inner a:hover { color: var(--red); }
-    [data-reveal] { transition: opacity .6s ease, transform .6s ease; }
-    .will-reveal { opacity: 0; transform: translateY(18px); }
-    .is-visible { opacity: 1; transform: none; }
-
-    @media (max-width: 900px) {
-      .wrap { width: calc(100% - 48px); }
-      .intro { padding-top: 62px; }
-      .project-grid { gap: 24px; }
-      .project-heading { align-items: start; flex-direction: column; gap: 8px; }
-      .project-description { min-height: 100px; }
-      .about-layout { grid-template-columns: 160px 1fr; gap: 32px; }
-    }
-    @media (max-width: 600px) {
-      html { scroll-padding-top: 85px; }
-      .wrap { width: calc(100% - 36px); }
-      .nav-inner { min-height: 72px; gap: 14px; }
-      .brand { font-size: 12px; gap: 8px; }
-      .brand-mark { width: 28px; height: 28px; font-size: 10px; }
-      .nav-links { gap: 18px; font-size: 12px; }
-      .nav-contact { display: none; }
-      .intro { padding: 46px 0 38px; }
-      h1 { font-size: clamp(44px, 11.7vw, 70px); }
-      .intro-bottom { display: block; margin-top: 22px; }
-      .intro-copy { font-size: 15px; }
-      .intro-link { margin-top: 22px; }
-      .intro-link span { width: 34px; height: 34px; }
-      .section-title { padding: 16px 0; align-items: end; }
-      .section-title p { max-width: 120px; text-align: right; line-height: 1.5; }
-      .project-grid { grid-template-columns: 1fr; gap: 44px; }
-      .project-heading { flex-direction: row; align-items: center; gap: 12px; }
-      .project-heading h3 { font-size: 31px; }
-      .project-state { font-size: 10px; }
-      .project-description { min-height: 0; }
-      .project-copy { padding-top: 20px; }
-      .project-actions { gap: 20px; }
-      .project-visual { border-radius: 12px; }
-      .projects { padding-bottom: 50px; }
-      .about { padding: 40px 0; }
-      .about-layout { grid-template-columns: 1fr; gap: 24px; }
-      .about-identity { display: flex; align-items: center; gap: 16px; }
-      .about-identity img { width: 64px; height: 64px; margin: 0; }
-      .footer-inner { font-size: 11px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; animation: none !important; }
-      .will-reveal { opacity: 1; transform: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/portfolio/portfolio.css">
+  <script defer src="./assets/portfolio/portfolio.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#projetos">Pular para os projetos</a>
   <header class="site-header" id="inicio">
     <nav class="wrap nav-inner" aria-label="Navegação principal">
       <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">MG</span> Manoel Gustavo</a>
-      <div class="nav-links">
-        <a href="#projetos">Projetos</a>
-        <a href="#sobre">Sobre mim</a>
-        <a class="nav-contact" href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-      </div>
+      <div class="nav-links"><a href="#sobre">Sobre mim</a><a href="#projetos">Projetos</a><a class="nav-contact" href="#contato">Contato</a></div>
     </nav>
   </header>
-
   <main>
-    <div class="intro wrap">
-      <h1>Aplicações<br>que <span>projetei.</span></h1>
-      <div class="intro-bottom">
-        <p class="intro-copy">Minha experiência em RH se transforma em aplicações para organizar processos e melhorar a experiência das pessoas.</p>
-        <a class="intro-link" href="#projetos">Explorar os projetos <span aria-hidden="true">↓</span></a>
+    <section class="about" id="sobre" aria-labelledby="about-title">
+      <div class="wrap about-layout">
+        <div>
+          <p class="eyebrow">Manoel Gustavo · Recursos Humanos</p>
+          <h1 id="about-title">Um olhar de RH<br>para <span>o negócio.</span></h1>
+          <p class="about-lead">Pessoas, processos, dados e tecnologia se encontram nos projetos que construo.</p>
+          <p class="about-copy">Minha experiência em RH generalista, Business Partner e gestão de equipes orienta a forma como organizo processos e projeto soluções. Parto das necessidades de quem vai usar para desenhar fluxos, conectar informações e apoiar decisões.</p>
+          <p class="about-copy">Formado em Gestão de RH, estudante de Psicologia e de Gestão de Projetos.</p>
+          <div class="expertise" aria-label="Frentes de atuação"><span>Desenvolvimento de pessoas</span><span>People Analytics</span><span>Projetos de RH</span></div>
+          <div class="hero-actions"><a class="button" href="#projetos">Conhecer os projetos</a><a class="inline-link" href="#contato">Vamos conversar</a></div>
+        </div>
+        <figure class="portrait"><img src="./assets/manoel-gustavo.webp" alt="Retrato de Manoel Gustavo" width="640" height="616" fetchpriority="high" decoding="async"><figcaption><strong>Gestão de Pessoas</strong><span>Processos, dados e tecnologia.</span></figcaption></figure>
       </div>
-    </div>
-
+    </section>
     <section class="projects wrap" id="projetos" aria-labelledby="projects-title">
-      <div class="section-title">
-        <h2 id="projects-title">Projetos</h2>
-        <p>Versões públicas navegáveis</p>
-      </div>
+      <div class="section-title"><h2 id="projects-title">Aplicações que <span>projetei.</span></h2><p>Da jornada das pessoas ao planejamento do negócio. Explore cada processo ao longo da página.</p></div>
+      <div class="project-index" aria-label="Acesso rápido aos projetos"><a href="#gt360-projeto">GT360°</a><a href="#headcount-projeto">Quadro e custos</a><a href="#carreira-projeto">Cargos e carreira</a><a href="#eu-horizonte">eu + horizonte</a></div>
       <div class="project-grid" id="solucoes-digitais">
-        <article class="project-card" id="gt360-projeto" data-reveal>
-          <a class="project-visual" href="./gt360/" aria-label="Explorar demonstração do GT360°">
-            <img src="./gt360/gt360-case-editorial.svg?v=20261102" alt="Apresentação visual das aplicações de RH do GT360°" width="1600" height="1120" fetchpriority="high" decoding="async">
-          </a>
+        <article class="project-card" id="gt360-projeto" data-reveal aria-labelledby="gt360-projeto-title">
           <div class="project-copy">
-            <div class="project-heading"><h3>GT360°</h3><span class="project-state">Demonstração pública</span></div>
-            <p class="project-description">Workspace de Gestão de Pessoas com onze aplicações. Integração, treinamentos, avaliações e pesquisas reunidos em uma navegação única.</p>
-            <div class="project-actions">
-              <a class="button" href="./gt360/">Explorar aplicação <span aria-hidden="true">↗</span></a>
-              <a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub <span aria-hidden="true">↗</span></a>
-            </div>
+            <p class="project-category">Jornada e gestão de pessoas</p>
+            <div class="project-heading"><h3 id="gt360-projeto-title">GT360°</h3><span class="project-state">Workspace de Gestão de Pessoas</span></div>
+            <p class="project-purpose">Processos conectados para acompanhar a jornada das pessoas.</p>
+            <p class="project-description">Integração, avaliações, desenvolvimento, pesquisas e planejamento reunidos em onze aplicações. Um ambiente para organizar rotinas e ampliar a leitura sobre o que acontece com as pessoas.</p>
+            <ul class="process-focus"><li>Jornada do colaborador e desenvolvimento</li><li>Engajamento, saúde organizacional e qualidade</li><li>Planejamento do quadro, custos e carreira</li></ul>
+            <div class="project-actions"><a class="button" href="./gt360/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/gt360" target="_blank" rel="noopener noreferrer">Ver no GitHub</a></div>
+
             <details class="project-details">
               <summary>Sobre o projeto e minha participação</summary>
               <div class="detail-body">
@@ -197,36 +59,71 @@
                 <p><strong>A entrega.</strong> O sistema interno foi desenvolvido e implantado em parceria entre RH e Tecnologia. A versão pública adapta o projeto para explorar suas interfaces e fluxos.</p>
               </div>
             </details>
-            <details class="project-modules">
+<details class="project-modules">
               <summary>Explorar as onze aplicações</summary>
               <ul class="module-links">
-                <li><a href="./gt360/?modulo=onboarding">Fluxo de Onboarding <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=avaliacao-clt">Avaliação de Experiência CLT <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=avaliacao-pj">Avaliação de Prestadores PJ <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=tempo-casa">Gestão de Tempo de Casa <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=desligamento">Questionário de Desligamento <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=engajamento">Pesquisa de Engajamento <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=riscos-psicossociais">Gestão de Riscos Psicossociais <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=treinamentos">Painel de Treinamentos <span aria-hidden="true">↗</span></a></li>
-                <li><a href="./gt360/?modulo=checklist-5s">Checklist 5S <span aria-hidden="true">↗</span></a></li>
+                <li><a href="./gt360/?modulo=onboarding">Fluxo de Onboarding</a></li>
+                <li><a href="./gt360/?modulo=avaliacao-clt">Avaliação de Experiência CLT</a></li>
+                <li><a href="./gt360/?modulo=avaliacao-pj">Avaliação de Prestadores PJ</a></li>
+                <li><a href="./gt360/?modulo=tempo-casa">Gestão de Tempo de Casa</a></li>
+                <li><a href="./gt360/?modulo=desligamento">Questionário de Desligamento</a></li>
+                <li><a href="./gt360/?modulo=engajamento">Pesquisa de Engajamento</a></li>
+                <li><a href="./gt360/?modulo=riscos-psicossociais">Gestão de Riscos Psicossociais</a></li>
+                <li><a href="./gt360/?modulo=treinamentos">Painel de Treinamentos</a></li>
+                <li><a href="./gt360/?modulo=checklist-5s">Checklist 5S</a></li>
                 <li><a href="./gt360/?modulo=headcount">Quadro e custos</a></li>
                 <li><a href="./gt360/?modulo=carreira">Cargos e carreira</a></li>
               </ul>
             </details>
           </div>
+          <a class="project-visual" href="./gt360/" aria-label="Explorar GT360°"><img src="./gt360/gt360-case-editorial.svg?v=20261122" alt="Visão das aplicações e dos processos de Gestão de Pessoas no GT360°" width="1600" height="1120" loading="lazy" decoding="async"></a>
         </article>
 
-        <article class="project-card alt" id="eu-horizonte" data-reveal>
-          <a class="project-visual" href="./eu-horizonte-intranet/" aria-label="Explorar protótipo do eu mais horizonte">
-            <img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Apresentação visual do mural, agenda e acervo da intranet eu mais horizonte" width="1600" height="1120" loading="lazy" decoding="async">
-          </a>
+        <article class="project-card" id="headcount-projeto" data-reveal aria-labelledby="headcount-projeto-title">
           <div class="project-copy">
-            <div class="project-heading"><h3>eu + horizonte</h3><span class="project-state">Protótipo navegável</span></div>
-            <p class="project-description">Intranet para aproximar colaboradores da comunicação interna. Mural, agenda e acervo organizados para facilitar o acesso aos conteúdos da empresa.</p>
-            <div class="project-actions">
-              <a class="button" href="./eu-horizonte-intranet/">Explorar aplicação <span aria-hidden="true">↗</span></a>
-              <a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub <span aria-hidden="true">↗</span></a>
-            </div>
+            <p class="project-category">Planejamento do negócio</p>
+            <div class="project-heading"><h3 id="headcount-projeto-title">Quadro e custos</h3><span class="project-state">Módulo do GT360°</span></div>
+            <p class="project-purpose">Visibilidade para planejar o quadro e o orçamento de pessoas.</p>
+            <p class="project-description">Uma movimentação no quadro também muda o custo da operação. A aplicação conecta posições, remuneração, encargos e benefícios para comparar cenários e antecipar seus impactos no orçamento.</p>
+            <ul class="process-focus"><li>Quadro aprovado, ocupação e vagas por unidade</li><li>Custo de pessoas, encargos e reflexos de folha</li><li>Evolução mensal e impacto anual dos cenários</li></ul>
+            <div class="project-actions"><a class="button" href="./headcount/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/headcount" target="_blank" rel="noopener noreferrer">Ver no GitHub</a></div>
+            <p class="module-origin">Integra o GT360° e ganha aqui um recorte próprio de planejamento e previsibilidade. <a href="./gt360/?modulo=headcount">Explorar dentro do workspace</a></p>
+            <details class="project-details"><summary>Sobre o projeto e minha participação</summary><div class="detail-body">
+              <p><strong>A necessidade.</strong> Antecipar o efeito das movimentações de pessoas sobre o quadro e os custos.</p>
+              <p><strong>Minha participação.</strong> Ideação, desenho dos fluxos, modelagem de dados, definição de regras e validação funcional da aplicação.</p>
+              <p><strong>A entrega.</strong> Projeção mensal com encargos e reflexos de folha, benefícios líquidos, filtros por unidade e exportação dos resultados. Compartilha o catálogo de pessoas do GT360°.</p>
+            </div></details>
+          </div>
+          <a class="project-visual" href="./headcount/" aria-label="Explorar Quadro e custos"><img src="./headcount/case.svg" alt="Apresentação do planejamento de quadro e custos de pessoas" width="1600" height="1120" loading="lazy" decoding="async"></a>
+        </article>
+
+        <article class="project-card" id="carreira-projeto" data-reveal aria-labelledby="carreira-projeto-title">
+          <div class="project-copy">
+            <p class="project-category">Estrutura e desenvolvimento</p>
+            <div class="project-heading"><h3 id="carreira-projeto-title">Cargos e carreira</h3><span class="project-state">Módulo do GT360°</span></div>
+            <p class="project-purpose">Clareza sobre estrutura, remuneração e próximos passos.</p>
+            <p class="project-description">Cargos, faixas e competências se conectam às conversas sobre desenvolvimento. O mapa permite analisar enquadramentos, explorar caminhos de carreira e acompanhar propostas e indicações de sucessão.</p>
+            <ul class="process-focus"><li>Estrutura de cargos e enquadramento salarial</li><li>Trilhas, competências e planos de desenvolvimento</li><li>Impacto das propostas e horizontes de sucessão</li></ul>
+            <div class="project-actions"><a class="button" href="./carreira/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/carreira" target="_blank" rel="noopener noreferrer">Ver no GitHub</a></div>
+            <p class="module-origin">Integra o GT360° e ganha aqui um recorte próprio de estrutura e desenvolvimento de pessoas. <a href="./gt360/?modulo=carreira">Explorar dentro do workspace</a></p>
+            <details class="project-details"><summary>Sobre o projeto e minha participação</summary><div class="detail-body">
+              <p><strong>A necessidade.</strong> Dar clareza à estrutura de cargos e apoiar conversas sobre desenvolvimento e próximos passos.</p>
+              <p><strong>Minha participação.</strong> Ideação, desenho dos fluxos, modelagem de dados, definição de regras e validação funcional da aplicação.</p>
+              <p><strong>A entrega.</strong> Catálogo de cargos, faixas salariais, simulações de acomodação e indicações manuais de sucessão. Compartilha o catálogo de pessoas do GT360°.</p>
+            </div></details>
+          </div>
+          <a class="project-visual" href="./carreira/" aria-label="Explorar Cargos e carreira"><img src="./carreira/case.svg" alt="Apresentação da estrutura de cargos, carreira e sucessão" width="1600" height="1120" loading="lazy" decoding="async"></a>
+        </article>
+
+        <article class="project-card" id="eu-horizonte" data-reveal aria-labelledby="eu-horizonte-title">
+          <div class="project-copy">
+            <p class="project-category">Comunicação e experiência</p>
+            <div class="project-heading"><h3 id="eu-horizonte-title">eu + horizonte</h3><span class="project-state">Protótipo navegável</span></div>
+            <p class="project-purpose">Pessoas mais próximas da informação e das iniciativas da empresa.</p>
+            <p class="project-description">Uma intranet para encontrar comunicados, eventos, documentos e pessoas. Mural, agenda e acervo organizam a comunicação interna e facilitam o acesso ao que faz parte do dia a dia.</p>
+            <ul class="process-focus"><li>Comunicação interna e acesso à informação</li><li>Agenda, acervo e diretório de pessoas</li><li>Experiência de navegação do colaborador</li></ul>
+            <div class="project-actions"><a class="button" href="./eu-horizonte-intranet/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/eu-horizonte-intranet" target="_blank" rel="noopener noreferrer">Ver no GitHub</a></div>
+
             <details class="project-details">
               <summary>Sobre o projeto e minha participação</summary>
               <div class="detail-body">
@@ -236,84 +133,15 @@
               </div>
             </details>
           </div>
-        </article>
-
-        <article class="project-card" id="headcount-projeto" data-reveal>
-          <a class="project-visual" href="./headcount/" aria-label="Explorar Quadro e custos">
-            <img src="./headcount/case.svg" alt="Apresentação visual de Quadro e custos" width="1600" height="1120" loading="lazy" decoding="async">
-          </a>
-          <div class="project-copy">
-            <div class="project-heading"><h3>Quadro e custos</h3><span class="project-state">Aplicação interativa</span></div>
-            <p class="project-description">Simulador de headcount para acompanhar posições aprovadas, ocupação e orçamento. Explore admissões, ajustes e saídas com encargos patronais, provisões e benefícios.</p>
-            <div class="project-actions"><a class="button" href="./headcount/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/headcount" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub</a></div>
-            <details class="project-details"><summary>Sobre o projeto e minha participação</summary><div class="detail-body">
-              <p><strong>A necessidade.</strong> Antecipar o efeito das movimentações de pessoas sobre o quadro e os custos.</p>
-              <p><strong>Minha participação.</strong> Ideação, desenho dos fluxos, modelagem de dados, definição de regras e validação funcional da aplicação.</p>
-              <p><strong>A entrega.</strong> Projeção mensal com encargos e reflexos de folha, benefícios líquidos, filtros por unidade e exportação dos resultados. Compartilha o catálogo de pessoas do GT360°.</p>
-            </div></details>
-          </div>
-        </article>
-
-        <article class="project-card" id="carreira-projeto" data-reveal>
-          <a class="project-visual" href="./carreira/" aria-label="Explorar Cargos e carreira">
-            <img src="./carreira/case.svg" alt="Apresentação visual de Cargos e carreira" width="1600" height="1120" loading="lazy" decoding="async">
-          </a>
-          <div class="project-copy">
-            <div class="project-heading"><h3>Cargos e carreira</h3><span class="project-state">Aplicação interativa</span></div>
-            <p class="project-description">Mapa de cargos para estruturar papéis, revisar enquadramentos e visualizar caminhos de progressão. Competências, desenvolvimento e sucessão conectados numa mesma experiência.</p>
-            <div class="project-actions"><a class="button" href="./carreira/">Explorar aplicação</a><a class="inline-link" href="https://github.com/gustavomrtns/projetos_rh/tree/main/carreira" target="_blank" rel="noopener noreferrer">Ver projeto no GitHub</a></div>
-            <details class="project-details"><summary>Sobre o projeto e minha participação</summary><div class="detail-body">
-              <p><strong>A necessidade.</strong> Dar clareza à estrutura de cargos e apoiar conversas sobre desenvolvimento e próximos passos.</p>
-              <p><strong>Minha participação.</strong> Ideação, desenho dos fluxos, modelagem de dados, definição de regras e validação funcional da aplicação.</p>
-              <p><strong>A entrega.</strong> Catálogo de cargos, faixas salariais, simulações de acomodação e indicações manuais de sucessão. Compartilha o catálogo de pessoas do GT360°.</p>
-            </div></details>
-          </div>
+          <a class="project-visual" href="./eu-horizonte-intranet/" aria-label="Explorar eu + horizonte"><img src="./eu-horizonte-intranet/eu-horizonte-case-editorial.svg?v=20261102" alt="Visão do mural, agenda e acervo da intranet eu mais horizonte" width="1600" height="1120" loading="lazy" decoding="async"></a>
         </article>
       </div>
-      <p class="demo-note">As versões públicas utilizam dados fictícios para apresentar os projetos. Alterações na demonstração são temporárias e reiniciam ao recarregar a página.</p>
+      <p class="demo-note">As aplicações públicas utilizam dados fictícios. As alterações realizadas durante a navegação são temporárias e reiniciam ao recarregar a página.</p>
     </section>
-
-    <section class="about" id="sobre" aria-labelledby="about-title">
-      <div class="wrap about-layout">
-        <div class="about-identity">
-          <img src="./assets/manoel-gustavo.webp" alt="Retrato de Manoel Gustavo" width="640" height="616" loading="lazy" decoding="async">
-          <h2 id="about-title">Um pouco sobre mim</h2>
-        </div>
-        <div class="about-copy">
-          <h3>Sou Manoel Gustavo.</h3>
-          <p>Profissional de Recursos Humanos, formado em Gestão de RH e estudante de Psicologia e de Gestão de Projetos.</p>
-          <p>Parto das necessidades de quem vai usar a solução, organizo requisitos e jornadas e acompanho a construção e a validação da experiência.</p>
-          <div class="contact-links" id="contato">
-            <a href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-            <a href="https://github.com/gustavomrtns" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a href="mailto:manoel.gustavo@outlook.com">E-mail <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-      </div>
+    <section class="contact" id="contato" aria-labelledby="contact-title">
+      <div class="wrap contact-layout"><div><p class="eyebrow">Contato</p><h2 id="contact-title">Vamos trocar experiências?</h2><p>Conversas sobre gestão de pessoas, processos e projetos são sempre bem-vindas.</p></div><div class="contact-links"><a href="https://www.linkedin.com/in/manoel-gustavo/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/gustavomrtns" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:manoel.gustavo@outlook.com">E-mail</a></div></div>
     </section>
   </main>
-
-  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Projetos e aplicações</span><a href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a></div></footer>
-
-  <script>
-    (() => {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduceMotion || !('IntersectionObserver' in window)) return;
-
-      const observer = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        }
-      }, { threshold: 0.05 });
-
-      document.querySelectorAll('[data-reveal]').forEach(element => {
-        element.classList.add('will-reveal');
-        observer.observe(element);
-      });
-    })();
-  </script>
+  <footer><div class="wrap footer-inner"><span>Manoel Gustavo · Pessoas, processos e projetos</span><a href="#inicio">Voltar ao início</a></div></footer>
 </body>
 </html>
