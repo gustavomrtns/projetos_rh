@@ -68,9 +68,9 @@ test('carreira apresenta intervalos e faixas fictícias, sem alterar enquadramen
   const before=JSON.stringify(data.pessoas);
   const gaps=P.gaps(data,'D003','J005');
   assert.deepEqual(gaps.filter(g=>g.gap>0).map(g=>g.id),['K003','K004']);
-  assert.equal(P.band(data,'J003',3900).status,'Abaixo da faixa fictícia');
-  assert.equal(P.band(data,'J003',4200).status,'Dentro da faixa fictícia');
-  assert.equal(P.band(data,'J003',6500).status,'Acima da faixa fictícia');
+  assert.equal(P.band(data,'J003',3900).status,'Abaixo da faixa');
+  assert.equal(P.band(data,'J003',4200).status,'Dentro da faixa');
+  assert.equal(P.band(data,'J003',6500).status,'Acima da faixa');
   assert.equal(JSON.stringify(data.pessoas),before);
 });
 test('escapa textos de hipóteses para uso na interface',()=>{

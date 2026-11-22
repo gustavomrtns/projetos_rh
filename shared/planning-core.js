@@ -31,7 +31,7 @@
   async function load() {
     const url = new URL('planning-data.json', document.querySelector('script[src$="planning-core.js"]').src);
     const response = await fetch(url);
-    if (!response.ok) throw new Error('Não foi possível carregar a base de demonstração.');
+    if (!response.ok) throw new Error('Não foi possível carregar a base de pessoas.');
     return validate(await response.json(), window.PortfolioDemo.copyPeople());
   }
   function snapshot(data, events, month, factor = 0.3, unit = '') {
@@ -98,7 +98,7 @@
   function band(data, jobId, salary) {
     const job = lookup(data.cargos,jobId);
     const range = data.faixas_salariais.find(r => r.nivel_id === job.nivel_id);
-    return {...range, status:salary < range.minimo ? 'Abaixo da faixa fictícia' : salary > range.maximo ? 'Acima da faixa fictícia' : 'Dentro da faixa fictícia'};
+    return {...range, status:salary < range.minimo ? 'Abaixo da faixa' : salary > range.maximo ? 'Acima da faixa' : 'Dentro da faixa'};
   }
   function csvDownload(name, headers, rows) {
     const cell = v => '"' + String(v ?? '').replace(/^[=+@-]/, "'$&").replace(/"/g,'""') + '"';

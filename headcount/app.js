@@ -15,7 +15,7 @@
         <label>Cenário<select id="scenario">${d.cenarios.map(s=>opt(s.id,s.nome)).join('')}</select></label>
         <label>Unidade<select id="unit">${opt('','Todas as unidades')}${d.unidades.map(u=>opt(u.id,u.nome)).join('')}</select></label>
         <label>Mês de acompanhamento<select id="month">${months.map(m=>opt(m,monthName(m)+'/2027')).join('')}</select></label>
-        <label>Fator de custo simulado (%)<input id="factor" type="number" min="0" max="200" step="0.1" value="30" required></label>
+        <label>Fator de custo (%)<input id="factor" type="number" min="0" max="200" step="0.1" value="30" required></label>
       </div>
       <p id="premise" class="muted"></p><div class="metrics" id="metrics"></div>
       <section class="panel" aria-labelledby="forecast-title">
@@ -38,8 +38,8 @@
         </section>
         <section class="panel" aria-labelledby="events-title"><div class="panel-head"><h2 id="events-title">Movimentações do cenário</h2><button id="reset" class="small">Restaurar cenário</button></div><p class="muted">Remover uma hipótese recalcula todos os meses.</p><ul id="events" class="event-list"></ul></section>
       </div>
-      <section class="panel" aria-labelledby="positions-title"><h2 id="positions-title">Quadro por posição</h2><p class="muted">Posições em proposta aparecem no quadro, fora do total aprovado. Uma admissão simulada não cria cadastro no GT360°.</p><div id="positions" class="table-wrap"></div></section>
-      <p class="footer">Conecte as decisões de quadro à <a href="../carreira/">estrutura de cargos e carreira</a>. Valores salariais e orçamentos são ilustrativos.</p>`;
+      <section class="panel" aria-labelledby="positions-title"><h2 id="positions-title">Quadro por posição</h2><p class="muted">Posições em proposta aparecem no quadro, fora do total aprovado.</p><div id="positions" class="table-wrap"></div></section>
+      <p class="footer">Conecte as decisões de quadro à <a href="../carreira/">estrutura de cargos e carreira</a>. As alterações reiniciam ao recarregar a página e não são sincronizadas entre abas.</p>`;
     container.setAttribute('aria-busy','false');
     function metric(title,value,note,accent=false) {return `<div class="metric${accent?' accent':''}"><span>${E(title)}</span><strong>${E(value)}</strong><small>${E(note)}</small></div>`;}
     function factor() {return activeFactor;}
@@ -53,7 +53,7 @@
       const baseline = P.snapshot(d,[],selected.month,factor(),$('unit').value);
       const delta = P.round(selected.cost-baseline.cost), balance = P.round(selected.budget-selected.cost);
       $('premise').textContent = `${P.lookup(d.cenarios,scenarioId).nome}${events.length?' · '+events.length+' movimentação(ões) no cenário':''}. Orçamento de referência: novembro/2026, mantido constante em 2027.`;
-      $('metrics').innerHTML = metric('Quadro aprovado',selected.approved,`${selected.proposed} posição(ões) em proposta`) + metric('Pessoas no mês',selected.headcount,`${selected.vacancies} posição(ões) aprovada(s) vaga(s)`) + metric('Custo mensal simulado',M(selected.cost),`Variação sobre base: ${M(delta)}`,true) + metric('Saldo do orçamento',M(balance),`Referência mensal: ${M(selected.budget)}`);
+      $('metrics').innerHTML = metric('Quadro aprovado',selected.approved,`${selected.proposed} posição(ões) em proposta`) + metric('Pessoas no mês',selected.headcount,`${selected.vacancies} posição(ões) aprovada(s) vaga(s)`) + metric('Custo mensal projetado',M(selected.cost),`Variação sobre base: ${M(delta)}`,true) + metric('Saldo do orçamento',M(balance),`Referência mensal: ${M(selected.budget)}`);
       const max = Math.max(1,...projections.map(p=>p.cost));
       $('chart').innerHTML = projections.map(p=>`<div class="chart-col${p.month===selected.month?' selected':''}"><div class="chart-bar" style="height:${Math.max(2,p.cost/max*175)}px"></div><span>${monthName(p.month)}</span></div>`).join('');
       $('annual').textContent = `Custo anual projetado: ${M(projections.reduce((a,p)=>a+p.cost,0))}. Saldo anual frente à referência: ${M(projections.reduce((a,p)=>a+p.budget-p.cost,0))}.`;
@@ -85,7 +85,7 @@
     $('factor').addEventListener('change',()=>{if(!$('factor').checkValidity()||$('factor').value===''){$('factor').reportValidity();return;}activeFactor=Number($('factor').value)/100;render();});
     $('export').addEventListener('click',()=>{
       if(!$('factor').checkValidity()||$('factor').value===''){$('factor').reportValidity();return;}
-      P.csvDownload('headcount-projecao-2027-ficticia.csv',['Cenario','Unidade','Mes','Headcount','Custo projetado BRL','Orcamento referencia BRL','Saldo BRL','Fator simulado','Tipo'],projection().map(p=>[P.lookup(d.cenarios,scenarioId).nome,$('unit').selectedOptions[0].textContent,p.month,p.headcount,p.cost,p.budget,P.round(p.budget-p.cost),factor(),'projecao ficticia']));
+      P.csvDownload('headcount-projecao-2027.csv',['Cenario','Unidade','Mes','Headcount','Custo projetado BRL','Orcamento referencia BRL','Saldo BRL','Fator de custo','Tipo'],projection().map(p=>[P.lookup(d.cenarios,scenarioId).nome,$('unit').selectedOptions[0].textContent,p.month,p.headcount,p.cost,p.budget,P.round(p.budget-p.cost),factor(),'Projeção']));
     });
     const requested=new URLSearchParams(location.search).get('cenario');
     if(P.lookup(d.cenarios,requested)){scenarioId=requested;$('scenario').value=requested;events=P.copy(P.lookup(d.cenarios,requested).eventos);}

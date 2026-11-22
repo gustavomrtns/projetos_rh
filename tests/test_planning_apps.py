@@ -62,7 +62,7 @@ class PlanningBrowserTests(unittest.TestCase):
                     page.select_option('#target', 'J003')
                     page.fill('#salary', '4200')
                     page.locator('#simulate').click()
-                    self.assertIn('Dentro da faixa fictícia', page.locator('#placement').inner_text())
+                    self.assertIn('Dentro da faixa', page.locator('#placement').inner_text())
                     self.assertIn('390,00', page.locator('#placement').inner_text())
                     self.assertEqual(page.locator('#nominations .path').count(), 1)
                     page.select_option('#candidate', 'D001')

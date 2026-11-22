@@ -1,6 +1,6 @@
 {
   "meta": {
-    "versao": "1.1.0",
+    "versao": "1.1.1",
     "gerado_em": "2026-11-22",
     "referencia_base": "2026-11",
     "totalmente_ficticio": true,
@@ -291,35 +291,35 @@
       "nome": "Especialista de Tecnologia",
       "familia": "Tecnologia",
       "nivel_id": "ESP",
-      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+      "missao_demo": "Definir soluções técnicas e orientar a evolução dos serviços de tecnologia."
     },
     {
       "id": "J007",
       "nome": "Analista de Gestão de Pessoas Sênior",
       "familia": "Gestão de Pessoas",
       "nivel_id": "SR",
-      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+      "missao_demo": "Conduzir iniciativas de desenvolvimento organizacional e apoiar as lideranças."
     },
     {
       "id": "J008",
       "nome": "Coordenador de Comunicação",
       "familia": "Comunicação",
       "nivel_id": "COORD",
-      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+      "missao_demo": "Coordenar a comunicação, as campanhas e o alinhamento entre equipes."
     },
     {
       "id": "J009",
       "nome": "Analista Administrativo",
       "familia": "Administrativo",
       "nivel_id": "PL",
-      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+      "missao_demo": "Analisar processos, controles e indicadores administrativos."
     },
     {
       "id": "J010",
       "nome": "Gerente de Projetos",
       "familia": "Projetos",
       "nivel_id": "GER",
-      "missao_demo": "Cargo-alvo fictício para simular evolução profissional."
+      "missao_demo": "Gerir o portfólio de projetos, as prioridades, os recursos e as entregas."
     }
   ],
   "niveis": [
@@ -1044,7 +1044,7 @@
       "salario_atual": 6500,
       "salario_proposto": 6500,
       "status": "em_estudo",
-      "justificativa_demo": "Exemplo de análise de responsabilidades e enquadramento. Não altera cadastro atual."
+      "justificativa_demo": "Revisão do enquadramento para a trilha de especialização em Tecnologia, mantendo o salário atual."
     },
     {
       "id": "AC002",
@@ -1054,7 +1054,7 @@
       "salario_atual": 3900,
       "salario_proposto": 4200,
       "status": "em_estudo",
-      "justificativa_demo": "Exemplo de acomodação na faixa fictícia. Não representa obrigação ou pesquisa salarial."
+      "justificativa_demo": "Revisão do salário para o início da faixa do cargo, mantendo o enquadramento atual."
     }
   ],
   "sucessao": [
@@ -1069,7 +1069,7 @@
         "K003",
         "K004"
       ],
-      "evidencia": "Caso inteiramente fictício; indicação manual demonstrativa; não decorre das pesquisas do GT360."
+      "evidencia": "Gestão de projetos e liderança como prioridades de desenvolvimento, com projeto piloto e mentoria até a revisão."
     }
   ],
   "planos_desenvolvimento": [
