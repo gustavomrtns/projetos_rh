@@ -54,7 +54,7 @@ As tabelas novas são inteiramente sintéticas. Notas de competências e indica�
 
 As aplicações `headcount/` e `carreira/` usam estado JavaScript em memória, sem `localStorage` ou `sessionStorage`. A navegação tem acessos cruzados e retorno ao portfólio. Os nove módulos existentes do GT360° mantêm sua estrutura.
 
-Headcount inicia com 7 posições aprovadas (5 ocupadas e 2 vagas), 1 posição em proposta, custo simulado de R$ 39.080/mês e orçamento de referência de R$ 53.360/mês. A posição em proposta não integra o quadro aprovado. Fator inicial de 30%, sem cálculo legal de folha ou provisões.
+Headcount inicia com 7 posições aprovadas (5 ocupadas e 2 vagas), 1 posição em proposta, custo projetado de R$ 44.636,46/mês e orçamento de referência de R$ 53.360/mês. A posição em proposta não integra o quadro aprovado. Parâmetros iniciais editáveis: CPP 20%, RAT 2%, FAP 1, terceiros 5,8% e FGTS 8%, com provisões de 13º e férias/terço. Os salários já previstos nas férias são compensados para evitar duplicação. Benefícios têm valor bruto e participação do colaborador.
 
 Carreira apresenta 10 cargos, 6 níveis, 5 trajetórias, 2 acomodações em estudo e 1 posição crítica para indicação manual. As faixas não são pesquisa salarial.
 

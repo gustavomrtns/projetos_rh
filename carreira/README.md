@@ -9,7 +9,7 @@ Mapa de arquitetura de cargos para explorar estruturação, acomodação de enqu
 - Catálogo de dez cargos e seis níveis, com missão, faixas fictícias e ocupação por posição.
 - Filtro por família, busca e exportação da estrutura em CSV.
 - Cinco trajetórias propostas e comparação de cargo atual com cargo de destino.
-- Simulação de enquadramento salarial e impacto mensal a um fator ilustrativo de 30%.
+- Simulação de enquadramento salarial e impacto mensal usando os mesmos parâmetros iniciais de encargos, provisões e benefícios do simulador de quadro.
 - Perfis de competências demonstrativos de 1 a 4, requisitos e intervalos a desenvolver.
 - Duas acomodações em estudo e indicação manual de sucessores para uma posição crítica, com prontidão, evidências, data de revisão e ações de desenvolvimento existentes na base.
 

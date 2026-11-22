@@ -1,13 +1,13 @@
 {
   "meta": {
-    "versao": "1.1.1",
+    "versao": "2.0.0",
     "gerado_em": "2026-11-22",
     "referencia_base": "2026-11",
     "totalmente_ficticio": true,
     "fonte": "gustavomrtns/projetos_rh/shared/demo-core.js",
     "sha_fonte": "398a3d7c7a6e050a09ddf189b2ea22b41f6c0402",
     "limite": "Base integrada às demonstrações de headcount e carreira; cenários em memória, sem alterar os cadastros atuais do GT360°.",
-    "premissas_custos": "Valores ilustrativos BRL por mês; fator 30% é premissa fictícia editável, não cálculo legal de folha. Sem 13º, férias, provisões, encargos reais ou proporcionalidade diária.",
+    "premissas_custos": "Custo CLT mensalizado: remuneração, CPP, RAT×FAP, terceiros, FGTS, provisões de 13º e férias com terço, encargos sobre provisões líquidas e benefícios líquidos de participação. Alíquotas parametrizáveis; férias compensam salário já incluído. Sem fluxo de caixa, reavaliação de saldos acumulados, cálculo rescisório, IRRF ou INSS do empregado.",
     "classificacao_dados": "Campos originais preservados; todos os novos atributos são sintéticos. Gestores ausentes permanecem nulos."
   },
   "pessoas_gt360_originais": [
@@ -500,7 +500,10 @@
       "beneficios_empresa": 900,
       "fator_encargos_simulado": 0.3,
       "outras_despesas": 0,
-      "origem": "novo_ficticio"
+      "origem": "novo_ficticio",
+      "beneficios_brutos": 900,
+      "coparticipacao_beneficios": 0,
+      "medias_remuneratorias": 0
     },
     {
       "pessoa_id": "D002",
@@ -509,7 +512,10 @@
       "beneficios_empresa": 900,
       "fator_encargos_simulado": 0.3,
       "outras_despesas": 0,
-      "origem": "novo_ficticio"
+      "origem": "novo_ficticio",
+      "beneficios_brutos": 900,
+      "coparticipacao_beneficios": 0,
+      "medias_remuneratorias": 0
     },
     {
       "pessoa_id": "D003",
@@ -518,7 +524,10 @@
       "beneficios_empresa": 900,
       "fator_encargos_simulado": 0.3,
       "outras_despesas": 0,
-      "origem": "novo_ficticio"
+      "origem": "novo_ficticio",
+      "beneficios_brutos": 900,
+      "coparticipacao_beneficios": 0,
+      "medias_remuneratorias": 0
     },
     {
       "pessoa_id": "D004",
@@ -527,7 +536,10 @@
       "beneficios_empresa": 900,
       "fator_encargos_simulado": 0.3,
       "outras_despesas": 0,
-      "origem": "novo_ficticio"
+      "origem": "novo_ficticio",
+      "beneficios_brutos": 900,
+      "coparticipacao_beneficios": 0,
+      "medias_remuneratorias": 0
     },
     {
       "pessoa_id": "D005",
@@ -536,7 +548,10 @@
       "beneficios_empresa": 900,
       "fator_encargos_simulado": 0.3,
       "outras_despesas": 0,
-      "origem": "novo_ficticio"
+      "origem": "novo_ficticio",
+      "beneficios_brutos": 900,
+      "coparticipacao_beneficios": 0,
+      "medias_remuneratorias": 0
     }
   ],
   "orcamento": [
@@ -544,35 +559,35 @@
       "centro_custo_id": "CC001",
       "competencia": "2026-11",
       "headcount_aprovado": 1,
-      "custo_orcado": 7140.0,
+      "custo_orcado": 7140,
       "origem": "novo_ficticio"
     },
     {
       "centro_custo_id": "CC002",
       "competencia": "2026-11",
       "headcount_aprovado": 2,
-      "custo_orcado": 16490.0,
+      "custo_orcado": 16490,
       "origem": "novo_ficticio"
     },
     {
       "centro_custo_id": "CC003",
       "competencia": "2026-11",
       "headcount_aprovado": 2,
-      "custo_orcado": 13110.0,
+      "custo_orcado": 13110,
       "origem": "novo_ficticio"
     },
     {
       "centro_custo_id": "CC004",
       "competencia": "2026-11",
       "headcount_aprovado": 1,
-      "custo_orcado": 4280.0,
+      "custo_orcado": 4280,
       "origem": "novo_ficticio"
     },
     {
       "centro_custo_id": "CC005",
       "competencia": "2026-11",
       "headcount_aprovado": 1,
-      "custo_orcado": 12340.0,
+      "custo_orcado": 12340,
       "origem": "novo_ficticio"
     }
   ],
@@ -1202,253 +1217,262 @@
       "cenario_id": "CEN_BASE",
       "competencia": "2027-01",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-02",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-03",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-04",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-05",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-06",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-07",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-08",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-09",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-10",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-11",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_BASE",
       "competencia": "2027-12",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-01",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-02",
       "headcount_projetado": 5,
-      "custo_projetado": 39080.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 44636.46,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-03",
       "headcount_projetado": 6,
-      "custo_projetado": 46220.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 52779.13,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-04",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-05",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-06",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-07",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-08",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-09",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-10",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-11",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_EXP",
       "competencia": "2027-12",
       "headcount_projetado": 7,
-      "custo_projetado": 53360.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 60921.8,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-01",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-02",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-03",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-04",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-05",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-06",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-07",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-08",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-09",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-10",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-11",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     },
     {
       "cenario_id": "CEN_ACOM",
       "competencia": "2027-12",
       "headcount_projetado": 5,
-      "custo_projetado": 39470.0,
-      "tipo": "projecao_ficticia_nao_realizado"
+      "custo_projetado": 45089.12,
+      "tipo": "projecao_custo_clt_nao_realizado"
     }
-  ]
+  ],
+  "encargos_base": {
+    "cpp": 20,
+    "rat": 2,
+    "fap": 1,
+    "thirdParty": 5.8,
+    "fgts": 8,
+    "include13": true,
+    "includeVacation": true
+  }
 }

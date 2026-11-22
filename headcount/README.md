@@ -1,37 +1,50 @@
 # Quadro e custos
 
-[Abrir demonstração](https://gustavomrtns.github.io/projetos_rh/headcount/) · [Cargos e carreira](../carreira/) · [Portfólio](../)
+[Abrir aplicação](https://gustavomrtns.github.io/projetos_rh/headcount/) · [Cargos e carreira](../carreira/) · [Portfólio](../)
 
-Simulador de headcount com quadro aprovado, ocupação, posições em proposta, orçamento de referência e projeção mensal de custos. Aplicação independente, acessível também pela navegação do GT360°.
+Simulador de headcount com quadro aprovado, ocupação, orçamento e composição de custos CLT por competência. Compartilha o catálogo de cinco pessoas do GT360°, preservando os campos originais.
 
 ## Funcionalidades
 
-- Comparação de três cenários: quadro constante, preenchimento de duas posições e acomodação salarial de Camila.
-- Admissão em vaga aprovada, ajuste salarial e saída planejada, com vigência mensal e remoção de hipóteses.
-- Filtro por unidade e mês; fator de custo editável; projeção anual e exportação CSV.
-- Quadro por posição, separando vagas aprovadas de posições ainda em proposta.
+- Cenários de quadro constante, preenchimento de posições e acomodação salarial.
+- Admissão, ajuste salarial, revisão de benefícios/verbas e saída com vigência mensal.
+- CPP/INSS patronal, RAT, FAP, terceiros e FGTS editáveis para o cenário inteiro.
+- Seleção de provisões de 13º e férias/terço, com reflexos de encargos.
+- Benefícios brutos e participação do colaborador, médias remuneratórias e outras despesas por pessoa.
+- Composição do mês, detalhamento por posição, projeção anual e exportações CSV com valores e parâmetros aplicados.
 
-## Dados e cálculo
+## Modelo de custeio
 
-`../shared/planning-data.json` amplia o catálogo de cinco pessoas fictícias de `demo-core.js`. `planning-core.js` confere os campos originais na abertura. Nenhum cadastro atual do GT360° é alterado.
+A base compartilhada é sintética. Os parâmetros iniciais são CPP 20%, RAT 2%, FAP 1, terceiros 5,8% e FGTS 8%. CPP, RAT e terceiros dependem do regime tributário, atividade, FPAS e demais enquadramentos; os percentuais iniciais não são uma regra universal. A interface permite ajustar ou zerar cada alíquota. Não há determinação automática de regime, CPRB ou enquadramento.
 
-Base: novembro/2026. Projeção: janeiro a dezembro/2027. Orçamento mensal constante de referência, sem alegação de aprovação real para 2027.
+Base novembro/2026; projeção janeiro a dezembro/2027. O orçamento de R$ 53.360/mês é referência constante da base e não é recalculado para acomodar aumento de custos. O custo inicial com os parâmetros completos é **R$ 44.636,46/mês**.
 
-**Custo mensal = salário × (1 + fator simulado) + benefícios + outras despesas.**
+1. Remuneração = salário + médias remuneratórias informadas, com incidência nos encargos e provisões.
+2. Encargos do mês = CPP + RAT × FAP + terceiros + FGTS, calculados sobre a remuneração.
+3. Provisão de 13º = remuneração ÷ 12, quando selecionada.
+4. Férias = remuneração ÷ 12; terço = remuneração ÷ 36, quando selecionadas. A remuneração das férias já está nos 12 salários do ano; por isso a parcela de férias é mostrada e compensada, acrescentando ao custo anual apenas o terço e seus reflexos. Não há custo de substituição durante férias.
+5. Encargos sobre provisões incidem no 13º e no terço líquidos da compensação acima, às mesmas alíquotas de custeio.
+6. Benefícios líquidos = benefícios brutos − participação do colaborador. O desconto não reduz a base dos encargos.
+7. Total = remuneração + encargos do mês + provisões líquidas + encargos sobre provisões + benefícios líquidos + outras despesas.
 
-O fator inicial de 30% é ilustrativo. Não representa cálculo legal de folha; não há 13º, férias, provisões, tributos reais, rescisão, inflação ou proporcionalidade diária. Saídas retiram o custo mensal, sem calcular verbas rescisórias. Hipóteses de admissão preenchem somente as duas vagas aprovadas da base; não criam pessoas nem autorizam novas posições.
+Componentes são arredondados em duas casas por pessoa e somados. As médias de horas extras, DSR e adicionais são informadas já apuradas; não há motor de rubricas, apuração de jornada, cálculo do salário líquido, INSS do empregado ou IRRF. O campo de benefícios destina-se a parcelas sem natureza salarial; verbas remuneratórias devem entrar nas médias.
 
-| Conferência | Resultado inicial |
-|---|---:|
-| Posições aprovadas | 7 |
-| Ocupadas | 5 |
-| Vagas aprovadas | 2 |
-| Posição em proposta, fora do aprovado | 1 |
-| Custo mensal simulado | R$ 39.080,00 |
-| Orçamento mensal de referência | R$ 53.360,00 |
+As movimentações valem por mês integral. Esta é uma visão de custo mensalizado: não agenda pagamentos, não controla saldos contábeis de provisões, não reavalia o saldo anterior após reajustes e não calcula quitação de férias, 13º ou rescisão. Saídas retiram o custo dos meses seguintes à vigência, sem apurar verbas de desligamento.
 
-Alterações ficam em memória nesta página e reiniciam ao recarregar. O catálogo comum não sincroniza cenários entre abas. `demoStore` continua sendo o mecanismo dos cases anteriores; este simulador usa estado JavaScript local, sem gravação no navegador.
+A revisão de benefícios/verbas substitui o pacote da pessoa a partir da vigência. O salário é alterado em movimentação própria. O sistema impede descontos maiores que os benefícios e revisões duplicadas para a mesma pessoa e mês.
+
+## Dados e funcionamento
+
+Dados: `../shared/planning-data.json`. Regras: `../shared/planning-core.js`. Cenários, parâmetros e indicações permanecem em memória, reiniciando ao recarregar; sem sincronização entre abas. `demoStore` permanece nos cases anteriores. O mapa de carreira usa os mesmos parâmetros iniciais para comparar impactos salariais, sem receber edições de outra aba.
+
+## Referências consultadas em 22/11/2026
+
+- [PGFN: contribuições patronais, terço de férias e descontos na folha](https://www.gov.br/pgfn/pt-br/cidadania-tributaria/por-assunto/tributacao-sobre-a-folhas-de-salarios-e-outras/contribuicoes-previdenciarias-1/patronal-ou-dos-empregadores).
+- [eSocial: orientação sobre CPP, RAT/FAP e terceiros por enquadramento](https://www.gov.br/esocial/pt-br/documentacao-tecnica/manuais/mos-s-1-3-consolidada-ate-a-no-s-1-3-08-2026-com-marcacoes.pdf).
+- [Lei 8.036/1990: FGTS, art. 15](https://www.planalto.gov.br/ccivil_03/leis/l8036compilada.htm).
+- [Lei 4.090/1962: décimo terceiro](https://www.planalto.gov.br/ccivil_03/leis/l4090.htm).
+- [MTE: FGTS nas férias e no 13º](https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/fgtsdigital/perguntas-frequentes).
 
 ## Validação
 
-`node --test tests/planning.test.cjs` verifica projeções, vínculos, campos originais, premissas e rejeição de movimentos incoerentes. Os fluxos de interface desktop/mobile estão em `tests/test_planning_apps.py` e no workflow de validação.
+`node --test tests/planning.test.cjs`: composição, incidências, compensação de férias, descontos, parâmetros, vigências, conciliação e referências. `tests/test_planning_apps.py`: fluxos desktop/mobile, alterações de encargos, limites de participação e exportação, além da navegação existente.
